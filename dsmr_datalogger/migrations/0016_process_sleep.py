@@ -6,7 +6,6 @@ from django.conf import settings
 
 
 class Migration(migrations.Migration):
-
     def migrate_forward(apps, schema_editor):
         try:
             # Only when available.
@@ -14,7 +13,7 @@ class Migration(migrations.Migration):
         except AttributeError:
             return
 
-        DataloggerSettings = apps.get_model('dsmr_datalogger', 'DataloggerSettings')
+        DataloggerSettings = apps.get_model("dsmr_datalogger", "DataloggerSettings")
         DataloggerSettings.objects.all().update(
             process_sleep=decimal.Decimal(settings.DSMRREADER_DATALOGGER_SLEEP)
         )
@@ -23,14 +22,20 @@ class Migration(migrations.Migration):
         pass  # Nothing to do, but allow going backwards.
 
     dependencies = [
-        ('dsmr_datalogger', '0015_datalogger_foreign_countries'),
+        ("dsmr_datalogger", "0015_datalogger_foreign_countries"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='process_sleep',
-            field=models.DecimalField(decimal_places=1, default=0.5, help_text='The number of seconds the application will sleep after reading data from the datalogger (API excluded).', max_digits=3, verbose_name='Datalogger process sleep'),
+            model_name="dataloggersettings",
+            name="process_sleep",
+            field=models.DecimalField(
+                decimal_places=1,
+                default=0.5,
+                help_text="The number of seconds the application will sleep after reading data from the datalogger (API excluded).",
+                max_digits=3,
+                verbose_name="Datalogger process sleep",
+            ),
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]

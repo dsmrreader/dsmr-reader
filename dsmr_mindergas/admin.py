@@ -13,20 +13,21 @@ from dsmr_mindergas.models.settings import MinderGasSettings
 class MinderGasSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
-            None, {
-                'fields': ['export', 'auth_token'],
-                'description': _(
+            None,
+            {
+                "fields": ["export", "auth_token"],
+                "description": _(
                     'Detailed instructions for configuring MinderGas.nl can be found here: <a href="https://dsmr-reader'
                     '.readthedocs.io/nl/v5/how-to/admin/mindergas.html">Documentation</a>'
-                )
-            }
+                ),
+            },
         ),
     )
 
 
 @receiver(django.db.models.signals.post_save, sender=MinderGasSettings)
 def handle_mindergas_settings_update(sender, instance, **kwargs):
-    """ Hook to toggle related scheduled process. """
+    """Hook to toggle related scheduled process."""
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT
     ).update(active=instance.export)

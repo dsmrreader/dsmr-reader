@@ -40,13 +40,15 @@ class TelegramParser(object):
         :raises InvalidChecksumError:
         """
 
-        if self.apply_checksum_validation \
-                and self.telegram_specification['checksum_support']:
+        if (
+            self.apply_checksum_validation
+            and self.telegram_specification["checksum_support"]
+        ):
             self.validate_checksum(telegram_data)
 
         telegram = {}
 
-        for signature, parser in self.telegram_specification['objects'].items():
+        for signature, parser in self.telegram_specification["objects"].items():
             # DSMR-reader #778: We might hit the same pattern multiple times. The last one matched will be leading.
             matches = re.findall(signature, telegram_data, re.DOTALL)
 
@@ -56,8 +58,12 @@ class TelegramParser(object):
                 try:
                     telegram[signature] = parser.parse(current_match)
                 except Exception:
-                    logger.error("ignore line with signature {}, because parsing failed.".format(signature),
-                                 exc_info=True)
+                    logger.error(
+                        "ignore line with signature {}, because parsing failed.".format(
+                            signature
+                        ),
+                        exc_info=True,
+                    )
 
         return telegram
 
@@ -70,31 +76,28 @@ class TelegramParser(object):
         """
 
         # Extract the part for which the checksum applies.
-        checksum_contents = re.search(r'\/.+\!', telegram, re.DOTALL)
+        checksum_contents = re.search(r"\/.+\!", telegram, re.DOTALL)
 
         # Extract the hexadecimal checksum value itself.
         # The line ending '\r\n' for the checksum line can be ignored.
-        checksum_hex = re.search(r'((?<=\!)[0-9A-Z]{4})+', telegram)
+        checksum_hex = re.search(r"((?<=\!)[0-9A-Z]{4})+", telegram)
 
         if not checksum_contents or not checksum_hex:
             raise ParseError(
-                'Failed to perform CRC validation because the telegram is '
-                'incomplete. The checksum and/or content values are missing.'
+                "Failed to perform CRC validation because the telegram is "
+                "incomplete. The checksum and/or content values are missing."
             )
 
         calculated_crc = TelegramParser.crc16(checksum_contents.group(0))
         expected_crc = int(checksum_hex.group(0), base=16)
-        calculated_crc_hex = '{:0>4}'.format(hex(calculated_crc)[2:].upper())
-        expected_crc_hex = '{:0>4}'.format(hex(expected_crc)[2:].upper())
+        calculated_crc_hex = "{:0>4}".format(hex(calculated_crc)[2:].upper())
+        expected_crc_hex = "{:0>4}".format(hex(expected_crc)[2:].upper())
 
         if calculated_crc != expected_crc:
             raise InvalidChecksumError(
                 "Invalid telegram CRC. The calculated checksum '{}' ({}) does not match the "
                 "telegram checksum '{}' ({})".format(
-                    calculated_crc,
-                    calculated_crc_hex,
-                    expected_crc,
-                    expected_crc_hex
+                    calculated_crc, calculated_crc_hex, expected_crc, expected_crc_hex
                 )
             )
 
@@ -111,7 +114,7 @@ class TelegramParser(object):
             for i in range(0, 256):
                 crc = c_ushort(i).value
                 for _j in range(0, 8):
-                    if (crc & 0x0001):
+                    if crc & 0x0001:
                         crc = c_ushort(crc >> 1).value ^ 0xA001
                     else:
                         crc = c_ushort(crc >> 1).value
@@ -121,7 +124,7 @@ class TelegramParser(object):
             d = ord(c)
             tmp = crcValue ^ d
             rotated = c_ushort(crcValue >> 8).value
-            crcValue = rotated ^ int(TelegramParser.crc16_tab[(tmp & 0x00ff)], 0)
+            crcValue = rotated ^ int(TelegramParser.crc16_tab[(tmp & 0x00FF)], 0)
 
         return crcValue
 
@@ -136,16 +139,15 @@ class DSMRObjectParser(object):
 
     def _is_line_wellformed(self, line, values):
         # allows overriding by child class
-        return (values and (len(values) == len(self.value_formats)))
+        return values and (len(values) == len(self.value_formats))
 
     def _parse_values(self, values):
         # allows overriding by child class
-        return [self.value_formats[i].parse(value)
-                for i, value in enumerate(values)]
+        return [self.value_formats[i].parse(value) for i, value in enumerate(values)]
 
     def _parse(self, line):
         # Match value groups, but exclude the parentheses
-        pattern = re.compile(r'((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))')
+        pattern = re.compile(r"((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))")
 
         values = re.findall(pattern, line)
 
@@ -153,7 +155,7 @@ class DSMRObjectParser(object):
             raise ParseError("Invalid '%s' line for '%s'", line, self)
 
         # Convert empty value groups to None for clarity.
-        values = [None if value == '' else value for value in values]
+        values = [None if value == "" else value for value in values]
 
         return self._parse_values(values)
 
@@ -231,7 +233,7 @@ class ProfileGenericParser(DSMRObjectParser):
         self.parsers_for_unidentified = parsers_for_unidentified
 
     def _is_line_wellformed(self, line, values):
-        if values and (len(values) == 1) and (values[0] == ''):
+        if values and (len(values) == 1) and (values[0] == ""):
             # special case: single empty parentheses (indicated by empty string)
             return True
 
@@ -247,7 +249,7 @@ class ProfileGenericParser(DSMRObjectParser):
             values = [0, None]  # buffer_length=0, buffer_value_obis_ID=None
         buffer_length = int(values[0])
         buffer_value_obis_ID = values[1]
-        if (buffer_length > 0):
+        if buffer_length > 0:
             if buffer_value_obis_ID in self.buffer_types:
                 bufferValueParsers = self.buffer_types[buffer_value_obis_ID]
             else:
@@ -279,14 +281,11 @@ class ValueParser(object):
     def parse(self, value):
         unit_of_measurement = None
 
-        if value and '*' in value:
-            value, unit_of_measurement = value.split('*')
+        if value and "*" in value:
+            value, unit_of_measurement = value.split("*")
 
         # A value group is not required to have a value, and then coercing does
         # not apply.
         value = self.coerce_type(value) if value is not None else value
 
-        return {
-            'value': value,
-            'unit': unit_of_measurement
-        }
+        return {"value": value, "unit": unit_of_measurement}

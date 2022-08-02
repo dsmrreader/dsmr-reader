@@ -7,33 +7,61 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0022_three_month_retention'),
+        ("dsmr_datalogger", "0022_three_month_retention"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='dataloggersettings',
-            old_name='com_port',
-            new_name='serial_port',
+            model_name="dataloggersettings",
+            old_name="com_port",
+            new_name="serial_port",
         ),
         migrations.AlterField(
-            model_name='dataloggersettings',
-            name='serial_port',
-            field=models.CharField(blank=True, default='/dev/ttyUSB0', help_text='For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0', max_length=196, null=True, verbose_name='Serial port'),
+            model_name="dataloggersettings",
+            name="serial_port",
+            field=models.CharField(
+                blank=True,
+                default="/dev/ttyUSB0",
+                help_text="For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0",
+                max_length=196,
+                null=True,
+                verbose_name="Serial port",
+            ),
         ),
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='input_method',
-            field=models.CharField(choices=[('serial', 'Serial port'), ('ipv4', 'Network socket (IPv4)')], default='serial', help_text='Whether to read telegrams from a serial port or network socket.', max_length=16, verbose_name='Input method'),
+            model_name="dataloggersettings",
+            name="input_method",
+            field=models.CharField(
+                choices=[("serial", "Serial port"), ("ipv4", "Network socket (IPv4)")],
+                default="serial",
+                help_text="Whether to read telegrams from a serial port or network socket.",
+                max_length=16,
+                verbose_name="Input method",
+            ),
         ),
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='network_socket_address',
-            field=models.CharField(blank=True, default=None, help_text='For network input: IP address or hostname of the network device connected to smartmeter.', max_length=196, null=True, verbose_name='Network socket address'),
+            model_name="dataloggersettings",
+            name="network_socket_address",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                help_text="For network input: IP address or hostname of the network device connected to smartmeter.",
+                max_length=196,
+                null=True,
+                verbose_name="Network socket address",
+            ),
         ),
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='network_socket_port',
-            field=models.IntegerField(default=23, help_text='For network input: Port of the network device connected to smartmeter.', validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(65535)], verbose_name='Network socket port'),
+            model_name="dataloggersettings",
+            name="network_socket_port",
+            field=models.IntegerField(
+                default=23,
+                help_text="For network input: Port of the network device connected to smartmeter.",
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(65535),
+                ],
+                verbose_name="Network socket port",
+            ),
         ),
     ]

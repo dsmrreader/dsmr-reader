@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mqtt', '0008_mqtt_null_payload'),
+        ("dsmr_mqtt", "0008_mqtt_null_payload"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='mqttbrokersettings',
-            name='debug',
+            model_name="mqttbrokersettings",
+            name="debug",
         ),
     ]

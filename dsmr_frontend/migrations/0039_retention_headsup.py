@@ -12,20 +12,24 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    RetentionSettings = apps.get_model('dsmr_datalogger', 'RetentionSettings')
-    retention_is_enabled = RetentionSettings.objects.filter(data_retention_in_hours__isnull=False)
+    RetentionSettings = apps.get_model("dsmr_datalogger", "RetentionSettings")
+    retention_is_enabled = RetentionSettings.objects.filter(
+        data_retention_in_hours__isnull=False
+    )
 
     if retention_is_enabled:
         # Skip when already using retention.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'Data retention policy is currently disabled. Please note that this may eventually cause severe '
-            'performance and / or storage issues, depending on your hardware and type of disk used. Consider choosing '
-            'a retention policy in the datalogger retention configuration.',
-        )),
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "Data retention policy is currently disabled. Please note that this may eventually cause severe "
+                "performance and / or storage issues, depending on your hardware and type of disk used. Consider choosing "
+                "a retention policy in the datalogger retention configuration.",
+            )
+        ),
     )
 
 
@@ -40,5 +44,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0038_always_require_login'),
+        ("dsmr_frontend", "0038_always_require_login"),
     ]

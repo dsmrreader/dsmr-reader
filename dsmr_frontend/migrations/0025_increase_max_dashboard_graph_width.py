@@ -7,13 +7,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0024_v2100_release'),
+        ("dsmr_frontend", "0024_v2100_release"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='frontendsettings',
-            name='dashboard_graph_width',
-            field=models.IntegerField(default=30, help_text='The number of items displayed on the X-axis of the dashboard graphs', validators=[django.core.validators.MinValueValidator(30), django.core.validators.MaxValueValidator(86400)], verbose_name='Dashboard graph width'),
+            model_name="frontendsettings",
+            name="dashboard_graph_width",
+            field=models.IntegerField(
+                default=30,
+                help_text="The number of items displayed on the X-axis of the dashboard graphs",
+                validators=[
+                    django.core.validators.MinValueValidator(30),
+                    django.core.validators.MaxValueValidator(86400),
+                ],
+                verbose_name="Dashboard graph width",
+            ),
         ),
     ]

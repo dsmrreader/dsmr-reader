@@ -7,20 +7,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0004_chart_colors'),
+        ("dsmr_frontend", "0004_chart_colors"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Notification',
+            name="Notification",
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-                ('message', models.TextField()),
-                ('redirect_to', models.CharField(max_length=64, blank=True, default=None, null=True)),
-                ('read', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        verbose_name="ID",
+                        serialize=False,
+                        primary_key=True,
+                        auto_created=True,
+                    ),
+                ),
+                ("message", models.TextField()),
+                (
+                    "redirect_to",
+                    models.CharField(
+                        max_length=64, blank=True, default=None, null=True
+                    ),
+                ),
+                ("read", models.BooleanField(default=False)),
             ],
             options={
-                'default_permissions': (),
+                "default_permissions": (),
             },
         ),
     ]

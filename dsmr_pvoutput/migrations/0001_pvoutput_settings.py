@@ -10,35 +10,122 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='PVOutputAddStatusSettings',
+            name="PVOutputAddStatusSettings",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('export', models.BooleanField(default=False, help_text='Whether the system uploads consumption using the Add Status Service API call.', verbose_name='Enabled')),
-                ('upload_interval', models.IntegerField(choices=[(5, '5 minutes'), (10, '10 minutes'), (15, '15 minutes')], default=5, help_text='The interval between each upload (in minutes). Please make sure this matches the device settings.', verbose_name='Upload interval')),
-                ('upload_delay', models.IntegerField(default=0, help_text='An artificial delay in uploading data to PVOutput. E.g.: When you set this to "5" and the application uploads the data at 10:45, then only data until 10:40 will be taken into account. It effectively limits its upload data search by "ignore the last X minutes", where X is this setting.', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(30)], verbose_name='Upload offset (minutes)')),
-                ('processing_delay', models.IntegerField(blank=True, default=None, help_text='Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)', null=True, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(120)], verbose_name='PVOutput: Processing delay (minutes)')),
-                ('next_export', models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next export. Automatically updated by application.', null=True, verbose_name='Next export')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "export",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Whether the system uploads consumption using the Add Status Service API call.",
+                        verbose_name="Enabled",
+                    ),
+                ),
+                (
+                    "upload_interval",
+                    models.IntegerField(
+                        choices=[
+                            (5, "5 minutes"),
+                            (10, "10 minutes"),
+                            (15, "15 minutes"),
+                        ],
+                        default=5,
+                        help_text="The interval between each upload (in minutes). Please make sure this matches the device settings.",
+                        verbose_name="Upload interval",
+                    ),
+                ),
+                (
+                    "upload_delay",
+                    models.IntegerField(
+                        default=0,
+                        help_text='An artificial delay in uploading data to PVOutput. E.g.: When you set this to "5" and the application uploads the data at 10:45, then only data until 10:40 will be taken into account. It effectively limits its upload data search by "ignore the last X minutes", where X is this setting.',
+                        validators=[
+                            django.core.validators.MinValueValidator(0),
+                            django.core.validators.MaxValueValidator(30),
+                        ],
+                        verbose_name="Upload offset (minutes)",
+                    ),
+                ),
+                (
+                    "processing_delay",
+                    models.IntegerField(
+                        blank=True,
+                        default=None,
+                        help_text="Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)",
+                        null=True,
+                        validators=[
+                            django.core.validators.MinValueValidator(0),
+                            django.core.validators.MaxValueValidator(120),
+                        ],
+                        verbose_name="PVOutput: Processing delay (minutes)",
+                    ),
+                ),
+                (
+                    "next_export",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        help_text="Timestamp of the next export. Automatically updated by application.",
+                        null=True,
+                        verbose_name="Next export",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'PVOutput: Add Status configuration',
-                'default_permissions': (),
+                "verbose_name": "PVOutput: Add Status configuration",
+                "default_permissions": (),
             },
         ),
         migrations.CreateModel(
-            name='PVOutputAPISettings',
+            name="PVOutputAPISettings",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('auth_token', models.CharField(blank=True, default=None, help_text='The API key for your PVOutput account. Listed in PVOutput at Settings -> "API Settings".', max_length=256, null=True, verbose_name='API key')),
-                ('system_identifier', models.CharField(blank=True, default=None, help_text='The "System ID" for your device. Listed in PVOutput at Settings -> "Registered Systems".', max_length=32, null=True, verbose_name='System ID (digit)')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "auth_token",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text='The API key for your PVOutput account. Listed in PVOutput at Settings -> "API Settings".',
+                        max_length=256,
+                        null=True,
+                        verbose_name="API key",
+                    ),
+                ),
+                (
+                    "system_identifier",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text='The "System ID" for your device. Listed in PVOutput at Settings -> "Registered Systems".',
+                        max_length=32,
+                        null=True,
+                        verbose_name="System ID (digit)",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'PVOutput: API configuration',
-                'default_permissions': (),
+                "verbose_name": "PVOutput: API configuration",
+                "default_permissions": (),
             },
         ),
     ]

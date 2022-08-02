@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0014_dropbox_oauth'),
+        ("dsmr_backup", "0014_dropbox_oauth"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='dropboxsettings',
-            name='app_key',
+            model_name="dropboxsettings",
+            name="app_key",
         ),
     ]

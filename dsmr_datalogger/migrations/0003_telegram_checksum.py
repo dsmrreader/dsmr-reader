@@ -8,13 +8,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0002_meta_names'),
+        ("dsmr_datalogger", "0002_meta_names"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='meterstatistics',
-            name='rejected_telegrams',
-            field=models.IntegerField(default=0, help_text='Number of rejected telegrams due to invalid CRC checksum'),
+            model_name="meterstatistics",
+            name="rejected_telegrams",
+            field=models.IntegerField(
+                default=0,
+                help_text="Number of rejected telegrams due to invalid CRC checksum",
+            ),
         ),
     ]

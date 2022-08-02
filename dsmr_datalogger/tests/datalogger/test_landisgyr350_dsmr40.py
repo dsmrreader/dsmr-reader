@@ -12,7 +12,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
 class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
-    """ Landis+Gyr 350 DSMR v4.0. """
+    """Landis+Gyr 350 DSMR v4.0."""
 
     def _dsmr_dummy_data(self):
         return [
@@ -58,33 +58,38 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         ]
 
     def test_reading_creation(self):
-        """ Test whether dsmr_datalogger can insert a reading for Landis+Gyr 350 DSMR v4.0. """
+        """Test whether dsmr_datalogger can insert a reading for Landis+Gyr 350 DSMR v4.0."""
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_values(self):
-        """ Test whether dsmr_datalogger reads the correct values. """
+        """Test whether dsmr_datalogger reads the correct values."""
         DataloggerSettings.get_solo()
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(reading.timestamp, datetime(2015, 7, 1, 17, 29, 59, tzinfo=pytz.UTC))
-        self.assertEqual(reading.electricity_delivered_1, Decimal('510.747'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('0.123'))
-        self.assertEqual(reading.electricity_delivered_2, Decimal('500.013'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('123.456'))
-        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.192'))
-        self.assertEqual(reading.electricity_currently_returned, Decimal('0.123'))
-        self.assertEqual(reading.extra_device_timestamp, datetime(2015, 7, 1, 17, 0, 0, tzinfo=pytz.UTC))
-        self.assertEqual(reading.extra_device_delivered, Decimal('845.206'))
-        self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.123'))
-        self.assertEqual(reading.phase_currently_delivered_l2, Decimal('0.456'))
-        self.assertEqual(reading.phase_currently_delivered_l3, Decimal('0.789'))
-        self.assertEqual(reading.phase_currently_returned_l1, Decimal('0.111'))
-        self.assertEqual(reading.phase_currently_returned_l2, Decimal('0.555'))
-        self.assertEqual(reading.phase_currently_returned_l3, Decimal('0.999'))
+        self.assertEqual(
+            reading.timestamp, datetime(2015, 7, 1, 17, 29, 59, tzinfo=pytz.UTC)
+        )
+        self.assertEqual(reading.electricity_delivered_1, Decimal("510.747"))
+        self.assertEqual(reading.electricity_returned_1, Decimal("0.123"))
+        self.assertEqual(reading.electricity_delivered_2, Decimal("500.013"))
+        self.assertEqual(reading.electricity_returned_2, Decimal("123.456"))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal("0.192"))
+        self.assertEqual(reading.electricity_currently_returned, Decimal("0.123"))
+        self.assertEqual(
+            reading.extra_device_timestamp,
+            datetime(2015, 7, 1, 17, 0, 0, tzinfo=pytz.UTC),
+        )
+        self.assertEqual(reading.extra_device_delivered, Decimal("845.206"))
+        self.assertEqual(reading.phase_currently_delivered_l1, Decimal("0.123"))
+        self.assertEqual(reading.phase_currently_delivered_l2, Decimal("0.456"))
+        self.assertEqual(reading.phase_currently_delivered_l3, Decimal("0.789"))
+        self.assertEqual(reading.phase_currently_returned_l1, Decimal("0.111"))
+        self.assertEqual(reading.phase_currently_returned_l2, Decimal("0.555"))
+        self.assertEqual(reading.phase_currently_returned_l3, Decimal("0.999"))
         self.assertIsNone(reading.phase_voltage_l1)
         self.assertIsNone(reading.phase_voltage_l2)
         self.assertIsNone(reading.phase_voltage_l3)
@@ -94,8 +99,8 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()
-        self.assertEqual(meter_statistics.dsmr_version, '40')
-        self.assertEqual(meter_statistics.electricity_tariff, Decimal('1'))
+        self.assertEqual(meter_statistics.dsmr_version, "40")
+        self.assertEqual(meter_statistics.electricity_tariff, Decimal("1"))
         self.assertEqual(meter_statistics.power_failure_count, 3)
         self.assertEqual(meter_statistics.long_power_failure_count, 0)
         self.assertEqual(meter_statistics.voltage_sag_count_l1, 2)

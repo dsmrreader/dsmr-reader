@@ -11,24 +11,25 @@ from dsmr_stats.models.statistics import DayStatistics
 
 
 class TestViews(TestCase):
-    """ Test whether views render at all. """
+    """Test whether views render at all."""
+
     fixtures = [
-        'dsmr_frontend/test_dsmrreading.json',
-        'dsmr_frontend/test_note.json',
-        'dsmr_frontend/test_energysupplierprice.json',
-        'dsmr_frontend/test_statistics.json',
-        'dsmr_frontend/test_meterstatistics.json',
-        'dsmr_frontend/test_electricity_consumption.json',
-        'dsmr_frontend/test_gas_consumption.json',
+        "dsmr_frontend/test_dsmrreading.json",
+        "dsmr_frontend/test_note.json",
+        "dsmr_frontend/test_energysupplierprice.json",
+        "dsmr_frontend/test_statistics.json",
+        "dsmr_frontend/test_meterstatistics.json",
+        "dsmr_frontend/test_electricity_consumption.json",
+        "dsmr_frontend/test_gas_consumption.json",
     ]
-    namespace = 'frontend'
+    namespace = "frontend"
     support_data = True
     support_gas = True
 
     def setUp(self):
         self.client = Client()
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_dashboard(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
 
@@ -36,22 +37,21 @@ class TestViews(TestCase):
         weather_settings.track = True
         weather_settings.save()
 
-        response = self.client.get(
-            reverse('{}:dashboard'.format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:dashboard".format(self.namespace)))
         self.assertEqual(response.status_code, 200, response.content)
-        self.assertIn('capabilities', response.context)
-        self.assertIn('today_date_format', response.context)
-        self.assertIn('month_date_format', response.context)
-        self.assertIn('year_date_format', response.context)
-        self.assertIn('datalogger_settings', response.context)
-        self.assertIn('frontend_settings', response.context)
-        self.assertIn('notification_count', response.context)
-        self.assertIn('period_totals', response.context)
+        self.assertIn("capabilities", response.context)
+        self.assertIn("today_date_format", response.context)
+        self.assertIn("month_date_format", response.context)
+        self.assertIn("year_date_format", response.context)
+        self.assertIn("datalogger_settings", response.context)
+        self.assertIn("frontend_settings", response.context)
+        self.assertIn("notification_count", response.context)
+        self.assertIn("period_totals", response.context)
 
 
 class TestViewsWithoutData(TestViews):
-    """ Same tests as above, but without any data as it's flushed in setUp().  """
+    """Same tests as above, but without any data as it's flushed in setUp()."""
+
     fixtures = []
     support_data = support_gas = False
 
@@ -67,7 +67,7 @@ class TestViewsWithoutData(TestViews):
 
 
 class TestViewsWithoutPrices(TestViews):
-    """ Same tests as above, but without any price data as it's flushed in setUp().  """
+    """Same tests as above, but without any price data as it's flushed in setUp()."""
 
     def setUp(self):
         super(TestViewsWithoutPrices, self).setUp()
@@ -76,14 +76,15 @@ class TestViewsWithoutPrices(TestViews):
 
 
 class TestViewsWithoutGas(TestViews):
-    """ Same tests as above, but without any GAS related data.  """
+    """Same tests as above, but without any GAS related data."""
+
     fixtures = [
-        'dsmr_frontend/test_dsmrreading_without_gas.json',
-        'dsmr_frontend/test_note.json',
-        'dsmr_frontend/test_energysupplierprice.json',
-        'dsmr_frontend/test_statistics.json',
-        'dsmr_frontend/test_meterstatistics.json',
-        'dsmr_frontend/test_electricity_consumption.json',
+        "dsmr_frontend/test_dsmrreading_without_gas.json",
+        "dsmr_frontend/test_note.json",
+        "dsmr_frontend/test_energysupplierprice.json",
+        "dsmr_frontend/test_statistics.json",
+        "dsmr_frontend/test_meterstatistics.json",
+        "dsmr_frontend/test_electricity_consumption.json",
     ]
     support_gas = False
 

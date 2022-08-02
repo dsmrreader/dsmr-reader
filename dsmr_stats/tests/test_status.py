@@ -27,12 +27,12 @@ class TestStatus(TestCase):
         DayStatistics.objects.all().delete()
         self.assertIsInstance(check_day_statistics_generation(), MonitoringStatusIssue)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_check_day_statistics_generation_okay(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2000, 1, 2))
         self.assertEqual(check_day_statistics_generation(), None)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_check_day_statistics_generation_fail(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2000, 1, 3))
         self.assertIsInstance(check_day_statistics_generation(), MonitoringStatusIssue)

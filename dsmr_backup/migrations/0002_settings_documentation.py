@@ -8,13 +8,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0001_initial'),
+        ("dsmr_backup", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dropboxsettings',
-            name='access_token',
-            field=models.CharField(blank=True, default=None, max_length=128, null=True, verbose_name='Dropbox access token'),
+            model_name="dropboxsettings",
+            name="access_token",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                max_length=128,
+                null=True,
+                verbose_name="Dropbox access token",
+            ),
         ),
     ]

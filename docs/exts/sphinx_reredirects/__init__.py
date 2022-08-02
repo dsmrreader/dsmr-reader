@@ -17,7 +17,9 @@ OPTION_REDIRECTS_DEFAULT = {}
 OPTION_TEMPLATE_FILE = "redirect_html_template_file"
 OPTION_TEMPLATE_FILE_DEFAULT = None
 
-REDIRECT_FILE_DEFAULT_TEMPLATE = '<html><head><meta http-equiv="refresh" content="0; url=${to_uri}"></head></html>'
+REDIRECT_FILE_DEFAULT_TEMPLATE = (
+    '<html><head><meta http-equiv="refresh" content="0; url=${to_uri}"></head></html>'
+)
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +38,7 @@ def init(app: Sphinx, exception):
     template_file: str = app.config[OPTION_TEMPLATE_FILE]
 
     if not redirects:
-        logger.info('No redirects found')
+        logger.info("No redirects found")
         return
 
     # HTML used as redirect file content

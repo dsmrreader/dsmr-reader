@@ -6,12 +6,15 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0014_phases_currently_returned'),
+        ("dsmr_frontend", "0014_phases_currently_returned"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='notification',
-            options={'default_permissions': (), 'verbose_name': 'Application notification'},
+            name="notification",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Application notification",
+            },
         ),
     ]

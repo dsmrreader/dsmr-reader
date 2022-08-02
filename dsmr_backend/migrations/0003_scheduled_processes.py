@@ -7,26 +7,34 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backend', '0002_email_settings'),
+        ("dsmr_backend", "0002_email_settings"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ScheduledProcess',
+            name="ScheduledProcess",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64)),
-                ('module', models.CharField(max_length=128, unique=True)),
-                ('planned', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64)),
+                ("module", models.CharField(max_length=128, unique=True)),
+                ("planned", models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'default_permissions': (),
-                'verbose_name': 'Scheduled process',
+                "default_permissions": (),
+                "verbose_name": "Scheduled process",
             },
         ),
         migrations.AlterField(
-            model_name='scheduledprocess',
-            name='planned',
+            model_name="scheduledprocess",
+            name="planned",
             field=models.DateTimeField(default=django.utils.timezone.now),
         ),
     ]

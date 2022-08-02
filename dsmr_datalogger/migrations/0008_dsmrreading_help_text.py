@@ -8,63 +8,115 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0007_dsmrreading_timestamp_index'),
+        ("dsmr_datalogger", "0007_dsmrreading_timestamp_index"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='electricity_currently_delivered',
-            field=models.DecimalField(decimal_places=3, help_text='Current electricity delivered in kW', max_digits=9),
+            model_name="dsmrreading",
+            name="electricity_currently_delivered",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="Current electricity delivered in kW",
+                max_digits=9,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='electricity_currently_returned',
-            field=models.DecimalField(decimal_places=3, help_text='Current electricity returned in kW', max_digits=9),
+            model_name="dsmrreading",
+            name="electricity_currently_returned",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="Current electricity returned in kW",
+                max_digits=9,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='electricity_delivered_1',
-            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity delivered (Dutch users: low tariff) in kWh', max_digits=9),
+            model_name="dsmrreading",
+            name="electricity_delivered_1",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="Meter position stating electricity delivered (Dutch users: low tariff) in kWh",
+                max_digits=9,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='electricity_delivered_2',
-            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity delivered (normal tariff) in kWh', max_digits=9),
+            model_name="dsmrreading",
+            name="electricity_delivered_2",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="Meter position stating electricity delivered (normal tariff) in kWh",
+                max_digits=9,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='electricity_returned_1',
-            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity returned (Dutch users: low tariff) in kWh', max_digits=9),
+            model_name="dsmrreading",
+            name="electricity_returned_1",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="Meter position stating electricity returned (Dutch users: low tariff) in kWh",
+                max_digits=9,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='electricity_returned_2',
-            field=models.DecimalField(decimal_places=3, help_text='Meter position stating electricity returned (normal tariff) in kWh', max_digits=9),
+            model_name="dsmrreading",
+            name="electricity_returned_2",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="Meter position stating electricity returned (normal tariff) in kWh",
+                max_digits=9,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='extra_device_delivered',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Last value read from the extra device connected (gas meter)', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="extra_device_delivered",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Last value read from the extra device connected (gas meter)",
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='extra_device_timestamp',
-            field=models.DateTimeField(default=None, help_text='Last timestamp read from the extra device connected (gas meter)', null=True),
+            model_name="dsmrreading",
+            name="extra_device_timestamp",
+            field=models.DateTimeField(
+                default=None,
+                help_text="Last timestamp read from the extra device connected (gas meter)",
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='phase_currently_delivered_l1',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Current electricity used by phase L1 (in kW)', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="phase_currently_delivered_l1",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Current electricity used by phase L1 (in kW)",
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='phase_currently_delivered_l2',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Current electricity used by phase L2 (in kW)', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="phase_currently_delivered_l2",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Current electricity used by phase L2 (in kW)",
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='phase_currently_delivered_l3',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Current electricity used by phase L3 (in kW)', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="phase_currently_delivered_l3",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Current electricity used by phase L3 (in kW)",
+                max_digits=9,
+                null=True,
+            ),
         ),
     ]

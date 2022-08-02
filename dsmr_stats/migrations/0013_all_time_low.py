@@ -6,38 +6,74 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0012_electricity_statistics'),
+        ("dsmr_stats", "0012_electricity_statistics"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='electricitystatistics',
-            name='lowest_usage_l1_timestamp',
-            field=models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of lowest usage on L1+'),
+            model_name="electricitystatistics",
+            name="lowest_usage_l1_timestamp",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                null=True,
+                verbose_name="Timestamp of lowest usage on L1+",
+            ),
         ),
         migrations.AddField(
-            model_name='electricitystatistics',
-            name='lowest_usage_l1_value',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Lowest usage on L1+ (in kW)'),
+            model_name="electricitystatistics",
+            name="lowest_usage_l1_value",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                max_digits=9,
+                null=True,
+                verbose_name="Lowest usage on L1+ (in kW)",
+            ),
         ),
         migrations.AddField(
-            model_name='electricitystatistics',
-            name='lowest_usage_l2_timestamp',
-            field=models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of lowest usage on L2+'),
+            model_name="electricitystatistics",
+            name="lowest_usage_l2_timestamp",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                null=True,
+                verbose_name="Timestamp of lowest usage on L2+",
+            ),
         ),
         migrations.AddField(
-            model_name='electricitystatistics',
-            name='lowest_usage_l2_value',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Lowest usage on L2+ (in kW)'),
+            model_name="electricitystatistics",
+            name="lowest_usage_l2_value",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                max_digits=9,
+                null=True,
+                verbose_name="Lowest usage on L2+ (in kW)",
+            ),
         ),
         migrations.AddField(
-            model_name='electricitystatistics',
-            name='lowest_usage_l3_timestamp',
-            field=models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of lowest usage on L3+'),
+            model_name="electricitystatistics",
+            name="lowest_usage_l3_timestamp",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                null=True,
+                verbose_name="Timestamp of lowest usage on L3+",
+            ),
         ),
         migrations.AddField(
-            model_name='electricitystatistics',
-            name='lowest_usage_l3_value',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Lowest usage on L3+ (in kW)'),
+            model_name="electricitystatistics",
+            name="lowest_usage_l3_value",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                max_digits=9,
+                null=True,
+                verbose_name="Lowest usage on L3+ (in kW)",
+            ),
         ),
     ]

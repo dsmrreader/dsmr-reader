@@ -5,58 +5,84 @@ from django.db import migrations, models
 
 
 def migrate_forward(apps, schema_editor):
-    """ Clears API settings if we used NMA. """
+    """Clears API settings if we used NMA."""
     import dsmr_backend.services.backend
 
     if dsmr_backend.services.backend.is_recent_installation():
         return
 
     import dsmr_frontend.services
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
         message=dsmr_frontend.services.get_translated_string(
             text=gettext_lazy(
                 "MQTT now requires a separate process in Supervisor. Please read the changelog for more instructions."
             )
         ),
-        redirect_to='frontend:changelog-redirect'
+        redirect_to="frontend:changelog-redirect",
     )
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mqtt', '0005_mqtt_use_local_timezone'),
+        ("dsmr_mqtt", "0005_mqtt_use_local_timezone"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Message',
+            name="Message",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('topic', models.CharField(max_length=255)),
-                ('payload', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("topic", models.CharField(max_length=255)),
+                ("payload", models.TextField()),
             ],
             options={
-                'verbose_name_plural': 'MQTT: Outgoing messages',
-                'verbose_name': 'MQTT: Outgoing message',
-                'default_permissions': (),
+                "verbose_name_plural": "MQTT: Outgoing messages",
+                "verbose_name": "MQTT: Outgoing message",
+                "default_permissions": (),
             },
         ),
         migrations.AddField(
-            model_name='mqttbrokersettings',
-            name='debug',
-            field=models.BooleanField(default=False, help_text='Whether the client should display debug information in the logs.', verbose_name='Enable debug logging'),
+            model_name="mqttbrokersettings",
+            name="debug",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether the client should display debug information in the logs.",
+                verbose_name="Enable debug logging",
+            ),
         ),
         migrations.AddField(
-            model_name='mqttbrokersettings',
-            name='qos',
-            field=models.IntegerField(choices=[(0, 'QoS 0 - At most once (default)'), (1, 'QoS 1 - At least once'), (2, 'QoS 2 - Exactly once')], default=2, help_text='QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages.', verbose_name='Quality Of Service'),
+            model_name="mqttbrokersettings",
+            name="qos",
+            field=models.IntegerField(
+                choices=[
+                    (0, "QoS 0 - At most once (default)"),
+                    (1, "QoS 1 - At least once"),
+                    (2, "QoS 2 - Exactly once"),
+                ],
+                default=2,
+                help_text="QoS 0: Fastest performance, but unreliable (designed for reliable connections, such as cabled networks). QoS 1: Average performance, but reliable. Caveat: May re-send messages, causing them to duplicate! QoS 2: Slowest performance, but reliable and prevents sending duplicate messages.",
+                verbose_name="Quality Of Service",
+            ),
         ),
         migrations.AddField(
-            model_name='mqttbrokersettings',
-            name='restart_required',
-            field=models.BooleanField(default=False, help_text='Whether the process requires a restart, forcing the client-broker connection to be reset.', verbose_name='Restart required'),
+            model_name="mqttbrokersettings",
+            name="restart_required",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether the process requires a restart, forcing the client-broker connection to be reset.",
+                verbose_name="Restart required",
+            ),
         ),
         migrations.RunPython(migrate_forward),
     ]

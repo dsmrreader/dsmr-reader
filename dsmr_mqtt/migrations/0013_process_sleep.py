@@ -7,7 +7,6 @@ from django.conf import settings
 
 
 class Migration(migrations.Migration):
-
     def migrate_forward(apps, schema_editor):
         try:
             # Only when available.
@@ -15,7 +14,7 @@ class Migration(migrations.Migration):
         except AttributeError:
             return
 
-        MQTTBrokerSettings = apps.get_model('dsmr_mqtt', 'MQTTBrokerSettings')
+        MQTTBrokerSettings = apps.get_model("dsmr_mqtt", "MQTTBrokerSettings")
         MQTTBrokerSettings.objects.all().update(
             process_sleep=decimal.Decimal(settings.DSMRREADER_MQTT_SLEEP)
         )
@@ -24,14 +23,20 @@ class Migration(migrations.Migration):
         pass  # Nothing to do, but allow going backwards.
 
     dependencies = [
-        ('dsmr_mqtt', '0012_mqtt_voltage_defaults'),
+        ("dsmr_mqtt", "0012_mqtt_voltage_defaults"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mqttbrokersettings',
-            name='process_sleep',
-            field=models.DecimalField(decimal_places=1, default=1, help_text='The number of seconds the application will sleep after publishing the outgoing MQTT message queue.', max_digits=3, verbose_name='MQTT process sleep'),
+            model_name="mqttbrokersettings",
+            name="process_sleep",
+            field=models.DecimalField(
+                decimal_places=1,
+                default=1,
+                help_text="The number of seconds the application will sleep after publishing the outgoing MQTT message queue.",
+                max_digits=3,
+                verbose_name="MQTT process sleep",
+            ),
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]

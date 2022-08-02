@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mqtt', '0007_mqtts'),
+        ("dsmr_mqtt", "0007_mqtts"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='message',
-            name='payload',
+            model_name="message",
+            name="payload",
             field=models.TextField(blank=True, null=True),
         ),
     ]

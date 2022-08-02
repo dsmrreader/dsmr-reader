@@ -6,17 +6,19 @@ from django.core import mail
 from dsmr_backend.models.settings import EmailSettings
 
 
-logger = logging.getLogger('dsmrreader')
+logger = logging.getLogger("dsmrreader")
 
 
-def send(email_from: str, email_to: str, subject: str, body: str, attachment: str = None) -> None:
-    """ Sends an email using the outgoing email settings. """
+def send(
+    email_from: str, email_to: str, subject: str, body: str, attachment: str = None
+) -> None:
+    """Sends an email using the outgoing email settings."""
     email_settings = EmailSettings.get_solo()
 
     logger.debug(
-        'Email: Preparing to send email using mail server %s:%s',
+        "Email: Preparing to send email using mail server %s:%s",
         email_settings.host,
-        email_settings.port
+        email_settings.port,
     )
     email_backend = EmailBackend(
         host=email_settings.host,
@@ -24,11 +26,13 @@ def send(email_from: str, email_to: str, subject: str, body: str, attachment: st
         username=email_settings.username,
         password=email_settings.password,
         use_tls=email_settings.use_tls,
-        use_ssl=email_settings.use_ssl
+        use_ssl=email_settings.use_ssl,
     )
 
     # Prevent hanging processes, ensure there is always a timeout set.
-    email_backend.timeout = email_backend.timeout if email_backend.timeout is not None else 30
+    email_backend.timeout = (
+        email_backend.timeout if email_backend.timeout is not None else 30
+    )
 
     message = mail.EmailMessage(
         subject=subject,
@@ -41,5 +45,5 @@ def send(email_from: str, email_to: str, subject: str, body: str, attachment: st
     if attachment:
         message.attach_file(attachment)
 
-    logger.debug('Email backup: Sending an email to %s (%s)', email_to, subject)
+    logger.debug("Email backup: Sending an email to %s (%s)", email_to, subject)
     message.send()

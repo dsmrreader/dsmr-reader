@@ -4,5 +4,5 @@ from django.apps import apps
 
 class TestMetaDefaultPermissions(TestCase):
     def test_default_permissions(self):
-        for current_model in apps.get_app_config('dsmr_frontend').get_models():
+        for current_model in apps.get_app_config("dsmr_frontend").get_models():
             self.assertEqual(len(current_model()._meta.default_permissions), 0)

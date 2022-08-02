@@ -5,16 +5,18 @@ from django.conf import settings
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
     ScheduledProcess.objects.create(
-        name='Generate consumption data',
+        name="Generate consumption data",
         module=settings.DSMRREADER_MODULE_GENERATE_CONSUMPTION,
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_GENERATE_CONSUMPTION).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_GENERATE_CONSUMPTION
+    ).delete()
 
 
 class Migration(migrations.Migration):
@@ -24,5 +26,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_consumption', '0012_add_voltage_indexes'),
+        ("dsmr_consumption", "0012_add_voltage_indexes"),
     ]

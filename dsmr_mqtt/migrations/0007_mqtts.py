@@ -6,18 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mqtt', '0006_mqtt_refactoring'),
+        ("dsmr_mqtt", "0006_mqtt_refactoring"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mqttbrokersettings',
-            name='secure',
-            field=models.IntegerField(choices=[(0, 'INSECURE - No SSL/TLS'), (1, 'SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certificates)'), (2, 'SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate')], default=0, help_text='Whether the client should use a secure connection. Select SECURE (CERT_NONE) for self-signed certificates. Make sure to use the appropriate MQTT(S) port as well.', verbose_name='Secure (SSL/TLS)'),
+            model_name="mqttbrokersettings",
+            name="secure",
+            field=models.IntegerField(
+                choices=[
+                    (0, "INSECURE - No SSL/TLS"),
+                    (
+                        1,
+                        "SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certificates)",
+                    ),
+                    (
+                        2,
+                        "SECURE (CERT_REQUIRED) - Requires a valid/trusted certificate",
+                    ),
+                ],
+                default=0,
+                help_text="Whether the client should use a secure connection. Select SECURE (CERT_NONE) for self-signed certificates. Make sure to use the appropriate MQTT(S) port as well.",
+                verbose_name="Secure (SSL/TLS)",
+            ),
         ),
         migrations.AlterField(
-            model_name='mqttbrokersettings',
-            name='port',
-            field=models.IntegerField(default=1883, help_text='MQTT: 1883 - MQTTS: 8883', null=True, verbose_name='Port'),
+            model_name="mqttbrokersettings",
+            name="port",
+            field=models.IntegerField(
+                default=1883,
+                help_text="MQTT: 1883 - MQTTS: 8883",
+                null=True,
+                verbose_name="Port",
+            ),
         ),
     ]

@@ -7,22 +7,26 @@ from django.utils.translation import ugettext_lazy
 def migrate_forward(apps, schema_editor):
     import dsmr_frontend.services
 
-    if connection.vendor != 'mysql':
+    if connection.vendor != "mysql":
         return
 
     with connection.cursor() as cursor:
         # This will result in NULL when the timezone is unknown or unsupported.
-        cursor.execute("SELECT CONVERT_TZ('2020-01-01 00:00:00', 'UTC', 'Europe/Amsterdam')")
+        cursor.execute(
+            "SELECT CONVERT_TZ('2020-01-01 00:00:00', 'UTC', 'Europe/Amsterdam')"
+        )
 
     if cursor.fetchone() is not None:
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=ugettext_lazy(
-            'You are using a MySQL database without timezone support. This may cause bugs. Please enable timezone '
-            'support in your database, see: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html'
-        ))
+        message=dsmr_frontend.services.get_translated_string(
+            text=ugettext_lazy(
+                "You are using a MySQL database without timezone support. This may cause bugs. Please enable timezone "
+                "support in your database, see: https://dev.mysql.com/doc/refman/en/mysql-tzinfo-to-sql.html"
+            )
+        )
     )
 
 
@@ -37,5 +41,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0033_django_colorfield_update'),
+        ("dsmr_frontend", "0033_django_colorfield_update"),
     ]

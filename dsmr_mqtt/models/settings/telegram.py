@@ -7,17 +7,18 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class RawTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """ MQTT raw telegrams. """
+    """MQTT raw telegrams."""
+
     enabled = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether any raw telegrams received are sent to the broker.')
+        verbose_name=_("Enabled"),
+        help_text=_("Whether any raw telegrams received are sent to the broker."),
     )
     topic = models.CharField(
         max_length=256,
-        default='dsmr/raw',
-        verbose_name=_('Topic path'),
-        help_text=_('The topic to send the raw telegrams to.')
+        default="dsmr/raw",
+        verbose_name=_("Topic path"),
+        help_text=_("The topic to send the raw telegrams to."),
     )
 
     def __str__(self):
@@ -25,24 +26,25 @@ class RawTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('(Data source) Telegram: Raw')
+        verbose_name = _("(Data source) Telegram: Raw")
 
 
 class JSONTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """ MQTT JSON telegram. """
+    """MQTT JSON telegram."""
+
     enabled = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether parsed telegrams are sent to the broker, in JSON format.')
+        verbose_name=_("Enabled"),
+        help_text=_("Whether parsed telegrams are sent to the broker, in JSON format."),
     )
     topic = models.CharField(
         max_length=256,
-        default='dsmr/json',
-        verbose_name=_('Topic path'),
-        help_text=_('The topic to send the parsed JSON telegrams to.')
+        default="dsmr/json",
+        verbose_name=_("Topic path"),
+        help_text=_("The topic to send the parsed JSON telegrams to."),
     )
     formatting = models.TextField(
-        default='''
+        default="""
 [mapping]
 # READING FIELD = JSON FIELD
 id = id
@@ -67,16 +69,20 @@ phase_voltage_l3 = phase_voltage_l3
 phase_power_current_l1 = phase_power_current_l1
 phase_power_current_l2 = phase_power_current_l2
 phase_power_current_l3 = phase_power_current_l3
-''',
-        verbose_name=_('Formatting'),
-        help_text=_('Maps the field names used in the JSON message sent to the broker.')
+""",
+        verbose_name=_("Formatting"),
+        help_text=_(
+            "Maps the field names used in the JSON message sent to the broker."
+        ),
     )
     use_local_timezone = models.BooleanField(
         default=False,
-        verbose_name=_('Use local timezone'),
-        help_text=_('Whether to use the local timezone ({}) in the timestamp sent.'.format(
-            settings.TIME_ZONE
-        ))
+        verbose_name=_("Use local timezone"),
+        help_text=_(
+            "Whether to use the local timezone ({}) in the timestamp sent.".format(
+                settings.TIME_ZONE
+            )
+        ),
     )
 
     def __str__(self):
@@ -84,18 +90,21 @@ phase_power_current_l3 = phase_power_current_l3
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('(Data source) Telegram: JSON')
+        verbose_name = _("(Data source) Telegram: JSON")
 
 
 class SplitTopicTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """ MQTT splitted telegram per field, mapped to topics. """
+    """MQTT splitted telegram per field, mapped to topics."""
+
     enabled = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether parsed telegrams are sent to the broker, having each field sent to a different topic.')
+        verbose_name=_("Enabled"),
+        help_text=_(
+            "Whether parsed telegrams are sent to the broker, having each field sent to a different topic."
+        ),
     )
     formatting = models.TextField(
-        default='''
+        default="""
 [mapping]
 # READING FIELD = TOPIC PATH
 id = dsmr/reading/id
@@ -120,16 +129,18 @@ phase_voltage_l3 = dsmr/reading/phase_voltage_l3
 phase_power_current_l1 = dsmr/reading/phase_power_current_l1
 phase_power_current_l2 = dsmr/reading/phase_power_current_l2
 phase_power_current_l3 = dsmr/reading/phase_power_current_l3
-''',
-        verbose_name=_('Formatting'),
-        help_text=_('Maps the field names to separate topics sent to the broker.')
+""",
+        verbose_name=_("Formatting"),
+        help_text=_("Maps the field names to separate topics sent to the broker."),
     )
     use_local_timezone = models.BooleanField(
         default=False,
-        verbose_name=_('Use local timezone'),
-        help_text=_('Whether to use the local timezone ({}) in the timestamp sent.'.format(
-            settings.TIME_ZONE
-        ))
+        verbose_name=_("Use local timezone"),
+        help_text=_(
+            "Whether to use the local timezone ({}) in the timestamp sent.".format(
+                settings.TIME_ZONE
+            )
+        ),
     )
 
     def __str__(self):
@@ -137,4 +148,4 @@ phase_power_current_l3 = dsmr/reading/phase_power_current_l3
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('(Data source) Telegram: Split topic')
+        verbose_name = _("(Data source) Telegram: Split topic")

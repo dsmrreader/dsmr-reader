@@ -5,27 +5,33 @@ from django.conf import settings
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    PVOutputAPISettings = apps.get_model('dsmr_pvoutput', 'PVOutputAPISettings')
-    PVOutputAddStatusSettings = apps.get_model('dsmr_pvoutput', 'PVOutputAddStatusSettings')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    PVOutputAPISettings = apps.get_model("dsmr_pvoutput", "PVOutputAPISettings")
+    PVOutputAddStatusSettings = apps.get_model(
+        "dsmr_pvoutput", "PVOutputAddStatusSettings"
+    )
 
     api_settings, _ = PVOutputAPISettings.objects.get_or_create()
     add_status_settings, _ = PVOutputAddStatusSettings.objects.get_or_create()
 
     ScheduledProcess.objects.create(
-        name='PVOutput export',
+        name="PVOutput export",
         module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT,
-        active=all([
-            api_settings.auth_token,
-            api_settings.system_identifier,
-            add_status_settings.export
-        ])
+        active=all(
+            [
+                api_settings.auth_token,
+                api_settings.system_identifier,
+                add_status_settings.export,
+            ]
+        ),
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT
+    ).delete()
 
 
 class Migration(migrations.Migration):
@@ -35,5 +41,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_pvoutput', '0002_pvoutput_latest_sync'),
+        ("dsmr_pvoutput", "0002_pvoutput_latest_sync"),
     ]

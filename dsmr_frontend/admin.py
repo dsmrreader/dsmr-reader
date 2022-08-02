@@ -12,104 +12,113 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
     save_on_top = True
     fieldsets = (
         (
-            _('Security'), {
-                'fields': ['always_require_login'],
-            }
+            _("Security"),
+            {
+                "fields": ["always_require_login"],
+            },
         ),
         (
-            _('Interface'), {
-                'fields': [
-                    'frontend_theme',
-                    'gui_refresh_interval',
-                    'merge_electricity_tariffs',
+            _("Interface"),
+            {
+                "fields": [
+                    "frontend_theme",
+                    "gui_refresh_interval",
+                    "merge_electricity_tariffs",
                 ],
-            }
+            },
         ),
         (
-            _('Graphs'), {
-                'fields': [
-                    'live_graphs_initial_zoom',
-                    'live_graphs_hours_range',
-                    'electricity_graph_style',
-                    'stack_electricity_graphs',
-                    'gas_graph_style',
+            _("Graphs"),
+            {
+                "fields": [
+                    "live_graphs_initial_zoom",
+                    "live_graphs_hours_range",
+                    "electricity_graph_style",
+                    "stack_electricity_graphs",
+                    "gas_graph_style",
                 ],
-            }
+            },
         ),
         (
-            _('Tariff names'), {
-                'fields': [
-                    'tariff_1_delivered_name',
-                    'tariff_2_delivered_name',
-                    'tariff_1_returned_name',
-                    'tariff_2_returned_name',
+            _("Tariff names"),
+            {
+                "fields": [
+                    "tariff_1_delivered_name",
+                    "tariff_2_delivered_name",
+                    "tariff_1_returned_name",
+                    "tariff_2_returned_name",
                 ],
-            }
-        ),
-
-        (
-            _('Electricity delivered'), {
-                'fields': [
-                    'electricity_delivered_color',
-                    'electricity_delivered_alternate_color',
-                ],
-            }
+            },
         ),
         (
-            _('Electricity returned'), {
-                'fields': [
-                    'electricity_returned_color',
-                    'electricity_returned_alternate_color',
-
+            _("Electricity delivered"),
+            {
+                "fields": [
+                    "electricity_delivered_color",
+                    "electricity_delivered_alternate_color",
                 ],
-            }
+            },
         ),
         (
-            _('Gas'), {
-                'fields': [
-                    'gas_delivered_color',
+            _("Electricity returned"),
+            {
+                "fields": [
+                    "electricity_returned_color",
+                    "electricity_returned_alternate_color",
                 ],
-            }
+            },
         ),
         (
-            _('Phases P+'), {
-                'fields': [
-                    'phase_delivered_l1_color',
-                    'phase_delivered_l2_color',
-                    'phase_delivered_l3_color',
+            _("Gas"),
+            {
+                "fields": [
+                    "gas_delivered_color",
                 ],
-            }
+            },
         ),
         (
-            _('Phases P-'), {
-                'fields': [
-                    'phase_returned_l1_color',
-                    'phase_returned_l2_color',
-                    'phase_returned_l3_color',
+            _("Phases P+"),
+            {
+                "fields": [
+                    "phase_delivered_l1_color",
+                    "phase_delivered_l2_color",
+                    "phase_delivered_l3_color",
                 ],
-            }
+            },
         ),
         (
-            _('Temperature'), {
-                'fields': [
-                    'temperature_color',
+            _("Phases P-"),
+            {
+                "fields": [
+                    "phase_returned_l1_color",
+                    "phase_returned_l2_color",
+                    "phase_returned_l3_color",
                 ],
-            }
+            },
+        ),
+        (
+            _("Temperature"),
+            {
+                "fields": [
+                    "temperature_color",
+                ],
+            },
         ),
     )
 
 
 @admin.register(SortedGraph)
 class SortedGraphAdmin(ChangeOnlyAdminModel, SortableAdmin):
-    list_display = ('sorting_order', 'name')
+    list_display = ("sorting_order", "name")
     fieldsets = (
         (
-            None, {
-                'fields': ['sorting_order', 'name'],
-                'description': _(
-                    'To alter the order in which the graphs are displayed, '
+            None,
+            {
+                "fields": ["sorting_order", "name"],
+                "description": _(
+                    "To alter the order in which the graphs are displayed, "
                     '<a href="/admin/dsmr_frontend/sortedgraph/sort/">go to this page</a> and drag the graph names.'
-                )
-            }
+                ),
+            },
         ),
     )

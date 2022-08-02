@@ -8,23 +8,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_consumption', '0004_merge_electricity_tariffs'),
+        ("dsmr_consumption", "0004_merge_electricity_tariffs"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='electricityconsumption',
-            name='phase_currently_delivered_l1',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Instantaneous active power L1 (+P) in W resolution', db_index=True, max_digits=9, null=True),
+            model_name="electricityconsumption",
+            name="phase_currently_delivered_l1",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Instantaneous active power L1 (+P) in W resolution",
+                db_index=True,
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='electricityconsumption',
-            name='phase_currently_delivered_l2',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Instantaneous active power L2 (+P) in W resolution', db_index=True, max_digits=9, null=True),
+            model_name="electricityconsumption",
+            name="phase_currently_delivered_l2",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Instantaneous active power L2 (+P) in W resolution",
+                db_index=True,
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='electricityconsumption',
-            name='phase_currently_delivered_l3',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Instantaneous active power L3 (+P) in W resolution', db_index=True, max_digits=9, null=True),
+            model_name="electricityconsumption",
+            name="phase_currently_delivered_l3",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Instantaneous active power L3 (+P) in W resolution",
+                db_index=True,
+                max_digits=9,
+                null=True,
+            ),
         ),
     ]

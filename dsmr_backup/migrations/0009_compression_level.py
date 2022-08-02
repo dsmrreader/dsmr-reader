@@ -7,13 +7,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0008_verbose_field_translations'),
+        ("dsmr_backup", "0008_verbose_field_translations"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='backupsettings',
-            name='compression_level',
-            field=models.IntegerField(default=1, help_text='The gzip compression level used. Level 9 = best, level 1 = fastest.', validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(9)], verbose_name='Compression level'),
+            model_name="backupsettings",
+            name="compression_level",
+            field=models.IntegerField(
+                default=1,
+                help_text="The gzip compression level used. Level 9 = best, level 1 = fastest.",
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(9),
+                ],
+                verbose_name="Compression level",
+            ),
         ),
     ]

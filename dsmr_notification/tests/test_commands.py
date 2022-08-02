@@ -7,11 +7,11 @@ from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_stats.models.statistics import DayStatistics
 
 
-@mock.patch('dsmr_notification.services.send_notification')
+@mock.patch("dsmr_notification.services.send_notification")
 class TestManagementCommand(InterceptCommandStdoutMixin, TestCase):
     def test_dsmr_notification_test(self, service_mock):
         self.assertFalse(service_mock.called)
-        self._intercept_command_stdout('dsmr_notification_test')
+        self._intercept_command_stdout("dsmr_notification_test")
         self.assertTrue(service_mock.called)
 
     def test_dsmr_notification_test_with_statistics(self, service_mock):
@@ -29,5 +29,5 @@ class TestManagementCommand(InterceptCommandStdoutMixin, TestCase):
         )
 
         self.assertFalse(service_mock.called)
-        self._intercept_command_stdout('dsmr_notification_test')
+        self._intercept_command_stdout("dsmr_notification_test")
         self.assertTrue(service_mock.called)

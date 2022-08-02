@@ -6,30 +6,146 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0011_note_model_index'),
+        ("dsmr_stats", "0011_note_model_index"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ElectricityStatistics',
+            name="ElectricityStatistics",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('highest_usage_l1_timestamp', models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of highest usage on L1+')),
-                ('highest_usage_l2_timestamp', models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of highest usage on L2+')),
-                ('highest_usage_l3_timestamp', models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of highest usage on L3+')),
-                ('highest_return_l1_timestamp', models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of highest return on L1-')),
-                ('highest_return_l2_timestamp', models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of highest return on L2-')),
-                ('highest_return_l3_timestamp', models.DateTimeField(blank=True, default=None, null=True, verbose_name='Timestamp of highest return on L3-')),
-                ('highest_usage_l1_value', models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Highest usage on L1+ (in kW)')),
-                ('highest_usage_l2_value', models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Highest usage on L2+ (in kW)')),
-                ('highest_usage_l3_value', models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Highest usage on L3+ (in kW)')),
-                ('highest_return_l1_value', models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Highest return on L1- (in kW)')),
-                ('highest_return_l2_value', models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Highest return on L2- (in kW)')),
-                ('highest_return_l3_value', models.DecimalField(blank=True, decimal_places=3, default=None, max_digits=9, null=True, verbose_name='Highest return on L3- (in kW)')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "highest_usage_l1_timestamp",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        verbose_name="Timestamp of highest usage on L1+",
+                    ),
+                ),
+                (
+                    "highest_usage_l2_timestamp",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        verbose_name="Timestamp of highest usage on L2+",
+                    ),
+                ),
+                (
+                    "highest_usage_l3_timestamp",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        verbose_name="Timestamp of highest usage on L3+",
+                    ),
+                ),
+                (
+                    "highest_return_l1_timestamp",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        verbose_name="Timestamp of highest return on L1-",
+                    ),
+                ),
+                (
+                    "highest_return_l2_timestamp",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        verbose_name="Timestamp of highest return on L2-",
+                    ),
+                ),
+                (
+                    "highest_return_l3_timestamp",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        verbose_name="Timestamp of highest return on L3-",
+                    ),
+                ),
+                (
+                    "highest_usage_l1_value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=3,
+                        default=None,
+                        max_digits=9,
+                        null=True,
+                        verbose_name="Highest usage on L1+ (in kW)",
+                    ),
+                ),
+                (
+                    "highest_usage_l2_value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=3,
+                        default=None,
+                        max_digits=9,
+                        null=True,
+                        verbose_name="Highest usage on L2+ (in kW)",
+                    ),
+                ),
+                (
+                    "highest_usage_l3_value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=3,
+                        default=None,
+                        max_digits=9,
+                        null=True,
+                        verbose_name="Highest usage on L3+ (in kW)",
+                    ),
+                ),
+                (
+                    "highest_return_l1_value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=3,
+                        default=None,
+                        max_digits=9,
+                        null=True,
+                        verbose_name="Highest return on L1- (in kW)",
+                    ),
+                ),
+                (
+                    "highest_return_l2_value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=3,
+                        default=None,
+                        max_digits=9,
+                        null=True,
+                        verbose_name="Highest return on L2- (in kW)",
+                    ),
+                ),
+                (
+                    "highest_return_l3_value",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=3,
+                        default=None,
+                        max_digits=9,
+                        null=True,
+                        verbose_name="Highest return on L3- (in kW)",
+                    ),
+                ),
             ],
             options={
-                'default_permissions': (),
-                'verbose_name': 'Electricity statistics',
+                "default_permissions": (),
+                "verbose_name": "Electricity statistics",
             },
         ),
     ]

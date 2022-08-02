@@ -5,20 +5,22 @@ from django.conf import settings
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    BackupSettings = apps.get_model('dsmr_backup', 'BackupSettings')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    BackupSettings = apps.get_model("dsmr_backup", "BackupSettings")
 
     backup_settings, _ = BackupSettings.objects.get_or_create()
     ScheduledProcess.objects.create(
-        name='Create daily backup',
+        name="Create daily backup",
         module=settings.DSMRREADER_MODULE_DAILY_BACKUP,
-        active=backup_settings.daily_backup
+        active=backup_settings.daily_backup,
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_DAILY_BACKUP).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_DAILY_BACKUP
+    ).delete()
 
 
 class Migration(migrations.Migration):
@@ -28,5 +30,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_backup', '0009_compression_level'),
+        ("dsmr_backup", "0009_compression_level"),
     ]

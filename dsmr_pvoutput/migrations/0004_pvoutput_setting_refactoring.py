@@ -6,16 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_pvoutput', '0003_schedule_pvoutput'),
+        ("dsmr_pvoutput", "0003_schedule_pvoutput"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='pvoutputaddstatussettings',
-            name='latest_sync',
+            model_name="pvoutputaddstatussettings",
+            name="latest_sync",
         ),
         migrations.RemoveField(
-            model_name='pvoutputaddstatussettings',
-            name='next_export',
+            model_name="pvoutputaddstatussettings",
+            name="next_export",
         ),
     ]

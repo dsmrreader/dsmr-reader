@@ -20,8 +20,8 @@ class DropboxAppAuthorizationView(LoginRequiredMixin, RedirectView):
         auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(  # noqa: S106
             settings.DSMRREADER_DROPBOX_APP_KEY,
             use_pkce=True,
-            token_access_type='offline',
-            timeout=settings.DSMRREADER_CLIENT_TIMEOUT
+            token_access_type="offline",
+            timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         )
         authorize_url = auth_flow.start()
 
@@ -32,7 +32,7 @@ class DropboxAppAuthorizationView(LoginRequiredMixin, RedirectView):
             serialized_auth_flow=serialized_auth_flow,
             # Reset all other fields as well.
             refresh_token=None,
-            one_time_authorization_code=None
+            one_time_authorization_code=None,
         )
 
         return authorize_url

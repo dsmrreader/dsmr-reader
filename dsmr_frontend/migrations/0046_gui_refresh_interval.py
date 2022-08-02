@@ -7,13 +7,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0045_frontendsettings_frontend_theme'),
+        ("dsmr_frontend", "0045_frontendsettings_frontend_theme"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='frontendsettings',
-            name='gui_refresh_interval',
-            field=models.IntegerField(default=5, help_text='The number of seconds the GUI (e.g. graphs) will refresh data. Lowering this value may affect performance!', validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(5)], verbose_name='Refresh interval (GUI)'),
+            model_name="frontendsettings",
+            name="gui_refresh_interval",
+            field=models.IntegerField(
+                default=5,
+                help_text="The number of seconds the GUI (e.g. graphs) will refresh data. Lowering this value may affect performance!",
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(5),
+                ],
+                verbose_name="Refresh interval (GUI)",
+            ),
         ),
     ]

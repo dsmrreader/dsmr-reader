@@ -4,10 +4,10 @@ from django.db import migrations, models
 
 
 def migrate_forward(apps, schema_editor):
-    NotificationSetting = apps.get_model('dsmr_notification', 'NotificationSetting')
+    NotificationSetting = apps.get_model("dsmr_notification", "NotificationSetting")
     _, _ = NotificationSetting.objects.get_or_create()
 
-    if not NotificationSetting.objects.filter(notification_service='prowl').exists():
+    if not NotificationSetting.objects.filter(notification_service="prowl").exists():
         return
 
     notification_setting = NotificationSetting.objects.filter()[0]
@@ -17,7 +17,7 @@ def migrate_forward(apps, schema_editor):
 
 
 def migrate_backward(apps, schema_editor):
-    NotificationSetting = apps.get_model('dsmr_notification', 'NotificationSetting')
+    NotificationSetting = apps.get_model("dsmr_notification", "NotificationSetting")
     _, _ = NotificationSetting.objects.get_or_create()
     notification_setting = NotificationSetting.objects.filter()[0]
 
@@ -31,44 +31,82 @@ def migrate_backward(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_notification', '0005_notify_my_android_ended_support'),
+        ("dsmr_notification", "0005_notify_my_android_ended_support"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='notificationsetting',
-            name='prowl_api_key',
-            field=models.CharField(blank=True, default=None, max_length=64, null=True, verbose_name='API key'),
+            model_name="notificationsetting",
+            name="prowl_api_key",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                max_length=64,
+                null=True,
+                verbose_name="API key",
+            ),
         ),
         migrations.AddField(
-            model_name='notificationsetting',
-            name='pushover_api_key',
-            field=models.CharField(blank=True, default=None, help_text='The API key of your Pushover Application', max_length=64, null=True, verbose_name='API key'),
+            model_name="notificationsetting",
+            name="pushover_api_key",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                help_text="The API key of your Pushover Application",
+                max_length=64,
+                null=True,
+                verbose_name="API key",
+            ),
         ),
         migrations.AddField(
-            model_name='notificationsetting',
-            name='pushover_user_key',
-            field=models.CharField(blank=True, default=None, help_text='Your User Key displayed in your Pushover dashboard', max_length=64, null=True),
+            model_name="notificationsetting",
+            name="pushover_user_key",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                help_text="Your User Key displayed in your Pushover dashboard",
+                max_length=64,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='notificationsetting',
-            name='notification_service',
-            field=models.CharField(blank=True, choices=[(None, '--- Disabled ---'), ('pushover', 'Pushover'), ('prowl', 'Prowl')], default=None, help_text='Which notification service to use for sending daily usage notifications', max_length=20, null=True, verbose_name='Notification service'),
+            model_name="notificationsetting",
+            name="notification_service",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    (None, "--- Disabled ---"),
+                    ("pushover", "Pushover"),
+                    ("prowl", "Prowl"),
+                ],
+                default=None,
+                help_text="Which notification service to use for sending daily usage notifications",
+                max_length=20,
+                null=True,
+                verbose_name="Notification service",
+            ),
         ),
-
         migrations.RunPython(migrate_forward, migrate_backward),
-
         migrations.RemoveField(
-            model_name='notificationsetting',
-            name='api_key',
+            model_name="notificationsetting",
+            name="api_key",
         ),
         migrations.AlterModelOptions(
-            name='notificationsetting',
-            options={'default_permissions': (), 'verbose_name': 'Notification Apps configuration'},
+            name="notificationsetting",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Notification Apps configuration",
+            },
         ),
         migrations.AlterField(
-            model_name='notificationsetting',
-            name='next_notification',
-            field=models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next notification. Managed by application.', null=True, verbose_name='Next notification'),
+            model_name="notificationsetting",
+            name="next_notification",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                help_text="Timestamp of the next notification. Managed by application.",
+                null=True,
+                verbose_name="Next notification",
+            ),
         ),
     ]

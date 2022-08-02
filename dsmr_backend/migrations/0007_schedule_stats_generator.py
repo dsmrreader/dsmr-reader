@@ -5,22 +5,24 @@ from django.conf import settings
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
     ScheduledProcess.objects.create(
-        name='Generate day and hour statistics',
+        name="Generate day and hour statistics",
         module=settings.DSMRREADER_MODULE_STATS_GENERATOR,
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_STATS_GENERATOR).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_STATS_GENERATOR
+    ).delete()
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backend', '0006_backend_auto_update_check'),
+        ("dsmr_backend", "0006_backend_auto_update_check"),
     ]
 
     operations = [

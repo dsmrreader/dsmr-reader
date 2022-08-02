@@ -11,17 +11,17 @@ from .models.statistics import HourStatistics, DayStatistics, ElectricityStatist
 
 @admin.register(Note)
 class NoteAdmin(admin.ModelAdmin):
-    list_display = ('day', 'description')
+    list_display = ("day", "description")
     formfield_overrides = {
-        models.CharField: {'widget': widgets.Textarea},
+        models.CharField: {"widget": widgets.Textarea},
     }
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(NoteAdmin, self).get_form(request, obj, **kwargs)
-        day = request.GET.get('day')
+        day = request.GET.get("day")
 
         if day:
-            form.base_fields['day'].initial = day
+            form.base_fields["day"].initial = day
 
         return form
 
@@ -30,37 +30,67 @@ class NoteAdmin(admin.ModelAdmin):
 class DayStatisticsAdmin(admin.ModelAdmin):
     save_on_top = True
     actions = None
-    ordering = ['-day', 'total_cost']
-    list_display = ('day', 'electricity_merged', 'electricity_returned_merged', 'fixed_cost', 'total_cost')
-    list_filter = (
-        ('day', DateRangeFilter),
+    ordering = ["-day", "total_cost"]
+    list_display = (
+        "day",
+        "electricity_merged",
+        "electricity_returned_merged",
+        "fixed_cost",
+        "total_cost",
     )
+    list_filter = (("day", DateRangeFilter),)
     fieldsets = (
         (
-            None, {
-                'fields': ['day'],
-            }
+            None,
+            {
+                "fields": ["day"],
+            },
         ),
         (
-            _('Diff'), {
-                'fields': ['electricity1', 'electricity2', 'electricity1_returned', 'electricity2_returned', 'gas'],
-            }
+            _("Diff"),
+            {
+                "fields": [
+                    "electricity1",
+                    "electricity2",
+                    "electricity1_returned",
+                    "electricity2_returned",
+                    "gas",
+                ],
+            },
         ),
         (
-            _('Readings'), {
-                'fields': ['electricity1_reading', 'electricity2_reading', 'electricity1_returned_reading',
-                           'electricity2_returned_reading', 'gas_reading'],
-            }
+            _("Readings"),
+            {
+                "fields": [
+                    "electricity1_reading",
+                    "electricity2_reading",
+                    "electricity1_returned_reading",
+                    "electricity2_returned_reading",
+                    "gas_reading",
+                ],
+            },
         ),
         (
-            _('Costs'), {
-                'fields': ['electricity1_cost', 'electricity2_cost', 'gas_cost', 'fixed_cost', 'total_cost'],
-            }
+            _("Costs"),
+            {
+                "fields": [
+                    "electricity1_cost",
+                    "electricity2_cost",
+                    "gas_cost",
+                    "fixed_cost",
+                    "total_cost",
+                ],
+            },
         ),
         (
-            _('Weather'), {
-                'fields': ['lowest_temperature', 'highest_temperature', 'average_temperature'],
-            }
+            _("Weather"),
+            {
+                "fields": [
+                    "lowest_temperature",
+                    "highest_temperature",
+                    "average_temperature",
+                ],
+            },
         ),
     )
 
@@ -69,34 +99,42 @@ class DayStatisticsAdmin(admin.ModelAdmin):
 class HourStatisticsAdmin(admin.ModelAdmin):
     save_on_top = True
     actions = None
-    ordering = ['-hour_start']
+    ordering = ["-hour_start"]
     list_display = (
-        'hour_start', 'formatted_electricity_merged', 'formatted_electricity_returned_merged', 'formatted_gas'
+        "hour_start",
+        "formatted_electricity_merged",
+        "formatted_electricity_returned_merged",
+        "formatted_gas",
     )
-    list_filter = (
-        ('hour_start', DateTimeRangeFilter),
-    )
+    list_filter = (("hour_start", DateTimeRangeFilter),)
 
-    def formatted_electricity_merged(self, obj: HourStatistics) -> str:  # pragma: no cover
+    def formatted_electricity_merged(
+        self, obj: HourStatistics
+    ) -> str:  # pragma: no cover
         if not obj.electricity_merged:
-            return '-'
+            return "-"
 
         return obj.electricity_merged
-    formatted_electricity_merged.short_description = 'electricity delivered'  # type: ignore[attr-defined]
 
-    def formatted_electricity_returned_merged(self, obj: HourStatistics) -> str:  # pragma: no cover
+    formatted_electricity_merged.short_description = "electricity delivered"  # type: ignore[attr-defined]
+
+    def formatted_electricity_returned_merged(
+        self, obj: HourStatistics
+    ) -> str:  # pragma: no cover
         if not obj.electricity_returned_merged:
-            return '-'
+            return "-"
 
         return obj.electricity_returned_merged
-    formatted_electricity_returned_merged.short_description = 'electricity returned'  # type: ignore[attr-defined]
+
+    formatted_electricity_returned_merged.short_description = "electricity returned"  # type: ignore[attr-defined]
 
     def formatted_gas(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.gas:
-            return '-'
+            return "-"
 
         return str(obj.gas)
-    formatted_gas.short_description = 'gas'  # type: ignore[attr-defined]
+
+    formatted_gas.short_description = "gas"  # type: ignore[attr-defined]
 
 
 @admin.register(ElectricityStatistics)

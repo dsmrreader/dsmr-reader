@@ -9,7 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 def insert_notifications(apps, schema_editor):
     import dsmr_frontend.services
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+
+    Notification = apps.get_model("dsmr_frontend", "Notification")
 
     # Search for any applied migrations in the past. This should indicate a long(er) living instance of the project.
     existing_project = MigrationRecorder.Migration.objects.filter(
@@ -21,15 +22,17 @@ def insert_notifications(apps, schema_editor):
 
     Notification.objects.create(
         message=dsmr_frontend.services.get_translated_string(
-            text=_('Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!')
+            text=_(
+                "Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!"
+            )
         ),
-        redirect_to='admin:index'
+        redirect_to="admin:index",
     )
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('dsmr_frontend', '0005_notifications'),
+        ("dsmr_frontend", "0005_notifications"),
     ]
 
     operations = [

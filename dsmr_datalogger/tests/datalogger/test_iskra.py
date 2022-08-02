@@ -14,7 +14,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
 class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
-    """ Iskra meter, unknown DSMR version, asumed v2/3. """
+    """Iskra meter, unknown DSMR version, asumed v2/3."""
 
     def setUp(self):
         datalogger_settings = DataloggerSettings.get_solo()
@@ -46,28 +46,35 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         ]
 
     def test_reading_creation(self):
-        """ Test whether dsmr_datalogger can insert a reading. """
+        """Test whether dsmr_datalogger can insert a reading."""
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_reading_values(self, now_mock):
-        """ Test whether dsmr_datalogger reads the correct values. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 4, 10, hour=14, minute=30, second=15))
+        """Test whether dsmr_datalogger reads the correct values."""
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2016, 4, 10, hour=14, minute=30, second=15)
+        )
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(reading.timestamp, datetime(2016, 4, 10, 12, 30, 15, tzinfo=pytz.UTC))
-        self.assertEqual(reading.electricity_delivered_1, Decimal('1234.784'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('0'))
-        self.assertEqual(reading.electricity_delivered_2, Decimal('4321.725'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('0.002'))
-        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.36'))
-        self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(reading.extra_device_timestamp, datetime(2016, 4, 10, 11, 0, 0, tzinfo=pytz.UTC))
-        self.assertEqual(reading.extra_device_delivered, Decimal('7890.693'))
+        self.assertEqual(
+            reading.timestamp, datetime(2016, 4, 10, 12, 30, 15, tzinfo=pytz.UTC)
+        )
+        self.assertEqual(reading.electricity_delivered_1, Decimal("1234.784"))
+        self.assertEqual(reading.electricity_returned_1, Decimal("0"))
+        self.assertEqual(reading.electricity_delivered_2, Decimal("4321.725"))
+        self.assertEqual(reading.electricity_returned_2, Decimal("0.002"))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal("0.36"))
+        self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
+        self.assertEqual(
+            reading.extra_device_timestamp,
+            datetime(2016, 4, 10, 11, 0, 0, tzinfo=pytz.UTC),
+        )
+        self.assertEqual(reading.extra_device_delivered, Decimal("7890.693"))
         self.assertIsNone(reading.phase_voltage_l1)
         self.assertIsNone(reading.phase_voltage_l2)
         self.assertIsNone(reading.phase_voltage_l3)
@@ -87,12 +94,13 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_telegram_override_timestamp(self, now_mock):
-        """ Tests whether this user setting overrides as expectedly. """
+        """Tests whether this user setting overrides as expectedly."""
         reading = self._reading_with_override_telegram_timestamp_active(now_mock)
 
         self.assertEqual(
             # CET > UTC. Minute marker rounded to hours. Because Fluvius may or may not communicate DSMR v5 in telegrams
-            reading.extra_device_timestamp, datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=pytz.UTC)
+            reading.extra_device_timestamp,
+            datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=pytz.UTC),
         )

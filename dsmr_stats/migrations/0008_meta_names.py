@@ -7,16 +7,24 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0007_min_max_temperature_statistics_retroactive'),
+        ("dsmr_stats", "0007_min_max_temperature_statistics_retroactive"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='daystatistics',
-            options={'verbose_name': 'Day statistics (read only)', 'default_permissions': (), 'verbose_name_plural': 'Day statistics (read only)'},
+            name="daystatistics",
+            options={
+                "verbose_name": "Day statistics (read only)",
+                "default_permissions": (),
+                "verbose_name_plural": "Day statistics (read only)",
+            },
         ),
         migrations.AlterModelOptions(
-            name='hourstatistics',
-            options={'verbose_name': 'Hour statistics (read only)', 'default_permissions': (), 'verbose_name_plural': 'Hour statistics (read only)'},
+            name="hourstatistics",
+            options={
+                "verbose_name": "Hour statistics (read only)",
+                "default_permissions": (),
+                "verbose_name_plural": "Hour statistics (read only)",
+            },
         ),
     ]

@@ -11,8 +11,8 @@ from dsmr_backend.signals import request_status
 
 
 class DataloggerAppConfig(AppConfig):
-    name = 'dsmr_datalogger'
-    verbose_name = _('Datalogger')
+    name = "dsmr_datalogger"
+    verbose_name = _("Datalogger")
 
 
 @receiver(request_status)
@@ -20,12 +20,10 @@ def check_recent_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_datalogger.models.reading import DsmrReading
 
     try:
-        latest_reading = DsmrReading.objects.all().order_by('-timestamp')[0]
+        latest_reading = DsmrReading.objects.all().order_by("-timestamp")[0]
     except (DsmrReading.DoesNotExist, IndexError):
         return MonitoringStatusIssue(
-            __name__,
-            _('Waiting for the first reading ever'),
-            timezone.now()
+            __name__, _("Waiting for the first reading ever"), timezone.now()
         )
 
     max_slack = timezone.now() - timezone.timedelta(
@@ -36,9 +34,7 @@ def check_recent_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
         return None
 
     return MonitoringStatusIssue(
-        __name__,
-        _('No recent readings received'),
-        latest_reading.timestamp
+        __name__, _("No recent readings received"), latest_reading.timestamp
     )
 
 
@@ -46,13 +42,17 @@ def check_recent_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
 def check_reading_count(**kwargs) -> Optional[MonitoringStatusIssue]:  # pragma: nocover
     import dsmr_datalogger.services.datalogger
 
-    reading_count = dsmr_datalogger.services.datalogger.postgresql_approximate_reading_count()
+    reading_count = (
+        dsmr_datalogger.services.datalogger.postgresql_approximate_reading_count()
+    )
 
     if reading_count < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_READING_COUNT:
         return None
 
     return MonitoringStatusIssue(
         __name__,
-        _('Approximately {} readings stored, consider data cleanup (if not already enabled)').format(reading_count),
-        timezone.now()
+        _(
+            "Approximately {} readings stored, consider data cleanup (if not already enabled)"
+        ).format(reading_count),
+        timezone.now(),
     )

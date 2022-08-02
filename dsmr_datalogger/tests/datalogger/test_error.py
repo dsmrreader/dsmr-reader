@@ -12,7 +12,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 class TestDataloggerError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
-        """ Returns INCOMPLETE telegram. """
+        """Returns INCOMPLETE telegram."""
         return [
             # We start halfway, forcing us to discard/ignore it.
             "1-0:99.97.0(1)(0-0:96.7.19)(000101000001W)(2147483647*s)\r\n",
@@ -24,7 +24,6 @@ class TestDataloggerError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, Tes
             "1-0:21.7.0(00.143*kW)\r\n",
             "1-0:22.7.0(00.000*kW)\r\n",
             "!74B0\n",
-
             # 10 seconds later we should see this one.
             "/KFM5KAIFA-METER\r\n",
             "\r\n",
@@ -52,7 +51,7 @@ class TestDataloggerError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, Tes
         ]
 
     def test_telegram_buffer_reset(self):
-        """ Test whether an incomplete telegram gets dicarded. """
+        """Test whether an incomplete telegram gets dicarded."""
         self.assertFalse(DsmrReading.objects.exists())
 
         # Regression raises:   django.db.utils.IntegrityError: NOT NULL constraint failed:
@@ -61,9 +60,11 @@ class TestDataloggerError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, Tes
         self.assertEqual(DsmrReading.objects.count(), 1)
 
 
-class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
+class TestDataloggerCrcError(
+    FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
+):
     def _dsmr_dummy_data(self):
-        """ Returns invalid telegram. """
+        """Returns invalid telegram."""
         return [
             "/KFM5KAIFA-METER\r\n",
             "\r\n",
@@ -91,14 +92,16 @@ class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, 
         ]
 
     def test_fail(self):
-        """ Fake & process an DSMR vX telegram reading. """
+        """Fake & process an DSMR vX telegram reading."""
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertFalse(DsmrReading.objects.exists())
 
 
-class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
-    """ Test Iskra meter, DSMR v5.0, with somewhat duplicate data. """
+class TestDataloggerDuplicateData(
+    FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
+):
+    """Test Iskra meter, DSMR v5.0, with somewhat duplicate data."""
 
     def _dsmr_dummy_data(self):
         return [
@@ -150,38 +153,40 @@ class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptCommandStdoutMi
             "0-1:24.1.0(003)\r\n",
             "0-1:96.1.0(xxx)\r\n",
             "0-1:24.2.1(170110204009W)(00123.456*m3)\r\n",
-            "!469F\r\n"
+            "!469F\r\n",
         ]
 
     def test_reading_creation(self):
-        """ Test whether dsmr_datalogger can insert a reading. """
+        """Test whether dsmr_datalogger can insert a reading."""
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_reading_values(self, now_mock):
-        """ Test whether dsmr_datalogger reads the correct values. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 2, 1, hour=0, minute=0, second=0))
+        """Test whether dsmr_datalogger reads the correct values."""
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2017, 2, 1, hour=0, minute=0, second=0)
+        )
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
         self.assertEqual(
             reading.timestamp,
-            timezone.datetime(2017, 1, 10, 19, 40, 57, tzinfo=pytz.UTC)
+            timezone.datetime(2017, 1, 10, 19, 40, 57, tzinfo=pytz.UTC),
         )
-        self.assertEqual(reading.electricity_delivered_1, Decimal('9012.345'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('9123.456'))
-        self.assertEqual(reading.electricity_delivered_2, Decimal('9067.890'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('9789.012'))
-        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.320'))
-        self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
+        self.assertEqual(reading.electricity_delivered_1, Decimal("9012.345"))
+        self.assertEqual(reading.electricity_returned_1, Decimal("9123.456"))
+        self.assertEqual(reading.electricity_delivered_2, Decimal("9067.890"))
+        self.assertEqual(reading.electricity_returned_2, Decimal("9789.012"))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal("0.320"))
+        self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
         self.assertEqual(
             reading.extra_device_timestamp,
-            timezone.datetime(2017, 1, 10, 19, 40, 9, tzinfo=pytz.UTC)
+            timezone.datetime(2017, 1, 10, 19, 40, 9, tzinfo=pytz.UTC),
         )
-        self.assertEqual(reading.extra_device_delivered, Decimal('123.456'))
+        self.assertEqual(reading.extra_device_delivered, Decimal("123.456"))
 
 
 class TestFutureTelegrams(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
@@ -228,10 +233,12 @@ class TestFutureTelegrams(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, Tes
             "!2998\n",
         ]
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_discard_telegram_with_future_timestamp(self, now_mock):
-        """ Telegrams with timestamps in the (far) future should be rejected. """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1, hour=9, minute=0, second=0))
+        """Telegrams with timestamps in the (far) future should be rejected."""
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2017, 1, 1, hour=9, minute=0, second=0)
+        )
 
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()

@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backend', '0014_verbose_field_translations'),
+        ("dsmr_backend", "0014_verbose_field_translations"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='backendsettings',
-            name='restart_required',
-            field=models.BooleanField(default=False, help_text='Whether the backend process requires a restart. It should occur automatically.', verbose_name='Process restart required'),
+            model_name="backendsettings",
+            name="restart_required",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether the backend process requires a restart. It should occur automatically.",
+                verbose_name="Process restart required",
+            ),
         ),
     ]

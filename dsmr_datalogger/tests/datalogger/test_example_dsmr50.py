@@ -13,7 +13,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
 class TestSerial(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
-    """ Test example from Netbeheer docs. """
+    """Test example from Netbeheer docs."""
 
     def _dsmr_dummy_data(self):
         return [
@@ -69,30 +69,35 @@ class TestSerial(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(reading.timestamp, datetime(2010, 12, 9, 10, 30, 20, tzinfo=pytz.UTC))
-        self.assertEqual(reading.electricity_delivered_1, Decimal('123456.789'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('123456.789'))
-        self.assertEqual(reading.electricity_delivered_2, Decimal('123456.789'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('123456.789'))
-        self.assertEqual(reading.electricity_currently_delivered, Decimal('1.193'))
-        self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(reading.extra_device_timestamp, datetime(2010, 12, 9, 10, 25, tzinfo=pytz.UTC))
-        self.assertEqual(reading.extra_device_delivered, Decimal('12785.123'))
-        self.assertEqual(reading.phase_currently_delivered_l1, Decimal('1.111'))
-        self.assertEqual(reading.phase_currently_delivered_l2, Decimal('2.222'))
-        self.assertEqual(reading.phase_currently_delivered_l3, Decimal('3.333'))
-        self.assertEqual(reading.phase_currently_returned_l1, Decimal('4.444'))
-        self.assertEqual(reading.phase_currently_returned_l2, Decimal('5.555'))
-        self.assertEqual(reading.phase_currently_returned_l3, Decimal('6.666'))
-        self.assertEqual(reading.phase_voltage_l1, Decimal('220.1'))
-        self.assertEqual(reading.phase_voltage_l2, Decimal('220.2'))
-        self.assertEqual(reading.phase_voltage_l3, Decimal('220.3'))
+        self.assertEqual(
+            reading.timestamp, datetime(2010, 12, 9, 10, 30, 20, tzinfo=pytz.UTC)
+        )
+        self.assertEqual(reading.electricity_delivered_1, Decimal("123456.789"))
+        self.assertEqual(reading.electricity_returned_1, Decimal("123456.789"))
+        self.assertEqual(reading.electricity_delivered_2, Decimal("123456.789"))
+        self.assertEqual(reading.electricity_returned_2, Decimal("123456.789"))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal("1.193"))
+        self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
+        self.assertEqual(
+            reading.extra_device_timestamp,
+            datetime(2010, 12, 9, 10, 25, tzinfo=pytz.UTC),
+        )
+        self.assertEqual(reading.extra_device_delivered, Decimal("12785.123"))
+        self.assertEqual(reading.phase_currently_delivered_l1, Decimal("1.111"))
+        self.assertEqual(reading.phase_currently_delivered_l2, Decimal("2.222"))
+        self.assertEqual(reading.phase_currently_delivered_l3, Decimal("3.333"))
+        self.assertEqual(reading.phase_currently_returned_l1, Decimal("4.444"))
+        self.assertEqual(reading.phase_currently_returned_l2, Decimal("5.555"))
+        self.assertEqual(reading.phase_currently_returned_l3, Decimal("6.666"))
+        self.assertEqual(reading.phase_voltage_l1, Decimal("220.1"))
+        self.assertEqual(reading.phase_voltage_l2, Decimal("220.2"))
+        self.assertEqual(reading.phase_voltage_l3, Decimal("220.3"))
         self.assertEqual(reading.phase_power_current_l1, 1)
         self.assertEqual(reading.phase_power_current_l2, 2)
         self.assertEqual(reading.phase_power_current_l3, 3)
 
         meter_statistics = MeterStatistics.get_solo()
-        self.assertEqual(meter_statistics.dsmr_version, '50')
+        self.assertEqual(meter_statistics.dsmr_version, "50")
         self.assertEqual(meter_statistics.electricity_tariff, 2)
         self.assertEqual(meter_statistics.power_failure_count, 4)
         self.assertEqual(meter_statistics.long_power_failure_count, 2)
@@ -103,12 +108,13 @@ class TestSerial(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(meter_statistics.voltage_swell_count_l2, 3)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, 0)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_telegram_override_timestamp(self, now_mock):
-        """ Tests whether this user setting overrides as expectedly. """
+        """Tests whether this user setting overrides as expectedly."""
         reading = self._reading_with_override_telegram_timestamp_active(now_mock)
 
         self.assertEqual(
             # CET > UTC. Minute marker rounded to 5 mins.
-            reading.extra_device_timestamp, datetime(2021, 1, 15, 11, 30, 0, 0, tzinfo=pytz.UTC)
+            reading.extra_device_timestamp,
+            datetime(2021, 1, 15, 11, 30, 0, 0, tzinfo=pytz.UTC),
         )

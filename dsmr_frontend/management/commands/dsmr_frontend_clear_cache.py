@@ -6,15 +6,15 @@ from django.core.cache import caches
 from django.conf import settings
 
 
-logger = logging.getLogger('dsmrreader')
+logger = logging.getLogger("dsmrreader")
 
 
 class Command(BaseCommand):
-    help = _('Clears the entire cache.')
+    help = _("Clears the entire cache.")
 
     def handle(self, **options):
         for cache_key in settings.CACHES.keys():
-            logger.info('Clearing cache: %s', cache_key)
+            logger.info("Clearing cache: %s", cache_key)
             caches[cache_key].clear()
 
-        logger.info('Done')
+        logger.info("Done")

@@ -6,23 +6,51 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0026_datalogger_restart_required'),
+        ("dsmr_datalogger", "0026_datalogger_restart_required"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='MeterStatisticsChange',
+            name="MeterStatisticsChange",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Timestamp indicating when the change was logged', verbose_name='Created at')),
-                ('field', models.CharField(help_text='The name of the statistics field that changed', max_length=64, verbose_name='Field')),
-                ('old_value', models.CharField(max_length=32, verbose_name='Old value')),
-                ('new_value', models.CharField(max_length=32, verbose_name='New value')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        help_text="Timestamp indicating when the change was logged",
+                        verbose_name="Created at",
+                    ),
+                ),
+                (
+                    "field",
+                    models.CharField(
+                        help_text="The name of the statistics field that changed",
+                        max_length=64,
+                        verbose_name="Field",
+                    ),
+                ),
+                (
+                    "old_value",
+                    models.CharField(max_length=32, verbose_name="Old value"),
+                ),
+                (
+                    "new_value",
+                    models.CharField(max_length=32, verbose_name="New value"),
+                ),
             ],
             options={
-                'verbose_name': 'DSMR Meter statistics change',
-                'verbose_name_plural': 'DSMR Meter statistics changes',
-                'default_permissions': (),
+                "verbose_name": "DSMR Meter statistics change",
+                "verbose_name_plural": "DSMR Meter statistics changes",
+                "default_permissions": (),
             },
         ),
     ]

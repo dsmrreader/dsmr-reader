@@ -13,12 +13,14 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'DSMR-reader v2.9.0: Buienradar changed their API. This update fixes the issue.',
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "DSMR-reader v2.9.0: Buienradar changed their API. This update fixes the issue.",
+            )
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
 
 
@@ -33,5 +35,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0022_v270_release'),
+        ("dsmr_frontend", "0022_v270_release"),
     ]

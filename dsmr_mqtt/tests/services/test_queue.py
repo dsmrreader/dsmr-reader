@@ -5,11 +5,11 @@ from dsmr_mqtt.models.queue import Message
 
 
 class TestMessage(TestCase):
-    """ Tests for settings defaults. """
+    """Tests for settings defaults."""
 
     def setUp(self):
-        self.instance = Message.objects.create(topic='x', payload='y')
+        self.instance = Message.objects.create(topic="x", payload="y")
 
     def test_admin(self):
-        """ Model should be registered in Django Admin. """
+        """Model should be registered in Django Admin."""
         self.assertTrue(site.is_registered(Message))

@@ -5,7 +5,7 @@ import dsmr_stats.services
 
 
 class Command(BaseCommand):
-    help = _('Recalculates day statistics prices')
+    help = _("Recalculates day statistics prices")
 
     def handle(self, **options):
         dsmr_stats.services.recalculate_prices()

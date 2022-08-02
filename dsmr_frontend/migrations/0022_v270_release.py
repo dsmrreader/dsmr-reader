@@ -13,12 +13,14 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'DSMR-reader v2.7.0: Added support in MQTT to share gas consumption to your MQTT broker. ',
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "DSMR-reader v2.7.0: Added support in MQTT to share gas consumption to your MQTT broker. ",
+            )
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
 
 
@@ -33,5 +35,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0021_v260_release'),
+        ("dsmr_frontend", "0021_v260_release"),
     ]

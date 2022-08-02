@@ -5,8 +5,11 @@ from django.test import TestCase, Client
 from django.utils import timezone
 from django.urls import reverse
 
-from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption, \
-    QuarterHourPeakElectricityConsumption
+from dsmr_consumption.models.consumption import (
+    ElectricityConsumption,
+    GasConsumption,
+    QuarterHourPeakElectricityConsumption,
+)
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_weather.models.settings import WeatherSettings
 from dsmr_stats.models.statistics import DayStatistics
@@ -14,17 +17,18 @@ from dsmr_weather.models.reading import TemperatureReading
 
 
 class TestViews(TestCase):
-    """ Test whether views render at all. """
+    """Test whether views render at all."""
+
     fixtures = [
-        'dsmr_frontend/test_dsmrreading.json',
-        'dsmr_frontend/test_note.json',
-        'dsmr_frontend/test_energysupplierprice.json',
-        'dsmr_frontend/test_statistics.json',
-        'dsmr_frontend/test_meterstatistics.json',
-        'dsmr_frontend/test_electricity_consumption.json',
-        'dsmr_frontend/test_gas_consumption.json',
+        "dsmr_frontend/test_dsmrreading.json",
+        "dsmr_frontend/test_note.json",
+        "dsmr_frontend/test_energysupplierprice.json",
+        "dsmr_frontend/test_statistics.json",
+        "dsmr_frontend/test_meterstatistics.json",
+        "dsmr_frontend/test_electricity_consumption.json",
+        "dsmr_frontend/test_gas_consumption.json",
     ]
-    namespace = 'frontend'
+    namespace = "frontend"
     support_data = True
     support_gas = True
 
@@ -32,7 +36,7 @@ class TestViews(TestCase):
         self.maxDiff = None
         self.client = Client()
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_live_graphs(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
 
@@ -40,13 +44,11 @@ class TestViews(TestCase):
         weather_settings.track = True
         weather_settings.save()
 
-        response = self.client.get(
-            reverse('{}:live-graphs'.format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:live-graphs".format(self.namespace)))
         self.assertEqual(response.status_code, 200, response.content)
-        self.assertIn('frontend_settings', response.context)
+        self.assertIn("frontend_settings", response.context)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_live_xhr_electricity(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 7, 1))
 
@@ -68,7 +70,7 @@ class TestViews(TestCase):
                 phase_voltage_l1=230,
                 phase_power_current_l1=1,
                 phase_power_current_l2=2,
-                phase_power_current_l3=3
+                phase_power_current_l3=3,
             )
             ElectricityConsumption.objects.create(
                 read_at=timezone.now() - timezone.timedelta(hours=1),
@@ -87,16 +89,19 @@ class TestViews(TestCase):
                 phase_voltage_l1=230,
                 phase_power_current_l1=11,
                 phase_power_current_l2=22,
-                phase_power_current_l3=33
+                phase_power_current_l3=33,
             )
 
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
             dict(
-                delivered=True, returned=True,
-                total_delivered=True, total_returned=True,
-                phases=True, power_current=True
-            )
+                delivered=True,
+                returned=True,
+                total_delivered=True,
+                total_returned=True,
+                phases=True,
+                power_current=True,
+            ),
         )
 
         if not self.support_data:
@@ -105,201 +110,211 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200, response.content)
 
         json_content = json.loads(response.content.decode("utf8"))
-        self.assertGreater(json_content['latest_delta_id'], 0)
+        self.assertGreater(json_content["latest_delta_id"], 0)
         self.assertEqual(
             json_content,
             {
-                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
-                'read_at': ['Sat 23:00', 'Sun 0:00'],
-                'currently_delivered': [2500, 1500],
-                'currently_returned': [200, 100],
-                'total_delivered': ['21.500', '10.000'],
-                'total_returned': ['41.500', '20.000'],
-                'phases_delivered': {
-                    'l1': [750, 500],
-                    'l2': [500, 250],
-                    'l3': [1250, 750],
+                "latest_delta_id": json_content[
+                    "latest_delta_id"
+                ],  # Not hardcoded due to DB backend differences.
+                "read_at": ["Sat 23:00", "Sun 0:00"],
+                "currently_delivered": [2500, 1500],
+                "currently_returned": [200, 100],
+                "total_delivered": ["21.500", "10.000"],
+                "total_returned": ["41.500", "20.000"],
+                "phases_delivered": {
+                    "l1": [750, 500],
+                    "l2": [500, 250],
+                    "l3": [1250, 750],
                 },
-                'phases_returned': {
-                    'l1': [3500, 2500],
-                    'l2': [3250, 2250],
-                    'l3': [3750, 2750],
+                "phases_returned": {
+                    "l1": [3500, 2500],
+                    "l2": [3250, 2250],
+                    "l3": [3750, 2750],
                 },
-                'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
-                'phase_power_current': {'l1': [11, 1], 'l2': [22, 2], 'l3': [33, 3]},
-            }
+                "phase_voltage": {"l1": [], "l2": [], "l3": []},
+                "phase_power_current": {"l1": [11, 1], "l2": [22, 2], "l3": [33, 3]},
+            },
         )
 
         # Branch tests for each option.
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            dict(delivered=True, returned=True, phases=False, power_current=False)
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
+            dict(delivered=True, returned=True, phases=False, power_current=False),
         )
         self.assertEqual(response.status_code, 200, response.content)
 
         json_content = json.loads(response.content.decode("utf8"))
-        self.assertNotEqual(json_content['read_at'], [])
-        self.assertNotEqual(json_content['currently_delivered'], [])
-        self.assertNotEqual(json_content['currently_returned'], [])
-        self.assertEqual(json_content['total_delivered'], [])
-        self.assertEqual(json_content['total_returned'], [])
-        self.assertEqual(json_content['phases_delivered']['l1'], [])
-        self.assertEqual(json_content['phases_delivered']['l2'], [])
-        self.assertEqual(json_content['phases_delivered']['l3'], [])
-        self.assertEqual(json_content['phases_returned']['l1'], [])
-        self.assertEqual(json_content['phases_returned']['l2'], [])
-        self.assertEqual(json_content['phases_returned']['l3'], [])
+        self.assertNotEqual(json_content["read_at"], [])
+        self.assertNotEqual(json_content["currently_delivered"], [])
+        self.assertNotEqual(json_content["currently_returned"], [])
+        self.assertEqual(json_content["total_delivered"], [])
+        self.assertEqual(json_content["total_returned"], [])
+        self.assertEqual(json_content["phases_delivered"]["l1"], [])
+        self.assertEqual(json_content["phases_delivered"]["l2"], [])
+        self.assertEqual(json_content["phases_delivered"]["l3"], [])
+        self.assertEqual(json_content["phases_returned"]["l1"], [])
+        self.assertEqual(json_content["phases_returned"]["l2"], [])
+        self.assertEqual(json_content["phases_returned"]["l3"], [])
 
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            dict(delivered=True, returned=False, phases=True, power_current=False)
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
+            dict(delivered=True, returned=False, phases=True, power_current=False),
         )
         self.assertEqual(response.status_code, 200, response.content)
 
         json_content = json.loads(response.content.decode("utf8"))
-        self.assertNotEqual(json_content['read_at'], [])
-        self.assertNotEqual(json_content['currently_delivered'], [])
-        self.assertEqual(json_content['currently_returned'], [])
-        self.assertEqual(json_content['total_delivered'], [])
-        self.assertEqual(json_content['total_returned'], [])
-        self.assertNotEqual(json_content['phases_delivered']['l1'], [])
-        self.assertNotEqual(json_content['phases_delivered']['l2'], [])
-        self.assertNotEqual(json_content['phases_delivered']['l3'], [])
-        self.assertEqual(json_content['phases_returned']['l1'], [])
-        self.assertEqual(json_content['phases_returned']['l2'], [])
-        self.assertEqual(json_content['phases_returned']['l3'], [])
+        self.assertNotEqual(json_content["read_at"], [])
+        self.assertNotEqual(json_content["currently_delivered"], [])
+        self.assertEqual(json_content["currently_returned"], [])
+        self.assertEqual(json_content["total_delivered"], [])
+        self.assertEqual(json_content["total_returned"], [])
+        self.assertNotEqual(json_content["phases_delivered"]["l1"], [])
+        self.assertNotEqual(json_content["phases_delivered"]["l2"], [])
+        self.assertNotEqual(json_content["phases_delivered"]["l3"], [])
+        self.assertEqual(json_content["phases_returned"]["l1"], [])
+        self.assertEqual(json_content["phases_returned"]["l2"], [])
+        self.assertEqual(json_content["phases_returned"]["l3"], [])
 
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            dict(delivered=False, returned=False, phases=False, power_current=False)
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
+            dict(delivered=False, returned=False, phases=False, power_current=False),
         )
         json_content = json.loads(response.content.decode("utf8"))
-        self.assertNotEqual(json_content['read_at'], [])
-        self.assertEqual(json_content['currently_delivered'], [])
-        self.assertEqual(json_content['currently_returned'], [])
-        self.assertEqual(json_content['total_delivered'], [])
-        self.assertEqual(json_content['total_returned'], [])
-        self.assertEqual(json_content['phases_delivered']['l1'], [])
-        self.assertEqual(json_content['phases_delivered']['l2'], [])
-        self.assertEqual(json_content['phases_delivered']['l3'], [])
-        self.assertEqual(json_content['phases_returned']['l1'], [])
-        self.assertEqual(json_content['phases_returned']['l2'], [])
-        self.assertEqual(json_content['phases_returned']['l3'], [])
+        self.assertNotEqual(json_content["read_at"], [])
+        self.assertEqual(json_content["currently_delivered"], [])
+        self.assertEqual(json_content["currently_returned"], [])
+        self.assertEqual(json_content["total_delivered"], [])
+        self.assertEqual(json_content["total_returned"], [])
+        self.assertEqual(json_content["phases_delivered"]["l1"], [])
+        self.assertEqual(json_content["phases_delivered"]["l2"], [])
+        self.assertEqual(json_content["phases_delivered"]["l3"], [])
+        self.assertEqual(json_content["phases_returned"]["l1"], [])
+        self.assertEqual(json_content["phases_returned"]["l2"], [])
+        self.assertEqual(json_content["phases_returned"]["l3"], [])
 
         # Send again, but with small delta update.
-        old_latest_delta_id = json_content['latest_delta_id']
+        old_latest_delta_id = json_content["latest_delta_id"]
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
             data=dict(
                 delivered=True,
                 returned=True,
                 phases=True,
                 power_current=True,
-                latest_delta_id=old_latest_delta_id
-            )
+                latest_delta_id=old_latest_delta_id,
+            ),
         )
         self.assertEqual(response.status_code, 200, response.content)
 
         # The delta sorting of this test is completely wrong, because the consumptions are created backwards above.
         json_content = json.loads(response.content.decode("utf8"))
-        self.assertGreater(json_content['latest_delta_id'], old_latest_delta_id)
+        self.assertGreater(json_content["latest_delta_id"], old_latest_delta_id)
         self.assertEqual(
             json_content,
             {
-                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
-                'read_at': ['Sat 23:00'],
-                'currently_delivered': [2500.0],
-                'currently_returned': [200.0],
-                'total_delivered': [],
-                'total_returned': [],
-                'phases_delivered': {
-                    'l1': [750.0],
-                    'l2': [500.0],
-                    'l3': [1250.0],
+                "latest_delta_id": json_content[
+                    "latest_delta_id"
+                ],  # Not hardcoded due to DB backend differences.
+                "read_at": ["Sat 23:00"],
+                "currently_delivered": [2500.0],
+                "currently_returned": [200.0],
+                "total_delivered": [],
+                "total_returned": [],
+                "phases_delivered": {
+                    "l1": [750.0],
+                    "l2": [500.0],
+                    "l3": [1250.0],
                 },
-                'phases_returned': {
-                    'l1': [3500.0],
-                    'l2': [3250.0],
-                    'l3': [3750.0],
+                "phases_returned": {
+                    "l1": [3500.0],
+                    "l2": [3250.0],
+                    "l3": [3750.0],
                 },
-                'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
-                'phase_power_current': {'l1': [11], 'l2': [22], 'l3': [33]},
-            }
+                "phase_voltage": {"l1": [], "l2": [], "l3": []},
+                "phase_power_current": {"l1": [11], "l2": [22], "l3": [33]},
+            },
         )
 
         # Voltages
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            dict(voltage=True, latest_delta_id=old_latest_delta_id)
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
+            dict(voltage=True, latest_delta_id=old_latest_delta_id),
         )
         self.assertEqual(response.status_code, 200, response.content)
         json_content = json.loads(response.content.decode("utf8"))
         self.assertEqual(
             json_content,
             {
-                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
-                'read_at': ['Sat 23:00'],
-                'currently_delivered': [],
-                'currently_returned': [],
-                'total_delivered': [],
-                'total_returned': [],
-                'phases_delivered': {
-                    'l1': [],
-                    'l2': [],
-                    'l3': [],
+                "latest_delta_id": json_content[
+                    "latest_delta_id"
+                ],  # Not hardcoded due to DB backend differences.
+                "read_at": ["Sat 23:00"],
+                "currently_delivered": [],
+                "currently_returned": [],
+                "total_delivered": [],
+                "total_returned": [],
+                "phases_delivered": {
+                    "l1": [],
+                    "l2": [],
+                    "l3": [],
                 },
-                'phases_returned': {
-                    'l1': [],
-                    'l2': [],
-                    'l3': [],
+                "phases_returned": {
+                    "l1": [],
+                    "l2": [],
+                    "l3": [],
                 },
-                'phase_voltage': {'l1': [230], 'l2': [0.0], 'l3': [0.0]},
-                'phase_power_current': {'l1': [], 'l2': [], 'l3': []},
-            }
+                "phase_voltage": {"l1": [230], "l2": [0.0], "l3": [0.0]},
+                "phase_power_current": {"l1": [], "l2": [], "l3": []},
+            },
         )
 
         # Power current
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            dict(power_current=True, latest_delta_id=old_latest_delta_id)
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
+            dict(power_current=True, latest_delta_id=old_latest_delta_id),
         )
         self.assertEqual(response.status_code, 200, response.content)
         json_content = json.loads(response.content.decode("utf8"))
         self.assertEqual(
             json_content,
             {
-                'latest_delta_id': json_content['latest_delta_id'],  # Not hardcoded due to DB backend differences.
-                'read_at': ['Sat 23:00'],
-                'currently_delivered': [],
-                'currently_returned': [],
-                'total_delivered': [],
-                'total_returned': [],
-                'phases_delivered': {
-                    'l1': [],
-                    'l2': [],
-                    'l3': [],
+                "latest_delta_id": json_content[
+                    "latest_delta_id"
+                ],  # Not hardcoded due to DB backend differences.
+                "read_at": ["Sat 23:00"],
+                "currently_delivered": [],
+                "currently_returned": [],
+                "total_delivered": [],
+                "total_returned": [],
+                "phases_delivered": {
+                    "l1": [],
+                    "l2": [],
+                    "l3": [],
                 },
-                'phases_returned': {
-                    'l1': [],
-                    'l2': [],
-                    'l3': [],
+                "phases_returned": {
+                    "l1": [],
+                    "l2": [],
+                    "l3": [],
                 },
-                'phase_voltage': {'l1': [], 'l2': [], 'l3': []},
-                'phase_power_current': {'l1': [11], 'l2': [22], 'l3': [33]},
-            }
+                "phase_voltage": {"l1": [], "l2": [], "l3": []},
+                "phase_power_current": {"l1": [11], "l2": [22], "l3": [33]},
+            },
         )
 
         # Fix for bug #506.
         ElectricityConsumption.objects.update(phase_currently_delivered_l1=None)
         response = self.client.get(
-            reverse('{}:live-xhr-electricity'.format(self.namespace)),
-            dict(delivered=True, returned=True, phases=True)
+            reverse("{}:live-xhr-electricity".format(self.namespace)),
+            dict(delivered=True, returned=True, phases=True),
         )
         self.assertEqual(response.status_code, 200, response.content)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_live_xhr_electricity_peaks(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 7, 1, 12, 0, 3))
+        now_mock.return_value = timezone.make_aware(
+            timezone.datetime(2022, 7, 1, 12, 0, 3)
+        )
 
         if self.support_data:
             QuarterHourPeakElectricityConsumption.objects.create(
@@ -309,16 +324,22 @@ class TestViews(TestCase):
             )
 
         response = self.client.get(
-            reverse('{}:live-xhr-electricity-peaks'.format(self.namespace))
+            reverse("{}:live-xhr-electricity-peaks".format(self.namespace))
         )
         json_content = json.loads(response.content.decode("utf8"))
 
         if self.support_data:
-            self.assertEqual(json_content, {'average_delivered': [1.234], 'read_at': ['Fri 12:00:03 - Fri 12:15:01']})
+            self.assertEqual(
+                json_content,
+                {
+                    "average_delivered": [1.234],
+                    "read_at": ["Fri 12:00:03 - Fri 12:15:01"],
+                },
+            )
         else:
-            self.assertEqual(json_content, {'read_at': [], 'average_delivered': []})
+            self.assertEqual(json_content, {"read_at": [], "average_delivered": []})
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_live_xhr_gas(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 7, 1))
 
@@ -335,17 +356,21 @@ class TestViews(TestCase):
                 currently_delivered=0.5,
             )
 
-        response = self.client.get(
-            reverse('{}:live-xhr-gas'.format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:live-xhr-gas".format(self.namespace)))
         json_content = json.loads(response.content.decode("utf8"))
 
         if self.support_data:
-            self.assertEqual(json_content, {'currently_delivered': [0.5, 1.0], 'read_at': ['Sat 23:00', 'Sun 0:00']})
+            self.assertEqual(
+                json_content,
+                {
+                    "currently_delivered": [0.5, 1.0],
+                    "read_at": ["Sat 23:00", "Sun 0:00"],
+                },
+            )
         else:
-            self.assertEqual(json_content, {'read_at': [], 'currently_delivered': []})
+            self.assertEqual(json_content, {"read_at": [], "currently_delivered": []})
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_live_xhr_temperature(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 7, 1))
 
@@ -365,18 +390,22 @@ class TestViews(TestCase):
             )
 
         response = self.client.get(
-            reverse('{}:live-xhr-temperature'.format(self.namespace))
+            reverse("{}:live-xhr-temperature".format(self.namespace))
         )
         json_content = json.loads(response.content.decode("utf8"))
 
         if self.support_data:
-            self.assertEqual(json_content, {'degrees_celcius': [30.0, 20.0], 'read_at': ['Sat 23:00', 'Sun 0:00']})
+            self.assertEqual(
+                json_content,
+                {"degrees_celcius": [30.0, 20.0], "read_at": ["Sat 23:00", "Sun 0:00"]},
+            )
         else:
-            self.assertEqual(json_content, {'read_at': [], 'degrees_celcius': []})
+            self.assertEqual(json_content, {"read_at": [], "degrees_celcius": []})
 
 
 class TestViewsWithoutData(TestViews):
-    """ Same tests as above, but without any data as it's flushed in setUp().  """
+    """Same tests as above, but without any data as it's flushed in setUp()."""
+
     fixtures = []
     support_data = support_gas = False
 
@@ -392,7 +421,7 @@ class TestViewsWithoutData(TestViews):
 
 
 class TestViewsWithoutPrices(TestViews):
-    """ Same tests as above, but without any price data as it's flushed in setUp().  """
+    """Same tests as above, but without any price data as it's flushed in setUp()."""
 
     def setUp(self):
         super(TestViewsWithoutPrices, self).setUp()
@@ -401,14 +430,15 @@ class TestViewsWithoutPrices(TestViews):
 
 
 class TestViewsWithoutGas(TestViews):
-    """ Same tests as above, but without any GAS related data.  """
+    """Same tests as above, but without any GAS related data."""
+
     fixtures = [
-        'dsmr_frontend/test_dsmrreading_without_gas.json',
-        'dsmr_frontend/test_note.json',
-        'dsmr_frontend/test_energysupplierprice.json',
-        'dsmr_frontend/test_statistics.json',
-        'dsmr_frontend/test_meterstatistics.json',
-        'dsmr_frontend/test_electricity_consumption.json',
+        "dsmr_frontend/test_dsmrreading_without_gas.json",
+        "dsmr_frontend/test_note.json",
+        "dsmr_frontend/test_energysupplierprice.json",
+        "dsmr_frontend/test_statistics.json",
+        "dsmr_frontend/test_meterstatistics.json",
+        "dsmr_frontend/test_electricity_consumption.json",
     ]
     support_gas = False
 

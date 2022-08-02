@@ -16,32 +16,42 @@ class TestDsmrWeatherServices(TestCase):
 
     def setUp(self):
         WeatherSettings.get_solo()
-        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE)
-        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2017, 1, 1)))
+        self.schedule_process = ScheduledProcess.objects.get(
+            module=settings.DSMRREADER_MODULE_WEATHER_UPDATE
+        )
+        self.schedule_process.update(
+            active=True, planned=timezone.make_aware(timezone.datetime(2017, 1, 1))
+        )
 
-    @mock.patch('dsmr_weather.services.get_temperature_from_api')
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("dsmr_weather.services.get_temperature_from_api")
+    @mock.patch("django.utils.timezone.now")
     def test_exception_handling(self, now_mock, get_temperature_from_api_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
-        get_temperature_from_api_mock.side_effect = AssertionError('TEST')  # Simulate any exception.
+        get_temperature_from_api_mock.side_effect = AssertionError(
+            "TEST"
+        )  # Simulate any exception.
 
         dsmr_weather.services.run(self.schedule_process)
 
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
+        self.assertEqual(
+            self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1)
+        )
 
-    @mock.patch('requests.get')
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("requests.get")
+    @mock.patch("django.utils.timezone.now")
     def test_okay(self, now_mock, requests_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
 
         response_mock = mock.MagicMock()
         response_mock.json.return_value = {
-            'actual': {
-                'stationmeasurements': [{
-                    'stationid': WeatherSettings.get_solo().buienradar_station,
-                    'groundtemperature': 123.4,
-                }]
+            "actual": {
+                "stationmeasurements": [
+                    {
+                        "stationid": WeatherSettings.get_solo().buienradar_station,
+                        "groundtemperature": 123.4,
+                    }
+                ]
             }
         }
         type(response_mock).status_code = mock.PropertyMock(return_value=200)
@@ -51,22 +61,26 @@ class TestDsmrWeatherServices(TestCase):
         dsmr_weather.services.run(self.schedule_process)
 
         self.assertTrue(TemperatureReading.objects.exists())
-        self.assertEqual(TemperatureReading.objects.get().degrees_celcius, Decimal('123.4'))
+        self.assertEqual(
+            TemperatureReading.objects.get().degrees_celcius, Decimal("123.4")
+        )
 
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
+        self.assertEqual(
+            self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1)
+        )
 
-    @mock.patch('requests.get')
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("requests.get")
+    @mock.patch("django.utils.timezone.now")
     def test_fail_http_connection(self, now_mock, requests_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
-        requests_mock.side_effect = IOError('Failed to connect')  # Any error is fine.
+        requests_mock.side_effect = IOError("Failed to connect")  # Any error is fine.
 
         with self.assertRaises(RuntimeError):
             dsmr_weather.services.get_temperature_from_api()
 
-    @mock.patch('requests.get')
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("requests.get")
+    @mock.patch("django.utils.timezone.now")
     def test_fail_http_response(self, now_mock, requests_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
         response_mock = mock.MagicMock()
@@ -76,17 +90,19 @@ class TestDsmrWeatherServices(TestCase):
         with self.assertRaises(RuntimeError):
             dsmr_weather.services.get_temperature_from_api()
 
-    @mock.patch('requests.get')
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("requests.get")
+    @mock.patch("django.utils.timezone.now")
     def test_fail_station(self, now_mock, requests_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
         response_mock = mock.MagicMock()
         response_mock.json.return_value = {
-            'actual': {
-                'stationmeasurements': [{
-                    'stationid': 0000,
-                    'groundtemperature': 123,
-                }]
+            "actual": {
+                "stationmeasurements": [
+                    {
+                        "stationid": 0000,
+                        "groundtemperature": 123,
+                    }
+                ]
             }
         }
         type(response_mock).status_code = mock.PropertyMock(return_value=200)

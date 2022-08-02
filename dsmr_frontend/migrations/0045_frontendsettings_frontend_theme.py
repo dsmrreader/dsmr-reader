@@ -6,13 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0044_v4_20_0_release'),
+        ("dsmr_frontend", "0044_v4_20_0_release"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='frontendsettings',
-            name='frontend_theme',
-            field=models.IntegerField(choices=[(-1, 'Based on device settings (default)'), (0, 'Light'), (1, 'Dark')], default=-1, help_text='The theme will be used on the frontend based on this setting', verbose_name='Theme'),
+            model_name="frontendsettings",
+            name="frontend_theme",
+            field=models.IntegerField(
+                choices=[
+                    (-1, "Based on device settings (default)"),
+                    (0, "Light"),
+                    (1, "Dark"),
+                ],
+                default=-1,
+                help_text="The theme will be used on the frontend based on this setting",
+                verbose_name="Theme",
+            ),
         ),
     ]

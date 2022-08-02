@@ -5,15 +5,15 @@ from django.db import migrations
 
 
 def data_migration(apps, schema_editor):
-    """ alters the (default) NULL values of gas hourly statistics to zero. """
-    HourStatistics = apps.get_model('dsmr_stats', 'HourStatistics')
+    """alters the (default) NULL values of gas hourly statistics to zero."""
+    HourStatistics = apps.get_model("dsmr_stats", "HourStatistics")
     HourStatistics.objects.filter(gas__isnull=True).update(gas=0)
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0003_hour_statistics_gas_default'),
+        ("dsmr_stats", "0003_hour_statistics_gas_default"),
     ]
 
     operations = [

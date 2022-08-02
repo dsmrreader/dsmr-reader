@@ -12,15 +12,16 @@ from dsmr_backend.signals import request_status
 
 
 class StatsAppConfig(AppConfig):
-    name = 'dsmr_stats'
-    verbose_name = _('Trend & statistics')
+    name = "dsmr_stats"
+    verbose_name = _("Trend & statistics")
 
     def ready(self):
         from dsmr_datalogger.models.reading import DsmrReading
+
         django.db.models.signals.post_save.connect(
             receiver=self._on_dsmrreading_created_signal,
             dispatch_uid=self.__class__,
-            sender=DsmrReading
+            sender=DsmrReading,
         )
 
     def _on_dsmrreading_created_signal(self, instance, created, raw, **kwargs):
@@ -29,6 +30,7 @@ class StatsAppConfig(AppConfig):
             return
 
         import dsmr_stats.services
+
         dsmr_stats.services.update_electricity_statistics(reading=instance)
 
 
@@ -37,12 +39,10 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
     from dsmr_stats.models.statistics import DayStatistics
 
     try:
-        latest_day_statistics = DayStatistics.objects.all().order_by('-day')[0]
+        latest_day_statistics = DayStatistics.objects.all().order_by("-day")[0]
     except IndexError:
         return MonitoringStatusIssue(
-            __name__,
-            _('No day statistics found'),
-            timezone.now()
+            __name__, _("No day statistics found"), timezone.now()
         )
 
     offset = timezone.now().date() - timezone.timedelta(
@@ -56,12 +56,14 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
 
     return MonitoringStatusIssue(
         __name__,
-        _('Day statistics are lagging behind'),
-        timezone.make_aware(timezone.datetime(
-            year=latest_date_generated.year,
-            month=latest_date_generated.month,
-            day=latest_date_generated.day,
-            hour=23,
-            minute=59
-        ))
+        _("Day statistics are lagging behind"),
+        timezone.make_aware(
+            timezone.datetime(
+                year=latest_date_generated.year,
+                month=latest_date_generated.month,
+                day=latest_date_generated.day,
+                hour=23,
+                minute=59,
+            )
+        ),
     )

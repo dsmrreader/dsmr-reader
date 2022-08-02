@@ -6,23 +6,36 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_consumption', '0013_schedule_generate_consumption'),
+        ("dsmr_consumption", "0013_schedule_generate_consumption"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='consumptionsettings',
-            old_name='compactor_grouping_type',
-            new_name='electricity_grouping_type',
+            model_name="consumptionsettings",
+            old_name="compactor_grouping_type",
+            new_name="electricity_grouping_type",
         ),
         migrations.AlterField(
-            model_name='consumptionsettings',
-            name='electricity_grouping_type',
-            field=models.IntegerField(choices=[(1, 'By reading (default)'), (2, 'By minute (recommended)')], default=2, help_text='Electricity readings are read every X seconds, depending on your meter. We can group these for you.', verbose_name='Electricity grouping type'),
+            model_name="consumptionsettings",
+            name="electricity_grouping_type",
+            field=models.IntegerField(
+                choices=[(1, "By reading (default)"), (2, "By minute (recommended)")],
+                default=2,
+                help_text="Electricity readings are read every X seconds, depending on your meter. We can group these for you.",
+                verbose_name="Electricity grouping type",
+            ),
         ),
         migrations.AddField(
-            model_name='consumptionsettings',
-            name='gas_grouping_type',
-            field=models.IntegerField(choices=[(1, 'On every change (default & recommended)'), (2, 'Force grouping by hour')], default=1, help_text='DSMR 4 (gas) meters always group readings by hour. DSMR 5 (gas) meters can be optionally grouped by hour.', verbose_name='Gas grouping type'),
+            model_name="consumptionsettings",
+            name="gas_grouping_type",
+            field=models.IntegerField(
+                choices=[
+                    (1, "On every change (default & recommended)"),
+                    (2, "Force grouping by hour"),
+                ],
+                default=1,
+                help_text="DSMR 4 (gas) meters always group readings by hour. DSMR 5 (gas) meters can be optionally grouped by hour.",
+                verbose_name="Gas grouping type",
+            ),
         ),
     ]

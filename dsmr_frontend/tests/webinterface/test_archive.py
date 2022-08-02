@@ -12,73 +12,75 @@ from dsmr_stats.models.statistics import DayStatistics
 
 
 class TestViews(TestCase):
-    """ Test whether views render at all. """
+    """Test whether views render at all."""
+
     fixtures = [
-        'dsmr_frontend/test_dsmrreading.json',
-        'dsmr_frontend/test_note.json',
-        'dsmr_frontend/test_energysupplierprice.json',
-        'dsmr_frontend/test_statistics.json',
-        'dsmr_frontend/test_meterstatistics.json',
-        'dsmr_frontend/test_electricity_consumption.json',
-        'dsmr_frontend/test_gas_consumption.json',
+        "dsmr_frontend/test_dsmrreading.json",
+        "dsmr_frontend/test_note.json",
+        "dsmr_frontend/test_energysupplierprice.json",
+        "dsmr_frontend/test_statistics.json",
+        "dsmr_frontend/test_meterstatistics.json",
+        "dsmr_frontend/test_electricity_consumption.json",
+        "dsmr_frontend/test_gas_consumption.json",
     ]
-    namespace = 'frontend'
+    namespace = "frontend"
     support_data = True
     support_gas = True
 
     def setUp(self):
         self.client = Client()
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_archive(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
-        response = self.client.get(
-            reverse('{}:archive'.format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:archive".format(self.namespace)))
         self.assertEqual(response.status_code, 200, response.content)
-        self.assertIn('capabilities', response.context)
+        self.assertIn("capabilities", response.context)
 
         # XHR's.
         data = {
-            'date': formats.date_format(timezone.now().date(), 'DSMR_DATEPICKER_DATE_FORMAT'),
+            "date": formats.date_format(
+                timezone.now().date(), "DSMR_DATEPICKER_DATE_FORMAT"
+            ),
         }
 
         if self.support_data:
-            self.assertEqual(response.context['start_date'], date(2016, 1, 1))
-            self.assertEqual(response.context['end_date'], date(2016, 1, 2))
+            self.assertEqual(response.context["start_date"], date(2016, 1, 1))
+            self.assertEqual(response.context["end_date"], date(2016, 1, 2))
 
-        for current_level in ('days', 'months', 'years'):
+        for current_level in ("days", "months", "years"):
             # Test both with tariffs separated and merged.
             for merge in (False, True):
                 frontend_settings = FrontendSettings.get_solo()
                 frontend_settings.merge_electricity_tariffs = merge
                 frontend_settings.save()
 
-                data.update({'level': current_level})
+                data.update({"level": current_level})
                 response = self.client.get(
-                    reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+                    reverse("{}:archive-xhr-summary".format(self.namespace)), data=data
                 )
                 self.assertEqual(response.status_code, 200, response.content)
 
                 response = self.client.get(
-                    reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
+                    reverse("{}:archive-xhr-graphs".format(self.namespace)), data=data
                 )
                 self.assertEqual(response.status_code, 200, response.content)
 
         # Invalid XHR.
-        data.update({'level': 'INVALID DATA'})
+        data.update({"level": "INVALID DATA"})
         response = self.client.get(
-            reverse('{}:archive-xhr-summary'.format(self.namespace)), data=data
+            reverse("{}:archive-xhr-summary".format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 500)
         response = self.client.get(
-            reverse('{}:archive-xhr-graphs'.format(self.namespace)), data=data
+            reverse("{}:archive-xhr-graphs".format(self.namespace)), data=data
         )
         self.assertEqual(response.status_code, 500)
 
 
 class TestViewsWithoutData(TestViews):
-    """ Same tests as above, but without any data as it's flushed in setUp().  """
+    """Same tests as above, but without any data as it's flushed in setUp()."""
+
     fixtures = []
     support_data = support_gas = False
 
@@ -94,7 +96,7 @@ class TestViewsWithoutData(TestViews):
 
 
 class TestViewsWithoutPrices(TestViews):
-    """ Same tests as above, but without any price data as it's flushed in setUp().  """
+    """Same tests as above, but without any price data as it's flushed in setUp()."""
 
     def setUp(self):
         super(TestViewsWithoutPrices, self).setUp()
@@ -103,14 +105,15 @@ class TestViewsWithoutPrices(TestViews):
 
 
 class TestViewsWithoutGas(TestViews):
-    """ Same tests as above, but without any GAS related data.  """
+    """Same tests as above, but without any GAS related data."""
+
     fixtures = [
-        'dsmr_frontend/test_dsmrreading_without_gas.json',
-        'dsmr_frontend/test_note.json',
-        'dsmr_frontend/test_energysupplierprice.json',
-        'dsmr_frontend/test_statistics.json',
-        'dsmr_frontend/test_meterstatistics.json',
-        'dsmr_frontend/test_electricity_consumption.json',
+        "dsmr_frontend/test_dsmrreading_without_gas.json",
+        "dsmr_frontend/test_note.json",
+        "dsmr_frontend/test_energysupplierprice.json",
+        "dsmr_frontend/test_statistics.json",
+        "dsmr_frontend/test_meterstatistics.json",
+        "dsmr_frontend/test_electricity_consumption.json",
     ]
     support_gas = False
 

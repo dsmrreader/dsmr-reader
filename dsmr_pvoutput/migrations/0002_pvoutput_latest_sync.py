@@ -6,13 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_pvoutput', '0001_pvoutput_settings'),
+        ("dsmr_pvoutput", "0001_pvoutput_settings"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='pvoutputaddstatussettings',
-            name='latest_sync',
-            field=models.DateTimeField(blank=True, default=None, help_text='Timestamp of latest sync with PVOutput. Automatically updated by application.', null=True, verbose_name='Latest sync'),
+            model_name="pvoutputaddstatussettings",
+            name="latest_sync",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                help_text="Timestamp of latest sync with PVOutput. Automatically updated by application.",
+                null=True,
+                verbose_name="Latest sync",
+            ),
         ),
     ]

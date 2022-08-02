@@ -11,20 +11,24 @@ from dsmr_frontend.models.settings import FrontendSettings
 
 
 class About(ConfigurableLoginRequiredMixin, TemplateView):
-    template_name = 'dsmr_frontend/about.html'
+    template_name = "dsmr_frontend/about.html"
 
     def get_context_data(self, **kwargs):
         context_data = super(About, self).get_context_data(**kwargs)
-        context_data['monitoring_issues'] = dsmr_backend.services.backend.request_monitoring_status()
-        context_data['frontend_settings'] = FrontendSettings.get_solo()
+        context_data[
+            "monitoring_issues"
+        ] = dsmr_backend.services.backend.request_monitoring_status()
+        context_data["frontend_settings"] = FrontendSettings.get_solo()
         return context_data
 
 
 class AboutXhrUpdateCheck(ConfigurableLoginRequiredMixin, View):
     def get(self, request):
-        response = JsonResponse({
-            'is_latest_version': dsmr_backend.services.backend.is_latest_version(),
-        })
+        response = JsonResponse(
+            {
+                "is_latest_version": dsmr_backend.services.backend.is_latest_version(),
+            }
+        )
         patch_response_headers(response)
 
         return response
@@ -32,11 +36,13 @@ class AboutXhrUpdateCheck(ConfigurableLoginRequiredMixin, View):
 
 class AboutXhrDebugInfo(LoginRequiredMixin, InterceptCommandStdoutMixin, View):
     def get(self, request):
-        debug_dump = self._intercept_command_stdout('dsmr_debuginfo')
+        debug_dump = self._intercept_command_stdout("dsmr_debuginfo")
 
-        response = JsonResponse({
-            'dump': debug_dump,
-        })
+        response = JsonResponse(
+            {
+                "dump": debug_dump,
+            }
+        )
         patch_response_headers(response)
 
         return response

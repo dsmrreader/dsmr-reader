@@ -12,13 +12,15 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'DSMR-reader will eventually be moved to its own organisation on GitHub in the near future. It should be '
-            'redirected automatically, but if not, the new location will be: https://github.com/dsmrreader/dsmr-reader'
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "DSMR-reader will eventually be moved to its own organisation on GitHub in the near future. It should be "
+                "redirected automatically, but if not, the new location will be: https://github.com/dsmrreader/dsmr-reader"
+            )
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
 
 
@@ -33,5 +35,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0041_graph_ordering'),
+        ("dsmr_frontend", "0041_graph_ordering"),
     ]

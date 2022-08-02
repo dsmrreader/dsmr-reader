@@ -14,14 +14,18 @@ class TestBackendSettings(TestCase):
         self.instance = BackendSettings().get_solo()
 
     def test_admin(self):
-        """ Model should be registered in Django Admin. """
+        """Model should be registered in Django Admin."""
         self.assertTrue(site.is_registered(BackendSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+        self.assertNotEqual(
+            str(self.instance), "{} object".format(self.instance.__class__.__name__)
+        )
 
     def test_handle_settings_update_hook(self):
-        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER)
+        sp = ScheduledProcess.objects.get(
+            module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
+        )
         self.assertTrue(sp.active)
 
         self.instance.automatic_update_checker = False
@@ -32,19 +36,21 @@ class TestBackendSettings(TestCase):
 
 
 class TestScheduledProcess(TestCase):
-    MODULE = 'dsmr_backend.tests.dummy.void_function'
+    MODULE = "dsmr_backend.tests.dummy.void_function"
 
     def setUp(self):
         ScheduledProcess.objects.all().delete()
-        self.instance = ScheduledProcess.objects.create(name='Test', module=self.MODULE)
+        self.instance = ScheduledProcess.objects.create(name="Test", module=self.MODULE)
 
     def test_str(self):
-        """ Model should override string formatting. """
-        self.assertNotEqual(str(self.instance), 'ScheduledProcess')
+        """Model should override string formatting."""
+        self.assertNotEqual(str(self.instance), "ScheduledProcess")
 
     def test_managers(self):
         self.assertTrue(ScheduledProcess.objects.ready().exists())
-        ScheduledProcess.objects.update(planned=timezone.now() + timezone.timedelta(minutes=1))
+        ScheduledProcess.objects.update(
+            planned=timezone.now() + timezone.timedelta(minutes=1)
+        )
         self.assertFalse(ScheduledProcess.objects.ready().exists())
 
     def test_delay(self):
@@ -52,10 +58,10 @@ class TestScheduledProcess(TestCase):
         self.instance.delay(minutes=1)
         self.assertFalse(ScheduledProcess.objects.ready().exists())
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_execute_ok(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2000, 1, 1))
-        self.assertEqual(self.instance.execute(), 'bla')
+        self.assertEqual(self.instance.execute(), "bla")
 
         self.instance.refresh_from_db()
         self.assertEqual(self.instance.last_executed_at, timezone.now())
@@ -78,8 +84,10 @@ class EmailSettingsSettings(TestCase):
         self.instance = EmailSettings().get_solo()
 
     def test_admin(self):
-        """ Model should be registered in Django Admin. """
+        """Model should be registered in Django Admin."""
         self.assertTrue(site.is_registered(EmailSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+        self.assertNotEqual(
+            str(self.instance), "{} object".format(self.instance.__class__.__name__)
+        )

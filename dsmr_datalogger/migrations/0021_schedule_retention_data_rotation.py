@@ -5,17 +5,19 @@ from django.conf import settings
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
 
     ScheduledProcess.objects.create(
-        name='Retention data rotation',
+        name="Retention data rotation",
         module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION,
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION
+    ).delete()
 
 
 class Migration(migrations.Migration):
@@ -25,5 +27,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_datalogger', '0020_track_power_current'),
+        ("dsmr_datalogger", "0020_track_power_current"),
     ]

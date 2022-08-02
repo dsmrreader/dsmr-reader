@@ -8,11 +8,11 @@ import dsmr_backend.services.persistent_clients
 import dsmr_backend.services.schedule
 
 
-logger = logging.getLogger('dsmrreader')
+logger = logging.getLogger("dsmrreader")
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
-    help = 'Backend operations in a persistent process'
+    help = "Backend operations in a persistent process"
     name = __name__  # Required for PID file.
 
     # Persistent during this process' lifetime.
@@ -22,14 +22,17 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         self.sleep_time = BackendSettings.get_solo().process_sleep
 
         self.persistent_clients = dsmr_backend.services.persistent_clients.initialize()
-        logger.debug('Persistent clients initialized: %s', [x.__class__ for x in self.persistent_clients])
+        logger.debug(
+            "Persistent clients initialized: %s",
+            [x.__class__ for x in self.persistent_clients],
+        )
 
     def shutdown(self):
-        """ Disconnects the client(s) gracefully. """
+        """Disconnects the client(s) gracefully."""
         dsmr_backend.services.persistent_clients.terminate(self.persistent_clients)
 
     def run(self, **options):
-        """ InfiniteManagementCommandMixin listens to handle() and calls run() in a loop. """
+        """InfiniteManagementCommandMixin listens to handle() and calls run() in a loop."""
         dsmr_backend.services.schedule.execute_scheduled_processes()
         dsmr_backend.services.schedule.dispatch_signals()  # Legacy
 
@@ -43,5 +46,5 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             return
 
         BackendSettings.objects.update(restart_required=False)
-        logger.warning('Detected backend restart required, stopping process...')
+        logger.warning("Detected backend restart required, stopping process...")
         raise StopInfiniteRun()

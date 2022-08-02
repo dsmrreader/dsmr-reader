@@ -16,7 +16,7 @@ import dsmr_backend.services.backend
 import dsmr_frontend.services
 
 
-logger = logging.getLogger('dsmrreader')
+logger = logging.getLogger("dsmrreader")
 
 
 def run(scheduled_process: ScheduledProcess) -> None:
@@ -38,59 +38,62 @@ def run(scheduled_process: ScheduledProcess) -> None:
         logger.exception(error)
 
         scheduled_process.delay(hours=1)
-        dsmr_frontend.services.display_dashboard_message(message=_(
-            'Failed to export to MinderGas: {}'.format(error)
-        ))
+        dsmr_frontend.services.display_dashboard_message(
+            message=_("Failed to export to MinderGas: {}".format(error))
+        )
         return
 
     # Reschedule between 3 AM and 6 AM next day.
-    midnight = timezone.localtime(timezone.make_aware(
-        timezone.datetime.combine(timezone.now(), time.min)
-    ))
+    midnight = timezone.localtime(
+        timezone.make_aware(timezone.datetime.combine(timezone.now(), time.min))
+    )
     next_midnight = midnight + timezone.timedelta(
-        hours=dsmr_backend.services.backend.hours_in_day(
-            day=timezone.now().date()
-        )
+        hours=dsmr_backend.services.backend.hours_in_day(day=timezone.now().date())
     )
     scheduled_process.reschedule(
-        next_midnight + timezone.timedelta(
-            hours=random.randint(3, 5),
-            minutes=random.randint(15, 59)
-        )
+        next_midnight
+        + timezone.timedelta(hours=random.randint(3, 5), minutes=random.randint(15, 59))
     )
 
 
 def export() -> None:
-    """ Exports gas readings to the MinderGas website. DSMR-reader transmits the last reading of the previous day. """
+    """Exports gas readings to the MinderGas website. DSMR-reader transmits the last reading of the previous day."""
     mindergas_settings = MinderGasSettings.get_solo()
-    midnight = timezone.localtime(timezone.make_aware(
-        timezone.datetime.combine(timezone.now(), time.min)
-    ))
+    midnight = timezone.localtime(
+        timezone.make_aware(timezone.datetime.combine(timezone.now(), time.min))
+    )
 
     try:
         last_gas_reading = GasConsumption.objects.filter(
             # Slack of a few hours to make sure we have any valid reading at all.
             read_at__range=(midnight - timezone.timedelta(hours=3), midnight)
-        ).order_by('-read_at')[0]
+        ).order_by("-read_at")[0]
     except IndexError as exc:
-        raise AssertionError(_('No recent gas reading found')) from exc
+        raise AssertionError(_("No recent gas reading found")) from exc
 
     reading_date = last_gas_reading.read_at.date().isoformat()
-    logger.debug('MinderGas: Uploading gas meter position: %s m³ @ %s', last_gas_reading.delivered, reading_date)
+    logger.debug(
+        "MinderGas: Uploading gas meter position: %s m³ @ %s",
+        last_gas_reading.delivered,
+        reading_date,
+    )
     response = requests.post(
         MinderGasSettings.API_URL,
         headers={
-            'User-Agent': settings.DSMRREADER_USER_AGENT,
-            'Content-Type': 'application/json',
-            'AUTH-TOKEN': mindergas_settings.auth_token
+            "User-Agent": settings.DSMRREADER_USER_AGENT,
+            "Content-Type": "application/json",
+            "AUTH-TOKEN": mindergas_settings.auth_token,
         },
-        data=json.dumps({
-            'date': reading_date,
-            'reading': str(last_gas_reading.delivered)
-        }),
+        data=json.dumps(
+            {"date": reading_date, "reading": str(last_gas_reading.delivered)}
+        ),
         timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
     )
 
     if response.status_code != 201:
-        logger.error('MinderGas: Upload failed (HTTP %s): %s', response.status_code, response.text)
-        raise AssertionError(_('Unexpected status code received'))
+        logger.error(
+            "MinderGas: Upload failed (HTTP %s): %s",
+            response.status_code,
+            response.text,
+        )
+        raise AssertionError(_("Unexpected status code received"))

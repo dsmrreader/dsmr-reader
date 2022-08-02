@@ -8,33 +8,51 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_consumption', '0007_settings_documentation'),
+        ("dsmr_consumption", "0007_settings_documentation"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='energysupplierprice',
-            old_name='electricity_1_price',
-            new_name='electricity_delivered_1_price',
+            model_name="energysupplierprice",
+            old_name="electricity_1_price",
+            new_name="electricity_delivered_1_price",
         ),
         migrations.RenameField(
-            model_name='energysupplierprice',
-            old_name='electricity_2_price',
-            new_name='electricity_delivered_2_price',
+            model_name="energysupplierprice",
+            old_name="electricity_2_price",
+            new_name="electricity_delivered_2_price",
         ),
         migrations.AddField(
-            model_name='energysupplierprice',
-            name='electricity_returned_1_price',
-            field=models.DecimalField(decimal_places=5, default=0, help_text='Set to zero when unused', max_digits=11, verbose_name='Electricity returned 1 price (Dutch users: low tariff)'),
+            model_name="energysupplierprice",
+            name="electricity_returned_1_price",
+            field=models.DecimalField(
+                decimal_places=5,
+                default=0,
+                help_text="Set to zero when unused",
+                max_digits=11,
+                verbose_name="Electricity returned 1 price (Dutch users: low tariff)",
+            ),
         ),
         migrations.AddField(
-            model_name='energysupplierprice',
-            name='electricity_returned_2_price',
-            field=models.DecimalField(decimal_places=5, default=0, help_text='Set to zero when unused', max_digits=11, verbose_name='Electricity returned 2 price (Dutch users: normal tariff)'),
+            model_name="energysupplierprice",
+            name="electricity_returned_2_price",
+            field=models.DecimalField(
+                decimal_places=5,
+                default=0,
+                help_text="Set to zero when unused",
+                max_digits=11,
+                verbose_name="Electricity returned 2 price (Dutch users: normal tariff)",
+            ),
         ),
         migrations.AlterField(
-            model_name='energysupplierprice',
-            name='gas_price',
-            field=models.DecimalField(decimal_places=5, default=0, help_text='Set to zero when unused', max_digits=11, verbose_name='Gas price'),
+            model_name="energysupplierprice",
+            name="gas_price",
+            field=models.DecimalField(
+                decimal_places=5,
+                default=0,
+                help_text="Set to zero when unused",
+                max_digits=11,
+                verbose_name="Gas price",
+            ),
         ),
     ]

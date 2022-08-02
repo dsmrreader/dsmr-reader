@@ -10,8 +10,8 @@ from dsmr_backend.signals import request_status
 
 
 class ConsumptionAppConfig(AppConfig):
-    name = 'dsmr_consumption'
-    verbose_name = _('Consumption')
+    name = "dsmr_consumption"
+    verbose_name = _("Consumption")
 
 
 @receiver(request_status)
@@ -25,6 +25,6 @@ def check_unprocessed_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
 
     return MonitoringStatusIssue(
         __name__,
-        _('Too many unprocessed readings: {}').format(unprocessed_count),
-        DsmrReading.objects.unprocessed().order_by('timestamp')[0].timestamp
+        _("Too many unprocessed readings: {}").format(unprocessed_count),
+        DsmrReading.objects.unprocessed().order_by("timestamp")[0].timestamp,
     )

@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0006_scheduled_email_backup'),
+        ("dsmr_backup", "0006_scheduled_email_backup"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='backupsettings',
-            name='compress',
+            model_name="backupsettings",
+            name="compress",
         ),
     ]

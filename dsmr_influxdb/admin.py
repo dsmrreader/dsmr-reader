@@ -9,23 +9,30 @@ from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasuremen
 @admin.register(InfluxdbIntegrationSettings)
 class InfluxdbIntegrationSettingsAdmin(SingletonModelAdmin):
     save_on_top = True
-    change_form_template = 'dsmr_influxdb/influxdb_settings/change_form.html'
+    change_form_template = "dsmr_influxdb/influxdb_settings/change_form.html"
     fieldsets = (
         (
-            None, {
-                'fields': [
-                    'enabled', 'hostname', 'port', 'secure', 'organization', 'api_token', 'bucket',
+            None,
+            {
+                "fields": [
+                    "enabled",
+                    "hostname",
+                    "port",
+                    "secure",
+                    "organization",
+                    "api_token",
+                    "bucket",
                 ],
-                'description': _(
-                    'The backend process should automatically restart to apply changes.'
-                )
-            }
+                "description": _(
+                    "The backend process should automatically restart to apply changes."
+                ),
+            },
         ),
         (
-            _('Mapping'), {
-                'fields': ['formatting'],
-                'description':
-                    '''Example:
+            _("Mapping"),
+            {
+                "fields": ["formatting"],
+                "description": """Example:
 <pre>
 ### [measurement_name]
 ### DSMR reading field 1 = InfluxDB field 1
@@ -63,13 +70,12 @@ phase_power_current_l3 = current_l3
 [gas_positions]
 extra_device_delivered = delivered
 </pre>
-'''
-
-            }
+""",
+            },
         ),
     )
 
 
 @admin.register(InfluxdbMeasurement)
 class InfluxdbMeasurementAdmin(DeletionOnlyAdminModel):
-    list_display = ('time', 'measurement_name')
+    list_display = ("time", "measurement_name")

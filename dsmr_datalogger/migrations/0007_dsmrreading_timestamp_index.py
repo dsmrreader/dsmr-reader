@@ -8,28 +8,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0006_dsmr_firmware_v5'),
+        ("dsmr_datalogger", "0006_dsmr_firmware_v5"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='timestamp',
-            field=models.DateTimeField(db_index=True, help_text='Timestamp indicating when the reading was taken, according to the meter'),
+            model_name="dsmrreading",
+            name="timestamp",
+            field=models.DateTimeField(
+                db_index=True,
+                help_text="Timestamp indicating when the reading was taken, according to the meter",
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='timestamp',
-            field=models.DateTimeField(db_index=True, help_text='Timestamp indicating when the reading was taken, according to the smart meter'),
+            model_name="dsmrreading",
+            name="timestamp",
+            field=models.DateTimeField(
+                db_index=True,
+                help_text="Timestamp indicating when the reading was taken, according to the smart meter",
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='extra_device_delivered',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Last hourly value delivered to client according to the extra device connected', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="extra_device_delivered",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Last hourly value delivered to client according to the extra device connected",
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='dsmrreading',
-            name='extra_device_timestamp',
-            field=models.DateTimeField(default=None, help_text='Last hourly reading timestamp for the extra device connected', null=True),
+            model_name="dsmrreading",
+            name="extra_device_timestamp",
+            field=models.DateTimeField(
+                default=None,
+                help_text="Last hourly reading timestamp for the extra device connected",
+                null=True,
+            ),
         ),
     ]

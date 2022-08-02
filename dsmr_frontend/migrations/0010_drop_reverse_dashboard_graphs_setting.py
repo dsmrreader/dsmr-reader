@@ -8,12 +8,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0009_docs_no_reverse_match'),
+        ("dsmr_frontend", "0009_docs_no_reverse_match"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='frontendsettings',
-            name='reverse_dashboard_graphs',
+            model_name="frontendsettings",
+            name="reverse_dashboard_graphs",
         ),
     ]

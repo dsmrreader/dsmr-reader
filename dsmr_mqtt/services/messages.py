@@ -6,7 +6,7 @@ from django.core.cache import caches
 from dsmr_mqtt.models import queue
 
 
-logger = logging.getLogger('dsmrreader')
+logger = logging.getLogger("dsmrreader")
 
 
 def queue_message(topic: str, payload: str) -> None:
@@ -17,15 +17,18 @@ def queue_message(topic: str, payload: str) -> None:
     - Each message sent MAY be cached, as it'll be dispatched with the "retain" flag.
     """
 
-    if queue.Message.objects.all().count() >= settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:
+    if (
+        queue.Message.objects.all().count()
+        >= settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
+    ):
         logger.warning(
-            'MQTT: Rejecting message for topic due to maximum queue size (%d): %s',
+            "MQTT: Rejecting message for topic due to maximum queue size (%d): %s",
             settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE,
-            topic
+            topic,
         )
         return
 
-    cache_storage = caches['mqtt']
+    cache_storage = caches["mqtt"]
     cache_key = topic
     cached_data = cache_storage.get(cache_key)
 
@@ -33,11 +36,12 @@ def queue_message(topic: str, payload: str) -> None:
     if cached_data is not None and cached_data == payload:
         # This is by design, since we publish all messages with the "retain" flag for the broker.
         logger.debug(
-            'MQTT: Rejecting message as it exactly matches the previous message sent for this topic: %s', topic
+            "MQTT: Rejecting message as it exactly matches the previous message sent for this topic: %s",
+            topic,
         )
         return
 
     queue.Message.objects.create(topic=topic, payload=payload)
     cache_storage.set(cache_key, payload)
 
-    logger.debug('MQTT: Queued message for %s: %s', topic, payload)
+    logger.debug("MQTT: Queued message for %s: %s", topic, payload)

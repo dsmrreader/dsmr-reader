@@ -6,13 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0002_settings_documentation'),
+        ("dsmr_backup", "0002_settings_documentation"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dropboxsettings',
-            name='next_sync',
-            field=models.DateTimeField(blank=True, default=None, help_text='Timestamp of next sync with Dropbox. Automatically updated by application.', null=True, verbose_name='Next sync'),
+            model_name="dropboxsettings",
+            name="next_sync",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                help_text="Timestamp of next sync with Dropbox. Automatically updated by application.",
+                null=True,
+                verbose_name="Next sync",
+            ),
         ),
     ]

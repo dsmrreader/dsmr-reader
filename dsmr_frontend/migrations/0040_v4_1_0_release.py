@@ -12,20 +12,22 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'DSMR-reader v4.0: Added support for InfluxDB.'
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy("DSMR-reader v4.0: Added support for InfluxDB.")
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'DSMR-reader v4.1: Added support for reading network sockets with the datalogger (e.g. when using ser2net).'
-            ' Both the builtin and remote datalogger now support this feature. The latter requires a reinstallation of '
-            'the (remote) datalogger script.'
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "DSMR-reader v4.1: Added support for reading network sockets with the datalogger (e.g. when using ser2net)."
+                " Both the builtin and remote datalogger now support this feature. The latter requires a reinstallation of "
+                "the (remote) datalogger script."
+            )
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
 
 
@@ -40,5 +42,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0039_retention_headsup'),
+        ("dsmr_frontend", "0039_retention_headsup"),
     ]

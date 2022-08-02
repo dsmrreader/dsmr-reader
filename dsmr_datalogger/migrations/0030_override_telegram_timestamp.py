@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0029_default_retention_to_month'),
+        ("dsmr_datalogger", "0029_default_retention_to_month"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='override_telegram_timestamp',
-            field=models.BooleanField(default=False, help_text='Whether DSMR-reader should IGNORE any timestamps of incoming telegrams and use the current timestamp instead. Use with care and only when your situation actually requires this!', verbose_name='Override telegram timestamp'),
+            model_name="dataloggersettings",
+            name="override_telegram_timestamp",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether DSMR-reader should IGNORE any timestamps of incoming telegrams and use the current timestamp instead. Use with care and only when your situation actually requires this!",
+                verbose_name="Override telegram timestamp",
+            ),
         ),
     ]

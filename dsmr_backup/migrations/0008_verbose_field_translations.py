@@ -6,13 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0007_remove_backupsettings_compress'),
+        ("dsmr_backup", "0007_remove_backupsettings_compress"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='emailbackupsettings',
-            name='interval',
-            field=models.IntegerField(blank=True, choices=[(None, '--- Disabled ---'), (1, 'Daily'), (7, 'Weekly'), (14, 'Every two weeks'), (28, 'Every four weeks')], default=None, help_text='The frequency of sending backups per email', null=True, verbose_name='Interval'),
+            model_name="emailbackupsettings",
+            name="interval",
+            field=models.IntegerField(
+                blank=True,
+                choices=[
+                    (None, "--- Disabled ---"),
+                    (1, "Daily"),
+                    (7, "Weekly"),
+                    (14, "Every two weeks"),
+                    (28, "Every four weeks"),
+                ],
+                default=None,
+                help_text="The frequency of sending backups per email",
+                null=True,
+                verbose_name="Interval",
+            ),
         ),
     ]

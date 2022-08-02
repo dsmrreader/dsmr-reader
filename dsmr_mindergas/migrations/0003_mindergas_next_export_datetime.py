@@ -8,13 +8,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mindergas', '0002_mindergas_notification'),
+        ("dsmr_mindergas", "0002_mindergas_notification"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='mindergassettings',
-            name='next_export',
-            field=models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next export. Automatically updated by application.', null=True, verbose_name='Next export'),
+            model_name="mindergassettings",
+            name="next_export",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                help_text="Timestamp of the next export. Automatically updated by application.",
+                null=True,
+                verbose_name="Next export",
+            ),
         ),
     ]

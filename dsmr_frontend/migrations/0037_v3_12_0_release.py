@@ -19,5 +19,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0036_graphs_zoom'),
+        ("dsmr_frontend", "0036_graphs_zoom"),
     ]

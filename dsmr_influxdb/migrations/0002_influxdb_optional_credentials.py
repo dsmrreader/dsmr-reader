@@ -6,18 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_influxdb', '0001_influxdb_integration'),
+        ("dsmr_influxdb", "0001_influxdb_integration"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='influxdbintegrationsettings',
-            name='password',
-            field=models.CharField(blank=True, help_text='Optional: The password used for authentication with InfluxDB.', max_length=64, verbose_name='InfluxDB password'),
+            model_name="influxdbintegrationsettings",
+            name="password",
+            field=models.CharField(
+                blank=True,
+                help_text="Optional: The password used for authentication with InfluxDB.",
+                max_length=64,
+                verbose_name="InfluxDB password",
+            ),
         ),
         migrations.AlterField(
-            model_name='influxdbintegrationsettings',
-            name='username',
-            field=models.CharField(blank=True, help_text='Optional: The username used for authentication with InfluxDB.', max_length=64, verbose_name='InfluxDB username'),
+            model_name="influxdbintegrationsettings",
+            name="username",
+            field=models.CharField(
+                blank=True,
+                help_text="Optional: The username used for authentication with InfluxDB.",
+                max_length=64,
+                verbose_name="InfluxDB username",
+            ),
         ),
     ]

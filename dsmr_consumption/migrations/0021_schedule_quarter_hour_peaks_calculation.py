@@ -5,16 +5,18 @@ from django.conf import settings
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
     ScheduledProcess.objects.create(
-        name='Calculate quarter hour electricity peaks',
+        name="Calculate quarter hour electricity peaks",
         module=settings.DSMRREADER_MODULE_CALCULATE_QUARTER_HOUR_PEAKS,
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_CALCULATE_QUARTER_HOUR_PEAKS).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_CALCULATE_QUARTER_HOUR_PEAKS
+    ).delete()
 
 
 class Migration(migrations.Migration):
@@ -24,5 +26,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_consumption', '0020_quarter_hour_peaks'),
+        ("dsmr_consumption", "0020_quarter_hour_peaks"),
     ]

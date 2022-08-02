@@ -12,7 +12,7 @@ def insert_notifications(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0007_merge_electricity_tariffs'),
+        ("dsmr_frontend", "0007_merge_electricity_tariffs"),
     ]
 
     operations = [

@@ -6,16 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0012_track_phase_voltages'),
+        ("dsmr_datalogger", "0012_track_phase_voltages"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='dataloggersettings',
-            name='track',
+            model_name="dataloggersettings",
+            name="track",
         ),
         migrations.RemoveField(
-            model_name='dataloggersettings',
-            name='track_phases',
+            model_name="dataloggersettings",
+            name="track_phases",
         ),
     ]

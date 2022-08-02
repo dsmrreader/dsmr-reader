@@ -1,7 +1,14 @@
 from django.test import TestCase
 from django.contrib.admin.sites import site
 
-from dsmr_mqtt.models.settings import broker, day_totals, telegram, meter_statistics, consumption, period_totals
+from dsmr_mqtt.models.settings import (
+    broker,
+    day_totals,
+    telegram,
+    meter_statistics,
+    consumption,
+    period_totals,
+)
 
 
 class TestSettings(TestCase):
@@ -26,4 +33,6 @@ class TestSettings(TestCase):
     def test_to_string(self):
         for current in self.CLASSES:
             instance = current.get_solo()
-            self.assertNotEqual(str(instance), '{} object'.format(instance.__class__.__name__))
+            self.assertNotEqual(
+                str(instance), "{} object".format(instance.__class__.__name__)
+            )

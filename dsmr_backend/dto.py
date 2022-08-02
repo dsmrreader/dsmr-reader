@@ -17,28 +17,30 @@ class MonitoringStatusIssue(object):
 
     def serialize(self) -> Dict:
         return {
-            'source': self.source,
-            'description': self.description,
-            'since': timezone.localtime(self.since),
+            "source": self.source,
+            "description": self.description,
+            "since": timezone.localtime(self.since),
         }
 
 
 @unique
 class Capability(enum.Enum):
-    """ List of types of capabilities available. They act as feature flags in this project. """
-    ANY = 'any'
-    ELECTRICITY = 'electricity'
-    ELECTRICITY_RETURNED = 'electricity_returned'
-    MULTI_PHASES = 'multi_phases'
-    VOLTAGE = 'voltage'
-    POWER_CURRENT = 'power_current'
-    GAS = 'gas'
-    WEATHER = 'weather'
-    COSTS = 'costs'
+    """List of types of capabilities available. They act as feature flags in this project."""
+
+    ANY = "any"
+    ELECTRICITY = "electricity"
+    ELECTRICITY_RETURNED = "electricity_returned"
+    MULTI_PHASES = "multi_phases"
+    VOLTAGE = "voltage"
+    POWER_CURRENT = "power_current"
+    GAS = "gas"
+    WEATHER = "weather"
+    COSTS = "costs"
 
 
 class CapabilityReport(object):
-    """ Lists all capabilities found. Acts like a dict in disguise to ease usage in templates. """
+    """Lists all capabilities found. Acts like a dict in disguise to ease usage in templates."""
+
     _capabilities: Dict[str, Capability]
 
     def __init__(self):
@@ -48,13 +50,13 @@ class CapabilityReport(object):
         self._capabilities[capability.value] = capability
 
     def __contains__(self, capability: Union[str, Capability]) -> bool:
-        """ Check whether the capability is found in this report. """
+        """Check whether the capability is found in this report."""
         if isinstance(capability, str):
             try:
                 # Presumes all capability enums names are simply the uppercase value.
                 getattr(Capability, capability.upper())
             except AttributeError as exc:
-                raise KeyError('Unknown capability: ' + capability) from exc
+                raise KeyError("Unknown capability: " + capability) from exc
 
         if isinstance(capability, Capability):
             capability = capability.value

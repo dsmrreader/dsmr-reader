@@ -3,5 +3,5 @@ from django.utils.translation import gettext_lazy as _
 
 
 class BackupAppConfig(AppConfig):
-    name = 'dsmr_backup'
-    verbose_name = _('Backup')
+    name = "dsmr_backup"
+    verbose_name = _("Backup")

@@ -9,11 +9,13 @@ class TestPVOutputAPISettings(TestCase):
         self.instance = PVOutputAPISettings().get_solo()
 
     def test_admin(self):
-        """ Model should be registered in Django Admin. """
+        """Model should be registered in Django Admin."""
         self.assertTrue(site.is_registered(PVOutputAPISettings))
 
     def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+        self.assertNotEqual(
+            str(self.instance), "{} object".format(self.instance.__class__.__name__)
+        )
 
     def test_auth_token(self):
         self.assertIsNone(self.instance.auth_token)
@@ -27,17 +29,21 @@ class TestPVOutputAddStatusSettings(TestCase):
         self.instance = PVOutputAddStatusSettings().get_solo()
 
     def test_admin(self):
-        """ Model should be registered in Django Admin. """
+        """Model should be registered in Django Admin."""
         self.assertTrue(site.is_registered(PVOutputAddStatusSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(str(self.instance), '{} object'.format(self.instance.__class__.__name__))
+        self.assertNotEqual(
+            str(self.instance), "{} object".format(self.instance.__class__.__name__)
+        )
 
     def test_export(self):
         self.assertFalse(self.instance.export)
 
     def test_upload_interval(self):
-        self.assertEqual(self.instance.upload_interval, PVOutputAddStatusSettings.INTERVAL_5_MINUTES)
+        self.assertEqual(
+            self.instance.upload_interval, PVOutputAddStatusSettings.INTERVAL_5_MINUTES
+        )
 
     def test_upload_delay(self):
         self.assertEqual(self.instance.upload_delay, 0)

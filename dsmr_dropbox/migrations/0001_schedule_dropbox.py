@@ -5,20 +5,22 @@ from django.conf import settings
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    DropboxSettings = apps.get_model('dsmr_backup', 'DropboxSettings')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    DropboxSettings = apps.get_model("dsmr_backup", "DropboxSettings")
 
     dropbox_settings, _ = DropboxSettings.objects.get_or_create()
     ScheduledProcess.objects.create(
-        name='Dropbox export',
+        name="Dropbox export",
         module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT,
-        active=bool(dropbox_settings.refresh_token)
+        active=bool(dropbox_settings.refresh_token),
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT
+    ).delete()
 
 
 class Migration(migrations.Migration):
@@ -27,5 +29,4 @@ class Migration(migrations.Migration):
         migrations.RunPython(migrate_forward, migrate_backward),
     ]
 
-    dependencies = [
-    ]
+    dependencies = []

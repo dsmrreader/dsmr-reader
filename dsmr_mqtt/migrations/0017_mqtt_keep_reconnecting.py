@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mqtt', '0016_client_settings_update'),
+        ("dsmr_mqtt", "0016_client_settings_update"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mqttbrokersettings',
-            name='keep_reconnecting',
-            field=models.BooleanField(default=False, help_text='By default this integration will be disabled on connection errors, to prevent network flooding. You can override this behaviour by enabling this option. It will then no longer disable itself in this situation.', verbose_name='Keep reconnecting'),
+            model_name="mqttbrokersettings",
+            name="keep_reconnecting",
+            field=models.BooleanField(
+                default=False,
+                help_text="By default this integration will be disabled on connection errors, to prevent network flooding. You can override this behaviour by enabling this option. It will then no longer disable itself in this situation.",
+                verbose_name="Keep reconnecting",
+            ),
         ),
     ]

@@ -6,20 +6,23 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class JSONCurrentPeriodTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """ Daily update of current month and year totals. """
+    """Daily update of current month and year totals."""
+
     enabled = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether the period totals are sent to the broker, in JSON format.')
+        verbose_name=_("Enabled"),
+        help_text=_(
+            "Whether the period totals are sent to the broker, in JSON format."
+        ),
     )
     topic = models.CharField(
         max_length=256,
-        default='dsmr/current-period',
-        verbose_name=_('Topic path'),
-        help_text=_('The topic to send the JSON formatted message to.')
+        default="dsmr/current-period",
+        verbose_name=_("Topic path"),
+        help_text=_("The topic to send the JSON formatted message to."),
     )
     formatting = models.TextField(
-        default='''
+        default="""
 [mapping]
 ### SOURCE DATA = JSON FIELD
 ### Only alter fields on the RIGHT HAND SIDE below. Remove lines to omit them from the JSON structure sent.
@@ -53,9 +56,11 @@ current_year_gas = current_year_gas
 current_year_gas_cost = current_year_gas_cost
 current_year_fixed_cost = current_year_fixed_cost
 current_year_total_cost = current_year_total_cost
-''',
-        verbose_name=_('Formatting'),
-        help_text=_('Maps the field names used in the JSON message sent to the broker.')
+""",
+        verbose_name=_("Formatting"),
+        help_text=_(
+            "Maps the field names used in the JSON message sent to the broker."
+        ),
     )
 
     def __str__(self):
@@ -63,18 +68,21 @@ current_year_total_cost = current_year_total_cost
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('(Data source) Current month/year totals: JSON')
+        verbose_name = _("(Data source) Current month/year totals: JSON")
 
 
 class SplitTopicCurrentPeriodTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """ Daily update of current month and year totals. """
+    """Daily update of current month and year totals."""
+
     enabled = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether period totals are sent to the broker, having each field sent to a different topic.')
+        verbose_name=_("Enabled"),
+        help_text=_(
+            "Whether period totals are sent to the broker, having each field sent to a different topic."
+        ),
     )
     formatting = models.TextField(
-        default='''
+        default="""
 [mapping]
 ### SOURCE DATA = TOPIC PATH
 ### Only alter the topic paths on the RIGHT HAND SIDE below. Remove lines to prevent them from being sent at all.
@@ -108,9 +116,9 @@ current_year_gas = dsmr/current-year/gas
 current_year_gas_cost = dsmr/current-year/gas_cost
 current_year_fixed_cost = dsmr/current-year/fixed_cost
 current_year_total_cost = dsmr/current-year/total_cost
-''',
-        verbose_name=_('Formatting'),
-        help_text=_('Maps the field names to separate topics sent to the broker.')
+""",
+        verbose_name=_("Formatting"),
+        help_text=_("Maps the field names to separate topics sent to the broker."),
     )
 
     def __str__(self):
@@ -118,4 +126,4 @@ current_year_total_cost = dsmr/current-year/total_cost
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('(Data source) Current month/year totals: Split topic')
+        verbose_name = _("(Data source) Current month/year totals: Split topic")

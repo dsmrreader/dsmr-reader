@@ -3,7 +3,7 @@ from django.db import migrations, models
 
 
 def migrate_forward(apps, schema_editor):
-    NotificationSetting = apps.get_model('dsmr_notification', 'NotificationSetting')
+    NotificationSetting = apps.get_model("dsmr_notification", "NotificationSetting")
     setting, _ = NotificationSetting.objects.get_or_create()
 
     # Disabled? Default to NULL.
@@ -14,32 +14,59 @@ def migrate_forward(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_notification', '0003_notification_notification'),
+        ("dsmr_notification", "0003_notification_notification"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='notificationsetting',
-            name='notification_service',
-            field=models.CharField(blank=True, choices=[(None, '--- Disabled ---'), ('nma', 'NotifyMyAndroid'), ('prowl', 'Prowl')], default=None, help_text='Which notification service to use for sending daily usage notifications', max_length=20, null=True, verbose_name='Notification service'),
+            model_name="notificationsetting",
+            name="notification_service",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    (None, "--- Disabled ---"),
+                    ("nma", "NotifyMyAndroid"),
+                    ("prowl", "Prowl"),
+                ],
+                default=None,
+                help_text="Which notification service to use for sending daily usage notifications",
+                max_length=20,
+                null=True,
+                verbose_name="Notification service",
+            ),
         ),
-
         # Backwards migration not possible, field was removed before.
         migrations.RunPython(migrate_forward),
-
         migrations.RemoveField(
-            model_name='notificationsetting',
-            name='send_notification',
+            model_name="notificationsetting",
+            name="send_notification",
         ),
         migrations.CreateModel(
-            name='StatusNotificationSetting',
+            name="StatusNotificationSetting",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('next_check', models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next check. Managed by application.', null=True, verbose_name='Next check')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "next_check",
+                    models.DateTimeField(
+                        blank=True,
+                        default=None,
+                        help_text="Timestamp of the next check. Managed by application.",
+                        null=True,
+                        verbose_name="Next check",
+                    ),
+                ),
             ],
             options={
-                'default_permissions': (),
-                'verbose_name': 'Status notification configuration',
+                "default_permissions": (),
+                "verbose_name": "Status notification configuration",
             },
         ),
     ]

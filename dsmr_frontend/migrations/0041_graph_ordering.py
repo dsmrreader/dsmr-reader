@@ -4,13 +4,17 @@ from django.db import migrations, models
 
 
 def migrate_forward(apps, schema_editor):
-    SortedGraph = apps.get_model('dsmr_frontend', 'SortedGraph')
-    SortedGraph.objects.create(name='Electricity', graph_type='electricity', sorting_order=1)
-    SortedGraph.objects.create(name='Phases', graph_type='phases', sorting_order=2)
-    SortedGraph.objects.create(name='Voltage', graph_type='voltage', sorting_order=3)
-    SortedGraph.objects.create(name='Power', graph_type='power_current', sorting_order=4)
-    SortedGraph.objects.create(name='Gas', graph_type='gas', sorting_order=5)
-    SortedGraph.objects.create(name='Weather', graph_type='weather', sorting_order=6)
+    SortedGraph = apps.get_model("dsmr_frontend", "SortedGraph")
+    SortedGraph.objects.create(
+        name="Electricity", graph_type="electricity", sorting_order=1
+    )
+    SortedGraph.objects.create(name="Phases", graph_type="phases", sorting_order=2)
+    SortedGraph.objects.create(name="Voltage", graph_type="voltage", sorting_order=3)
+    SortedGraph.objects.create(
+        name="Power", graph_type="power_current", sorting_order=4
+    )
+    SortedGraph.objects.create(name="Gas", graph_type="gas", sorting_order=5)
+    SortedGraph.objects.create(name="Weather", graph_type="weather", sorting_order=6)
 
 
 def migrate_backward(apps, schema_editor):
@@ -21,23 +25,36 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='SortedGraph',
+            name="SortedGraph",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64)),
-                ('graph_type', models.CharField(max_length=32)),
-                ('sorting_order', models.PositiveIntegerField(db_index=True, default=0, editable=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64)),
+                ("graph_type", models.CharField(max_length=32)),
+                (
+                    "sorting_order",
+                    models.PositiveIntegerField(
+                        db_index=True, default=0, editable=False
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Sorted graph',
-                'verbose_name_plural': 'Sorted graphs',
-                'ordering': ['sorting_order'],
-                'default_permissions': (),
+                "verbose_name": "Sorted graph",
+                "verbose_name_plural": "Sorted graphs",
+                "ordering": ["sorting_order"],
+                "default_permissions": (),
             },
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0040_v4_1_0_release'),
+        ("dsmr_frontend", "0040_v4_1_0_release"),
     ]

@@ -7,7 +7,7 @@ from dsmr_mqtt.models.queue import Message
 
 class TestStatus(TestCase):
     def setUp(self):
-        Message.objects.create(topic='test', payload='')
+        Message.objects.create(topic="test", payload="")
         self.assertEqual(Message.objects.all().count(), 1)
 
     @override_settings(DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE=2)

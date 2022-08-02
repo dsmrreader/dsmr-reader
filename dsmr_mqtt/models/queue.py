@@ -5,7 +5,8 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class Message(ModelUpdateMixin, models.Model):
-    """ Queued message for MQTT. """
+    """Queued message for MQTT."""
+
     topic = models.CharField(max_length=255)
     payload = models.TextField(null=True, blank=True)
 
@@ -13,6 +14,6 @@ class Message(ModelUpdateMixin, models.Model):
         return self.topic
 
     class Meta:
-        default_permissions = ('delete', )  # Do allow deletion.
-        verbose_name = _('Outgoing MQTT message')
-        verbose_name_plural = _('Outgoing MQTT messages')
+        default_permissions = ("delete",)  # Do allow deletion.
+        verbose_name = _("Outgoing MQTT message")
+        verbose_name_plural = _("Outgoing MQTT messages")

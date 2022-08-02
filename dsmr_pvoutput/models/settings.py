@@ -13,16 +13,20 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
         null=True,
         blank=True,
         default=None,
-        verbose_name=_('API key'),
-        help_text=_('The API key for your PVOutput account. Listed in PVOutput at Settings -> "API Settings".')
+        verbose_name=_("API key"),
+        help_text=_(
+            'The API key for your PVOutput account. Listed in PVOutput at Settings -> "API Settings".'
+        ),
     )
     system_identifier = models.CharField(
         null=True,
         blank=True,
         default=None,
         max_length=32,
-        verbose_name=_('System ID (digit)'),
-        help_text=_('The "System ID" for your device. Listed in PVOutput at Settings -> "Registered Systems".')
+        verbose_name=_("System ID (digit)"),
+        help_text=_(
+            'The "System ID" for your device. Listed in PVOutput at Settings -> "Registered Systems".'
+        ),
     )
 
     def __str__(self):
@@ -30,7 +34,7 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('PVOutput: API configuration')
+        verbose_name = _("PVOutput: API configuration")
 
 
 class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
@@ -40,42 +44,46 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
     INTERVAL_10_MINUTES = 10
     INTERVAL_15_MINUTES = 15
     INTERVAL_CHOICES = (
-        (INTERVAL_5_MINUTES, _('5 minutes')),
-        (INTERVAL_10_MINUTES, _('10 minutes')),
-        (INTERVAL_15_MINUTES, _('15 minutes')),
+        (INTERVAL_5_MINUTES, _("5 minutes")),
+        (INTERVAL_10_MINUTES, _("10 minutes")),
+        (INTERVAL_15_MINUTES, _("15 minutes")),
     )
 
     export = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether the system uploads consumption using the Add Status Service API call.')
+        verbose_name=_("Enabled"),
+        help_text=_(
+            "Whether the system uploads consumption using the Add Status Service API call."
+        ),
     )
     upload_interval = models.IntegerField(
         default=INTERVAL_5_MINUTES,
         choices=INTERVAL_CHOICES,
-        verbose_name=_('Upload interval'),
-        help_text=_('The interval between each upload (in minutes). Please make sure this matches the device settings.')
+        verbose_name=_("Upload interval"),
+        help_text=_(
+            "The interval between each upload (in minutes). Please make sure this matches the device settings."
+        ),
     )
     upload_delay = models.IntegerField(
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(30)],
-        verbose_name=_('Upload offset (minutes)'),
+        verbose_name=_("Upload offset (minutes)"),
         help_text=_(
             'An artificial delay in uploading data to PVOutput. E.g.: When you set this to "5" and the application '
-            'uploads the data at 10:45, then only data until 10:40 will be taken into account. '
+            "uploads the data at 10:45, then only data until 10:40 will be taken into account. "
             'It effectively limits its upload data search by "ignore the last X minutes", where X is this setting.'
-        )
+        ),
     )
     processing_delay = models.IntegerField(
         default=None,
         null=True,
         blank=True,
         validators=[MinValueValidator(0), MaxValueValidator(120)],
-        verbose_name=_('PVOutput: Processing delay (minutes)'),
+        verbose_name=_("PVOutput: Processing delay (minutes)"),
         help_text=_(
-            'Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, '
-            'by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)'
-        )
+            "Leave EMPTY to disable the feature. This parameter allows the processing of the data to be delayed, "
+            "by the specified number of minutes. Allowed values: empty or 0 to 120 (minutes)"
+        ),
     )
 
     def __str__(self):
@@ -83,4 +91,4 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('PVOutput: Add Status configuration')
+        verbose_name = _("PVOutput: Add Status configuration")

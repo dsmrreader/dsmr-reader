@@ -9,24 +9,27 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class BackupSettings(ModelUpdateMixin, SingletonModel):
-    """ Generic backup settings. """
+    """Generic backup settings."""
+
     daily_backup = models.BooleanField(
         default=True,
-        verbose_name=_('Backup daily'),
-        help_text=_('Create a backup of your data daily. Stored locally, but can be exported using Dropbox.')
+        verbose_name=_("Backup daily"),
+        help_text=_(
+            "Create a backup of your data daily. Stored locally, but can be exported using Dropbox."
+        ),
     )
     backup_time = models.TimeField(
         default=time(hour=2),
-        verbose_name=_('Backup timestamp'),
+        verbose_name=_("Backup timestamp"),
         help_text=_(
-            'Daily moment of creating the backup. You should prefer a nightly timestamp, as it '
-            'might freeze or lock the application shortly during backup creation.'
-        )
+            "Daily moment of creating the backup. You should prefer a nightly timestamp, as it "
+            "might freeze or lock the application shortly during backup creation."
+        ),
     )
     folder = models.CharField(
         max_length=512,
-        default='backups/',
-        verbose_name=_('Backup storage folder'),
+        default="backups/",
+        verbose_name=_("Backup storage folder"),
         help_text=_(
             'The folder to store the backups in. The default location is "backups/". '
             'Please make sure that the "dsmr" user both has read and write access to the folder.'
@@ -35,8 +38,10 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
     compression_level = models.IntegerField(
         default=1,
         validators=[MinValueValidator(1), MaxValueValidator(9)],
-        verbose_name=_('Compression level'),
-        help_text=_("The gzip compression level used. Level 9 = best, level 1 = fastest.")
+        verbose_name=_("Compression level"),
+        help_text=_(
+            "The gzip compression level used. Level 9 = best, level 1 = fastest."
+        ),
     )
 
     def __str__(self):
@@ -44,34 +49,37 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Backup configuration')
+        verbose_name = _("Backup configuration")
 
 
 class DropboxSettings(ModelUpdateMixin, SingletonModel):
-    """ Dropbox backup upload settings. """
+    """Dropbox backup upload settings."""
+
     one_time_authorization_code = models.CharField(
         max_length=255,
         default=None,
         null=True,
         blank=True,
-        verbose_name=_('Access Code by Dropbox'),
+        verbose_name=_("Access Code by Dropbox"),
         help_text=_(
-            'Enter the one-time Access Code here that Dropbox generates for you after authorizing DSMR-reader'
+            "Enter the one-time Access Code here that Dropbox generates for you after authorizing DSMR-reader"
         ),
     )
     serialized_auth_flow = models.BinaryField(
         default=None,
         null=True,
         blank=True,
-        help_text=_('Automatically managed by DSMR-reader - Only used once during authorization set up'),
+        help_text=_(
+            "Automatically managed by DSMR-reader - Only used once during authorization set up"
+        ),
     )
     refresh_token = models.CharField(
         max_length=255,
         default=None,
         null=True,
         blank=True,
-        verbose_name=_('Dropbox refresh token'),
-        help_text=_('Automatically managed by DSMR-reader'),
+        verbose_name=_("Dropbox refresh token"),
+        help_text=_("Automatically managed by DSMR-reader"),
     )
 
     def __str__(self):
@@ -79,11 +87,12 @@ class DropboxSettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Dropbox configuration')
+        verbose_name = _("Dropbox configuration")
 
 
 class EmailBackupSettings(ModelUpdateMixin, SingletonModel):
-    """ Backup by email settings. """
+    """Backup by email settings."""
+
     INTERVAL_NONE = None
     INTERVAL_DAILY = 1
     INTERVAL_WEEKLY = 7
@@ -91,19 +100,19 @@ class EmailBackupSettings(ModelUpdateMixin, SingletonModel):
     INTERVAL_MONTHLY = 28
 
     INTERVAL_CHOICES = (
-        (INTERVAL_NONE, _('--- Disabled ---')),
-        (INTERVAL_DAILY, _('Daily')),
-        (INTERVAL_WEEKLY, _('Weekly')),
-        (INTERVAL_BIWEEKLY, _('Every two weeks')),
-        (INTERVAL_MONTHLY, _('Every four weeks')),
+        (INTERVAL_NONE, _("--- Disabled ---")),
+        (INTERVAL_DAILY, _("Daily")),
+        (INTERVAL_WEEKLY, _("Weekly")),
+        (INTERVAL_BIWEEKLY, _("Every two weeks")),
+        (INTERVAL_MONTHLY, _("Every four weeks")),
     )
     interval = models.IntegerField(
         null=True,
         blank=True,
         default=INTERVAL_NONE,
         choices=INTERVAL_CHOICES,
-        verbose_name=_('Interval'),
-        help_text=_('The frequency of sending backups per email')
+        verbose_name=_("Interval"),
+        help_text=_("The frequency of sending backups per email"),
     )
 
     def __str__(self):
@@ -111,4 +120,4 @@ class EmailBackupSettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Email backup configuration')
+        verbose_name = _("Email backup configuration")

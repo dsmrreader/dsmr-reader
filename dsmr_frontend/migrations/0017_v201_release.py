@@ -12,12 +12,14 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            "DSMR-reader v2.0.1 adds two missing API calls in the documentation (/api/v2/consumption/)"
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "DSMR-reader v2.0.1 adds two missing API calls in the documentation (/api/v2/consumption/)"
+            )
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
 
 
@@ -32,5 +34,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0016_v200_release'),
+        ("dsmr_frontend", "0016_v200_release"),
     ]

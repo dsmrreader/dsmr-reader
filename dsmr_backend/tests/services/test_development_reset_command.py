@@ -10,18 +10,18 @@ from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 class TestCommands(InterceptCommandStdoutMixin, TestCase):
     @override_settings(DEBUG=True)
     def test_development_reset(self):
-        self._intercept_command_stdout('development_reset')
+        self._intercept_command_stdout("development_reset")
 
     @override_settings(DEBUG=False)
     def test_fail_debug(self):
         with self.assertRaises(CommandError):
-            self._intercept_command_stdout('development_reset')
+            self._intercept_command_stdout("development_reset")
 
     @override_settings(DEBUG=True)
     def test_update_admin_user(self):
-        User.objects.create_superuser('admin', 'root@localhost', 'some-password')
-        self._intercept_command_stdout('development_reset')
+        User.objects.create_superuser("admin", "root@localhost", "some-password")
+        self._intercept_command_stdout("development_reset")
 
         self.assertIsNotNone(
-            authenticate(username='admin', password='admin')  # Success
+            authenticate(username="admin", password="admin")  # Success
         )

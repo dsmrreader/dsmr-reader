@@ -8,16 +8,24 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0008_meta_names'),
+        ("dsmr_stats", "0008_meta_names"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='daystatistics',
-            options={'default_permissions': (), 'verbose_name': 'Day statistics (automatically generated data)', 'verbose_name_plural': 'Day statistics (automatically generated data)'},
+            name="daystatistics",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Day statistics (automatically generated data)",
+                "verbose_name_plural": "Day statistics (automatically generated data)",
+            },
         ),
         migrations.AlterModelOptions(
-            name='hourstatistics',
-            options={'default_permissions': (), 'verbose_name': 'Hour statistics (automatically generated data)', 'verbose_name_plural': 'Hour statistics (automatically generated data)'},
+            name="hourstatistics",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Hour statistics (automatically generated data)",
+                "verbose_name_plural": "Hour statistics (automatically generated data)",
+            },
         ),
     ]

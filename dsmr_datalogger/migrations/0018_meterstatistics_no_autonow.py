@@ -7,13 +7,16 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0017_log_telegrams'),
+        ("dsmr_datalogger", "0017_log_telegrams"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='meterstatistics',
-            name='timestamp',
-            field=models.DateTimeField(default=django.utils.timezone.now, help_text='Timestamp indicating when the reading was taken'),
+            model_name="meterstatistics",
+            name="timestamp",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now,
+                help_text="Timestamp indicating when the reading was taken",
+            ),
         ),
     ]

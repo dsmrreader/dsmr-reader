@@ -22,40 +22,44 @@ import dsmr_backend.services.email
 admin.site.unregister(Group)
 admin.site.unregister(User)
 
-admin.site.site_header = _('DSMR-reader')
+admin.site.site_header = _("DSMR-reader")
 admin.site.site_title = admin.site.site_header
-admin.site.index_title = _('Configuration')  # Should match the frontend menu item.
+admin.site.index_title = _("Configuration")  # Should match the frontend menu item.
 
 
 @admin.register(BackendSettings)
 class BackendSettingsAdmin(SingletonModelAdmin):
-    readonly_fields = ('restart_required',)
+    readonly_fields = ("restart_required",)
     fieldsets = (
         (
-            _('Updates'), {
-                'fields': ['automatic_update_checker'],
-            }
+            _("Updates"),
+            {
+                "fields": ["automatic_update_checker"],
+            },
         ),
         (
-            _('Advanced'), {
-                'fields': [
-                    'language', 'process_sleep', 'disable_electricity_returned_capability', 'disable_gas_capability'
+            _("Advanced"),
+            {
+                "fields": [
+                    "language",
+                    "process_sleep",
+                    "disable_electricity_returned_capability",
+                    "disable_gas_capability",
                 ],
-            }
+            },
         ),
         (
-            _('System'), {
-                'fields': [
-                    'restart_required'
-                ],
-            }
+            _("System"),
+            {
+                "fields": ["restart_required"],
+            },
         ),
     )
 
 
 @receiver(django.db.models.signals.post_save, sender=BackendSettings)
 def handle_backend_settings_update(sender, instance, **kwargs):
-    """ Hook to toggle related scheduled process. """
+    """Hook to toggle related scheduled process."""
     ScheduledProcess.objects.filter(
         module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
     ).update(active=instance.automatic_update_checker)
@@ -63,81 +67,104 @@ def handle_backend_settings_update(sender, instance, **kwargs):
 
 @admin.register(EmailSettings)
 class EmailSettingsAdmin(SingletonModelAdmin):
-    change_form_template = 'dsmr_backend/email_settings/change_form.html'
+    change_form_template = "dsmr_backend/email_settings/change_form.html"
 
     formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size': '64'})},
+        models.CharField: {"widget": TextInput(attrs={"size": "64"})},
     }
     fieldsets = (
         (
-            None, {
-                'fields': ['email_to'],
-            }
+            None,
+            {
+                "fields": ["email_to"],
+            },
         ),
         (
-            _('Advanced'), {
-                'fields': ['email_from', 'host', 'port', 'username', 'password', 'use_tls', 'use_ssl'],
-                'description': _(
-                    'Enter your outgoing email settings here, which DSMR-reader will use to send emails. '
-                    '<br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, '
-                    'port <strong>25</strong> and use <strong>TLS</strong>. '
+            _("Advanced"),
+            {
+                "fields": [
+                    "email_from",
+                    "host",
+                    "port",
+                    "username",
+                    "password",
+                    "use_tls",
+                    "use_ssl",
+                ],
+                "description": _(
+                    "Enter your outgoing email settings here, which DSMR-reader will use to send emails. "
+                    "<br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, "
+                    "port <strong>25</strong> and use <strong>TLS</strong>. "
                     'Do NOT fill in any username of password, but just enter your GMail address as "Email to" above.'
-                )
-            }
+                ),
+            },
         ),
     )
 
     def response_change(self, request, obj):
-        if 'send_test_email' not in request.POST.keys():
+        if "send_test_email" not in request.POST.keys():
             return super(EmailSettingsAdmin, self).response_change(request, obj)
 
         email_settings = EmailSettings.get_solo()
 
         with translation.override(language=BackendSettings.get_solo().language):
-            subject = _('DSMR-reader email test')
-            body = _('Test for your email settings.')
+            subject = _("DSMR-reader email test")
+            body = _("Test for your email settings.")
 
         try:
             dsmr_backend.services.email.send(
                 email_from=email_settings.email_from,
                 email_to=email_settings.email_to,
                 subject=subject,
-                body=body
+                body=body,
             )
         except Exception as error:
-            self.message_user(request, _('Failed to send test email: {}'.format(error)), level=logging.ERROR)
-            return HttpResponseRedirect('.')
+            self.message_user(
+                request,
+                _("Failed to send test email: {}".format(error)),
+                level=logging.ERROR,
+            )
+            return HttpResponseRedirect(".")
 
-        self.message_user(request, _('Email sent succesfully, please check your email inbox (or spam folder).'))
-        return HttpResponseRedirect('.')
+        self.message_user(
+            request,
+            _(
+                "Email sent succesfully, please check your email inbox (or spam folder)."
+            ),
+        )
+        return HttpResponseRedirect(".")
 
 
 @admin.register(ScheduledProcess)
 class ScheduledProcessAdmin(admin.ModelAdmin):
-    list_display = ('active', 'name', 'next_call_naturaltime', 'planned')
-    readonly_fields = ('name', 'active')
-    list_display_links = ('name', 'planned')
-    ordering = ('-active', 'name')  # Disabled processes on bottom.
+    list_display = ("active", "name", "next_call_naturaltime", "planned")
+    readonly_fields = ("name", "active")
+    list_display_links = ("name", "planned")
+    ordering = ("-active", "name")  # Disabled processes on bottom.
     actions = None
 
     fieldsets = (
         (
-            None, {
-                'fields': ['active', 'name'],
-            }
+            None,
+            {
+                "fields": ["active", "name"],
+            },
         ),
         (
-            _('Next call'), {
-                'fields': ['planned'],
-                'description': _(
-                    _('Only reschedule a process if you really need to, as it could cause mistimings at some point.')
-                )
-            }
+            _("Next call"),
+            {
+                "fields": ["planned"],
+                "description": _(
+                    _(
+                        "Only reschedule a process if you really need to, as it could cause mistimings at some point."
+                    )
+                ),
+            },
         ),
     )
 
     def next_call_naturaltime(self, obj):
-        """ Fancy column to display time until next call, in relative time. """
+        """Fancy column to display time until next call, in relative time."""
         if not obj.active:
             return None
 
@@ -148,7 +175,7 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
 
         return naturaltime(planned)
 
-    next_call_naturaltime.short_description = _('Time until next call')  # type: ignore[attr-defined]
+    next_call_naturaltime.short_description = _("Time until next call")  # type: ignore[attr-defined]
 
     def has_add_permission(self, request, obj=None):
         return False

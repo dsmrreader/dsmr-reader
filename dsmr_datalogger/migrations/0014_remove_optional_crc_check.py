@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0013_remove_datalogger_track_settings'),
+        ("dsmr_datalogger", "0013_remove_datalogger_track_settings"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='dataloggersettings',
-            name='verify_telegram_crc',
+            model_name="dataloggersettings",
+            name="verify_telegram_crc",
         ),
     ]

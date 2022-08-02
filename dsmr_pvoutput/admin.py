@@ -19,27 +19,29 @@ class PVOutputAPISettingsAdmin(SingletonModelAdmin):
 class PVOutputAddStatusSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
-            None, {
-                'fields': ['export', 'upload_interval', 'upload_delay'],
-                'description': _(
-                    'Implements the following API call: '
+            None,
+            {
+                "fields": ["export", "upload_interval", "upload_delay"],
+                "description": _(
+                    "Implements the following API call: "
                     '<a href="https://pvoutput.org/help.html#api-addstatus" target="_blank" rel="noopener noreferrer">'
-                    'Add Status Service</a>'
-                )
-            }
+                    "Add Status Service</a>"
+                ),
+            },
         ),
         (
-            _('PVOutput Donators'), {
-                'fields': ['processing_delay'],
-                'description': _(
-                    'This feature is ONLY available when you have a DONATOR account for PVOutput.org. '
-                    'For more information see: '
+            _("PVOutput Donators"),
+            {
+                "fields": ["processing_delay"],
+                "description": _(
+                    "This feature is ONLY available when you have a DONATOR account for PVOutput.org. "
+                    "For more information see: "
                     '<a href="https://pvoutput.org/donate.jsp" target="_blank" rel="noopener noreferrer">'
-                    'Donating to PVOutput</a> '
+                    "Donating to PVOutput</a> "
                     ' and <a href="https://pvoutput.org/help.html#donations" target="_blank" rel="noopener noreferrer">'
-                    'Bonus Features</a>.'
-                )
-            }
+                    "Bonus Features</a>."
+                ),
+            },
         ),
     )
 
@@ -65,9 +67,11 @@ def _on_pvoutput_setting_update():
         module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT
     ).update(
         planned=timezone.now(),
-        active=all([
-            api_settings.auth_token,
-            api_settings.system_identifier,
-            add_status_settings.export
-        ])
+        active=all(
+            [
+                api_settings.auth_token,
+                api_settings.system_identifier,
+                add_status_settings.export,
+            ]
+        ),
     )

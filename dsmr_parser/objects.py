@@ -35,7 +35,7 @@ class Telegram(object):
         self._item_names = self._get_item_names()
 
     def __getattr__(self, name):
-        ''' will only get called for undefined attributes '''
+        """will only get called for undefined attributes"""
         obis_reference = self._reverse_obis_name_mapping[name]
         value = self._dictionary[obis_reference]
         setattr(self, name, value)
@@ -56,7 +56,9 @@ class Telegram(object):
         return output
 
     def to_json(self):
-        return json.dumps(dict([[attr, json.loads(value.to_json())] for attr, value in self]))
+        return json.dumps(
+            dict([[attr, json.loads(value.to_json())] for attr, value in self])
+        )
 
 
 class DSMRObject(object):
@@ -69,10 +71,9 @@ class DSMRObject(object):
 
 
 class MBusObject(DSMRObject):
-
     @property
     def datetime(self):
-        return self.values[0]['value']
+        return self.values[0]["value"]
 
     @property
     def value(self):
@@ -80,9 +81,9 @@ class MBusObject(DSMRObject):
         # TODO object, but let the parse set them differently? So don't use
         # TODO hardcoded indexes here.
         if len(self.values) != 2:  # v2
-            return self.values[6]['value']
+            return self.values[6]["value"]
         else:
-            return self.values[1]['value']
+            return self.values[1]["value"]
 
     @property
     def unit(self):
@@ -90,12 +91,14 @@ class MBusObject(DSMRObject):
         # TODO object, but let the parse set them differently? So don't use
         # TODO hardcoded indexes here.
         if len(self.values) != 2:  # v2
-            return self.values[5]['value']
+            return self.values[5]["value"]
         else:
-            return self.values[1]['unit']
+            return self.values[1]["unit"]
 
     def __str__(self):
-        output = "{}\t[{}] at {}".format(str(self.value), str(self.unit), str(self.datetime.astimezone().isoformat()))
+        output = "{}\t[{}] at {}".format(
+            str(self.value), str(self.unit), str(self.datetime.astimezone().isoformat())
+        )
         return output
 
     def to_json(self):
@@ -107,23 +110,18 @@ class MBusObject(DSMRObject):
             value = self.value.astimezone().isoformat()
         if isinstance(self.value, Decimal):
             value = float(self.value)
-        output = {
-            'datetime': timestamp,
-            'value': value,
-            'unit': self.unit
-        }
+        output = {"datetime": timestamp, "value": value, "unit": self.unit}
         return json.dumps(output)
 
 
 class CosemObject(DSMRObject):
-
     @property
     def value(self):
-        return self.values[0]['value']
+        return self.values[0]["value"]
 
     @property
     def unit(self):
-        return self.values[0]['unit']
+        return self.values[0]["unit"]
 
     def __str__(self):
         print_value = self.value
@@ -138,10 +136,7 @@ class CosemObject(DSMRObject):
             json_value = self.value.astimezone().isoformat()
         if isinstance(self.value, Decimal):
             json_value = float(self.value)
-        output = {
-            'value': json_value,
-            'unit': self.unit
-        }
+        output = {"value": json_value, "unit": self.unit}
         return json.dumps(output)
 
 
@@ -168,11 +163,11 @@ class ProfileGenericObject(DSMRObject):
 
     @property
     def buffer_length(self):
-        return self.values[0]['value']
+        return self.values[0]["value"]
 
     @property
     def buffer_type(self):
-        return self.values[1]['value']
+        return self.values[1]["value"]
 
     @property
     def buffer(self):
@@ -181,7 +176,9 @@ class ProfileGenericObject(DSMRObject):
             values_offset = 2
             for i in range(self.buffer_length):
                 offset = values_offset + i * 2
-                self._buffer_list.append(MBusObject([self.values[offset], self.values[offset + 1]]))
+                self._buffer_list.append(
+                    MBusObject([self.values[offset], self.values[offset + 1]])
+                )
         return self._buffer_list
 
     def __str__(self):
@@ -210,9 +207,9 @@ class ProfileGenericObject(DSMRObject):
                               ]
                   }
         """
-        list = [['buffer_length', self.buffer_length]]
-        list.append(['buffer_type', self.buffer_type])
+        list = [["buffer_length", self.buffer_length]]
+        list.append(["buffer_type", self.buffer_type])
         buffer_repr = [json.loads(buffer_item.to_json()) for buffer_item in self.buffer]
-        list.append(['buffer', buffer_repr])
+        list.append(["buffer", buffer_repr])
         output = dict(list)
         return json.dumps(output)

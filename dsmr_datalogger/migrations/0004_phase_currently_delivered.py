@@ -8,28 +8,50 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0003_telegram_checksum'),
+        ("dsmr_datalogger", "0003_telegram_checksum"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dsmrreading',
-            name='phase_currently_delivered_l1',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Instantaneous active power L1 (+P) in W resolution', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="phase_currently_delivered_l1",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Instantaneous active power L1 (+P) in W resolution",
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='dsmrreading',
-            name='phase_currently_delivered_l2',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Instantaneous active power L2 (+P) in W resolution', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="phase_currently_delivered_l2",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Instantaneous active power L2 (+P) in W resolution",
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='dsmrreading',
-            name='phase_currently_delivered_l3',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='Instantaneous active power L3 (+P) in W resolution', max_digits=9, null=True),
+            model_name="dsmrreading",
+            name="phase_currently_delivered_l3",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="Instantaneous active power L3 (+P) in W resolution",
+                max_digits=9,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='track_phases',
-            field=models.BooleanField(default=False, help_text='Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page', verbose_name='Track electricity phases'),
+            model_name="dataloggersettings",
+            name="track_phases",
+            field=models.BooleanField(
+                default=False,
+                help_text="Tracks electricity phases as well, keeping track of the highs and lows for the Statistics page",
+                verbose_name="Track electricity phases",
+            ),
         ),
     ]

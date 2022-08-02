@@ -5,13 +5,17 @@ from django.db import migrations, models
 
 
 def migrate_forward(apps, schema_editor):
-    SortedGraph = apps.get_model('dsmr_frontend', 'SortedGraph')
-    SortedGraph.objects.create(name='Electricity quarter hour peaks', graph_type='electricity-peaks', sorting_order=7)
+    SortedGraph = apps.get_model("dsmr_frontend", "SortedGraph")
+    SortedGraph.objects.create(
+        name="Electricity quarter hour peaks",
+        graph_type="electricity-peaks",
+        sorting_order=7,
+    )
 
 
 def migrate_backward(apps, schema_editor):
-    SortedGraph = apps.get_model('dsmr_frontend', 'SortedGraph')
-    SortedGraph.objects.get(graph_type='electricity-peaks').delete()
+    SortedGraph = apps.get_model("dsmr_frontend", "SortedGraph")
+    SortedGraph.objects.get(graph_type="electricity-peaks").delete()
 
 
 class Migration(migrations.Migration):
@@ -20,5 +24,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0047_tariff_name_update'),
+        ("dsmr_frontend", "0047_tariff_name_update"),
     ]

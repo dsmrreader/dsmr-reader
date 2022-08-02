@@ -6,20 +6,23 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class JSONDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """ MQTT JSON Dashboard overview. """
+    """MQTT JSON Dashboard overview."""
+
     enabled = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether the day consumption is sent to the broker, in JSON format.')
+        verbose_name=_("Enabled"),
+        help_text=_(
+            "Whether the day consumption is sent to the broker, in JSON format."
+        ),
     )
     topic = models.CharField(
         max_length=256,
-        default='dsmr/day-consumption',
-        verbose_name=_('Topic path'),
-        help_text=_('The topic to send the JSON formatted message to.')
+        default="dsmr/day-consumption",
+        verbose_name=_("Topic path"),
+        help_text=_("The topic to send the JSON formatted message to."),
     )
     formatting = models.TextField(
-        default='''
+        default="""
 [mapping]
 # DATA = JSON FIELD
 electricity1 = electricity1
@@ -46,9 +49,11 @@ energy_supplier_price_electricity_delivered_2 = energy_supplier_price_electricit
 energy_supplier_price_electricity_returned_1 = energy_supplier_price_electricity_returned_1
 energy_supplier_price_electricity_returned_2 = energy_supplier_price_electricity_returned_2
 energy_supplier_price_gas = energy_supplier_price_gas
-''',
-        verbose_name=_('Formatting'),
-        help_text=_('Maps the field names used in the JSON message sent to the broker.')
+""",
+        verbose_name=_("Formatting"),
+        help_text=_(
+            "Maps the field names used in the JSON message sent to the broker."
+        ),
     )
 
     def __str__(self):
@@ -56,18 +61,21 @@ energy_supplier_price_gas = energy_supplier_price_gas
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('(Data source) Day consumption: JSON')
+        verbose_name = _("(Data source) Day consumption: JSON")
 
 
 class SplitTopicDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """ MQTT splitted day totals per field, mapped to topics. """
+    """MQTT splitted day totals per field, mapped to topics."""
+
     enabled = models.BooleanField(
         default=False,
-        verbose_name=_('Enabled'),
-        help_text=_('Whether day consumption is sent to the broker, having each field sent to a different topic.')
+        verbose_name=_("Enabled"),
+        help_text=_(
+            "Whether day consumption is sent to the broker, having each field sent to a different topic."
+        ),
     )
     formatting = models.TextField(
-        default='''
+        default="""
 [mapping]
 # DATA = TOPIC PATH
 electricity1 = dsmr/day-consumption/electricity1
@@ -94,9 +102,9 @@ energy_supplier_price_electricity_delivered_2 = dsmr/day-consumption/energy_supp
 energy_supplier_price_electricity_returned_1 = dsmr/day-consumption/energy_supplier_price_electricity_returned_1
 energy_supplier_price_electricity_returned_2 = dsmr/day-consumption/energy_supplier_price_electricity_returned_2
 energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas
-''',
-        verbose_name=_('Formatting'),
-        help_text=_('Maps the field names to separate topics sent to the broker.')
+""",
+        verbose_name=_("Formatting"),
+        help_text=_("Maps the field names to separate topics sent to the broker."),
     )
 
     def __str__(self):
@@ -104,4 +112,4 @@ energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('(Data source) Day consumption: Split topic')
+        verbose_name = _("(Data source) Day consumption: Split topic")

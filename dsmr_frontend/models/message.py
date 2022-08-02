@@ -10,13 +10,16 @@ class NotificationManager(models.Manager):
 
 
 class Notification(ModelUpdateMixin, models.Model):
-    """ Used to queue messages to end users. """
+    """Used to queue messages to end users."""
+
     objects = NotificationManager()
 
     message = models.TextField()
-    redirect_to = models.CharField(max_length=64, null=True, blank=True, default=None)  # = a Django reverse URL!
+    redirect_to = models.CharField(
+        max_length=64, null=True, blank=True, default=None
+    )  # = a Django reverse URL!
     read = models.BooleanField(default=False)
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('Application notification')
+        verbose_name = _("Application notification")

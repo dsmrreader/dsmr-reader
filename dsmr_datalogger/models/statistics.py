@@ -9,17 +9,14 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class MeterStatistics(ModelUpdateMixin, SingletonModel):
-    """ Meter statistics, but only exists as a single record, containing the latest data. """
+    """Meter statistics, but only exists as a single record, containing the latest data."""
 
     timestamp = models.DateTimeField(
         help_text=_("Timestamp indicating when the reading was taken"),
-        default=timezone.now
+        default=timezone.now,
     )
     dsmr_version = models.CharField(
-        help_text=_("DSMR version"),
-        max_length=2,
-        null=True,
-        default=None
+        help_text=_("DSMR version"), max_length=2, null=True, default=None
     )
     electricity_tariff = models.IntegerField(
         help_text=_(
@@ -27,51 +24,45 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
             "dependent loads e.g boilers. This is responsibility of the P1 user."
         ),
         null=True,
-        default=None
+        default=None,
     )
     power_failure_count = models.IntegerField(
-        help_text=_("Number of power failures in any phase"),
-        null=True,
-        default=None
+        help_text=_("Number of power failures in any phase"), null=True, default=None
     )
     long_power_failure_count = models.IntegerField(
         help_text=_("Number of long power failures in any phase"),
         null=True,
-        default=None
+        default=None,
     )
     voltage_sag_count_l1 = models.IntegerField(
-        help_text=_("Number of voltage sags/dips in phase L1"),
-        null=True,
-        default=None
+        help_text=_("Number of voltage sags/dips in phase L1"), null=True, default=None
     )
     voltage_sag_count_l2 = models.IntegerField(
         help_text=_("Number of voltage sags/dips in phase L2 (polyphase meters only)"),
         null=True,
-        default=None
+        default=None,
     )
     voltage_sag_count_l3 = models.IntegerField(
         help_text=_("Number of voltage sags/dips in phase L3 (polyphase meters only)"),
         null=True,
-        default=None
+        default=None,
     )
     voltage_swell_count_l1 = models.IntegerField(
-        help_text=_("Number of voltage swells in phase L1"),
-        null=True,
-        default=None
+        help_text=_("Number of voltage swells in phase L1"), null=True, default=None
     )
     voltage_swell_count_l2 = models.IntegerField(
         help_text=_("Number of voltage swells in phase L2 (polyphase meters only)"),
         null=True,
-        default=None
+        default=None,
     )
     voltage_swell_count_l3 = models.IntegerField(
         help_text=_("Number of voltage swells in phase L3 (polyphase meters only)"),
         null=True,
-        default=None
+        default=None,
     )
     rejected_telegrams = models.IntegerField(
         help_text=_("Number of rejected telegrams due to invalid CRC checksum"),
-        default=0
+        default=0,
     )
     latest_telegram = models.TextField(
         help_text=_(
@@ -79,57 +70,59 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
             "overwritten each time."
         ),
         null=True,
-        default=None
+        default=None,
     )
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('DSMR Meter statistics (read only)')
+        verbose_name = _("DSMR Meter statistics (read only)")
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return '{} @ {}'.format(self.__class__.__name__, self.timestamp)
+        return "{} @ {}".format(self.__class__.__name__, self.timestamp)
 
 
 class MeterStatisticsChange(models.Model):
     created_at = models.DateTimeField(
         verbose_name=_("Created at"),
         help_text=_("Timestamp indicating when the change was logged"),
-        auto_now_add=True
+        auto_now_add=True,
     )
     field = models.CharField(
         verbose_name=_("Field"),
         help_text=_("The name of the statistics field that changed"),
-        max_length=64
+        max_length=64,
     )
-    old_value = models.CharField(
-        verbose_name=_("Old value"),
-        max_length=32
-    )
-    new_value = models.CharField(
-        verbose_name=_("New value"),
-        max_length=32
-    )
+    old_value = models.CharField(verbose_name=_("Old value"), max_length=32)
+    new_value = models.CharField(verbose_name=_("New value"), max_length=32)
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('DSMR Meter statistics change')
-        verbose_name_plural = _('DSMR Meter statistics changes')
+        verbose_name = _("DSMR Meter statistics change")
+        verbose_name_plural = _("DSMR Meter statistics changes")
 
     def __str__(self):
-        return '{} @ {}'.format(self.__class__.__name__, self.created_at)
+        return "{} @ {}".format(self.__class__.__name__, self.created_at)
 
 
 @receiver(django.db.models.signals.pre_save, sender=MeterStatistics)
 def _on_meter_statistics_pre_save_signal(instance, raw, update_fields, **kwargs):
-    """ Logs any changes. """
+    """Logs any changes."""
     if raw or not update_fields:
         return
 
     WATCHED_FIELDS = [
-        x.name for x in MeterStatistics._meta.get_fields() if x.name not in (
+        x.name
+        for x in MeterStatistics._meta.get_fields()
+        if x.name
+        not in (
             # Excluded fields listed here:
-            'id', 'timestamp', 'dsmr_version', 'electricity_tariff', 'rejected_telegrams', 'latest_telegram'
+            "id",
+            "timestamp",
+            "dsmr_version",
+            "electricity_tariff",
+            "rejected_telegrams",
+            "latest_telegram",
         )
     ]
 

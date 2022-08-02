@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0025_datalogger_mandatory_sleep_update'),
+        ("dsmr_datalogger", "0025_datalogger_mandatory_sleep_update"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='restart_required',
-            field=models.BooleanField(default=False, help_text='Whether the datalogger process requires a restart. It should occur automatically.', verbose_name='Process restart required'),
+            model_name="dataloggersettings",
+            name="restart_required",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether the datalogger process requires a restart. It should occur automatically.",
+                verbose_name="Process restart required",
+            ),
         ),
     ]

@@ -19,5 +19,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0026_v2140_release'),
+        ("dsmr_frontend", "0026_v2140_release"),
     ]

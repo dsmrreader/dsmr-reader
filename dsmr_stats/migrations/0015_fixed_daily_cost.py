@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0014_day_total_cost_index'),
+        ("dsmr_stats", "0014_day_total_cost_index"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='daystatistics',
-            name='fixed_cost',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=8, verbose_name='Fixed costs'),
+            model_name="daystatistics",
+            name="fixed_cost",
+            field=models.DecimalField(
+                decimal_places=2, default=0, max_digits=8, verbose_name="Fixed costs"
+            ),
         ),
     ]

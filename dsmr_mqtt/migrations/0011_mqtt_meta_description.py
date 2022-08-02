@@ -6,48 +6,79 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mqtt', '0010_mqtt_gas_consumption'),
+        ("dsmr_mqtt", "0010_mqtt_gas_consumption"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='jsondaytotalsmqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Day consumption: JSON'},
+            name="jsondaytotalsmqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Day consumption: JSON",
+            },
         ),
         migrations.AlterModelOptions(
-            name='jsongasconsumptionmqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Gas consumption: JSON'},
+            name="jsongasconsumptionmqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Gas consumption: JSON",
+            },
         ),
         migrations.AlterModelOptions(
-            name='jsontelegrammqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Telegram: JSON'},
+            name="jsontelegrammqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Telegram: JSON",
+            },
         ),
         migrations.AlterModelOptions(
-            name='message',
-            options={'default_permissions': (), 'verbose_name': 'Outgoing MQTT message', 'verbose_name_plural': 'Outgoing MQTT messages'},
+            name="message",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Outgoing MQTT message",
+                "verbose_name_plural": "Outgoing MQTT messages",
+            },
         ),
         migrations.AlterModelOptions(
-            name='mqttbrokersettings',
-            options={'default_permissions': (), 'verbose_name': 'MQTT Broker/connection'},
+            name="mqttbrokersettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "MQTT Broker/connection",
+            },
         ),
         migrations.AlterModelOptions(
-            name='rawtelegrammqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Telegram: Raw'},
+            name="rawtelegrammqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Telegram: Raw",
+            },
         ),
         migrations.AlterModelOptions(
-            name='splittopicdaytotalsmqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Day consumption: Split topic'},
+            name="splittopicdaytotalsmqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Day consumption: Split topic",
+            },
         ),
         migrations.AlterModelOptions(
-            name='splittopicgasconsumptionmqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Gas consumption: Split topic'},
+            name="splittopicgasconsumptionmqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Gas consumption: Split topic",
+            },
         ),
         migrations.AlterModelOptions(
-            name='splittopicmeterstatisticsmqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Meter Statistics: Split topic'},
+            name="splittopicmeterstatisticsmqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Meter Statistics: Split topic",
+            },
         ),
         migrations.AlterModelOptions(
-            name='splittopictelegrammqttsettings',
-            options={'default_permissions': (), 'verbose_name': '(Data source) Telegram: Split topic'},
+            name="splittopictelegrammqttsettings",
+            options={
+                "default_permissions": (),
+                "verbose_name": "(Data source) Telegram: Split topic",
+            },
         ),
     ]

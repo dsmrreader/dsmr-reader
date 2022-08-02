@@ -8,13 +8,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_weather', '0002_meta'),
+        ("dsmr_weather", "0002_meta"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='weathersettings',
-            name='next_sync',
-            field=models.DateTimeField(blank=True, default=None, help_text='Timestamp of the next sync. Automatically updated by application.', null=True, verbose_name='Next sync'),
+            model_name="weathersettings",
+            name="next_sync",
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                help_text="Timestamp of the next sync. Automatically updated by application.",
+                null=True,
+                verbose_name="Next sync",
+            ),
         ),
     ]

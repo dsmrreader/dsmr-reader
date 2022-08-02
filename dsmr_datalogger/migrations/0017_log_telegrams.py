@@ -7,7 +7,6 @@ from django.conf import settings
 
 
 class Migration(migrations.Migration):
-
     def migrate_forward(apps, schema_editor):
         try:
             # Only when available.
@@ -15,7 +14,7 @@ class Migration(migrations.Migration):
         except AttributeError:
             return
 
-        DataloggerSettings = apps.get_model('dsmr_datalogger', 'DataloggerSettings')
+        DataloggerSettings = apps.get_model("dsmr_datalogger", "DataloggerSettings")
         DataloggerSettings.objects.all().update(
             log_telegrams=decimal.Decimal(settings.DSMRREADER_LOG_TELEGRAMS)
         )
@@ -24,14 +23,17 @@ class Migration(migrations.Migration):
         pass  # Nothing to do, but allow going backwards.
 
     dependencies = [
-        ('dsmr_datalogger', '0016_process_sleep'),
+        ("dsmr_datalogger", "0016_process_sleep"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='log_telegrams',
-            field=models.BooleanField(default=False, help_text='Whether telegrams are logged, in base64 format. Only required for debugging.'),
+            model_name="dataloggersettings",
+            name="log_telegrams",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether telegrams are logged, in base64 format. Only required for debugging.",
+            ),
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]

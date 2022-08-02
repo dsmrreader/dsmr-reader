@@ -13,7 +13,7 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
 class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
-    """ Landis+Gyr 350 DSMR v4.2. """
+    """Landis+Gyr 350 DSMR v4.2."""
 
     def _dsmr_dummy_data(self):
         return [
@@ -56,33 +56,38 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         ]
 
     def test_reading_creation(self):
-        """ Test whether dsmr_datalogger can insert a reading for Landis+Gyr 350 DSMR v4.2. """
+        """Test whether dsmr_datalogger can insert a reading for Landis+Gyr 350 DSMR v4.2."""
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
     def test_reading_values(self):
-        """ Test whether dsmr_datalogger reads the correct values. """
+        """Test whether dsmr_datalogger reads the correct values."""
         DataloggerSettings.get_solo()
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(reading.timestamp, datetime(2016, 2, 10, 19, 30, 34, tzinfo=pytz.UTC))
-        self.assertEqual(reading.electricity_delivered_1, Decimal('756.849'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('0'))
-        self.assertEqual(reading.electricity_delivered_2, Decimal('714.405'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('0'))
-        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.111'))
-        self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
-        self.assertEqual(reading.extra_device_timestamp, datetime(2016, 2, 10, 19, 0, 0, tzinfo=pytz.UTC))
-        self.assertEqual(reading.extra_device_delivered, Decimal('1197.484'))
-        self.assertEqual(reading.phase_currently_delivered_l1, Decimal('0.123'))
-        self.assertEqual(reading.phase_currently_delivered_l2, Decimal('0.456'))
-        self.assertEqual(reading.phase_currently_delivered_l3, Decimal('0.789'))
-        self.assertEqual(reading.phase_currently_returned_l1, Decimal('0.222'))
-        self.assertEqual(reading.phase_currently_returned_l2, Decimal('0.444'))
-        self.assertEqual(reading.phase_currently_returned_l3, Decimal('0.666'))
+        self.assertEqual(
+            reading.timestamp, datetime(2016, 2, 10, 19, 30, 34, tzinfo=pytz.UTC)
+        )
+        self.assertEqual(reading.electricity_delivered_1, Decimal("756.849"))
+        self.assertEqual(reading.electricity_returned_1, Decimal("0"))
+        self.assertEqual(reading.electricity_delivered_2, Decimal("714.405"))
+        self.assertEqual(reading.electricity_returned_2, Decimal("0"))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal("0.111"))
+        self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
+        self.assertEqual(
+            reading.extra_device_timestamp,
+            datetime(2016, 2, 10, 19, 0, 0, tzinfo=pytz.UTC),
+        )
+        self.assertEqual(reading.extra_device_delivered, Decimal("1197.484"))
+        self.assertEqual(reading.phase_currently_delivered_l1, Decimal("0.123"))
+        self.assertEqual(reading.phase_currently_delivered_l2, Decimal("0.456"))
+        self.assertEqual(reading.phase_currently_delivered_l3, Decimal("0.789"))
+        self.assertEqual(reading.phase_currently_returned_l1, Decimal("0.222"))
+        self.assertEqual(reading.phase_currently_returned_l2, Decimal("0.444"))
+        self.assertEqual(reading.phase_currently_returned_l3, Decimal("0.666"))
         self.assertIsNone(reading.phase_voltage_l1)
         self.assertIsNone(reading.phase_voltage_l2)
         self.assertIsNone(reading.phase_voltage_l3)
@@ -92,7 +97,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
 
         # Different data source.
         meter_statistics = MeterStatistics.get_solo()
-        self.assertEqual(meter_statistics.dsmr_version, '42')
+        self.assertEqual(meter_statistics.dsmr_version, "42")
         self.assertEqual(meter_statistics.electricity_tariff, 2)
         self.assertEqual(meter_statistics.power_failure_count, 3)
         self.assertEqual(meter_statistics.long_power_failure_count, 0)
@@ -103,12 +108,13 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(meter_statistics.voltage_swell_count_l2, 0)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, 0)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_telegram_override_timestamp(self, now_mock):
-        """ Tests whether this user setting overrides as expectedly. """
+        """Tests whether this user setting overrides as expectedly."""
         reading = self._reading_with_override_telegram_timestamp_active(now_mock)
 
         self.assertEqual(
             # CET > UTC. Minute marker rounded to one hour.
-            reading.extra_device_timestamp, datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=pytz.UTC)
+            reading.extra_device_timestamp,
+            datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=pytz.UTC),
         )

@@ -7,17 +7,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0034_mysql_timezone_support'),
+        ("dsmr_frontend", "0034_mysql_timezone_support"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='frontendsettings',
-            name='dashboard_graph_width',
+            model_name="frontendsettings",
+            name="dashboard_graph_width",
         ),
         migrations.AddField(
-            model_name='frontendsettings',
-            name='live_graphs_hours_range',
-            field=models.IntegerField(default=24, help_text='The range of the data displayed in live graphs (increasing it may degrade rendering performance!)', validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(168)], verbose_name='Live graphs hours range'),
+            model_name="frontendsettings",
+            name="live_graphs_hours_range",
+            field=models.IntegerField(
+                default=24,
+                help_text="The range of the data displayed in live graphs (increasing it may degrade rendering performance!)",
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(168),
+                ],
+                verbose_name="Live graphs hours range",
+            ),
         ),
     ]

@@ -5,43 +5,55 @@ from django.utils.translation import gettext_lazy
 
 
 def migrate_forward(apps, schema_editor):
-    """ Clears API settings if we used NMA. """
-    NotificationSetting = apps.get_model('dsmr_notification', 'NotificationSetting')
+    """Clears API settings if we used NMA."""
+    NotificationSetting = apps.get_model("dsmr_notification", "NotificationSetting")
     _, _ = NotificationSetting.objects.get_or_create()
 
-    if not NotificationSetting.objects.filter(notification_service='nma').exists():
+    if not NotificationSetting.objects.filter(notification_service="nma").exists():
         return
 
     # Did we use NMA? Disable it.
-    NotificationSetting.objects.update(notification_service=None, api_key=None, next_notification=None)
+    NotificationSetting.objects.update(
+        notification_service=None, api_key=None, next_notification=None
+    )
 
     import dsmr_frontend.services
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
-        ))
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "Notify My Android has terminated their service, the notification settings in DSMR-reader are disabled."
+            )
+        )
     )
 
 
 def migrate_backward(apps, schema_editor):
-    """ We can't restore deleted data. """
+    """We can't restore deleted data."""
     pass
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_notification', '0004_statusnotificationsetting'),
+        ("dsmr_notification", "0004_statusnotificationsetting"),
     ]
 
     operations = [
         # Backwards migration not possible, field was removed before.
         migrations.RunPython(migrate_forward, migrate_backward),
-
         migrations.AlterField(
-            model_name='notificationsetting',
-            name='notification_service',
-            field=models.CharField(blank=True, choices=[(None, '--- Disabled ---'), ('prowl', 'Prowl')], default=None, help_text='Which notification service to use for sending daily usage notifications', max_length=20, null=True, verbose_name='Notification service'),
+            model_name="notificationsetting",
+            name="notification_service",
+            field=models.CharField(
+                blank=True,
+                choices=[(None, "--- Disabled ---"), ("prowl", "Prowl")],
+                default=None,
+                help_text="Which notification service to use for sending daily usage notifications",
+                max_length=20,
+                null=True,
+                verbose_name="Notification service",
+            ),
         ),
     ]

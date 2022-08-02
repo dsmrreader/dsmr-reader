@@ -6,18 +6,21 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class APISettings(ModelUpdateMixin, SingletonModel):
-    """ Singleton model restricted by django-solo plugin. Settings for this application only. """
+    """Singleton model restricted by django-solo plugin. Settings for this application only."""
+
     allow = models.BooleanField(
         default=False,
-        verbose_name=_('Enable DSMR-reader API'),
-        help_text=_('When disabled it will reject incoming requests and return an HTTP 403 error')
+        verbose_name=_("Enable DSMR-reader API"),
+        help_text=_(
+            "When disabled it will reject incoming requests and return an HTTP 403 error"
+        ),
     )
     auth_key = models.CharField(
         max_length=256,
         null=True,
         default=None,
-        verbose_name=_('Auth Key'),
-        help_text=_('The auth key used to authenticate for this API.')
+        verbose_name=_("Auth Key"),
+        help_text=_("The auth key used to authenticate for this API."),
     )
 
     def __str__(self):
@@ -25,4 +28,4 @@ class APISettings(ModelUpdateMixin, SingletonModel):
 
     class Meta:
         default_permissions = tuple()
-        verbose_name = _('API configuration')
+        verbose_name = _("API configuration")

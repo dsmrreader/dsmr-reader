@@ -6,7 +6,7 @@ from django.conf import settings
 
 
 class ExceptionTracebackMiddleware:
-    """ Handles any uncaught exceptions crashing the webinterface, and displays them. """
+    """Handles any uncaught exceptions crashing the webinterface, and displays them."""
 
     def __init__(self, get_response):
         self.get_response = get_response
@@ -29,10 +29,13 @@ class ExceptionTracebackMiddleware:
 
         return HttpResponseServerError(
             render_to_string(
-                '500.html', {
-                    'exception': exception,
-                    'exception_class': exception.__class__.__name__,
-                    'error_trace': traceback.format_tb(exception.__traceback__, limit=100)
-                }
+                "500.html",
+                {
+                    "exception": exception,
+                    "exception_class": exception.__class__.__name__,
+                    "error_trace": traceback.format_tb(
+                        exception.__traceback__, limit=100
+                    ),
+                },
             )
         )

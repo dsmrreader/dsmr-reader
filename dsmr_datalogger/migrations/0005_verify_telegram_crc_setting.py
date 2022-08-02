@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0004_phase_currently_delivered'),
+        ("dsmr_datalogger", "0004_phase_currently_delivered"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dataloggersettings',
-            name='verify_telegram_crc',
-            field=models.BooleanField(default=True, help_text='Whether we should verify the CRC of any telegrams read by / sent to the application.', verbose_name='Verify telegram CRC'),
+            model_name="dataloggersettings",
+            name="verify_telegram_crc",
+            field=models.BooleanField(
+                default=True,
+                help_text="Whether we should verify the CRC of any telegrams read by / sent to the application.",
+                verbose_name="Verify telegram CRC",
+            ),
         ),
     ]

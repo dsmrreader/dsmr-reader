@@ -6,13 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0028_v3_0_fix_upgrade_redirect'),
+        ("dsmr_frontend", "0028_v3_0_fix_upgrade_redirect"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='frontendsettings',
-            name='gas_graph_style',
-            field=models.CharField(choices=[('bar', 'Bar'), ('line', 'Line')], default='bar', help_text='Using the bar style will help you distinguish empty values better', verbose_name='Gas graph style', max_length=4),
+            model_name="frontendsettings",
+            name="gas_graph_style",
+            field=models.CharField(
+                choices=[("bar", "Bar"), ("line", "Line")],
+                default="bar",
+                help_text="Using the bar style will help you distinguish empty values better",
+                verbose_name="Gas graph style",
+                max_length=4,
+            ),
         ),
     ]

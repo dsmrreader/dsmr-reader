@@ -18,91 +18,114 @@ import dsmr_backend.services.backend
 
 
 class Export(LoginRequiredMixin, TemplateView):
-    template_name = 'dsmr_frontend/export.html'
+    template_name = "dsmr_frontend/export.html"
 
     def get_context_data(self, **kwargs):
         context_data = super(Export, self).get_context_data(**kwargs)
-        context_data['capabilities'] = dsmr_backend.services.backend.get_capabilities()
-        context_data['frontend_settings'] = FrontendSettings.get_solo()
+        context_data["capabilities"] = dsmr_backend.services.backend.get_capabilities()
+        context_data["frontend_settings"] = FrontendSettings.get_solo()
 
-        day_statistics = DayStatistics.objects.all().order_by('day')
+        day_statistics = DayStatistics.objects.all().order_by("day")
 
         try:
-            context_data['start_date'] = day_statistics[0].day
-            context_data['end_date'] = day_statistics.order_by('-day')[0].day
+            context_data["start_date"] = day_statistics[0].day
+            context_data["end_date"] = day_statistics.order_by("-day")[0].day
         except IndexError:
-            context_data['start_date'] = None
-            context_data['end_date'] = None
+            context_data["start_date"] = None
+            context_data["end_date"] = None
 
-        context_data['datepicker_locale_format'] = formats.get_format('DSMR_DATEPICKER_LOCALE_FORMAT')
-        context_data['datepicker_date_format'] = 'DSMR_DATEPICKER_DATE_FORMAT'
+        context_data["datepicker_locale_format"] = formats.get_format(
+            "DSMR_DATEPICKER_LOCALE_FORMAT"
+        )
+        context_data["datepicker_date_format"] = "DSMR_DATEPICKER_DATE_FORMAT"
         return context_data
 
 
 class ExportAsCsv(LoginRequiredMixin, BaseFormView):
-    """ Exports the selected data in CSV format. """
+    """Exports the selected data in CSV format."""
+
     form_class = ExportAsCsvForm
 
     def form_invalid(self, form):
-        return redirect(reverse('frontend:export'))
+        return redirect(reverse("frontend:export"))
 
     def form_valid(self, form):
-        start_date = form.cleaned_data['start_date']
-        start_date = timezone.localtime(timezone.make_aware(timezone.datetime(
-            start_date.year, start_date.month, start_date.day
-        )))
-        end_date = form.cleaned_data['end_date']
-        end_date = timezone.localtime(timezone.make_aware(timezone.datetime(
-            end_date.year, end_date.month, end_date.day
-        )))
-        data_type = form.cleaned_data['data_type']
+        start_date = form.cleaned_data["start_date"]
+        start_date = timezone.localtime(
+            timezone.make_aware(
+                timezone.datetime(start_date.year, start_date.month, start_date.day)
+            )
+        )
+        end_date = form.cleaned_data["end_date"]
+        end_date = timezone.localtime(
+            timezone.make_aware(
+                timezone.datetime(end_date.year, end_date.month, end_date.day)
+            )
+        )
+        data_type = form.cleaned_data["data_type"]
 
         if data_type == ExportAsCsvForm.DATA_TYPE_DAY:
             source_data = DayStatistics.objects.filter(
                 day__gte=start_date.date(), day__lte=end_date.date()
-            ).order_by('day')
+            ).order_by("day")
             export_fields = [
-                'day', 'electricity1', 'electricity2', 'electricity1_returned',
-                'electricity2_returned', 'gas', 'electricity1_cost', 'electricity2_cost',
-                'gas_cost', 'fixed_cost', 'total_cost', 'electricity1_reading', 'electricity2_reading',
-                'electricity1_returned_reading', 'electricity2_returned_reading', 'gas_reading'
+                "day",
+                "electricity1",
+                "electricity2",
+                "electricity1_returned",
+                "electricity2_returned",
+                "gas",
+                "electricity1_cost",
+                "electricity2_cost",
+                "gas_cost",
+                "fixed_cost",
+                "total_cost",
+                "electricity1_reading",
+                "electricity2_reading",
+                "electricity1_returned_reading",
+                "electricity2_returned_reading",
+                "gas_reading",
             ]
 
         elif data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
             source_data = HourStatistics.objects.filter(
                 hour_start__gte=start_date, hour_start__lte=end_date
-            ).order_by('hour_start')
+            ).order_by("hour_start")
             export_fields = [
-                'hour_start', 'electricity1', 'electricity2', 'electricity1_returned',
-                'electricity2_returned', 'gas'
+                "hour_start",
+                "electricity1",
+                "electricity2",
+                "electricity1_returned",
+                "electricity2_returned",
+                "gas",
             ]
 
         else:  # if data_type == ExportAsCsvForm.DATA_TYPE_TEMPERATURE:
             source_data = TemperatureReading.objects.filter(
                 read_at__gte=start_date, read_at__lte=end_date
-            ).order_by('read_at')
-            export_fields = ['read_at', 'degrees_celcius']
+            ).order_by("read_at")
+            export_fields = ["read_at", "degrees_celcius"]
 
         # Direct copy from Django docs.
-        class Echo():
-            """ An object that implements just the write method of the file-like interface. """
+        class Echo:
+            """An object that implements just the write method of the file-like interface."""
 
             def write(self, value):
-                """ Write the value by returning it, instead of storing in a buffer. """
+                """Write the value by returning it, instead of storing in a buffer."""
                 return value
 
         pseudo_buffer = Echo()
         writer = csv.writer(pseudo_buffer)
         response = StreamingHttpResponse(
-            (
-                self._generate_csv_row(writer, source_data, export_fields)
-            ),
-            content_type='text/csv'
+            (self._generate_csv_row(writer, source_data, export_fields)),
+            content_type="text/csv",
         )
-        attachment_name = 'dsmrreader-data-export---{}__{}__{}.csv'.format(
+        attachment_name = "dsmrreader-data-export---{}__{}__{}.csv".format(
             data_type, start_date.date(), end_date.date()
         )
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(attachment_name)
+        response["Content-Disposition"] = 'attachment; filename="{}"'.format(
+            attachment_name
+        )
         return response
 
     def _generate_csv_row(self, writer, data, fields):
@@ -116,11 +139,12 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
         yield writer.writerow(header)
 
         for current_data in data:
-            yield writer.writerow([
-                self._serialize_field(
-                    getattr(current_data, current_field)
-                ) for current_field in fields
-            ])
+            yield writer.writerow(
+                [
+                    self._serialize_field(getattr(current_data, current_field))
+                    for current_field in fields
+                ]
+            )
 
     def _serialize_field(self, data):
         if isinstance(data, Decimal):
@@ -129,7 +153,7 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
         elif isinstance(data, datetime.datetime):
             # Ensure local time to ease usage.
             data = timezone.localtime(data)
-            return formats.date_format(data, 'DSMR_EXPORT_DATETIME_FORMAT')
+            return formats.date_format(data, "DSMR_EXPORT_DATETIME_FORMAT")
 
         elif isinstance(data, datetime.date):  # pragma: no cover
-            return formats.date_format(data, 'DSMR_EXPORT_DATE_FORMAT')
+            return formats.date_format(data, "DSMR_EXPORT_DATE_FORMAT")

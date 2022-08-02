@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
         """
         Fixes email not being sent when the new email_from field is empty.
         """
-        EmailSettings = apps.get_model('dsmr_backend', 'EmailSettings')
+        EmailSettings = apps.get_model("dsmr_backend", "EmailSettings")
         email_settings, _ = EmailSettings.objects.get_or_create()
 
         # Already set.
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         pass  # Nothing to do, but allow going backwards.
 
     dependencies = [
-        ('dsmr_backend', '0011_disable_capabilities'),
+        ("dsmr_backend", "0011_disable_capabilities"),
     ]
 
     operations = [

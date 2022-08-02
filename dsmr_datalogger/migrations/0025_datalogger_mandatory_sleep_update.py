@@ -13,20 +13,22 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    DataloggerSettings = apps.get_model('dsmr_datalogger', 'DataloggerSettings')
+    DataloggerSettings = apps.get_model("dsmr_datalogger", "DataloggerSettings")
     sleep_update_required = DataloggerSettings.objects.filter(process_sleep__lt=5.0)
 
     if not sleep_update_required:
         # Skip when already okay.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'The system just applied a one-time update to the datalogger sleep setting, increasing it to 5 seconds. '
-            'This probably prevents a lot of potential future data storage and performance issues for many users. '
-            'If you disagree with this new value, feel free to revert it manually in the configuration.',
-        )),
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "The system just applied a one-time update to the datalogger sleep setting, increasing it to 5 seconds. "
+                "This probably prevents a lot of potential future data storage and performance issues for many users. "
+                "If you disagree with this new value, feel free to revert it manually in the configuration.",
+            )
+        ),
     )
 
 
@@ -38,13 +40,23 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='dataloggersettings',
-            name='process_sleep',
-            field=models.DecimalField(decimal_places=1, default=5.0, help_text='The number of seconds the application will sleep after reading data from the datalogger (API and remote datalogger excluded). The recommended value is 5 seconds or higher and does not affect daily totals!', max_digits=3, validators=[django.core.validators.MinValueValidator(0.5), django.core.validators.MaxValueValidator(99)], verbose_name='Datalogger process sleep'),
+            model_name="dataloggersettings",
+            name="process_sleep",
+            field=models.DecimalField(
+                decimal_places=1,
+                default=5.0,
+                help_text="The number of seconds the application will sleep after reading data from the datalogger (API and remote datalogger excluded). The recommended value is 5 seconds or higher and does not affect daily totals!",
+                max_digits=3,
+                validators=[
+                    django.core.validators.MinValueValidator(0.5),
+                    django.core.validators.MaxValueValidator(99),
+                ],
+                verbose_name="Datalogger process sleep",
+            ),
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]
 
     dependencies = [
-        ('dsmr_datalogger', '0024_enable_retention_by_default'),
+        ("dsmr_datalogger", "0024_enable_retention_by_default"),
     ]

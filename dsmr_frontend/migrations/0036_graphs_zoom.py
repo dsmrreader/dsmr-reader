@@ -7,13 +7,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0035_graphs_range'),
+        ("dsmr_frontend", "0035_graphs_range"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='frontendsettings',
-            name='live_graphs_initial_zoom',
-            field=models.IntegerField(default=10, help_text='The percentage of the graph range displayed initially', validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(100)], verbose_name='Live graphs initial zoom'),
+            model_name="frontendsettings",
+            name="live_graphs_initial_zoom",
+            field=models.IntegerField(
+                default=10,
+                help_text="The percentage of the graph range displayed initially",
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(100),
+                ],
+                verbose_name="Live graphs initial zoom",
+            ),
         ),
     ]

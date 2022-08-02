@@ -7,14 +7,14 @@ from django.utils import timezone
 
 
 def migrate_next_sync_setting_retroactive(apps, schema_editor):
-    """ Sets the new 'next_sync' setting to the latest temperature reading, if any. """
-    TemperatureReading = apps.get_model('dsmr_weather', 'TemperatureReading')
-    WeatherSettings = apps.get_model('dsmr_weather', 'WeatherSettings')
+    """Sets the new 'next_sync' setting to the latest temperature reading, if any."""
+    TemperatureReading = apps.get_model("dsmr_weather", "TemperatureReading")
+    WeatherSettings = apps.get_model("dsmr_weather", "WeatherSettings")
 
     if not TemperatureReading.objects.exists():
         return
 
-    latest_reading = TemperatureReading.objects.all().order_by('-read_at')[0]
+    latest_reading = TemperatureReading.objects.all().order_by("-read_at")[0]
 
     weather_settings, _ = WeatherSettings.objects.get_or_create()
     weather_settings.next_sync = latest_reading.read_at + timezone.timedelta(hours=1)
@@ -24,9 +24,7 @@ def migrate_next_sync_setting_retroactive(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_weather', '0003_next_sync_setting'),
+        ("dsmr_weather", "0003_next_sync_setting"),
     ]
 
-    operations = [
-        migrations.RunPython(migrate_next_sync_setting_retroactive)
-    ]
+    operations = [migrations.RunPython(migrate_next_sync_setting_retroactive)]

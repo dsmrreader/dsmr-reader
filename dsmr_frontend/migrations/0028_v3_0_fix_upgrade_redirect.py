@@ -5,8 +5,8 @@ from django.db import migrations
 
 def migrate_forward(apps, schema_editor):
     # Delete this notification, as the target URL no longer exists in v3.
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
-    Notification.objects.filter(redirect_to='frontend:v3-upgrade-redirect').delete()
+    Notification = apps.get_model("dsmr_frontend", "Notification")
+    Notification.objects.filter(redirect_to="frontend:v3-upgrade-redirect").delete()
 
 
 def migrate_backward(apps, schema_editor):
@@ -20,5 +20,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0027_v215_release'),
+        ("dsmr_frontend", "0027_v215_release"),
     ]

@@ -6,24 +6,26 @@ from django.utils import timezone
 
 
 def migrate_forward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
     ScheduledProcess.objects.create(
-        name='Automatic update checker',
+        name="Automatic update checker",
         module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER,
         # Do not check now. Allow users to disable this within the first 24 hours, as it's opt-out.
-        planned=timezone.now() + timezone.timedelta(days=1)
+        planned=timezone.now() + timezone.timedelta(days=1),
     )
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
+    ).delete()
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backend', '0004_backend_schedule_process_active_flag'),
+        ("dsmr_backend", "0004_backend_schedule_process_active_flag"),
     ]
 
     operations = [

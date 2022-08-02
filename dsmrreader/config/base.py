@@ -25,88 +25,83 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['*']
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+ALLOWED_HOSTS = ["*"]
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Application definition
 INSTALLED_APPS = (
     # Django.
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.humanize',
-
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.humanize",
     # Third party.
-    'solo.apps.SoloAppConfig',
-    'colorfield',
-    'django_filters',
-    'rangefilter',
-    'rest_framework',
-    'adminsortable',
-    'mathfilters',
-
+    "solo.apps.SoloAppConfig",
+    "colorfield",
+    "django_filters",
+    "rangefilter",
+    "rest_framework",
+    "adminsortable",
+    "mathfilters",
     # DSMR-reader.
-    'dsmr_api.apps.ApiAppConfig',
-    'dsmr_backend.apps.BackendAppConfig',
-    'dsmr_backup.apps.BackupAppConfig',
-    'dsmr_consumption.apps.ConsumptionAppConfig',
-    'dsmr_datalogger.apps.DataloggerAppConfig',
-    'dsmr_dropbox.apps.DropboxAppConfig',
-    'dsmr_frontend.apps.FrontendAppConfig',
-    'dsmr_mindergas.apps.MindergasAppConfig',
-    'dsmr_mqtt.apps.MqttAppConfig',
-    'dsmr_notification.apps.NotificationAppConfig',
-    'dsmr_plugins.apps.PluginsAppConfig',
-    'dsmr_pvoutput.apps.PvoutputAppConfig',
-    'dsmr_stats.apps.StatsAppConfig',
-    'dsmr_weather.apps.WeatherAppConfig',
-    'dsmr_influxdb.apps.DsmrInfluxdbConfig',
+    "dsmr_api.apps.ApiAppConfig",
+    "dsmr_backend.apps.BackendAppConfig",
+    "dsmr_backup.apps.BackupAppConfig",
+    "dsmr_consumption.apps.ConsumptionAppConfig",
+    "dsmr_datalogger.apps.DataloggerAppConfig",
+    "dsmr_dropbox.apps.DropboxAppConfig",
+    "dsmr_frontend.apps.FrontendAppConfig",
+    "dsmr_mindergas.apps.MindergasAppConfig",
+    "dsmr_mqtt.apps.MqttAppConfig",
+    "dsmr_notification.apps.NotificationAppConfig",
+    "dsmr_plugins.apps.PluginsAppConfig",
+    "dsmr_pvoutput.apps.PvoutputAppConfig",
+    "dsmr_stats.apps.StatsAppConfig",
+    "dsmr_weather.apps.WeatherAppConfig",
+    "dsmr_influxdb.apps.DsmrInfluxdbConfig",
 )
 
 MIDDLEWARE = (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
     # Local.
-    'dsmr_frontend.middleware.exception_traceback.ExceptionTracebackMiddleware',
+    "dsmr_frontend.middleware.exception_traceback.ExceptionTracebackMiddleware",
 )
 
-ROOT_URLCONF = 'dsmrreader.urls'
+ROOT_URLCONF = "dsmrreader.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
                 # Project version.
-                'dsmr_frontend.context_processors.version',
+                "dsmr_frontend.context_processors.version",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'dsmrreader.wsgi.application'
+WSGI_APPLICATION = "dsmrreader.wsgi.application"
 
-LOGIN_URL = 'admin:login'
-LOGOUT_URL = 'admin:logout'
+LOGIN_URL = "admin:login"
+LOGOUT_URL = "admin:logout"
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -117,7 +112,7 @@ LOGOUT_URL = 'admin:logout'
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 # Django creates migrations based on default language. Therefore we need to force English here.
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = "en"
 
 USE_I18N = True
 USE_L10N = True
@@ -125,74 +120,72 @@ USE_TZ = True
 
 # Localization.
 # https://docs.djangoproject.com/en/1.8/topics/i18n/formatting/
-FORMAT_MODULE_PATH = [
-    'dsmrreader.formats'
-]
+FORMAT_MODULE_PATH = ["dsmrreader.formats"]
 USE_THOUSAND_SEPARATOR = True
 
 # Caching framework. LocMemCache: Advantages of caching in memory but without requiring memcached installed.
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': 60,
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "TIMEOUT": 60,
     },
-    'mqtt': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': 3600,
+    "mqtt": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "TIMEOUT": 3600,
     },
 }
 CACHE_MIDDLEWARE_SECONDS = 0  # Do not have browsers cache app responses
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_URL = '/static/'
-STATIC_ROOT = '/var/www/dsmrreader/static'
+STATIC_URL = "/static/"
+STATIC_ROOT = "/var/www/dsmrreader/static"
 
 # Translation files.
 LANGUAGES = (
-    ('nl', _('Dutch')),
-    ('en', _('English')),
+    ("nl", _("Dutch")),
+    ("en", _("English")),
 )
 
-LOCALE_PATHS = (os.path.join(BASE_DIR, 'locales'), )
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locales"),)
 
 EMAIL_TIMEOUT = 30
 
 """ Python Logging. """
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'simple': {
-            'format': '{asctime} {levelname:8} | {message}',
-            'style': '{',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "{asctime} {levelname:8} | {message}",
+            "style": "{",
         },
-        'verbose': {
-            'format': '{asctime} {levelname:8} {module:12} {funcName:30} {lineno:4} | {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
+        "verbose": {
+            "format": "{asctime} {levelname:8} {module:12} {funcName:30} {lineno:4} | {message}",
+            "style": "{",
         },
     },
-    'loggers': {
-        'dsmrreader': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-            'propagate': True,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
         },
-        'console_commands': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
+    },
+    "loggers": {
+        "dsmrreader": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": True,
         },
-        'django.db': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-            'propagate': False,
+        "console_commands": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "django.db": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
         },
     },
 }
@@ -201,19 +194,13 @@ LOGGING = {
 """ Django Rest Framework. """
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': (
-        'rest_framework.filters.OrderingFilter',
-        'django_filters.rest_framework.DjangoFilterBackend',
+    "DEFAULT_FILTER_BACKENDS": (
+        "rest_framework.filters.OrderingFilter",
+        "django_filters.rest_framework.DjangoFilterBackend",
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'dsmr_api.authentication.HeaderAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 25,
+    "DEFAULT_AUTHENTICATION_CLASSES": ("dsmr_api.authentication.HeaderAuthentication",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 25,
 }

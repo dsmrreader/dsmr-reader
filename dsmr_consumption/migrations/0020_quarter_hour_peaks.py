@@ -7,23 +7,53 @@ import dsmr_backend.mixins
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_consumption', '0019_energy_supplier_price_decimals'),
+        ("dsmr_consumption", "0019_energy_supplier_price_decimals"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='QuarterHourPeakElectricityConsumption',
+            name="QuarterHourPeakElectricityConsumption",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('read_at_start', models.DateTimeField(db_index=True, help_text='The timestamp of the first reading used for average calculation', verbose_name='Start')),
-                ('read_at_end', models.DateTimeField(help_text='The timestamp of the last reading used for average calculation', verbose_name='End')),
-                ('average_delivered', models.DecimalField(db_index=True, decimal_places=3, help_text='In kW. Calculated by tracking the kWh/15m consumption during the given start/end and multiplying it by 4', verbose_name='Average quarter peak consumption', max_digits=9)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "read_at_start",
+                    models.DateTimeField(
+                        db_index=True,
+                        help_text="The timestamp of the first reading used for average calculation",
+                        verbose_name="Start",
+                    ),
+                ),
+                (
+                    "read_at_end",
+                    models.DateTimeField(
+                        help_text="The timestamp of the last reading used for average calculation",
+                        verbose_name="End",
+                    ),
+                ),
+                (
+                    "average_delivered",
+                    models.DecimalField(
+                        db_index=True,
+                        decimal_places=3,
+                        help_text="In kW. Calculated by tracking the kWh/15m consumption during the given start/end and multiplying it by 4",
+                        verbose_name="Average quarter peak consumption",
+                        max_digits=9,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Quarter hour peak electricity consumption',
-                'verbose_name_plural': 'Quarter hour peak electricity consumptions',
-                'ordering': ['read_at_start'],
-                'default_permissions': (),
+                "verbose_name": "Quarter hour peak electricity consumption",
+                "verbose_name_plural": "Quarter hour peak electricity consumptions",
+                "ordering": ["read_at_start"],
+                "default_permissions": (),
             },
             bases=(dsmr_backend.mixins.ModelUpdateMixin, models.Model),
         ),

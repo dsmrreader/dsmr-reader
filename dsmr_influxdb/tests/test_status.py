@@ -10,8 +10,8 @@ class TestStatus(TestCase):
     def setUp(self):
         InfluxdbMeasurement.objects.create(
             time=timezone.now(),
-            measurement_name='test',
-            fields='[]',
+            measurement_name="test",
+            fields="[]",
         )
         self.assertEqual(InfluxdbMeasurement.objects.all().count(), 1)
 
@@ -21,4 +21,6 @@ class TestStatus(TestCase):
 
     @override_settings(DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE=1)
     def test_check_influxdb_measurements_queue_fail(self):
-        self.assertIsInstance(check_influxdb_measurements_queue(), MonitoringStatusIssue)
+        self.assertIsInstance(
+            check_influxdb_measurements_queue(), MonitoringStatusIssue
+        )

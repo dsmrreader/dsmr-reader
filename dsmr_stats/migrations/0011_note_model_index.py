@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0010_statistics_models_index'),
+        ("dsmr_stats", "0010_statistics_models_index"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='note',
-            name='day',
-            field=models.DateField(db_index=True, verbose_name='Day'),
+            model_name="note",
+            name="day",
+            field=models.DateField(db_index=True, verbose_name="Day"),
         ),
     ]

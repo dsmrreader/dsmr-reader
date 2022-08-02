@@ -12,18 +12,20 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            'DSMR-reader v2.1.0: (1) Adds support for Telegram-app notifications (for bots only). '
-            '(2) Added a missing API call to easily retrieve the latest gas consumption. '
-            '(3) Added support for backups (only day/hour statistics) using your email (server). '
-            '(4) Added some extra checks regarding unsupported Python versions for future upgrades. '
-            '(5) Now allows Token authentication for the API, fixing the browsable API in the API docs. '
-            '(6) Changes the way backup file timestamps are compared among timezones, fixing a possible '
-            'issue for Docker users. (7) Updates some outdated dependencies.',
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "DSMR-reader v2.1.0: (1) Adds support for Telegram-app notifications (for bots only). "
+                "(2) Added a missing API call to easily retrieve the latest gas consumption. "
+                "(3) Added support for backups (only day/hour statistics) using your email (server). "
+                "(4) Added some extra checks regarding unsupported Python versions for future upgrades. "
+                "(5) Now allows Token authentication for the API, fixing the browsable API in the API docs. "
+                "(6) Changes the way backup file timestamps are compared among timezones, fixing a possible "
+                "issue for Docker users. (7) Updates some outdated dependencies.",
+            )
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
 
 
@@ -38,5 +40,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0018_v202_release'),
+        ("dsmr_frontend", "0018_v202_release"),
     ]

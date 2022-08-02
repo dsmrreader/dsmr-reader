@@ -10,17 +10,13 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    FrontendSettings = apps.get_model('dsmr_frontend', 'FrontendSettings')
+    FrontendSettings = apps.get_model("dsmr_frontend", "FrontendSettings")
     FrontendSettings.objects.filter(
-        electricity_delivered_alternate_color='#7D311A'
-    ).update(
-        electricity_delivered_alternate_color='#A43737'
-    )
+        electricity_delivered_alternate_color="#7D311A"
+    ).update(electricity_delivered_alternate_color="#A43737")
     FrontendSettings.objects.filter(
-        electricity_returned_alternate_color='#C8C864'
-    ).update(
-        electricity_returned_alternate_color='#166C2A'
-    )
+        electricity_returned_alternate_color="#C8C864"
+    ).update(electricity_returned_alternate_color="#166C2A")
 
 
 def migrate_backward(apps, schema_editor):
@@ -31,28 +27,48 @@ def migrate_backward(apps, schema_editor):
 class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
-            model_name='frontendsettings',
-            name='electricity_delivered_alternate_color',
-            field=colorfield.fields.ColorField(default='#A43737', help_text='Graph color for electricity delivered (tariff 1)', max_length=18, verbose_name='Electricity delivered color (alternative)'),
+            model_name="frontendsettings",
+            name="electricity_delivered_alternate_color",
+            field=colorfield.fields.ColorField(
+                default="#A43737",
+                help_text="Graph color for electricity delivered (tariff 1)",
+                max_length=18,
+                verbose_name="Electricity delivered color (alternative)",
+            ),
         ),
         migrations.AlterField(
-            model_name='frontendsettings',
-            name='electricity_delivered_color',
-            field=colorfield.fields.ColorField(default='#F05050', help_text='Graph color for electricity delivered (default, tariff 2)', max_length=18, verbose_name='Electricity delivered color'),
+            model_name="frontendsettings",
+            name="electricity_delivered_color",
+            field=colorfield.fields.ColorField(
+                default="#F05050",
+                help_text="Graph color for electricity delivered (default, tariff 2)",
+                max_length=18,
+                verbose_name="Electricity delivered color",
+            ),
         ),
         migrations.AlterField(
-            model_name='frontendsettings',
-            name='electricity_returned_alternate_color',
-            field=colorfield.fields.ColorField(default='#166C2A', help_text='Graph color for electricity returned (tariff 1)', max_length=18, verbose_name='Electricity returned color (alternative)'),
+            model_name="frontendsettings",
+            name="electricity_returned_alternate_color",
+            field=colorfield.fields.ColorField(
+                default="#166C2A",
+                help_text="Graph color for electricity returned (tariff 1)",
+                max_length=18,
+                verbose_name="Electricity returned color (alternative)",
+            ),
         ),
         migrations.AlterField(
-            model_name='frontendsettings',
-            name='electricity_returned_color',
-            field=colorfield.fields.ColorField(default='#27C24C', help_text='Graph color for electricity returned (default, tariff 2)', max_length=18, verbose_name='Electricity returned color'),
+            model_name="frontendsettings",
+            name="electricity_returned_color",
+            field=colorfield.fields.ColorField(
+                default="#27C24C",
+                help_text="Graph color for electricity returned (default, tariff 2)",
+                max_length=18,
+                verbose_name="Electricity returned color",
+            ),
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0042_v4_4_0_release'),
+        ("dsmr_frontend", "0042_v4_4_0_release"),
     ]

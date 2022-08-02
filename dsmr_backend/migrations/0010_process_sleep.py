@@ -7,7 +7,6 @@ from django.conf import settings
 
 
 class Migration(migrations.Migration):
-
     def migrate_forward(apps, schema_editor):
         try:
             # Only when available.
@@ -15,7 +14,7 @@ class Migration(migrations.Migration):
         except AttributeError:
             return
 
-        BackendSettings = apps.get_model('dsmr_backend', 'BackendSettings')
+        BackendSettings = apps.get_model("dsmr_backend", "BackendSettings")
         BackendSettings.objects.all().update(
             process_sleep=decimal.Decimal(settings.DSMRREADER_BACKEND_SLEEP)
         )
@@ -24,14 +23,20 @@ class Migration(migrations.Migration):
         pass  # Nothing to do, but allow going backwards.
 
     dependencies = [
-        ('dsmr_backend', '0009_update_email_settings_mail_from'),
+        ("dsmr_backend", "0009_update_email_settings_mail_from"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='backendsettings',
-            name='process_sleep',
-            field=models.DecimalField(decimal_places=1, default=1, help_text='The number of seconds the application will sleep after completing a backend run.', max_digits=3, verbose_name='Backend process sleep'),
+            model_name="backendsettings",
+            name="process_sleep",
+            field=models.DecimalField(
+                decimal_places=1,
+                default=1,
+                help_text="The number of seconds the application will sleep after completing a backend run.",
+                max_digits=3,
+                verbose_name="Backend process sleep",
+            ),
         ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]

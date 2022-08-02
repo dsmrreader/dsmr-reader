@@ -6,18 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mqtt', '0004_phases_currently_returned'),
+        ("dsmr_mqtt", "0004_phases_currently_returned"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='jsontelegrammqttsettings',
-            name='use_local_timezone',
-            field=models.BooleanField(default=False, help_text='Whether to use the local timezone (Europe/Amsterdam) in the timestamp sent.', verbose_name='Use local timezone'),
+            model_name="jsontelegrammqttsettings",
+            name="use_local_timezone",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether to use the local timezone (Europe/Amsterdam) in the timestamp sent.",
+                verbose_name="Use local timezone",
+            ),
         ),
         migrations.AddField(
-            model_name='splittopictelegrammqttsettings',
-            name='use_local_timezone',
-            field=models.BooleanField(default=False, help_text='Whether to use the local timezone (Europe/Amsterdam) in the timestamp sent.', verbose_name='Use local timezone'),
+            model_name="splittopictelegrammqttsettings",
+            name="use_local_timezone",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether to use the local timezone (Europe/Amsterdam) in the timestamp sent.",
+                verbose_name="Use local timezone",
+            ),
         ),
     ]

@@ -6,16 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0012_increase_dropbox_token_length'),
+        ("dsmr_backup", "0012_increase_dropbox_token_length"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='dropboxsettings',
-            name='latest_sync',
+            model_name="dropboxsettings",
+            name="latest_sync",
         ),
         migrations.RemoveField(
-            model_name='dropboxsettings',
-            name='next_sync',
+            model_name="dropboxsettings",
+            name="next_sync",
         ),
     ]

@@ -16,16 +16,16 @@ import dsmr_backend.services.backend
 
 
 class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
-    help = 'Dumps debug info to share with the developer(s) when having issues'
+    help = "Dumps debug info to share with the developer(s) when having issues"
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
         parser.add_argument(
-            '--with-indices',
-            action='store_true',
-            dest='with_indices',
+            "--with-indices",
+            action="store_true",
+            dest="with_indices",
             default=False,
-            help='Optional: Also includes important (PostgreSQL) indexes'
+            help="Optional: Also includes important (PostgreSQL) indexes",
         )
 
     def handle(self, **options):
@@ -35,7 +35,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self._dump_issues()
         self._dump_pg_size()
 
-        if options['with_indices']:
+        if options["with_indices"]:
             self._dump_pg_indices()
 
         self._print_end()
@@ -43,44 +43,60 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
     def _dump_application_info(self):
         pending_migrations = []
 
-        for line in self._intercept_command_stdout('showmigrations', no_color=True).split("\n"):
-            if line.startswith(' [ ]'):
+        for line in self._intercept_command_stdout(
+            "showmigrations", no_color=True
+        ).split("\n"):
+            if line.startswith(" [ ]"):
                 pending_migrations.append(line)
 
         pending_migrations_count = len(pending_migrations)
 
-        self._print_header('DSMR-reader')
-        self._pretty_print('App / Python / Database', 'v{} / v{} / {}'.format(
-            settings.DSMRREADER_VERSION,
-            platform.python_version(),
-            connection.vendor
-        ))
+        self._print_header("DSMR-reader")
+        self._pretty_print(
+            "App / Python / Database",
+            "v{} / v{} / {}".format(
+                settings.DSMRREADER_VERSION,
+                platform.python_version(),
+                connection.vendor,
+            ),
+        )
 
-        self._pretty_print('BE sleep / DL sleep / Retention / Override', '{}s / {}s / {}h / {}'.format(
-            BackendSettings.get_solo().process_sleep,
-            DataloggerSettings.get_solo().process_sleep,
-            RetentionSettings.get_solo().data_retention_in_hours or '-',
-            DataloggerSettings.get_solo().override_telegram_timestamp,
-        ))
-        self._pretty_print('Latest telegram version read / Parser settings', '"{}" / "{}"'.format(
-            MeterStatistics.get_solo().dsmr_version,
-            DataloggerSettings.get_solo().dsmr_version
-        ))
+        self._pretty_print(
+            "BE sleep / DL sleep / Retention / Override",
+            "{}s / {}s / {}h / {}".format(
+                BackendSettings.get_solo().process_sleep,
+                DataloggerSettings.get_solo().process_sleep,
+                RetentionSettings.get_solo().data_retention_in_hours or "-",
+                DataloggerSettings.get_solo().override_telegram_timestamp,
+            ),
+        )
+        self._pretty_print(
+            "Latest telegram version read / Parser settings",
+            '"{}" / "{}"'.format(
+                MeterStatistics.get_solo().dsmr_version,
+                DataloggerSettings.get_solo().dsmr_version,
+            ),
+        )
 
         if pending_migrations_count > 0:
-            self._pretty_print('(!) Database migrations pending', '{} (!)'.format(pending_migrations_count))
+            self._pretty_print(
+                "(!) Database migrations pending",
+                "{} (!)".format(pending_migrations_count),
+            )
 
     def _dump_data_info(self):
         reading_count = self._table_record_count(DsmrReading._meta.db_table)
-        electricity_count = self._table_record_count(ElectricityConsumption._meta.db_table)
+        electricity_count = self._table_record_count(
+            ElectricityConsumption._meta.db_table
+        )
         gas_count = self._table_record_count(GasConsumption._meta.db_table)
 
-        self._print_header('Data')
-        self._pretty_print('Telegrams total (est.)', reading_count or '-')
-        self._pretty_print('Consumption records electricity / gas (est.)', '{} / {}'.format(
-            electricity_count or '-',
-            gas_count or '-'
-        ))
+        self._print_header("Data")
+        self._pretty_print("Telegrams total (est.)", reading_count or "-")
+        self._pretty_print(
+            "Consumption records electricity / gas (est.)",
+            "{} / {}".format(electricity_count or "-", gas_count or "-"),
+        )
 
     def _dump_issues(self):
         issues = dsmr_backend.services.backend.request_monitoring_status()
@@ -88,18 +104,16 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         if not issues:
             return
 
-        self._print_header('Unresolved issues')
+        self._print_header("Unresolved issues")
 
         for current in issues:
             self._pretty_print(
                 current.description,
-                humanize.naturaltime(
-                    timezone.localtime(current.since)
-                )
+                humanize.naturaltime(timezone.localtime(current.since)),
             )
 
     def _dump_pg_size(self):
-        if connection.vendor != 'postgresql':
+        if connection.vendor != "postgresql":
             return
 
         # @see https://wiki.postgresql.org/wiki/Disk_Usage
@@ -123,13 +137,15 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             if not results:
                 return
 
-            self._print_header('PostgreSQL size of largest tables (> {} MB)'.format(MIN_SIZE_MB))
+            self._print_header(
+                "PostgreSQL size of largest tables (> {} MB)".format(MIN_SIZE_MB)
+            )
 
             for table, size in results:
                 self._pretty_print(table, size)
 
     def _dump_pg_indices(self):
-        if connection.vendor != 'postgresql':
+        if connection.vendor != "postgresql":
             return
 
         indexes_sql = """
@@ -146,34 +162,34 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
         with connection.cursor() as cursor:
             cursor.execute(indexes_sql)
-            self._print_header('PostgreSQL indices of large tables')
+            self._print_header("PostgreSQL indices of large tables")
 
             for tablename, indexname in cursor.fetchall():
                 self._pretty_print(tablename, indexname)
 
     def _table_record_count(self, table_name):
-        if connection.vendor != 'postgresql':
-            return '??? ({})'.format(connection.vendor)
+        if connection.vendor != "postgresql":
+            return "??? ({})".format(connection.vendor)
 
         # A live count is too slow on huge datasets, this is accurate enough:
         with connection.cursor() as cursor:
             cursor.execute(
-                'SELECT reltuples as approximate_row_count FROM pg_class WHERE relname = %s;',
-                [table_name]
+                "SELECT reltuples as approximate_row_count FROM pg_class WHERE relname = %s;",
+                [table_name],
             )
             reading_count = cursor.fetchone()[0]
             return int(reading_count)
 
     def _print_start(self):
         self.stdout.write()
-        self.stdout.write('<!-- COPY OUTPUT BELOW -->')
+        self.stdout.write("<!-- COPY OUTPUT BELOW -->")
         self.stdout.write()
 
     def _pretty_print(self, what, value):
-        self.stdout.write('    {:65}{:>40}'.format(str(what), str(value)))
+        self.stdout.write("    {:65}{:>40}".format(str(what), str(value)))
 
     def _pretty_print_short(self, what, value):
-        self.stdout.write('    {:40}{:>65}'.format(str(what), str(value)))
+        self.stdout.write("    {:40}{:>65}".format(str(what), str(value)))
 
     def _print_header(self, what):
         self.stdout.write()
@@ -182,5 +198,5 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
     def _print_end(self):
         self.stdout.write()
         self.stdout.write()
-        self.stdout.write('<!-- COPY OUTPUT ABOVE -->')
+        self.stdout.write("<!-- COPY OUTPUT ABOVE -->")
         self.stdout.write()

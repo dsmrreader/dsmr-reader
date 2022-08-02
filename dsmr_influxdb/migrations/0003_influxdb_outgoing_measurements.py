@@ -7,22 +7,30 @@ import dsmr_backend.mixins
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_influxdb', '0002_influxdb_optional_credentials'),
+        ("dsmr_influxdb", "0002_influxdb_optional_credentials"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='InfluxdbMeasurement',
+            name="InfluxdbMeasurement",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('time', models.DateTimeField()),
-                ('measurement_name', models.CharField(max_length=255)),
-                ('fields', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("time", models.DateTimeField()),
+                ("measurement_name", models.CharField(max_length=255)),
+                ("fields", models.TextField()),
             ],
             options={
-                'verbose_name': 'Influxdb measurement',
-                'verbose_name_plural': 'Influxdb measurements',
-                'default_permissions': ('delete',),
+                "verbose_name": "Influxdb measurement",
+                "verbose_name_plural": "Influxdb measurements",
+                "default_permissions": ("delete",),
             },
             bases=(dsmr_backend.mixins.ModelUpdateMixin, models.Model),
         ),

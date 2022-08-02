@@ -12,5 +12,5 @@ class TestTemperatureReading(TestCase):
         )
 
     def test_str(self):
-        """ Model should override string formatting. """
-        self.assertNotEqual(str(self.instance), 'TemperatureReading')
+        """Model should override string formatting."""
+        self.assertNotEqual(str(self.instance), "TemperatureReading")

@@ -12,13 +12,15 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=ugettext_lazy(
-            'DSMR-reader v2.14.0: Some configuration options in setting.py were relocated or removed. This only '
-            'affects you if you are using custom settings in setting.py. See the changelog for more information.'
-        )),
-        redirect_to='frontend:changelog-redirect'
+        message=dsmr_frontend.services.get_translated_string(
+            text=ugettext_lazy(
+                "DSMR-reader v2.14.0: Some configuration options in setting.py were relocated or removed. This only "
+                "affects you if you are using custom settings in setting.py. See the changelog for more information."
+            )
+        ),
+        redirect_to="frontend:changelog-redirect",
     )
 
 
@@ -33,5 +35,5 @@ class Migration(migrations.Migration):
     ]
 
     dependencies = [
-        ('dsmr_frontend', '0025_increase_max_dashboard_graph_width'),
+        ("dsmr_frontend", "0025_increase_max_dashboard_graph_width"),
     ]

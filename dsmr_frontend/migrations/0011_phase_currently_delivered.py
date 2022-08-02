@@ -9,23 +9,38 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0010_drop_reverse_dashboard_graphs_setting'),
+        ("dsmr_frontend", "0010_drop_reverse_dashboard_graphs_setting"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='frontendsettings',
-            name='phase_delivered_l1_color',
-            field=colorfield.fields.ColorField(default='#A47448', help_text='Graph color for phase L1', max_length=10, verbose_name='Phase L1 color'),
+            model_name="frontendsettings",
+            name="phase_delivered_l1_color",
+            field=colorfield.fields.ColorField(
+                default="#A47448",
+                help_text="Graph color for phase L1",
+                max_length=10,
+                verbose_name="Phase L1 color",
+            ),
         ),
         migrations.AddField(
-            model_name='frontendsettings',
-            name='phase_delivered_l2_color',
-            field=colorfield.fields.ColorField(default='#A4484E', help_text='Graph color for phase L2 (when available)', max_length=10, verbose_name='Phase L2 color'),
+            model_name="frontendsettings",
+            name="phase_delivered_l2_color",
+            field=colorfield.fields.ColorField(
+                default="#A4484E",
+                help_text="Graph color for phase L2 (when available)",
+                max_length=10,
+                verbose_name="Phase L2 color",
+            ),
         ),
         migrations.AddField(
-            model_name='frontendsettings',
-            name='phase_delivered_l3_color',
-            field=colorfield.fields.ColorField(default='#A44882', help_text='Graph color for phase L3 (when available)', max_length=10, verbose_name='Phase L3 color'),
+            model_name="frontendsettings",
+            name="phase_delivered_l3_color",
+            field=colorfield.fields.ColorField(
+                default="#A44882",
+                help_text="Graph color for phase L3 (when available)",
+                max_length=10,
+                verbose_name="Phase L3 color",
+            ),
         ),
     ]

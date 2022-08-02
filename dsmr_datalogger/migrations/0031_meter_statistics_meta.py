@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_datalogger', '0030_override_telegram_timestamp'),
+        ("dsmr_datalogger", "0030_override_telegram_timestamp"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='meterstatistics',
-            name='electricity_tariff',
-            field=models.IntegerField(default=None, help_text='Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user.', null=True),
+            model_name="meterstatistics",
+            name="electricity_tariff",
+            field=models.IntegerField(
+                default=None,
+                help_text="Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user.",
+                null=True,
+            ),
         ),
     ]

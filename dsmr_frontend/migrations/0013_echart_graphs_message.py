@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy
 
 
 def migrate_forward(apps, schema_editor):
-    """ Notify user about the new graphs. """
+    """Notify user about the new graphs."""
     import dsmr_frontend.services
     import dsmr_backend.services.backend
 
@@ -13,12 +13,14 @@ def migrate_forward(apps, schema_editor):
         # Skip for new installations.
         return
 
-    Notification = apps.get_model('dsmr_frontend', 'Notification')
+    Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
-        message=dsmr_frontend.services.get_translated_string(text=gettext_lazy(
-            "The graphs on the Dashboard have been replaced this release and are now scrollable. "
-            "The graphs on the Trends page have been updated as well."
-        ))
+        message=dsmr_frontend.services.get_translated_string(
+            text=gettext_lazy(
+                "The graphs on the Dashboard have been replaced this release and are now scrollable. "
+                "The graphs on the Trends page have been updated as well."
+            )
+        )
     )
 
 
@@ -29,7 +31,7 @@ def migrate_backward(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_frontend', '0012_frontendsettings_dashboard_graph_width'),
+        ("dsmr_frontend", "0012_frontendsettings_dashboard_graph_width"),
     ]
 
     operations = [

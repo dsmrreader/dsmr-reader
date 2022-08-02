@@ -5,7 +5,7 @@ from django.conf import settings
 
 
 class PluginsAppConfig(AppConfig):
-    name = 'dsmr_plugins'
+    name = "dsmr_plugins"
 
     def ready(self):
         # Required due to error: "SyntaxError: import * only allowed at module level"

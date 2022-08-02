@@ -6,4 +6,4 @@ from dsmr_datalogger.models.statistics import MeterStatistics
 class MeterStatisticsSerializer(serializers.ModelSerializer):
     class Meta:
         model = MeterStatistics
-        fields = '__all__'
+        fields = "__all__"

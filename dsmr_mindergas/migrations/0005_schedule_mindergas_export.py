@@ -7,13 +7,18 @@ from django.utils import timezone
 
 
 def migrate_forward(apps, schema_editor):
-    MinderGasSettings = apps.get_model('dsmr_mindergas', 'MinderGasSettings')
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
+    MinderGasSettings = apps.get_model("dsmr_mindergas", "MinderGasSettings")
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
 
-    app_settings, _ = MinderGasSettings.objects.get_or_create()  # Ensure we have at least an instance.
+    (
+        app_settings,
+        _,
+    ) = (
+        MinderGasSettings.objects.get_or_create()
+    )  # Ensure we have at least an instance.
 
     ScheduledProcess.objects.create(
-        name='Upload gas meter position to MinderGas.nl',
+        name="Upload gas meter position to MinderGas.nl",
         module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT,
         active=app_settings.export,
         planned=app_settings.next_export or timezone.now(),
@@ -21,24 +26,26 @@ def migrate_forward(apps, schema_editor):
 
 
 def migrate_backward(apps, schema_editor):
-    ScheduledProcess = apps.get_model('dsmr_backend', 'ScheduledProcess')
-    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT).delete()
+    ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
+    ScheduledProcess.objects.filter(
+        module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT
+    ).delete()
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_mindergas', '0004_mindergas_latest_sync'),
+        ("dsmr_mindergas", "0004_mindergas_latest_sync"),
     ]
 
     operations = [
         migrations.RunPython(migrate_forward, migrate_backward),
         migrations.RemoveField(
-            model_name='mindergassettings',
-            name='latest_sync',
+            model_name="mindergassettings",
+            name="latest_sync",
         ),
         migrations.RemoveField(
-            model_name='mindergassettings',
-            name='next_export',
+            model_name="mindergassettings",
+            name="next_export",
         ),
     ]

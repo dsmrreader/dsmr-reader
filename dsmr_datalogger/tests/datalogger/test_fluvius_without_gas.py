@@ -14,11 +14,13 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 
 
 class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
-    """ Belgium Fluvius meter. """
+    """Belgium Fluvius meter."""
 
     def setUp(self):
         DataloggerSettings.get_solo()
-        DataloggerSettings.objects.all().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
+        DataloggerSettings.objects.all().update(
+            dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS
+        )
 
     def _dsmr_dummy_data(self):
         return [
@@ -52,30 +54,34 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         ]
 
     def test_reading_creation(self):
-        """ Test whether dsmr_datalogger can insert a reading. """
+        """Test whether dsmr_datalogger can insert a reading."""
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_reading_values(self, now_mock):
-        """ Test whether dsmr_datalogger reads the correct values. """
+        """Test whether dsmr_datalogger reads the correct values."""
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 5))
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(reading.timestamp, datetime(2020, 3, 5, 21, 29, 45, tzinfo=pytz.UTC))
-        self.assertEqual(reading.electricity_delivered_1, Decimal('172.987'))
-        self.assertEqual(reading.electricity_returned_1, Decimal('23.457'))
-        self.assertEqual(reading.electricity_delivered_2, Decimal('160.643'))
-        self.assertEqual(reading.electricity_returned_2, Decimal('4.819'))
-        self.assertEqual(reading.electricity_currently_delivered, Decimal('0.638'))
-        self.assertEqual(reading.electricity_currently_returned, Decimal('0'))
+        self.assertEqual(
+            reading.timestamp, datetime(2020, 3, 5, 21, 29, 45, tzinfo=pytz.UTC)
+        )
+        self.assertEqual(reading.electricity_delivered_1, Decimal("172.987"))
+        self.assertEqual(reading.electricity_returned_1, Decimal("23.457"))
+        self.assertEqual(reading.electricity_delivered_2, Decimal("160.643"))
+        self.assertEqual(reading.electricity_returned_2, Decimal("4.819"))
+        self.assertEqual(reading.electricity_currently_delivered, Decimal("0.638"))
+        self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
         self.assertEqual(reading.extra_device_timestamp, None)  # Error handled.
-        self.assertEqual(reading.extra_device_delivered, None)  # Should be NONE too due to timestamp.
-        self.assertEqual(reading.phase_voltage_l1, Decimal('230.3'))
-        self.assertEqual(reading.phase_voltage_l2, Decimal('230.5'))
-        self.assertEqual(reading.phase_voltage_l3, Decimal('229.3'))
+        self.assertEqual(
+            reading.extra_device_delivered, None
+        )  # Should be NONE too due to timestamp.
+        self.assertEqual(reading.phase_voltage_l1, Decimal("230.3"))
+        self.assertEqual(reading.phase_voltage_l2, Decimal("230.5"))
+        self.assertEqual(reading.phase_voltage_l3, Decimal("229.3"))
         self.assertEqual(reading.phase_power_current_l1, 0)
         self.assertEqual(reading.phase_power_current_l2, 0)
         self.assertEqual(reading.phase_power_current_l3, 1)
@@ -92,9 +98,11 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
 
-    @mock.patch('django.utils.timezone.now')
+    @mock.patch("django.utils.timezone.now")
     def test_telegram_override_timestamp(self, now_mock):
-        """ Tests whether this user setting overrides as expectedly. """
+        """Tests whether this user setting overrides as expectedly."""
         reading = self._reading_with_override_telegram_timestamp_active(now_mock)
 
-        self.assertEqual(reading.extra_device_delivered, None)  # Should be NONE too due to timestamp.
+        self.assertEqual(
+            reading.extra_device_delivered, None
+        )  # Should be NONE too due to timestamp.

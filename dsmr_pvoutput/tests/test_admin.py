@@ -9,42 +9,51 @@ from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 
 class TestAdmin(TestCase):
     def setUp(self):
-        username = 'testuser'
-        password = 'passwd'
-        User.objects.create_superuser(username, 'unknown@localhost', password)
+        username = "testuser"
+        password = "passwd"
+        User.objects.create_superuser(username, "unknown@localhost", password)
 
         self.client = Client()
         self.client.login(username=username, password=password)
 
     def test_pvoutput_settings_hook(self):
-        API_URL = reverse('admin:dsmr_pvoutput_pvoutputapisettings_changelist')
-        STATUS_URL = reverse('admin:dsmr_pvoutput_pvoutputaddstatussettings_changelist')
+        API_URL = reverse("admin:dsmr_pvoutput_pvoutputapisettings_changelist")
+        STATUS_URL = reverse("admin:dsmr_pvoutput_pvoutputaddstatussettings_changelist")
 
-        self.assertFalse(ScheduledProcess.objects.filter(
-            module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT,
-            active=True
-        ).exists())
+        self.assertFalse(
+            ScheduledProcess.objects.filter(
+                module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True
+            ).exists()
+        )
 
-        response = self.client.post(API_URL, dict(
-            auth_token='test',
-            system_identifier='12345',
-        ))
+        response = self.client.post(
+            API_URL,
+            dict(
+                auth_token="test",
+                system_identifier="12345",
+            ),
+        )
         self.assertEqual(response.status_code, 302)
         # Unchanged
-        self.assertFalse(ScheduledProcess.objects.filter(
-            module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT,
-            active=True
-        ).exists())
+        self.assertFalse(
+            ScheduledProcess.objects.filter(
+                module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True
+            ).exists()
+        )
 
         # Pt. II
-        response = self.client.post(STATUS_URL, dict(
-            export=True,
-            upload_interval=PVOutputAddStatusSettings.INTERVAL_5_MINUTES,
-            upload_delay=0
-        ))
+        response = self.client.post(
+            STATUS_URL,
+            dict(
+                export=True,
+                upload_interval=PVOutputAddStatusSettings.INTERVAL_5_MINUTES,
+                upload_delay=0,
+            ),
+        )
         self.assertEqual(response.status_code, 302)
         # Affected
-        self.assertTrue(ScheduledProcess.objects.filter(
-            module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT,
-            active=True
-        ).exists())
+        self.assertTrue(
+            ScheduledProcess.objects.filter(
+                module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True
+            ).exists()
+        )

@@ -6,73 +6,146 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_stats', '0015_fixed_daily_cost'),
+        ("dsmr_stats", "0015_fixed_daily_cost"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='daystatistics',
-            name='electricity1_reading',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, help_text='The first absolute value read at the start of the day', max_digits=9, null=True, verbose_name='Electricity tariff 1 reading'),
+            model_name="daystatistics",
+            name="electricity1_reading",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                help_text="The first absolute value read at the start of the day",
+                max_digits=9,
+                null=True,
+                verbose_name="Electricity tariff 1 reading",
+            ),
         ),
         migrations.AddField(
-            model_name='daystatistics',
-            name='electricity1_returned_reading',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, help_text='The first absolute value read at the start of the day', max_digits=9, null=True, verbose_name='Electricity tariff 1 reading'),
+            model_name="daystatistics",
+            name="electricity1_returned_reading",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                help_text="The first absolute value read at the start of the day",
+                max_digits=9,
+                null=True,
+                verbose_name="Electricity tariff 1 reading",
+            ),
         ),
         migrations.AddField(
-            model_name='daystatistics',
-            name='electricity2_reading',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, help_text='The first absolute value read at the start of the day', max_digits=9, null=True, verbose_name='Electricity tariff 2 reading'),
+            model_name="daystatistics",
+            name="electricity2_reading",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                help_text="The first absolute value read at the start of the day",
+                max_digits=9,
+                null=True,
+                verbose_name="Electricity tariff 2 reading",
+            ),
         ),
         migrations.AddField(
-            model_name='daystatistics',
-            name='electricity2_returned_reading',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, help_text='The first absolute value read at the start of the day', max_digits=9, null=True, verbose_name='Electricity tariff 2 reading'),
+            model_name="daystatistics",
+            name="electricity2_returned_reading",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                help_text="The first absolute value read at the start of the day",
+                max_digits=9,
+                null=True,
+                verbose_name="Electricity tariff 2 reading",
+            ),
         ),
         migrations.AddField(
-            model_name='daystatistics',
-            name='gas_reading',
-            field=models.DecimalField(blank=True, decimal_places=3, default=None, help_text='The first absolute value read at the start of the day', max_digits=9, null=True, verbose_name='Gas reading'),
+            model_name="daystatistics",
+            name="gas_reading",
+            field=models.DecimalField(
+                blank=True,
+                decimal_places=3,
+                default=None,
+                help_text="The first absolute value read at the start of the day",
+                max_digits=9,
+                null=True,
+                verbose_name="Gas reading",
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='electricity1',
-            field=models.DecimalField(decimal_places=3, help_text='The difference between the first and last reading of the day', max_digits=9, verbose_name='Electricity tariff 1 diff'),
+            model_name="daystatistics",
+            name="electricity1",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="The difference between the first and last reading of the day",
+                max_digits=9,
+                verbose_name="Electricity tariff 1 diff",
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='electricity1_cost',
-            field=models.DecimalField(decimal_places=2, max_digits=8, verbose_name='Electricity tariff 1 cost'),
+            model_name="daystatistics",
+            name="electricity1_cost",
+            field=models.DecimalField(
+                decimal_places=2, max_digits=8, verbose_name="Electricity tariff 1 cost"
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='electricity1_returned',
-            field=models.DecimalField(decimal_places=3, help_text='The difference between the first and last reading of the day', max_digits=9, verbose_name='Electricity tariff 1 returned diff'),
+            model_name="daystatistics",
+            name="electricity1_returned",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="The difference between the first and last reading of the day",
+                max_digits=9,
+                verbose_name="Electricity tariff 1 returned diff",
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='electricity2',
-            field=models.DecimalField(decimal_places=3, help_text='The difference between the first and last reading of the day', max_digits=9, verbose_name='Electricity tariff 2 diff'),
+            model_name="daystatistics",
+            name="electricity2",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="The difference between the first and last reading of the day",
+                max_digits=9,
+                verbose_name="Electricity tariff 2 diff",
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='electricity2_cost',
-            field=models.DecimalField(decimal_places=2, max_digits=8, verbose_name='Electricity tariff 2 cost'),
+            model_name="daystatistics",
+            name="electricity2_cost",
+            field=models.DecimalField(
+                decimal_places=2, max_digits=8, verbose_name="Electricity tariff 2 cost"
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='electricity2_returned',
-            field=models.DecimalField(decimal_places=3, help_text='The difference between the first and last reading of the day', max_digits=9, verbose_name='Electricity tariff 2 returned diff'),
+            model_name="daystatistics",
+            name="electricity2_returned",
+            field=models.DecimalField(
+                decimal_places=3,
+                help_text="The difference between the first and last reading of the day",
+                max_digits=9,
+                verbose_name="Electricity tariff 2 returned diff",
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='fixed_cost',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=8, verbose_name='Fixed cost'),
+            model_name="daystatistics",
+            name="fixed_cost",
+            field=models.DecimalField(
+                decimal_places=2, default=0, max_digits=8, verbose_name="Fixed cost"
+            ),
         ),
         migrations.AlterField(
-            model_name='daystatistics',
-            name='gas',
-            field=models.DecimalField(decimal_places=3, default=None, help_text='The difference between the first and last reading of the day', max_digits=9, null=True, verbose_name='Gas diff'),
+            model_name="daystatistics",
+            name="gas",
+            field=models.DecimalField(
+                decimal_places=3,
+                default=None,
+                help_text="The difference between the first and last reading of the day",
+                max_digits=9,
+                null=True,
+                verbose_name="Gas diff",
+            ),
         ),
     ]

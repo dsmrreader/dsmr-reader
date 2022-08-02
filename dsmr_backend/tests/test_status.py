@@ -9,8 +9,7 @@ from dsmr_backend.models.schedule import ScheduledProcess
 class TestStatus(TestCase):
     def setUp(self):
         ScheduledProcess.objects.all().update(
-            active=True,
-            planned=timezone.now() - timezone.timedelta(minutes=1)
+            active=True, planned=timezone.now() - timezone.timedelta(minutes=1)
         )
         self.assertEqual(ScheduledProcess.objects.all().count(), 11)
 

@@ -9,60 +9,188 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='MQTTBrokerSettings',
+            name="MQTTBrokerSettings",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hostname', models.CharField(blank=True, default=None, help_text='The hostname of the broker to send MQTT messages to.', max_length=256, null=True, verbose_name='Hostname')),
-                ('port', models.IntegerField(default=1883, help_text='The port of the broker to send MQTT messages to.', null=True, verbose_name='Port')),
-                ('username', models.CharField(blank=True, default=None, help_text='Optional: The username required for authentication (if any).', max_length=256, null=True, verbose_name='Username')),
-                ('password', models.CharField(blank=True, default=None, help_text='Optional: The password required for authentication (if any).', max_length=256, null=True, verbose_name='Password')),
-                ('client_id', models.CharField(default='DSMR-reader', help_text='The client ID used to identify DSMR-reader sending the MQTT messages.', max_length=256, verbose_name='Client ID')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "hostname",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text="The hostname of the broker to send MQTT messages to.",
+                        max_length=256,
+                        null=True,
+                        verbose_name="Hostname",
+                    ),
+                ),
+                (
+                    "port",
+                    models.IntegerField(
+                        default=1883,
+                        help_text="The port of the broker to send MQTT messages to.",
+                        null=True,
+                        verbose_name="Port",
+                    ),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text="Optional: The username required for authentication (if any).",
+                        max_length=256,
+                        null=True,
+                        verbose_name="Username",
+                    ),
+                ),
+                (
+                    "password",
+                    models.CharField(
+                        blank=True,
+                        default=None,
+                        help_text="Optional: The password required for authentication (if any).",
+                        max_length=256,
+                        null=True,
+                        verbose_name="Password",
+                    ),
+                ),
+                (
+                    "client_id",
+                    models.CharField(
+                        default="DSMR-reader",
+                        help_text="The client ID used to identify DSMR-reader sending the MQTT messages.",
+                        max_length=256,
+                        verbose_name="Client ID",
+                    ),
+                ),
             ],
             options={
-                'default_permissions': (),
-                'verbose_name': 'MQTT: Broker/connection configuration',
+                "default_permissions": (),
+                "verbose_name": "MQTT: Broker/connection configuration",
             },
         ),
         migrations.CreateModel(
-            name='RawTelegramMQTTSettings',
+            name="RawTelegramMQTTSettings",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('enabled', models.BooleanField(default=False, help_text='Whether any raw telegrams received are sent to the broker.', verbose_name='Enabled')),
-                ('topic', models.CharField(default='dsmr/raw', help_text='The topic to send the raw telegrams to.', max_length=256, verbose_name='Topic path')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "enabled",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Whether any raw telegrams received are sent to the broker.",
+                        verbose_name="Enabled",
+                    ),
+                ),
+                (
+                    "topic",
+                    models.CharField(
+                        default="dsmr/raw",
+                        help_text="The topic to send the raw telegrams to.",
+                        max_length=256,
+                        verbose_name="Topic path",
+                    ),
+                ),
             ],
             options={
-                'default_permissions': (),
-                'verbose_name': 'MQTT: Telegram (as raw string) configuration',
+                "default_permissions": (),
+                "verbose_name": "MQTT: Telegram (as raw string) configuration",
             },
         ),
         migrations.CreateModel(
-            name='JSONTelegramMQTTSettings',
+            name="JSONTelegramMQTTSettings",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('enabled', models.BooleanField(default=False, help_text='Whether parsed telegrams are sent to the broker, in JSON format.', verbose_name='Enabled')),
-                ('topic', models.CharField(default='dsmr/json', help_text='The topic to send the parsed JSON telegrams to.', max_length=256, verbose_name='Topic path')),
-                ('formatting', models.TextField(default='\n[mapping]\n# READING FIELD = JSON FIELD\nid = id\ntimestamp = timestamp\nelectricity_delivered_1 = electricity_delivered_1\nelectricity_returned_1 = electricity_returned_1\nelectricity_delivered_2 = electricity_delivered_2\nelectricity_returned_2 = electricity_returned_2\nelectricity_currently_delivered = electricity_currently_delivered\nelectricity_currently_returned = electricity_currently_returned\nphase_currently_delivered_l1 = phase_currently_delivered_l1\nphase_currently_delivered_l2 = phase_currently_delivered_l2\nphase_currently_delivered_l3 = phase_currently_delivered_l3\nextra_device_timestamp = extra_device_timestamp\nextra_device_delivered = extra_device_delivered\n', help_text='Maps the field names used in the JSON message sent to the broker.', verbose_name='Formatting')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "enabled",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Whether parsed telegrams are sent to the broker, in JSON format.",
+                        verbose_name="Enabled",
+                    ),
+                ),
+                (
+                    "topic",
+                    models.CharField(
+                        default="dsmr/json",
+                        help_text="The topic to send the parsed JSON telegrams to.",
+                        max_length=256,
+                        verbose_name="Topic path",
+                    ),
+                ),
+                (
+                    "formatting",
+                    models.TextField(
+                        default="\n[mapping]\n# READING FIELD = JSON FIELD\nid = id\ntimestamp = timestamp\nelectricity_delivered_1 = electricity_delivered_1\nelectricity_returned_1 = electricity_returned_1\nelectricity_delivered_2 = electricity_delivered_2\nelectricity_returned_2 = electricity_returned_2\nelectricity_currently_delivered = electricity_currently_delivered\nelectricity_currently_returned = electricity_currently_returned\nphase_currently_delivered_l1 = phase_currently_delivered_l1\nphase_currently_delivered_l2 = phase_currently_delivered_l2\nphase_currently_delivered_l3 = phase_currently_delivered_l3\nextra_device_timestamp = extra_device_timestamp\nextra_device_delivered = extra_device_delivered\n",
+                        help_text="Maps the field names used in the JSON message sent to the broker.",
+                        verbose_name="Formatting",
+                    ),
+                ),
             ],
             options={
-                'default_permissions': (),
-                'verbose_name': 'MQTT: Telegram (as JSON) configuration',
+                "default_permissions": (),
+                "verbose_name": "MQTT: Telegram (as JSON) configuration",
             },
         ),
         migrations.CreateModel(
-            name='SplitTopicTelegramMQTTSettings',
+            name="SplitTopicTelegramMQTTSettings",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('enabled', models.BooleanField(default=False, help_text='Whether parsed telegrams are sent to the broker, having each field sent to a different topic.', verbose_name='Enabled')),
-                ('formatting', models.TextField(default='\n[mapping]\n# READING FIELD = TOPIC PATH\nid = dsmr/reading/id\ntimestamp = dsmr/reading/timestamp\nelectricity_delivered_1 = dsmr/reading/electricity_delivered_1\nelectricity_returned_1 = dsmr/reading/electricity_returned_1\nelectricity_delivered_2 = dsmr/reading/electricity_delivered_2\nelectricity_returned_2 = dsmr/reading/electricity_returned_2\nelectricity_currently_delivered = dsmr/reading/electricity_currently_delivered\nelectricity_currently_returned = dsmr/reading/electricity_currently_returned\nphase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1\nphase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2\nphase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3\nextra_device_timestamp = dsmr/reading/extra_device_timestamp\nextra_device_delivered = dsmr/reading/extra_device_delivered\n', help_text='Maps the field names to separate topics sent to the broker.', verbose_name='Formatting')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "enabled",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Whether parsed telegrams are sent to the broker, having each field sent to a different topic.",
+                        verbose_name="Enabled",
+                    ),
+                ),
+                (
+                    "formatting",
+                    models.TextField(
+                        default="\n[mapping]\n# READING FIELD = TOPIC PATH\nid = dsmr/reading/id\ntimestamp = dsmr/reading/timestamp\nelectricity_delivered_1 = dsmr/reading/electricity_delivered_1\nelectricity_returned_1 = dsmr/reading/electricity_returned_1\nelectricity_delivered_2 = dsmr/reading/electricity_delivered_2\nelectricity_returned_2 = dsmr/reading/electricity_returned_2\nelectricity_currently_delivered = dsmr/reading/electricity_currently_delivered\nelectricity_currently_returned = dsmr/reading/electricity_currently_returned\nphase_currently_delivered_l1 = dsmr/reading/phase_currently_delivered_l1\nphase_currently_delivered_l2 = dsmr/reading/phase_currently_delivered_l2\nphase_currently_delivered_l3 = dsmr/reading/phase_currently_delivered_l3\nextra_device_timestamp = dsmr/reading/extra_device_timestamp\nextra_device_delivered = dsmr/reading/extra_device_delivered\n",
+                        help_text="Maps the field names to separate topics sent to the broker.",
+                        verbose_name="Formatting",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'MQTT: Telegram (per split topic) configuration',
-                'default_permissions': (),
+                "verbose_name": "MQTT: Telegram (per split topic) configuration",
+                "default_permissions": (),
             },
         ),
     ]

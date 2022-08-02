@@ -8,16 +8,24 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_consumption', '0006_dsmr_firmware_v5'),
+        ("dsmr_consumption", "0006_dsmr_firmware_v5"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='electricityconsumption',
-            options={'default_permissions': (), 'verbose_name': 'Electricity consumption', 'verbose_name_plural': 'Electricity consumption'},
+            name="electricityconsumption",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Electricity consumption",
+                "verbose_name_plural": "Electricity consumption",
+            },
         ),
         migrations.AlterModelOptions(
-            name='gasconsumption',
-            options={'default_permissions': (), 'verbose_name': 'Gas consumption', 'verbose_name_plural': 'Gas consumption'},
+            name="gasconsumption",
+            options={
+                "default_permissions": (),
+                "verbose_name": "Gas consumption",
+                "verbose_name_plural": "Gas consumption",
+            },
         ),
     ]

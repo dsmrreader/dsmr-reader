@@ -20,28 +20,34 @@ class TestRegression(TestCase):
         return apps.get_containing_app_config(type(self).__module__).name
 
     def setUp(self):
-        self.user = User.objects.create_user('testuser', 'unknown@localhost', 'passwd')
+        self.user = User.objects.create_user("testuser", "unknown@localhost", "passwd")
         self.client = Client()
-        self.client.login(username='testuser', password='passwd')
+        self.client.login(username="testuser", password="passwd")
 
     def test_no_reverse_match_docs(self):
-        """ Test whether the docs URL in old notfications are converted to their new location. """
-        if connection.vendor == 'sqlite':  # pragma: no cover
-            return self.skipTest(reason='SQLite cannot be used while foreign key constraint checks are enabled')
+        """Test whether the docs URL in old notfications are converted to their new location."""
+        if connection.vendor == "sqlite":  # pragma: no cover
+            return self.skipTest(
+                reason="SQLite cannot be used while foreign key constraint checks are enabled"
+            )
 
         Notification.objects.create(
-            message='Fake',
-            redirect_to='frontend:docs',  # URL was renamed at some point.
+            message="Fake",
+            redirect_to="frontend:docs",  # URL was renamed at some point.
         )
 
         # This SHOULD crash.
-        response = self.client.get(reverse('frontend:notifications'))
+        response = self.client.get(reverse("frontend:notifications"))
         self.assertEqual(response.status_code, 500)
 
         # Now we fake applying the migration (again for this test).
-        MigrationRecorder.Migration.objects.filter(app='dsmr_frontend', name='0009_docs_no_reverse_match').delete()
-        MigrationExecutor(connection=connection).migrate([(self.app, '0009_docs_no_reverse_match')])
+        MigrationRecorder.Migration.objects.filter(
+            app="dsmr_frontend", name="0009_docs_no_reverse_match"
+        ).delete()
+        MigrationExecutor(connection=connection).migrate(
+            [(self.app, "0009_docs_no_reverse_match")]
+        )
 
         # The error should be fixed now.
-        response = self.client.get(reverse('frontend:notifications'))
+        response = self.client.get(reverse("frontend:notifications"))
         self.assertEqual(response.status_code, 200)

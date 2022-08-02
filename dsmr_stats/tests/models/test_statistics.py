@@ -17,21 +17,23 @@ class TestHourStatistics(TestCase):
         )
 
     def test_str(self):
-        """ Model should override string formatting. """
-        self.assertNotEqual(str(self.instance), 'HourStatistics')
+        """Model should override string formatting."""
+        self.assertNotEqual(str(self.instance), "HourStatistics")
 
     def test_attributes(self):
         self.assertEqual(self.instance.electricity_merged, 2)
         self.assertEqual(self.instance.electricity_returned_merged, 4)
 
     def test_hour_statistics_average(self):
-        """ #100: Empty gas readings mess up average. """
+        """#100: Empty gas readings mess up average."""
         now = timezone.localtime(timezone.now())
         average_consumption = dsmr_stats.services.average_consumption_by_hour(
             start=(now - timezone.timedelta(weeks=4)).date(),
             end=now.date(),
         )
-        self.assertEqual(average_consumption[0]['avg_gas'], 0)  # Would have been 'None' before.
+        self.assertEqual(
+            average_consumption[0]["avg_gas"], 0
+        )  # Would have been 'None' before.
 
 
 class TestDayStatistics(TestCase):
@@ -49,8 +51,8 @@ class TestDayStatistics(TestCase):
         )
 
     def test_str(self):
-        """ Model should override string formatting. """
-        self.assertNotEqual(str(self.instance), 'DayStatistics')
+        """Model should override string formatting."""
+        self.assertNotEqual(str(self.instance), "DayStatistics")
 
     def test_attributes(self):
         self.assertEqual(self.instance.electricity_merged, 2)

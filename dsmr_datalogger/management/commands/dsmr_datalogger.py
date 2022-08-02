@@ -10,11 +10,11 @@ from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_datalogger.models.settings import DataloggerSettings
 
 
-logger = logging.getLogger('dsmrreader')
+logger = logging.getLogger("dsmrreader")
 
 
 class Command(InfiniteManagementCommandMixin, BaseCommand):
-    help = _('Performs an DSMR P1 telegram reading on the serial port.')
+    help = _("Performs an DSMR P1 telegram reading on the serial port.")
     name = __name__  # Required for PID file.
 
     telegram_generator = None
@@ -44,7 +44,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             return
 
         DataloggerSettings.objects.update(restart_required=False)
-        logger.warning('Detected datalogger restart required, stopping process...')
+        logger.warning("Detected datalogger restart required, stopping process...")
         raise StopInfiniteRun()
 
     def _datasource(self):

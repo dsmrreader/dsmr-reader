@@ -8,13 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_consumption', '0008_energysupplier_return_prices'),
+        ("dsmr_consumption", "0008_energysupplier_return_prices"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='consumptionsettings',
-            name='compactor_grouping_type',
-            field=models.IntegerField(choices=[(1, 'By reading (every X seconds)'), (2, 'By minute')], default=2, help_text='Electricity readings are read every X seconds. We can group those for you.', verbose_name='Compactor grouping type'),
+            model_name="consumptionsettings",
+            name="compactor_grouping_type",
+            field=models.IntegerField(
+                choices=[(1, "By reading (every X seconds)"), (2, "By minute")],
+                default=2,
+                help_text="Electricity readings are read every X seconds. We can group those for you.",
+                verbose_name="Compactor grouping type",
+            ),
         ),
     ]

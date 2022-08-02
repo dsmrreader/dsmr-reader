@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dsmr_backup', '0003_dropbox_sync_field'),
+        ("dsmr_backup", "0003_dropbox_sync_field"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='backupsettings',
-            name='folder',
-            field=models.CharField(default='backups/', help_text='The folder to store the backups in. The default location is "backups/". Please make sure that the "dsmr" user both has read and write access to the folder.', max_length=512, verbose_name='Backup storage folder'),
+            model_name="backupsettings",
+            name="folder",
+            field=models.CharField(
+                default="backups/",
+                help_text='The folder to store the backups in. The default location is "backups/". Please make sure that the "dsmr" user both has read and write access to the folder.',
+                max_length=512,
+                verbose_name="Backup storage folder",
+            ),
         ),
     ]
