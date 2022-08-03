@@ -12,5 +12,5 @@ initialize_persistent_client = Signal()
 run_persistent_client = Signal()
 terminate_persistent_client = Signal()
 
-# Triggered status check. If there any issues, listeners should respond with those.
+# Triggered status check. If there are any issues, listeners should respond with those.
 request_status = Signal()

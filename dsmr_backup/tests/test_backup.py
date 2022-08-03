@@ -7,7 +7,7 @@ import os
 import io
 
 from django.db import connection
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 from django.conf import settings
 
@@ -91,6 +91,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("dsmr_backup.services.backup.create_partial")
     @mock.patch("dsmr_backup.services.backup.create_full")
     @mock.patch("django.utils.timezone.now")
+    @override_settings(DSMRREADER_BACKUP_INTERVAL_DAYS=1)
     def test_rescheduling(self, now_mock, create_full_mock, create_partial_mock):
         """Test scheduling after success."""
         now_mock.return_value = timezone.make_aware(

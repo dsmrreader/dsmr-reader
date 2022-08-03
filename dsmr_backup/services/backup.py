@@ -40,9 +40,11 @@ def run(scheduled_process: ScheduledProcess) -> None:
     # Now create full.
     create_full(folder=get_backup_directory())
 
-    # Schedule tomorrow, for the time specified.
+    # Schedule for whatever interval is set (usually 1 day), for the time specified.
     backup_settings = BackupSettings.get_solo()
-    next_backup_timestamp = timezone.now() + timezone.timedelta(days=1)
+    next_backup_timestamp = timezone.now() + timezone.timedelta(
+        days=settings.DSMRREADER_BACKUP_INTERVAL_DAYS
+    )
     next_backup_timestamp = timezone.localtime(next_backup_timestamp)
 
     next_backup_timestamp = next_backup_timestamp.replace(
