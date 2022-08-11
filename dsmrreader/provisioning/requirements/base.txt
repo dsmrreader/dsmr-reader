@@ -1,6 +1,6 @@
 coreapi==2.3.3
 crcmod==1.7
-django==3.2.14
+django==3.2.15
 django-admin-rangefilter==0.8.5
 django-admin-sortable==2.3
 django-colorfield==0.7.2
@@ -18,7 +18,7 @@ pyserial==3.5
 pyserial-asyncio==0.6
 python-dateutil==2.8.2
 python-decouple==3.6
-pytz==2021.3
+pytz==2022.1
 pyyaml==6.0
 requests==2.28.1
 urllib3==1.26.11
