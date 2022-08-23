@@ -33,7 +33,7 @@ $(document).ready(function () {
                     type: 'value',
                     axisLabel: {
                         color: TEXTSTYLE_COLOR,
-                        formatter: '{value} ' + TEXT_KW15M
+                        formatter: '{value} ' + TEXT_KW
                     }
                 }
             ],
@@ -54,7 +54,7 @@ $(document).ready(function () {
             ],
             series: [
                 {
-                    name: TEXT_KW15M,
+                    name: TEXT_KW,
                     type: 'line',
                     areaStyle: {},
                     emphasis: EMPHASIS_STYLE_OPTIONS,

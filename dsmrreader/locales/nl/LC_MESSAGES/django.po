@@ -1729,8 +1729,8 @@ msgstr "in °C"
 msgid "Recent quarter hour electricity peak consumption"
 msgstr "Recente kwartiervermogens"
 
-msgid "in kW/15m"
-msgstr "in kW/15m"
+msgid "in kW"
+msgstr "in kW"
 
 msgid "Watt delivered"
 msgstr "Wattage verbruikt"
@@ -1743,9 +1743,6 @@ msgstr "kWh verbruikt"
 
 msgid "kWh returned"
 msgstr "kWh teruggeleverd"
-
-msgid "kW/15m"
-msgstr "kW/15m"
 
 msgid "Notifications"
 msgstr "Notificaties"
