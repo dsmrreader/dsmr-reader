@@ -29,7 +29,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
-        verbose_name=_("Tariff 1 delivered price (€)"),
+        verbose_name=_("Tariff 1 delivered price (€/kWh)"),
         help_text=_(
             "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
         ),
@@ -39,7 +39,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
-        verbose_name=_("Tariff 2 delivered price (€)"),
+        verbose_name=_("Tariff 2 delivered price (€/kWh)"),
         help_text=_(
             "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
         ),
@@ -49,7 +49,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
-        verbose_name=_("Gas price (€)"),
+        verbose_name=_("Gas price (€/m³)"),
         help_text=_(
             "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
         ),
@@ -59,7 +59,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
-        verbose_name=_("Tariff 1 returned price (€)"),
+        verbose_name=_("Tariff 1 returned price (€/kWh)"),
         help_text=_(
             "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
         ),
@@ -69,7 +69,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         decimal_places=6,
         default=0,
         validators=[MinValueValidator(0)],
-        verbose_name=_("Tariff 2 returned price (€)"),
+        verbose_name=_("Tariff 2 returned price (€/kWh)"),
         help_text=_(
             "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
         ),
@@ -78,7 +78,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         max_digits=11,
         decimal_places=6,
         default=0,
-        verbose_name=_("Fixed daily costs (€)"),
+        verbose_name=_("Fixed daily costs (€/day)"),
         help_text=_(
             "Both positive and negative prices allowed. Set to zero when: Unused / Defined in other contract / "
             "Not applicable to your situation"

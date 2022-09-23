@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 help_text="Set to zero when: Unused / Defined in other contract / Not applicable to your situation",
                 max_digits=11,
                 validators=[django.core.validators.MinValueValidator(0)],
-                verbose_name="Tariff 1 delivered price (€)",
+                verbose_name="Tariff 1 delivered price (€/kWh)",
             ),
         ),
         migrations.AlterField(
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 help_text="Set to zero when: Unused / Defined in other contract / Not applicable to your situation",
                 max_digits=11,
                 validators=[django.core.validators.MinValueValidator(0)],
-                verbose_name="Tariff 2 delivered price (€)",
+                verbose_name="Tariff 2 delivered price (€/kWh)",
             ),
         ),
         migrations.AlterField(
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 help_text="Set to zero when: Unused / Defined in other contract / Not applicable to your situation",
                 max_digits=11,
                 validators=[django.core.validators.MinValueValidator(0)],
-                verbose_name="Tariff 1 returned price (€)",
+                verbose_name="Tariff 1 returned price (€/kWh)",
             ),
         ),
         migrations.AlterField(
@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 help_text="Set to zero when: Unused / Defined in other contract / Not applicable to your situation",
                 max_digits=11,
                 validators=[django.core.validators.MinValueValidator(0)],
-                verbose_name="Tariff 2 returned price (€)",
+                verbose_name="Tariff 2 returned price (€/kWh)",
             ),
         ),
         migrations.AlterField(
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
                 default=0,
                 help_text="Both positive and negative prices allowed. Set to zero when: Unused / Defined in other contract / Not applicable to your situation",
                 max_digits=11,
-                verbose_name="Fixed daily costs (€)",
+                verbose_name="Fixed daily costs (€/day)",
             ),
         ),
         migrations.AlterField(
@@ -79,7 +79,7 @@ class Migration(migrations.Migration):
                 help_text="Set to zero when: Unused / Defined in other contract / Not applicable to your situation",
                 max_digits=11,
                 validators=[django.core.validators.MinValueValidator(0)],
-                verbose_name="Gas price (€)",
+                verbose_name="Gas price (€/m³)",
             ),
         ),
     ]
