@@ -50,6 +50,7 @@ class TestDsmrWeatherServices(TestCase):
                     {
                         "stationid": WeatherSettings.get_solo().buienradar_station,
                         "groundtemperature": 123.4,
+                        "temperature": 567.8,
                     }
                 ]
             }
@@ -62,7 +63,7 @@ class TestDsmrWeatherServices(TestCase):
 
         self.assertTrue(TemperatureReading.objects.exists())
         self.assertEqual(
-            TemperatureReading.objects.get().degrees_celcius, Decimal("123.4")
+            TemperatureReading.objects.get().degrees_celcius, Decimal("567.8")
         )
 
         self.schedule_process.refresh_from_db()
@@ -100,7 +101,8 @@ class TestDsmrWeatherServices(TestCase):
                 "stationmeasurements": [
                     {
                         "stationid": 0000,
-                        "groundtemperature": 123,
+                        "temperature": 123,
+                        "groundtemperature": 456,
                     }
                 ]
             }
