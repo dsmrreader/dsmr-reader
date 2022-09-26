@@ -58,7 +58,7 @@ def get_temperature_from_api() -> TemperatureReading:
     if not station_data:
         raise RuntimeError("Selected station info not found: {}".format(station_id))
 
-    temperature = station_data[0]["groundtemperature"]
+    temperature = station_data[0]["temperature"]
     logger.debug("Buienradar: Storing temperature read: %s", temperature)
 
     hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)
