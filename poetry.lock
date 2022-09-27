@@ -1194,7 +1194,7 @@ types-urllib3 = "<1.27"
 
 [[package]]
 name = "types-six"
-version = "1.16.20"
+version = "1.16.21"
 description = "Typing stubs for six"
 category = "dev"
 optional = false
@@ -1202,7 +1202,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-urllib3"
-version = "1.26.24"
+version = "1.26.25"
 description = "Typing stubs for urllib3"
 category = "dev"
 optional = false
@@ -1974,12 +1974,12 @@ types-requests = [
     {file = "types_requests-2.28.11-py3-none-any.whl", hash = "sha256:af5f55e803cabcfb836dad752bd6d8a0fc8ef1cd84243061c0e27dee04ccf4fd"},
 ]
 types-six = [
-    {file = "types-six-1.16.20.tar.gz", hash = "sha256:550ce95de763370a7d9e32b2fce51f6c1edc81c1bfd2249b8f2cd44e1fd30b1b"},
-    {file = "types_six-1.16.20-py3-none-any.whl", hash = "sha256:57c01d7ae41ba953ffe955be548dd46073c0562e76a0ea305419af9f8ac02e84"},
+    {file = "types-six-1.16.21.tar.gz", hash = "sha256:562b036de1a837eafe164827c5c53d7a8d703a44bb211642932dcd59e9e0f7c9"},
+    {file = "types_six-1.16.21-py3-none-any.whl", hash = "sha256:e4428b56da2505b5de228a3b5603561fa98571540fd75a90306eed8b3016ddf4"},
 ]
 types-urllib3 = [
-    {file = "types-urllib3-1.26.24.tar.gz", hash = "sha256:a1b3aaea7dda3eb1b51699ee723aadd235488e4dc4648e030f09bc429ecff42f"},
-    {file = "types_urllib3-1.26.24-py3-none-any.whl", hash = "sha256:cf7918503d02d3576e503bbfb419b0e047c4617653bba09624756ab7175e15c9"},
+    {file = "types-urllib3-1.26.25.tar.gz", hash = "sha256:5aef0e663724eef924afa8b320b62ffef2c1736c1fa6caecfc9bc6c8ae2c3def"},
+    {file = "types_urllib3-1.26.25-py3-none-any.whl", hash = "sha256:c1d78cef7bd581e162e46c20a57b2e1aa6ebecdcf01fd0713bb90978ff3e3427"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
