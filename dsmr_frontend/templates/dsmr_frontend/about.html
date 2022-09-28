@@ -75,7 +75,7 @@
                             {% translate "Looking for something specific? A good place to start might be the FAQ" %}:
                         </div>
                         <div class="col-sm-6">
-                            <a href="{% url 'frontend:docs-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View frequently asked questions (FAQ)" %} </a>
+                            <i class="fa-regular fa-circle-question"></i> &nbsp; <a href="{% url 'frontend:docs-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View frequently asked questions (FAQ)" %} </a>
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -84,7 +84,7 @@
                             {% translate "Did something change after updating? Check out the latest changes" %}:
                         </div>
                         <div class="col-sm-6">
-                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View changelog" %} </a>
+                            <i class="fa-solid fa-arrows-turn-to-dots"></i> &nbsp; <a href="{% url 'frontend:changelog-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View changelog" %} </a>
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -93,7 +93,7 @@
                             <small>{% translate "Still need troubleshooting? Check out current issues on GitHub" %}:</small>
                         </div>
                         <div class="col-sm-6">
-                            <a href="https://github.com/dsmrreader/dsmr-reader/issues" target="_blank" rel="noopener noreferrer">{% translate "View DSMR-reader issues on GitHub (or create one)" %} </a>
+                            <i class="fa-solid fa-bullhorn"></i> &nbsp; <a href="https://github.com/dsmrreader/dsmr-reader/issues" target="_blank" rel="noopener noreferrer">{% translate "View DSMR-reader issues on GitHub (or create one)" %} </a>
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -102,6 +102,8 @@
                             <small>{% translate "For new GitHub issues, please supply a debug info dump as well:" %}</small>
                         </div>
                         <div class="col-sm-6">
+                            <i class="fa-solid fa-stethoscope"></i>
+                            &nbsp;
                             {% if user.is_authenticated %}
                             <a class="btn btn-info trigger-debug-info" href="#">{% translate "View 'dsmr_debuginfo' dump" %}</a>
                             {% else %}
@@ -122,7 +124,7 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank" rel="noopener noreferrer">{% translate "View API docs" %}</a>
+                            <i class="fa-solid fa-robot"></i> &nbsp; <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank" rel="noopener noreferrer">{% translate "View API docs" %}</a>
                         </div>
                     </div>
                 </div>
@@ -142,12 +144,23 @@
                             {% translate "Originally created and authored by" %}
                         </div>
                         <div class="col-sm-6">
+                            <i class="fa-solid fa-user-ninja">
+                                &nbsp;
                             <a href="https://linkedin.com/in/dennissiemensma" target="_blank">
-                                Dennis Siemensma&nbsp; <i class="far fa-xs fa-copyright"></i> 2015 - {% now "Y" %}
+                                </i>Dennis Siemensma&nbsp; <i class="far fa-xs fa-copyright"></i> 2015 - {% now "Y" %}
                             </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fas fa-heart"></i>
                             &nbsp;
                             <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/how-to/donate/thanks.html" target="_blank" rel="noopener noreferrer">
-                                <span class="unit">{% translate "want to say thanks?" %}</span>
+                                {% translate "Want to say thanks?" %}
                             </a>
                         </div>
                     </div>
@@ -157,8 +170,10 @@
                             {% translate "Improved by" %}
                         </div>
                         <div class="col-sm-6">
+                            <i class="fa-solid fa-people-group"></i>
+                            &nbsp;
                             <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank" rel="noopener noreferrer">
-                                {% translate "Many contributors" %} <i class="fas fa-heart"></i>
+                                {% translate "Many contributors" %}
                             </a>
                         </div>
                     </div>
