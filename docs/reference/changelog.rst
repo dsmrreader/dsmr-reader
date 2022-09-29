@@ -17,9 +17,17 @@ Current version
     ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v5.8.0 - 2022-xx-xx
+v5.8.0 - 2022-10-01
 -------------------
 
+.. attention::
+
+    This release fixes a four year old bug that may have disrupted the order of your MQTT messages sent by DSMR-reader.
+
+    It only affected installations with either a high throughput of data or a delayed backend process (or both).
+    You probably only have noticed it when running an installation similar to the one above, along using per-topic data sources.
+
+- ``Fixed`` Outgoing MQTT message queue not maintaining its own order [`#1714 <https://github.com/dsmrreader/dsmr-reader/issues/1714>`_]
 
 
 v5.7.0 - 2022-09-27

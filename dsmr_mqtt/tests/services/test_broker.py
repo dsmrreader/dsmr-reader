@@ -174,6 +174,16 @@ class TestBroker(TestCase):
 
         self.assertFalse(queue.Message.objects.exists())
 
+        # Make sure whatever mechanism we're using, the queue order is always preserved.
+        previous_payload = 0
+
+        for current_call in publish_mock.call_args_list:
+            current_call_payload = int(current_call[1]["payload"])
+            self.assertGreater(
+                current_call_payload, previous_payload
+            )  # Possible issues with queue order
+            previous_payload = current_call_payload
+
     @mock.patch("paho.mqtt.client.Client.publish")
     @mock.patch("paho.mqtt.client.Client.loop")
     def test_run_disconnected(self, loop_mock, *mocks):
