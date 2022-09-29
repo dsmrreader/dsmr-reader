@@ -1,10 +1,9 @@
-
 msgid ""
 msgstr ""
-"Project-Id-Version:  DSMR-reader\n"
+"Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2022-07-06 20:47+0000\n"
-"PO-Revision-Date: 2022-07-06 22:45+0200\n"
+"POT-Creation-Date: 2022-09-29 20:27+0000\n"
+"PO-Revision-Date: 2022-09-29 22:28+0200\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -13,6 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 2.3\n"
 
 #: ../../how-to/donate/thanks.rst:2
 msgid "Thanks!"
@@ -27,9 +27,8 @@ msgid "When for some reason you still want to give a small token of appreciation
 msgstr "Mocht je (om wat voor reden dan ook) toch iets uit waardering willen geven, dan kun je:"
 
 #: ../../how-to/donate/thanks.rst:11
-#, python-format
-msgid "`Donate directly to my PayPal-account <https://www.paypal.com/donate/?business=D8BZ9V563HRK2&no_recurring=0&item_name=Token%20of%20appreciation%20for%20DSMR-reader!&currency_code=EUR>`_"
-msgstr "`Doneren op mijn PayPal-account <https://www.paypal.com/donate/?business=D8BZ9V563HRK2&no_recurring=0&item_name=Gebaar%20van%20waardering%20voor%20DSMR-reader!&currency_code=EUR>`_"
+msgid "`Donate with PayPal <https://www.paypal.com/donate/?hosted_button_id=GCJZF72C28QM4>`_"
+msgstr "`Doneer via PayPal <https://www.paypal.com/donate/?hosted_button_id=GCJZF72C28QM4>`_"
 
 #~ msgid "❤"
 #~ msgstr "❤"
@@ -37,3 +36,5 @@ msgstr "`Doneren op mijn PayPal-account <https://www.paypal.com/donate/?business
 #~ msgid "`Donate using my PayPal.me <https://www.paypal.me/dsiemensma>`_"
 #~ msgstr "`Doneren via mijn PayPal.me <https://www.paypal.me/dsiemensma>`_"
 
+#~ msgid "`Donate directly to my PayPal-account <https://www.paypal.com/donate/?business=D8BZ9V563HRK2&no_recurring=0&item_name=Token%20of%20appreciation%20for%20DSMR-reader!&currency_code=EUR>`_"
+#~ msgstr "`Doneren op mijn PayPal-account <https://www.paypal.com/donate/?business=D8BZ9V563HRK2&no_recurring=0&item_name=Gebaar%20van%20waardering%20voor%20DSMR-reader!&currency_code=EUR>`_"
