@@ -70,10 +70,29 @@ def initialize_client() -> Optional[paho.Client]:
 def run(mqtt_client: paho.Client) -> None:
     """Reads any messages from the queue and publishing them to the MQTT broker."""
 
-    # Keep batches small, only send the latest X messages. The rest will be trimmed (in case of delay).
-    message_queue = queue.Message.objects.all().order_by("-pk")[
-        0 : settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
-    ]
+    try:
+        # Keep batches small, only send the latest X messages. So drop any excess first and fetch the remainder after.
+        lowest_pk_to_preserve = (
+            queue.Message.objects.all()
+            .order_by("-pk")[
+                settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
+                - 1  # Zero indexed, so -1
+            ]
+            .pk
+        )
+    except IndexError:
+        # Total count within limits. No cleanup required.
+        pass
+    else:
+        deletion_count, _ = queue.Message.objects.filter(
+            pk__lt=lowest_pk_to_preserve
+        ).delete()
+        logger.warning(
+            "MQTT: Dropped %d message(s) from queue due to limit", deletion_count
+        )
+
+    # Remainder, preserving order.
+    message_queue = queue.Message.objects.all().order_by("pk")
 
     if not message_queue:
         return
@@ -120,9 +139,6 @@ def run(mqtt_client: paho.Client) -> None:
 
         logger.debug("MQTT: Deleting published message (#%s) from queue", current.pk)
         current.delete()
-
-    # Delete any overflow in messages.
-    queue.Message.objects.all().delete()
 
 
 def signal_reconnect() -> None:

@@ -169,10 +169,27 @@ class TestBroker(TestCase):
         self.assertEqual(publish_mock.call_count, MAX)
 
         # We assert that the LAST X messages were sent, rest is deleted.
-        for x in range(MAX + 1, MAX * 2 + 1):
+        LOWEST_PAYLOAD = MAX + 1
+        HIGHEST_PAYLOAD = MAX * 2
+
+        for x in range(LOWEST_PAYLOAD, HIGHEST_PAYLOAD + 1):
             publish_mock.assert_any_call(topic="z", payload=str(x), qos=2, retain=True)
 
         self.assertFalse(queue.Message.objects.exists())
+
+        # Make sure whatever mechanism we're using, the queue order is always preserved.
+        previous_payload = 0
+
+        for current_call in publish_mock.call_args_list:
+            current_call_payload = int(current_call[1]["payload"])
+
+            # For our sanity and to ensure the right ones are deleted.
+            self.assertGreaterEqual(current_call_payload, LOWEST_PAYLOAD)
+            self.assertLessEqual(current_call_payload, HIGHEST_PAYLOAD)
+
+            # Fails? Possible issues with queue order.
+            self.assertGreater(current_call_payload, previous_payload)
+            previous_payload = current_call_payload
 
     @mock.patch("paho.mqtt.client.Client.publish")
     @mock.patch("paho.mqtt.client.Client.loop")
