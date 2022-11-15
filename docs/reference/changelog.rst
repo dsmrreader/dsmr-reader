@@ -20,6 +20,8 @@ Current version
 v5.9.0 - 2022-xx-xx
 -------------------
 
+- ``Added`` Support for Python 3.11
+
 
 
 v5.8.0 - 2022-09-30
@@ -38,7 +40,7 @@ v5.8.0 - 2022-09-30
 v5.7.0 - 2022-09-27
 -------------------
 
-- ``Added`` Added undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` for overriding backup intervals [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_]
+- ``Added`` New undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` for overriding backup intervals [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_]
 
 - ``Changed`` Entire codebase reformatted with Black [`#1636 <https://github.com/dsmrreader/dsmr-reader/issues/1636>`_]
 - ``Changed`` Gebruik temperature ipv groundtemperature uit Buienradar API - by @mind04 [`#1711 <https://github.com/dsmrreader/dsmr-reader/issues/1711>`_]
