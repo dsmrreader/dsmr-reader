@@ -39,8 +39,15 @@ DSMRREADER_SUPPORTED_DB_VENDORS = ("postgresql", "mysql")
 
 DSMRREADER_BACKUP_PG_DUMP = "pg_dump"
 DSMRREADER_BACKUP_MYSQLDUMP = "mysqldump"
-DSMRREADER_BACKUP_NAME_PREFIX = config(
-    "DSMRREADER_BACKUP_NAME_PREFIX", cast=str, default="dsmrreader"
+DSMRREADER_BACKUP_NAME_PREFIX = (
+    config(  # @deprecated since v5.9, will be dropped in v6.x
+        "DSMRREADER_BACKUP_NAME_PREFIX", cast=str, default=""
+    )
+)
+DSMRREADER_BACKUP_INTERVAL_DAYS = (
+    config(  # @deprecated since v5.9, will be dropped in v6.x
+        "DSMRREADER_BACKUP_INTERVAL_DAYS", cast=int, default=0
+    )
 )
 
 DSMRREADER_BACKUP_SQLITE = "sqlite3"
@@ -74,9 +81,6 @@ DSMRREADER_MODULE_PVOUTPUT_EXPORT = "dsmr_pvoutput.services.run"
 # Used in SP error stack traces. Added a stacktrace to uncaught errors when in DEBUG mode.
 DSMRREADER_LOGGER_STACKTRACE_LIMIT = 20 if DSMRREADER_LOGLEVEL == "DEBUG" else 0
 
-DSMRREADER_BACKUP_INTERVAL_DAYS = config(
-    "DSMRREADER_BACKUP_INTERVAL_DAYS", cast=int, default=1
-)
 
 # Refers to the Dropbox app "Official DSMR-Reader" which is a "Scoped App (App Folder)". Public access allowed with PKCE
 DSMRREADER_DROPBOX_APP_KEY = config(

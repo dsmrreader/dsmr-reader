@@ -21,7 +21,16 @@ v5.9.0 - 2022-xx-xx
 -------------------
 
 - ``Added`` Support for Python 3.11
+- ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_]New admin setting for changing backup intervals
+- ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] New admin setting for changing backup file names
 
+- ``Deprecated`` [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_] Prepared removal of undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` env var for overriding backup intervals
+- ``Deprecated`` [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] Prepared removal of undocumented ``DSMRREADER_BACKUP_NAME_PREFIX`` env var for overriding backup name prefix
+
+.. attention::
+
+    The deprecated ``DSMRREADER_BACKUP_INTERVAL_DAYS`` and ``DSMRREADER_BACKUP_NAME_PREFIX`` env vars still take priority over the newly introduced admin settings.
+    However, please **remove** these env vars from your installation if you use them and just use the admin interface instead.
 
 
 v5.8.0 - 2022-09-30

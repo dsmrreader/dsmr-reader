@@ -23,10 +23,11 @@ logger = logging.getLogger("dsmrreader")
 def run(scheduled_process: ScheduledProcess) -> None:
     """Checks whether a new backup should be created. Creates one if needed as well."""
 
-    # Create a partial, minimal backup first. Since it will grow and take disk space, only create one weekly.
+    # Create a partial, minimal backup first.
     today = timezone.localtime(timezone.now()).date()
 
-    if today.isoweekday() == 1:
+    # Since it will grow and take disk space, only create one weekly.
+    if today.isoweekday() == 1:  # Mondays
         create_partial(
             folder=os.path.join(
                 get_backup_directory(),
@@ -42,9 +43,14 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     # Schedule for whatever interval is set (usually 1 day), for the time specified.
     backup_settings = BackupSettings.get_solo()
-    next_backup_timestamp = timezone.now() + timezone.timedelta(
-        days=settings.DSMRREADER_BACKUP_INTERVAL_DAYS
-    )
+
+    # @deprecated legacy - Will be removed in v6.x
+    if settings.DSMRREADER_BACKUP_INTERVAL_DAYS > 0:
+        interval_in_hours = settings.DSMRREADER_BACKUP_INTERVAL_DAYS * 24
+    else:
+        interval_in_hours = backup_settings.backup_interval_hours
+
+    next_backup_timestamp = timezone.now() + timezone.timedelta(hours=interval_in_hours)
     next_backup_timestamp = timezone.localtime(next_backup_timestamp)
 
     next_backup_timestamp = next_backup_timestamp.replace(
@@ -62,9 +68,11 @@ def get_backup_directory(backup_directory=None) -> str:
     if not backup_directory:
         backup_directory = BackupSettings.get_solo().folder
 
+    # These are root paths, so use as-is.
     if backup_directory.startswith("/"):
         return os.path.abspath(backup_directory)
 
+    # Relative path.
     return os.path.abspath(os.path.join(settings.BASE_DIR, "..", backup_directory))
 
 
@@ -74,13 +82,16 @@ def create_full(folder: str) -> str:
         logger.info(" - Creating non-existing backup folder: %s", folder)
         os.makedirs(folder)
 
-    # Backup file with day name included, for weekly rotation.
+    # @deprecated legacy - Will be removed in v6.x
+    prefix = settings.DSMRREADER_BACKUP_NAME_PREFIX
+
     backup_file = os.path.join(
         folder,
-        "{}-{}-backup-{}.sql".format(
-            settings.DSMRREADER_BACKUP_NAME_PREFIX,
-            connection.vendor,
-            formats.date_format(timezone.now().date(), "l"),
+        "{prefix}-{day_name}-{backup_type}-{database_vendor}.sql".format(
+            prefix=prefix if prefix else "dsmrreader",
+            day_name=formats.date_format(timezone.now().date(), "l"),
+            backup_type="backup",
+            database_vendor=connection.vendor,
         ),
     )
 
@@ -151,12 +162,16 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
         logger.info(" - Creating non-existing backup folder: %s", folder)
         os.makedirs(folder)
 
+    # @deprecated legacy - Will be removed in v6.x
+    prefix = settings.DSMRREADER_BACKUP_NAME_PREFIX
+
     backup_file = os.path.join(
         folder,
-        "{}-{}-partial-backup-{}.sql".format(
-            settings.DSMRREADER_BACKUP_NAME_PREFIX,
-            connection.vendor,
-            formats.date_format(timezone.now().date(), "Y-m-d"),
+        "{prefix}-{day_name}-{backup_type}-{database_vendor}.sql".format(
+            prefix=prefix if prefix else "dsmrreader",
+            day_name=formats.date_format(timezone.now().date(), "l"),
+            backup_type="partial-backup",
+            database_vendor=connection.vendor,
         ),
     )
 

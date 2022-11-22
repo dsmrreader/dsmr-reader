@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                     "backup_time",
                     models.TimeField(
                         default=datetime.time(2, 0),
-                        help_text="Daily moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation.",
+                        help_text="Moment of creating the backup. You should prefer a nightly timestamp, as it might freeze or lock the application shortly during backup creation.",
                         verbose_name="Backup timestamp",
                     ),
                 ),

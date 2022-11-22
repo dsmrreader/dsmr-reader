@@ -13,26 +13,44 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
 
     daily_backup = models.BooleanField(
         default=True,
-        verbose_name=_("Backup daily"),
+        verbose_name=_("Enable backup"),
         help_text=_(
-            "Create a backup of your data daily. Stored locally, but can be exported using Dropbox."
+            "Create a backup of your data. Stored locally. Can be exported using Dropbox (or a custom off disk sync)."
         ),
     )
     backup_time = models.TimeField(
         default=time(hour=2),
         verbose_name=_("Backup timestamp"),
         help_text=_(
-            "Daily moment of creating the backup. You should prefer a nightly timestamp, as it "
+            "Moment of creating the backup. You should prefer a nightly timestamp, as it "
             "might freeze or lock the application shortly during backup creation."
         ),
+    )
+    backup_interval_hours = models.IntegerField(
+        default=24,
+        validators=[MinValueValidator(1), MaxValueValidator(28 * 24)],
+        verbose_name=_("Backup interval in hours"),
+        help_text=_("The minimal interval between backups. Defaults to daily."),
     )
     folder = models.CharField(
         max_length=512,
         default="backups/",
         verbose_name=_("Backup storage folder"),
         help_text=_(
-            'The folder to store the backups in. The default location is "backups/". '
-            'Please make sure that the "dsmr" user both has read and write access to the folder.'
+            'The folder to store the backups in. The default location is "backups/". Starting the path with a slash '
+            "makes it an absolute path, otherwise it will be relative to the installation folder. "
+            'Please make sure that the "dsmr" user has both read and write access to the folder.'
+        ),
+    )
+    file_name = models.CharField(
+        max_length=96,
+        default="{prefix}-{day_name}-{backup_type}-{database_vendor}",
+        verbose_name=_("Backup file name"),
+        help_text=_(
+            "Variables available: {prefix}, {day_name}, {backup_type} and {database_vendor}. "
+            'Examples: {prefix} = "dsmrreader", {day_name} = "Friday", {backup_type} = "partial-backup" and '
+            '{database_vendor} = "postgresql". Be advised to at least include the "{backup_type}" variable to '
+            'distinguish backup types. Defaults to "{prefix}-{day_name}-{backup_type}-{database_vendor}".'
         ),
     )
     compression_level = models.IntegerField(
