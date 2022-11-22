@@ -46,7 +46,7 @@ class TestAdmin(TestCase):
         data = dict(
             backup_time="06:00:00",
             backup_interval_hours=12,
-            file_name='test',
+            file_name="test",
             folder="backups/",
             compression_level=1,
         )
