@@ -27,83 +27,84 @@ v5.9.0 - 2022-xx-xx
 v5.8.0 - 2022-09-30
 -------------------
 
+- ``Fixed`` [`#1714 <https://github.com/dsmrreader/dsmr-reader/issues/1714>`_] Outgoing MQTT message queue not maintaining its own order
+
 .. attention::
 
     This release fixes a four year old bug that may have disrupted the order of your MQTT messages sent by DSMR-reader.
 
     It only affected installations with either a high throughput of data or a delayed backend process (or both).
-    You probably only have noticed it when running an installation similar to the one above, along using per-topic data sources.
-
-- ``Fixed`` Outgoing MQTT message queue not maintaining its own order [`#1714 <https://github.com/dsmrreader/dsmr-reader/issues/1714>`_]
+    You probably may only have noticed it when running an installation similar to the one above, along using per-topic data sources.
+    The majority of users should be unaffected anyway.
 
 
 v5.7.0 - 2022-09-27
 -------------------
 
-- ``Added`` New undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` for overriding backup intervals [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_]
+- ``Added`` [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_] New undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` for overriding backup intervals - ⚠️ *Dropped again in future release*
 
-- ``Changed`` Entire codebase reformatted with Black [`#1636 <https://github.com/dsmrreader/dsmr-reader/issues/1636>`_]
-- ``Changed`` Gebruik temperature ipv groundtemperature uit Buienradar API - by @mind04 [`#1711 <https://github.com/dsmrreader/dsmr-reader/issues/1711>`_]
+- ``Changed`` [`#1636 <https://github.com/dsmrreader/dsmr-reader/issues/1636>`_] Entire codebase reformatted with Black
+- ``Changed`` [`#1711 <https://github.com/dsmrreader/dsmr-reader/issues/1711>`_] Gebruik temperature ipv groundtemperature uit Buienradar API - by @mind04
 
 
 v5.6.0 - 2022-08-02
 -------------------
 
-- ``Added`` Added peak consumption live graph [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_]
+- ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] Added peak consumption live graph
 
-- ``Changed`` Reworked/improved peak consumption [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_]
-- ``Changed`` Deselect live electricity graph kWh totals by default [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
+- ``Changed`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] Reworked/improved peak consumption
+- ``Changed`` [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_] Deselect live electricity graph kWh totals by default
 
 
 v5.5.1 - 2022-07-27
 -------------------
 
-- ``Fixed`` Unable to configure dropbox backup - Dropbox SDK downgrade [`#1677 <https://github.com/dsmrreader/dsmr-reader/issues/1677>`_]
+- ``Fixed`` [`#1677 <https://github.com/dsmrreader/dsmr-reader/issues/1677>`_] Unable to configure dropbox backup - Dropbox SDK downgrade
 
 
 v5.5.0 - 2022-07-15
 -------------------
 
-- ``Added`` Total kWh consumed/returned (diff) in live electricity graph [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
+- ``Added`` [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_] Total kWh consumed/returned (diff) in live electricity graph
 
-- ``Changed`` Python patch bump + optimizations - by @goegol [`#1665 <https://github.com/dsmrreader/dsmr-reader/issues/1665>`_]
-- ``Changed`` Tariefnamen rechttrekken [`#1666 <https://github.com/dsmrreader/dsmr-reader/issues/1666>`_]
-- ``Changed`` Allow graph 'stack' option for live graphs [`#1420 <https://github.com/dsmrreader/dsmr-reader/issues/1420>`_]
-- ``Changed`` Reworked live graphs a bit, dropped inverse graphs too [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_]
+- ``Changed`` [`#1665 <https://github.com/dsmrreader/dsmr-reader/issues/1665>`_] Python patch bump + optimizations - by @goegol
+- ``Changed`` [`#1666 <https://github.com/dsmrreader/dsmr-reader/issues/1666>`_] Tariefnamen rechttrekken
+- ``Changed`` [`#1420 <https://github.com/dsmrreader/dsmr-reader/issues/1420>`_] Allow graph 'stack' option for live graphs
+- ``Changed`` [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_] Reworked live graphs a bit, dropped inverse graphs too
 
 
 v5.4.0 - 2022-07-07
 -------------------
 
-- ``Changed`` Pie charts in Trends vervangen door bar/line chart [`#1390 <https://github.com/dsmrreader/dsmr-reader/issues/1390>`_]
-- ``Changed`` Energiecontracten makkelijker kunnen klonen [`#1652 <https://github.com/dsmrreader/dsmr-reader/issues/1652>`_]
-- ``Changed`` Totaalverbruik toevoegen bij "Vergelijk" [`#1527 <https://github.com/dsmrreader/dsmr-reader/issues/1527>`_]
-- ``Changed`` Added comment regarding MinderGas upload mechanism [`#1646 <https://github.com/dsmrreader/dsmr-reader/issues/1646>`_]
+- ``Changed`` [`#1390 <https://github.com/dsmrreader/dsmr-reader/issues/1390>`_] Pie charts in Trends vervangen door bar/line chart
+- ``Changed`` [`#1652 <https://github.com/dsmrreader/dsmr-reader/issues/1652>`_] Energiecontracten makkelijker kunnen klonen
+- ``Changed`` [`#1527 <https://github.com/dsmrreader/dsmr-reader/issues/1527>`_] Totaalverbruik toevoegen bij "Vergelijk"
+- ``Changed`` [`#1646 <https://github.com/dsmrreader/dsmr-reader/issues/1646>`_] Added comment regarding MinderGas upload mechanism
 
 
 v5.3.0 - 2022-06-09
 -------------------
 
-- ``Added`` New API endpoint for fetching the energy supplier price (contracts) entered in DSMR-reader [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_]
+- ``Added`` [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_] New API endpoint for fetching the energy supplier price (contracts) entered in DSMR-reader
 
-- ``Changed`` Updated/improved API documentation [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_]
-- ``Changed`` Improved Dropbox connection error handling a bit [`#1623 <https://github.com/dsmrreader/dsmr-reader/issues/1623>`_]
+- ``Changed`` [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_] Updated/improved API documentation
+- ``Changed`` [`#1623 <https://github.com/dsmrreader/dsmr-reader/issues/1623>`_] Improved Dropbox connection error handling a bit
 
 
 v5.2.0 - 2022-05-24
 -------------------
 
-- ``Added`` Support for tracking quarter peak electricity consumption *(due to upcoming changes in Belgium's policy)* [`#1084 <https://github.com/dsmrreader/dsmr-reader/issues/1084>`_]
-- ``Added`` Meterstand tonen bij energiecontracten [`#1559 <https://github.com/dsmrreader/dsmr-reader/issues/1559>`_]
-- ``Added`` Allow overriding backup files name prefix [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_]
+- ``Added`` [`#1084 <https://github.com/dsmrreader/dsmr-reader/issues/1084>`_] Support for tracking quarter peak electricity consumption *(due to upcoming changes in Belgium's policy)*
+- ``Added`` [`#1559 <https://github.com/dsmrreader/dsmr-reader/issues/1559>`_] Meterstand tonen bij energiecontracten
+- ``Added`` [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] Allow overriding backup files name prefix
 
 - ``Changed`` Added new admin setting for GUI refresh interval (1 - 5 seconds, default 5)
 - ``Changed`` Reworked search terms for Configuration page a bit
 - ``Changed`` Improved error logging for uncaught errors in backend process
-- ``Changed`` Added libjpeg-dev to upgrade guide for situational issues [`#1612 <https://github.com/dsmrreader/dsmr-reader/issues/1612>`_]
+- ``Changed`` [`#1612 <https://github.com/dsmrreader/dsmr-reader/issues/1612>`_] Added libjpeg-dev to upgrade guide for situational issues
 
-- ``Fixed`` Graph numbers hidden when using OS dark mode + DSMR-reader light mode [`#1602 <https://github.com/dsmrreader/dsmr-reader/issues/1602>`_]
-- ``Fixed`` Meter statistics tariff description field update [`#1631 <https://github.com/dsmrreader/dsmr-reader/issues/1631>`_]
+- ``Fixed`` [`#1602 <https://github.com/dsmrreader/dsmr-reader/issues/1602>`_] Graph numbers hidden when using OS dark mode + DSMR-reader light mode
+- ``Fixed`` [`#1631 <https://github.com/dsmrreader/dsmr-reader/issues/1631>`_] Meter statistics tariff description field update
 
 
 v5.1.0 - 2022-03-01
@@ -113,25 +114,25 @@ v5.1.0 - 2022-03-01
 
     ⚠️ The following features/support were changed in an **incompatible** way due to external requirements!
 
-- ``Changed`` Dropbox Oauth flow: The App Key **is no longer configurable in the admin interface** and now uses the default App Key of DSMR-reader [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
+- ``Changed`` [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_] Dropbox Oauth flow: The App Key **is no longer configurable in the admin interface** and now uses the default App Key of DSMR-reader
 
 ----
 
 *Other changes*:
 
-- ``Added`` Support for dark mode - by @Justin991q [`#1567 <https://github.com/dsmrreader/dsmr-reader/issues/1567>`_]
+- ``Added`` [`#1567 <https://github.com/dsmrreader/dsmr-reader/issues/1567>`_] Support for dark mode - by @Justin991q
 
-- ``Changed`` Dagelijkse notificaties uitbreiden [`#1589 <https://github.com/dsmrreader/dsmr-reader/issues/1589>`_]
+- ``Changed`` [`#1589 <https://github.com/dsmrreader/dsmr-reader/issues/1589>`_] Dagelijkse notificaties uitbreiden
 - ``Changed`` Trends datepicker start now defaults to today
 - ``Changed`` Extended some admin forms with additional delete/save/update buttons on top of page
 - ``Changed`` Added support for deleting "dsmrreading" records and "electricity/gas consumption" records in the admin
 - ``Changed`` Dependency updates
 
-- ``Fixed`` Increased remote datalogger its default log level from `INFO` to `ERROR` [`dsmr-reader-docker/#1579 <https://github.com/xirixiz/dsmr-reader-docker/issues/268>`_]
-- ``Fixed`` Fix docker issue with pg_dump not found - by @sanderdw [`#1579 <https://github.com/dsmrreader/dsmr-reader/issues/1579>`_]
-- ``Fixed`` Improved empty/error state in Trends [`#1523 <https://github.com/dsmrreader/dsmr-reader/issues/1523>`_]
-- ``Fixed`` Vergelijken geeft visueel verkeerde kleur bij negatief verschil [`#1517 <https://github.com/dsmrreader/dsmr-reader/issues/1517>`_]
-- ``Fixed`` Added headers to XHR responses to prevent browser caching [`#1591 <https://github.com/dsmrreader/dsmr-reader/issues/1591>`_]
+- ``Fixed`` [`dsmr-reader-docker/#1579 <https://github.com/xirixiz/dsmr-reader-docker/issues/268>`_] Increased remote datalogger its default log level from `INFO` to `ERROR`
+- ``Fixed`` [`#1579 <https://github.com/dsmrreader/dsmr-reader/issues/1579>`_] Fix docker issue with pg_dump not found - by @sanderdw
+- ``Fixed` [`#1523 <https://github.com/dsmrreader/dsmr-reader/issues/1523>`_]` Improved empty/error state in Trends
+- ``Fixed`` [`#1517 <https://github.com/dsmrreader/dsmr-reader/issues/1517>`_] Vergelijken geeft visueel verkeerde kleur bij negatief verschil
+- ``Fixed`` [`#1591 <https://github.com/dsmrreader/dsmr-reader/issues/1591>`_] Added headers to XHR responses to prevent browser caching
 
 
 v5.0.0 - 2022-02-07
@@ -147,23 +148,23 @@ v5.0.0 - 2022-02-07
 
     The following changes *may* affect your setup of DSMR-reader.
 
-- ``Added`` Added support for **Python 3.10** [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
-- ``Added`` Added support for **InfluxDB 2.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
+- ``Added`` [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_] Added support for **Python 3.10**
+- ``Added`` [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_] Added support for **InfluxDB 2.x**
 
 ----
 
 - ``Changed`` `dsmr_datalogger_api_client.py <https://github.com/dsmrreader/dsmr-reader/blob/v5/dsmr_datalogger/scripts/dsmr_datalogger_api_client.py>`_ env vars are now prefixed with ``DSMRREADER_REMOTE_`` (*affects new installations only*) [`#1216 <https://github.com/dsmrreader/dsmr-reader/issues/1216>`_]
-- ``Changed`` The default value of ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT`` was changed from ``3600`` to ``0``, disabling MQTT cache by default [`#1561 <https://github.com/dsmrreader/dsmr-reader/issues/1561>`_]
-- ``Changed`` The default value of ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE`` was changed from ``500`` to ``5000`` [`#1561 <https://github.com/dsmrreader/dsmr-reader/issues/1561>`_]
-- ``Changed`` The ``dsmr_influxdb_export_all_readings`` its console arguments were renamed due to **InfluxDB 2.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
-- ``Changed`` Dropbox integratie via OAuth + PKCE [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
-- ``Changed`` Preferred Python version for DSMR-reader is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7 [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
-- ``Changed`` Updated to Django 3.2 [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
+- ``Changed`` [`#1561 <https://github.com/dsmrreader/dsmr-reader/issues/1561>`_] The default value of ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT`` was changed from ``3600`` to ``0``, disabling MQTT cache by default
+- ``Changed`` [`#1561 <https://github.com/dsmrreader/dsmr-reader/issues/1561>`_] The default value of ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE`` was changed from ``500`` to ``5000``
+- ``Changed`` [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_] The ``dsmr_influxdb_export_all_readings`` its console arguments were renamed due to **InfluxDB 2.x**
+- ``Changed`` [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_] Dropbox integratie via OAuth + PKCE
+- ``Changed`` [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_] Preferred Python version for DSMR-reader is now Python 3.9 (*support until end of 2025*), minimum version Python 3.7
+- ``Changed`` [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_] Updated to Django 3.2
 
 ----
 
-- ``Fixed`` OpenAPI specs wijken qua formaat af van de bestandsextensie [`#1563 <https://github.com/dsmrreader/dsmr-reader/issues/1563>`_]
-- ``Fixed`` InfluxDB 2.x instelling-velden te kort (*release candidate 2*) [`#1568 <https://github.com/dsmrreader/dsmr-reader/issues/1568>`_]
+- ``Fixed`` [`#1563 <https://github.com/dsmrreader/dsmr-reader/issues/1563>`_] OpenAPI specs wijken qua formaat af van de bestandsextensie
+- ``Fixed`` [`#1568 <https://github.com/dsmrreader/dsmr-reader/issues/1568>`_] InfluxDB 2.x instelling-velden te kort (*release candidate 2*)
 
 ----
 
@@ -171,23 +172,23 @@ v5.0.0 - 2022-02-07
 
     ⚠️ The following features/support have been **dropped** or were changed in an **incompatible** way!
 
-- ``Changed`` Relocated Supervisor processes PID files from ``/var/tmp/`` to ``/tmp/`` [`#1297 <https://github.com/dsmrreader/dsmr-reader/issues/1297>`_]
-- ``Removed`` Dropped support for **Python 3.6** (*EOL December 2021*) [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_]
-- ``Removed`` Dropped support for **InfluxDB 1.x** [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_]
-- ``Removed`` Dropped support for **PostgreSQL 9.x** and below (*due to Django 3.2* + PostgreSQL lifecycle) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
-- ``Removed`` Dropped support for **MySQL 5.6** and below (*due to Django 3.2*) [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_]
-- ``Removed`` Dropped support for **legacy Dropbox tokens**, now using OAuth [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_]
-- ``Removed`` Dropped ``SECRET_KEY`` env var, use ``DJANGO_SECRET_KEY`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DB_ENGINE`` env var, use ``DJANGO_DATABASE_ENGINE`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DB_NAME`` env var, use ``DJANGO_DATABASE_NAME`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DB_USER`` env var, use ``DJANGO_DATABASE_USER`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DB_PASS`` env var, use ``DJANGO_DATABASE_PASSWORD`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DB_HOST`` env var, use ``DJANGO_DATABASE_HOST`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DB_PORT`` env var, use ``DJANGO_DATABASE_PORT`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``CONN_MAX_AGE`` env var, use ``DJANGO_DATABASE_CONN_MAX_AGE`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``TZ`` env var, use ``DJANGO_TIME_ZONE`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DSMR_USER`` env var, use ``DSMRREADER_ADMIN_USER`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
-- ``Removed`` Dropped ``DSMR_PASSWORD`` env var, use ``DSMRREADER_ADMIN_PASSWORD`` instead [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_]
+- ``Changed`` [`#1297 <https://github.com/dsmrreader/dsmr-reader/issues/1297>`_] Relocated Supervisor processes PID files from ``/var/tmp/`` to ``/tmp/``
+- ``Removed`` [`#1314 <https://github.com/dsmrreader/dsmr-reader/issues/1314>`_] Dropped support for **Python 3.6** (*EOL December 2021*)
+- ``Removed`` [`#1380 <https://github.com/dsmrreader/dsmr-reader/issues/1380>`_] Dropped support for **InfluxDB 1.x**
+- ``Removed`` [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_] Dropped support for **PostgreSQL 9.x** and below (*due to Django 3.2* + PostgreSQL lifecycle)
+- ``Removed`` [`#1363 <https://github.com/dsmrreader/dsmr-reader/issues/1363>`_] Dropped support for **MySQL 5.6** and below (*due to Django 3.2*)
+- ``Removed`` [`#1210 <https://github.com/dsmrreader/dsmr-reader/issues/1210>`_] Dropped support for **legacy Dropbox tokens**, now using OAuth
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``SECRET_KEY`` env var, use ``DJANGO_SECRET_KEY`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DB_ENGINE`` env var, use ``DJANGO_DATABASE_ENGINE`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DB_NAME`` env var, use ``DJANGO_DATABASE_NAME`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DB_USER`` env var, use ``DJANGO_DATABASE_USER`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DB_PASS`` env var, use ``DJANGO_DATABASE_PASSWORD`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DB_HOST`` env var, use ``DJANGO_DATABASE_HOST`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DB_PORT`` env var, use ``DJANGO_DATABASE_PORT`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``CONN_MAX_AGE`` env var, use ``DJANGO_DATABASE_CONN_MAX_AGE`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``TZ`` env var, use ``DJANGO_TIME_ZONE`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DSMR_USER`` env var, use ``DSMRREADER_ADMIN_USER`` instead
+- ``Removed`` [`#1141 <https://github.com/dsmrreader/dsmr-reader/issues/1141>`_] Dropped ``DSMR_PASSWORD`` env var, use ``DSMRREADER_ADMIN_PASSWORD`` instead
 - ``Removed`` Dropped ``DATALOGGER_INPUT_METHOD`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD`` instead
 - ``Removed`` Dropped ``DATALOGGER_SERIAL_PORT`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT`` instead
 - ``Removed`` Dropped ``DATALOGGER_SERIAL_BAUDRATE`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE`` instead
