@@ -33,7 +33,8 @@ RUN apt-get install -y \
     cu \
     gettext \
     libmariadb-dev \
-    libopenjp2-7-dev
+    libopenjp2-7-dev \
+    postgresql-client
 
 COPY ./dsmrreader/provisioning/requirements/dev.txt /app/dsmrreader/provisioning/requirements/
 RUN pip3 install -r dsmrreader/provisioning/requirements/dev.txt
