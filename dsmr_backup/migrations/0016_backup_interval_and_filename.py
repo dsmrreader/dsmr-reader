@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 default=24,
                 help_text="The minimal interval between backups. Defaults to daily.",
                 validators=[
-                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MinValueValidator(24),
                     django.core.validators.MaxValueValidator(672),
                 ],
                 verbose_name="Backup interval in hours",

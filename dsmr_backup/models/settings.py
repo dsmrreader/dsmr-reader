@@ -28,7 +28,7 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
     )
     backup_interval_hours = models.IntegerField(
         default=24,
-        validators=[MinValueValidator(1), MaxValueValidator(28 * 24)],
+        validators=[MinValueValidator(24), MaxValueValidator(28 * 24)],
         verbose_name=_("Backup interval in hours"),
         help_text=_("The minimal interval between backups. Defaults to daily."),
     )
