@@ -46,11 +46,11 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     # @deprecated legacy - Will be removed in v6.x
     if settings.DSMRREADER_BACKUP_INTERVAL_DAYS > 0:
-        interval_in_hours = settings.DSMRREADER_BACKUP_INTERVAL_DAYS * 24
+        interval_in_days = settings.DSMRREADER_BACKUP_INTERVAL_DAYS
     else:
-        interval_in_hours = backup_settings.backup_interval_hours
+        interval_in_days = backup_settings.backup_interval_in_days
 
-    next_backup_timestamp = timezone.now() + timezone.timedelta(hours=interval_in_hours)
+    next_backup_timestamp = timezone.now() + timezone.timedelta(days=interval_in_days)
     next_backup_timestamp = timezone.localtime(next_backup_timestamp)
 
     next_backup_timestamp = next_backup_timestamp.replace(

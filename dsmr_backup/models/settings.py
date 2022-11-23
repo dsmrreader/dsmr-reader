@@ -26,10 +26,10 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
             "might freeze or lock the application shortly during backup creation."
         ),
     )
-    backup_interval_hours = models.IntegerField(
-        default=24,
-        validators=[MinValueValidator(24), MaxValueValidator(28 * 24)],
-        verbose_name=_("Backup interval in hours"),
+    backup_interval_in_days = models.IntegerField(
+        default=1,
+        validators=[MinValueValidator(1), MaxValueValidator(7)],
+        verbose_name=_("Backup interval in days"),
         help_text=_("The minimal interval between backups. Defaults to daily."),
     )
     folder = models.CharField(

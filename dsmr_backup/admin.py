@@ -27,7 +27,7 @@ class BackupSettingsAdmin(SingletonModelAdmin):
         (
             None,
             {
-                "fields": ["daily_backup", "backup_time", "backup_interval_hours"],
+                "fields": ["daily_backup", "backup_time", "backup_interval_in_days"],
                 "description": _(
                     'Detailed instructions for restoring a backup can be found here <a href="https://dsmr-reader.read'
                     'thedocs.io/nl/v5/how-to/database/postgresql-restore-backup.html">in documentation</a>.'

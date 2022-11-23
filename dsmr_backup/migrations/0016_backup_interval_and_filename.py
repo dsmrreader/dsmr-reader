@@ -24,13 +24,13 @@ class Migration(migrations.Migration):
             model_name="backupsettings",
             name="backup_interval_hours",
             field=models.IntegerField(
-                default=24,
+                default=1,
                 help_text="The minimal interval between backups. Defaults to daily.",
                 validators=[
-                    django.core.validators.MinValueValidator(24),
-                    django.core.validators.MaxValueValidator(672),
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(7),
                 ],
-                verbose_name="Backup interval in hours",
+                verbose_name="Backup interval in days",
             ),
         ),
         migrations.AddField(
