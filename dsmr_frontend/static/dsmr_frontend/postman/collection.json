@@ -55,7 +55,7 @@
 					"name": "Datalogger",
 					"item": [
 						{
-							"name": "Create DSMR reading",
+							"name": "DSMR readings: Create",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -185,7 +185,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve DSMR readings",
+							"name": "DSMR readings: List",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -197,7 +197,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/dsmrreading?timestamp__gte=2020-01-14 12:00:00&timestamp__lte=2020-01-20 12:00:00&ordering=-timestamp&offset=10&limit=5",
+									"raw": "{{DSMR-reader-API-host}}/api/v2/datalogger/dsmrreading?timestamp=2022-01-15 00:00:08",
 									"host": [
 										"{{DSMR-reader-API-host}}"
 									],
@@ -209,28 +209,38 @@
 									],
 									"query": [
 										{
-											"key": "timestamp__gte",
-											"value": "2020-01-14 12:00:00",
-											"description": "Optional"
-										},
-										{
-											"key": "timestamp__lte",
-											"value": "2020-01-20 12:00:00",
-											"description": "Optional"
-										},
-										{
 											"key": "ordering",
 											"value": "-timestamp",
-											"description": "Optional"
+											"description": "Optional",
+											"disabled": true
 										},
 										{
 											"key": "offset",
 											"value": "10",
-											"description": "Optional"
+											"description": "Optional",
+											"disabled": true
 										},
 										{
 											"key": "limit",
-											"value": "5",
+											"value": "1",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "timestamp__gte",
+											"value": "2022-01-15 00:00:00",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "timestamp__lte",
+											"value": "2022-01-15 23:59:59",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "timestamp",
+											"value": "2022-01-15 00:00:08",
 											"description": "Optional"
 										}
 									]
@@ -239,7 +249,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve meter statistics",
+							"name": "Meter statistics: Get",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -266,7 +276,7 @@
 							"response": []
 						},
 						{
-							"name": "Update meter statistics",
+							"name": "Meter statistics: Partial update",
 							"request": {
 								"method": "PATCH",
 								"header": [
@@ -339,7 +349,7 @@
 					"name": "Consumption",
 					"item": [
 						{
-							"name": "Retrieve energy supplier prices",
+							"name": "Energy supplier prices: List",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -410,7 +420,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve electricity consumption",
+							"name": "Electricity consumption: List",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -468,7 +478,75 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve gas consumption",
+							"name": "Quarter-hour peak electricity consumption: List",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"url": {
+									"raw": "{{DSMR-reader-API-host}}/api/v2/consumption/quarter-hour-peak-electricity?read_at_start__gte=2022-04-01 00:00:00&read_at_start__lte=2023-04-01 00:00:00&ordering=-average_delivered",
+									"host": [
+										"{{DSMR-reader-API-host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"consumption",
+										"quarter-hour-peak-electricity"
+									],
+									"query": [
+										{
+											"key": "read_at_start__gte",
+											"value": "2022-04-01 00:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "read_at_start__lte",
+											"value": "2023-04-01 00:00:00",
+											"description": "Optional"
+										},
+										{
+											"key": "average_delivered__gte",
+											"value": "2.50",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "average_delivered__lte",
+											"value": "5.000",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "ordering",
+											"value": "-average_delivered",
+											"description": "Optional"
+										},
+										{
+											"key": "offset",
+											"value": "10",
+											"description": "Optional",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "1",
+											"description": "Optional",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Gas consumption: List",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -522,7 +600,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve today's consumption",
+							"name": "Today's consumption: Get",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -549,7 +627,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve live electricity consumption",
+							"name": "Electricity consumption: Live",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -576,7 +654,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve live gas consumption",
+							"name": "Gas consumption: Live",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -608,7 +686,7 @@
 					"name": "Statistics",
 					"item": [
 						{
-							"name": "Create day statistics",
+							"name": "Day statistics: Create",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -730,7 +808,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve day statistics",
+							"name": "Day statistics: List",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -784,7 +862,7 @@
 							"response": []
 						},
 						{
-							"name": "Retrieve hour statistics",
+							"name": "Hour statistics: List",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -843,7 +921,7 @@
 					"name": "Application",
 					"item": [
 						{
-							"name": "Application version",
+							"name": "Application: Version",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -870,7 +948,7 @@
 							"response": []
 						},
 						{
-							"name": "Application monitoring",
+							"name": "Application: Monitoring",
 							"request": {
 								"method": "GET",
 								"header": [

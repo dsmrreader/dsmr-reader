@@ -237,6 +237,76 @@ class TestElectricity(APIv2TestCase):
         self.assertEqual(resultset["results"][1]["id"], 96)
 
 
+class TestQuarterHourPeakElectricity(APIv2TestCase):
+    fixtures = ["dsmr_api/test_quarter_hour_peak_electricity_consumption.json"]
+
+    def test_get(self):
+        resultset = self._request(
+            "quarter-hour-peak-electricity-consumption", data={"limit": 100}
+        )
+        self.assertEqual(resultset["count"], 3)
+        self.assertEqual(resultset["results"][0]["id"], 1)
+        self.assertEqual(resultset["results"][1]["id"], 2)
+        self.assertEqual(resultset["results"][2]["id"], 3)
+
+        # Limit.
+        resultset = self._request(
+            "quarter-hour-peak-electricity-consumption", data={"limit": 1}
+        )
+        self.assertEqual(resultset["count"], 3)
+        self.assertEqual(resultset["results"][0]["id"], 1)
+        self.assertEqual(len(resultset["results"]), 1)
+
+        # Sort read_at_start DESC.
+        resultset = self._request(
+            "quarter-hour-peak-electricity-consumption",
+            data={"ordering": "-read_at_start"},
+        )
+        self.assertEqual(resultset["count"], 3)
+        self.assertEqual(resultset["results"][0]["id"], 3)
+        self.assertEqual(resultset["results"][1]["id"], 2)
+        self.assertEqual(resultset["results"][2]["id"], 1)
+
+        # Sort average_delivered DESC.
+        resultset = self._request(
+            "quarter-hour-peak-electricity-consumption",
+            data={"ordering": "-average_delivered"},
+        )
+        self.assertEqual(resultset["count"], 3)
+        self.assertEqual(resultset["results"][0]["id"], 2)
+        self.assertEqual(resultset["results"][1]["id"], 3)
+        self.assertEqual(resultset["results"][2]["id"], 1)
+
+        # Range >
+        resultset = self._request(
+            "quarter-hour-peak-electricity-consumption",
+            data={"read_at_start__gte": "2022-01-02 00:00:00"},
+        )  # Z+01:00
+        self.assertEqual(resultset["count"], 2)
+        self.assertEqual(resultset["results"][0]["id"], 2)
+        self.assertEqual(resultset["results"][1]["id"], 3)
+
+        # Range <
+        resultset = self._request(
+            "quarter-hour-peak-electricity-consumption",
+            data={"read_at_start__lte": "2022-01-03 00:00:00"},
+        )
+        self.assertEqual(resultset["count"], 2)
+        self.assertEqual(resultset["results"][0]["id"], 1)
+        self.assertEqual(resultset["results"][1]["id"], 2)
+
+        # Range > <
+        resultset = self._request(
+            "quarter-hour-peak-electricity-consumption",
+            data={
+                "read_at_start__gte": "2022-01-02 00:00:00",
+                "read_at_start__lte": "2022-01-03 00:00:00",
+            },
+        )
+        self.assertEqual(resultset["count"], 1)
+        self.assertEqual(resultset["results"][0]["id"], 2)
+
+
 class TestGas(APIv2TestCase):
     fixtures = ["dsmr_api/test_gas_consumption.json"]
 

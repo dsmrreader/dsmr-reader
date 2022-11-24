@@ -1,0 +1,29 @@
+[
+{
+    "pk": 1,
+    "fields": {
+        "read_at_start": "2022-01-01T12:00:00Z",
+        "read_at_end": "2022-01-01T12:15:00Z",
+        "average_delivered": "1.111"
+    },
+    "model": "dsmr_consumption.quarterhourpeakelectricityconsumption"
+},
+{
+    "pk": 2,
+    "fields": {
+        "read_at_start": "2022-01-02T12:00:00Z",
+        "read_at_end": "2022-01-02T12:15:00Z",
+        "average_delivered": "3.222"
+    },
+    "model": "dsmr_consumption.quarterhourpeakelectricityconsumption"
+},
+{
+    "pk": 3,
+    "fields": {
+        "read_at_start": "2022-01-03T12:00:00Z",
+        "read_at_end": "2022-01-03T12:15:00Z",
+        "average_delivered": "2.333"
+    },
+    "model": "dsmr_consumption.quarterhourpeakelectricityconsumption"
+}
+]

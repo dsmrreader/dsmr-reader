@@ -21,8 +21,11 @@ v5.9.0 - 2022-xx-xx
 -------------------
 
 - ``Added`` Support for Python 3.11
+- ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] New REST API endpoint for listing quarter hour peak electricity consumption
 - ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_]New admin setting for changing backup intervals
 - ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] New admin setting for changing backup file names
+
+- ``Changed`` Reworked API docs, updated Postman collection.
 
 - ``Deprecated`` [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_] Prepared removal of undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` env var for overriding backup intervals
 - ``Deprecated`` [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] Prepared removal of undocumented ``DSMRREADER_BACKUP_NAME_PREFIX`` env var for overriding backup name prefix

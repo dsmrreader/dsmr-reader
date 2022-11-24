@@ -2,7 +2,11 @@ from django_filters import rest_framework as filters
 
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
-from dsmr_consumption.models.consumption import GasConsumption, ElectricityConsumption
+from dsmr_consumption.models.consumption import (
+    GasConsumption,
+    ElectricityConsumption,
+    QuarterHourPeakElectricityConsumption,
+)
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 
 
@@ -69,6 +73,35 @@ class ElectricityConsumptionFilter(filters.FilterSet):
     class Meta:
         model = ElectricityConsumption
         fields = ["read_at"]  # Deprecated. Revert to empty list in some major API bump.
+
+
+class QuarterHourPeakElectricityConsumptionFilter(filters.FilterSet):
+    FIELD = "read_at_start"
+
+    read_at_start__gte = filters.DateTimeFilter(
+        field_name=FIELD,
+        lookup_expr="gte",
+        label="Quarter-hour peak consumption start timestamp must be after or equal to `X`",
+    )
+    read_at_start__lte = filters.DateTimeFilter(
+        field_name=FIELD,
+        lookup_expr="lte",
+        label="Quarter-hour peak consumption start timestamp must be before or equal to `X`",
+    )
+    average_delivered__gte = filters.DateTimeFilter(
+        field_name=FIELD,
+        lookup_expr="gte",
+        label="Quarter-hour peak consumption average must be higher or equal to `X`",
+    )
+    average_delivered__lte = filters.DateTimeFilter(
+        field_name=FIELD,
+        lookup_expr="lte",
+        label="Quarter-hour peak consumption average must be lower or equal to `X`",
+    )
+
+    class Meta:
+        model = QuarterHourPeakElectricityConsumption
+        fields = []
 
 
 class GasConsumptionFilter(filters.FilterSet):

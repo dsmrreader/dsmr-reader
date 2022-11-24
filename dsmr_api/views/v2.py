@@ -12,8 +12,13 @@ from dsmr_consumption.serializers.consumption import (
     ElectricityConsumptionSerializer,
     GasConsumptionSerializer,
     EnergySupplierPriceSerializer,
+    QuarterHourPeakElectricityConsumptionSerializer,
 )
-from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.consumption import (
+    ElectricityConsumption,
+    GasConsumption,
+    QuarterHourPeakElectricityConsumption,
+)
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.serializers.statistics import MeterStatisticsSerializer
 from dsmr_stats.serializers.statistics import (
@@ -30,6 +35,7 @@ from dsmr_api.filters import (
     GasConsumptionFilter,
     HourStatisticsFilter,
     EnergySupplierPriceFilter,
+    QuarterHourPeakElectricityConsumptionFilter,
 )
 import dsmr_consumption.services
 import dsmr_backend.services.backend
@@ -54,7 +60,7 @@ class DsmrReadingViewSet(
     - ⚠️ **Deprecated** ~``timestamp``: Reading timestamp must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
 
     ### Changes
-    - Deprecated the ``timestamp`` query parameter in DSMR-reader v5.3
+    - Deprecated the ``timestamp`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
 
     ### Request samples
     ```
@@ -93,7 +99,7 @@ class DsmrReadingViewSet(
     ```
     """
 
-    schema = DsmrReaderSchema(get="Retrieve DSMR readings", post="Create DSMR reading")
+    schema = DsmrReaderSchema(post="DSMR readings: Create", get="DSMR readings: List")
     FIELD = "timestamp"
     queryset = DsmrReading.objects.all()
     serializer_class = DsmrReadingSerializer
@@ -130,7 +136,7 @@ class MeterStatisticsViewSet(
     """
 
     schema = DsmrReaderSchema(
-        get="Retrieve meter statistics", patch="Update meter statistics"
+        get="Meter statistics: Get", patch="Meter statistics: Partial update"
     )
     serializer_class = MeterStatisticsSerializer
 
@@ -175,7 +181,7 @@ class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
     ```
     """
 
-    schema = DsmrReaderSchema(get="Retrieve energy supplier prices")
+    schema = DsmrReaderSchema(get="Energy supplier prices: List")
     queryset = EnergySupplierPrice.objects.all()
     serializer_class = EnergySupplierPriceSerializer
     filterset_class = EnergySupplierPriceFilter
@@ -186,7 +192,7 @@ class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
 class TodayConsumptionView(APIView):
     """Returns the consumption of the current day so far."""
 
-    schema = DsmrReaderSchema(get="Retrieve today's consumption")
+    schema = DsmrReaderSchema(get="Today's consumption: Get")
     IGNORE_FIELDS = (
         "electricity1_start",
         "electricity2_start",
@@ -234,7 +240,7 @@ class TodayConsumptionView(APIView):
 class ElectricityLiveView(APIView):
     """Returns the live electricity consumption, containing the same data as the Dashboard header."""
 
-    schema = DsmrReaderSchema(get="Retrieve live electricity consumption")
+    schema = DsmrReaderSchema(get="Electricity consumption: Live")
 
     def get(self, request):
         return Response(dsmr_consumption.services.live_electricity_consumption())
@@ -243,7 +249,7 @@ class ElectricityLiveView(APIView):
 class GasLiveView(APIView):
     """Returns the latest gas consumption."""
 
-    schema = DsmrReaderSchema(get="Retrieve live gas consumption")
+    schema = DsmrReaderSchema(get="Gas consumption: Live")
 
     def get(self, request):
         return Response(dsmr_consumption.services.live_gas_consumption())
@@ -263,15 +269,41 @@ class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     - ⚠️ **Deprecated** ~`read_at`: Consumption timestamp must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
 
     ### Changes
-    - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3
+    - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
     """
 
-    schema = DsmrReaderSchema(get="Retrieve electricity consumption")
+    schema = DsmrReaderSchema(get="Electricity consumption: List")
     FIELD = "read_at"
     queryset = ElectricityConsumption.objects.all()
     serializer_class = ElectricityConsumptionSerializer
     filterset_class = ElectricityConsumptionFilter
     ordering_fields = (FIELD,)
+    ordering = FIELD
+
+
+class QuarterHourPeakElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Retrieves any data regarding quarter-hour peak electricity consumption. This is based on the readings processed.
+
+    ### Query parameters
+    - *Only mandatory when explicitly marked with the **required** label. Can be omitted otherwise.*
+    - ``limit`` / ``offset``: Pagination for iterating when having large result sets.
+    - ``ordering``: Order by either ``read_at_start`` (ASC), ``-read_at_start`` (DESC), ``average_delivered`` (ASC) or \
+    ``-average_delivered`` (DESC).
+    - ``read_at_start__gte`` / ``read_at_start__lte``: Can be used for generic filtering the results \
+    returned by quarter-hour peak electricity START timestamp with the given datetime as placeholder `X` below. \
+    Note the ``Y-m-d HH:MM:SS`` format for `X`, in the local timezone. \
+    **Should be changed to ISO 8601 some day, supporting timezone hints.**
+    - ``average_delivered__gte`` / ``average_delivered__lte``: Can be used for generic filtering the results \
+    returned by the average calculated (In kW).
+    """
+
+    schema = DsmrReaderSchema(get="Quarter-hour peak electricity consumption: List")
+    FIELD = "read_at_start"
+    queryset = QuarterHourPeakElectricityConsumption.objects.all()
+    serializer_class = QuarterHourPeakElectricityConsumptionSerializer
+    filterset_class = QuarterHourPeakElectricityConsumptionFilter
+    ordering_fields = (FIELD, "average_delivered")
     ordering = FIELD
 
 
@@ -289,10 +321,10 @@ class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     - ⚠️ **Deprecated** ~`read_at`: Consumption timestamp must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
 
     ### Changes
-    - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3
+    - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
     """
 
-    schema = DsmrReaderSchema(get="Retrieve gas consumption")
+    schema = DsmrReaderSchema(get="Gas consumption: List")
     FIELD = "read_at"
     queryset = GasConsumption.objects.all()
     serializer_class = GasConsumptionSerializer
@@ -318,7 +350,7 @@ class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSe
     - ⚠️ **Deprecated** ~`day`: Date must **exactly match** the given value (``Y-m-d HH:MM:SS``).~
 
     ### Changes
-    - Deprecated the ``day`` query parameter in DSMR-reader v5.3
+    - Deprecated the ``day`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
 
 
     create:
@@ -328,9 +360,7 @@ class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSe
     - Should only be used to import historic data.
     """
 
-    schema = DsmrReaderSchema(
-        get="Retrieve day statistics", post="Create day statistics"
-    )
+    schema = DsmrReaderSchema(post="Day statistics: Create", get="Day statistics: List")
     FIELD = "day"
     queryset = DayStatistics.objects.all()
     serializer_class = DayStatisticsSerializer
@@ -356,10 +386,10 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
     - ⚠️ **Deprecated** ~`hour_start`: Hour start timestamp must **exactly match** the given value (`Y-m-d HH:MM:SS`).~
 
     ### Changes
-    - Deprecated the ``hour_start`` query parameter in DSMR-reader v5.3
+    - Deprecated the ``hour_start`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
     """
 
-    schema = DsmrReaderSchema(get="Retrieve hour statistics")
+    schema = DsmrReaderSchema(get="Hour statistics: List")
     FIELD = "hour_start"
     queryset = HourStatistics.objects.all()
     serializer_class = HourStatisticsSerializer
@@ -371,7 +401,7 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 class VersionView(APIView):
     """Returns the version of DSMR-reader you are running."""
 
-    schema = DsmrReaderSchema(get="Application version")
+    schema = DsmrReaderSchema(get="Application: Version")
 
     def get(self, request):
         return Response(
@@ -384,7 +414,7 @@ class VersionView(APIView):
 class MonitoringIssuesView(APIView):
     """Returns any monitoring issues found. Reflects the same (issue) data as displayed on the Status page."""
 
-    schema = DsmrReaderSchema(get="Application monitoring")
+    schema = DsmrReaderSchema(get="Application: Monitoring")
 
     def get(self, request):
         issues = dsmr_backend.services.backend.request_monitoring_status()
