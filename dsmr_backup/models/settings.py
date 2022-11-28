@@ -44,13 +44,13 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
     )
     file_name = models.CharField(
         max_length=96,
-        default="{prefix}-{day_name}-{backup_type}-{database_vendor}",
+        default="{prefix}-{database_vendor}-{backup_type}-{day_name}",
         verbose_name=_("Backup file name"),
         help_text=_(
             "Variables available: {prefix}, {day_name}, {backup_type} and {database_vendor}. "
             'Examples: {prefix} = "dsmrreader", {day_name} = "Friday", {backup_type} = "partial-backup" and '
             '{database_vendor} = "postgresql". Be advised to at least include the "{backup_type}" variable to '
-            'distinguish backup types. Defaults to "{prefix}-{day_name}-{backup_type}-{database_vendor}".'
+            'distinguish backup types. Defaults to "{prefix}-{database_vendor}-{backup_type}-{day_name}".'
         ),
     )
     compression_level = models.IntegerField(

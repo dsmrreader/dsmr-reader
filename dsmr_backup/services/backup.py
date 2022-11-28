@@ -82,12 +82,14 @@ def create_full(folder: str) -> str:
         logger.info(" - Creating non-existing backup folder: %s", folder)
         os.makedirs(folder)
 
+    file_name_format = "{}.sql".format(BackupSettings.get_solo().file_name)
+
     # @deprecated legacy - Will be removed in v6.x
     prefix = settings.DSMRREADER_BACKUP_NAME_PREFIX
 
     backup_file = os.path.join(
         folder,
-        "{prefix}-{day_name}-{backup_type}-{database_vendor}.sql".format(
+        file_name_format.format(
             prefix=prefix if prefix else "dsmrreader",
             day_name=formats.date_format(timezone.now().date(), "l"),
             backup_type="backup",
@@ -162,12 +164,14 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
         logger.info(" - Creating non-existing backup folder: %s", folder)
         os.makedirs(folder)
 
+    file_name_format = "{}.sql".format(BackupSettings.get_solo().file_name)
+
     # @deprecated legacy - Will be removed in v6.x
     prefix = settings.DSMRREADER_BACKUP_NAME_PREFIX
 
     backup_file = os.path.join(
         folder,
-        "{prefix}-{day_name}-{backup_type}-{database_vendor}.sql".format(
+        file_name_format.format(
             prefix=prefix if prefix else "dsmrreader",
             day_name=formats.date_format(timezone.now().date(), "l"),
             backup_type="partial-backup",
