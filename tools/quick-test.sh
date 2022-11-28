@@ -34,14 +34,4 @@ fi
 
 
 echo ""
-echo "--- Running safety (insecure packages check)..."
-poetry run safety check --bare
-
-if [ $? -ne 0 ]; then
-    echo "[!] Failure"
-    exit 1;
-fi
-
-
-echo ""
 echo ">>> Ensure to run 'Check translations' manually, when required..."
