@@ -30,7 +30,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             action="store_true",
             dest="use_demo_mode_and_override_checks",
             default=False,
-            help="Optional for production: Override checks and runs in demo mode",
+            help="Optional for production: Override checks and runs in demo mode. NEVER USE THIS",
         )
         parser.add_argument(
             "--with-gas",
@@ -101,7 +101,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         now = timezone.now() + timezone.timedelta(hours=int(hour_offset))
         now = timezone.localtime(now)  # Must be local.
 
-        # COS or SIN graph for some purposes
+        # COS or SIN for some fancy graphs.
         graph_base = math.cos(now.timestamp() / 20)
 
         current_unix_time = time.mktime(now.timetuple())
@@ -118,29 +118,21 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         electricity_2_returned = electricity_base * 0.8
         gas = electricity_base * 0.3  # Random as well.
 
+        # Delivered and returned MAY be used simultaneously.
+        # Some phases will return zero, even though the numbers make no sense.
         current_base = abs(graph_base)
-        currently_delivered_l1 = current_base + random.randint(0, 100) * 0.001  # kW
-        currently_delivered_l2 = current_base + random.randint(0, 250) * 0.001  # kW
-        currently_delivered_l3 = current_base + random.randint(0, 800) * 0.001  # kW
+        currently_delivered_l1 = 0
+        currently_delivered_l2 = current_base + random.randint(0, 25) * 0.001  # kW
+        currently_delivered_l3 = current_base + random.randint(0, 100) * 0.001  # kW
         currently_delivered = (
             currently_delivered_l1 + currently_delivered_l2 + currently_delivered_l3
         )
-        currently_returned_l1 = current_base + random.randint(0, 100) * 0.001  # kW
-        currently_returned_l2 = current_base + random.randint(0, 200) * 0.001  # kW
-        currently_returned_l3 = current_base + random.randint(0, 400) * 0.001  # kW
+        currently_returned_l1 = current_base + random.randint(0, 40) * 0.001  # kW
+        currently_returned_l2 = 0
+        currently_returned_l3 = 0
         currently_returned = (
             currently_returned_l1 + currently_returned_l2 + currently_returned_l3
         )
-
-        # Delivered and returned MAY be used simultaneously. But this asumes most setups, having it either direction.
-        if graph_base > 0:
-            currently_delivered = (
-                currently_delivered_l1
-            ) = currently_delivered_l2 = currently_delivered_l3 = 0
-        else:
-            currently_returned = (
-                currently_returned_l1
-            ) = currently_returned_l2 = currently_returned_l3 = 0
 
         # Voltage around 235 with 210 and 260 as bound (+ few random Volt)
         voltage_base = 235 + ((graph_base * 100) / 5)
