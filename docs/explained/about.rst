@@ -144,13 +144,23 @@ This pages allows you to export all day or hour statistics to CSV.
 About
 ^^^^^
 
-Shows the 'health' of the application and provides a lot of background information.
+Shows the 'health' of the application. Any issues will be reported here.
 
 You can also easily check for DSMR-reader updates here.
 
 .. image:: ../_static/screenshots/v5/frontend/about.png
     :target: ../_static/screenshots/v5/frontend/about.png
-    :alt: Status
+    :alt: About
+
+
+Support
+^^^^^^^
+
+Assists you in finding the information required for debugging your installation or any issues.
+
+.. image:: ../_static/screenshots/v5/frontend/support.png
+    :target: ../_static/screenshots/v5/frontend/support.png
+    :alt: Support
 
 
 Configuration
