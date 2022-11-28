@@ -12,24 +12,34 @@ Changelog
 Current version
 ===============
 
+.. contents:: :local:
+    :depth: 1
+
+
 .. tip::
 
     ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v5.9.0 - 2022-xx-xx
--------------------
+v5.9.0 - December 2022
+----------------------
 
 - ``Added`` Support for Python 3.11
 - ``Added`` Added new "Support" page to access help and debugging information more easily
 - ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] New REST API endpoint for listing quarter hour peak electricity consumption
-- ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_]New admin setting for changing backup intervals
+- ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_] New admin setting for changing backup intervals
 - ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] New admin setting for changing backup file names
+
+----
 
 - ``Changed`` Reworked API docs, updated Postman collection.
 - ``Changed`` Reworked "About" page, splitting it partially into the new "support" page.
 
+----
+
 - ``Removed`` Dropped "Export" menu item from the main menu, added a reference to it on the new "Support" page instead.
+
+----
 
 - ``Deprecated`` [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_] Prepared future removal of undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` env var for overriding backup intervals
 - ``Deprecated`` [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] Prepared future removal of undocumented ``DSMRREADER_BACKUP_NAME_PREFIX`` env var for overriding backup name prefix
@@ -41,8 +51,8 @@ v5.9.0 - 2022-xx-xx
     However, please **remove** these env vars from your installation if you use them and just use the admin interface instead.
 
 
-v5.8.0 - 2022-09-30
--------------------
+v5.8.0 - September 2022
+-----------------------
 
 - ``Fixed`` [`#1714 <https://github.com/dsmrreader/dsmr-reader/issues/1714>`_] Outgoing MQTT message queue not maintaining its own order
 
@@ -55,8 +65,8 @@ v5.8.0 - 2022-09-30
     The majority of users should be unaffected anyway.
 
 
-v5.7.0 - 2022-09-27
--------------------
+v5.7.0 - September 2022
+-----------------------
 
 - ``Added`` [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_] New undocumented ``DSMRREADER_BACKUP_INTERVAL_DAYS`` for overriding backup intervals - ⚠️ *Dropped again in future release*
 
@@ -64,8 +74,8 @@ v5.7.0 - 2022-09-27
 - ``Changed`` [`#1711 <https://github.com/dsmrreader/dsmr-reader/issues/1711>`_] Gebruik temperature ipv groundtemperature uit Buienradar API - by @mind04
 
 
-v5.6.0 - 2022-08-02
--------------------
+v5.6.0 - August 2022
+--------------------
 
 - ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] Added peak consumption live graph
 
@@ -73,14 +83,14 @@ v5.6.0 - 2022-08-02
 - ``Changed`` [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_] Deselect live electricity graph kWh totals by default
 
 
-v5.5.1 - 2022-07-27
--------------------
+v5.5.1 - July 2022
+------------------
 
 - ``Fixed`` [`#1677 <https://github.com/dsmrreader/dsmr-reader/issues/1677>`_] Unable to configure dropbox backup - Dropbox SDK downgrade
 
 
-v5.5.0 - 2022-07-15
--------------------
+v5.5.0 - July 2022
+------------------
 
 - ``Added`` [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_] Total kWh consumed/returned (diff) in live electricity graph
 
@@ -90,8 +100,8 @@ v5.5.0 - 2022-07-15
 - ``Changed`` [`#979 <https://github.com/dsmrreader/dsmr-reader/issues/979>`_] Reworked live graphs a bit, dropped inverse graphs too
 
 
-v5.4.0 - 2022-07-07
--------------------
+v5.4.0 - July 2022
+------------------
 
 - ``Changed`` [`#1390 <https://github.com/dsmrreader/dsmr-reader/issues/1390>`_] Pie charts in Trends vervangen door bar/line chart
 - ``Changed`` [`#1652 <https://github.com/dsmrreader/dsmr-reader/issues/1652>`_] Energiecontracten makkelijker kunnen klonen
@@ -99,8 +109,8 @@ v5.4.0 - 2022-07-07
 - ``Changed`` [`#1646 <https://github.com/dsmrreader/dsmr-reader/issues/1646>`_] Added comment regarding MinderGas upload mechanism
 
 
-v5.3.0 - 2022-06-09
--------------------
+v5.3.0 - June 2022
+------------------
 
 - ``Added`` [`#1640 <https://github.com/dsmrreader/dsmr-reader/issues/1640>`_] New API endpoint for fetching the energy supplier price (contracts) entered in DSMR-reader
 
@@ -108,8 +118,8 @@ v5.3.0 - 2022-06-09
 - ``Changed`` [`#1623 <https://github.com/dsmrreader/dsmr-reader/issues/1623>`_] Improved Dropbox connection error handling a bit
 
 
-v5.2.0 - 2022-05-24
--------------------
+v5.2.0 - May 2022
+-----------------
 
 - ``Added`` [`#1084 <https://github.com/dsmrreader/dsmr-reader/issues/1084>`_] Support for tracking quarter peak electricity consumption *(due to upcoming changes in Belgium's policy)*
 - ``Added`` [`#1559 <https://github.com/dsmrreader/dsmr-reader/issues/1559>`_] Meterstand tonen bij energiecontracten
@@ -124,7 +134,7 @@ v5.2.0 - 2022-05-24
 - ``Fixed`` [`#1631 <https://github.com/dsmrreader/dsmr-reader/issues/1631>`_] Meter statistics tariff description field update
 
 
-v5.1.0 - 2022-03-01
+v5.1.0 - March 2022
 -------------------
 
 .. danger::
@@ -152,8 +162,8 @@ v5.1.0 - 2022-03-01
 - ``Fixed`` [`#1591 <https://github.com/dsmrreader/dsmr-reader/issues/1591>`_] Added headers to XHR responses to prevent browser caching
 
 
-v5.0.0 - 2022-02-07
--------------------
+v5.0.0 - Februari 2022
+----------------------
 
 .. seealso::
 
