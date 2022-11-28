@@ -1,6 +1,11 @@
 from django.urls.conf import path
 
-from dsmr_frontend.views.about import About, AboutXhrUpdateCheck, AboutXhrDebugInfo
+from dsmr_frontend.views.about import About, AboutXhrUpdateCheck
+from dsmr_frontend.views.support import (
+    Support,
+    SupportXhrDebugInfo,
+    SupportXhrLatestTelegram,
+)
 from dsmr_frontend.views.configuration import Configuration
 from dsmr_frontend.views.dashboard import Dashboard
 from dsmr_frontend.views.archive import Archive, ArchiveXhrSummary, ArchiveXhrGraphs
@@ -86,9 +91,6 @@ urlpatterns = [
         AboutXhrUpdateCheck.as_view(),
         name="about-xhr-update-check",
     ),
-    path(
-        "about/xhr/debug-info", AboutXhrDebugInfo.as_view(), name="about-xhr-debug-info"
-    ),
     path("notifications", Notifications.as_view(), name="notifications"),
     # Docs.
     path("docs/api/redoc", RedocApiDocs.as_view(), name="redoc-api-docs"),
@@ -101,9 +103,20 @@ urlpatterns = [
         "v5-upgrade-redirect", V5UpgradeRedirect.as_view(), name="v5-upgrade-redirect"
     ),
     # Views always requiring authentication.
+    path("support", Support.as_view(), name="support"),
     path("configuration", Configuration.as_view(), name="configuration"),
     path("export", Export.as_view(), name="export"),
     path("export/csv", ExportAsCsv.as_view(), name="export-as-csv"),
+    path(
+        "support/xhr/debug-info",
+        SupportXhrDebugInfo.as_view(),
+        name="support-xhr-debug-info",
+    ),
+    path(
+        "support/xhr/latest-telegram",
+        SupportXhrLatestTelegram.as_view(),
+        name="support-xhr-latest-telegram",
+    ),
     path(
         "notifications/xhr/mark-read",
         XhrMarkNotificationRead.as_view(),

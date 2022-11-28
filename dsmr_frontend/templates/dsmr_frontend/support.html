@@ -1,0 +1,180 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate "Support" %}{% endblock %}
+{% block header %}{% translate "Support" %} &nbsp; <i class="fas fa-handshake-angle"></i>{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fa-solid fa-circle-info"></i> &nbsp; {% translate "Help" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Looking for something specific? A good place to start might be the FAQ" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa-regular fa-circle-question"></i> &nbsp; <a href="{% url 'frontend:docs-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "Frequently asked questions (FAQ)" %} </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Did something change after updating? Check out the latest changes" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-arrows-turn-to-dots"></i> &nbsp; <a href="{% url 'frontend:changelog-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View changelog" %} </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Do you want to access your data using scripts or other software? Check out the API" %}:
+                        </div>
+
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-robot"></i> &nbsp; <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank" rel="noopener noreferrer">{% translate "View API docs" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fa-brands fa-github"></i> &nbsp; {% translate "Issues reported" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "View issues reported on GitHub that are still open" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-bug"></i> &nbsp; <a href="https://github.com/dsmrreader/dsmr-reader/issues" target="_blank" rel="noopener noreferrer">{% translate "View open issues" %} </a>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Check out previous and recent issues reported on GitHub" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-bug-slash"></i> &nbsp; <a href="https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc" target="_blank" rel="noopener noreferrer">{% translate "View previous issues" %} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fa-solid fa-code"></i> &nbsp; {% translate "Debug info dump" %}
+                </header>
+                <div class="panel-body">
+                    <a href="#" data-trigger="click">{% translate "Show debug info dump" %}</a>
+                    <pre class="xhr-hidden" id="debug_info_dump_result"></pre>
+                    <br><br>
+                    <small>
+                        {% translate "A technical summary of how your DSMR-reader installation runs." %}
+                        {% translate "Please attach this information, if prompted, when creating a new GitHub issue." %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fa-solid fa-plug-circle-exclamation"></i> &nbsp; {% translate "Telegram data" %}
+                </header>
+                <div class="panel-body">
+                    <a href="#" data-trigger="click">{% translate "Show telegram" %}</a>
+                    <pre class="xhr-hidden" id="latest_telegram_result"></pre>
+                    <br><br>
+                    <small>
+                        {% translate "One of your latest telegrams received." %}
+                        {% translate "Useful when debugging your situation or verifying DSMR-reader's behaviour." %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <i class="fa-solid fa-download"></i> &nbsp; {% translate "Data" %}
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "You can easily export your data here" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-file-excel"></i> &nbsp; <a href="{% url 'frontend:export' %}">{% translate "Export" %} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        fetch_xhr_debug_info();
+        fetch_xhr_latest_telegram();
+
+        $('[data-trigger=click]').click(on_toggle_click);
+    });
+
+    function on_toggle_click()
+    {
+        $(this).hide().siblings().show();
+        return false;
+    }
+
+    function fetch_xhr_debug_info()
+    {
+        $.ajax({
+            dataType: "json",
+            url: "{% url 'frontend:support-xhr-debug-info' %}",
+        }).done(function(response) {
+            $("#debug_info_dump_result").html(response.dump);
+        });
+    }
+
+    function fetch_xhr_latest_telegram()
+    {
+        $.ajax({
+            dataType: "json",
+            url: "{% url 'frontend:support-xhr-latest-telegram' %}",
+        }).done(function(response) {
+            $("#latest_telegram_result").html(response.telegram);
+        });
+    }
+
+</script>
+{% endblock %}

@@ -207,11 +207,13 @@ class TestAlwaysRequireLoginDisabled(TestCase):
         "v5-upgrade-redirect",
         "configuration",
         "status",
+        "support",
         "export",
         "export-as-csv",
         "notification-xhr-mark-read",
         "notification-xhr-mark-all-read",
-        "about-xhr-debug-info",
+        "support-xhr-debug-info",
+        "support-xhr-latest-telegram",
         "trends-xhr-avg-consumption",
         "trends-xhr-consumption-by-tariff",
     )
@@ -265,7 +267,7 @@ class TestAlwaysRequireLoginEnabledAndNotLoggedIn(TestAlwaysRequireLoginDisabled
 
 
 class TestAlwaysRequireLoginEnabledAndLoggedIn(TestAlwaysRequireLoginDisabled):
-    """Restricted and but logged in."""
+    """Restricted and logged in."""
 
     ALWAYS_REQUIRE_LOGIN = True
     LOGGED_IN = True

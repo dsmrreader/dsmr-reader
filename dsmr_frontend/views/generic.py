@@ -44,11 +44,11 @@ class ReadTheDocsRedirectView(RedirectView):
 
 
 class ChangelogRedirect(ReadTheDocsRedirectView):
-    subpage = "changelog.html"
+    subpage = "reference/changelog.html"
 
 
 class DocsRedirect(ReadTheDocsRedirectView):
-    subpage = "faq.html"
+    subpage = "how-to/index.html"
 
 
 class FeedbackRedirect(ReadTheDocsRedirectView):
@@ -56,7 +56,7 @@ class FeedbackRedirect(ReadTheDocsRedirectView):
 
 
 class DonationsRedirect(ReadTheDocsRedirectView):
-    subpage = "donations.html"
+    subpage = "how-to/donate/thanks.html"
 
 
 class V5UpgradeRedirect(ReadTheDocsRedirectView):

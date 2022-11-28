@@ -3,8 +3,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% translate "About &amp; support" %}{% endblock %}
-{% block header %}{% translate "About &amp; support" %} &nbsp; <i class="fas fa-robot"></i>{% endblock %}
+{% block title %}{% translate "About" %}{% endblock %}
+{% block header %}{% translate "About" %} &nbsp; <i class="fas fa-robot"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
@@ -14,12 +14,14 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fas fa-question"></i> &nbsp; {% translate "About" %}
+                    {% translate "Version" %}
                 </header>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
-                            {% translate "Currently installed" %}: <strong>DSMR-reader v{{ dsmr_version }}</strong>
+                            {% translate "DSMR-reader" %}: <strong>v{{ dsmr_version }}</strong>
+                            <br><br>
+                            <a href="{% url 'frontend:changelog-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View changelog" %} </a>
                         </div>
                         <div class="col-sm-6">
                             <a class="btn btn-info trigger-update-check" href="#">{% translate "Check for updates" %}</a>
@@ -37,27 +39,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">&nbsp;</div>
-                    {% for current in monitoring_issues %}
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="alert alert-without-padding alert-danger" role="alert">
-                                    <i class="fas fa-exclamation-triangle"></i> &nbsp; <strong>{{ current.description }}</strong>
-                                    &nbsp;
-                                    <small>(<strong>{{ current.since|naturaltime|default:'-' }}</strong>)</small>
-                                </div>
-
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="alert alert-without-padding alert-success" role="alert">
-                                    <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -67,76 +48,40 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fas fa-bullhorn"></i> &nbsp; {% translate "Support" %}
+                    {% translate "Status" %}
                 </header>
                 <div class="panel-body">
+                {% for current in monitoring_issues %}
                     <div class="row">
-                        <div class="col-sm-6">
-                            {% translate "Looking for something specific? A good place to start might be the FAQ" %}:
-                        </div>
-                        <div class="col-sm-6">
-                            <i class="fa-regular fa-circle-question"></i> &nbsp; <a href="{% url 'frontend:docs-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View frequently asked questions (FAQ)" %} </a>
-                        </div>
-                    </div>
-                    <div class="row">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {% translate "Did something change after updating? Check out the latest changes" %}:
-                        </div>
-                        <div class="col-sm-6">
-                            <i class="fa-solid fa-arrows-turn-to-dots"></i> &nbsp; <a href="{% url 'frontend:changelog-redirect' %}" target="_blank" rel="noopener noreferrer">{% translate "View changelog" %} </a>
-                        </div>
-                    </div>
-                    <div class="row">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <small>{% translate "Still need troubleshooting? Check out current issues on GitHub" %}:</small>
-                        </div>
-                        <div class="col-sm-6">
-                            <i class="fa-solid fa-bullhorn"></i> &nbsp; <a href="https://github.com/dsmrreader/dsmr-reader/issues" target="_blank" rel="noopener noreferrer">{% translate "View DSMR-reader issues on GitHub (or create one)" %} </a>
-                        </div>
-                    </div>
-                    <div class="row">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <small>{% translate "For new GitHub issues, please supply a debug info dump as well:" %}</small>
-                        </div>
-                        <div class="col-sm-6">
-                            <i class="fa-solid fa-stethoscope"></i>
-                            &nbsp;
-                            {% if user.is_authenticated %}
-                            <a class="btn btn-info trigger-debug-info" href="#">{% translate "View 'dsmr_debuginfo' dump" %}</a>
-                            {% else %}
-                            <a class="btn btn-danger" href="{% url 'admin:login' %}?next={% url 'frontend:about' %}">{% translate "View 'dsmr_debuginfo' dump" %}</a> &nbsp; <small><i class="fas fa-lock"></i> &nbsp; {% translate "Login required" %}</small>
-                            {% endif %}
-                            <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden debug-info"></i>
-                        </div>
-                    </div>
-                    <div class="row debug-info xhr-hidden">
                         <div class="col-sm-12">
-                            <pre id="debug_info_result"></pre>
-                        </div>
-                    </div>
-                    <div class="row">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {% translate "Do you want to access your data using scripts or other software? Check out the API:" %}
-                        </div>
+                            <div class="alert alert-without-padding alert-danger" role="alert">
+                                <i class="fas fa-exclamation-triangle"></i> &nbsp; <strong>{{ current.description }}</strong>
+                                &nbsp;
+                                <small>(<strong>{{ current.since|naturaltime|default:'-' }}</strong>)</small>
+                            </div>
 
-                        <div class="col-sm-6">
-                            <i class="fa-solid fa-robot"></i> &nbsp; <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank" rel="noopener noreferrer">{% translate "View API docs" %}</a>
                         </div>
                     </div>
+                {% empty %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-without-padding alert-success" role="alert">
+                                <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 
+
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
-                    <i class="fas fa-code"></i> &nbsp; {% translate "Credits" %}
+                    {% translate "Credits" %}
                 </header>
                 <div class="panel-body">
                     <div class="row">
@@ -144,10 +89,24 @@
                             {% translate "Originally created and authored by" %}
                         </div>
                         <div class="col-sm-6">
-                            <i class="fa-solid fa-user-ninja">
+                            <i class="fa-solid fa-user-ninja"></i>
                                 &nbsp;
-                            <a href="https://linkedin.com/in/dennissiemensma" target="_blank">
-                                </i>Dennis Siemensma&nbsp; <i class="far fa-xs fa-copyright"></i> 2015 - {% now "Y" %}
+                            <a href="https://github.com/dennissiemensma" target="_blank">
+                                Dennis Siemensma
+                            </a>
+                            &nbsp; <i class="far fa-xs fa-copyright"></i> 2015 - {% now "Y" %}
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% translate "Improved by" %}
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-people-group"></i>
+                            &nbsp;
+                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank" rel="noopener noreferrer">
+                                {% translate "Many contributors" %}
                             </a>
                         </div>
                     </div>
@@ -164,19 +123,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {% translate "Improved by" %}
-                        </div>
-                        <div class="col-sm-6">
-                            <i class="fa-solid fa-people-group"></i>
-                            &nbsp;
-                            <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html" target="_blank" rel="noopener noreferrer">
-                                {% translate "Many contributors" %}
-                            </a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -193,12 +140,6 @@
         $('.trigger-update-check').click(function(){
     	    $('.trigger-update-check').hide();
    		    fetch_xhr_update_check();
-   		    return false;
-    	})
-
-    	$('.trigger-debug-info').click(function(){
-    	    $('.trigger-debug-info').hide();
-   		    fetch_xhr_debug_info();
    		    return false;
     	})
     });
@@ -218,20 +159,6 @@
             }
         }).always(function(){
             $(".xhr-loader").filter('.update-check').hide();
-        });
-    }
-
-    function fetch_xhr_debug_info()
-    {
-        $(".xhr-loader").filter(".debug-info").removeClass("hidden").show();
-
-        $.ajax({
-            dataType: "json",
-            url: "{% url 'frontend:about-xhr-debug-info' %}",
-        }).done(function(response) {
-            $(".xhr-loader").filter(".debug-info").hide();
-            $("#debug_info_result").html(response.dump);
-            $(".xhr-hidden").filter(".debug-info").show();
         });
     }
 

@@ -106,25 +106,25 @@
                             &nbsp;&nbsp;
                         </li>
                         <li>
-                            <a href="{% url 'frontend:about' %}">
-                                <i class="fas fa-robot"></i> &nbsp;
-                                <small>
-                                    {% translate "About &amp; support" %}
-
-                                    {% if request_cached_monitoring_status %}
-                                    &nbsp; <span class="badge bg-red">{{ request_cached_monitoring_status|length }}</span>
-                                    {% endif %}
-                                </small>
-                            </a>
-                        </li>
-                        <li>
 				            <a href="{% url 'frontend:configuration' %}">
 				                <i class="fas fa-xs fa-wrench"></i> &nbsp; <small>{% translate "Configuration" %}</small>
 				            </a>
 			            </li>
                         <li>
-                            <a href="{% url 'frontend:export' %}">
-                                <i class="fas fa-xs fa-download"></i> &nbsp; <small>{% translate "Export" %}</small>
+				            <a href="{% url 'frontend:support' %}">
+				                <i class="fas fa-xs fa-handshake-angle"></i> &nbsp; <small>{% translate "Support" %}</small>
+				            </a>
+			            </li>
+                        <li>
+                            <a href="{% url 'frontend:about' %}">
+                                <i class="fas fa-xs fa-robot"></i> &nbsp;
+                                <small>
+                                    {% translate "About" %}
+
+                                    {% if monitoring_status_issues %}
+                                    &nbsp; <span class="badge bg-red">{{ monitoring_status_issues|length }}</span>
+                                    {% endif %}
+                                </small>
                             </a>
                         </li>
                     </ul>
