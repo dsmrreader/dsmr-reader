@@ -63,8 +63,11 @@ class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "topic", "formatting", "use_local_timezone"],
-                "description": _("Triggered by any method of reading insertion (datalogger or API).") + " " +
-                _(
+                "description": _(
+                    "Triggered by any method of reading insertion (datalogger or API)."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
                     "used in the JSON message. Removing lines will remove fields from the message as well. "
                     """Default value:
@@ -91,8 +94,11 @@ class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting", "use_local_timezone"],
-                "description": _("Triggered by any method of reading insertion (datalogger or API).") + " " +
-                _(
+                "description": _(
+                    "Triggered by any method of reading insertion (datalogger or API)."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
                     "name to a different topic. Removing lines will prevent those fields from being broadcast as well. "
                     """Default value:
@@ -122,8 +128,11 @@ class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "topic", "formatting"],
-                "description": _("Triggered by any method of reading insertion (datalogger or API).") + " " +
-                _(
+                "description": _(
+                    "Triggered by any method of reading insertion (datalogger or API)."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
                     "used in the JSON message. Removing lines will remove fields from the message as well. "
                     """Default value:
@@ -150,8 +159,11 @@ class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _("Triggered by any method of reading insertion (datalogger or API).") + " " +
-                _(
+                "description": _(
+                    "Triggered by any method of reading insertion (datalogger or API)."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
                     "name to a different topic. Removing lines will prevent those fields from being broadcast as well. "
                     """Default value:
@@ -181,8 +193,11 @@ class JSONPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "topic", "formatting"],
-                "description": _("Contains the totals for the current month and current year.") + " " +
-                _(
+                "description": _(
+                    "Contains the totals for the current month and current year."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
                     "used in the JSON message. Removing lines will remove fields from the message as well. "
                     """Default value:
@@ -209,8 +224,11 @@ class SplitTopicPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _("Contains the totals for the current month and current year.") + " " +
-                _(
+                "description": _(
+                    "Contains the totals for the current month and current year."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
                     "name to a different topic. Removing lines will prevent those fields from being broadcast as well. "
                     """Default value:
@@ -237,8 +255,11 @@ class SplitTopicMeterStatisticsMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _("Triggered by any method of reading insertion (datalogger or API).") + " " +
-                _(
+                "description": _(
+                    "Triggered by any method of reading insertion (datalogger or API)."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
                     "name to a different topic. Removing lines will prevent those fields from being broadcast as well. "
                     """Default value:
@@ -268,8 +289,9 @@ class JSONGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "topic", "formatting"],
-                "description": _("Triggered when a different gas reading is processed.") + " " +
-                _(
+                "description": _("Triggered when a different gas reading is processed.")
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
                     "used in the JSON message. Removing lines will remove fields from the message as well. "
                     """Default value:
@@ -296,8 +318,9 @@ class SplitTopicGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _("Triggered when a different gas reading is processed.") + " " +
-                _(
+                "description": _("Triggered when a different gas reading is processed.")
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
                     "name to a different topic. Removing lines will prevent those fields from being broadcast as well. "
                     """Default value:
@@ -327,8 +350,11 @@ class JSONQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(SingletonModelA
             None,
             {
                 "fields": ["enabled", "topic", "formatting"],
-                "description": _("Triggered when a quarter-hour peak consumption is calculated.") + " " +
-                _(
+                "description": _(
+                    "Triggered when a quarter-hour peak consumption is calculated."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
                     "used in the JSON message. Removing lines will remove fields from the message as well. "
                     """Default value:
@@ -357,8 +383,11 @@ class SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _("Triggered when a quarter-hour peak consumption is calculated.") + " " +
-                _(
+                "description": _(
+                    "Triggered when a quarter-hour peak consumption is calculated."
+                )
+                + " "
+                + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
                     "name to a different topic. Removing lines will prevent those fields from being broadcast as well. "
                     """Default value:

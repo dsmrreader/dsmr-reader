@@ -13,7 +13,11 @@ from dsmr_mqtt.models.settings import (
     consumption,
     period_totals,
 )
-from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
+from dsmr_consumption.models.consumption import (
+    ElectricityConsumption,
+    GasConsumption,
+    QuarterHourPeakElectricityConsumption,
+)
 from dsmr_datalogger.models.statistics import MeterStatistics
 import dsmr_consumption.services
 import dsmr_mqtt.services.messages
@@ -21,7 +25,6 @@ import dsmr_stats.services
 
 
 def publish_raw_dsmr_telegram(data: str) -> None:
-    """Publishes a raw DSMR telegram string to a broker, if set and enabled."""
     raw_settings = telegram.RawTelegramMQTTSettings.get_solo()
 
     if not raw_settings.enabled:
@@ -31,7 +34,6 @@ def publish_raw_dsmr_telegram(data: str) -> None:
 
 
 def publish_json_dsmr_reading(reading: DsmrReading) -> None:
-    """Publishes a JSON formatted DSMR reading to a broker, if set and enabled."""
     json_settings = telegram.JSONTelegramMQTTSettings.get_solo()
 
     if not json_settings.enabled:
@@ -49,7 +51,6 @@ def publish_json_dsmr_reading(reading: DsmrReading) -> None:
 
 
 def publish_split_topic_dsmr_reading(reading: DsmrReading) -> None:
-    """Publishes a DSMR reading to a broker, formatted in a separate topic per field name, if set and enabled."""
     split_topic_settings = telegram.SplitTopicTelegramMQTTSettings.get_solo()
 
     if not split_topic_settings.enabled:
@@ -65,7 +66,6 @@ def publish_split_topic_dsmr_reading(reading: DsmrReading) -> None:
 
 
 def publish_day_consumption() -> None:
-    """Publishes day consumption to a broker, if set and enabled."""
     json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
     split_topic_settings = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
 
@@ -98,7 +98,6 @@ def publish_day_consumption() -> None:
 
 
 def publish_json_period_totals() -> None:
-    """Publishes JSON formatted period totals to a broker, if set and enabled."""
     json_settings = period_totals.JSONCurrentPeriodTotalsMQTTSettings.get_solo()
 
     if not json_settings.enabled:
@@ -117,7 +116,6 @@ def publish_json_period_totals() -> None:
 
 
 def publish_split_topic_period_totals() -> None:
-    """Publishes period totals to a broker, formatted in a separate topic per field name, if set and enabled."""
     split_topic_settings = (
         period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo()
     )
@@ -163,7 +161,6 @@ def convert_period_totals() -> Dict:
 
 
 def publish_split_topic_meter_statistics() -> None:
-    """Publishes meter statistics to a broker, formatted in a separate topic per field name, if set and enabled."""
     split_topic_settings = (
         meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
     )
@@ -178,7 +175,6 @@ def publish_split_topic_meter_statistics() -> None:
 
 
 def publish_json_gas_consumption(instance: GasConsumption) -> None:
-    """Publishes JSON formatted gas consumption to a broker, if set and enabled."""
     json_settings = consumption.JSONGasConsumptionMQTTSettings.get_solo()
 
     if not json_settings.enabled:
@@ -192,7 +188,6 @@ def publish_json_gas_consumption(instance: GasConsumption) -> None:
 
 
 def publish_split_topic_gas_consumption(instance: GasConsumption) -> None:
-    """Publishes gas consumption to a broker, formatted in a separate topic per field name, if set and enabled."""
     split_topic_settings = consumption.SplitTopicGasConsumptionMQTTSettings.get_solo()
 
     if not split_topic_settings.enabled:
@@ -200,6 +195,38 @@ def publish_split_topic_gas_consumption(instance: GasConsumption) -> None:
 
     publish_split_topic_data(
         mapping_format=split_topic_settings.formatting, data_source=instance
+    )
+
+
+def publish_split_topic_quarter_hour_peak_consumption(
+    instance: QuarterHourPeakElectricityConsumption,
+) -> None:
+    split_topic_settings = (
+        consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
+    )
+
+    if not split_topic_settings.enabled:
+        return
+
+    publish_split_topic_data(
+        mapping_format=split_topic_settings.formatting, data_source=instance
+    )
+
+
+def publish_json_quarter_hour_peak_consumption(
+    instance: QuarterHourPeakElectricityConsumption,
+) -> None:
+    json_settings = (
+        consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
+    )
+
+    if not json_settings.enabled:
+        return
+
+    publish_json_data(
+        topic=json_settings.topic,
+        mapping_format=json_settings.formatting,
+        data_source=instance,
     )
 
 
