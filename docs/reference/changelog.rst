@@ -36,6 +36,7 @@ v5.9.0 - December 2022
 
 - ``Changed`` Reworked API docs, updated Postman collection.
 - ``Changed`` Reworked "About" page, splitting it partially into the new "support" page.
+- ``Changed`` Reworked small GUI stuff, updated some icons.
 
 ----
 

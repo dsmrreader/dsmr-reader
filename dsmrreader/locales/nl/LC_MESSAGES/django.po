@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-29 20:31+0100\n"
+"POT-Creation-Date: 2022-11-29 22:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1494,12 +1494,6 @@ msgstr "Ongelezen notificaties"
 msgid "Go to notification overview"
 msgstr "Ga naar notificatieoverzicht"
 
-msgid "The data displayed here is only for giving you a global reference regarding static costs or historic meter positions. DSMR-reader does NOT simulate your energy supplier's invoice, nor it will ever do in a future release."
-msgstr "De getoonde gegevens hier zijn er puur om je een globale indicatie te geven qua kosten of historische meterstanden. DSMR-reader simuleert NIET je energierekening en zal dat ook nooit doen."
-
-msgid "All data is based on whether you have set prices for each type of consumption. For example, omitting a contract's gas price will hide gas consumption for that contract."
-msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. Bijvoorbeeld het weglaten van de gasprijs bij een contract verbergt daar de gasconsumptie."
-
 msgid "day"
 msgid_plural "days"
 msgstr[0] "dag"
@@ -1835,20 +1829,26 @@ msgstr "Wil je je gegevens geautomatiseerd benaderen via scripts of andere softw
 msgid "View API docs"
 msgstr "Bekijk API-documentatie"
 
-msgid "Issues reported"
-msgstr "Gerapporteerde issues"
+msgid "Reporting problems / Feature requests"
+msgstr "Gerapporteerde problemen / feature requests"
 
-msgid "View issues reported on GitHub that are still open"
-msgstr "Bekijk gerapporteerde issues op GitHub die nog open staan"
+msgid "View open problems/requests reported"
+msgstr "Bekijk open gerapporteerde problemen / feature requests"
 
-msgid "View open issues"
-msgstr "Bekijken openstaande issues"
+msgid "View open issues on GitHub"
+msgstr "Bekijk openstaande issues op Github"
 
-msgid "Check out previous and recent issues reported on GitHub"
-msgstr "Bekijk vorige en recente gerapporteerde issues op GitHub"
+msgid "Check out previous and recent problems/requests"
+msgstr "Bekijk vorige en recente gerapporteerde problemen/verzoeken"
 
-msgid "View previous issues"
-msgstr "Bekijk voorgaande issues"
+msgid "View previous issues on GitHub"
+msgstr "Bekijk voorgaande issues op Github"
+
+msgid "Previous discussions and Q&A's"
+msgstr "Voorgaande discussies & vraag/antwoorden"
+
+msgid "View discussions/Q&A on GitHub"
+msgstr "Bekijk discussies & vraag/antwoorden op Github"
 
 msgid "Debug info dump"
 msgstr "Debug info dump"
@@ -2736,6 +2736,18 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Issues reported"
+#~ msgstr "Gerapporteerde issues"
+
+#~ msgid "View issues reported on GitHub that are still open"
+#~ msgstr "Bekijk gerapporteerde issues op GitHub die nog open staan"
+
+#~ msgid "The data displayed here is only for giving you a global reference regarding static costs or historic meter positions. DSMR-reader does NOT simulate your energy supplier's invoice, nor it will ever do in a future release."
+#~ msgstr "De getoonde gegevens hier zijn er puur om je een globale indicatie te geven qua kosten of historische meterstanden. DSMR-reader simuleert NIET je energierekening en zal dat ook nooit doen."
+
+#~ msgid "All data is based on whether you have set prices for each type of consumption. For example, omitting a contract's gas price will hide gas consumption for that contract."
+#~ msgstr "Alle gegevens zijn gebaseerd op de ingestelde prijzen per energietype. Bijvoorbeeld het weglaten van de gasprijs bij een contract verbergt daar de gasconsumptie."
 
 #~ msgid ""
 #~ "Triggered by any method of reading insertion (datalogger or API). Allows you to send newly created readings to the MQTT broker, as a JSON message. You can alter the field names used in the JSON message. Removing lines will remove fields from the message as well. Default value:\n"

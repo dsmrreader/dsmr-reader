@@ -4,18 +4,12 @@
 {% load i18n %}
 
 {% block title %}{% translate "Energy contracts" %}{% endblock %}
-{% block header %}{% translate "Energy contracts" %} &nbsp; <i class="fas fa-euro-sign"></i>{% endblock %}
+{% block header %}{% translate "Energy contracts" %} &nbsp; <i class="fa-solid fa-object-ungroup"></i>{% endblock %}
 
 {% block content %}
 <!-- Main content -->
 <section class="content">
 {% if capabilities.costs and energy_contracts %}
-	<div class="alert alert-info small-alert-info" role="alert">
-	    <span class="fas fa-info-circle"></span> &nbsp;
-        {% blocktranslate %}The data displayed here is only for giving you a global reference regarding static costs or historic meter positions. DSMR-reader does NOT simulate your energy supplier's invoice, nor it will ever do in a future release.{% endblocktranslate %}
-        {% blocktranslate %}All data is based on whether you have set prices for each type of consumption. For example, omitting a contract's gas price will hide gas consumption for that contract.{% endblocktranslate %}
-    </div>
-
     {% for current in energy_contracts %}
     <div class="row">
         <div class="col-sm-12">
