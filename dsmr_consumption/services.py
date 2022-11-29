@@ -140,14 +140,20 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     # We may not be able to track exactly 15 minutes, so adjust the average a bit based on the real duration.
     time_diff = last_reading.timestamp - first_reading.timestamp
 
+    # avg_delivered_in_quarter = kW QUARTER peak during ~15 minutes... x ~4 maps it to avg per hour for kW HOUR peak
+    average_delivered_hour = avg_delivered_in_quarter * Decimal(
+        3600 / time_diff.total_seconds()
+    )
+
+    # Make sure to round here.
+    average_delivered_hour = round_decimal(average_delivered_hour, decimal_count=3)
+
     new_instance = QuarterHourPeakElectricityConsumption.objects.create(
         # Using the reading timestamps used to ensure we can indicate gaps or lag in reading input.
         # E.g. due backend/datalogger process sleep or simply v4 meters emitting a reading only once per 10 seconds.
         read_at_start=first_reading.timestamp,
         read_at_end=last_reading.timestamp,
-        # avg_delivered_in_quarter = kW QUARTER peak during ~15 minutes... x ~4 maps it to avg per hour for kW HOUR peak
-        average_delivered=avg_delivered_in_quarter
-        * Decimal(3600 / time_diff.total_seconds()),
+        average_delivered=average_delivered_hour,
     )
     logger.debug(
         "Quarter hour peaks: Created %s (%s seconds diff)",
