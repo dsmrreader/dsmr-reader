@@ -26,7 +26,9 @@ v5.9.0 - December 2022
 
 - ``Added`` Support for Python 3.11
 - ``Added`` Added new "Support" page to access help and debugging information more easily
-- ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] New REST API endpoint for listing quarter hour peak electricity consumption
+- ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] Support for quarter-hour peak consumption split-topic MQTT messages - Sent after a new quarter-hour peak is calculated
+- ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] Support for quarter-hour peak consumption JSON MQTT messages - Sent after a new quarter-hour peak is calculated
+- ``Added`` [`#1635 <https://github.com/dsmrreader/dsmr-reader/issues/1635>`_] New REST API endpoint for listing quarter-hour peak electricity consumption
 - ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1685 <https://github.com/dsmrreader/dsmr-reader/issues/1685>`_] New admin setting for changing backup intervals
 - ``Added`` [`#1746 <https://github.com/dsmrreader/dsmr-reader/issues/1746>`_] [`#1609 <https://github.com/dsmrreader/dsmr-reader/issues/1609>`_] New admin setting for changing backup file names
 

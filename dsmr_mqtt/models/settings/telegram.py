@@ -94,7 +94,7 @@ phase_power_current_l3 = phase_power_current_l3
 
 
 class SplitTopicTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
-    """MQTT splitted telegram per field, mapped to topics."""
+    """MQTT telegram per field, mapped to split topic."""
 
     enabled = models.BooleanField(
         default=False,
