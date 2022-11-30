@@ -21,7 +21,7 @@ Latest version
     ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-v5.9.0 - December 2022
+v5.9.0 - November 2022
 ----------------------
 
 - ``Added`` Support for Python 3.11
