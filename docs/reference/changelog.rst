@@ -160,7 +160,7 @@ v5.1.0 - March 2022
 
 - ``Fixed`` [`dsmr-reader-docker/#1579 <https://github.com/xirixiz/dsmr-reader-docker/issues/268>`_] Increased remote datalogger its default log level from `INFO` to `ERROR`
 - ``Fixed`` [`#1579 <https://github.com/dsmrreader/dsmr-reader/issues/1579>`_] Fix docker issue with pg_dump not found - by @sanderdw
-- ``Fixed` [`#1523 <https://github.com/dsmrreader/dsmr-reader/issues/1523>`_]` Improved empty/error state in Trends
+- ``Fixed`` [`#1523 <https://github.com/dsmrreader/dsmr-reader/issues/1523>`_] Improved empty/error state in Trends
 - ``Fixed`` [`#1517 <https://github.com/dsmrreader/dsmr-reader/issues/1517>`_] Vergelijken geeft visueel verkeerde kleur bij negatief verschil
 - ``Fixed`` [`#1591 <https://github.com/dsmrreader/dsmr-reader/issues/1591>`_] Added headers to XHR responses to prevent browser caching
 
