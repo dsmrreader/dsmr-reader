@@ -9,8 +9,8 @@ Changelog
 ----
 
 
-Current version
-===============
+Latest version
+==============
 
 .. contents:: :local:
     :depth: 1
