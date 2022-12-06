@@ -2,7 +2,7 @@
     Default settings as defined in the base.py config.
     Some settings can be overridden by system env vars or the .env.
 """
-from decouple import Csv
+from decouple import Csv, Choices
 
 from dsmrreader.config.base import *
 from dsmrreader.config.django_overrides import *
@@ -13,7 +13,9 @@ import dsmrreader
 DSMR-reader project settings (non Django related).
 """
 
-DSMRREADER_LOGLEVEL = config("DSMRREADER_LOGLEVEL", cast=str, default=None)
+DSMRREADER_LOGLEVEL = config(
+    "DSMRREADER_LOGLEVEL", cast=Choices(["DEBUG", "WARNING", "ERROR"]), default=None
+)
 
 if DSMRREADER_LOGLEVEL in ("DEBUG", "WARNING"):
     LOGGING["loggers"]["dsmrreader"][
@@ -115,7 +117,7 @@ DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_DATABASE_SIZE = 1 * 1000 * 1000 * 1000  # 
 DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS = 3
 DSMRREADER_DAILY_NOTIFICATION_TIME_HOURS = 6  # E.g. 6 = 6 AM
 
-# The time scheduled processes are allowed to lagg behind before failing the monitoring.
+# The time scheduled processes are allowed to lag behind before failing the monitoring.
 DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES = 15
 
 # Days statistics should be generated daily.

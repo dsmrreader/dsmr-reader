@@ -130,7 +130,8 @@ def main():  # noqa: C901
         "DSMRREADER_REMOTE_DATALOGGER_SLEEP", default=0.5, cast=float
     )
     DATALOGGER_INPUT_METHOD = decouple.config(
-        "DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD"
+        "DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD",
+        cast=decouple.Choices(["serial", "ipv4"]),
     )
     DATALOGGER_API_HOSTS = decouple.config(
         "DSMRREADER_REMOTE_DATALOGGER_API_HOSTS", cast=decouple.Csv(post_process=tuple)

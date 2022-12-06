@@ -310,11 +310,12 @@ class TestScriptErrors(TestCase):
     )
     def test_main_with_unsupported_input_method(self):
         """Unsupported DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD."""
-        with self.assertRaises(RuntimeError) as e:
+        with self.assertRaises(ValueError) as e:
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
         self.assertEqual(
-            str(e.exception), "Unsupported DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD"
+            str(e.exception),
+            "Value not in list: 'non-existing'; valid values are ['serial', 'ipv4']",
         )
 
 

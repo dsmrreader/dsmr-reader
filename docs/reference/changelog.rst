@@ -21,10 +21,11 @@ Latest version
     ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
-
 v5.10.0 - XXX 2022
 ----------------------
 
+- ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD`` is now restricted to: ``DEBUG``, ``WARNING`` or ``ERROR``
+- ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_LOGLEVEL`` is now restricted to: ``serial`` or ``ipv4``
 
 
 v5.9.0 - November 2022
