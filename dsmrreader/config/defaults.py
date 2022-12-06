@@ -14,7 +14,7 @@ DSMR-reader project settings (non Django related).
 """
 
 DSMRREADER_LOGLEVEL = config(
-    "DSMRREADER_LOGLEVEL", cast=Choices(["DEBUG", "WARNING", "ERROR"]), default=None
+    "DSMRREADER_LOGLEVEL", cast=Choices(["DEBUG", "WARNING", "ERROR"]), default="ERROR"
 )
 
 if DSMRREADER_LOGLEVEL in ("DEBUG", "WARNING"):
