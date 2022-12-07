@@ -95,8 +95,8 @@ msgid "**Disk space**: 1+ GB - Depending on your smart meter and whether how man
 msgstr "**Schijfruimte**: 1+ GB - Afhankelijk van je slimme meter en de hoeveelheid metingen je wilt bewaren."
 
 #: ../../explained/about.rst:46
-msgid "**Code**: A `supported <https://devguide.python.org/#status-of-python-branches>`__ Python version."
-msgstr "**Code**: Een `ondersteunde <https://devguide.python.org/#status-of-python-branches>`__ Python-versie."
+msgid "**Code**: A `supported <https://devguide.python.org/versions/#python-release-cycle>`__ Python version."
+msgstr "**Code**: Een `ondersteunde <https://devguide.python.org/versions/#python-release-cycle>`__ Python-versie."
 
 #: ../../explained/about.rst:47
 msgid "**Database**: A `supported <https://www.postgresql.org/support/versioning/>`__ PostgreSQL version."

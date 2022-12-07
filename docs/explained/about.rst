@@ -43,7 +43,7 @@ Software requirements
 
 - **OS**: ``Raspbian OS`` or similar (or using Docker).
 - **Disk space**: 1+ GB - Depending on your smart meter and whether how many readings you want to preserve.
-- **Code**: A `supported <https://devguide.python.org/#status-of-python-branches>`__ Python version.
+- **Code**: A `supported <https://devguide.python.org/versions/#python-release-cycle>`__ Python version.
 - **Database**: A `supported <https://www.postgresql.org/support/versioning/>`__ PostgreSQL version.
 
 Note that this project is built with `Django <https://www.djangoproject.com/>`__, which decides which Python/DB versions are actually supported.
