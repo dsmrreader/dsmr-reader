@@ -84,7 +84,7 @@
         
 {% if notes %}
 	    {% for current_note in notes %}
-	    <div class="alert alert-warning" role="alert"><i class="fas fa-comments"></i> {{ current_note.description }}</div>
+	    <div class="alert alert-warning" role="alert"><i class="fas fa-comments"></i> {{ current_note.description|linebreaksbr }}</div>
 	    {% endfor %}
 {% endif %}
     </div>
