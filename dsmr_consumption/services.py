@@ -691,7 +691,7 @@ def clear_consumption() -> None:
 
 
 def summarize_energy_contracts() -> List[Dict]:
-    """Returns a summery of all energy contracts and some statistics along them."""
+    """Returns a summary of all energy contracts and some statistics along them."""
     import dsmr_stats.services  # Prevents circular import.
 
     data = []
