@@ -2,9 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import gettext as _
 from django.conf import settings
 
-import dsmr_consumption.services
 import dsmr_stats.services
-from dsmr_datalogger.models.reading import DsmrReading
 
 
 class Command(BaseCommand):
