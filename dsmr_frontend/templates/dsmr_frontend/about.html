@@ -14,6 +14,47 @@
         <div class="col-sm-12">
             <div class="panel">
                 <header class="panel-heading">
+                    {% translate "Application status" %}
+                    {% if monitoring_status_issues %}
+                        &nbsp;
+                        <span class="badge bg-red">
+                        {% blocktranslate count issue_counter=monitoring_status_issues|length %}
+                            {{ issue_counter }} issue
+                        {% plural %}
+                            {{ issue_counter }} issues
+                        {% endblocktranslate %}
+                        </span>
+                    {% endif %}
+                </header>
+                <div class="panel-body">
+                {% for current in monitoring_issues %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-without-padding alert-danger" role="alert">
+                                <i class="fas fa-exclamation-triangle"></i> &nbsp; <strong>{{ current.description }}</strong>
+                                &nbsp;
+                                <small>(<strong>{{ current.since|naturaltime|default:'-' }}</strong>)</small>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-without-padding alert-success" role="alert">
+                                <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <header class="panel-heading">
                     {% translate "Version" %}
                 </header>
                 <div class="panel-body">
@@ -43,39 +84,6 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% translate "Status" %}
-                </header>
-                <div class="panel-body">
-                {% for current in monitoring_issues %}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="alert alert-without-padding alert-danger" role="alert">
-                                <i class="fas fa-exclamation-triangle"></i> &nbsp; <strong>{{ current.description }}</strong>
-                                &nbsp;
-                                <small>(<strong>{{ current.since|naturaltime|default:'-' }}</strong>)</small>
-                            </div>
-
-                        </div>
-                    </div>
-                {% empty %}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="alert alert-without-padding alert-success" role="alert">
-                                <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="row">
         <div class="col-sm-12">
@@ -123,7 +131,6 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

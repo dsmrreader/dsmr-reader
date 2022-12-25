@@ -19,6 +19,24 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
+                            {% translate "Wondering if there are any issues with your installation? See" %}:
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-robot"></i> &nbsp; <a href="{% url 'frontend:about' %}">{% translate "About" %} </a>
+                            {% if monitoring_status_issues %}
+                                <span class="badge bg-red">
+                                {% blocktranslate count issue_counter=monitoring_status_issues|length %}
+                                    {{ issue_counter }} issue
+                                {% plural %}
+                                    {{ issue_counter }} issues
+                                {% endblocktranslate %}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm-6">
                             {% translate "Looking for something specific? A good place to start might be the FAQ" %}:
                         </div>
                         <div class="col-sm-6">
@@ -41,7 +59,7 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <i class="fa-solid fa-robot"></i> &nbsp; <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank" rel="noopener noreferrer">{% translate "View API docs" %}</a>
+                            <i class="fa-solid fa-code"></i> &nbsp; <a href="{% url 'frontend:redoc-api-docs' %}" target="_blank" rel="noopener noreferrer">{% translate "View API docs" %}</a>
                         </div>
                     </div>
                 </div>

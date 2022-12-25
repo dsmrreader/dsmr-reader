@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-29 22:58+0100\n"
+"POT-Creation-Date: 2022-12-25 19:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "API"
 msgstr "API"
@@ -1176,6 +1176,30 @@ msgstr "Gesorteerde grafieken"
 msgid "About"
 msgstr "Over"
 
+msgid "Application status"
+msgstr "Applicatiestatus"
+
+#, python-format
+msgid ""
+"\n"
+"                            %(issue_counter)s issue\n"
+"                        "
+msgid_plural ""
+"\n"
+"                            %(issue_counter)s issues\n"
+"                        "
+msgstr[0] ""
+"\n"
+"                            %(issue_counter)s issue\n"
+"                        "
+msgstr[1] ""
+"\n"
+"                            %(issue_counter)s issues\n"
+"                        "
+
+msgid "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here."
+msgstr "Alles lijkt soepel te draaien. Als er problemen zijn, zoals missende gegevens of hangende processen, dan worden die hier getoond."
+
 msgid "Version"
 msgstr "Versie"
 
@@ -1190,12 +1214,6 @@ msgstr "Je draait de meest recente versie"
 
 msgid "Update available"
 msgstr "Update beschikbaar"
-
-msgid "Status"
-msgstr "Status"
-
-msgid "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here."
-msgstr "Alles lijkt soepel te draaien. Als er problemen zijn, zoals missende gegevens of hangende processen, dan worden die hier getoond."
 
 msgid "Credits"
 msgstr "Credits"
@@ -1813,6 +1831,27 @@ msgstr "Vink \"Houd elektriciteitsfasen bij\" aan, in de Dataloggerconfiguratie,
 
 msgid "Help"
 msgstr "Help"
+
+msgid "Wondering if there are any issues with your installation? See"
+msgstr "Vraag je je af of er problemen zijn met je installatie? Zie"
+
+#, python-format
+msgid ""
+"\n"
+"                                    %(issue_counter)s issue\n"
+"                                "
+msgid_plural ""
+"\n"
+"                                    %(issue_counter)s issues\n"
+"                                "
+msgstr[0] ""
+"\n"
+"                                    %(issue_counter)s issue\n"
+"                                "
+msgstr[1] ""
+"\n"
+"                                    %(issue_counter)s issues\n"
+"                                "
 
 msgid "Looking for something specific? A good place to start might be the FAQ"
 msgstr "Zoek je iets specifieks? Een goede plek om te beginnen is de FAQ"
@@ -2736,6 +2775,19 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Status"
+#~ msgstr "Status"
+
+#, fuzzy
+#~| msgid "Resets the environment for development purposes. Not intended for production."
+#~ msgid "DELETES all aggregated data for development purposes. Not intended for production."
+#~ msgstr "Reset de omgeving voor ontwikkelingsdoeleinden. Niet bedoeld voor gebruik in productie."
+
+#, fuzzy
+#~| msgid "Resets the environment for development purposes. Not intended for production."
+#~ msgid "Deletes all (generated) data in the STATS app, for development purposes. Not intended for production."
+#~ msgstr "Reset de omgeving voor ontwikkelingsdoeleinden. Niet bedoeld voor gebruik in productie."
 
 #~ msgid "Issues reported"
 #~ msgstr "Gerapporteerde issues"
