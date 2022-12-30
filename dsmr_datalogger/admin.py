@@ -76,6 +76,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
         "formatted_electricity_delivered_2",
         "formatted_electricity_returned_1",
         "formatted_electricity_returned_2",
+        "formatted_extra_device_timestamp",
         "formatted_extra_device_delivered",
     )
     list_filter = (("timestamp", DateTimeRangeFilter),)
@@ -119,6 +120,16 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
         return str(obj.electricity_returned_2)
 
     formatted_electricity_returned_2.short_description = "electricity returned 2"  # type: ignore[attr-defined]
+
+    def formatted_extra_device_timestamp(
+        self, obj: DsmrReading
+    ) -> str:  # pragma: no cover
+        if not obj.extra_device_timestamp:
+            return "-"
+
+        return str(timezone.localtime(obj.extra_device_timestamp))
+
+    formatted_extra_device_timestamp.short_description = "gas timestamp"  # type: ignore[attr-defined]
 
     def formatted_extra_device_delivered(
         self, obj: DsmrReading
