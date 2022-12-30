@@ -126,6 +126,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
 
 def create_statistics(target_day: datetime.date) -> None:
+    # One day at a time to prevent backend blocking.
     start_of_day = timezone.make_aware(
         timezone.datetime(
             year=target_day.year,
@@ -135,25 +136,70 @@ def create_statistics(target_day: datetime.date) -> None:
         )
     )
 
+    # Day and hour records should either be complete or not persisted at all.
     with transaction.atomic():
-        # One day at a time to prevent backend blocking.
-        create_daily_statistics(day=target_day)
         hours_in_day = dsmr_backend.services.backend.hours_in_day(day=target_day)
 
         for current_hour in range(0, hours_in_day):
             hour_start = start_of_day + timezone.timedelta(hours=current_hour)
             create_hourly_statistics(hour_start=hour_start)
 
+        instance = create_daily_statistics(day=target_day)
+        instance.save()
+
     # Reflect changes in cache.
     cache.clear()
 
 
 def create_daily_statistics(day: datetime.date) -> DayStatistics:
-    """Calculates and persists both electricity and gas statistics for a day. Daily."""
+    """Calculates and returns a day summary. Does NOT persist!"""
     logger.debug("Stats: Creating day statistics for: %s", day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
-    return DayStatistics.objects.create(
+    hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
+    start_of_day = timezone.make_aware(
+        timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0)
+    )
+    end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)
+
+    logger.debug(
+        "Stats: Searching for readings between %s and %s", start_of_day, end_of_day
+    )
+
+    # Fix for wrong gas consumption in some cases. Just use the hour totals instead.
+    hours_gas_sum = HourStatistics.objects.filter(
+        hour_start__gte=start_of_day,
+        hour_start__lt=end_of_day,
+    ).aggregate(gas_sum=Sum("gas"),)["gas_sum"]
+
+    # First reading of the day for meter positions.
+    first_electricity_reading_of_day = (
+        DsmrReading.objects.filter(
+            timestamp__gte=start_of_day,
+            timestamp__lt=end_of_day,
+        )
+        .order_by("timestamp")
+        .first()
+    )
+
+    if dsmr_backend.services.backend.get_capability(Capability.GAS):
+        # Gas readings may lag a bit behind for DSMR v4 telegrams. Make sure the gas meter updated the timestamp!
+        first_gas_reading_of_day = (
+            DsmrReading.objects.filter(
+                # DB indexed
+                timestamp__gte=start_of_day,
+                timestamp__lt=end_of_day,
+                # No DB index
+                extra_device_timestamp__gte=start_of_day,
+                extra_device_timestamp__lt=end_of_day,
+            )
+            .order_by("extra_device_timestamp")
+            .first()
+        )
+    else:
+        first_gas_reading_of_day = None
+
+    return DayStatistics(
         day=day,
         total_cost=consumption["total_cost"],
         electricity1=consumption["electricity1"],
@@ -162,23 +208,35 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
         electricity2_returned=consumption["electricity2_returned"],
         electricity1_cost=consumption["electricity1_cost"],
         electricity2_cost=consumption["electricity2_cost"],
-        gas=consumption.get("gas", 0),  # Optional
-        gas_cost=consumption.get("gas_cost", 0),  # Optional
+        # Gas is optional
+        gas=hours_gas_sum or 0,
+        # @TODO: May not be in sync with 'hours_gas_sum'!
+        gas_cost=consumption.get("gas_cost", 0),
         lowest_temperature=consumption.get("lowest_temperature"),
         highest_temperature=consumption.get("highest_temperature"),
         average_temperature=consumption.get("average_temperature"),
         fixed_cost=consumption["fixed_cost"],
-        # Historic reading. Use FIRST reading of the day as reference.
-        electricity1_reading=consumption["electricity1_start"],
-        electricity2_reading=consumption["electricity2_start"],
-        electricity1_returned_reading=consumption["electricity1_returned_start"],
-        electricity2_returned_reading=consumption["electricity2_returned_start"],
-        gas_reading=consumption.get("gas_start"),  # Optional
+        # Historic reading summary. Use first readings of the day as reference.
+        electricity1_reading=first_electricity_reading_of_day.electricity_delivered_1
+        if first_electricity_reading_of_day
+        else None,
+        electricity2_reading=first_electricity_reading_of_day.electricity_delivered_2
+        if first_electricity_reading_of_day
+        else None,
+        electricity1_returned_reading=first_electricity_reading_of_day.electricity_returned_1
+        if first_electricity_reading_of_day
+        else None,
+        electricity2_returned_reading=first_electricity_reading_of_day.electricity_returned_2
+        if first_electricity_reading_of_day
+        else None,
+        gas_reading=first_gas_reading_of_day.extra_device_delivered
+        if first_gas_reading_of_day
+        else None,
     )
 
 
-def create_hourly_statistics(hour_start: timezone.datetime) -> None:
-    """Calculates and persists both electricity and gas statistics for a day. Hourly."""
+def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStatistics]:
+    """Calculates and returns an hour summary, when applicable. Persists it as well."""
     logger.debug("Stats: Creating hour statistics for: %s", hour_start)
     hour_end = hour_start + timezone.timedelta(hours=1)
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
@@ -194,8 +252,8 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> None:
         logger.debug("Stats: Skipping duplicate hour statistics for: %s", hour_start)
         return
 
-    electricity_start = electricity_readings[0]
-    electricity_end = electricity_readings[electricity_readings.count() - 1]
+    electricity_start = electricity_readings.first()
+    electricity_end = electricity_readings.last()
     creation_kwargs["electricity1"] = (
         electricity_end.delivered_1 - electricity_start.delivered_1
     )
@@ -218,7 +276,7 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> None:
         gas_readings = list(gas_readings)
         creation_kwargs["gas"] = gas_readings[-1].delivered - gas_readings[0].delivered
 
-    HourStatistics.objects.create(**creation_kwargs)
+    return HourStatistics.objects.create(**creation_kwargs)
 
 
 def clear_statistics() -> None:

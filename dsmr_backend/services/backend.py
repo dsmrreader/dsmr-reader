@@ -184,7 +184,10 @@ def is_recent_installation() -> bool:
 
 
 def hours_in_day(day: datetime.date) -> int:
-    """Returns the number of hours in a day. Should always be 24, except in DST transitions."""
+    """
+    Returns the number of hours in a day. Should always be 24, except in DST transitions.
+    You should use this whenever you're bumping an entire day with timezone.timedelta(), as it MAY differ.
+    """
     start = timezone.make_aware(timezone.datetime.combine(day, datetime.time.min))
     end = start + timezone.timedelta(days=1)
     start = timezone.localtime(start)
@@ -196,7 +199,7 @@ def hours_in_day(day: datetime.date) -> int:
     # CET -> CEST
     elif end.dst() > start.dst():
         return 23
-    # Unchanged
+    # All other days
     else:
         return 24
 

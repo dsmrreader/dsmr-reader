@@ -489,24 +489,65 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("django.utils.timezone.now")
     def test_create_day_statistics_reading_history(self, now_mock):
-        """Check whether the first reading is stored as well in the day statistics."""
+        """Check whether the first reading is stored properly in the day statistics."""
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12))
 
         # Fixtures lack these values. Have some sample data for assertions.
-        ElectricityConsumption.objects.get(pk=95).update(
-            returned_1=Decimal("0.001"), returned_2=Decimal("0.002")
+        DsmrReading.objects.create(
+            timestamp=timezone.make_aware(
+                timezone.datetime(2015, 12, 11, hour=23, minute=59)
+            ),
+            electricity_delivered_1=595.000,
+            electricity_returned_1=0.001,
+            electricity_delivered_2=593.000,
+            electricity_returned_2=0.002,
+            electricity_currently_delivered=0,
+            electricity_currently_returned=0,
+            extra_device_timestamp=timezone.make_aware(
+                timezone.datetime(2015, 12, 11, hour=23, minute=0)
+            ),
+            extra_device_delivered=955.000,
         )
-        ElectricityConsumption.objects.get(pk=96).update(
-            returned_1=Decimal("0.003"), returned_2=Decimal("0.004")
+        DsmrReading.objects.create(
+            timestamp=timezone.make_aware(
+                timezone.datetime(2015, 12, 12, hour=0, minute=0)
+            ),
+            electricity_delivered_1=595.187,  # First value of the day
+            electricity_returned_1=0.111,  # First value of the day
+            electricity_delivered_2=593.558,  # First value of the day
+            electricity_returned_2=0.222,  # First value of the day
+            electricity_currently_delivered=0,
+            electricity_currently_returned=0,
+            # Gas lagging behind on DSMR v4 telegrams
+            extra_device_timestamp=timezone.make_aware(
+                timezone.datetime(2015, 12, 11, hour=23, minute=0)
+            ),
+            extra_device_delivered=955.000,
+        )
+        DsmrReading.objects.create(
+            timestamp=timezone.make_aware(
+                timezone.datetime(2015, 12, 12, hour=0, minute=5)
+            ),
+            electricity_delivered_1=596.000,
+            electricity_returned_1=0.112,
+            electricity_delivered_2=594.000,
+            electricity_returned_2=0.223,
+            electricity_currently_delivered=0,
+            electricity_currently_returned=0,
+            extra_device_timestamp=timezone.make_aware(
+                timezone.datetime(2015, 12, 12, hour=0, minute=0)
+            ),
+            extra_device_delivered=956.739,  # First value of the day
         )
 
         dsmr_stats.services.create_statistics(target_day=timezone.now().date())
         day_statistics = DayStatistics.objects.get(day=timezone.now().date())
 
+        # These were reworked in favor of #1770
         self.assertEqual(day_statistics.electricity1_reading, Decimal("595.187"))
         self.assertEqual(day_statistics.electricity2_reading, Decimal("593.558"))
-        self.assertEqual(day_statistics.electricity1_returned_reading, Decimal("0.001"))
-        self.assertEqual(day_statistics.electricity2_returned_reading, Decimal("0.002"))
+        self.assertEqual(day_statistics.electricity1_returned_reading, Decimal("0.111"))
+        self.assertEqual(day_statistics.electricity2_returned_reading, Decimal("0.222"))
 
         if self.support_gas:
             self.assertEqual(day_statistics.gas_reading, Decimal("956.739"))
