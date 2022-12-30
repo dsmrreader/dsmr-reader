@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from dsmr_backend.mixins import ModelUpdateMixin
 
 
+# @TODO - Deprecated - Remove me eventually in favor of the readings.
 class ElectricityConsumption(ModelUpdateMixin, models.Model):
     """Point in time of electricity consumption (usage), extracted from reading(s)."""
 
@@ -161,6 +162,7 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         verbose_name_plural = verbose_name
 
 
+# @TODO - Deprecated - Remove me eventually in favor of the readings.
 class GasConsumption(ModelUpdateMixin, models.Model):
     """Interpolated gas reading, containing the actual usage, based on the reading before (if any)."""
 
@@ -188,6 +190,7 @@ class GasConsumption(ModelUpdateMixin, models.Model):
         verbose_name_plural = verbose_name
 
 
+# @TODO - Deprecated - Remove me eventually in favor of the new meter firmware updates of Belgium users. Move to reading
 class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
     """Average consumption calculated over a ~15 minute period."""
 

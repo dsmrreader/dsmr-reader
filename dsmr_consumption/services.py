@@ -355,6 +355,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     )
 
 
+# @TODO: Deprecated - Consumption data models should be dropped in the future in favor of the reading models.
 def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
     """Calculates the consumption of a range specified."""
     electricity_readings = ElectricityConsumption.objects.filter(
@@ -370,6 +371,7 @@ def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
     return electricity_readings, gas_readings
 
 
+# @TODO: Deprecated - Consumption data models should be dropped in the future in favor of the reading models.
 def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
     consumption = {"day": day}
@@ -444,6 +446,7 @@ def day_consumption(day: datetime.date) -> Dict:
 
     # Gas readings are optional, as not all meters support this.
     if gas_readings.exists():
+        # @TODO: WARNING: The consumption calculation for gas is off for the first hour. Need to rework this!
         gas_reading_count = gas_readings.count()
         first_reading = gas_readings[0]
         last_reading = gas_readings[gas_reading_count - 1]
