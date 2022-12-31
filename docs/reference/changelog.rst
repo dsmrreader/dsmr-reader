@@ -9,16 +9,20 @@ Changelog
 ----
 
 
-Latest version
-==============
+Current release series
+======================
+
+.. hint::
+
+    The releases in this series are currently supported and will receive new features and bug/security fixes until a new major series is released *(give or take once a year)*.
+
+    - Every **minor** release (e.g. ``v4.x`` -> ``v4.y``) is *usually* compatible with any preceding release in the same series and should allow you to update easily. See :doc:`how to (minor) update in the same series</how-to/upgrading/upgrade>`.
+
+    - Every new **major** series (e.g. ``v4.x`` -> ``v5.x``) *usually* contains incompatible changes that require you to update with additional manual steps. Upgrading to the **last release** of a series (e.g. ``v4.20``), should tell you where to find the upgrade steps required.
+
 
 .. contents:: :local:
     :depth: 1
-
-
-.. tip::
-
-    ℹ️ :doc:`How to update</how-to/upgrading/upgrade>` *(minor updates only)*
 
 
 v5.10.0 - January 2023
@@ -241,8 +245,15 @@ v5.0.0 - Februari 2022
 ----
 
 
-Older releases
-==============
+Older release series
+====================
+
+.. danger::
+
+    These are releases that are **no longer supported**. There will be no more features added or any bug/security issues fixed for these series!
+
+    You can still run these on your own risk, but you're recommended to upgrade (eventually) to the latest supported series of DSMR-reader.
+    Especially if your installation happens to be reachable via the Internet.
 
 .. contents:: :local:
     :depth: 1
