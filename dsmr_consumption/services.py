@@ -311,7 +311,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
 
     There is quite some distinction between DSMR v4 and v5. DSMR v4 will update only once per hour and backtracks the
     time by reporting it over the previous hour.
-    DSMR v5 will just allow small intervals, depending on whether the readings are grouped per minute or not.
+    DSMR v5 will just allow small intervals, depending on whether the readings are grouped or not.
     """
     if (
         not dsmr_reading.extra_device_timestamp
