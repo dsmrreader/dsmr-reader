@@ -17,7 +17,7 @@ def regenerate_data(apps, schema_editor):
     for current in days:
         x += 1
         print(
-            "Data migration: Adding reading values to day statistics retroactively: {} ({}/{})".format(
+            "Data migration: Adding reading meter positions to day statistics retroactively: {} ({}/{})".format(
                 current.day, x, day_count
             )
         )
@@ -40,14 +40,20 @@ def regenerate_data(apps, schema_editor):
         current.save()
 
 
-def noop(apps, schema_editor):
-    # No need.
-    pass
+def revert_regenerated_data(apps, schema_editor):
+    DayStatistics = apps.get_model("dsmr_stats", "DayStatistics")
+    DayStatistics.objects.all().update(
+        electricity1_reading=None,
+        electricity2_reading=None,
+        electricity1_returned_reading=None,
+        electricity2_returned_reading=None,
+        gas_reading=None,
+    )
 
 
 class Migration(migrations.Migration):
 
-    operations = [migrations.RunPython(regenerate_data, noop)]
+    operations = [migrations.RunPython(regenerate_data, revert_regenerated_data)]
 
     dependencies = [
         ("dsmr_stats", "0016_day_statistics_reading_history"),
