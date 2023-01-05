@@ -1,3 +1,4 @@
+attrs==22.2.0
 coreapi==2.3.3
 crcmod==1.7
 django==3.2.16

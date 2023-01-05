@@ -28,9 +28,9 @@ Current release series
 v5.10.0 - January 2023
 ----------------------
 
-- ``Added`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Now tracking meter position timestamps in day statistics.
+- ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fixed not always logging the right (gas) meter positions of the day in day statistics correctly.
 
-- ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fixed not always using the right (gas) meter positions of the day in day statistics.
+- ``Added`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Now tracking meter position timestamps in day statistics. Added them to Archive (day view) and Export.
 
 - ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD`` is now restricted to: ``DEBUG``, ``WARNING`` or ``ERROR``
 - ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_LOGLEVEL`` is now restricted to: ``serial`` or ``ipv4``

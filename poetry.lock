@@ -24,7 +24,7 @@ tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 name = "attrs"
 version = "22.2.0"
 description = "Classes Without Boilerplate"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -1298,7 +1298,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "76478084fbc7a0c0081afce6322ad88b3bee98abf3efd02bb214760cb1171515"
+content-hash = "6bbf2ada1ee82ca82b6a57f0e857109a24632ae9d32f9cf1147992dbdcd14502"
 
 [metadata.files]
 alabaster = [

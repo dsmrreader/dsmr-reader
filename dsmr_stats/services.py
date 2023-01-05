@@ -25,6 +25,7 @@ from dsmr_stats.models.statistics import (
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_backend.services.backend
+import dsmr_datalogger.services.readings
 import dsmr_consumption.services
 
 
@@ -156,48 +157,34 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     logger.debug("Stats: Creating day statistics for: %s", day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
+    # @TODO: Due to #1770. Fix for wrong gas consumption in some cases. Fix day_consumption() later. Just use the hour totals instead, for now.
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
     start_of_day = timezone.make_aware(
         timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0)
     )
     end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)
-
-    logger.debug(
-        "Stats: Searching for readings between %s and %s", start_of_day, end_of_day
-    )
-
-    # Fix for wrong gas consumption in some cases. Just use the hour totals instead.
     hours_gas_sum = HourStatistics.objects.filter(
         hour_start__gte=start_of_day,
         hour_start__lt=end_of_day,
     ).aggregate(gas_sum=Sum("gas"),)["gas_sum"]
 
-    # First reading of the day for meter positions.
-    first_electricity_reading_of_day = (
-        DsmrReading.objects.filter(
-            timestamp__gte=start_of_day,
-            timestamp__lt=end_of_day,
+    try:
+        # @TODO: day_consumption() is still unreliable at this time due to #1770, rework later before marking OK again.
+        meter_positions = (
+            dsmr_datalogger.services.readings.first_meter_positions_of_day(day=day)
         )
-        .order_by("timestamp")
-        .first()
-    )
-
-    if dsmr_backend.services.backend.get_capability(Capability.GAS):
-        # Gas readings may lag a bit behind for DSMR v4 telegrams. Make sure the gas meter updated the timestamp!
-        first_gas_reading_of_day = (
-            DsmrReading.objects.filter(
-                # DB indexed
-                timestamp__gte=start_of_day,
-                timestamp__lt=end_of_day,
-                # No DB index
-                extra_device_timestamp__gte=start_of_day,
-                extra_device_timestamp__lt=end_of_day,
-            )
-            .order_by("extra_device_timestamp")
-            .first()
-        )
+    except LookupError:
+        meter_positions_kwargs = {}
     else:
-        first_gas_reading_of_day = None
+        meter_positions_kwargs = dict(
+            electricity_reading_timestamp=meter_positions.electricity_timestamp,
+            electricity1_reading=meter_positions.electricity_delivered_1,
+            electricity2_reading=meter_positions.electricity_delivered_2,
+            electricity1_returned_reading=meter_positions.electricity_returned_1,
+            electricity2_returned_reading=meter_positions.electricity_returned_2,
+            gas_reading_timestamp=meter_positions.extra_device_timestamp,
+            gas_reading=meter_positions.extra_device_delivered,
+        )
 
     return DayStatistics(
         day=day,
@@ -216,28 +203,8 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
         highest_temperature=consumption.get("highest_temperature"),
         average_temperature=consumption.get("average_temperature"),
         fixed_cost=consumption["fixed_cost"],
-        # Historic reading summary. Use first readings of the day as reference.
-        electricity_reading_timestamp=first_electricity_reading_of_day.timestamp
-        if first_electricity_reading_of_day
-        else None,
-        electricity1_reading=first_electricity_reading_of_day.electricity_delivered_1
-        if first_electricity_reading_of_day
-        else None,
-        electricity2_reading=first_electricity_reading_of_day.electricity_delivered_2
-        if first_electricity_reading_of_day
-        else None,
-        electricity1_returned_reading=first_electricity_reading_of_day.electricity_returned_1
-        if first_electricity_reading_of_day
-        else None,
-        electricity2_returned_reading=first_electricity_reading_of_day.electricity_returned_2
-        if first_electricity_reading_of_day
-        else None,
-        gas_reading=first_gas_reading_of_day.extra_device_delivered
-        if first_gas_reading_of_day
-        else None,
-        gas_reading_timestamp=first_gas_reading_of_day.extra_device_timestamp
-        if first_gas_reading_of_day
-        else None,
+        # Historic meter position summary, when available
+        **meter_positions_kwargs
     )
 
 

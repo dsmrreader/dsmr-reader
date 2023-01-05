@@ -17,7 +17,7 @@ def regenerate_data(apps, schema_editor):
     for current in days:
         x += 1
         print(
-            "Data migration: Adding reading meter positions to day statistics retroactively: {} ({}/{})".format(
+            "Data migration: Retroactively adding reading meter positions for day statistics: {} ({}/{})".format(
                 current.day, x, day_count
             )
         )
