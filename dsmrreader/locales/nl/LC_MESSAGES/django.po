@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-05 21:42+0100\n"
+"POT-Creation-Date: 2023-01-06 00:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1634,8 +1634,14 @@ msgstr "Gem"
 msgid "Meter positions"
 msgstr "Meterstanden"
 
-msgid "Meter positions of first reading of the day"
-msgstr "Meterstanden bij eerste meting van de dag"
+msgid "Timestamp"
+msgstr "Tijdstip"
+
+msgid "If the meter positions above have no timestamps along them, we were unable to reliably determine them retroactively."
+msgstr "Indien de meterstanden hierboven geen tijdstip hebben, waren ze niet met terugwerkende kracht te vinden."
+
+msgid "However, if they do have timestamps, the total gas difference between days still may or may not slightly differ from the total consumption of the day, depending on when the first gas reading was available for that day."
+msgstr "Wanneer ze echter wel tijdstippen hebben, kan het verschil in gas tussen dagen afwijken van het dagtotaal. Dit is afhankelijk van wanneer de eerste meting van de gasmeter die dag beschikbaar was."
 
 #, python-format
 msgid "%(data_count)s data point"
@@ -2787,6 +2793,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Meter positions of first reading of the day"
+#~ msgstr "Meterstanden bij eerste meting van de dag"
 
 #~ msgid "Status"
 #~ msgstr "Status"

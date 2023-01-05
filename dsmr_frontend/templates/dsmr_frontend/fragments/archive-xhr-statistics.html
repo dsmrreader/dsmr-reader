@@ -102,31 +102,40 @@
                 <div class="panel-body">
                     <table class="table table-hover">
                         <tr>
-                            <th class="col-sm-4"><small class="italic">{% translate "Meter positions of first reading of the day" %}</small></th>
+                            <th class="col-sm-4"></th>
                             <th class="col-sm-3">{% translate "Delivered" %}</th>
                             <th class="col-sm-3">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
-                            <th class="col-sm-2">&nbsp;</th>
+                            <th class="col-sm-2">{% translate "Timestamp" %}</th>
                         </tr>
                         <tr>
                             <td>{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ day_statistics.electricity1_reading }} </span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ day_statistics.electricity1_returned_reading}}{% endif %}</span></td>
-                            <td class="col-sm-2">&nbsp;</td>
+                            <td><span class="badge bg-green">{{ day_statistics.electricity1_returned_reading}}</span></td>
+                            <td class="col-sm-2"><span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ day_statistics.electricity2_reading }}</span></td>
-                            <td><span class="badge bg-green">{% if capabilities.electricity_returned %}{{ day_statistics.electricity2_returned_reading}}{% endif %}</span></td>
-                            <td class="col-sm-2">&nbsp;</td>
+                            <td><span class="badge bg-green">{{ day_statistics.electricity2_returned_reading}}</span></td>
+                            <td class="col-sm-2"><span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
                         </tr>
 
                         {% if capabilities.gas %}
                         <tr>
                             <td>{% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
-                            <td colspan="3"><span class="badge bg-orange">{{ day_statistics.gas_reading }}</span></td>
+                            <td><span class="badge bg-orange">{{ day_statistics.gas_reading }}</span></td>
+                            <td></td>
+                            <td class="col-sm-2"><span class="unit">{{ day_statistics.gas_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
                         </tr>
                         {% endif %}
                     </table>
+
+                    <br>
+                    <div class="alert alert-info" role="alert">
+                        <!-- @see #1770 @ https://github.com/dsmrreader/dsmr-reader/issues/1770 --->
+                        <small>{% translate "If the meter positions above have no timestamps along them, we were unable to reliably determine them retroactively." %}</small>
+                        <small>{% translate "However, if they do have timestamps, the total gas difference between days still may or may not slightly differ from the total consumption of the day, depending on when the first gas reading was available for that day." %}</small>
+                    </div>
                 </div>
             </div>
         </div>
