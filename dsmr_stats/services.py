@@ -217,6 +217,9 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
         average_temperature=consumption.get("average_temperature"),
         fixed_cost=consumption["fixed_cost"],
         # Historic reading summary. Use first readings of the day as reference.
+        electricity_reading_timestamp=first_electricity_reading_of_day.timestamp
+        if first_electricity_reading_of_day
+        else None,
         electricity1_reading=first_electricity_reading_of_day.electricity_delivered_1
         if first_electricity_reading_of_day
         else None,
@@ -230,6 +233,9 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
         if first_electricity_reading_of_day
         else None,
         gas_reading=first_gas_reading_of_day.extra_device_delivered
+        if first_gas_reading_of_day
+        else None,
+        gas_reading_timestamp=first_gas_reading_of_day.extra_device_timestamp
         if first_gas_reading_of_day
         else None,
     )

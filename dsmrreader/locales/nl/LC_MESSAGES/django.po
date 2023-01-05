@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-25 19:19+0100\n"
+"POT-Creation-Date: 2023-01-05 21:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -2500,14 +2500,26 @@ msgstr "Vaste kosten"
 msgid "Total cost"
 msgstr "Totale kosten"
 
+msgid "Electricity reading timestamp"
+msgstr "Tijdstip elektriciteitsmeterstand"
+
+msgid "When the first absolute meter position (for electricity) was read at the start of the day"
+msgstr "Wanneer de eerste absoluut gemeten meterstand was (voor elektriciteit) aan het begin van de dag"
+
 msgid "Electricity tariff 1 reading"
 msgstr "Elektriciteit tarief 1 gemeten"
 
-msgid "The first absolute value read at the start of the day"
-msgstr "De absoluut gemeten waarde aan het begin van de dag"
+msgid "The first absolute meter position read at the start of the day"
+msgstr "De eerste absolute meterstand aan het begin van de dag"
 
 msgid "Electricity tariff 2 reading"
 msgstr "Elektriciteit tarief 2 gemeten"
+
+msgid "Gas reading timestamp"
+msgstr "Tijdstip gasmeterstand"
+
+msgid "When the first absolute meter position (for gas) was read at the start of the day"
+msgstr "Wanneer de eerste absoluut gemeten meterstand was (voor gas), aan het begin van de dag"
 
 msgid "Gas reading"
 msgstr "Gasmeting"

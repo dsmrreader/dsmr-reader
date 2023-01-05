@@ -88,6 +88,15 @@ class DayStatistics(ModelUpdateMixin, models.Model):
     )
 
     """ Historic meter positions """
+    electricity_reading_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name=_("Electricity reading timestamp"),
+        help_text=_(
+            "When the first absolute meter position (for electricity) was read at the start of the day"
+        ),
+    )
     electricity1_reading = models.DecimalField(
         max_digits=9,
         decimal_places=3,
@@ -95,7 +104,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         null=True,
         default=None,
         verbose_name=_("Electricity tariff 1 reading"),
-        help_text=_("The first absolute value read at the start of the day"),
+        help_text=_("The first absolute meter position read at the start of the day"),
     )
     electricity2_reading = models.DecimalField(
         max_digits=9,
@@ -104,7 +113,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         null=True,
         default=None,
         verbose_name=_("Electricity tariff 2 reading"),
-        help_text=_("The first absolute value read at the start of the day"),
+        help_text=_("The first absolute meter position read at the start of the day"),
     )
     electricity1_returned_reading = models.DecimalField(
         max_digits=9,
@@ -113,7 +122,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         null=True,
         default=None,
         verbose_name=_("Electricity tariff 1 reading"),
-        help_text=_("The first absolute value read at the start of the day"),
+        help_text=_("The first absolute meter position read at the start of the day"),
     )
     electricity2_returned_reading = models.DecimalField(
         max_digits=9,
@@ -122,7 +131,17 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         null=True,
         default=None,
         verbose_name=_("Electricity tariff 2 reading"),
-        help_text=_("The first absolute value read at the start of the day"),
+        help_text=_("The first absolute meter position read at the start of the day"),
+    )
+    # This one probably differs from the electricity reading used above. It may take a few minutes before gas is updated
+    gas_reading_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name=_("Gas reading timestamp"),
+        help_text=_(
+            "When the first absolute meter position (for gas) was read at the start of the day"
+        ),
     )
     gas_reading = models.DecimalField(
         max_digits=9,
@@ -131,7 +150,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         null=True,
         default=None,
         verbose_name=_("Gas reading"),
-        help_text=_("The first absolute value read at the start of the day"),
+        help_text=_("The first absolute meter position read at the start of the day"),
     )
 
     @property
