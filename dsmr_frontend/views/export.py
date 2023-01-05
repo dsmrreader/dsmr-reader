@@ -80,10 +80,12 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
                 "gas_cost",
                 "fixed_cost",
                 "total_cost",
+                "electricity_reading_timestamp",
                 "electricity1_reading",
                 "electricity2_reading",
                 "electricity1_returned_reading",
                 "electricity2_returned_reading",
+                "gas_reading_timestamp",
                 "gas_reading",
             ]
 
