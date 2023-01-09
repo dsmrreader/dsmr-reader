@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-06 00:08+0100\n"
+"POT-Creation-Date: 2023-01-09 22:12+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -1874,6 +1874,15 @@ msgstr "Wil je je gegevens geautomatiseerd benaderen via scripts of andere softw
 msgid "View API docs"
 msgstr "Bekijk API-documentatie"
 
+msgid "Data"
+msgstr "Gegevens"
+
+msgid "You can easily export your data here"
+msgstr "Je kunt hier eenvoudig je gegevens exporteren"
+
+msgid "Export"
+msgstr "Export"
+
 msgid "Reporting problems / Feature requests"
 msgstr "Gerapporteerde problemen / feature requests"
 
@@ -1918,15 +1927,6 @@ msgstr "Een van je recent ontvangen telegrammen."
 
 msgid "Useful when debugging your situation or verifying DSMR-reader's behaviour."
 msgstr "Handig voor het debuggen van je eigen situatie of het verifiëren van DSMR-reader's gedrag."
-
-msgid "Data"
-msgstr "Gegevens"
-
-msgid "You can easily export your data here"
-msgstr "Je kunt hier eenvoudig je gegevens exporteren"
-
-msgid "Export"
-msgstr "Export"
 
 msgid "No day/hour statistics are generated yet. Please wait for the next day."
 msgstr "Er zijn momenteel nog geen dag-/uurstatistieken gegenereerd. Wacht op de volgende dag."

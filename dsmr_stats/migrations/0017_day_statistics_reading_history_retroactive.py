@@ -8,6 +8,11 @@ def regenerate_data(apps, schema_editor):
     DayStatistics = apps.get_model("dsmr_stats", "DayStatistics")
 
     import dsmr_consumption.services
+    import dsmr_backend.services.backend
+
+    if dsmr_backend.services.backend.is_recent_installation():
+        # Skip for new installations.
+        return
 
     # No DB index, but should be fine.
     days = DayStatistics.objects.filter(electricity1_reading=None)

@@ -8,6 +8,11 @@ def regenerate_data(apps, schema_editor):
     DayStatistics = apps.get_model("dsmr_stats", "DayStatistics")
 
     import dsmr_datalogger.services.readings
+    import dsmr_backend.services.backend
+
+    if dsmr_backend.services.backend.is_recent_installation():
+        # Skip for new installations.
+        return
 
     # No DB index, but should be fine.
     days = DayStatistics.objects.filter(electricity_reading_timestamp=None)
@@ -23,7 +28,6 @@ def regenerate_data(apps, schema_editor):
         )
 
         try:
-            # @TODO: day_consumption() is still unreliable at this time due to #1770, rework later before marking OK again.
             meter_positions = (
                 dsmr_datalogger.services.readings.first_meter_positions_of_day(
                     day=current.day

@@ -499,14 +499,14 @@ def update_electricity_statistics(reading: DsmrReading) -> None:
 
 
 def recalculate_prices() -> None:
-    """Retroactively sets the prices for all statistics. E.g.: When the user has altered the prices."""
+    """Retroactively sets the prices for all statistics. E.g. when the user has altered the prices in the past."""
     for current_day in DayStatistics.objects.all():
-        print(" - Recalculating:", current_day.day)
+        print(" - Recalculating prices for:", current_day.day)
 
         try:
             prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
         except EnergySupplierPrice.DoesNotExist:
-            print(" !!! No prices found, using zero fallback")
+            print("   [!] No prices found for this day, using zero fallback")
             prices = dsmr_consumption.services.get_fallback_prices()
 
         current_day.fixed_cost = prices.fixed_daily_cost
