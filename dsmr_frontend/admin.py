@@ -1,9 +1,11 @@
+from django.contrib.admin import ModelAdmin
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from adminsortable.admin import SortableAdmin
 from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import ChangeOnlyAdminModel
+from .models.message import Notification
 from .models.settings import FrontendSettings, SortedGraph
 
 
@@ -104,6 +106,15 @@ class FrontendSettingsAdmin(SingletonModelAdmin):
                 ],
             },
         ),
+    )
+
+
+@admin.register(Notification)
+class FrontendNotificationAdmin(ModelAdmin):
+    ordering = ["-read"]
+    list_display = (
+        "message",
+        "read",
     )
 
 

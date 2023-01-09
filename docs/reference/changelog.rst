@@ -30,10 +30,11 @@ v5.10.0 - January 2023
 
 - ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fixed not always logging the right (gas) meter positions in day statistics correctly.
 - ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fixed having gas consumption in day statistics being slightly off (situationally).
-- ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fixed minor issues on the Dashboard notification page in favor of automatic migration messages.
+- ``Fixed`` Fixed minor issues on the Dashboard notification page in favor of automatic migration messages.
 
 - ``Added`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Now tracking meter position timestamps in day statistics. Added them to Archive (day view) and Export.
 - ``Added`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Automatic migrations retroactively reassessing meter positions and timestamps. Additionally checks/fixes gas consumption mismatch.
+- ``Added`` Old Dashboard notifications can now be viewed and permanently deleted in the Frontend admin section.
 
 - ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD`` is now restricted to: ``DEBUG``, ``WARNING`` or ``ERROR``
 - ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_LOGLEVEL`` is now restricted to: ``serial`` or ``ipv4``

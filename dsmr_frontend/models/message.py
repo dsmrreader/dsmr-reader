@@ -10,7 +10,7 @@ class NotificationManager(models.Manager):
 
 
 class Notification(ModelUpdateMixin, models.Model):
-    """Used to queue messages to end users."""
+    """Used to queue (Dashboard) notification messages to end users."""
 
     objects = NotificationManager()
 
@@ -21,5 +21,5 @@ class Notification(ModelUpdateMixin, models.Model):
     read = models.BooleanField(default=False)
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions = ("delete",)  # Do allow deletion.
         verbose_name = _("Application notification")
