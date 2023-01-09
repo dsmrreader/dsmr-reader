@@ -22,7 +22,7 @@
                             <button class="btn btn-sm btn-success mark-all-notifications-read" data-notification-id="{{ current_notification.pk }}" title="{% translate 'Mark all notifications as read' %}">
                                 <i class="fas fa-check-double"></i> {% translate 'Mark all as read' %}
                             </button>
-                        {% else %}
+                        {% elif not user.is_authenticated %}
                             <a class="btn btn-sm btn-primary"  href="{% url 'admin:login' %}?next={% url 'frontend:notifications' %}">
                                 <i class="fas fa-lock"></i> &nbsp; {% translate 'Login to mark as read' %}
                             </a>
