@@ -8,6 +8,7 @@ from django.views.generic.edit import FormView
 from dsmr_frontend.forms import NotificationReadForm
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
 from dsmr_frontend.models.message import Notification
+from dsmr_frontend.models.settings import FrontendSettings
 
 
 class Notifications(ConfigurableLoginRequiredMixin, TemplateView):
@@ -15,6 +16,7 @@ class Notifications(ConfigurableLoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(Notifications, self).get_context_data(**kwargs)
+        context_data["frontend_settings"] = FrontendSettings.get_solo()
         context_data["notifications"] = Notification.objects.unread()
         return context_data
 
