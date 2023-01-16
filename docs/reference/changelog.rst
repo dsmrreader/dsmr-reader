@@ -30,6 +30,7 @@ v5.10.0 - January 2023
 
 - ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fixed not always logging the right (gas) meter positions in day statistics correctly.
 - ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fixed having gas consumption in day statistics being slightly off (situationally).
+- ``Fixed`` [`#1792 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Fix dark mode warnings in Django admin
 - ``Fixed`` Fixed minor issues on the Dashboard notification page in favor of automatic migration messages.
 
 - ``Added`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Now tracking meter position timestamps in day statistics. Added them to Archive (day view) and Export.

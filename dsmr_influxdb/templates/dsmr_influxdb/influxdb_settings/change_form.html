@@ -3,13 +3,13 @@
 
 
 {% block field_sets %}
-    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+    <div class="submit-row" style="text-align: left; border-color: orangered;">
         <p>
             {% blocktranslate %}This integration is meant to synchronize the (parsed) source DSMR readings to your InfluxDB, in order to aggregate the data yourself. Other data or non DSMR reading fields are not supported.{% endblocktranslate %}
         </p>
     </div>
 
-    <div class="submit-row" style="text-align: left; background: #FFFFCC;">
+    <div class="submit-row" style="text-align: left; border-color: orangered;">
         <p>
             {% blocktranslate %}Enabling this integration will only sync new readings. In order to export your existing readings retroactively, use the following utility{% endblocktranslate %}:
         </p>
