@@ -1,11 +1,10 @@
 import datetime
 from decimal import Decimal
-from typing import Optional, final
+from typing import Optional
 
 import attr
 
 
-@final
 @attr.dataclass(frozen=True, slots=True)
 class MeterPositionsDTO:
     electricity_timestamp: datetime.datetime
