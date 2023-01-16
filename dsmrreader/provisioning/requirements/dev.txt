@@ -15,7 +15,7 @@ sphinx==4.3.2
 sphinx-autobuild==2021.3.14
 sphinx-intl==2.0.1
 sphinx-rtd-theme==1.1.1
-types-pytz==2022.7.0.0
+types-pytz==2022.7.1.0
 types-requests==2.28.11.7
 types-python-dateutil==2.8.19.5
 types-polib==1.1.12.1
