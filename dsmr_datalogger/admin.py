@@ -23,7 +23,11 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
         (
             _("Input method and DSMR protocol"),
             {
-                "fields": ["input_method", "dsmr_version"],
+                "fields": [
+                    "input_method",
+                    "dsmr_version",
+                    "dsmr_extra_device_channel",
+                ],
                 "description": _(
                     "The datalogger process should automatically restart to apply changes."
                 ),
@@ -45,7 +49,6 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
             _("Advanced"),
             {
                 "fields": [
-                    "dsmr_extra_device_channel",
                     "process_sleep",
                     "override_telegram_timestamp",
                 ],

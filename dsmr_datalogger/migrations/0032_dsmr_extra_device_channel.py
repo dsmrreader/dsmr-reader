@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             field=models.IntegerField(
                 blank=True,
                 choices=[
-                    (None, "Auto (default)"),
+                    (None, "Automatic (default)"),
                     (1, "Belgium - Fluvius (channel 1)"),
                     (2, "Belgium - Fluvius (channel 2)"),
                     (3, "Belgium - Fluvius (channel 3)"),

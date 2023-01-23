@@ -34,7 +34,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
     DSMR_EXTRA_DEVICE_CHANNEL_3 = 3
     DSMR_EXTRA_DEVICE_CHANNEL_4 = 4
     DSMR_EXTRA_DEVICE_CHANNEL_CHOICES = (
-        (DSMR_EXTRA_DEVICE_CHANNEL_AUTO, _("Auto (default)")),
+        (DSMR_EXTRA_DEVICE_CHANNEL_AUTO, _("Automatic (default)")),
         (DSMR_EXTRA_DEVICE_CHANNEL_1, _("Belgium - Fluvius (channel 1)")),
         (DSMR_EXTRA_DEVICE_CHANNEL_2, _("Belgium - Fluvius (channel 2)")),
         (DSMR_EXTRA_DEVICE_CHANNEL_3, _("Belgium - Fluvius (channel 3)")),
