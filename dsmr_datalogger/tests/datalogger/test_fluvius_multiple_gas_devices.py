@@ -112,13 +112,3 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(meter_statistics.voltage_swell_count_l1, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
-
-    # @mock.patch("django.utils.timezone.now")
-    # def test_telegram_override_timestamp(self, now_mock):
-    #     reading = self._reading_with_override_telegram_timestamp_active(now_mock)
-    #
-    #     self.assertEqual(
-    #         # CET > UTC. Minute marker rounded to hours. Because Fluvius may or may not communicate DSMR v5 in telegrams
-    #         reading.extra_device_timestamp,
-    #         datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=pytz.UTC),
-    #     )
