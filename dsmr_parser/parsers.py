@@ -5,8 +5,10 @@ from binascii import unhexlify
 from ctypes import c_ushort
 from decimal import Decimal
 
-from dlms_cosem.connection import XDlmsApduFactory
-from dlms_cosem.protocol.xdlms import GeneralGlobalCipher
+# @TODO: Disabled in DSMR-reader due to incompatibilities with dlms-cosem's dependency of "cryptography", causing:
+# @TODO: "ImportError: libffi.so.7: cannot open shared object file: No such file or directory"
+# from dlms_cosem.connection import XDlmsApduFactory
+# from dlms_cosem.protocol.xdlms import GeneralGlobalCipher
 
 from dsmr_parser.objects import (
     MBusObject,
@@ -57,46 +59,47 @@ class TelegramParser(object):
         :raises InvalidChecksumError:
         """
 
-        if "general_global_cipher" in self.telegram_specification:
-            if self.telegram_specification["general_global_cipher"]:
-                enc_key = unhexlify(encryption_key)
-                auth_key = unhexlify(authentication_key)
-                telegram_data = unhexlify(telegram_data)
-                apdu = XDlmsApduFactory.apdu_from_bytes(apdu_bytes=telegram_data)
-                if apdu.security_control.security_suite != 0:
-                    logger.warning("Untested security suite")
-                if (
-                    apdu.security_control.authenticated
-                    and not apdu.security_control.encrypted
-                ):
-                    logger.warning("Untested authentication only")
-                if (
-                    not apdu.security_control.authenticated
-                    and not apdu.security_control.encrypted
-                ):
-                    logger.warning("Untested not encrypted or authenticated")
-                if apdu.security_control.compressed:
-                    logger.warning("Untested compression")
-                if apdu.security_control.broadcast_key:
-                    logger.warning("Untested broadcast key")
-                telegram_data = apdu.to_plain_apdu(enc_key, auth_key).decode("ascii")
-            else:
-                try:
-                    if unhexlify(telegram_data[0:2])[0] == GeneralGlobalCipher.TAG:
-                        raise RuntimeError(
-                            "Looks like a general_global_cipher frame "
-                            "but telegram specification is not matching!"
-                        )
-                except Exception:
-                    pass
-        else:
-            try:
-                if unhexlify(telegram_data[0:2])[0] == GeneralGlobalCipher.TAG:
-                    raise RuntimeError(
-                        "Looks like a general_global_cipher frame but telegram specification is not matching!"
-                    )
-            except Exception:
-                pass
+# @TODO: Disabled in DSMR-reader due to incompatibilities with dlms-cosem's dependency of "cryptography"
+        # if "general_global_cipher" in self.telegram_specification:
+        #     if self.telegram_specification["general_global_cipher"]:
+        #         enc_key = unhexlify(encryption_key)
+        #         auth_key = unhexlify(authentication_key)
+        #         telegram_data = unhexlify(telegram_data)
+        #         apdu = XDlmsApduFactory.apdu_from_bytes(apdu_bytes=telegram_data)
+        #         if apdu.security_control.security_suite != 0:
+        #             logger.warning("Untested security suite")
+        #         if (
+        #             apdu.security_control.authenticated
+        #             and not apdu.security_control.encrypted
+        #         ):
+        #             logger.warning("Untested authentication only")
+        #         if (
+        #             not apdu.security_control.authenticated
+        #             and not apdu.security_control.encrypted
+        #         ):
+        #             logger.warning("Untested not encrypted or authenticated")
+        #         if apdu.security_control.compressed:
+        #             logger.warning("Untested compression")
+        #         if apdu.security_control.broadcast_key:
+        #             logger.warning("Untested broadcast key")
+        #         telegram_data = apdu.to_plain_apdu(enc_key, auth_key).decode("ascii")
+        #     else:
+        #         try:
+        #             if unhexlify(telegram_data[0:2])[0] == GeneralGlobalCipher.TAG:
+        #                 raise RuntimeError(
+        #                     "Looks like a general_global_cipher frame "
+        #                     "but telegram specification is not matching!"
+        #                 )
+        #         except Exception:
+        #             pass
+        # else:
+        #     try:
+        #         if unhexlify(telegram_data[0:2])[0] == GeneralGlobalCipher.TAG:
+        #             raise RuntimeError(
+        #                 "Looks like a general_global_cipher frame but telegram specification is not matching!"
+        #             )
+        #     except Exception:
+        #         pass
 
         if (
             self.apply_checksum_validation
