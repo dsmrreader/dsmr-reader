@@ -115,7 +115,7 @@ BELGIUM_MBUS4_VALVE_POSITION = r"\d-4:24\.4\.0.+?\r\n"
 BELGIUM_MBUS4_METER_READING1 = r"\d-4:24\.2\.1.+?\r\n"
 BELGIUM_MBUS4_METER_READING2 = r"\d-4:24\.2\.3.+?\r\n"
 
-# DSMR-reader legacy. Should eventually be dropped or selected automatically in a future release.
+# @TODO DSMR-reader legacy. Should eventually be dropped or selected automatically in a future release.
 BELGIUM_MBUS_WILDCARD_DEVICE_TYPE = r"\d-\d:24\.1\.0.+?\r\n"
 BELGIUM_MBUS_WILDCARD_EQUIPMENT_IDENTIFIER = r"\d-\d:96\.1\.1.+?\r\n"
 BELGIUM_MBUS_WILDCARD_VALVE_POSITION = r"\d-\d:24\.4\.0.+?\r\n"

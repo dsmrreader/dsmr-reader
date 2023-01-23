@@ -218,7 +218,7 @@ BELGIUM_FLUVIUS = {
         obis.BELGIUM_MBUS4_METER_READING2: MBusParser(
             ValueParser(timestamp), ValueParser(Decimal)
         ),
-        # DSMR-reader legacy. Should eventually be dropped or selected automatically in a future release.
+        # @TODO DSMR-reader legacy. Should eventually be dropped or selected automatically in a future release.
         obis.BELGIUM_MBUS_WILDCARD_DEVICE_TYPE: CosemParser(ValueParser(int)),
         obis.BELGIUM_MBUS_WILDCARD_EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
         obis.BELGIUM_MBUS_WILDCARD_VALVE_POSITION: CosemParser(ValueParser(int)),
