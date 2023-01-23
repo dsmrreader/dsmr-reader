@@ -108,7 +108,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
 
     datalogger_settings = DataloggerSettings.get_solo()
     model_fields = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
-    mapping = _get_dsmrreader_mapping(datalogger_settings.dsmr_version)
+    mapping = _get_dsmrreader_mapping(datalogger_settings)
 
     for obis_ref, obis_data in parsed_telegram.items():
         try:
@@ -188,7 +188,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
     return new_instance
 
 
-def _get_dsmrreader_mapping(version: int) -> Dict:
+def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
     """Returns the mapping for OBIS to DSMR-reader (model fields)."""
     SPLIT_GAS_FIELD = {
         "value": "extra_device_delivered",
@@ -232,14 +232,25 @@ def _get_dsmrreader_mapping(version: int) -> Dict:
         obis_references.VOLTAGE_SWELL_L3_COUNT: "voltage_swell_count_l3",
     }
 
-    if version == DataloggerSettings.DSMR_BELGIUM_FLUVIUS:
+    if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_BELGIUM_FLUVIUS:
+        # Cheap hack for forcing channel selection.
+        try:
+            mbus_reference = {
+                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_1: obis_references.BELGIUM_MBUS1_METER_READING2,
+                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_2: obis_references.BELGIUM_MBUS2_METER_READING2,
+                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_3: obis_references.BELGIUM_MBUS3_METER_READING2,
+                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_4: obis_references.BELGIUM_MBUS4_METER_READING2,
+            }[datalogger_settings.dsmr_extra_device_channel]
+        except KeyError:
+            mbus_reference = obis_references.BELGIUM_MBUS_WILDCARD_METER_READING2
+
         mapping.update(
             {
-                obis_references.BELGIUM_MBUS_WILDCARD_METER_READING2: SPLIT_GAS_FIELD,
+                mbus_reference: SPLIT_GAS_FIELD,
             }
         )
 
-    if version == DataloggerSettings.DSMR_LUXEMBOURG_SMARTY:
+    if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_LUXEMBOURG_SMARTY:
         mapping.update(
             {
                 obis_references.ELECTRICITY_IMPORTED_TOTAL: "electricity_delivered_1",

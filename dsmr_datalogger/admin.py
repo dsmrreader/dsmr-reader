@@ -44,7 +44,11 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
         (
             _("Advanced"),
             {
-                "fields": ["process_sleep", "override_telegram_timestamp"],
+                "fields": [
+                    "dsmr_extra_device_channel",
+                    "process_sleep",
+                    "override_telegram_timestamp",
+                ],
             },
         ),
         (

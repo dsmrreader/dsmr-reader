@@ -35,6 +35,7 @@ v5.10.0 - January 2023
 
 - ``Added`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Now tracking meter position timestamps in day statistics. Added them to Archive (day view) and Export.
 - ``Added`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Automatic migrations retroactively reassessing meter positions and timestamps. Additionally checks/fixes gas consumption mismatch.
+- ``Added`` [`#1794 <https://github.com/dsmrreader/dsmr-reader/issues/1794>`_] Added new datalogger configuration option for selecting extra device channel for specific vendor(s)
 - ``Added`` Old Dashboard notifications can now be viewed and permanently deleted in the Frontend admin section.
 
 - ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD`` is now restricted to: ``DEBUG``, ``WARNING`` or ``ERROR``

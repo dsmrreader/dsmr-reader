@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-09 22:12+0100\n"
+"POT-Creation-Date: 2023-01-23 22:41+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -711,17 +711,38 @@ msgstr "België - Fluvius (fix voor gasmeter)"
 msgid "Luxembourg - Smarty (single tariff fix)"
 msgstr "Luxemburg - Smarty (fix voor enkel tarief)"
 
+msgid "Auto (default)"
+msgstr "Automatisch (standaard)"
+
+msgid "Belgium - Fluvius (channel 1)"
+msgstr "België - Fluvius (kanaal 1)"
+
+msgid "Belgium - Fluvius (channel 2)"
+msgstr "België - Fluvius (kanaal 2)"
+
+msgid "Belgium - Fluvius (channel 3)"
+msgstr "België - Fluvius (kanaal 3)"
+
+msgid "Belgium - Fluvius (channel 4)"
+msgstr "België - Fluvius (kanaal 4)"
+
 msgid "Input method"
 msgstr "Uitleesmethode"
 
 msgid "Whether to read telegrams from a serial port or network socket."
 msgstr "Geeft aan of telegrammen uitgelezen worden via een seriële poort of netwerk socket."
 
-msgid "DSMR version"
-msgstr "DSMR-versie"
+msgid "DSMR version/vendor"
+msgstr "DSMR-versie/fabrikant"
 
-msgid "The DSMR version your meter supports. Version should be printed on meter."
-msgstr "De DSMR-versie ondersteund door je meter. Versie staat meestal aangegeven op de meter."
+msgid "The DSMR version your meter supports or the vendor related to it. Version should be printed on meter."
+msgstr "De DSMR-versie ondersteund door je meter, of de fabrikant. Versie staat meestal aangegeven op de meter."
+
+msgid "Extra device channel"
+msgstr "Kanaal extra gekoppeld apparaat"
+
+msgid "Only use when your extra device is read incorrectly (e.g. gas). Also, only works with specific vendor(s)."
+msgstr "Alleen gebruiken wanneer een extra gekoppeld apparaat (zoals een gasmeter) niet goed uitgelezen wordt. Werkt daarnaast alleen voor specifieke fabrikant(en)."
 
 msgid "For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0"
 msgstr "Voor uitlezen via een seriële poort: De seriële poort verbonden met de slimme meter. Bijvoorbeeld: /dev/ttyUSB0"
@@ -785,6 +806,9 @@ msgstr "Retentieconfiguratie"
 
 msgid "Timestamp indicating when the reading was taken"
 msgstr "Moment waarop de meting is gedaan"
+
+msgid "DSMR version"
+msgstr "DSMR-versie"
 
 msgid "Tariff indicator electricity. The tariff indicator can be used to switch tariff  dependent loads e.g boilers. This is responsibility of the P1 user."
 msgstr "Tariefindicatie. Dit kan gebruikt worden om te wisselen met tariefafhankelijke vraag, zoals bijvoorbeeld een boiler. Verantwoording is voor de gebruiker van de P1-poort."

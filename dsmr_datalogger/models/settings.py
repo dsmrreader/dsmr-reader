@@ -28,6 +28,19 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         (DSMR_LUXEMBOURG_SMARTY, _("Luxembourg - Smarty (single tariff fix)")),
     )
 
+    DSMR_EXTRA_DEVICE_CHANNEL_AUTO = None
+    DSMR_EXTRA_DEVICE_CHANNEL_1 = 1
+    DSMR_EXTRA_DEVICE_CHANNEL_2 = 2
+    DSMR_EXTRA_DEVICE_CHANNEL_3 = 3
+    DSMR_EXTRA_DEVICE_CHANNEL_4 = 4
+    DSMR_EXTRA_DEVICE_CHANNEL_CHOICES = (
+        (DSMR_EXTRA_DEVICE_CHANNEL_AUTO, _("Auto (default)")),
+        (DSMR_EXTRA_DEVICE_CHANNEL_1, _("Belgium - Fluvius (channel 1)")),
+        (DSMR_EXTRA_DEVICE_CHANNEL_2, _("Belgium - Fluvius (channel 2)")),
+        (DSMR_EXTRA_DEVICE_CHANNEL_3, _("Belgium - Fluvius (channel 3)")),
+        (DSMR_EXTRA_DEVICE_CHANNEL_4, _("Belgium - Fluvius (channel 4)")),
+    )
+
     input_method = models.CharField(
         max_length=16,
         default=INPUT_METHOD_SERIAL,
@@ -38,9 +51,19 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
     dsmr_version = models.IntegerField(
         default=DSMR_VERSION_4_PLUS,
         choices=DSMR_VERSION_CHOICES,
-        verbose_name=_("DSMR version"),
+        verbose_name=_("DSMR version/vendor"),
         help_text=_(
-            "The DSMR version your meter supports. Version should be printed on meter."
+            "The DSMR version your meter supports or the vendor related to it. Version should be printed on meter."
+        ),
+    )
+    dsmr_extra_device_channel = models.IntegerField(
+        default=None,
+        blank=True,
+        null=True,
+        choices=DSMR_EXTRA_DEVICE_CHANNEL_CHOICES,
+        verbose_name=_("Extra device channel"),
+        help_text=_(
+            "Only use when your extra device is read incorrectly (e.g. gas). Also, only works with specific vendor(s)."
         ),
     )
     serial_port = models.CharField(
