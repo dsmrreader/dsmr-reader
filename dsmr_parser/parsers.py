@@ -1,10 +1,21 @@
 import logging
 import re
+from binascii import unhexlify
 
 from ctypes import c_ushort
+from decimal import Decimal
 
-from dsmr_parser.objects import MBusObject, CosemObject, ProfileGenericObject
+from dlms_cosem.connection import XDlmsApduFactory
+from dlms_cosem.protocol.xdlms import GeneralGlobalCipher
+
+from dsmr_parser.objects import (
+    MBusObject,
+    MBusObjectPeak,
+    CosemObject,
+    ProfileGenericObject,
+)
 from dsmr_parser.exceptions import ParseError, InvalidChecksumError
+from dsmr_parser.value_types import timestamp
 
 logger = logging.getLogger(__name__)
 
@@ -22,23 +33,70 @@ class TelegramParser(object):
         self.telegram_specification = telegram_specification
         self.apply_checksum_validation = apply_checksum_validation
 
-    def parse(self, telegram_data):
+    def parse(
+        self, telegram_data, encryption_key="", authentication_key=""
+    ):  # noqa: C901
         """
         Parse telegram from string to dict.
-
         The telegram str type makes python 2.x integration easier.
 
         :param str telegram_data: full telegram from start ('/') to checksum
             ('!ABCD') including line endings in between the telegram's lines
+        :param str encryption_key: encryption key
+        :param str authentication_key: authentication key
         :rtype: dict
         :returns: Shortened example:
             {
                 ..
+                r'\d-\d:96\.1\.1.+?\r\n': <CosemObject>,  # EQUIPMENT_IDENTIFIER
+                r'\d-\d:1\.8\.1.+?\r\n': <CosemObject>,   # ELECTRICITY_USED_TARIFF_1
+                r'\d-\d:24\.3\.0.+?\r\n.+?\r\n': <MBusObject>,  # GAS_METER_READING
                 ..
             }
         :raises ParseError:
         :raises InvalidChecksumError:
         """
+
+        if "general_global_cipher" in self.telegram_specification:
+            if self.telegram_specification["general_global_cipher"]:
+                enc_key = unhexlify(encryption_key)
+                auth_key = unhexlify(authentication_key)
+                telegram_data = unhexlify(telegram_data)
+                apdu = XDlmsApduFactory.apdu_from_bytes(apdu_bytes=telegram_data)
+                if apdu.security_control.security_suite != 0:
+                    logger.warning("Untested security suite")
+                if (
+                    apdu.security_control.authenticated
+                    and not apdu.security_control.encrypted
+                ):
+                    logger.warning("Untested authentication only")
+                if (
+                    not apdu.security_control.authenticated
+                    and not apdu.security_control.encrypted
+                ):
+                    logger.warning("Untested not encrypted or authenticated")
+                if apdu.security_control.compressed:
+                    logger.warning("Untested compression")
+                if apdu.security_control.broadcast_key:
+                    logger.warning("Untested broadcast key")
+                telegram_data = apdu.to_plain_apdu(enc_key, auth_key).decode("ascii")
+            else:
+                try:
+                    if unhexlify(telegram_data[0:2])[0] == GeneralGlobalCipher.TAG:
+                        raise RuntimeError(
+                            "Looks like a general_global_cipher frame "
+                            "but telegram specification is not matching!"
+                        )
+                except Exception:
+                    pass
+        else:
+            try:
+                if unhexlify(telegram_data[0:2])[0] == GeneralGlobalCipher.TAG:
+                    raise RuntimeError(
+                        "Looks like a general_global_cipher frame but telegram specification is not matching!"
+                    )
+            except Exception:
+                pass
 
         if (
             self.apply_checksum_validation
@@ -49,7 +107,7 @@ class TelegramParser(object):
         telegram = {}
 
         for signature, parser in self.telegram_specification["objects"].items():
-            # DSMR-reader #778: We might hit the same pattern multiple times. The last one matched will be leading.
+            # DSMR-reader legacy (#778): We might hit the same pattern multiple times. The last one matched will be leading.
             matches = re.findall(signature, telegram_data, re.DOTALL)
 
             for current_match in matches:
@@ -90,15 +148,11 @@ class TelegramParser(object):
 
         calculated_crc = TelegramParser.crc16(checksum_contents.group(0))
         expected_crc = int(checksum_hex.group(0), base=16)
-        calculated_crc_hex = "{:0>4}".format(hex(calculated_crc)[2:].upper())
-        expected_crc_hex = "{:0>4}".format(hex(expected_crc)[2:].upper())
 
         if calculated_crc != expected_crc:
             raise InvalidChecksumError(
-                "Invalid telegram CRC. The calculated checksum '{}' ({}) does not match the "
-                "telegram checksum '{}' ({})".format(
-                    calculated_crc, calculated_crc_hex, expected_crc, expected_crc_hex
-                )
+                "Invalid telegram. The CRC checksum '{}' does not match the "
+                "expected '{}'".format(calculated_crc, expected_crc)
             )
 
     @staticmethod
@@ -113,7 +167,7 @@ class TelegramParser(object):
         if len(TelegramParser.crc16_tab) == 0:
             for i in range(0, 256):
                 crc = c_ushort(i).value
-                for _j in range(0, 8):
+                for j in range(0, 8):
                     if crc & 0x0001:
                         crc = c_ushort(crc >> 1).value ^ 0xA001
                     else:
@@ -179,6 +233,43 @@ class MBusParser(DSMRObjectParser):
 
     def parse(self, line):
         return MBusObject(self._parse(line))
+
+
+class MaxDemandParser(DSMRObjectParser):
+    """
+    Max demand history parser.
+
+    These are lines with multiple values. Each containing 2 timestamps and a value
+
+    Line format:
+    'ID (Count) (ID) (ID) (TST) (TST) (Mv1*U1)'
+
+     1  2  3  4  5  6  7
+
+    1) OBIS Reduced ID-code
+    2) Amount of values in the response
+    3) ID of the source
+    4) ^^
+    5) Time Stamp (TST) of the month
+    6) Time Stamp (TST) when the max demand occured
+    6) Measurement value 1 (most recent entry of buffer attribute without unit)
+    7) Unit of measurement values (Unit of capture objects attribute)
+    """
+
+    def parse(self, line):
+        pattern = re.compile(r"((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))")
+        values = re.findall(pattern, line)
+
+        objects = []
+
+        count = int(values[0])
+        for i in range(1, count + 1):
+            timestamp_month = ValueParser(timestamp).parse(values[i * 3 + 1])
+            timestamp_occurred = ValueParser(timestamp).parse(values[i * 3 + 1])
+            value = ValueParser(Decimal).parse(values[i * 3 + 2])
+            objects.append(MBusObjectPeak([timestamp_month, timestamp_occurred, value]))
+
+        return objects
 
 
 class CosemParser(DSMRObjectParser):

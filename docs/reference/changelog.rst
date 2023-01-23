@@ -39,6 +39,7 @@ v5.10.0 - January 2023
 
 - ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD`` is now restricted to: ``DEBUG``, ``WARNING`` or ``ERROR``
 - ``Changed`` [`#1725 <https://github.com/dsmrreader/dsmr-reader/issues/1725>`_] The value of ``DSMRREADER_LOGLEVEL`` is now restricted to: ``serial`` or ``ipv4``
+- ``Changed`` [`#1794 <https://github.com/dsmrreader/dsmr-reader/issues/1794>`_] [`#1764 <https://github.com/dsmrreader/dsmr-reader/issues/1764>`_] Updated dsmr_parser (mostly) with latest version
 
 
 v5.9.0 - November 2022

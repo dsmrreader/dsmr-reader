@@ -235,15 +235,15 @@ def _get_dsmrreader_mapping(version: int) -> Dict:
     if version == DataloggerSettings.DSMR_BELGIUM_FLUVIUS:
         mapping.update(
             {
-                obis_references.BELGIUM_HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,
+                obis_references.BELGIUM_MBUS_WILDCARD_METER_READING2: SPLIT_GAS_FIELD,
             }
         )
 
     if version == DataloggerSettings.DSMR_LUXEMBOURG_SMARTY:
         mapping.update(
             {
-                obis_references.LUXEMBOURG_ELECTRICITY_USED_TARIFF_GLOBAL: "electricity_delivered_1",
-                obis_references.LUXEMBOURG_ELECTRICITY_DELIVERED_TARIFF_GLOBAL: "electricity_returned_1",
+                obis_references.ELECTRICITY_IMPORTED_TOTAL: "electricity_delivered_1",
+                obis_references.ELECTRICITY_EXPORTED_TOTAL: "electricity_returned_1",
             }
         )
 

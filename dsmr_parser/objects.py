@@ -114,6 +114,53 @@ class MBusObject(DSMRObject):
         return json.dumps(output)
 
 
+class MBusObjectPeak(DSMRObject):
+    @property
+    def datetime(self):
+        return self.values[0]["value"]
+
+    @property
+    def occurred(self):
+        return self.values[1]["value"]
+
+    @property
+    def value(self):
+        return self.values[2]["value"]
+
+    @property
+    def unit(self):
+        return self.values[2]["unit"]
+
+    def __str__(self):
+        output = "{}\t[{}] at {} occurred {}".format(
+            str(self.value),
+            str(self.unit),
+            str(self.datetime.astimezone().isoformat()),
+            str(self.occurred.astimezone().isoformat()),
+        )
+        return output
+
+    def to_json(self):
+        timestamp = self.datetime
+        if isinstance(self.datetime, datetime.datetime):
+            timestamp = self.datetime.astimezone().isoformat()
+        timestamp_occurred = self.occurred
+        if isinstance(self.occurred, datetime.datetime):
+            timestamp_occurred = self.occurred.astimezone().isoformat()
+        value = self.value
+        if isinstance(self.value, datetime.datetime):
+            value = self.value.astimezone().isoformat()
+        if isinstance(self.value, Decimal):
+            value = float(self.value)
+        output = {
+            "datetime": timestamp,
+            "occurred": timestamp_occurred,
+            "value": value,
+            "unit": self.unit,
+        }
+        return json.dumps(output)
+
+
 class CosemObject(DSMRObject):
     @property
     def value(self):
