@@ -59,7 +59,7 @@ class TelegramParser(object):
         :raises InvalidChecksumError:
         """
 
-# @TODO: Disabled in DSMR-reader due to incompatibilities with dlms-cosem's dependency of "cryptography"
+        # @TODO: Disabled in DSMR-reader due to incompatibilities with dlms-cosem's dependency of "cryptography"
         # if "general_global_cipher" in self.telegram_specification:
         #     if self.telegram_specification["general_global_cipher"]:
         #         enc_key = unhexlify(encryption_key)
