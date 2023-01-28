@@ -212,6 +212,7 @@ class TestAlwaysRequireLoginDisabled(TestCase):
         "export-as-csv",
         "notification-xhr-mark-read",
         "notification-xhr-mark-all-read",
+        "about-xhr-update-check",
         "support-xhr-debug-info",
         "support-xhr-latest-telegram",
         "trends-xhr-avg-consumption",
