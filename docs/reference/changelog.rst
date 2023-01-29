@@ -25,10 +25,6 @@ Current release series
     :depth: 1
 
 
-v5.11.0 - XXXXXXX 2023
-----------------------
-
-
 
 v5.10.0 - January 2023
 ----------------------

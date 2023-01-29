@@ -55,7 +55,7 @@ def regenerate_data(apps, schema_editor):
             hour_start__lt=end_of_day,
         ).aggregate(gas_sum=Sum("gas"),)["gas_sum"]
 
-        if hours_gas_sum == 0:
+        if not hours_gas_sum or not current.gas:
             continue
 
         current_day_gas_diff = hours_gas_sum - current.gas
