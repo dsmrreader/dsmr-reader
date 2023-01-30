@@ -25,7 +25,7 @@ Current release series
     :depth: 1
 
 
-v5.10.1 - January 2023
+v5.10.2 - January 2023
 ----------------------
 
 - ``Fixed`` [`#1795 <https://github.com/dsmrreader/dsmr-reader/issues/1795>`_] Bugfix in ``v5.10`` data migration checks.
