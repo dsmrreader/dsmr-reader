@@ -159,9 +159,10 @@ BELGIUM_FLUVIUS = {
         obis.ELECTRICITY_DELIVERED_TARIFF_2: CosemParser(ValueParser(Decimal)),
         obis.ELECTRICITY_ACTIVE_TARIFF: CosemParser(ValueParser(str)),
         obis.BELGIUM_CURRENT_AVERAGE_DEMAND: CosemParser(ValueParser(Decimal)),
-        obis.BELGIUM_MAXIMUM_DEMAND_MONTH: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        # @TODO: DSMR-reader disables these due to #1799 (for now)
+        # obis.BELGIUM_MAXIMUM_DEMAND_MONTH: MBusParser(
+        #     ValueParser(timestamp), ValueParser(Decimal)
+        # ),
         obis.BELGIUM_MAXIMUM_DEMAND_13_MONTHS: MaxDemandParser(),
         obis.CURRENT_ELECTRICITY_USAGE: CosemParser(ValueParser(Decimal)),
         obis.CURRENT_ELECTRICITY_DELIVERY: CosemParser(ValueParser(Decimal)),

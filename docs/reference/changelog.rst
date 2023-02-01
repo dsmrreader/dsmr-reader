@@ -25,10 +25,16 @@ Current release series
     :depth: 1
 
 
+v5.10.3 - February 2023
+-----------------------
+
+- ``Fixed`` [`#1799 <https://github.com/dsmrreader/dsmr-reader/issues/1799>`_] Bugfix in favor of ``v5.10`` DSMR-parser update (only affected Fluvius).
+
+
 v5.10.2 - January 2023
 ----------------------
 
-- ``Fixed`` [`#1795 <https://github.com/dsmrreader/dsmr-reader/issues/1795>`_] Bugfix in ``v5.10`` data migration checks.
+- ``Fixed`` [`#1795 <https://github.com/dsmrreader/dsmr-reader/issues/1795>`_] Bugfix in favor of ``v5.10`` data migration checks.
 
 
 v5.10.0 - January 2023
