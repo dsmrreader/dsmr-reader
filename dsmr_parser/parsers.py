@@ -151,11 +151,16 @@ class TelegramParser(object):
 
         calculated_crc = TelegramParser.crc16(checksum_contents.group(0))
         expected_crc = int(checksum_hex.group(0), base=16)
+        # @TODO DSMR-reader additions. Should eventually be pushed upstream.
+        calculated_crc_hex = "{:0>4}".format(hex(calculated_crc)[2:].upper())
+        expected_crc_hex = "{:0>4}".format(hex(expected_crc)[2:].upper())
 
         if calculated_crc != expected_crc:
             raise InvalidChecksumError(
-                "Invalid telegram. The CRC checksum '{}' does not match the "
-                "expected '{}'".format(calculated_crc, expected_crc)
+                "Invalid telegram CRC. The calculated checksum '{}' ({}) does not match the "
+                "telegram checksum '{}' ({})".format(
+                    calculated_crc, calculated_crc_hex, expected_crc, expected_crc_hex
+                )
             )
 
     @staticmethod
