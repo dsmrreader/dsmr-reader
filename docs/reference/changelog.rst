@@ -34,6 +34,12 @@ v5.10.3 - February 2023
 v5.10.2 - January 2023
 ----------------------
 
+- ``Fixed`` [`#1770 <https://github.com/dsmrreader/dsmr-reader/issues/1770>`_] Disabled an automatic data migration in ``v5.10`` until further notice.
+
+
+v5.10.1 - January 2023
+----------------------
+
 - ``Fixed`` [`#1795 <https://github.com/dsmrreader/dsmr-reader/issues/1795>`_] Bugfix in favor of ``v5.10`` data migration checks.
 
 
