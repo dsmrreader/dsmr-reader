@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_datalogger", "0025_datalogger_mandatory_sleep_update"),
     ]

@@ -5,7 +5,6 @@ import dsmr_backend.mixins
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_mqtt", "0018_mqtt_always_reconnect"),
     ]

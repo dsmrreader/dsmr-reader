@@ -35,7 +35,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_notification", "0004_statusnotificationsetting"),
     ]

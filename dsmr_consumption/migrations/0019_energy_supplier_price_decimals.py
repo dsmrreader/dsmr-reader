@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_consumption", "0018_allow_inversed_fixed_costs"),
     ]

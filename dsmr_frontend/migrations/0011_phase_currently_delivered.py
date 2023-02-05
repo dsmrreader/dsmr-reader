@@ -7,7 +7,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_frontend", "0010_drop_reverse_dashboard_graphs_setting"),
     ]

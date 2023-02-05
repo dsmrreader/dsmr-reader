@@ -5,7 +5,6 @@ import dsmr_backend.mixins
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_consumption", "0019_energy_supplier_price_decimals"),
     ]

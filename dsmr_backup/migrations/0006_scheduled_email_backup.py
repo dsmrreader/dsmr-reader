@@ -19,7 +19,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_backup", "0005_email_backup_settings"),
     ]

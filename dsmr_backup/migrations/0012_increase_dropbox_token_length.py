@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_backup", "0011_remove_backupsettings_latest_backup"),
     ]

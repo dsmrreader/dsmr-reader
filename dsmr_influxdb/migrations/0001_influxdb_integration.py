@@ -5,7 +5,6 @@ import dsmr_backend.mixins
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = []

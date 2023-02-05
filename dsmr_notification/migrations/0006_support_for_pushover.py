@@ -29,7 +29,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_notification", "0005_notify_my_android_ended_support"),
     ]

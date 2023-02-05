@@ -63,7 +63,6 @@ def revert_regenerated_data(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     operations = [migrations.RunPython(regenerate_data, revert_regenerated_data)]
 
     dependencies = [

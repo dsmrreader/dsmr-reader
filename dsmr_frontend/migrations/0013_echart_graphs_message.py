@@ -29,7 +29,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_frontend", "0012_frontendsettings_dashboard_graph_width"),
     ]

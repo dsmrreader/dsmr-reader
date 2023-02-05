@@ -5,7 +5,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_frontend", "0002_recent_history_weeks"),
     ]

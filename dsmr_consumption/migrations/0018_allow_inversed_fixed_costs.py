@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_consumption", "0017_energy_supplier_price_refactoring"),
     ]

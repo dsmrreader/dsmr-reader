@@ -87,7 +87,7 @@ def list_files_in_dir(directory: str) -> Iterable:
     """Lists all files recursively in the specified (backup) directory."""
     files = []
 
-    for (root, __, filenames) in os.walk(directory):
+    for root, __, filenames in os.walk(directory):
         for current_file in filenames:
             files.append(os.path.abspath(os.path.join(root, current_file)))
 

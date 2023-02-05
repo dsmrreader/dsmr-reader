@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_stats", "0004_hour_statistics_gas_default_retroactive"),
     ]

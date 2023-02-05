@@ -5,7 +5,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_stats", "0007_min_max_temperature_statistics_retroactive"),
     ]

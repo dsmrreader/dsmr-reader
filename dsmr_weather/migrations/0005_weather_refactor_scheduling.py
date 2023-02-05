@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_weather", "0004_next_sync_setting_retroactive"),
     ]

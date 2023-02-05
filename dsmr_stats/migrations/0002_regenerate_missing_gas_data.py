@@ -43,7 +43,6 @@ def regenerate_missing_data(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_stats", "0001_squashed_0016_drop_stats_settings"),
     ]

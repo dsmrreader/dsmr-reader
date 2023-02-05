@@ -10,7 +10,6 @@ def insert_notifications(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_frontend", "0005_notifications"),
         ("dsmr_mindergas", "0001_mindergas"),

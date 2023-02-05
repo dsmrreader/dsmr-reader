@@ -5,7 +5,6 @@ import dsmr_backend.mixins
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_influxdb", "0002_influxdb_optional_credentials"),
     ]

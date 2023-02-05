@@ -5,7 +5,6 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_datalogger", "0017_log_telegrams"),
     ]

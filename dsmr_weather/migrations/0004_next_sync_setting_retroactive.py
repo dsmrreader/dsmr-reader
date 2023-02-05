@@ -22,7 +22,6 @@ def migrate_next_sync_setting_retroactive(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_weather", "0003_next_sync_setting"),
     ]

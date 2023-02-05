@@ -20,7 +20,6 @@ def generate_random_auth_key(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_api", "0001_api_settings"),
     ]

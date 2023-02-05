@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_consumption", "0001_squashed_0004_recalculate_gas_consumption"),
     ]

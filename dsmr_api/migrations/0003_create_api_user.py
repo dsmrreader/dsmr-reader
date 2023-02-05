@@ -25,7 +25,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_api", "0002_generate_random_auth_key"),
     ]

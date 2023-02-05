@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_stats", "0017_day_statistics_reading_history_retroactive"),
     ]

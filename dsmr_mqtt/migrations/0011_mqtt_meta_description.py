@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_mqtt", "0010_mqtt_gas_consumption"),
     ]

@@ -33,7 +33,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_mindergas", "0004_mindergas_latest_sync"),
     ]

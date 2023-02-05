@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_datalogger", "0018_meterstatistics_no_autonow"),
     ]

@@ -115,7 +115,6 @@ def noop(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     operations = [migrations.RunPython(regenerate_data, noop)]
 
     dependencies = [

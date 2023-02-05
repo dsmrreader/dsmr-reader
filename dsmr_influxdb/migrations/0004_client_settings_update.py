@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_influxdb", "0003_influxdb_outgoing_measurements"),
     ]

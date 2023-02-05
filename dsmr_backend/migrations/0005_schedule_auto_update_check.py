@@ -23,7 +23,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_backend", "0004_backend_schedule_process_active_flag"),
     ]

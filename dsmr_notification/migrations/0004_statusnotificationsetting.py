@@ -12,7 +12,6 @@ def migrate_forward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_notification", "0003_notification_notification"),
     ]

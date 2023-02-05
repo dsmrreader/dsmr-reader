@@ -25,7 +25,6 @@ def migrate_forward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_mqtt", "0005_mqtt_use_local_timezone"),
     ]

@@ -13,7 +13,6 @@ def convert_notifications(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_frontend", "0008_merge_electricity_tariffs_notification"),
     ]

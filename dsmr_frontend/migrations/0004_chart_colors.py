@@ -6,7 +6,6 @@ import colorfield.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_frontend", "0003_drop_history_page"),
     ]

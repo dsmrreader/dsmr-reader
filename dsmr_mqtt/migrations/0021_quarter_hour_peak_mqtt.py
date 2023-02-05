@@ -5,7 +5,6 @@ import dsmr_backend.mixins
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_mqtt", "0020_drop_mqtt_qos_setting"),
     ]

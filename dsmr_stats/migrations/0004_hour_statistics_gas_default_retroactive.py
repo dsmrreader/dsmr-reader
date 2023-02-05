@@ -11,7 +11,6 @@ def data_migration(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_stats", "0003_hour_statistics_gas_default"),
     ]

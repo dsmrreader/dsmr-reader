@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_frontend", "0028_v3_0_fix_upgrade_redirect"),
     ]

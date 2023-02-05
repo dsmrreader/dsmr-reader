@@ -14,7 +14,6 @@ def disable_influxdb_integration(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_influxdb", "0004_client_settings_update"),
     ]

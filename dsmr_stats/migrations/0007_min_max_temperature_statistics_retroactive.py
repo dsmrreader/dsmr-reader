@@ -26,7 +26,6 @@ def regenerate_data(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_stats", "0006_min_max_temperature_statistics"),
     ]

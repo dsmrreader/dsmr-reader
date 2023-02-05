@@ -28,7 +28,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     operations = [
         migrations.RunPython(migrate_forward, migrate_backward),
     ]

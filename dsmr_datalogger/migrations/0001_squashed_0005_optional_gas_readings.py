@@ -14,7 +14,6 @@ def initialize_meter_statistics(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = []
 
     operations = [

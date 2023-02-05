@@ -5,7 +5,6 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("dsmr_backend", "0013_allow_higher_backend_sleep"),
     ]

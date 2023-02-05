@@ -22,7 +22,6 @@ def migrate_backward(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     operations = [
         migrations.CreateModel(
             name="SortedGraph",

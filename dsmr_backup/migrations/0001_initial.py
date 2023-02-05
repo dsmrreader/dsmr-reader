@@ -6,7 +6,6 @@ import datetime
 
 
 class Migration(migrations.Migration):
-
     dependencies = []
 
     operations = [
