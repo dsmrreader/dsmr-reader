@@ -1,7 +1,7 @@
 attrs==22.2.0
 coreapi==2.3.3
 crcmod==1.7
-django==3.2.16
+django==3.2.17
 django-admin-rangefilter==0.8.8
 django-admin-sortable==2.3
 django-colorfield==0.7.3
@@ -12,7 +12,7 @@ djangorestframework==3.14.0
 django-solo==2.0
 dropbox==11.36.0
 gunicorn==20.1.0
-influxdb-client==1.35.0
+influxdb-client==1.36.0
 paho-mqtt==1.6.1
 psycopg2-binary==2.9.5
 pyserial==3.5
