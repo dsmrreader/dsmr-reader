@@ -130,11 +130,10 @@
                         {% endif %}
                     </table>
 
-                    <br>
-                    <div class="alert alert-info" role="alert">
+                    <div>
                         <!-- @see #1770 @ https://github.com/dsmrreader/dsmr-reader/issues/1770 --->
-                        <small>{% translate "If the meter positions above have no timestamps along them, we were unable to reliably determine them retroactively." %}</small>
-                        <small>{% translate "However, if they do have timestamps, the total gas difference between days still may or may not slightly differ from the total consumption of the day, depending on when the first gas reading was available for that day." %}</small>
+                        <span class="unit">{% translate "If the meter positions above have no timestamps along them, we were unable to reliably determine them retroactively." %}</span>
+                        <span class="unit">{% translate "However, if they do have timestamps, the total gas difference between days still may or may not slightly differ from the total consumption of the day, depending on when the first gas reading was available for that day." %}</span>
                     </div>
                 </div>
             </div>
