@@ -28,6 +28,8 @@ Current release series
 v5.11.0 - xxxxxxxx 2023
 -----------------------
 
+- ``Fixed`` Bugfix for Archive which was causing the electricity returned meter positions to be displayed at all times.
+
 
 
 v5.10.3 - February 2023

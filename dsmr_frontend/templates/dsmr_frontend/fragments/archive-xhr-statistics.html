@@ -110,13 +110,13 @@
                         <tr>
                             <td>{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ day_statistics.electricity1_reading }} </span></td>
-                            <td><span class="badge bg-green">{{ day_statistics.electricity1_returned_reading}}</span></td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ day_statistics.electricity1_returned_reading}}</span><{% endif %}/td>
                             <td class="col-sm-2"><span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
                         </tr>
                         <tr>
                             <td>{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
                             <td><span class="badge bg-red">{{ day_statistics.electricity2_reading }}</span></td>
-                            <td><span class="badge bg-green">{{ day_statistics.electricity2_returned_reading}}</span></td>
+                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ day_statistics.electricity2_returned_reading}}</span>{% endif %}</td>
                             <td class="col-sm-2"><span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
                         </tr>
 
