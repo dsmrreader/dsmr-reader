@@ -419,6 +419,7 @@ def year_statistics(target_date: datetime.date):
     return range_statistics(start=start_of_year, end=end_of_year)
 
 
+# @TODO: Consider reworking this to meter positions in favor of https://github.com/dsmrreader/dsmr-reader/issues/1811
 def period_totals() -> Dict:
     """Retrieves year/month period totals and merges them with today's consumption."""
     today = timezone.localtime(timezone.now())
