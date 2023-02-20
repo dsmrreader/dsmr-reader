@@ -14,7 +14,7 @@ Setting up a development environment using Docker
     I'm using JetBrain's PyCharm IDE for local development, which has builtin support for Git and Docker.
     Therefor some steps or information below may or may not match your own development stack.
 
-- Install Docker on your system.
+- Install Docker on your system. E.g. Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 
 - Clone DSMR-reader repository from GitHub::
 
