@@ -1,6 +1,6 @@
 flake8-bandit==3.0.0
 flake8-black==0.3.6
-flake8-bugbear==23.1.20
+flake8-bugbear==23.2.23
 flake8==4.0.1
 mypy==0.971
 # Poetry is currently only used with development
@@ -17,7 +17,7 @@ sphinx-intl==2.1.0
 sphinx-rtd-theme==1.2.0
 sphinx==4.3.2
 types-polib==1.1.12.1
-types-python-dateutil==2.8.19.6
+types-python-dateutil==2.8.19.7
 types-pytz==2022.7.1.0
-types-requests==2.28.11.12
+types-requests==2.28.11.13
 types-six==1.16.21.4
