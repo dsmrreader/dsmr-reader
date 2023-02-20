@@ -60,7 +60,7 @@ Setting up a development environment using Docker
 
 .. tip::
 
-    Other DB engines can be tested as well, but the CI will take care of it anyway. The SQLite engine matches 99% of the features DSMR-reader requires and it also runs in-memory, speeding up tests.
+    Other DB engines can be tested as well, but the CI will take care of it anyway. The SQLite engine matches 99%% of the features DSMR-reader requires and it also runs in-memory, speeding up tests.
 
 
 Initial data to develop with
