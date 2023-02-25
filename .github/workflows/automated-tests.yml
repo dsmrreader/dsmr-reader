@@ -5,10 +5,7 @@ on:
     branches:
       - 'v*'
       - 'development'
-  pull_request:
-    branches:
-      - '!dependabot/'
-      - 'development'
+  pull_request: ~
 
 jobs:
   # The most verbose and complete job.
