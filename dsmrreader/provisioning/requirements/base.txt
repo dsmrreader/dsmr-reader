@@ -12,7 +12,7 @@ django==3.2.18
 djangorestframework==3.14.0
 dropbox==11.36.0
 gunicorn==20.1.0
-influxdb-client==1.36.0
+influxdb-client==1.36.1
 paho-mqtt==1.6.1
 psycopg2-binary==2.9.5
 pyserial-asyncio==0.6
