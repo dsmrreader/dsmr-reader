@@ -1,3 +1,5 @@
+import logging
+
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
@@ -39,6 +41,9 @@ class Command(BaseCommand):
             raise CommandError(
                 _("Intended usage is NOT production! Only allowed when DEBUG = True")
             )
+
+        # Show queries for feedback.
+        logging.getLogger("django.db").setLevel(logging.DEBUG)
 
         # Just wipe all settings which can affect the environment.
         APISettings.objects.update(allow=not options["no_api"], auth_key="test")
@@ -87,3 +92,5 @@ class Command(BaseCommand):
         else:
             admin.set_password("admin")
             admin.save()
+
+        print("Completed reset.")
