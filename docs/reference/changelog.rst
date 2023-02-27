@@ -25,11 +25,11 @@ Current release series
     :depth: 1
 
 
-v5.11.0 - xxxxxxxx 2023
------------------------
+v5.11.0 - March 2023
+--------------------
 
 - ``Fixed`` Bugfix for Archive which was causing the electricity returned meter positions to be displayed at all times.
-
+- ``Fixed`` [`#1767 <https://github.com/dsmrreader/dsmr-reader/issues/1767>`_] Slightly alter debug info for unsupported database engines.
 
 
 v5.10.3 - February 2023

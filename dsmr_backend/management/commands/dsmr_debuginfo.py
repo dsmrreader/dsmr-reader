@@ -53,8 +53,8 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
         self._print_header("DSMR-reader")
         self._pretty_print(
-            "App / Python / Database",
-            "v{} / v{} / {}".format(
+            "App | Python | Database",
+            "v{} | v{} | {}".format(
                 settings.DSMRREADER_VERSION,
                 platform.python_version(),
                 connection.vendor,
@@ -62,8 +62,8 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         )
 
         self._pretty_print(
-            "BE sleep / DL sleep / Retention / Override",
-            "{}s / {}s / {}h / {}".format(
+            "BE sleep | DL sleep | Retention | Override",
+            "{}s | {}s | {}h | {}".format(
                 BackendSettings.get_solo().process_sleep,
                 DataloggerSettings.get_solo().process_sleep,
                 RetentionSettings.get_solo().data_retention_in_hours or "-",
@@ -71,8 +71,8 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             ),
         )
         self._pretty_print(
-            "Latest telegram version read / Parser settings",
-            '"{}" / "{}"'.format(
+            "Latest telegram version read | Parser settings",
+            '"{}" | "{}"'.format(
                 MeterStatistics.get_solo().dsmr_version,
                 DataloggerSettings.get_solo().dsmr_version,
             ),
@@ -94,8 +94,8 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
         self._print_header("Data")
         self._pretty_print("Telegrams total (est.)", reading_count or "-")
         self._pretty_print(
-            "Consumption records electricity / gas (est.)",
-            "{} / {}".format(electricity_count or "-", gas_count or "-"),
+            "Consumption records electricity | gas (est.)",
+            "{} | {}".format(electricity_count or "-", gas_count or "-"),
         )
 
     def _dump_issues(self):
@@ -169,7 +169,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
     def _table_record_count(self, table_name):
         if connection.vendor != "postgresql":
-            return "??? ({})".format(connection.vendor)
+            return "N/A ({})".format(connection.vendor)
 
         # A live count is too slow on huge datasets, this is accurate enough:
         with connection.cursor() as cursor:

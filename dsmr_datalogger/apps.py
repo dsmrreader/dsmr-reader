@@ -46,6 +46,10 @@ def check_reading_count(**kwargs) -> Optional[MonitoringStatusIssue]:  # pragma:
         dsmr_datalogger.services.datalogger.postgresql_approximate_reading_count()
     )
 
+    # Skip for unsupported vendors (None)
+    if reading_count is None:
+        return None
+
     if (
         reading_count is not None
         and reading_count < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_READING_COUNT
