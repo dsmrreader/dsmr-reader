@@ -212,8 +212,12 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
     """Calculates and returns an hour summary, when applicable. Persists it as well."""
     logger.debug("Stats: Creating hour statistics for: %s", hour_start)
     hour_end = hour_start + timezone.timedelta(hours=1)
+    next_hour_end = hour_end + timezone.timedelta(hours=1)
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
         start=hour_start, end=hour_end
+    )
+    next_electricity_readings, next_gas_readings = dsmr_consumption.services.consumption_by_range(
+        start=hour_end, end=next_hour_end
     )
 
     if not electricity_readings.exists():
@@ -226,7 +230,7 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
         return
 
     electricity_start = electricity_readings.first()
-    electricity_end = electricity_readings.last()
+    electricity_end = next_electricity_readings.first()
     creation_kwargs["electricity1"] = (
         electricity_end.delivered_1 - electricity_start.delivered_1
     )
@@ -246,8 +250,7 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
 
     # DSMR v5
     elif len(gas_readings) > 1:
-        gas_readings = list(gas_readings)
-        creation_kwargs["gas"] = gas_readings[-1].delivered - gas_readings[0].delivered
+        creation_kwargs["gas"] = next_gas_readings.first().delivered - gas_readings.first().delivered
 
     return HourStatistics.objects.create(**creation_kwargs)
 
