@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2023-02-20 17:05+0000\n"
-"PO-Revision-Date: 2023-02-20 18:05+0100\n"
+"POT-Creation-Date: 2023-03-06 17:59+0000\n"
+"PO-Revision-Date: 2023-03-06 19:00+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language: nl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.12.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: ../../how-to/development.rst:2
@@ -71,123 +71,127 @@ msgstr "Probeer nu of de tests goed draaien met SQLite::"
 msgid "Other DB engines can be tested as well, but the CI will take care of it anyway. The SQLite engine matches 99%% of the features DSMR-reader requires and it also runs in-memory, speeding up tests."
 msgstr "Andere DB-engines kunnen ook getest worden, maar dit doet de CI ook al. De SQLite-engine ondersteunt overigens 99%% van de features die DMSR-reader nodig heeft. Daarnaast draait deze ook in-memory, waardoor de tests weer sneller draaien."
 
-#: ../../how-to/development.rst:67
+#: ../../how-to/development.rst:65
+msgid "When using PyCharm, you can add a new Interpreter using Docker Compose. Just select ``dsmr-app`` and set ``/opt/venv/bin/python`` as interpreter path. It should now map all dependencies used/installed in the container."
+msgstr "Wanneer je PyCharm gebruikt kun je een nieuwe Interpreter toevoegen die Docker Compose gebruikt. Selecteer ``dsmr-app`` en stel ``/opt/venv/bin/python`` in als interpreter path. Nu zouden alle gebruikte dependencies goed gemapt moeten worden vanuit de container."
+
+#: ../../how-to/development.rst:69
 msgid "Initial data to develop with"
 msgstr "Initiele gegevens om mee te ontwikkelen"
 
-#: ../../how-to/development.rst:69
+#: ../../how-to/development.rst:71
 msgid "To be honest, the best initial/fixture data is simply a backup of your own system in production."
 msgstr "De beste gegevens om mee te ontwikkelen zijn eerlijk gezegd simpelweg gegevens uit je eigen productieomgeving."
 
-#: ../../how-to/development.rst:73
+#: ../../how-to/development.rst:75
 msgid "Please note that you should not run any (backend) processes in your DSMR-reader development environment, **until you've unlinked all external services**."
 msgstr "Voorkom dat je (achtergrond)processen draait in je lokale DSMR-reader ontwikkelomgeving, **totdat je alle externe diensten hebt ontkoppeld**."
 
-#: ../../how-to/development.rst:75
+#: ../../how-to/development.rst:77
 msgid "After importing the backup of your production system, simply run::"
 msgstr "Voer simpelweg het volgende uit, na het importeren van een backup uit je eigen productieomgeving::"
 
-#: ../../how-to/development.rst:79
+#: ../../how-to/development.rst:81
 msgid "This will remove all API keys and other links to externals systems, as well as reset the admin user credentials to ``admin / admin`` (user / password)."
 msgstr "Dit verwijdert alle API-keys en andere koppelingen naar externe systemen. Tevens wordt de admin-gebruiker gereset naar ``admin / admin`` (gebruiker / wachtwoord)."
 
-#: ../../how-to/development.rst:81
+#: ../../how-to/development.rst:83
 msgid "Just import it as you should on your RaspberryPi. Copy a database backup to ``/var/lib/postgresql/`` on your PC and import it::"
 msgstr "Importeer deze zoals je dat ook zou doen op je RaspberryPi. Kopieer een database-backup naar ``/var/lib/postgresql`` op je PC en importeer deze met::"
 
-#: ../../how-to/development.rst:95
+#: ../../how-to/development.rst:97
 msgid "Fake datalogger"
 msgstr "Nep datalogger"
 
-#: ../../how-to/development.rst:99
+#: ../../how-to/development.rst:101
 msgid "There is a builtin command that can somewhat fake a datalogger::"
 msgstr "Er is een ingebouwd command voor een soort van datalogger die nepdata genereert::"
 
-#: ../../how-to/development.rst:103
+#: ../../how-to/development.rst:105
 msgid "It will generate random data every second in a certain pattern and should be fine for basic testing."
 msgstr "Deze genereert elke seconde willekeurige gegevens in een bepaald patroon en is vaak meer dan afdoende voor simpele testdoeleinden."
 
-#: ../../how-to/development.rst:105
+#: ../../how-to/development.rst:107
 msgid "Please note that it only inserts unprocessed readings, so you'll still have to run the following command to have the readings processed::"
 msgstr "Hiermee worden alleen onverwerkte metingen aangemaakt. Je zult ze nog steeds moeten verwerken door het volgende uit te voeren::"
 
-#: ../../how-to/development.rst:111
+#: ../../how-to/development.rst:113
 msgid "Running DSMR-reader locally"
 msgstr "DSMR-reader lokaal draaien"
 
-#: ../../how-to/development.rst:113
+#: ../../how-to/development.rst:115
 msgid "When running it with the default Docker compose config, the ``dsmr-app`` `Django Development Server application <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ will be accessible at: ``http://localhost:8000/``."
 msgstr "Wanneer je de standaard Docker compose configuratie gebruikt, is de ``dsmr-app`` `Django Development Server applicatie <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ toegankelijk op: ``http://localhost:8000/``."
 
-#: ../../how-to/development.rst:115
+#: ../../how-to/development.rst:117
 msgid "Any Python code changes you make will cause the Django Development Server to reload itself automatically."
 msgstr "Wijzigingen aan Python-bestanden zorgen ervoor dat de Django Development Server zichzelf automatisch herlaadt."
 
-#: ../../how-to/development.rst:119
+#: ../../how-to/development.rst:121
 msgid "Tests and coverage"
 msgstr "Tests en dekking"
 
-#: ../../how-to/development.rst:121
+#: ../../how-to/development.rst:123
 msgid "DSMR-reader's test coverage should remain as high as possible, however this does not guarantee the quality of tests, so find a sweet spot for coverage whenever possible."
 msgstr "DSMR-reader's testdekking zou zo hoog mogelijk moeten blijven, alhoewel dat niet perse wat zegt over de kwaliteit van de tests. Zoek hier een middenweg in."
 
-#: ../../how-to/development.rst:123
+#: ../../how-to/development.rst:125
 msgid "The easiest way to run tests is to use the SQLite (in-memory) tests::"
 msgstr "De makkelijkste manier om tests te draaien is via de SQLite (in-memory) tests::"
 
-#: ../../how-to/development.rst:127
+#: ../../how-to/development.rst:129
 msgid "To test a single app within DSMR-reader, just append it::"
 msgstr "Om een enkele app binnen DSMR-reader te testen, geef je deze simpelweg als extra argument op::"
 
-#: ../../how-to/development.rst:131
+#: ../../how-to/development.rst:133
 msgid "The test coverage should be visible in the terminal after running tests. There are detailed HTML pages available as well, after each test run, in ``coverage_report/html/index.html``. Just open it with your browser to view the test coverage of each file and line."
 msgstr "De test dekking zou na het draaien van tests zichtbaar moeten zijn in de terminal. Er zijn tevens gedetaileerde HTML-pagina's beschikbaar in ``coverage_report/html/index.html``, na het draaien van tests. Je kunt deze openen met je browser om de test dekking in detail te zien per bestand en per regel code."
 
-#: ../../how-to/development.rst:137
+#: ../../how-to/development.rst:139
 msgid "A side effect of running tests is that it may also regenerate .PO files from the ``docs/`` folder. If you did not make any changes there, your should just ignore those changed files and revert them."
 msgstr "Een mogelijk bijeffect van het draaien van tests is dat hiermee ook .PO-bestanden in de ``docs/`` map bijgewerkt worden. Als je daar geen wijzigingen in hebt gedaan, kun je die door de tests gewijzigde bestanden negeren."
 
-#: ../../how-to/development.rst:142
+#: ../../how-to/development.rst:144
 msgid "Translations"
 msgstr "Vertalingen"
 
-#: ../../how-to/development.rst:144
+#: ../../how-to/development.rst:146
 msgid "You can find the translations (.PO files) for the main application in ``dsmrreader/locales/``. To regenerate them, just execute the ``docker exec -it dsmr-app poetry run ./tools/check-translations.sh`` script."
 msgstr "Je kunt de vertalingen (.PO-bestanden) voor de hoofdapplicatie vinden in ``dsmrreader/locales/``. Om ze te hergenereren voer het ``docker exec -it dsmr-app poetry run ./tools/check-translations.sh`` script uit, zodat een van de tests de vertalingen opnieuw checkt."
 
-#: ../../how-to/development.rst:149
+#: ../../how-to/development.rst:151
 msgid "Editing documentation"
 msgstr "Documentatie bijwerken"
 
-#: ../../how-to/development.rst:151
+#: ../../how-to/development.rst:153
 msgid "The documentation is part of the repository and can be generated (automatically) with Sphinx."
 msgstr "De documentatie is onderdeel van het project en kan (automatisch) gegenereerd worden via Sphinx."
 
-#: ../../how-to/development.rst:153
+#: ../../how-to/development.rst:155
 msgid "By default the Docker compose file should create and run a docs container for each language supported."
 msgstr "Standaard zou de Docker compose file een container moeten maken voor documentatie, per ondersteunde taal."
 
-#: ../../how-to/development.rst:155
+#: ../../how-to/development.rst:157
 msgid "English::"
 msgstr "Engelstalig::"
 
-#: ../../how-to/development.rst:159
+#: ../../how-to/development.rst:161
 msgid "Dutch::"
 msgstr "Nederlandstalig::"
 
-#: ../../how-to/development.rst:163
+#: ../../how-to/development.rst:165
 msgid "Any changes you make will be reflected instantly in the browser, as Sphinx continuously checks for changed files."
 msgstr "Wijzigingen die je doorvoert in Pworden direct automatisch bijgewerkt en getoond in je browser, waar Sphinx voor zorgt."
 
-#: ../../how-to/development.rst:167
+#: ../../how-to/development.rst:169
 msgid "Translating documentation"
 msgstr "Documentatie vertalen"
 
-#: ../../how-to/development.rst:169
+#: ../../how-to/development.rst:171
 msgid "Translations are done using gettext and .PO files. Regenerate the .PO files with::"
 msgstr "Vertalingen verlopen via .PO-bestanden met gettext. Hergenereer de .PO-bestanden met::"
 
-#: ../../how-to/development.rst:173
+#: ../../how-to/development.rst:175
 msgid "The .PO files in ``docs/locale`` should be regenerated now. You can use the open-source tool ``poedit`` to view and translate the files."
 msgstr "De .PO-bestanden in ``docs/_locale`` zouden nu opnieuw gegenereerd moeten worden. Je kunt het open-source programma ``poedit`` gebruiken om de bestanden te bekijken en te vertalen."
 

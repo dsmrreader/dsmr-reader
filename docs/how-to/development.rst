@@ -62,6 +62,8 @@ Setting up a development environment using Docker
 
     Other DB engines can be tested as well, but the CI will take care of it anyway. The SQLite engine matches 99%% of the features DSMR-reader requires and it also runs in-memory, speeding up tests.
 
+- When using PyCharm, you can add a new Interpreter using Docker Compose. Just select ``dsmr-app`` and set ``/opt/venv/bin/python`` as interpreter path. It should now map all dependencies used/installed in the container.
+
 
 Initial data to develop with
 ----------------------------
