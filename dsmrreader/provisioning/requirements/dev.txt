@@ -5,7 +5,7 @@ flake8==4.0.1
 mypy==0.971
 # Poetry is currently only used with development
 poetry
-# Poetry is currently only used with development
+# MySQL is currently only used with development (unsupported)
 mysqlclient
 polib==1.2.0
 pytest-cov==3.0.0
@@ -17,7 +17,7 @@ sphinx-intl==2.1.0
 sphinx-rtd-theme==1.2.0
 sphinx==4.3.2
 types-polib==1.2.0
-types-python-dateutil==2.8.19.8
+types-python-dateutil==2.8.19.10
 types-pytz==2022.7.1.2
 types-requests==2.28.11.15
 types-six==1.16.21.6
