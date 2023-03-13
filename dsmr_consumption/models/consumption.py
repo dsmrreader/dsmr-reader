@@ -2,11 +2,14 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from typing_extensions import deprecated
 
 from dsmr_backend.mixins import ModelUpdateMixin
 
 
-# @TODO - Deprecated - Remove me eventually in favor of the readings.
+@deprecated(
+    "Consumption data models should be DROPPED in the future in favor of the reading models."
+)
 class ElectricityConsumption(ModelUpdateMixin, models.Model):
     """Point in time of electricity consumption (usage), extracted from reading(s)."""
 
@@ -162,7 +165,9 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         verbose_name_plural = verbose_name
 
 
-# @TODO - Deprecated - Remove me eventually in favor of the readings.
+@deprecated(
+    "Consumption data models should be DROPPED in the future in favor of the reading models."
+)
 class GasConsumption(ModelUpdateMixin, models.Model):
     """Interpolated gas reading, containing the actual usage, based on the reading before (if any)."""
 
@@ -190,7 +195,9 @@ class GasConsumption(ModelUpdateMixin, models.Model):
         verbose_name_plural = verbose_name
 
 
-# @TODO - Deprecated - Remove me eventually in favor of the new meter firmware updates of Belgium users. Move to reading
+@deprecated(
+    "Custom calculated quarter-hour peak consumption should eventually DROPPED in favor of DSMR P1 data (#1764)."
+)
 class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
     """Average consumption calculated over a ~15 minute period."""
 

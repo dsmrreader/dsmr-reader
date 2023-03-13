@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-23 22:47+0100\n"
+"POT-Creation-Date: 2023-03-13 22:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
@@ -88,9 +88,6 @@ msgstr "Reset de omgeving voor ontwikkelingsdoeleinden. Niet bedoeld voor gebrui
 
 msgid "Whether the API should be disabled."
 msgstr "Geeft aan of de API uitgeschakeld is."
-
-msgid "Intended usage is NOT production! Only allowed when DEBUG = True"
-msgstr "Bedoeld voor gebruik buiten productie. Alleen mogelijk wanneer instelling DEBUG = True"
 
 msgid "Forces single run, overriding Infinite Command mixin"
 msgstr "Forceert een enkele uitvoer"
@@ -2817,6 +2814,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Intended usage is NOT production! Only allowed when DEBUG = True"
+#~ msgstr "Bedoeld voor gebruik buiten productie. Alleen mogelijk wanneer instelling DEBUG = True"
 
 #~ msgid "Meter positions of first reading of the day"
 #~ msgstr "Meterstanden bij eerste meting van de dag"

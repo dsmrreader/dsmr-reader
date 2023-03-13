@@ -7,7 +7,6 @@ import math
 import crcmod
 import serial
 from django.core.management.base import BaseCommand, CommandError
-from django.utils.translation import gettext as _
 from django.utils import timezone
 from django.conf import settings
 
