@@ -9,7 +9,7 @@ from django.conf import settings
 from django.db.models import Avg, Min, Max, Count, Manager
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
-from typing_extensions import deprecated
+from deprecated import deprecated
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_consumption.exceptions import CompactorNotReadyError
@@ -33,7 +33,7 @@ logger = logging.getLogger("dsmrreader")
 
 
 @deprecated(
-    "Consumption data models should be DROPPED in the future in favor of the reading models."
+    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
 )
 def run(scheduled_process: ScheduledProcess) -> None:
     """Compacts all unprocessed readings, capped by a max to prevent hanging backend."""
@@ -51,7 +51,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
 
 @deprecated(
-    "Custom calculated quarter-hour peak consumption should eventually DROPPED in favor of DSMR P1 data (#1764)."
+    reason="Custom calculated quarter-hour peak consumption should eventually DROPPED in favor of DSMR P1 data (#1764)."
 )
 def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     """Calculates the quarter-hour peak consumption. For background info see issues #1084 / #1635."""
@@ -176,7 +176,7 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
 
 
 @deprecated(
-    "Consumption data models should be DROPPED in the future in favor of the reading models."
+    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
 )
 def compact(dsmr_reading: DsmrReading) -> None:
     """Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute."""
@@ -222,7 +222,7 @@ def compact(dsmr_reading: DsmrReading) -> None:
 
 
 @deprecated(
-    "Consumption data models should be DROPPED in the future in favor of the reading models."
+    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
 )
 def _compact_electricity(
     dsmr_reading: DsmrReading,
@@ -319,7 +319,7 @@ def _compact_electricity(
 
 
 @deprecated(
-    "Consumption data models should be DROPPED in the future in favor of the reading models."
+    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
 )
 def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     """
@@ -372,7 +372,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
 
 
 @deprecated(
-    "Consumption data models should be DROPPED in the future in favor of the reading models."
+    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
 )
 def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
     """Calculates the consumption of a range specified."""
@@ -390,7 +390,7 @@ def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
 
 
 @deprecated(
-    "Consumption data models should be DROPPED in the future in favor of the reading models."
+    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
 )
 def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
@@ -644,7 +644,7 @@ def round_decimal(value, decimal_count: int = 2) -> Decimal:
     )
 
 
-@deprecated("Legacy calculate_slumber_consumption_watt() seems unused, drop it?")
+@deprecated(reason="Legacy calculate_slumber_consumption_watt() seems unused, drop it?")
 def calculate_slumber_consumption_watt() -> Optional[int]:
     """Groups all electricity readings to find the most constant consumption."""
     most_common = (
@@ -668,7 +668,7 @@ def calculate_slumber_consumption_watt() -> Optional[int]:
     return round(usage / count * 1000)
 
 
-@deprecated("Legacy calculate_min_max_consumption_watt() seems unused, drop it?")
+@deprecated(reason="Legacy calculate_min_max_consumption_watt() seems unused, drop it?")
 def calculate_min_max_consumption_watt() -> Dict:
     """Returns the lowest and highest Wattage consumed for each phase."""
     FIELDS = {

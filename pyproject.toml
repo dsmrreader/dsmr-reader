@@ -40,6 +40,7 @@ pyyaml = "^6.0"
 requests = "^2.26"
 urllib3 = "^1.26"
 attrs = "^22.2.0"
+deprecated = "^1.2.13"
 
 
 [tool.poetry.dev-dependencies]
