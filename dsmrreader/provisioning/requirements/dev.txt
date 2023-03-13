@@ -1,6 +1,6 @@
 flake8-bandit==3.0.0
 flake8-black==0.3.6
-flake8-bugbear==23.2.13
+flake8-bugbear==23.3.12
 flake8==4.0.1
 mypy==0.971
 # Poetry is currently only used with development
@@ -10,7 +10,7 @@ mysqlclient
 polib==1.2.0
 pytest-cov==3.0.0
 pytest-django==4.5.2
-pytest-xdist==3.2.0
+pytest-xdist==3.2.1
 safety==2.3.4
 sphinx-autobuild==2021.3.14
 sphinx-intl==2.1.0
@@ -20,4 +20,4 @@ types-polib==1.2.0
 types-python-dateutil==2.8.19.10
 types-pytz==2022.7.1.2
 types-requests==2.28.11.15
-types-six==1.16.21.6
+types-six==1.16.21.7
