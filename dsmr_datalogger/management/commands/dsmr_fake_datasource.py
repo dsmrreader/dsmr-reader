@@ -66,7 +66,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         """InfiniteManagementCommandMixin listens to handle() and calls run() in a loop."""
         if not settings.DEBUG and not options["use_demo_mode_and_override_checks"]:
             raise CommandError(
-                _("Intended usage is NOT production! Only allowed when DEBUG = True")
+                "Intended usage is NOT production! Only allowed when DEBUG = True"
             )
 
         telegram = self._generate_data(

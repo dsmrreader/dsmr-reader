@@ -20,7 +20,7 @@ class Command(BaseCommand):
         """InfiniteManagementCommandMixin listens to handle() and calls run() in a loop."""
         if not settings.DEBUG:
             raise CommandError(
-                _("Intended usage is NOT production! Only allowed when DEBUG = True")
+                "Intended usage is NOT production! Only allowed when DEBUG = True"
             )
 
         self._randomize()

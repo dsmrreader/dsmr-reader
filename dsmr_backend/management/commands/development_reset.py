@@ -39,7 +39,7 @@ class Command(BaseCommand):
     def handle(self, **options):
         if not settings.DEBUG:
             raise CommandError(
-                _("Intended usage is NOT production! Only allowed when DEBUG = True")
+                "Intended usage is NOT production! Only allowed when DEBUG = True"
             )
 
         # Show queries for feedback.
