@@ -97,16 +97,16 @@ There are several guides, depending on your OS. We assume Raspbian OS here.
 
 .. tip::
 
-    You may consider upgrading to a higher Python version, e.g. ``Python 3.9``, if possible for your OS.
+    You may consider upgrading to a higher Python version, e.g. ``Python 3.11``, if possible for your OS.
 
 
 Execute the following::
 
     # Credits to Jeroen Peters @ issue #624
     sudo apt-get install python3-dev libffi-dev libssl-dev -y
-    wget https://www.python.org/ftp/python/3.9.13/Python-3.9.13.tar.xz
-    tar xJf Python-3.9.13.tar.xz
-    cd Python-3.9.13
+    wget https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tar.xz
+    tar xJf Python-3.11.2.tar.xz
+    cd Python-3.11.2
     ./configure --enable-optimizations --with-lto
     make
     sudo make install
