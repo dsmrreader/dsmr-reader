@@ -19,7 +19,7 @@ jobs:
           - '3.11'
     services:
       postgres:
-        image: 'postgres:13-alpine'
+        image: 'postgres:14-alpine'
         ports:
           - 5432
         env:
@@ -29,7 +29,7 @@ jobs:
         options: --health-cmd pg_isready --health-interval 5s --health-timeout 1s --health-retries 10
 
       mysql:
-        image: 'mysql:5.7'
+        image: 'mysql:8'
         ports:
           - 3306
         env:

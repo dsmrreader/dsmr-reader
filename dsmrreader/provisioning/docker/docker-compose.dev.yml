@@ -92,7 +92,7 @@ services:
       - POSTGRES_PASSWORD=postgres-password
 
   test-db-postgres:
-    image: postgres:13
+    image: postgres:14
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
@@ -106,7 +106,7 @@ services:
 
   # WARNING: MySQL tests/connections are broken here, but do seem to work well in the CI anyway.
   test-db-mysql:
-    image: mysql:5.7
+    image: mysql:8
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping"]
