@@ -37,7 +37,7 @@ python-dateutil = "^2.8"
 python-decouple = "^3.5"
 pytz = "^2022.1"
 pyyaml = "^6.0"
-requests = "^2.26"
+requests = "^2.29"
 urllib3 = "^1.26"
 attrs = "^22.2.0"
 
