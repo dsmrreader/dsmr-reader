@@ -6,7 +6,7 @@ mypy==0.971
 # Poetry is currently only used with development
 poetry
 # MySQL is currently only used with development (unsupported)
-mysqlclient
+mysqlclient==2.1.0
 polib==1.2.0
 pytest-cov==3.0.0
 pytest-django==4.5.2
