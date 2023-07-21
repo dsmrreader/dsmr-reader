@@ -137,7 +137,9 @@ DSMRREADER_BUIENRADAR_API_URL = "https://data.buienradar.nl/2.0/feed/json"
 # https://pvoutput.org/help.html#api-addstatus
 DSMRREADER_PVOUTPUT_ADD_STATUS_URL = "https://pvoutput.org/service/r2/addstatus.jsp"
 
-DSMRREADER_DATALOGGER_MIN_SLEEP_FOR_RECONNECT = 1.0
+DSMRREADER_DATALOGGER_MIN_SLEEP_FOR_RECONNECT = config(
+    "DSMRREADER_DATALOGGER_MIN_SLEEP_FOR_RECONNECT", cast=float, default=1.0
+)
 
 DSMRREADER_CAPABILITIES_CACHE = "capabilities"
 DSMRREADER_MONITORING_CACHE = "monitoring_status"
