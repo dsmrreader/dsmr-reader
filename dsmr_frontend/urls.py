@@ -29,6 +29,7 @@ from dsmr_frontend.views.generic import (
     FeedbackRedirect,
     DonationsRedirect,
     XhrHeader,
+    V4UpgradeRedirect,
     V5UpgradeRedirect,
     StatusRedirectView,
 )
@@ -99,6 +100,9 @@ urlpatterns = [
     path("docs-redirect", DocsRedirect.as_view(), name="docs-redirect"),
     path("feedback-redirect", FeedbackRedirect.as_view(), name="feedback-redirect"),
     path("donations-redirect", DonationsRedirect.as_view(), name="donations-redirect"),
+    path(
+        "v4-upgrade-redirect", V4UpgradeRedirect.as_view(), name="v4-upgrade-redirect"
+    ),
     path(
         "v5-upgrade-redirect", V5UpgradeRedirect.as_view(), name="v5-upgrade-redirect"
     ),
