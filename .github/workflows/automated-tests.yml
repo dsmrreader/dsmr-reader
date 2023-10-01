@@ -42,7 +42,7 @@ jobs:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -127,7 +127,7 @@ jobs:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
