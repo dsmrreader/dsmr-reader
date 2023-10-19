@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.12'
+          - '3.11'
     services:
       postgres:
         image: 'postgres:14-alpine'
@@ -121,7 +121,6 @@ jobs:
           - '3.8'
           - '3.9'
           - '3.10'
-          - '3.11'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
