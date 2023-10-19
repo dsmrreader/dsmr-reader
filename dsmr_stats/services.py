@@ -260,10 +260,7 @@ def clear_statistics() -> None:
 
 def electricity_tariff_percentage(start: date, end: date) -> Optional[Dict]:
     """Returns the total electricity consumption percentage by tariff (high/low tariff)."""
-    totals = DayStatistics.objects.filter(
-        day__gte=start,
-        day__lte=end,
-    ).aggregate(
+    totals = DayStatistics.objects.filter(day__gte=start, day__lte=end,).aggregate(
         electricity1=Sum("electricity1"),
         electricity2=Sum("electricity2"),
     )
