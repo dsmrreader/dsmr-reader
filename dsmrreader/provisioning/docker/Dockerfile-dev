@@ -4,8 +4,10 @@
 # Dockerfile for DSMR-reader development only, NEVER use in production! #
 #########################################################################
 
+ARG PYTHON_VERSION
+
 ### Base: OS + venv + base requirements
-FROM python:3.11-bullseye AS local-dsmrreader-base
+FROM python:${PYTHON_VERSION}-bullseye AS local-dsmrreader-base
 WORKDIR /app
 ENV PYTHONUNBUFFERED=1
 

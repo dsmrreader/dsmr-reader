@@ -12,6 +12,8 @@ services:
       context: .
       dockerfile: Dockerfile
       target: local-dsmrreader-app
+      args:
+        - PYTHON_VERSION=3.12
     volumes:
       - .:/app
     ports:
