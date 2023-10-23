@@ -120,7 +120,7 @@ class FrontendNotificationAdmin(ModelAdmin):
 
 @admin.register(SortedGraph)
 class SortedGraphAdmin(ChangeOnlyAdminModel, SortableAdmin):
-    list_display = ("sorting_order", "name")
+    list_display = ("sorting_order", "name", "graph_type")
     fieldsets = (
         (
             None,
