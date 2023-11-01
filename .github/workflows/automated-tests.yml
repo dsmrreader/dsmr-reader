@@ -6,8 +6,8 @@ on:
       - 'v*'
       - 'development'
   pull_request:
-    branches:
-      - '!dependabot/'
+    branches-ignore:
+      - 'dependabot/'
 
 jobs:
   # The most verbose and complete job.
