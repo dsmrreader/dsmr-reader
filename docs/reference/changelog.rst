@@ -25,6 +25,12 @@ Current release series
     :depth: 1
 
 
+v5.10.4 - November 2023
+-----------------------
+
+- ``Fixed`` [`#1915 <https://github.com/dsmrreader/dsmr-reader/issues/1915>`_] Pyyaml dependency unavailable.
+
+
 v5.10.3 - February 2023
 -----------------------
 
