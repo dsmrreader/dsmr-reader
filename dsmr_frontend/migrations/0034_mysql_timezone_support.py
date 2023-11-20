@@ -16,8 +16,8 @@ def migrate_forward(apps, schema_editor):
             "SELECT CONVERT_TZ('2020-01-01 00:00:00', 'UTC', 'Europe/Amsterdam')"
         )
 
-    if cursor.fetchone() is not None:
-        return
+        if cursor.fetchone() is not None:
+            return
 
     Notification = apps.get_model("dsmr_frontend", "Notification")
     Notification.objects.create(
