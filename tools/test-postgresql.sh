@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+ARGS=""
+
+for CURRENT in "$@"
+do
+    ARGS="$ARGS $CURRENT"
+done
 
 export DJANGO_SETTINGS_MODULE=dsmrreader.config.test
 
@@ -14,7 +20,7 @@ export DJANGO_DATABASE_NAME="${DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_NAME:-dsmr
 echo ""
 export DJANGO_DATABASE_ENGINE=django.db.backends.postgresql
 echo "--- Testing: $DJANGO_DATABASE_ENGINE"
-poetry run pytest --cov --cov-report=term
+poetry run pytest --cov --cov-report=term $ARGS
 
 if [ $? -ne 0 ]; then
     echo "[!] Tests failed: $DJANGO_DATABASE_ENGINE"
