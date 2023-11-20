@@ -22,4 +22,7 @@
 /Pipfile.lock
 /manage_mule.py
 /docker-compose.yml
+/docker-compose.override.yml
+/compose.yml
+/compose.override.yml
 /Dockerfile
