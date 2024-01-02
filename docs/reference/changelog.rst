@@ -16,9 +16,9 @@ Current release series
 
     The releases in this series are currently supported and will receive new features and bug/security fixes until a new major series is released *(give or take once a year)*.
 
-    - Every **minor** release (e.g. ``v4.x`` -> ``v4.y``) is *usually* compatible with any preceding release in the same series and should allow you to update easily. See :doc:`how to (minor) update in the same series</how-to/upgrading/upgrade>`.
+    - Every **minor** release (e.g. ``v5.x`` -> ``v5.y``) is *usually* compatible with any preceding release in the same series and should allow you to update easily. See :doc:`how to (minor) update in the same series</how-to/upgrading/upgrade>`.
 
-    - Every new **major** series (e.g. ``v4.x`` -> ``v5.x``) *usually* contains incompatible changes that require you to update with additional manual steps. Upgrading to the **last release** of a series (e.g. ``v4.20``), should tell you where to find the upgrade steps required.
+    - Every new **major** series (e.g. ``v5.x`` -> ``v6.x``) *usually* contains incompatible changes that require you to update with additional manual steps. Upgrading to the **last release** of a series (e.g. ``v4.20``), should tell you where to find the upgrade steps required.
 
 
 .. contents:: :local:
