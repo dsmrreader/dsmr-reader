@@ -4,29 +4,66 @@ from django.db import migrations, models
 
 
 def migrate_forward(apps, schema_editor):
-    """ See #1945. """
+    """See #1945."""
     RetentionSettings = apps.get_model("dsmr_datalogger", "RetentionSettings")
-    RetentionSettings.objects.filter(data_retention_in_hours=28*24).update(data_retention_in_hours=31*24)  # 1M
-    RetentionSettings.objects.filter(data_retention_in_hours=3*28*24).update(data_retention_in_hours=3*31*24)  # 3M
-    RetentionSettings.objects.filter(data_retention_in_hours=6*28*24).update(data_retention_in_hours=6*31*24)  # 6M
-    RetentionSettings.objects.filter(data_retention_in_hours=12*28*24).update(data_retention_in_hours=366*24)  # 1Y
+    RetentionSettings.objects.filter(data_retention_in_hours=28 * 24).update(
+        data_retention_in_hours=31 * 24
+    )  # 1M
+    RetentionSettings.objects.filter(data_retention_in_hours=3 * 28 * 24).update(
+        data_retention_in_hours=3 * 31 * 24
+    )  # 3M
+    RetentionSettings.objects.filter(data_retention_in_hours=6 * 28 * 24).update(
+        data_retention_in_hours=6 * 31 * 24
+    )  # 6M
+    RetentionSettings.objects.filter(data_retention_in_hours=12 * 28 * 24).update(
+        data_retention_in_hours=366 * 24
+    )  # 1Y
 
 
 def migrate_backward(apps, schema_editor):
-    """ See #1945. """
+    """See #1945."""
     RetentionSettings = apps.get_model("dsmr_datalogger", "RetentionSettings")
-    RetentionSettings.objects.filter(data_retention_in_hours=31*24).update(data_retention_in_hours=28*24)  # 1M
-    RetentionSettings.objects.filter(data_retention_in_hours=3*31*24).update(data_retention_in_hours=3*28*24)  # 3M
-    RetentionSettings.objects.filter(data_retention_in_hours=6*31*24).update(data_retention_in_hours=6*28*24)  # 6M
-    RetentionSettings.objects.filter(data_retention_in_hours=366*24).update(data_retention_in_hours=12*28*24)  # 1Y
+    RetentionSettings.objects.filter(data_retention_in_hours=31 * 24).update(
+        data_retention_in_hours=28 * 24
+    )  # 1M
+    RetentionSettings.objects.filter(data_retention_in_hours=3 * 31 * 24).update(
+        data_retention_in_hours=3 * 28 * 24
+    )  # 3M
+    RetentionSettings.objects.filter(data_retention_in_hours=6 * 31 * 24).update(
+        data_retention_in_hours=6 * 28 * 24
+    )  # 6M
+    RetentionSettings.objects.filter(data_retention_in_hours=366 * 24).update(
+        data_retention_in_hours=12 * 28 * 24
+    )  # 1Y
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('dsmr_datalogger', '0032_dsmr_extra_device_channel'),
+        ("dsmr_datalogger", "0032_dsmr_extra_device_channel"),
     ]
 
     operations = [
+        migrations.AlterField(
+            model_name="retentionsettings",
+            name="data_retention_in_hours",
+            field=models.IntegerField(
+                blank=True,
+                choices=[
+                    (
+                        None,
+                        "Disabled (WARNING: Will eventually lead to performance issues!)",
+                    ),
+                    (168, "Clean up most source data after one week (RECOMMENDED)"),
+                    (744, "Clean up most source data after one month (RECOMMENDED)"),
+                    (2232, "Clean up most source data after three months"),
+                    (4464, "Clean up most source data after six months"),
+                    (8784, "Clean up most source data after one year"),
+                ],
+                default=744,
+                help_text="The lifetime of source readings and consumption records. Day and hour statistics will always be preserved indefinitely.",
+                null=True,
+                verbose_name="Data retention policy",
+            ),
+        ),
         migrations.RunPython(migrate_forward, migrate_backward),
     ]
