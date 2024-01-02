@@ -25,7 +25,7 @@ Current release series
     :depth: 1
 
 
-v5.11.0 - November 2023
+v5.11.0 - xxxxxxxx 2024
 -----------------------
 
 - ``Fixed`` Bugfix for Archive which was causing the electricity returned meter positions to be displayed at all times.
@@ -35,6 +35,12 @@ v5.11.0 - November 2023
 
 - ``Changed`` [`#1827 <https://github.com/dsmrreader/dsmr-reader/issues/1827>`_] Update to python 3.11.2 - by ``goegol``
 - ``Changed`` [`#1861 <https://github.com/dsmrreader/dsmr-reader/issues/1861>`_] Added undocumented env var for low level datalogger usage
+
+
+v5.10.4 - November 2023
+-----------------------
+
+- ``Fixed`` [`#1915 <https://github.com/dsmrreader/dsmr-reader/issues/1915>`_] Pyyaml dependency unavailable.
 
 
 v5.10.3 - February 2023
