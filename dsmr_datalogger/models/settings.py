@@ -145,12 +145,13 @@ def _on_datalogger_restart_required_signal(**kwargs):
 
 
 class RetentionSettings(ModelUpdateMixin, SingletonModel):
+    # @see #1945: Some of these values are obviously incorrect for most months/years, but on the "safe" side anyway.
     RETENTION_NONE = None
     RETENTION_WEEK = 7 * 24
-    RETENTION_MONTH = 24 * 30
+    RETENTION_MONTH = 24 * 31
     RETENTION_THREE_MONTHS = 3 * RETENTION_MONTH
     RETENTION_HALF_YEAR = 6 * RETENTION_MONTH
-    RETENTION_YEAR = 24 * 365
+    RETENTION_YEAR = 24 * 366
     RETENTION_CHOICES = (
         (
             RETENTION_NONE,

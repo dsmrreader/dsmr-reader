@@ -32,6 +32,7 @@ v5.11.0 - xxxxxxxx 2024
 - ``Fixed`` [`#1767 <https://github.com/dsmrreader/dsmr-reader/issues/1767>`_] Slightly alter debug info for unsupported database engines.
 - ``Fixed`` [`#1841 <https://github.com/dsmrreader/dsmr-reader/issues/1841>`_] Restored broken `v4-upgrade-redirect` route for legacy upgrades.
 - ``Fixed`` [`#1901 <https://github.com/dsmrreader/dsmr-reader/issues/1901>`_] Naamgeving in configuratie van sorted graphs.
+- ``Fixed`` [`#1945 <https://github.com/dsmrreader/dsmr-reader/issues/1945>`_] Maak intervallen in retentie nauwkeuriger. - by `RichieB2B`
 
 - ``Changed`` [`#1827 <https://github.com/dsmrreader/dsmr-reader/issues/1827>`_] Update to python 3.11.2 - by ``goegol``
 - ``Changed`` [`#1861 <https://github.com/dsmrreader/dsmr-reader/issues/1861>`_] Added undocumented env var for low level datalogger usage
