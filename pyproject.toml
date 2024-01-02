@@ -45,7 +45,7 @@ deprecated = "^1.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^5.0"
-flake8-bandit = "^3.0"
+flake8-bandit = "^4.0"
 flake8-black = "^0.3"
 flake8-bugbear = "^23.0"
 polib = "^1.2"
