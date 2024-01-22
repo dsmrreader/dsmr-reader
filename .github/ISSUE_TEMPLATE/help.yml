@@ -1,34 +1,43 @@
-name: 🙋 I need help
-description: You need help debugging some error or other issue.
-title: '🙋'
-labels: ["help"]
+name: DSMR-reader issue
+description: Only for DSMR-reader specific stuff.
+title: '?'
 body:
-  - type: markdown
+  - type: dropdown
+    id: language
     attributes:
-      value: |
-        *🇳🇱 Voel je vooral vrij om ook in het Nederlands te communiceren, ondanks dat het project in de kern Engelstalig is, gezien dat een stuk vlotter gaat. If you're unable to communicate in Dutch, welcome anyway! Feel free to use English and indicate that you do not understand Dutch.*
-
-        ### Help yourself
-        Sometimes you can help yourself with:
-        - Check [the how to guides](https://dsmr-reader.readthedocs.io/nl/v5/how-to/index.html).
-        - See previous [questions](https://github.com/dsmrreader/dsmr-reader/discussions).
-        - See (recent) previous [issues](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc).
-        - Errors? Check [your logfiles](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/logfiles.html).
-
-  - type: textarea
-    id: description
-    attributes:
-      label: Description
-      description: What help do you need?
+      label: Communicatietaal / Language
+      description: |
+        - *🇳🇱 Voel je vooral vrij om in het Nederlands te communiceren, ondanks dat het project technisch Engelstalig is.* 
+        - *🇬🇧 Unable to communicate in Dutch? Welcome anyway! Feel free to use English.*
+      options:
+        - '🇳🇱 Nederlandstalig'
+        - '🇬🇧 English'
     validations:
       required: true
 
-  - type: input
-    id: version
+  - type: checkboxes
     attributes:
-      label: DSMR-reader version
-      description: What DSMR-reader version are you running?
-      placeholder: e.g. 4.18
+      label: Help yourself
+      description: Most of the times you can help yourself by checking the guides or previous solutions.  Verify each one of these.
+      options:
+        - label: "I've checked [the how-to guides](https://dsmr-reader.readthedocs.io/nl/v5/how-to/index.html)"
+          required: true
+        - label: "I've checked previous [questions](https://github.com/dsmrreader/dsmr-reader/discussions)"
+          required: true
+        - label: "I've checked (recent) [previous issues](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc) and their solutions"
+          required: true
+        - label: "I've checked the [logfiles](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/logfiles.html) *(when applicable)*"
+          required: true
+
+  - type: dropdown
+    id: inquiry
+    attributes:
+      label: Inquiry
+      description: What do you need?
+      options:
+        - 'Help with installation or upgrade'
+        - 'Report a bug'
+        - 'Feature or idea'
     validations:
       required: true
 
@@ -37,7 +46,16 @@ body:
       value: |
         ----
 
-        *If you are able to provide (some of the) additional information below, it may assist in helping you.*
+        *Please provide additional information below.*
+
+  - type: input
+    id: dsmrreader-version
+    attributes:
+      label: DSMR-reader version
+      description: What version are you using? E.g. ``v5.10.2``.
+      placeholder: vX.Y.Z
+    validations:
+      required: true
 
   - type: dropdown
     id: platform
@@ -45,15 +63,25 @@ body:
       label: DSMR-reader platform
       description: How do you run DSMR-reader?
       options:
-        - Native (e.g. manual installation)
-        - Docker (e.g. Xirixiz)
-        - Other
+        - "Native (e.g. manual installation)"
+        - "Docker (e.g. Xirixiz's DSMR-reader Docker)"
+        - "Other (e.g. Home Assistant Plugin)"
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: debug-info-dump
     attributes:
-      label: Debug info dump
-      description: When applicable, add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/debug-info-dump.html) below. This will be automatically formatted into code, so no need for backticks.
-      render: shell
+      label: 'Optional: Debug info dump (of DSMR-reader)'
+      description: |
+        When applicable, add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/debug-info-dump.html) below.
+        This will be automatically formatted into code, so no need for backticks.
+      render: shell-script
+
+  - type: textarea
+    id: telegram
+    attributes:
+      label: 'Optional: Smart meter telegram'
+      description: |
+        When applicable (e.g. on readings mismatch), add a [data telegram](https://dsmr-reader.readthedocs.io/nl/v5/explained/about.html#support) below.
+      render: shell-script
