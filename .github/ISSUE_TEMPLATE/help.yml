@@ -29,6 +29,10 @@ body:
         - label: "I've checked the [logfiles](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/logfiles.html) *(when applicable)*"
           required: true
 
+  - type: markdown
+    attributes:
+      value: ----
+
   - type: dropdown
     id: inquiry
     attributes:
@@ -38,6 +42,14 @@ body:
         - 'Help with installation or upgrade'
         - 'Report a bug'
         - 'Feature or idea'
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 'Description'
+      description: 'Your issue, suggestion or bug description'
     validations:
       required: true
 
