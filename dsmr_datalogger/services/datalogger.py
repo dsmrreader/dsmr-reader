@@ -43,9 +43,9 @@ def get_dsmr_connection_parameters() -> Dict:
             url_or_port=datalogger_settings.serial_port,
             baudrate=115200 if is_default_dsmr_protocol else 9600,
             bytesize=serial.EIGHTBITS if is_default_dsmr_protocol else serial.SEVENBITS,
-            parity=serial.PARITY_NONE
-            if is_default_dsmr_protocol
-            else serial.PARITY_EVEN,
+            parity=(
+                serial.PARITY_NONE if is_default_dsmr_protocol else serial.PARITY_EVEN
+            ),
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
             rtscts=0,
@@ -149,9 +149,9 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
                 "dsmr_version"
             ].startswith("5")
 
-            model_fields[
-                "extra_device_timestamp"
-            ] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
+            model_fields["extra_device_timestamp"] = (
+                calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
+            )
 
     # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
     discard_after = timezone.now() + timezone.timedelta(hours=24)

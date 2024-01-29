@@ -1,4 +1,5 @@
 """ Tests. """
+
 import secrets
 
 from dsmrreader.config.development import *

@@ -14,8 +14,8 @@ class EnergyContracts(ConfigurableLoginRequiredMixin, TemplateView):
 
         context_data["capabilities"] = dsmr_backend.services.backend.get_capabilities()
         context_data["frontend_settings"] = FrontendSettings.get_solo()
-        context_data[
-            "energy_contracts"
-        ] = dsmr_consumption.services.summarize_energy_contracts()
+        context_data["energy_contracts"] = (
+            dsmr_consumption.services.summarize_energy_contracts()
+        )
 
         return context_data

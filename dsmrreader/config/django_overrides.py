@@ -2,6 +2,7 @@
     Django settings overwritten from env.
     Mostly try-except because we don't want to pin any defaults to fall back to, just let Django set them.
 """
+
 from decouple import config, UndefinedValueError
 
 

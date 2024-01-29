@@ -79,9 +79,9 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
             'SP: Rescheduled "%s" to %s (ETA %s)',
             self.name,
             timezone.localtime(self.planned),
-            self.planned - now
-            if self.planned > now
-            else "-",  # Negative timedelta formats weird for some reason
+            (
+                self.planned - now if self.planned > now else "-"
+            ),  # Negative timedelta formats weird for some reason
         )
 
     def reschedule_asap(self):

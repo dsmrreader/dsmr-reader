@@ -1,6 +1,7 @@
 """
 This only tests the __main__ route and methods not covered by other tests.
 """
+
 from unittest import mock
 import logging
 

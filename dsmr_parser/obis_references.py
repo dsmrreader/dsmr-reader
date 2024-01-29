@@ -6,6 +6,7 @@ refactored to full line signatures to maintain backwards compatibility.
 Might be refactored in a backwards incompatible way as soon as proper telegram
 objects are introduced.
 """
+
 P1_MESSAGE_HEADER = r"\d-\d:0\.2\.8.+?\r\n"
 P1_MESSAGE_TIMESTAMP = r"\d-\d:1\.0\.0.+?\r\n"
 ELECTRICITY_USED_TARIFF_1 = r"\d-\d:1\.8\.1.+?\r\n"

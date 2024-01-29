@@ -17,9 +17,9 @@ class Statistics(ConfigurableLoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(Statistics, self).get_context_data(**kwargs)
         context_data["capabilities"] = dsmr_backend.services.backend.get_capabilities()
-        context_data[
-            "electricity_statistics"
-        ] = ElectricityStatistics.get_solo().export()
+        context_data["electricity_statistics"] = (
+            ElectricityStatistics.get_solo().export()
+        )
         context_data["frontend_settings"] = FrontendSettings.get_solo()
 
         try:

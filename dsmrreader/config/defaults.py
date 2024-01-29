@@ -2,6 +2,7 @@
     Default settings as defined in the base.py config.
     Some settings can be overridden by system env vars or the .env.
 """
+
 from decouple import Csv, Choices
 
 from dsmrreader.config.base import *

@@ -54,10 +54,14 @@ def first_meter_positions_of_day(day: datetime.date) -> MeterPositionsDTO:
         electricity_returned_1=first_electricity_reading_of_day.electricity_returned_1,
         electricity_delivered_2=first_electricity_reading_of_day.electricity_delivered_2,
         electricity_returned_2=first_electricity_reading_of_day.electricity_returned_2,
-        extra_device_timestamp=first_gas_reading_of_day.extra_device_timestamp
-        if first_gas_reading_of_day
-        else None,
-        extra_device_delivered=first_gas_reading_of_day.extra_device_delivered
-        if first_gas_reading_of_day
-        else None,
+        extra_device_timestamp=(
+            first_gas_reading_of_day.extra_device_timestamp
+            if first_gas_reading_of_day
+            else None
+        ),
+        extra_device_delivered=(
+            first_gas_reading_of_day.extra_device_delivered
+            if first_gas_reading_of_day
+            else None
+        ),
     )
