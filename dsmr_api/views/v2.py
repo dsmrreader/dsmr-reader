@@ -65,7 +65,7 @@ class DsmrReadingViewSet(
     ### Request samples
     ```
     // Fetching the latest reading created.
-    GET /api/v2/consumption/energy-supplier-prices?ordering=-timestamp&limit=1
+    GET /api/v2/datalogger/dsmrreading?ordering=-timestamp&limit=1
 
     // Get all readings of a specific "day", presuming that day is 15 January 2022.
     GET /api/v2/datalogger/dsmrreading?timestamp__gte=2022-01-15 00:00:00&timestamp__lte=2022-01-15 23:59:59
