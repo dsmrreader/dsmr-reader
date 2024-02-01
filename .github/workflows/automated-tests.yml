@@ -107,7 +107,7 @@ jobs:
             DJANGO_DATABASE_PASSWORD: ''
 
       - name: Code coverage upload
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
 
 
   # Shallow tests for (older) supported Python versions.
