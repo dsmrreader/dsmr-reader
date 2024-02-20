@@ -119,9 +119,9 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.7'
-          - '3.8'
-          - '3.9'
+          - '3.7'  # Drop me in DSMR-reader v6.x
+          - '3.8'  # Drop me in DSMR-reader v6.x
+          - '3.9'  # Drop me in DSMR-reader v6.x
           - '3.10'
     env:
       # Do not log verbosely
