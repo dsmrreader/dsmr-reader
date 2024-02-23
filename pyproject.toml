@@ -43,7 +43,7 @@ attrs = "^22.0"
 deprecated = "^1.0"
 
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 flake8 = "^5.0"
 flake8-bandit = "^4.0"
 flake8-black = "^0.3"
