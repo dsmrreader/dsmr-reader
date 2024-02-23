@@ -50,7 +50,7 @@ Setting up a development environment using Docker
 
 - Containers built? See if this command works::
 
-    docker exec -it dsmr-app poetry run /app/manage.py check
+    docker exec -it dsmr-app poetry run /usr/src/app/manage.py check
 
     # Expected output: "System check identified no issues (0 silenced)"
 
@@ -76,7 +76,7 @@ To be honest, the best initial/fixture data is simply a backup of your own syste
 
     After importing the backup of your production system, simply run::
 
-        docker exec -it dsmr-app poetry run /app/manage.py development_reset
+        docker exec -it dsmr-app poetry run /usr/src/app/manage.py development_reset
 
     This will remove all API keys and other links to externals systems, as well as reset the admin user credentials to ``admin / admin`` (user / password).
 
@@ -100,13 +100,13 @@ Fake datalogger
 
     There is a builtin command that can somewhat fake a datalogger::
 
-        docker exec -it dsmr-app poetry run /app/manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
+        docker exec -it dsmr-app poetry run /usr/src/app/manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
 
 It will generate random data every second in a certain pattern and should be fine for basic testing. 
 
 Please note that it only inserts unprocessed readings, so you'll still have to run the following command to have the readings processed::
 
-    docker exec -it dsmr-app poetry run /app/manage.py dsmr_backend --run-once
+    docker exec -it dsmr-app poetry run /usr/src/app/manage.py dsmr_backend --run-once
 
 
 Running DSMR-reader locally

@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker: Backend run (ONCE)" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="docker exec -it dsmr-app poetry run /app/manage.py dsmr_backend --run-once" />
+    <option name="SCRIPT_TEXT" value="docker exec -it dsmr-app poetry run /usr/src/app/manage.py dsmr_backend --run-once" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

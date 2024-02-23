@@ -4,55 +4,44 @@
 
 ARG PYTHON_VERSION="3.11"
 
-### Base: OS + venv + base requirements
-FROM python:${PYTHON_VERSION}-bullseye AS local-dsmrreader-base
-WORKDIR /app
+### OS + venv + dependencies
+FROM python:${PYTHON_VERSION}-alpine AS local-dsmrreader-dev
+WORKDIR /usr/src/app
+
 ENV PYTHONUNBUFFERED=1
+RUN apk add --update \
+    build-base \
+    gcc \
+    libffi-dev
 
-RUN apt-get update && \
-    apt-get install -y \
-        python3 \
-        python3-psycopg2 \
-        python3-pip \
-        python3-venv
-
-# Credits to: https://pythonspeed.com/articles/activate-virtualenv-dockerfile/
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-COPY ./dsmrreader/provisioning/requirements/base.txt /app/dsmrreader/provisioning/requirements/
-RUN pip3 install pip --upgrade && \
-    pip3 install -r dsmrreader/provisioning/requirements/base.txt
-
-
-### Dev: Debug/dev tools + mysql client
-FROM local-dsmrreader-base AS local-dsmrreader-dev
-RUN apt-get install -y \
-    telnet \
-    cu \
+### Debug/dev tools
+RUN apk add --update \
+    inetutils-telnet \
     gettext \
-    libmariadb-dev \
-    libopenjp2-7-dev \
+    openjpeg \
+    mariadb-dev \
     postgresql-client
 
-COPY ./dsmrreader/provisioning/requirements/dev.txt /app/dsmrreader/provisioning/requirements/
-RUN pip3 install -r dsmrreader/provisioning/requirements/dev.txt
+ENV POETRY_VIRTUALENVS_IN_PROJECT=false
+COPY ./pyproject.toml ./poetry.lock /usr/src/app/
+RUN pip install poetry
+RUN poetry self add poetry-plugin-export
+RUN poetry install --no-root --with dev
 
 
 
-### Runserver instance
+### Dev: Runserver instance
 FROM local-dsmrreader-dev AS local-dsmrreader-app
-WORKDIR /app
-ENTRYPOINT python3 manage.py runserver 0.0.0.0:8000
+WORKDIR /usr/src/app
+ENTRYPOINT poetry run python manage.py runserver 0.0.0.0:8000
 
 
 
-### Docs instance(s) - Language parameter does not seem to be supported dynamically...
+### Dev: Docs instance(s) - Language parameter does not seem to be supported dynamically...
 FROM local-dsmrreader-dev AS local-dsmrreader-docs-en
-WORKDIR /app/docs
-ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=en
+WORKDIR /usr/src/app/docs
+ENTRYPOINT poetry run sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=en
 
 FROM local-dsmrreader-dev AS local-dsmrreader-docs-nl
-WORKDIR /app/docs
-ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=nl
+WORKDIR /usr/src/app/docs
+ENTRYPOINT poetry run sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=nl

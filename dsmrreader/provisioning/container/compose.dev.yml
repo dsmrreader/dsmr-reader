@@ -15,7 +15,7 @@ services:
       args:
         - PYTHON_VERSION=3.11
     volumes:
-      - .:/app
+      - .:/usr/src/app
     ports:
       - '8000:8000'
     depends_on:
@@ -60,7 +60,7 @@ services:
       dockerfile: Containerfile
       target: local-dsmrreader-docs-en
     volumes:
-      - .:/app
+      - .:/usr/src/app
     ports:
       - '10000:10000'
 
@@ -72,7 +72,7 @@ services:
       dockerfile: Containerfile
       target: local-dsmrreader-docs-nl
     volumes:
-      - .:/app
+      - .:/usr/src/app
     ports:
       - '10001:10000'
 
@@ -88,7 +88,7 @@ services:
       timeout: 5s
       retries: 10
 #    # Only use for restoring DB-backups when developing.
-#    # E.g. in container: psql -U dsmrreader -f /var/run/host/Desktop/dsmrreader-postgresql-backup-Saturday.sql dsmrreader
+#    # E.g. in container: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Friday.sql dsmrreader
 #    volumes:
 #      - ~/Desktop:/run/host/Desktop/
     environment:
