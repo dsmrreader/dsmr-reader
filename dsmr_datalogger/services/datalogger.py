@@ -149,9 +149,9 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
                 "dsmr_version"
             ].startswith("5")
 
-            model_fields["extra_device_timestamp"] = (
-                calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
-            )
+            model_fields[
+                "extra_device_timestamp"
+            ] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
 
     # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
     discard_after = timezone.now() + timezone.timedelta(hours=24)
