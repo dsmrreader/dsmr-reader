@@ -24,12 +24,12 @@ Setting up a development environment using Docker
 - Symlink Docker files required (or just copy them)::
 
     # Either symlink
-    ln -s dsmrreader/provisioning/docker/Dockerfile-dev Dockerfile
-    ln -s dsmrreader/provisioning/docker/docker-compose.dev.yml docker-compose.yml
+    ln -s dsmrreader/provisioning/container/Containerfile-dev Containerfile
+    ln -s dsmrreader/provisioning/container/compose.dev.yml compose.yml
 
     # Or copy
-    cp dsmrreader/provisioning/docker/Dockerfile-dev Dockerfile
-    cp dsmrreader/provisioning/docker/docker-compose.dev.yml docker-compose.yml
+    cp dsmrreader/provisioning/container/Containerfile-dev Containerfile
+    cp dsmrreader/provisioning/container/compose.dev.yml compose.yml
 
 - Copy Django settings template::
 

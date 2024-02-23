@@ -1,8 +1,6 @@
-# syntax=docker/dockerfile:1
-
-#########################################################################
-# Dockerfile for DSMR-reader development only, NEVER use in production! #
-#########################################################################
+############################################################################
+# Containerfile for DSMR-reader DEVELOPMENT only, NEVER use in production! #
+############################################################################
 
 ARG PYTHON_VERSION="3.11"
 
