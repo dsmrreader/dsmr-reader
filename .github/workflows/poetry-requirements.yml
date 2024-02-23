@@ -36,7 +36,6 @@ jobs:
           poetry self add poetry-plugin-export
           poetry config virtualenvs.in-project true
           poetry check
-          poetry run pip install -r 
           
           poetry export -f requirements.txt --without-urls --without-hashes --without dev --output poetry-export-base.txt
           poetry export -f requirements.txt --without-urls --without-hashes --only dev --output poetry-export-dev.txt
