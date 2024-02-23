@@ -128,7 +128,7 @@ services:
     image: eclipse-mosquitto:2
     restart: unless-stopped
     volumes:
-      - ./dsmrreader/provisioning/docker/mosquitto-dev/:/mosquitto/config/
+      - ./dsmrreader/provisioning/container/mosquitto-dev/:/mosquitto/config/
     ports:
       - '1883:1883'
 
