@@ -21,7 +21,7 @@ def check():
     if sys.version_info < PREFERRED_MINIMUM_VERSION:
         print(
             "[WARNING] Your Python version can still be used with your current DSMR-reader version. "
-            "However, Python {} or higher is preferred. Consider using it for new installations in the future.".format(
+            "However, Python {} is preferred. Consider using it for new installations in the future.".format(
                 ".".join([str(x) for x in PREFERRED_MINIMUM_VERSION])
             )
         )
