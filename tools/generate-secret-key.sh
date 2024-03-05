@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 ### Generates a new DJANGO_SECRET_KEY for the local installation
 
 CURRENT_DIR=$(cd `dirname $0` && pwd)
