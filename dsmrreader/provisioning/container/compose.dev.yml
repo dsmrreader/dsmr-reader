@@ -78,7 +78,7 @@ services:
 
   dsmr-db:
     container_name: dsmr-db
-    image: postgres:13
+    image: postgres:15-alpine
     restart: unless-stopped
     ports:
       - '5432:5432'
@@ -97,7 +97,7 @@ services:
       - POSTGRES_PASSWORD=postgres-password
 
   test-db-postgres:
-    image: postgres:14
+    image: postgres:15-alpine
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
