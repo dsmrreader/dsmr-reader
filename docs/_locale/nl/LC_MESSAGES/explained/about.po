@@ -75,9 +75,8 @@ msgid "**For datalogger only**: *Any* RaspberryPi or similar."
 msgstr "**Voor alleen-datalogger**: *Elke* RaspberryPi of vergelijkbaar."
 
 #: ../../explained/about.rst:44
-#, fuzzy
 msgid "**For full DSMR-reader**: *RaspberryPi 4+* or similar."
-msgstr "**Voor volledige DSMR-reader**: *RaspberryPi 3+* of vergelijkbaar."
+msgstr "**Voor volledige DSMR-reader**: *RaspberryPi 4+* of vergelijkbaar."
 
 #: ../../explained/about.rst:45
 msgid "P1 telegram cable (or a network socket when using ``ser2net``)."
@@ -92,9 +91,8 @@ msgid "Software requirements"
 msgstr "Softwarevereisten"
 
 #: ../../explained/about.rst:52
-#, fuzzy
 msgid "**OS**: ``RaspberryPi OS`` or similar (or using Docker)."
-msgstr "**OS**: ``Raspbian OS`` of vergelijkbaar (of via Docker)"
+msgstr "**OS**: ``RaspberryPi OS`` of vergelijkbaar (of via Docker)"
 
 #: ../../explained/about.rst:53
 msgid "**Disk space**: 1+ GB - Depending on your smart meter and whether how many readings you want to preserve."
