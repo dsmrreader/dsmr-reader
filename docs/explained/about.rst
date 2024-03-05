@@ -22,6 +22,14 @@ Project goals
     DSMR-reader only supports the generic protocols above and cannot support every individual integration possible.
 
 
+Architecture
+------------
+
+.. image:: ../_static/misc/DSMR-reader-Architecture.svg
+    :target: ../_static/misc/DSMR-reader-Architecture.svg
+    :alt: DSMR-reader Architecture
+
+
 Languages
 ---------
 
@@ -33,7 +41,7 @@ Hardware requirements
 ---------------------
 
 - **For datalogger only**: *Any* RaspberryPi or similar.
-- **For full DSMR-reader**: *RaspberryPi 3+* or similar.
+- **For full DSMR-reader**: *RaspberryPi 4+* or similar.
 - P1 telegram cable (or a network socket when using ``ser2net``).
 - A smart meter supporting DSMR versions: ``v2`` / ``v4`` / ``v5``.
 
@@ -41,7 +49,7 @@ Hardware requirements
 Software requirements
 ---------------------
 
-- **OS**: ``Raspbian OS`` or similar (or using Docker).
+- **OS**: ``RaspberryPi OS`` or similar (or using Docker).
 - **Disk space**: 1+ GB - Depending on your smart meter and whether how many readings you want to preserve.
 - **Code**: A `supported <https://devguide.python.org/versions/#python-release-cycle>`__ Python version.
 - **Database**: A `supported <https://www.postgresql.org/support/versioning/>`__ PostgreSQL version.
