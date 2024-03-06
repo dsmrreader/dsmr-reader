@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker: Poetry export (dev)" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="docker exec -it dsmr-app poetry export -f requirements.txt --without-urls --without-hashes --only dev --output dsmrreader/provisioning/requirements/dev.txt.tmp ; cat dsmrreader/provisioning/requirements/dev.txt.tmp | cut -d ';' -f1 | cut -d ' ' -f1 &gt; dsmrreader/provisioning/requirements/dev.txt" />
+    <option name="SCRIPT_TEXT" value="docker exec -it dsmr-app poetry export -f requirements.txt --without-urls --without-hashes --only dev --output dev.txt.tmp ; cat dev.txt.tmp | cut -d ';' -f1 | cut -d ' ' -f1 &gt; dsmrreader/provisioning/requirements/dev.txt ; rm dev.txt.tmp" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />
