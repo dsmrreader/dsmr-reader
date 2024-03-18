@@ -9,7 +9,7 @@ django-debug-toolbar==3.8.1
 django-filter==21.1
 django-mathfilters==1.0.0
 django-solo==2.1.0
-django==3.2.23
+django==3.2.25
 djangorestframework==3.14.0
 dropbox==11.36.2
 gunicorn==20.1.0
