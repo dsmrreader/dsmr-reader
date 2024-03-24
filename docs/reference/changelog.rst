@@ -29,6 +29,7 @@ Current release series
 v5.12.0 - xxxxxxxx 2024
 -----------------------
 
+- ``Changed`` [`#1979 <https://github.com/dsmrreader/dsmr-reader/issues/1979>`_] Toevoegen uitleg over tijdstip van upload naar Mindergas- by ``MrLurch81``
 
 
 v5.11.0 - February 2024
