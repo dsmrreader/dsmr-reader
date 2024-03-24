@@ -116,9 +116,8 @@ msgid "There are several guides, depending on your OS. We assume Raspbian OS her
 msgstr "Er zijn diverse handleidingen, afhankelijk van je OS. We gaan hier uit van Raspbian OS."
 
 #: ../../tutorial/upgrading/to-v5.rst:100
-
 msgid "You may consider upgrading to a higher Python version, e.g. ``Python 3.11``, if possible for your OS."
-msgstr "Je kunt overwegen om direct naar een hogere Python-versie te upgraden, bijvoorbeeld ``Python 3.9``, indien dat mogelijk is voor het OS dat je gebruikt."
+msgstr "Je kunt overwegen om direct naar een hogere Python-versie te upgraden, bijvoorbeeld ``Python 3.11``, indien dat mogelijk is voor het OS dat je gebruikt."
 
 #: ../../tutorial/upgrading/to-v5.rst:117
 msgid "Try running the command ``python3 --version`` to see if things worked out. If you're getting any errors, do not continue with the upgrade."
