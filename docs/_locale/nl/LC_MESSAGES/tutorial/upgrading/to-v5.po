@@ -2,13 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
+"POT-Creation-Date: 2024-03-24 18:50+0000\n"
+"PO-Revision-Date: 2024-03-24 19:57+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.14.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ../../tutorial/upgrading/to-v5.rst:2
 msgid "Guide: Upgrading DSMR-reader v4.x to v5.x"
@@ -115,8 +119,8 @@ msgid "There are several guides, depending on your OS. We assume Raspbian OS her
 msgstr "Er zijn diverse handleidingen, afhankelijk van je OS. We gaan hier uit van Raspbian OS."
 
 #: ../../tutorial/upgrading/to-v5.rst:100
-msgid "You may consider upgrading to a higher Python version, e.g. ``Python 3.9``, if possible for your OS."
-msgstr "Je kunt overwegen om direct naar een hogere Python-versie te upgraden, bijvoorbeeld ``Python 3.9``, indien dat mogelijk is voor het OS dat je gebruikt."
+msgid "You may consider upgrading to a higher Python version, e.g. ``Python 3.11``, if possible for your OS."
+msgstr "Je kunt overwegen om direct naar een hogere Python-versie te upgraden, bijvoorbeeld ``Python 3.11``, indien dat mogelijk is voor het OS dat je gebruikt."
 
 #: ../../tutorial/upgrading/to-v5.rst:117
 msgid "Try running the command ``python3 --version`` to see if things worked out. If you're getting any errors, do not continue with the upgrade."
@@ -220,72 +224,72 @@ msgstr "Het zou iets moeten tonen als: \"System check identified no issues (0 si
 msgid "Make sure you've installed ``libopenjp2-7-dev`` above::"
 msgstr "Zorg dan dat je hierboven ``libopenjp2-7-dev`` hebt geïnstalleerd::"
 
-#: ../../tutorial/upgrading/to-v5.rst:284
-#: ../../tutorial/upgrading/to-v5.rst:288
+#: ../../tutorial/upgrading/to-v5.rst:283
+#: ../../tutorial/upgrading/to-v5.rst:287
 msgid "Execute::"
 msgstr "Voer uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:294
+#: ../../tutorial/upgrading/to-v5.rst:293
 msgid "Note: This *may* revert any customizations you've done yourself, such as HTTP Basic Auth configuration."
 msgstr "N.b.: Dit *kan* alle handmatige wijzigingen die je zelf ooit hebt gedaan terugdraaien, zoals HTTP Basic Auth configuratie."
 
-#: ../../tutorial/upgrading/to-v5.rst:296
+#: ../../tutorial/upgrading/to-v5.rst:295
 msgid "Update Nginx config::"
 msgstr "Update Nginx config::"
 
-#: ../../tutorial/upgrading/to-v5.rst:301
+#: ../../tutorial/upgrading/to-v5.rst:300
 msgid "Reload Nginx::"
 msgstr "Herlaad Nginx::"
 
-#: ../../tutorial/upgrading/to-v5.rst:306
+#: ../../tutorial/upgrading/to-v5.rst:305
 msgid "Update Supervisor configs::"
 msgstr "Update Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:312
+#: ../../tutorial/upgrading/to-v5.rst:311
 msgid "Reload Supervisor configs::"
 msgstr "Herlaad Supervisor configs::"
 
-#: ../../tutorial/upgrading/to-v5.rst:317
+#: ../../tutorial/upgrading/to-v5.rst:316
 msgid "Start DSMR-reader::"
 msgstr "Start DSMR-reader::"
 
-#: ../../tutorial/upgrading/to-v5.rst:323
+#: ../../tutorial/upgrading/to-v5.rst:322
 msgid "6. Deploy"
 msgstr "6. Deploy"
 
-#: ../../tutorial/upgrading/to-v5.rst:324
+#: ../../tutorial/upgrading/to-v5.rst:323
 msgid "Finally, execute the deploy script::"
 msgstr "Tot slot, voer het deploy-script uit::"
 
-#: ../../tutorial/upgrading/to-v5.rst:329
+#: ../../tutorial/upgrading/to-v5.rst:328
 msgid "Great. You should now be on ``v5.x``!"
 msgstr "Top! Je zou nu ``v5.x`` moeten draaien!"
 
-#: ../../tutorial/upgrading/to-v5.rst:333
+#: ../../tutorial/upgrading/to-v5.rst:332
 msgid "7. Situational: Reconfigure InfluxDB"
 msgstr "7. Situationeel: Herconfigureer InfluxDB"
 
-#: ../../tutorial/upgrading/to-v5.rst:335
+#: ../../tutorial/upgrading/to-v5.rst:334
 msgid "If you happened to use DSMR-reader export to InfluxDB previously, you **must** reconfigure it accordingly in order to get it working again. It has been disabled automatically as well."
 msgstr "Als je DSMR-reader gebruikte om data te exporteren naar InfluxDB, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen. De integratie is tevens automatisch uitgeschakeld."
 
-#: ../../tutorial/upgrading/to-v5.rst:340
+#: ../../tutorial/upgrading/to-v5.rst:339
 msgid "Where the previous version utilized *usernames*, *passwords* and *databases*, it now connects using *organizations*, *API tokens* and *buckets*."
 msgstr "Waar de vorige versie *usernames*, *passwords* en *databases* gebruikte, is het nu gewijzigd naar *organizations*, *API tokens* en *buckets*."
 
-#: ../../tutorial/upgrading/to-v5.rst:344
+#: ../../tutorial/upgrading/to-v5.rst:343
 msgid "8. Situational: Reconfigure Dropbox"
 msgstr "8. Situationeel: Herconfigureer Dropbox"
 
-#: ../../tutorial/upgrading/to-v5.rst:346
+#: ../../tutorial/upgrading/to-v5.rst:345
 msgid "If you happened to use DSMR-reader's Dropbox sync for backups, you **must** reconfigure it accordingly in order to get it working again."
 msgstr "Als je DSMR-reader gebruikte om backups naar Dropbox te sturen, dan **moet** je deze integratie handmatig opnieuw configureren om het werkend te krijgen."
 
-#: ../../tutorial/upgrading/to-v5.rst:350
+#: ../../tutorial/upgrading/to-v5.rst:349
 msgid "9. Situational: Remote datalogger env vars"
 msgstr "9. Situationeel: Remote datalogger env vars"
 
-#: ../../tutorial/upgrading/to-v5.rst:352
+#: ../../tutorial/upgrading/to-v5.rst:351
 msgid "The following **remote datalogger script** settings were renamed as well, but you'll only need to change them if you use and update the remote datalogger script as well. E.g. when running it in Docker::"
 msgstr "De volgende **remote datalogger script** instellingen zijn ook hernoemd, maar je hoeft ze alleen aan te passen als je ze daadwerkelijk gebruikt, samen met een nieuwe versie van het remote datalogger script. Bijvoorbeeld wanneer je Docker gebruikt::"
 

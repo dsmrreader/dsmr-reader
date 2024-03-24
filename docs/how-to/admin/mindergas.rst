@@ -5,7 +5,7 @@ Link your MinderGas.nl-account to have DSMR-reader upload your gas meter positio
 
 .. hint::
 
-    DSMR-reader transmits the **last reading of the previous day** to your account.
+    DSMR-reader transmits the **last reading of the previous day** to your account. To avoid overloading the MinderGas website, this is done randomly between 03:00 and 06:00am.
 
 
 .. image:: ../../_static/screenshots/v5/admin/mindergassettings.png

@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DSMR-reader\n"
 "Report-Msgid-Bugs-To: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"POT-Creation-Date: 2022-06-14 21:39+0000\n"
-"PO-Revision-Date: 2022-06-14 23:41+0200\n"
+"POT-Creation-Date: 2024-03-24 18:50+0000\n"
+"PO-Revision-Date: 2024-03-24 19:53+0100\n"
 "Last-Translator: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Language: nl\n"
 "Language-Team: Dennis Siemensma <github@dennissiemensma.nl>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.2\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.14.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ../../how-to/admin/mindergas.rst:2
 msgid "Admin: MinderGas.nl"
@@ -23,9 +23,10 @@ msgid "Link your MinderGas.nl-account to have DSMR-reader upload your gas meter 
 msgstr "Koppel je MinderGas.nl-account om DSMR-reader dagelijks je gasmeterstanden te laten uploaden."
 
 #: ../../how-to/admin/mindergas.rst:8
-msgid "DSMR-reader transmits the **last reading of the previous day** to your account."
-msgstr "DSMR-reader verzendt telkens de **laatste meting van de voorgaande dag** naar je account."
+msgid "DSMR-reader transmits the **last reading of the previous day** to your account. To avoid overloading the MinderGas website, this is done randomly between 03:00 and 06:00am."
+msgstr "DSMR-reader verzendt telkens de **laatste meting van de voorgaande dag** naar je account. Om overbelasting van de MinderGas website te voorkomen, wordt dit op een willekeurig moment tussen 03:00 en 06:00 uur gedaan."
 
+#: ../../how-to/admin/mindergas.rst:-1
 msgid "MinderGas"
 msgstr "MinderGas"
 
@@ -33,6 +34,7 @@ msgstr "MinderGas"
 msgid "Make sure you have a Mindergas.nl account or `signup for one <https://www.mindergas.nl/users/sign_up>`_. Now go to \"`Meterstand API <https://www.mindergas.nl/member/api>`_\" and click on the button located below **\"Authenticatietoken\"**."
 msgstr "Zorg ervoor dat je een mindergas.nl-account hebt of `registreer je op hun website <https://www.mindergas.nl/users/sign_up>`_. Ga nu naar \"`Meterstand API <https://www.mindergas.nl/member/api>`_\" en klik op de knop onder het kopje **\"Authenticatietoken\"**."
 
+#: ../../how-to/admin/mindergas.rst:-1
 msgid "Mindergas API"
 msgstr "Mindergas API"
 
