@@ -2,13 +2,21 @@ name: DSMR-reader issue
 description: Only for DSMR-reader specific stuff.
 title: '?'
 body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > *Choose a title ⬆️ that help other people understand what your issue is about, without reading the entire thing below.*
+        
+        ----
+
   - type: dropdown
     id: language
     attributes:
-      label: Communicatietaal / Language
+      label: Language / Voertaal
       description: |
-        - *🇳🇱 Voel je vooral vrij om in het Nederlands te communiceren, ondanks dat het project technisch Engelstalig is.* 
-        - *🇬🇧 Unable to communicate in Dutch? Welcome anyway! Feel free to use English.*
+        *🇬🇧 Unable to communicate in Dutch? Welcome anyway! Feel free to use English.*
+        *🇳🇱 Voel je vooral vrij om in het Nederlands te communiceren, ondanks dat het project (technisch gezien) Engelstalig is.*
       options:
         - '🇳🇱 Nederlandstalig'
         - '🇬🇧 English'
@@ -18,7 +26,11 @@ body:
   - type: checkboxes
     attributes:
       label: Help yourself
-      description: Most of the times you can help yourself by checking the guides or previous solutions.  Verify each one of these.
+      description: |
+        > [!IMPORTANT]
+        > Most of the times you can help yourself by checking the guides or previous solutions/reports made. Simply shallowly searching for a minute or two may save your lots of time. 
+        
+        **Verify each one of these**:
       options:
         - label: "I've checked [the how-to guides](https://dsmr-reader.readthedocs.io/nl/v5/how-to/index.html)"
           required: true
@@ -49,22 +61,23 @@ body:
     id: description
     attributes:
       label: 'Description'
-      description: 'Your issue, suggestion or bug description'
+      description: |
+        Your issue, suggestion or bug description
+        
+        > [!TIP]
+        > E.g. installation trouble, readings stopped working, data is gone, feature request, bug report...
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value: |
-        ----
-
-        *Please provide additional information below.*
 
   - type: input
     id: dsmrreader-version
     attributes:
       label: DSMR-reader version
-      description: What version are you using? E.g. ``v5.10.2``.
+      description: |
+        What DSMR-reader version are you using?
+        
+        > [!IMPORTANT]
+        > *Specify the full version, e.g. ``v5.10.2``.*
       placeholder: vX.Y.Z
     validations:
       required: true
@@ -73,7 +86,7 @@ body:
     id: platform
     attributes:
       label: DSMR-reader platform
-      description: How do you run DSMR-reader?
+      description: How did you install/do you run DSMR-reader?
       options:
         - "Native (e.g. manual installation)"
         - "Docker (e.g. Xirixiz's DSMR-reader Docker)"
@@ -86,8 +99,10 @@ body:
     attributes:
       label: 'Optional: Debug info dump (of DSMR-reader)'
       description: |
-        When applicable, add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/debug-info-dump.html) below.
-        This will be automatically formatted into code, so no need for backticks.
+        > [!TIP]
+        > Providing this information *may* assist in providing you better help. *Also, everything you type in this fields will be automatically formatted into code, so **no need for backticks**.*
+
+        When applicable (e.g. with tech issues), add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/debug-info-dump.html) below.
       render: shell-script
 
   - type: textarea
@@ -95,5 +110,8 @@ body:
     attributes:
       label: 'Optional: Smart meter telegram'
       description: |
+        > [!TIP]
+        > Providing this information *may* assist in providing you better help. *Also, everything you type in this fields will be automatically formatted into code, so **no need for backticks**.*
+        
         When applicable (e.g. on readings mismatch), add a [data telegram](https://dsmr-reader.readthedocs.io/nl/v5/explained/about.html#support) below.
       render: shell-script
