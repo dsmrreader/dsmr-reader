@@ -5,6 +5,7 @@ on:
     branches:
       - 'v*'
       - 'development'
+      - 'work-in-progress/'  # Future TODO: Remove me
   pull_request:
     branches-ignore:
       - 'dependabot/'
