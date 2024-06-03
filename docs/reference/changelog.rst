@@ -18,12 +18,53 @@ Current release series
 
     - Every **minor** release (e.g. ``v5.x`` -> ``v5.y``) is *usually* compatible with any preceding release in the same series and should allow you to update easily. See :doc:`how to (minor) update in the same series</how-to/upgrading/upgrade>`.
 
-    - Every new **major** series (e.g. ``v5.x`` -> ``v6.x``) *usually* contains incompatible changes that require you to update with additional manual steps. Upgrading to the **last release** of a series (e.g. ``v4.20``), should tell you where to find the upgrade steps required.
+    - Every new **major** series (e.g. ``v5.x`` -> ``v6.x``) *usually* contains incompatible changes that require you to update with additional manual steps. Upgrading to the **last release** of a series (e.g. ``v5.12``), should tell you where to find the upgrade steps required.
 
 
 .. contents:: :local:
     :depth: 1
 
+
+
+v6.0.0 - xxxxxxxxx 2024
+-----------------------
+
+.. seealso::
+
+    ℹ️ This release of DSMR-reader requires you to **manually upgrade** from ``v5.x`` to ``v6.x``. See :doc:`the v6 upgrade guide </tutorial/upgrading/to-v6>` for more information.
+
+
+.. danger::
+
+    ⚠️ The following features/support have been **dropped** or were changed in an **incompatible** way!
+
+- ``Changed`` [`#1594 <https://github.com/dsmrreader/dsmr-reader/issues/1594>`_] Dropped support for **manual installations**, only supporting **container installations**, to ease future upgrades for users.
+- ``Removed`` [`#1594 <https://github.com/dsmrreader/dsmr-reader/issues/1594>`_] Dropped support for **Python 3.7**
+- ``Removed`` [`#1594 <https://github.com/dsmrreader/dsmr-reader/issues/1594>`_] Dropped support for **Python 3.8**
+- ``Removed`` [`#1594 <https://github.com/dsmrreader/dsmr-reader/issues/1594>`_] Dropped support for **Python 3.9**
+- ``Removed`` [`#1594 <https://github.com/dsmrreader/dsmr-reader/issues/1594>`_] Dropped support for **Python 3.10**
+- ``Removed`` [`#1594 <https://github.com/dsmrreader/dsmr-reader/issues/1594>`_] Dropped support for **Python 3.11**
+- ``Removed`` [`#1763 <https://github.com/dsmrreader/dsmr-reader/issues/1763>`_] Dropped support for **PostgreSQL 10**
+- ``Removed`` [`#1763 <https://github.com/dsmrreader/dsmr-reader/issues/1763>`_] Dropped support for **PostgreSQL 11**
+- ``Removed`` [`#1763 <https://github.com/dsmrreader/dsmr-reader/issues/1763>`_] Dropped support for **PostgreSQL 12**
+- ``Removed`` [`#1763 <https://github.com/dsmrreader/dsmr-reader/issues/1763>`_] Dropped support for **PostgreSQL 13**
+
+
+----
+
+
+Older release series
+====================
+
+.. danger::
+
+    These are releases that are **no longer supported**. There will be no more features added or any bugs/security issues fixed for these releases.
+
+    You can still run these on your own risk, but you're recommended to upgrade (eventually) to the latest supported series of DSMR-reader.
+    Especially if your installation happens to be reachable via the Internet.
+
+.. contents:: :local:
+    :depth: 1
 
 
 v5.12.0 - xxxxxxxx 2024
@@ -231,7 +272,7 @@ v5.1.0 - March 2022
 - ``Fixed`` [`#1591 <https://github.com/dsmrreader/dsmr-reader/issues/1591>`_] Added headers to XHR responses to prevent browser caching
 
 
-v5.0.0 - Februari 2022
+v5.0.0 - February 2022
 ----------------------
 
 .. seealso::
@@ -293,23 +334,6 @@ v5.0.0 - Februari 2022
 - ``Removed`` Dropped ``DATALOGGER_TIMEOUT`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_TIMEOUT`` instead
 - ``Removed`` Dropped ``DATALOGGER_SLEEP`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_SLEEP`` instead
 - ``Removed`` Dropped ``DATALOGGER_MIN_SLEEP_FOR_RECONNECT`` env var, use ``DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT`` instead
-
-
-----
-
-
-Older release series
-====================
-
-.. danger::
-
-    These are releases that are **no longer supported**. There will be no more features added or any bug/security issues fixed for these series!
-
-    You can still run these on your own risk, but you're recommended to upgrade (eventually) to the latest supported series of DSMR-reader.
-    Especially if your installation happens to be reachable via the Internet.
-
-.. contents:: :local:
-    :depth: 1
 
 
 v4.20.0 - 2022-02-07
