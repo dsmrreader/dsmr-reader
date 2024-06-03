@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.11'
+          - '3.11'  # @TODO: Bump me to 3.12 later
     services:
       postgres:
         image: 'postgres:14-alpine'
@@ -119,10 +119,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.7'  # Drop me in DSMR-reader v6.x
-          - '3.8'  # Drop me in DSMR-reader v6.x
-          - '3.9'  # Drop me in DSMR-reader v6.x
-          - '3.10'
+          - '3.11'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR

@@ -2,8 +2,8 @@
 import sys
 
 # EOL table @ https://www.python.org/downloads/
-MINIMUM_VERSION = (3, 7, 0)
-PREFERRED_MINIMUM_VERSION = (3, 11, 0)
+MINIMUM_VERSION = (3, 11, 0)
+PREFERRED_MINIMUM_VERSION = (3, 12, 0)
 
 
 def check():
