@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker: Test SQLite (quick test)" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="docker exec -e DSMRREADER_LOGLEVEL=ERROR -it dsmr-app poetry run /app/tools/test-sqlite.sh" />
+    <option name="SCRIPT_TEXT" value="docker exec -e DSMRREADER_LOGLEVEL=ERROR -it dsmr-app poetry run /usr/src/app/tools/test-sqlite.sh" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

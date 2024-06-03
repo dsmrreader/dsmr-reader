@@ -2,7 +2,7 @@
 # Compose for DSMR-reader development only, NEVER use in production! #
 ######################################################################
 
-version: "3.7"
+version: "3.9"
 services:
   # http://localhost:8000
   dsmr-app:
@@ -10,12 +10,12 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Containerfile
       target: local-dsmrreader-app
       args:
         - PYTHON_VERSION=3.11
     volumes:
-      - .:/app
+      - .:/usr/src/app
     ports:
       - '8000:8000'
     depends_on:
@@ -57,10 +57,10 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Containerfile
       target: local-dsmrreader-docs-en
     volumes:
-      - .:/app
+      - .:/usr/src/app
     ports:
       - '10000:10000'
 
@@ -69,16 +69,16 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Containerfile
       target: local-dsmrreader-docs-nl
     volumes:
-      - .:/app
+      - .:/usr/src/app
     ports:
       - '10001:10000'
 
   dsmr-db:
     container_name: dsmr-db
-    image: postgres:13
+    image: postgres:15-alpine
     restart: unless-stopped
     ports:
       - '5432:5432'
@@ -88,7 +88,7 @@ services:
       timeout: 5s
       retries: 10
 #    # Only use for restoring DB-backups when developing.
-#    # E.g. in container: psql -U dsmrreader -f /var/run/host/Desktop/dsmrreader-postgresql-backup-Saturday.sql dsmrreader
+#    # E.g. in container: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
 #    volumes:
 #      - ~/Desktop:/run/host/Desktop/
     environment:
@@ -97,7 +97,7 @@ services:
       - POSTGRES_PASSWORD=postgres-password
 
   test-db-postgres:
-    image: postgres:14
+    image: postgres:15-alpine
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
@@ -128,7 +128,7 @@ services:
     image: eclipse-mosquitto:2
     restart: unless-stopped
     volumes:
-      - ./dsmrreader/provisioning/docker/mosquitto-dev/:/mosquitto/config/
+      - ./dsmrreader/provisioning/container/mosquitto-dev/:/mosquitto/config/
     ports:
       - '1883:1883'
 

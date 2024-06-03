@@ -11,6 +11,7 @@ from dsmr_mindergas.models.settings import MinderGasSettings
 
 @admin.register(MinderGasSettings)
 class MinderGasSettingsAdmin(SingletonModelAdmin):
+    change_form_template = "dsmr_mindergas/mindergas_settings/change_form.html"
     fieldsets = (
         (
             None,

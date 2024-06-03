@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 CURRENT_DIR=$(cd `dirname $0` && pwd)
 

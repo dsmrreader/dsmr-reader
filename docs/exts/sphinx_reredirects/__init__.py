@@ -77,4 +77,5 @@ def create_redirect_file(content_template: str, at_path: Path, to_uri: str) -> N
     at_path.touch()
     at_path.write_text(content)
 
-    logger.info(f"Created redirect file '{at_path}' to '{to_uri}'")
+    # Re-enable me to debug
+    # logger.info(f"Created redirect file '{at_path}' to '{to_uri}'")
