@@ -15,7 +15,7 @@ services:
       args:
         - PYTHON_VERSION=3.11
     volumes:
-      - .:/usr/src/app
+      - ./app:/usr/src/app
     ports:
       - '8000:8000'
     depends_on:
@@ -60,7 +60,7 @@ services:
       dockerfile: Containerfile
       target: local-dsmrreader-docs-en
     volumes:
-      - .:/usr/src/app
+      - ./docs:/usr/src/app  # Note: Application root target is similar to "dsmr-app"
     ports:
       - '10000:10000'
 
@@ -72,7 +72,7 @@ services:
       dockerfile: Containerfile
       target: local-dsmrreader-docs-nl
     volumes:
-      - .:/usr/src/app
+      - ./docs:/usr/src/app  # Note: Application root target is similar to "dsmr-app"
     ports:
       - '10001:10000'
 
@@ -87,9 +87,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-#    # Only use for restoring DB-backups when developing.
-#    # E.g. in container: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
-#    volumes:
+    volumes:
+      - ./.container-data/dsmr-db/:/var/lib/postgresql/
+    # Only use for restoring DB-backups. E.g.: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
 #      - ~/Desktop:/run/host/Desktop/
     environment:
       - POSTGRES_DB=dsmrreader
@@ -128,7 +128,7 @@ services:
     image: eclipse-mosquitto:2
     restart: unless-stopped
     volumes:
-      - ./dsmrreader/provisioning/container/mosquitto-dev/:/mosquitto/config/
+      - ./provisioning/container/mosquitto-dev/:/mosquitto/config/
     ports:
       - '1883:1883'
 
