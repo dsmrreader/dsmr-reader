@@ -11,12 +11,12 @@
 /docs/_locale/nl/LC_MESSAGES/**/changelog.po
 /docs/_locale/nl/LC_MESSAGES/**/changelog.mo
 /docs/_locale/nl/LC_MESSAGES/how-to/upgrading/to-v*.po
-/app/dsmrreader/settings.py
-/app/dsmrreader/settings.py.BACKUP
-/app/coverage_report/
-/app/backups/
-/app/logs/
-/app/dsmr_plugins/modules/
+/src/dsmrreader/settings.py
+/src/dsmrreader/settings.py.BACKUP
+/src/coverage_report/
+/src/backups/
+/src/logs/
+/src/dsmr_plugins/modules/
 /manage_mule.py
 # Containerization
 /docker-compose.override.yml
