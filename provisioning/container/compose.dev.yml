@@ -11,11 +11,10 @@ services:
     build:
       context: .
       dockerfile: Containerfile
-      target: local-dsmrreader-app
-      args:
-        - PYTHON_VERSION=3.11
+      target: local-dsmrreader-dev
     volumes:
-      - ./app:/usr/src/app
+      - ./src:/app
+      - ./tools:/tools
     ports:
       - '8000:8000'
     depends_on:
@@ -60,7 +59,7 @@ services:
       dockerfile: Containerfile
       target: local-dsmrreader-docs-en
     volumes:
-      - ./docs:/usr/src/app  # Note: Application root target is similar to "dsmr-app"
+      - ./docs:/app-docs
     ports:
       - '10000:10000'
 
@@ -72,7 +71,7 @@ services:
       dockerfile: Containerfile
       target: local-dsmrreader-docs-nl
     volumes:
-      - ./docs:/usr/src/app  # Note: Application root target is similar to "dsmr-app"
+      - ./docs:/app-docs
     ports:
       - '10001:10000'
 

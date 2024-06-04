@@ -25,4 +25,4 @@
 /compose.yml
 /Dockerfile
 /Containerfile
-/.container-data/dsmr-db/
+/.container-data/
