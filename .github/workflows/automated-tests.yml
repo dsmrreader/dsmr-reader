@@ -65,7 +65,9 @@ jobs:
           poetry install --no-root --with dev
 
       - name: Check flake8
-        run: poetry run flake8
+        run: |
+          cd src/
+          poetry run flake8
 
       - name: Check translation status
         run: sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po | wc -l | grep -e '^0$'
