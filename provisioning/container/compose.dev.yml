@@ -10,120 +10,69 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Containerfile
+      dockerfile: provisioning/container/Containerfile-dev
       target: local-dsmrreader-dev
     volumes:
       - ./src:/app
-      - ./tools:/tools
     ports:
       - '8000:8000'
     depends_on:
-      # DSMR-reader development
-      - dsmr-db
-      - dsmr-docs-en
-      - dsmr-docs-nl
-      # Testing DB engines
-      - test-db-postgres
-      - test-db-mysql
-      # Misc tools for development/testing
-      - mosquitto
-      - influxdb
-    environment:
-      # Development
-      - DSMRREADER_LOGLEVEL=DEBUG
-      - DJANGO_DATABASE_ENGINE=django.db.backends.postgresql
-      - DJANGO_DATABASE_HOST=dsmr-db
-      - DJANGO_DATABASE_PORT=5432
-      - DJANGO_DATABASE_NAME=dsmrreader
-      - DJANGO_DATABASE_USER=dsmrreader
-      - DJANGO_DATABASE_PASSWORD=postgres-password
-      - DJANGO_SECRET_KEY=development
-      # Tests
-      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_HOST=test-db-postgres
-      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_PORT=5432
-      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_USER=testuser
-      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_PASSWORD=testpasswd
-      - DOCKER_TEST_POSTGRESQL_DJANGO_DATABASE_NAME=test_dsmrreader
+      dsmr-dev-db:
+        condition: service_healthy
+      dsmr-tests-db:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+      influxdb:
+        condition: service_started
+    env_file:
+      - provisioning/container/dev.env
 
-      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_HOST=test-db-mysql
-      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PORT=3306
-      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_USER=testuser
-      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_PASSWORD=testpasswd
-      - DOCKER_TEST_MYSQL_DJANGO_DATABASE_NAME=dsmrreader  # Django prefixes "test_" automatically.
-
-  # http://localhost:10000
-  dsmr-docs-en:
-    restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Containerfile
-      target: local-dsmrreader-docs-en
-    volumes:
-      - ./docs:/app-docs
-    ports:
-      - '10000:10000'
-
-  # http://localhost:10001
-  dsmr-docs-nl:
-    restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Containerfile
-      target: local-dsmrreader-docs-nl
-    volumes:
-      - ./docs:/app-docs
-    ports:
-      - '10001:10000'
-
-  dsmr-db:
-    container_name: dsmr-db
+  dsmr-dev-db:
+    container_name: dsmr-dev-db
     image: postgres:15-alpine
     restart: unless-stopped
     ports:
       - '5432:5432'
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
-      interval: 10s
+      interval: 1s
       timeout: 5s
-      retries: 10
+      retries: 20
+    env_file:
+      - provisioning/container/dev.env
     volumes:
-      - ./.container-data/dsmr-db/:/var/lib/postgresql/
-    # Only use for restoring DB-backups. E.g.: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
-#      - ~/Desktop:/run/host/Desktop/
-    environment:
-      - POSTGRES_DB=dsmrreader
-      - POSTGRES_USER=dsmrreader
-      - POSTGRES_PASSWORD=postgres-password
+      # Persist database storage between container recreation
+      - ./.container-data/dsmr-dev-db/:/var/lib/postgresql/
+      # Only use for restoring DB-backups. E.g.: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
+      - ~/Desktop:/run/host/Desktop/
 
-  test-db-postgres:
-    image: postgres:15-alpine
+  dsmr-docs-en:  # http://localhost:10000
+    container_name: dsmr-docs-en
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-    environment:
-      - POSTGRES_DB=test_dsmrreader
-      - POSTGRES_USER=testuser
-      - POSTGRES_PASSWORD=testpasswd
+    build:
+      context: .
+      dockerfile: provisioning/container/Containerfile-dev
+      target: local-dsmrreader-docs-en
+    volumes:
+      - ./docs:/app-docs
+    ports:
+      - '10000:10000'
 
-  # WARNING: MySQL tests/connections are broken here, but do seem to work well in the CI anyway.
-  test-db-mysql:
-    image: mysql:8
+  dsmr-docs-nl:  # http://localhost:10001
+    container_name: dsmr-docs-nl
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-    environment:
-     - MYSQL_DATABASE=test_dsmrreader
-     - MYSQL_USER=testuser
-     - MYSQL_PASSWORD=testpasswd
-     - MYSQL_ROOT_PASSWORD=testpasswd
+    build:
+      context: .
+      dockerfile: provisioning/container/Containerfile-dev
+      target: local-dsmrreader-docs-nl
+    volumes:
+      - ./docs:/app-docs
+    ports:
+      - '10001:10000'
 
   mosquitto:
+    container_name: mosquitto-dev
     image: eclipse-mosquitto:2
     restart: unless-stopped
     volumes:
@@ -132,14 +81,25 @@ services:
       - '1883:1883'
 
   influxdb:
+    container_name: influxdb-dev
     image: influxdb:2.0-alpine
     restart: unless-stopped
     ports:
       - '8086:8086'
-    environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_USERNAME=dsmrreader
-      - DOCKER_INFLUXDB_INIT_PASSWORD=dsmrreader
-      - DOCKER_INFLUXDB_INIT_ORG=dsmrreader
-      - DOCKER_INFLUXDB_INIT_BUCKET=dsmrreader_measurements
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=dsmrreader_influxdb_token
+    env_file:
+      - provisioning/container/dev.env
+
+
+  ##### Automated testing #####
+
+  dsmr-tests-db:
+    container_name: dsmr-tests-db
+    image: postgres:15-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      interval: 1s
+      timeout: 5s
+      retries: 20
+    env_file:
+      - provisioning/container/test.env

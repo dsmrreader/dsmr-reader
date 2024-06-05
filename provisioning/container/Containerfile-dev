@@ -24,12 +24,11 @@ COPY ./src/pyproject.toml ./src/poetry.lock /app/
 RUN pip install poetry
 RUN poetry self add poetry-plugin-export
 RUN poetry install --no-root --with dev
+EXPOSE 8000
 ENTRYPOINT poetry run python manage.py runserver 0.0.0.0:8000
 
 
-
 # -----------------------------------------------------------
-
 
 
 FROM python:${DOCS_PYTHON_VERSION}-alpine AS local-dsmrreader-docs
@@ -38,7 +37,9 @@ COPY ./docs/requirements.txt /app-docs/
 RUN pip install -r requirements.txt
 
 FROM local-dsmrreader-docs AS local-dsmrreader-docs-en
+EXPOSE 10000
 ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=en
 
 FROM local-dsmrreader-docs AS local-dsmrreader-docs-nl
+EXPOSE 10000
 ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=nl

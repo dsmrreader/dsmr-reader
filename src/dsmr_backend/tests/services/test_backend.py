@@ -424,6 +424,7 @@ class TestIslatestVersion(TestCase):
         request_mock.json.return_value = self.response_same_branch_newer_release
         get_mock.return_value = request_mock
 
+        # If this test fails, check whether settings.DSMRREADER_MAIN_BRANCH is outdated
         self.assertFalse(dsmr_backend.services.backend.is_latest_version())
 
     def test_newer_branch_new_release_available(self, get_mock):
