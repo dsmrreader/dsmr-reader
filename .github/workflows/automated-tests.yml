@@ -56,10 +56,13 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cp $GITHUB_WORKSPACE/src/pyproject.toml .
+          cp $GITHUB_WORKSPACE/src/poetry.lock .
           pip install --upgrade pip poetry
           poetry config virtualenvs.in-project true
           poetry check
-          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
+          poetry self add poetry-plugin-export
+          poetry install --no-root --with dev
 
       - name: Check flake8
         run: poetry run flake8
