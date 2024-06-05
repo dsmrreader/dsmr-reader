@@ -30,15 +30,6 @@ jobs:
             POSTGRES_DB: test_dsmrreader
             POSTGRES_PASSWORD: testpasswd
         options: --health-cmd pg_isready --health-interval 5s --health-timeout 1s --health-retries 10
-
-      mysql:
-        image: 'mysql:8'
-        ports:
-          - 3306
-        env:
-            MYSQL_DATABASE: test_dsmrreader
-            MYSQL_ALLOW_EMPTY_PASSWORD: yes
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
@@ -94,18 +85,6 @@ jobs:
             DJANGO_DATABASE_NAME: test_dsmrreader
             DJANGO_DATABASE_USER: root
             DJANGO_DATABASE_PASSWORD: testpasswd
-
-      - name: Run MySQL tests
-        run: poetry run py.test
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: unsafe-test-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.mysql
-            DJANGO_DATABASE_HOST: 127.0.0.1
-            DJANGO_DATABASE_PORT: '${{ job.services.mysql.ports[3306] }}'
-            DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
-            DJANGO_DATABASE_USER: root
-            DJANGO_DATABASE_PASSWORD: ''
 
       - name: Code coverage upload
         uses: codecov/codecov-action@v4
