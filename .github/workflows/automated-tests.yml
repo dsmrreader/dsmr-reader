@@ -29,12 +29,17 @@ jobs:
             POSTGRES_USER: root
             POSTGRES_DB: test_dsmrreader
             POSTGRES_PASSWORD: testpasswd
-        options: --health-cmd pg_isready --health-interval 5s --health-timeout 1s --health-retries 10
+        options: --health-cmd pg_isready --health-interval 1s --health-timeout 1s --health-retries 20
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Make sure to only fetch the src folder needed.
+          sparse-checkout: |
+            .github
+            src
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -44,7 +49,7 @@ jobs:
       - name: Install APT dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+          sudo apt-get install -y gettext libgettextpo-dev
 
       - name: Cached dependencies & virtualenv
         uses: actions/cache@v4
@@ -56,8 +61,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cp $GITHUB_WORKSPACE/src/pyproject.toml .
-          cp $GITHUB_WORKSPACE/src/poetry.lock .
           pip install --upgrade pip poetry
           poetry config virtualenvs.in-project true
           poetry check
@@ -114,7 +117,7 @@ jobs:
       - name: Install APT dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+          sudo apt-get install -y gettext libgettextpo-dev
 
       - name: Cached dependencies & virtualenv
         uses: actions/cache@v4
