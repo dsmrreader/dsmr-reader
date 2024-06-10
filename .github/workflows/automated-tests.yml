@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.11'  # @TODO: Bump me to 3.12 later
+          - '3.10'  # @TODO: Bump me to 3.12 later
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR

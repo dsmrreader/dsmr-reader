@@ -3,7 +3,7 @@
 ############################################################################
 
 # Development app should run latest Python when possible.
-ARG APP_PYTHON_VERSION="3.11"
+ARG APP_PYTHON_VERSION="3.10"
 # Docs should use whatever Python version ReadTheDocs runs.
 ARG DOCS_PYTHON_VERSION="3.12"
 
@@ -20,7 +20,8 @@ RUN apk add --update \
     mariadb-dev \
     postgresql-client
 ENV POETRY_VIRTUALENVS_IN_PROJECT=false
-COPY ./src/pyproject.toml ./src/poetry.lock /app/
+#COPY ./src/pyproject.toml ./src/poetry.lock /app/
+COPY ./src/pyproject.toml /app/
 RUN pip install poetry
 RUN poetry self add poetry-plugin-export
 RUN poetry install --no-root --with dev
