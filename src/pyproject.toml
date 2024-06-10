@@ -15,31 +15,30 @@ authors = [
 [tool.poetry.dependencies]
 python = "^3.10 | ^3.11 | ^3.12"
 
-coreapi = "^2.0"
 crcmod = "^1.0"
 django = "4.0"
-django-admin-rangefilter = "^0.8"
+django-admin-rangefilter = "^0.13"
 django-admin-sortable = "^2.0"
-django-colorfield = "^0.7"
-django-debug-toolbar = "^3.0"
-django-filter = "^21.0"
+django-colorfield = "^0.11"
+django-debug-toolbar = "^4.0"
+django-filter = "^23.0"  # @TODO: Upgrade later
 django-mathfilters = "^1.0"
 djangorestframework = "^3.0"
 django-solo = "^2.0"
-dropbox = "^11.0"
-gunicorn = "^20.1"
+dropbox = "^11.0"  # @TODO: Upgrade later
+gunicorn = "^22.0"
 influxdb-client = "^1.0"
-paho-mqtt = "^1.0"
+paho-mqtt = "^1.0" # @TODO: Upgrade later
 psycopg2-binary = "^2.0"
 pyserial = "^3.0"
 pyserial-asyncio = "^0.6"
 python-dateutil = "^2.0"
 python-decouple = "^3.0"
-pytz = "^2023.0"
+pytz = "^2024.0"
 pyyaml = "^6.0"
 requests = "^2.0"
 urllib3 = "^1.0"
-attrs = "^22.0"
+attrs = "^23.0"
 
 
 [tool.poetry.group.dev.dependencies]
