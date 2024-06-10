@@ -2,12 +2,11 @@
 # Compose for DSMR-reader development only, NEVER use in production! #
 ######################################################################
 
-version: "3.9"
 services:
   # http://localhost:8000
-  dsmr-app:
-    container_name: dsmr-app
-    restart: unless-stopped
+  dev-dsmr-app:
+    container_name: dev-dsmr-app
+    restart: 'unless-stopped'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
@@ -17,9 +16,7 @@ services:
     ports:
       - '8000:8000'
     depends_on:
-      dsmr-dev-db:
-        condition: service_healthy
-      dsmr-tests-db:
+      dev-dsmr-db:
         condition: service_healthy
       mosquitto:
         condition: service_started
@@ -28,10 +25,10 @@ services:
     env_file:
       - provisioning/container/dev.env
 
-  dsmr-dev-db:
-    container_name: dsmr-dev-db
+  dev-dsmr-db:
+    container_name: dev-dsmr-db
     image: postgres:15-alpine
-    restart: unless-stopped
+    restart: 'unless-stopped'
     ports:
       - '5432:5432'
     healthcheck:
@@ -43,13 +40,13 @@ services:
       - provisioning/container/dev.env
     volumes:
       # Persist database storage between container recreation
-      - ./.container-data/dsmr-dev-db/:/var/lib/postgresql/
+      - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/
       # Only use for restoring DB-backups. E.g.: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
       - ~/Desktop:/run/host/Desktop/
 
   dsmr-docs-en:  # http://localhost:10000
     container_name: dsmr-docs-en
-    restart: unless-stopped
+    restart: 'unless-stopped'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
@@ -61,7 +58,7 @@ services:
 
   dsmr-docs-nl:  # http://localhost:10001
     container_name: dsmr-docs-nl
-    restart: unless-stopped
+    restart: 'unless-stopped'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
@@ -74,7 +71,7 @@ services:
   mosquitto:
     container_name: mosquitto-dev
     image: eclipse-mosquitto:2
-    restart: unless-stopped
+    restart: 'unless-stopped'
     volumes:
       - ./provisioning/container/mosquitto-dev/:/mosquitto/config/
     ports:
@@ -83,7 +80,7 @@ services:
   influxdb:
     container_name: influxdb-dev
     image: influxdb:2.0-alpine
-    restart: unless-stopped
+    restart: 'unless-stopped'
     ports:
       - '8086:8086'
     env_file:
@@ -91,11 +88,25 @@ services:
 
 
   ##### Automated testing #####
+  tests-dsmr-app:
+    container_name: tests-dsmr-app
+    restart: 'no'
+    build:
+      context: .
+      dockerfile: provisioning/container/Containerfile-dev
+      target: local-dsmrreader-test
+    volumes:
+      - ./src:/app
+    depends_on:
+      tests-dsmr-db:
+        condition: service_healthy
+    env_file:
+      - provisioning/container/test.env
 
-  dsmr-tests-db:
-    container_name: dsmr-tests-db
+  tests-dsmr-db:
+    container_name: tests-dsmr-db
     image: postgres:15-alpine
-    restart: unless-stopped
+    restart: 'unless-stopped'
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
       interval: 1s

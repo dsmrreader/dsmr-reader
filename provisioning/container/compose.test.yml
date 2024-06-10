@@ -1,0 +1,32 @@
+######################################################################
+# Compose for DSMR-reader development only, NEVER use in production! #
+######################################################################
+
+services:
+  tests-dsmr-app:
+    container_name: tests-dsmr-app
+
+    restart: 'no'
+    build:
+      context: .
+      dockerfile: provisioning/container/Containerfile-dev
+      target: local-dsmrreader-test
+    volumes:
+      - ./src:/app
+    depends_on:
+      tests-dsmr-db:
+        condition: service_healthy
+    env_file:
+      - provisioning/container/test.env
+
+  tests-dsmr-db:
+    container_name: tests-dsmr-db
+    image: postgres:15-alpine
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      interval: 1s
+      timeout: 5s
+      retries: 20
+    env_file:
+      - provisioning/container/test.env

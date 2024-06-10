@@ -20,126 +20,19 @@ jobs:
       matrix:
         python-version:
           - '3.11'  # @TODO: Bump me to 3.12 later
-    services:
-      postgres:
-        image: 'postgres:15-alpine'
-        ports:
-          - 5432
-        env:
-            POSTGRES_USER: root
-            POSTGRES_DB: test_dsmrreader
-            POSTGRES_PASSWORD: testpasswd
-        options: --health-cmd pg_isready --health-interval 1s --health-timeout 1s --health-retries 20
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
       - uses: actions/checkout@v4
-        with:
-          # Make sure to only fetch the src folder needed.
-          sparse-checkout: |
-            .github
-            src
 
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install APT dependencies
+      - name: Build docker image(s) for TESTS
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gettext libgettextpo-dev
-
-      - name: Cached dependencies & virtualenv
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/pypoetry/
-            ~/dsmr-reader/.venv
-          key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
-
-      - name: Install dependencies
-        run: |
-          cp ./src/pyproject.toml .
-          cp ./src/poetry.lock .
-          pip install --upgrade pip poetry
-          poetry config virtualenvs.in-project true
-          poetry check
-          poetry install --no-root --with dev
+          ln -s provisioning/container/compose.test.yml compose.yml
+          docker-compose build
 
       - name: Check flake8
-        run: |
-          cd src/
-          poetry run flake8
-
-      - name: Run SQLite tests
-        run: poetry run py.test --cov --cov-report=xml
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
+        run: docker compose run tests-dsmr-app flake8
 
       - name: Run PostgreSQL tests
-        run: poetry run py.test
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: unsafe-test-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-            DJANGO_DATABASE_HOST: 127.0.0.1
-            DJANGO_DATABASE_PORT: '${{ job.services.postgres.ports[5432] }}'
-            DJANGO_DATABASE_NAME: test_dsmrreader
-            DJANGO_DATABASE_USER: root
-            DJANGO_DATABASE_PASSWORD: testpasswd
-
-      - name: Code coverage upload
-        uses: codecov/codecov-action@v4
-
-
-  # Shallow tests for (older) supported Python versions.
-  matrix_tests:
-    needs: main_test
-    name: 'Python ${{ matrix.python-version }}'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    strategy:
-      matrix:
-        python-version:
-          - '3.11'
-    env:
-      # Do not log verbosely
-      DSMRREADER_LOGLEVEL: ERROR
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install APT dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gettext libgettextpo-dev
-
-      - name: Cached dependencies & virtualenv
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/pypoetry/
-            ~/dsmr-reader/dsmr-reader/.venv
-          key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
-
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip poetry
-          poetry config virtualenvs.in-project true
-          poetry check
-          poetry install
-
-      - name: Run SQLite tests
-        run: poetry run py.test --cov --cov-report=xml
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
+        run: docker compose run tests-dsmr-app pytest

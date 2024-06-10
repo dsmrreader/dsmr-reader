@@ -48,7 +48,7 @@ Setting up a development environment using Docker
 
 - Containers built? See if this command works::
 
-    docker exec -it dsmr-app poetry run /app/manage.py check
+    docker exec -it dev-dsmr-app poetry run /app/manage.py check
 
     # Expected output: "System check identified no issues (0 silenced)"
 
@@ -60,7 +60,7 @@ Setting up a development environment using Docker
 
     Other DB engines can be tested as well, but the CI will take care of it anyway. The SQLite engine matches 99%% of the features DSMR-reader requires and it also runs in-memory, speeding up tests.
 
-- When using PyCharm, you can add a new Interpreter using Docker Compose. Just select ``dsmr-app`` and set ``/opt/venv/bin/python`` as interpreter path. It should now map all dependencies used/installed in the container.
+- When using PyCharm, you can add a new Interpreter using Docker Compose. Just select ``dev-dsmr-app`` and set ``/opt/venv/bin/python`` as interpreter path. It should now map all dependencies used/installed in the container.
 
 
 Initial data to develop with
@@ -74,7 +74,7 @@ To be honest, the best initial/fixture data is simply a backup of your own syste
 
     After importing the backup of your production system, simply run::
 
-        docker exec -it dsmr-app poetry run /app/manage.py development_reset
+        docker exec -it dev-dsmr-app poetry run /app/manage.py development_reset
 
     This will remove all API keys and other links to externals systems, as well as reset the admin user credentials to ``admin / admin`` (user / password).
 
@@ -98,19 +98,19 @@ Fake datalogger
 
     There is a builtin command that can somewhat fake a datalogger::
 
-        docker exec -it dsmr-app poetry run /app/manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
+        docker exec -it dev-dsmr-app poetry run /app/manage.py dsmr_fake_datasource --with-gas --with-electricity-returned
 
 It will generate random data every second in a certain pattern and should be fine for basic testing. 
 
 Please note that it only inserts unprocessed readings, so you'll still have to run the following command to have the readings processed::
 
-    docker exec -it dsmr-app poetry run /app/manage.py dsmr_backend --run-once
+    docker exec -it dev-dsmr-app poetry run /app/manage.py dsmr_backend --run-once
 
 
 Running DSMR-reader locally
 ---------------------------
 
-When running it with the default Docker compose config, the ``dsmr-app`` `Django Development Server application <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ will be accessible at: ``http://localhost:8000/``.
+When running it with the default Docker compose config, the ``dev-dsmr-app`` `Django Development Server application <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ will be accessible at: ``http://localhost:8000/``.
 
 Any Python code changes you make will cause the Django Development Server to reload itself automatically.
 
@@ -122,11 +122,11 @@ DSMR-reader's test coverage should remain as high as possible, however this does
 
 The easiest way to run tests is to use the SQLite (in-memory) tests::
 
-    docker exec -it dsmr-app poetry run ./tools/quick-test.sh
+    docker exec -it dev-dsmr-app poetry run ./tools/quick-test.sh
     
 To test a single app within DSMR-reader, just append it::
 
-    docker exec -it dsmr-app poetry run ./tools/quick-test.sh dsmr_frontend
+    docker exec -it dev-dsmr-app poetry run ./tools/quick-test.sh dsmr_frontend
 
 The test coverage should be visible in the terminal after running tests.
 There are detailed HTML pages available as well, after each test run, in ``coverage_report/html/index.html``. 
@@ -142,7 +142,7 @@ Translations
 ------------
 
 You can find the translations (.PO files) for the main application in ``dsmrreader/locales/``.
-To regenerate them, just execute the ``docker exec -it dsmr-app poetry run ./tools/check-translations.sh`` script.
+To regenerate them, just execute the ``docker exec -it dev-dsmr-app poetry run ./tools/check-translations.sh`` script.
 
 
 Editing documentation

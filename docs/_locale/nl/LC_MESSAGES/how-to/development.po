@@ -68,8 +68,8 @@ msgid "Other DB engines can be tested as well, but the CI will take care of it a
 msgstr "Andere DB-engines kunnen ook getest worden, maar dit doet de CI ook al. De SQLite-engine ondersteunt overigens 99%% van de features die DMSR-reader nodig heeft. Daarnaast draait deze ook in-memory, waardoor de tests weer sneller draaien."
 
 #: ../../how-to/development.rst:65
-msgid "When using PyCharm, you can add a new Interpreter using Docker Compose. Just select ``dsmr-app`` and set ``/opt/venv/bin/python`` as interpreter path. It should now map all dependencies used/installed in the container."
-msgstr "Wanneer je PyCharm gebruikt kun je een nieuwe Interpreter toevoegen die Docker Compose gebruikt. Selecteer ``dsmr-app`` en stel ``/opt/venv/bin/python`` in als interpreter path. Nu zouden alle gebruikte dependencies goed gemapt moeten worden vanuit de container."
+msgid "When using PyCharm, you can add a new Interpreter using Docker Compose. Just select ``dev-dsmr-app`` and set ``/opt/venv/bin/python`` as interpreter path. It should now map all dependencies used/installed in the container."
+msgstr "Wanneer je PyCharm gebruikt kun je een nieuwe Interpreter toevoegen die Docker Compose gebruikt. Selecteer ``dev-dsmr-app`` en stel ``/opt/venv/bin/python`` in als interpreter path. Nu zouden alle gebruikte dependencies goed gemapt moeten worden vanuit de container."
 
 #: ../../how-to/development.rst:69
 msgid "Initial data to develop with"
@@ -116,8 +116,8 @@ msgid "Running DSMR-reader locally"
 msgstr "DSMR-reader lokaal draaien"
 
 #: ../../how-to/development.rst:115
-msgid "When running it with the default Docker compose config, the ``dsmr-app`` `Django Development Server application <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ will be accessible at: ``http://localhost:8000/``."
-msgstr "Wanneer je de standaard Docker compose configuratie gebruikt, is de ``dsmr-app`` `Django Development Server applicatie <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ toegankelijk op: ``http://localhost:8000/``."
+msgid "When running it with the default Docker compose config, the ``dev-dsmr-app`` `Django Development Server application <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ will be accessible at: ``http://localhost:8000/``."
+msgstr "Wanneer je de standaard Docker compose configuratie gebruikt, is de ``dev-dsmr-app`` `Django Development Server applicatie <https://docs.djangoproject.com/en/3.2/intro/tutorial01/#the-development-server>`_ toegankelijk op: ``http://localhost:8000/``."
 
 #: ../../how-to/development.rst:117
 msgid "Any Python code changes you make will cause the Django Development Server to reload itself automatically."
@@ -152,8 +152,8 @@ msgid "Translations"
 msgstr "Vertalingen"
 
 #: ../../how-to/development.rst:146
-msgid "You can find the translations (.PO files) for the main application in ``dsmrreader/locales/``. To regenerate them, just execute the ``docker exec -it dsmr-app poetry run ./tools/check-translations.sh`` script."
-msgstr "Je kunt de vertalingen (.PO-bestanden) voor de hoofdapplicatie vinden in ``dsmrreader/locales/``. Om ze te hergenereren voer het ``docker exec -it dsmr-app poetry run ./tools/check-translations.sh`` script uit, zodat een van de tests de vertalingen opnieuw checkt."
+msgid "You can find the translations (.PO files) for the main application in ``dsmrreader/locales/``. To regenerate them, just execute the ``docker exec -it dev-dsmr-app poetry run ./tools/check-translations.sh`` script."
+msgstr "Je kunt de vertalingen (.PO-bestanden) voor de hoofdapplicatie vinden in ``dsmrreader/locales/``. Om ze te hergenereren voer het ``docker exec -it dev-dsmr-app poetry run ./tools/check-translations.sh`` script uit, zodat een van de tests de vertalingen opnieuw checkt."
 
 #: ../../how-to/development.rst:151
 msgid "Editing documentation"
