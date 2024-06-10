@@ -10,6 +10,7 @@ ARG DOCS_PYTHON_VERSION="3.12"
 FROM python:${APP_PYTHON_VERSION}-alpine AS local-dsmrreader-dev
 WORKDIR /app
 ENV PYTHONUNBUFFERED=1
+ENV POETRY_VIRTUALENVS_IN_PROJECT=false
 RUN apk add --update \
     build-base \
     gcc \
@@ -19,11 +20,8 @@ RUN apk add --update \
     openjpeg \
     mariadb-dev \
     postgresql-client
-ENV POETRY_VIRTUALENVS_IN_PROJECT=false
-#COPY ./src/pyproject.toml ./src/poetry.lock /app/
-COPY ./src/pyproject.toml /app/
+COPY ./src/pyproject.toml ./src/poetry.lock /app/
 RUN pip install poetry
-RUN poetry self add poetry-plugin-export
 RUN poetry install --no-root --with dev
 EXPOSE 8000
 ENTRYPOINT poetry run python manage.py runserver 0.0.0.0:8000
