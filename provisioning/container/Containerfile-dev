@@ -20,10 +20,9 @@ RUN apk add --update \
     mariadb-dev \
     postgresql-client
 ENV POETRY_VIRTUALENVS_IN_PROJECT=false
-COPY ./src/pyproject.toml ./src/poetry.lock /app/
 RUN pip install poetry
 RUN poetry self add poetry-plugin-export
-RUN poetry install --no-root --with dev
+RUN poetry install --no-root --with dev --without docs
 EXPOSE 8000
 ENTRYPOINT poetry run python manage.py runserver 0.0.0.0:8000
 

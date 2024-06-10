@@ -61,10 +61,11 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cp ./src/pyproject.toml .
+          cp ./src/poetry.lock .
           pip install --upgrade pip poetry
           poetry config virtualenvs.in-project true
           poetry check
-          poetry self add poetry-plugin-export
           poetry install --no-root --with dev
 
       - name: Check flake8
