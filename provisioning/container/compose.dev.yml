@@ -7,6 +7,7 @@ services:
   dev-dsmr-app:
     container_name: dev-dsmr-app
     restart: 'unless-stopped'
+    command: '/app/manage.py runserver 0.0.0.0:8000'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
@@ -44,7 +45,8 @@ services:
       # Only use for restoring DB-backups. E.g.: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
       - ~/Desktop:/run/host/Desktop/
 
-  dsmr-docs-en:  # http://localhost:10000
+  # http://localhost:10000
+  dsmr-docs-en:
     container_name: dsmr-docs-en
     restart: 'unless-stopped'
     build:
@@ -56,7 +58,8 @@ services:
     ports:
       - '10000:10000'
 
-  dsmr-docs-nl:  # http://localhost:10001
+  # http://localhost:10001
+  dsmr-docs-nl:
     container_name: dsmr-docs-nl
     restart: 'unless-stopped'
     build:
@@ -88,21 +91,6 @@ services:
 
 
   ##### Automated testing #####
-  tests-dsmr-app:
-    container_name: tests-dsmr-app
-    restart: 'no'
-    build:
-      context: .
-      dockerfile: provisioning/container/Containerfile-dev
-      target: local-dsmrreader-test
-    volumes:
-      - ./src:/app
-    depends_on:
-      tests-dsmr-db:
-        condition: service_healthy
-    env_file:
-      - provisioning/container/test.env
-
   tests-dsmr-db:
     container_name: tests-dsmr-db
     image: postgres:15-alpine

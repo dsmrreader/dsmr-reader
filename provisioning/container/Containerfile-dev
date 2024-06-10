@@ -24,12 +24,11 @@ COPY ./src/pyproject.toml ./src/poetry.lock /app/
 RUN pip install poetry
 RUN poetry install --no-root --with dev
 EXPOSE 8000
-ENTRYPOINT poetry run python manage.py runserver 0.0.0.0:8000
+ENTRYPOINT ["poetry", "run"]
 
 
 FROM local-dsmrreader-dev AS local-dsmrreader-test
 EXPOSE ""
-ENTRYPOINT ["poetry", "run"]
 
 
 # -----------------------------------------------------------
