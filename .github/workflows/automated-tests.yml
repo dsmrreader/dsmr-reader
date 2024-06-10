@@ -69,7 +69,9 @@ jobs:
           poetry install --no-root --with dev
 
       - name: Check flake8
-        run: poetry run flake8 -v src/
+        run: |
+          cd src/
+          poetry run flake8
 
       - name: Run SQLite tests
         run: poetry run py.test --cov --cov-report=xml
