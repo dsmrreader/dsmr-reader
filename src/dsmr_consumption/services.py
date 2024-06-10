@@ -9,7 +9,6 @@ from django.conf import settings
 from django.db.models import Avg, Min, Max, Count, Manager
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
-from deprecated import deprecated
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_consumption.exceptions import CompactorNotReadyError
@@ -32,9 +31,6 @@ import dsmr_backend.services.backend
 logger = logging.getLogger("dsmrreader")
 
 
-@deprecated(
-    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
-)
 def run(scheduled_process: ScheduledProcess) -> None:
     """Compacts all unprocessed readings, capped by a max to prevent hanging backend."""
     for current_reading in DsmrReading.objects.unprocessed()[
@@ -50,9 +46,6 @@ def run(scheduled_process: ScheduledProcess) -> None:
     scheduled_process.delay(seconds=1)
 
 
-@deprecated(
-    reason="Custom calculated quarter-hour peak consumption should eventually DROPPED in favor of DSMR P1 data (#1764)."
-)
 def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     """Calculates the quarter-hour peak consumption. For background info see issues #1084 / #1635."""
     MINUTE_INTERVAL = 15
@@ -175,9 +168,6 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     )
 
 
-@deprecated(
-    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
-)
 def compact(dsmr_reading: DsmrReading) -> None:
     """Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute."""
     consumption_settings = ConsumptionSettings.get_solo()
@@ -221,9 +211,6 @@ def compact(dsmr_reading: DsmrReading) -> None:
     logger.debug("Compact: Processed reading: %s", dsmr_reading)
 
 
-@deprecated(
-    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
-)
 def _compact_electricity(
     dsmr_reading: DsmrReading,
     electricity_grouping_type: int,
@@ -318,9 +305,6 @@ def _compact_electricity(
     )
 
 
-@deprecated(
-    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
-)
 def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     """
     Compacts any DSMR readings to gas consumption records, optionally grouped. Only when there is support for gas.
@@ -371,9 +355,6 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     )
 
 
-@deprecated(
-    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
-)
 def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
     """Calculates the consumption of a range specified."""
     electricity_readings = ElectricityConsumption.objects.filter(
@@ -389,9 +370,6 @@ def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
     return electricity_readings, gas_readings
 
 
-@deprecated(
-    reason="Consumption data models should be DROPPED in the future in favor of the reading models."
-)
 def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
     consumption = {"day": day}
@@ -644,7 +622,6 @@ def round_decimal(value, decimal_count: int = 2) -> Decimal:
     )
 
 
-@deprecated(reason="Legacy calculate_slumber_consumption_watt() seems unused, drop it?")
 def calculate_slumber_consumption_watt() -> Optional[int]:
     """Groups all electricity readings to find the most constant consumption."""
     most_common = (
@@ -668,7 +645,6 @@ def calculate_slumber_consumption_watt() -> Optional[int]:
     return round(usage / count * 1000)
 
 
-@deprecated(reason="Legacy calculate_min_max_consumption_watt() seems unused, drop it?")
 def calculate_min_max_consumption_watt() -> Dict:
     """Returns the lowest and highest Wattage consumed for each phase."""
     FIELDS = {
