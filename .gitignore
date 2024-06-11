@@ -1,7 +1,6 @@
 /.pydevproject/
 /.project/
 /.idea/*
-/.venv/
 *.pyc
 **/__pycache__
 **/.pytest_cache
@@ -11,6 +10,7 @@
 /docs/_locale/nl/LC_MESSAGES/**/changelog.po
 /docs/_locale/nl/LC_MESSAGES/**/changelog.mo
 /docs/_locale/nl/LC_MESSAGES/how-to/upgrading/to-v*.po
+/src/.venv/
 /src/dsmrreader/settings.py
 /src/dsmrreader/settings.py.BACKUP
 /src/coverage_report/
