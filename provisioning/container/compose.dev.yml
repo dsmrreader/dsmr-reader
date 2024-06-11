@@ -14,12 +14,10 @@ services:
       target: local-dsmrreader-dev
     volumes:
       - ./src:/app
-      - /app/.venv  # Prevents mirroring it either direction
+      - /app/.venv  # Prevents mirroring it to host
     ports:
       - '8000:8000'
     depends_on:
-      dev-dsmr-db:
-        condition: service_healthy
       mosquitto:
         condition: service_started
       influxdb:
@@ -33,17 +31,12 @@ services:
     restart: 'unless-stopped'
     ports:
       - '5432:5432'
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
-      interval: 1s
-      timeout: 5s
-      retries: 20
     env_file:
       - provisioning/container/dev.env
     volumes:
       # Persist database storage between container recreation
       - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/
-      # Only use for restoring DB-backups. E.g.: psql -U dsmrreader -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
+      # Only use for restoring DB-backups. E.g.: psql -U dbuser -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
       - ~/Desktop:/run/host/Desktop/
 
   # http://localhost:10000
@@ -96,10 +89,7 @@ services:
     container_name: tests-dsmr-db
     image: postgres:15-alpine
     restart: 'unless-stopped'
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
-      interval: 1s
-      timeout: 5s
-      retries: 20
-    env_file:
-      - provisioning/container/test.env
+    environment:
+      POSTGRES_DB: 'test_dsmrreader'
+      POSTGRES_USER: 'testuser'
+      POSTGRES_PASSWORD: 'testpasswd'

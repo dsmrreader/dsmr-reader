@@ -1,6 +1,7 @@
 /.pydevproject/
 /.project/
 /.idea/*
+!/.idea/runConfigurations/*
 *.pyc
 **/__pycache__
 **/.pytest_cache

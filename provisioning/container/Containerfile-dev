@@ -9,6 +9,7 @@ ARG DOCS_PYTHON_VERSION="3.12"
 
 FROM python:${APP_PYTHON_VERSION}-alpine AS local-dsmrreader-base
 WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update \
     build-base \
@@ -19,19 +20,14 @@ RUN apk add --update \
     openjpeg \
     mariadb-dev \
     postgresql-client
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 RUN pip install poetry
-
+COPY ./src/ /app/
 
 FROM local-dsmrreader-base AS local-dsmrreader-dev
-ENV POETRY_VIRTUALENVS_IN_PROJECT=true
-COPY ./src/ /app/
 RUN poetry install --with dev --no-root
 EXPOSE 8000
 ENTRYPOINT ["poetry", "run"]
-
-
-FROM local-dsmrreader-dev AS local-dsmrreader-test
-EXPOSE ""
 
 
 # -----------------------------------------------------------
