@@ -14,6 +14,7 @@ services:
       target: local-dsmrreader-dev
     volumes:
       - ./src:/app
+      - /app/.venv  # Prevents mirroring it either direction
     ports:
       - '8000:8000'
     depends_on:

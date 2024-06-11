@@ -7,10 +7,9 @@ ARG APP_PYTHON_VERSION="3.10"
 # Docs should use whatever Python version ReadTheDocs runs.
 ARG DOCS_PYTHON_VERSION="3.12"
 
-FROM python:${APP_PYTHON_VERSION}-alpine AS local-dsmrreader-dev
+FROM python:${APP_PYTHON_VERSION}-alpine AS local-dsmrreader-base
 WORKDIR /app
 ENV PYTHONUNBUFFERED=1
-ENV POETRY_VIRTUALENVS_IN_PROJECT=false
 RUN apk add --update \
     build-base \
     gcc \
@@ -20,9 +19,13 @@ RUN apk add --update \
     openjpeg \
     mariadb-dev \
     postgresql-client
-COPY ./src/pyproject.toml ./src/poetry.lock /app/
 RUN pip install poetry
-RUN poetry install --no-root --with dev
+
+
+FROM local-dsmrreader-base AS local-dsmrreader-dev
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true
+COPY ./src/ /app/
+RUN poetry install --with dev --no-root
 EXPOSE 8000
 ENTRYPOINT ["poetry", "run"]
 
