@@ -1,3 +1,4 @@
+import datetime
 from decimal import Decimal
 from unittest import mock
 
@@ -76,10 +77,10 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
                 [
                     # Asume a one hour backtrack.
                     timezone.make_aware(
-                        timezone.datetime(2015, 11, 10, hour=18), timezone.utc
+                        timezone.datetime(2015, 11, 10, hour=18), datetime.timezone.utc
                     ),
                     timezone.make_aware(
-                        timezone.datetime(2015, 11, 10, hour=19), timezone.utc
+                        timezone.datetime(2015, 11, 10, hour=19), datetime.timezone.utc
                     ),
                 ],
             )

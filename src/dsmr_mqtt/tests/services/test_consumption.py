@@ -1,3 +1,4 @@
+import datetime
 from unittest import mock
 import json
 
@@ -89,7 +90,7 @@ class TestConsumption(TestServices):
     @mock.patch("django.utils.timezone.now")
     def test_publish_json_gas_consumption(self, now_mock, queue_message_mock):
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2020, 1, 1), timezone=timezone.utc
+            timezone.datetime(2020, 1, 1), timezone=datetime.timezone.utc
         )
         json_settings = consumption.JSONGasConsumptionMQTTSettings.get_solo()
         gas_consumption = self._create_gas_consumption()
@@ -130,7 +131,7 @@ currently_delivered = ccc
     @mock.patch("django.utils.timezone.now")
     def test_publish_split_topic_gas_consumption(self, now_mock, queue_message_mock):
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2020, 1, 1), timezone=timezone.utc
+            timezone.datetime(2020, 1, 1), timezone=datetime.timezone.utc
         )
         split_topic_settings = (
             consumption.SplitTopicGasConsumptionMQTTSettings.get_solo()
@@ -176,7 +177,7 @@ currently_delivered = dsmr/consumption/gas/currently_delivered
         self, now_mock, queue_message_mock
     ):
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2023, 1, 1), timezone=timezone.utc
+            timezone.datetime(2023, 1, 1), timezone=datetime.timezone.utc
         )
         json_settings = (
             consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
@@ -221,7 +222,7 @@ average_delivered = ccc
         self, now_mock, queue_message_mock
     ):
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2023, 1, 1), timezone=timezone.utc
+            timezone.datetime(2023, 1, 1), timezone=datetime.timezone.utc
         )
         split_topic_settings = (
             consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()

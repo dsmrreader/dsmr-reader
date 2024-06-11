@@ -1,3 +1,4 @@
+import datetime
 from unittest import mock
 import json
 
@@ -86,7 +87,7 @@ class TestTelegramAndReading(TestServices):
     @mock.patch("django.utils.timezone.now")
     def test_publish_json_dsmr_reading(self, now_mock, queue_message_mock):
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1), timezone=timezone.utc
+            timezone.datetime(2018, 1, 1), timezone=datetime.timezone.utc
         )
         json_settings = telegram.JSONTelegramMQTTSettings.get_solo()
         dsmr_reading = self._create_dsmrreading()
@@ -161,7 +162,7 @@ extra_device_delivered = ppp
     @mock.patch("django.utils.timezone.now")
     def test_publish_split_topic_dsmr_reading(self, now_mock, queue_message_mock):
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1), timezone=timezone.utc
+            timezone.datetime(2018, 1, 1), timezone=datetime.timezone.utc
         )
         split_topic_settings = telegram.SplitTopicTelegramMQTTSettings.get_solo()
         dsmr_reading = self._create_dsmrreading()

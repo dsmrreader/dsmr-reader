@@ -1,3 +1,4 @@
+import datetime
 from unittest import mock
 
 from django.test import TestCase
@@ -10,7 +11,7 @@ class TestDsmrReading(TestCase):
     @mock.patch("django.utils.timezone.now")
     def setUp(self, now_mock):
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1), timezone=timezone.utc
+            timezone.datetime(2018, 1, 1), timezone=datetime.timezone.utc
         )
         self.instance = DsmrReading.objects.create(
             timestamp=timezone.now(),
@@ -39,7 +40,7 @@ class TestDsmrReading(TestCase):
     def test_convert_to_local_timezone(self, now_mock):
         """Test altering the timezone formatting for the timestamps."""
         now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1), timezone=timezone.utc
+            timezone.datetime(2018, 1, 1), timezone=datetime.timezone.utc
         )
 
         self.assertEqual(str(self.instance.timestamp), "2018-01-01 00:00:00+00:00")
