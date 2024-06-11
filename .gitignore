@@ -19,6 +19,7 @@
 /src/dsmr_plugins/modules/
 /manage_mule.py
 # Containerization
+/venv/
 /docker-compose.override.yml
 /docker-compose.yml
 /compose.override.yml
