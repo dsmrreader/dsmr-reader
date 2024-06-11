@@ -510,18 +510,18 @@ test-randomorder = ["pytest-randomly"]
 
 [[package]]
 name = "django"
-version = "4.1"
+version = "4.2.13"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Django-4.1-py3-none-any.whl", hash = "sha256:031ccb717782f6af83a0063a1957686e87cb4581ea61b47b3e9addf60687989a"},
-    {file = "Django-4.1.tar.gz", hash = "sha256:032f8a6fc7cf05ccd1214e4a2e21dfcd6a23b9d575c6573cacc8c67828dbe642"},
+    {file = "Django-4.2.13-py3-none-any.whl", hash = "sha256:a17fcba2aad3fc7d46fdb23215095dbbd64e6174bf4589171e732b18b07e426a"},
+    {file = "Django-4.2.13.tar.gz", hash = "sha256:837e3cf1f6c31347a1396a3f6b65688f2b4bb4a11c580dcb628b5afe527b68a5"},
 ]
 
 [package.dependencies]
-asgiref = ">=3.5.2,<4"
-sqlparse = ">=0.2.2"
+asgiref = ">=3.6.0,<4"
+sqlparse = ">=0.3.1"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
 [package.extras]
@@ -569,17 +569,17 @@ Pillow = ">=9.0.0"
 
 [[package]]
 name = "django-debug-toolbar"
-version = "4.3.0"
+version = "4.4.2"
 description = "A configurable set of panels that display various debug information about the current request/response."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_debug_toolbar-4.3.0-py3-none-any.whl", hash = "sha256:e09b7dcb8417b743234dfc57c95a7c1d1d87a88844abd13b4c5387f807b31bf6"},
-    {file = "django_debug_toolbar-4.3.0.tar.gz", hash = "sha256:0b0dddee5ea29b9cb678593bc0d7a6d76b21d7799cb68e091a2148341a80f3c4"},
+    {file = "django_debug_toolbar-4.4.2-py3-none-any.whl", hash = "sha256:5d7afb2ea5f8730241e5b0735396e16cd1fd8c6b53a2f3e1e30bbab9abb23728"},
+    {file = "django_debug_toolbar-4.4.2.tar.gz", hash = "sha256:9204050fcb1e4f74216c5b024bc76081451926a6303993d6c513f5e142675927"},
 ]
 
 [package.dependencies]
-django = ">=3.2.4"
+django = ">=4.2.9"
 sqlparse = ">=0.2"
 
 [[package]]
@@ -2562,4 +2562,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10 | ^3.11 | ^3.12"
-content-hash = "3380c7b5514ac78ca71ad7510972476b3919ff4a71b01e2be3c30571de9581c1"
+content-hash = "bb3fc8a3a875f773752f0d0832b4a430bbad654aa53b20878d6d88713ee31e2b"
