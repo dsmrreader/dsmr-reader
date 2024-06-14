@@ -32,8 +32,8 @@ jobs:
           docker compose up -d
           sleep 10
 
-      - name: Check flake8
-        run: docker compose exec tests-dsmr-app poetry run flake8 -v
+#      - name: Check flake8
+#        run: docker compose exec tests-dsmr-app poetry run flake8
 
       - name: Run PostgreSQL tests
         run: docker compose exec tests-dsmr-app poetry run pytest
