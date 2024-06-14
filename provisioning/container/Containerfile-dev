@@ -2,12 +2,9 @@
 # Containerfile for DSMR-reader DEVELOPMENT only, NEVER use in production! #
 ############################################################################
 
-# Development app should run latest Python when possible.
-ARG APP_PYTHON_VERSION="3.12"
-# Docs should use whatever Python version ReadTheDocs runs.
-ARG DOCS_PYTHON_VERSION="3.12"
+ARG PYTHON_VERSION="3.12"
 
-FROM python:${APP_PYTHON_VERSION}-alpine AS local-dsmrreader-base
+FROM python:${PYTHON_VERSION}-alpine AS local-dsmrreader-base
 WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -20,20 +17,18 @@ RUN apk add --update \
     openjpeg \
     mariadb-dev \
     postgresql-client
+
+
+FROM local-dsmrreader-base AS local-dsmrreader-dev
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 RUN pip install poetry
 COPY ./src/ /app/
-
-FROM local-dsmrreader-base AS local-dsmrreader-dev
 RUN poetry install --with dev --no-root
 EXPOSE 8000
 ENTRYPOINT ["poetry", "run"]
 
 
-# -----------------------------------------------------------
-
-
-FROM python:${DOCS_PYTHON_VERSION}-alpine AS local-dsmrreader-docs
+FROM local-dsmrreader-base AS local-dsmrreader-docs
 WORKDIR /app-docs
 COPY ./docs/requirements.txt /app-docs/
 RUN pip install -r requirements.txt
