@@ -336,28 +336,40 @@ def range_statistics(start: datetime.date, end: datetime.date):
     """Returns the statistics (totals) and the number of data points for a target range."""
     queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
     aggregate = queryset.aggregate(
-        electricity1=Sum("electricity1"),
-        electricity1_cost=Sum("electricity1_cost"),
-        electricity1_returned=Sum("electricity1_returned"),
-        electricity2=Sum("electricity2"),
-        electricity2_cost=Sum("electricity2_cost"),
-        electricity2_returned=Sum("electricity2_returned"),
-        electricity_merged=Sum(models.F("electricity1") + models.F("electricity2")),
-        electricity_cost_merged=Sum(
+        electricity1_sum=Sum("electricity1"),
+        electricity1_cost_sum=Sum("electricity1_cost"),
+        electricity1_returned_sum=Sum("electricity1_returned"),
+        electricity2_sum=Sum("electricity2"),
+        electricity2_cost_sum=Sum("electricity2_cost"),
+        electricity2_returned_sum=Sum("electricity2_returned"),
+        electricity_merged_sum=Sum(models.F("electricity1") + models.F("electricity2")),
+        electricity_cost_merged_sum=Sum(
             models.F("electricity1_cost") + models.F("electricity2_cost")
         ),
-        electricity_returned_merged=Sum(
+        electricity_returned_merged_sum=Sum(
             models.F("electricity1_returned") + models.F("electricity2_returned")
         ),
-        gas=Sum("gas"),
-        gas_cost=Sum("gas_cost"),
-        fixed_cost=Sum("fixed_cost"),
-        total_cost=Sum("total_cost"),
+        gas_sum=Sum("gas"),
+        gas_cost_sum=Sum("gas_cost"),
+        fixed_cost_sum=Sum("fixed_cost"),
+        total_cost_sum=Sum("total_cost"),
         temperature_min=Min("lowest_temperature"),
         temperature_max=Max("highest_temperature"),
         temperature_avg=Avg("average_temperature"),
         number_of_days=Count("day"),
     )
+
+    # Workaround for query fields aliases (renamed due to Django 4.2), appended *_sum above
+    sanitized_aggregate = {}
+
+    for k, v in aggregate.items():
+        if not k.endswith("_sum"):
+            sanitized_aggregate[k] = v
+            continue
+
+        sanitized_aggregate[k.replace("_sum", "")] = v
+
+    del aggregate
 
     rounding = {
         # Decimals: [fields]
@@ -383,14 +395,16 @@ def range_statistics(start: datetime.date, end: datetime.date):
     # For some reason the values are not rounded and formatted like "0.0300000000000000". So we force rounding them.
     for decimal_count, fields in rounding.items():
         for current_field in fields:
-            if aggregate[current_field] is None:
+            if sanitized_aggregate[current_field] is None:
                 continue
 
-            aggregate[current_field] = dsmr_consumption.services.round_decimal(
-                aggregate[current_field], decimal_count
+            sanitized_aggregate[current_field] = (
+                dsmr_consumption.services.round_decimal(
+                    sanitized_aggregate[current_field], decimal_count
+                )
             )
 
-    return aggregate
+    return sanitized_aggregate
 
 
 def day_statistics(target_date: datetime.date):
