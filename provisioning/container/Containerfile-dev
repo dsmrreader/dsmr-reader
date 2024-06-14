@@ -3,7 +3,7 @@
 ############################################################################
 
 # Development app should run latest Python when possible.
-ARG APP_PYTHON_VERSION="3.10"
+ARG APP_PYTHON_VERSION="3.12"
 # Docs should use whatever Python version ReadTheDocs runs.
 ARG DOCS_PYTHON_VERSION="3.12"
 

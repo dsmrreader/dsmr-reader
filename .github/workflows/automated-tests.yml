@@ -11,7 +11,6 @@ on:
       - 'dependabot/'
 
 jobs:
-  # The most verbose and complete job.
   main_test:
     name: 'Python ${{ matrix.python-version }}'
     runs-on: ubuntu-latest
@@ -19,7 +18,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.10'  # @TODO: Bump me to 3.12 later
+          - '3.12'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
