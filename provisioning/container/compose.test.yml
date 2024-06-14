@@ -5,7 +5,8 @@
 services:
   tests-dsmr-app:
     container_name: tests-dsmr-app
-    restart: 'no'
+    restart: 'unless-stopped'
+    command: '/app/manage.py runserver 8000'  # This is just to make sure the container keeps running.
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev

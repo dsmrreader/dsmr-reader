@@ -31,7 +31,7 @@ jobs:
           docker-compose build
 
       - name: Check flake8
-        run: docker compose run tests-dsmr-app poetry run flake8 -v
+        run: docker compose exec tests-dsmr-app poetry run flake8 -v
 
       - name: Run PostgreSQL tests
-        run: docker compose run tests-dsmr-app poetry run pytest
+        run: docker compose exec tests-dsmr-app poetry run pytest
