@@ -25,15 +25,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build docker image(s) for TESTS
+      - name: Build docker image(s)
         run: |
           ln -s provisioning/container/compose.test.yml compose.yml
           docker compose build
-          docker compose up -d
-          sleep 10
 
-#      - name: Check flake8
-#        run: docker compose exec tests-dsmr-app poetry run flake8
+      - name: Run docker image(s)
+        run: |
+          docker compose up -d
+          sleep 5
+
+      - name: Check flake8
+        run: docker compose exec tests-dsmr-app poetry run flake8
 
       - name: Run PostgreSQL tests
         run: docker compose exec tests-dsmr-app poetry run pytest
