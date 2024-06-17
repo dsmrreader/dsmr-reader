@@ -18,6 +18,8 @@ services:
     ports:
       - '8000:8000'
     depends_on:
+      dev-dsmr-db:
+        condition: service_healthy
       mosquitto:
         condition: service_started
       influxdb:
@@ -29,6 +31,11 @@ services:
     container_name: dev-dsmr-db
     image: postgres:15-alpine
     restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      interval: 1s
+      timeout: 5s
+      retries: 20
     ports:
       - '5432:5432'
     env_file:
@@ -89,6 +96,11 @@ services:
     container_name: tests-dsmr-db
     image: postgres:15-alpine
     restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U testuser"]
+      interval: 1s
+      timeout: 5s
+      retries: 20
     environment:
       POSTGRES_DB: 'test_dsmrreader'
       POSTGRES_USER: 'testuser'

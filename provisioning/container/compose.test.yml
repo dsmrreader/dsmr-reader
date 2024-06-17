@@ -13,6 +13,7 @@ services:
       target: local-dsmrreader-dev
     volumes:
       - ./src:/app
+      - /app/.venv  # Prevents mirroring it to host
     depends_on:
       tests-dsmr-db:
         condition: service_healthy
@@ -31,7 +32,7 @@ services:
     image: postgres:15-alpine
     restart: 'unless-stopped'
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      test: ["CMD-SHELL", "pg_isready -U dbtestuser"]
       interval: 1s
       timeout: 5s
       retries: 20
