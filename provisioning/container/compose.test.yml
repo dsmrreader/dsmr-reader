@@ -5,8 +5,8 @@
 services:
   tests-dsmr-app:
     container_name: tests-dsmr-app
-    restart: 'unless-stopped'
-    command: 'sleep 300'  # This is just to make sure the container keeps running.
+    restart: 'no'
+    command: 'sleep 5'  # This is just to make sure the container keeps running.
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
