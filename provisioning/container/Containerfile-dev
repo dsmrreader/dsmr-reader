@@ -20,6 +20,7 @@ RUN apk add --update \
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-dev
+# The only reason for .venv is the IDE's detection
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 RUN pip install poetry
 COPY ./src/ /app/
