@@ -5,13 +5,13 @@ The application has an API, allowing you to insert/create readings and retrieve 
 ## Configuration
 You can access the API-documentation by selecting the **Support** menu item in DSMR-reader.
 
-![Support](/wiki/static/screenshots/api/support.png)
+![Screenshot](/static/screenshots/api/support.png)
 
 
 ### Enable API
 The API is disabled by default in the application. You may enable it in the **Configuration**.
 
-![API settings](/wiki/static/screenshots/api/api-settings.png)
+![Screenshot](/static/screenshots/api/api-settings.png)
 
 
 ## API key

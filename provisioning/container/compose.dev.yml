@@ -47,30 +47,18 @@ services:
       - ~/Desktop:/run/host/Desktop/
 
   # http://localhost:10000
-  dsmr-docs-en:
-    container_name: dsmr-docs-en
-    restart: 'unless-stopped'
+  dsmr-docs:
+    container_name: dsmr-docs
+    restart: 'on-failure'
+    command: 'serve --dev-addr 0.0.0.0:10000'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
-      target: local-dsmrreader-docs-en
+      target: local-dsmrreader-docs
     volumes:
-      - ./docs:/app-docs
+      - ./documentation:/app
     ports:
       - '10000:10000'
-
-  # http://localhost:10001
-  dsmr-docs-nl:
-    container_name: dsmr-docs-nl
-    restart: 'unless-stopped'
-    build:
-      context: .
-      dockerfile: provisioning/container/Containerfile-dev
-      target: local-dsmrreader-docs-nl
-    volumes:
-      - ./docs:/app-docs
-    ports:
-      - '10001:10000'
 
   mosquitto:
     container_name: mosquitto-dev

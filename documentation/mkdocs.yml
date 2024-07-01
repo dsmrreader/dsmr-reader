@@ -1,0 +1,10 @@
+site_name: DSMR-reader Documentation
+site_url: https://github.com/dsmrreader/dsmr-reader
+site_description: DSMR-reader
+site_author: Dennis Siemensma
+copyright: Dennis Siemensma
+theme: readthedocs
+locale: en
+markdown_extensions:
+  - toc:
+      baselevel: 2

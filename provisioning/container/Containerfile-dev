@@ -25,19 +25,11 @@ ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 RUN pip install poetry
 COPY ./src/ /app/
 RUN poetry install --with dev --no-root
-EXPOSE 8000
 ENTRYPOINT ["poetry", "run"]
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-docs
-WORKDIR /app-docs
-COPY ./docs/requirements.txt /app-docs/
-RUN pip install -r requirements.txt
-
-FROM local-dsmrreader-docs AS local-dsmrreader-docs-en
-EXPOSE 10000
-ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=en
-
-FROM local-dsmrreader-docs AS local-dsmrreader-docs-nl
-EXPOSE 10000
-ENTRYPOINT sphinx-autobuild . /var/tmp/_build/html --host 0.0.0.0 --port 10000 -D language=nl
+WORKDIR /app
+COPY ./documentation/ /app/
+RUN pip install -r /app/requirements.txt
+ENTRYPOINT ["mkdocs"]
