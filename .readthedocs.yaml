@@ -12,8 +12,8 @@ build:
 
 # Build documentation with MkDocs
 mkdocs:
-  configuration: mkdocs.yml
+  configuration: documentation/mkdocs.yml
 
 python:
   install:
-    - requirements: docs/requirements.txt
+    - requirements: documentation/requirements.txt
