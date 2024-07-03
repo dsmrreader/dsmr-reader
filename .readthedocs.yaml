@@ -1,8 +1,4 @@
-# .readthedocs.yaml
-# Read the Docs configuration file
-# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
-
-# Required
+# Read the Docs configuration file. See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
 version: 2
 
 build:
@@ -10,7 +6,6 @@ build:
   tools:
     python: "3.12"
 
-# Build documentation with MkDocs
 mkdocs:
   configuration: documentation/mkdocs.yml
 
