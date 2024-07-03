@@ -1,4 +1,4 @@
-# About DSMR-reader
+DSMR-reader project information.
 
 ## Project goals
 - Provide a tool to easily extract, store and visualize data transferred by the DSMR protocol of your smart meter.
@@ -21,7 +21,7 @@ DSMR-reader only supports the builtin mentioned above and unfortunately cannot s
 ![Drawing](../static/drawings/DSMR-reader-Architecture.svg)
 
 
-## Languages
+## Supported languages
 - The entire application and its code is written and documented in **English**.
 - The interface is available in both **English** and **Dutch** (detects your **browser's language preference**).
 - This documentation is only available in **English**.
@@ -46,7 +46,7 @@ DSMR-reader only supports the builtin mentioned above and unfortunately cannot s
 
 
 ## Screenshots
-**Dashboard**
+### Dashboard
 
 The dashboard displays the latest information regarding the consumption of today.
 You can view the total consumption for the current month and year as well.
@@ -57,7 +57,7 @@ If your meter supports it, you can also see your gas consumption and electricity
 
 ----
 
-**Live graphs**
+### Live graphs
 
 The live graphs plots the most recent data available, depending on the capabilities of your smart meter.
 
@@ -66,7 +66,7 @@ The live graphs plots the most recent data available, depending on the capabilit
 ----
 
 
-**Archive**
+### Archive
 
 The archive allows you to scroll through all historisch data captured by the application.
 All data can be viewed on different levels: by day, by month and by year.
@@ -76,7 +76,7 @@ All data can be viewed on different levels: by day, by month and by year.
 ----
 
 
-**Compare**
+### Compare
 
 This page allows you to simply compare two days, months or years with each other.
 It will also display the difference between each other as a percentage.
@@ -86,7 +86,7 @@ It will also display the difference between each other as a percentage.
 ----
 
 
-**Trends**
+### Trends
 
 This page displays a summary of your average daily consumption and habits.
 
@@ -95,7 +95,7 @@ This page displays a summary of your average daily consumption and habits.
 ----
 
 
-**Statistics**
+### Statistics
 
 This page displays your meter positions and statistics provided by the DSMR protocol.
 You can also find the number of readings stored and any excesses regarding consumption.
@@ -104,7 +104,7 @@ You can also find the number of readings stored and any excesses regarding consu
 
 ----
 
-**Energy contracts**
+### Energy contracts
 
 Summary of all your contracts and the amount of energy consumed/generated.
 
@@ -113,7 +113,7 @@ Summary of all your contracts and the amount of energy consumed/generated.
 ----
 
 
-**Export**
+### Export
 
 This pages allows you to export all day or hour statistics to CSV.
 
@@ -122,7 +122,7 @@ This pages allows you to export all day or hour statistics to CSV.
 ----
 
 
-**About**
+### About
 
 Shows the 'health' of the application. Any issues will be reported here.
 You can also easily check for DSMR-reader updates here.
@@ -132,7 +132,7 @@ You can also easily check for DSMR-reader updates here.
 ----
 
 
-**Support**
+### Support
 
 Assists you in finding the information required for debugging your installation or any issues.
 
@@ -141,7 +141,7 @@ Assists you in finding the information required for debugging your installation 
 ----
 
 
-**Configuration**
+### Configuration
 
 The configuration page is the entrypoint for the admin interface.
 

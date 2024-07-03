@@ -1,1 +1,3 @@
 # DSMR-reader documentation
+
+[TOC]

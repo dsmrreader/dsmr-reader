@@ -1,6 +1,6 @@
-# Hall of Fame
+DSMR-reader is originally created and authored by:
 
-DSMR-reader is originally created and authored by Dennis Siemensma.
+- Dennis Siemensma
 
 
 ## Thanks to
