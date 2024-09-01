@@ -39,7 +39,7 @@ pytz = "^2023.0"
 pyyaml = "^6.0"
 requests = "^2.0"
 urllib3 = "^1.0"
-attrs = "^22.0"
+attrs = "^24.2"
 deprecated = "^1.0"
 
 
