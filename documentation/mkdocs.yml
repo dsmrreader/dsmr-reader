@@ -8,3 +8,5 @@ locale: en
 markdown_extensions:
   - toc:
       baselevel: 2
+extra_css:
+  - css/style.css
