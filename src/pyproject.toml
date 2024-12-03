@@ -1,6 +1,5 @@
 [tool.poetry]
 name = "DSMR-reader"
-version = "v6"
 description = "DSMR-protocol reader, P1 telegram data storage and energy consumption visualizer"
 license = "Creative Commons Attribution-NonCommercial 4.0 International Public License"
 readme = 'README.md'
@@ -10,10 +9,11 @@ authors = [
     "Dennis Siemensma",
     "https://github.com/dsmrreader/dsmr-reader/graphs/contributors"
 ]
+package-mode = false
 
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">= 3.12 < 3.13"
 
 crcmod = "^1.0"
 django = "^4.2"

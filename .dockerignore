@@ -1,5 +1,4 @@
 /.git/
 /.github/
-/src/.venv
 Containerfile
 compose.yml

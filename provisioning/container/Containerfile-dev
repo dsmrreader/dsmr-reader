@@ -6,8 +6,8 @@ ARG PYTHON_VERSION="3.12"
 
 FROM python:${PYTHON_VERSION}-alpine AS local-dsmrreader-base
 WORKDIR /app
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 RUN apk add --update \
     build-base \
     gcc \
@@ -17,19 +17,32 @@ RUN apk add --update \
     openjpeg \
     mariadb-dev \
     postgresql-client
+RUN pip install pip --upgrade
+
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-dev
-# The only reason for .venv is the IDE's detection
-ENV POETRY_VIRTUALENVS_IN_PROJECT=true
-RUN pip install poetry
-COPY ./src/ /app/
-RUN poetry install --with dev --no-root
+ARG POETRY_VERSION="1.8.4"
+# Credits to https://www.martinrichards.me/post/python_poetry_docker/
+# Also, the only reason for .venv is the IDE's detection
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
+RUN pip install poetry==${POETRY_VERSION}
+
+COPY src/pyproject.toml src/poetry.lock /app/
+RUN touch README.md
+RUN poetry install --with dev --no-root && rm -rf $POETRY_CACHE_DIR
+
+WORKDIR /app
 ENTRYPOINT ["poetry", "run"]
+
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-docs
 WORKDIR /app
 COPY ./documentation/ /app/
+# Do not use Poetry here, as RTD also directly utilizes PIP instead anyway.
 RUN pip install -r /app/requirements.txt
 ENTRYPOINT ["mkdocs"]

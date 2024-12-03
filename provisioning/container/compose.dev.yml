@@ -7,7 +7,7 @@ services:
   dev-dsmr-app:
     container_name: dev-dsmr-app
     restart: 'unless-stopped'
-    command: '/app/manage.py runserver 0.0.0.0:8000'
+    command: 'poetry run /app/manage.py runserver 0.0.0.0:8000'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
@@ -16,7 +16,8 @@ services:
       - ./src:/app
       - /app/.venv  # Prevents mirroring it to host
     ports:
-      - '8000:8000'
+      # Use these env vars for your IDE's Python interpreter. Set Python path to /app/.venv/bin/python3 as well.
+      - '${HOST_DJANGO_PORT:-8000}:${CONTAINER_DJANGO_PORT:-8000}'
     depends_on:
       dev-dsmr-db:
         condition: service_healthy
