@@ -13,7 +13,7 @@ DSMR-reader project information.
 
 Any integration should be possible this way, either using generic scripts or even **plugins**.
 
-DSMR-reader only supports the builtin mentioned above and unfortunately cannot support every other (technical) integration that exists in the world.
+DSMR-reader only supports the built-in integrations mentioned above and, for practical reasons, cannot support every other (technical) integration that exists in the entire world.
 
 
 ## Architecture
@@ -23,26 +23,22 @@ DSMR-reader only supports the builtin mentioned above and unfortunately cannot s
 
 ## Supported languages
 - The entire application and its code is written and documented in **English**.
-- The interface is available in both **English** and **Dutch** (detects your **browser's language preference**).
-- This documentation is only available in **English**.
-- Any [support and communication](https://github.com/dsmrreader/dsmr-reader/issues/new/choose) is available in both **English** and **Dutch**. 
-
-<small>*This documentation used to be available in **Dutch** as well, but the latter was dropped along the release of DSMR-reader v6.x, to be able of spending most time into either development or support.*</small>
+- The interface is available in both **English** and **Dutch**. <small>Detected by your browser's language preference</small>.
+- Any [support and communication](https://github.com/dsmrreader/dsmr-reader/issues/new/choose) is available in both **English** and **Dutch**.
+- This documentation is only available in **English**. <small>*This documentation used to be available in **Dutch** as well, but the latter was dropped along the release of DSMR-reader v6.x, to be able of spending more time into actual development and support.*</small>
 
 ## Hardware requirements
 
-- RaspberryPi 4+ or similar.
-- P1 telegram cable or a network socket when using ``ser2net``.
+- RaspberryPi 4 (or similar) and higher.
+- P1 telegram cable (or a network socket when using ``ser2net``).
 - A smart meter supporting any of these DSMR-telegram versions: ``v2`` / ``v4`` / ``v5``.
 
 
 ## Software requirements
 
-- **OS**: Any operating system that supports Docker containers. DSMR-reader runs in a container to ease upgrading.
-- **Disk space**: 1+ GB - Depending on your smart meter and the amount of readings you want to preserve.
-- **Database**: A [supported](https://www.postgresql.org/support/versioning/) PostgreSQL database. <small>Other databases _may_ work as well, but are not supported for this project.</small>
-
-<small>Note that this project is built with [Django Framework](https://www.djangoproject.com/), which determines which versions are actually supported.</small>
+- **OS**: Any operating system that supports (Docker) containers. DSMR-reader runs in a container to ease upgrading and reduce OS-wide dependencies.
+- **Disk space**: 1+ GB - Depending on your smart meter and the amount of (source) readings you want to preserve.
+- **Database**: A [supported](https://www.postgresql.org/support/versioning/) PostgreSQL database. <small>Other databases _may_ work as well, but are not supported for this project. Also note that this project is built with [Django Framework](https://www.djangoproject.com/), which determines which Database-versions are supported by DSMR-reader.</small>
 
 
 ## Screenshots
