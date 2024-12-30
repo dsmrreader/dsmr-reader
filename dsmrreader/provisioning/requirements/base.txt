@@ -25,7 +25,7 @@ markupsafe==2.1.5
 paho-mqtt==1.6.1
 pillow==9.5.0
 ply==3.11
-psycopg2-binary==2.9.9
+psycopg2-binary==2.9.10
 pyserial-asyncio==0.6
 pyserial==3.5
 python-dateutil==2.8.2
