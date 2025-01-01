@@ -384,6 +384,7 @@ def range_statistics(start: datetime.date, end: datetime.date):
     for decimal_count, fields in rounding.items():
         for current_field in fields:
             if aggregate[current_field] is None:
+                aggregate[current_field] = 0
                 continue
 
             aggregate[current_field] = dsmr_consumption.services.round_decimal(
