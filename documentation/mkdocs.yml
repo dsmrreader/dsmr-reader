@@ -10,3 +10,8 @@ markdown_extensions:
       baselevel: 2
 extra_css:
   - css/style.css
+plugins:
+  - toc-md:
+      toc_page_title: DSMR-reader documentation
+      toc_page_description: See sidebar for a more specific navigation or below for a (global) overview.
+      header_level: 3
