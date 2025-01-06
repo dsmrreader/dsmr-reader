@@ -7,11 +7,15 @@ theme: material
 locale: en
 markdown_extensions:
   - toc:
-      baselevel: 2
+      baselevel: 1
+  # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
 extra_css:
   - css/style.css
 plugins:
   - toc-md:
       toc_page_title: DSMR-reader documentation
       toc_page_description: See sidebar for a more specific navigation or below for a (global) overview.
-      header_level: 3
+      header_level: 1
