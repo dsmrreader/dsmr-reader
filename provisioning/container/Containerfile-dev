@@ -28,7 +28,9 @@ ARG POETRY_VERSION="1.8.4"
 ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
+    POETRY_CACHE_DIR=/tmp/poetry_cache \
+    DJANGO_SETTINGS_MODULE=dsmrreader.config.development
+
 RUN pip install poetry==${POETRY_VERSION}
 
 COPY src/pyproject.toml src/poetry.lock /app/
