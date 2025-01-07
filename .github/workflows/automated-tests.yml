@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.13'
+          - '3.12'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
@@ -36,7 +36,7 @@ jobs:
           sleep 5
 
       - name: Check flake8
-        run: docker compose run tests-dsmr-app poetry run flake8
+        run: docker compose run tests-dsmr-app poetry run flake8 -v
 
       - name: Run PostgreSQL tests
         run: docker compose run tests-dsmr-app poetry run pytest
