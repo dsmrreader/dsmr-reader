@@ -2,7 +2,7 @@
 # Containerfile for DSMR-reader DEVELOPMENT only, NEVER use in production! #
 ############################################################################
 
-ARG PYTHON_VERSION="3.12"
+ARG PYTHON_VERSION="3.13"
 
 FROM python:${PYTHON_VERSION}-alpine AS local-dsmrreader-base
 WORKDIR /app
