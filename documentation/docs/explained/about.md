@@ -1,3 +1,7 @@
+# About DSMR-reader
+
+[TOC]
+
 DSMR-reader project information.
 
 ## Project goals

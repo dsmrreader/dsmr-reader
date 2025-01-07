@@ -13,7 +13,7 @@ Django settings/overrides
 -------------------------
 
 DSMR-reader utilizes the Python Django framework.
-All settings below directly affect or override Django, and therefor your DSMR-reader installation as well.
+All settings below directly affect or override Django.
 
 
 .. tip::

@@ -1,8 +1,10 @@
-The application has an API, allowing you to insert/create readings and retrieve statistics.
+# API
+
+The application has a REST API, allowing you to insert/create readings and retrieve statistics.
 
 
 ## Configuration
-You can access the API-documentation by selecting the **Support** menu item in DSMR-reader.
+You can access the API documentation by selecting the **Support** menu item in DSMR-reader.
 
 ![Screenshot](../static/screenshots/api/support.png)
 

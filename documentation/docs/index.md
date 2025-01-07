@@ -7,3 +7,10 @@
 # DSMR-reader documentation
 See sidebar for a more specific navigation or below for a (global) overview.
 
+## [About DSMR-reader](explained/about.md#about-dsmr-reader)
+## [Contributions](explained/hall-of-fame.md#contributions)
+## [Developing DSMR-reader](how-to/development.md#developing-dsmr-reader)
+## [Donating](how-to/donating.md#donating)
+## [API](reference/API.md#api)
+## [Environment variables](reference/environment-variables.md#environment-variables)
+## [Plugins](reference/plugins.md#plugins)
