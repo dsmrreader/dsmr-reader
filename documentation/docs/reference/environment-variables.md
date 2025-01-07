@@ -17,7 +17,7 @@ The secret key Django should use for some security internals. Should be unique a
 
 See [``SECRET_KEY`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#secret-key) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_DATABASE_ENGINE``
 
@@ -35,7 +35,7 @@ See [``DATABASES.ENGINE`` in Django docs](https://docs.djangoproject.com/en/4.2/
     
     Use engines, other than ``django.db.backends.postgresql``, at your own risk!
 
-----
+---
 
 ## ``DJANGO_DATABASE_HOST``
 
@@ -47,7 +47,7 @@ Database connection setting. For the default engine it's the host name to connec
 
 See [``DATABASES.HOST`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#host) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_DATABASE_PORT``
 
@@ -59,7 +59,7 @@ Database connection setting. For the default engine it's the host port to connec
 
 See [``DATABASES.PORT`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#port) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_DATABASE_NAME``
 
@@ -71,7 +71,7 @@ Database connection setting. For the default engine it's the database name to co
 
 See [``DATABASES.NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#name) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_DATABASE_USER``
 
@@ -83,7 +83,7 @@ Database connection setting. For the default engine it's the database username t
 
 See [``DATABASES.USER`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#user) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_DATABASE_PASSWORD``
 
@@ -95,7 +95,7 @@ Database connection setting. For the default engine it's the database password t
 
 See [``DATABASES.PASSWORD`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#password) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_DATABASE_CONN_MAX_AGE``
 
@@ -107,7 +107,7 @@ Database connection setting. For the default engine is not needed.
 
 See [``DATABASES.CONN_MAX_AGE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#conn-max-age) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_TIME_ZONE``
 
@@ -121,7 +121,7 @@ Omit to use the default, using the CET/CEST timezone (applicable to the Netherla
 
 See [``TIME_ZONE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-TIME_ZONE) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_ALLOWED_HOSTS``
 
@@ -145,7 +145,7 @@ See [``ALLOWED_HOSTS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref
     DJANGO_ALLOWED_HOSTS=https://subdomain1.example.com,https://subdomain2.example.com,https://subdomain3.example.com
     ```
 
-----
+---
 
 ## ``DJANGO_STATIC_URL``
 
@@ -155,7 +155,7 @@ See [``ALLOWED_HOSTS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref
 
 See [``STATIC_URL`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#static-url) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_FORCE_SCRIPT_NAME``
 
@@ -165,7 +165,7 @@ See [``STATIC_URL`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/se
 
 See [``FORCE_SCRIPT_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#force-script-name) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_USE_X_FORWARDED_HOST``
 
@@ -175,7 +175,7 @@ See [``FORCE_SCRIPT_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2
 
 See [``USE_X_FORWARDED_HOST`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#use-x-forwarded-host) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_USE_X_FORWARDED_PORT``
 
@@ -185,7 +185,7 @@ See [``USE_X_FORWARDED_HOST`` in Django docs](https://docs.djangoproject.com/en/
 
 See [``USE_X_FORWARDED_PORT`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#use-x-forwarded-port) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_X_FRAME_OPTIONS``
 
@@ -195,7 +195,7 @@ See [``USE_X_FORWARDED_PORT`` in Django docs](https://docs.djangoproject.com/en/
 
 See [``X_FRAME_OPTIONS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#x-frame-options) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_STATIC_ROOT``
 
@@ -205,7 +205,7 @@ See [``X_FRAME_OPTIONS`` in Django docs](https://docs.djangoproject.com/en/4.2/r
 
 See [``STATIC_ROOT`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#static-root) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_AGE``
 
@@ -221,7 +221,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_AGE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-age) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_DOMAIN``
 
@@ -237,7 +237,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_DOMAIN`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-domain) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_HTTPONLY``
 
@@ -253,7 +253,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_HTTPONLY`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-httponly) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_MASKED``
 
@@ -269,7 +269,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_MASKED`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-masked) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_NAME``
 
@@ -285,7 +285,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-name) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_PATH``
 
@@ -301,7 +301,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_PATH`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-path) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_SAMESITE``
 
@@ -317,7 +317,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_SAMESITE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-samesite) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_COOKIE_SECURE``
 
@@ -333,7 +333,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_COOKIE_SECURE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-secure) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_USE_SESSIONS``
 
@@ -349,7 +349,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_USE_SESSIONS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-use-sessions) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_HEADER_NAME``
 
@@ -365,7 +365,7 @@ Cross-Site Request Forgery (CSRF) related setting. Usually no customization need
 
 See [``CSRF_HEADER_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-header-name) for more information about the setting and what it does.
 
-----
+---
 
 ## ``DJANGO_CSRF_TRUSTED_ORIGINS``
 
@@ -389,11 +389,11 @@ See [``CSRF_TRUSTED_ORIGINS`` in Django docs](https://docs.djangoproject.com/en/
     DJANGO_CSRF_TRUSTED_ORIGINS=https://subdomain1.example.com,https://subdomain2.example.com,https://subdomain3.example.com
     ```
 
-----
+---
 
-----
+---
 
-----
+---
 
 **DSMR-reader settings**
 
@@ -407,7 +407,7 @@ These settings are for this project only.
 
 The username of the **webinterface** (super)user to create when running ``./manage.py dsmr_superuser``.
 
-----
+---
 
 ## ``DSMRREADER_ADMIN_PASSWORD``
 
@@ -417,7 +417,7 @@ The username of the **webinterface** (super)user to create when running ``./mana
 
 The password of the ``DSMRREADER_ADMIN_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``.
 
-----
+---
 
 
 ## ``DSMRREADER_LOGLEVEL``
@@ -434,7 +434,7 @@ The log level DSMR-reader should use. Choose either:
  
 The latter should only be used for debugging DSMR-reader and pinpointing weird issues.
 
-----
+---
 
 ## ``DSMRREADER_PLUGINS``
 
@@ -450,7 +450,7 @@ DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1
 DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1,dsmr_plugins.modules.plugin_name2
 ```
 
-----
+---
 
 ## ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
 
@@ -465,7 +465,7 @@ Set it to ``True`` to **disable the warnings** or omit it to use the default (= 
 
     Suppress warnings at your own risk.
 
-----
+---
 
 ## ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
 
@@ -485,7 +485,7 @@ Omit to use the default (a few thousand).
 
     Increase queue size at your own risk.
 
-----
+---
 
 ## ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
 
