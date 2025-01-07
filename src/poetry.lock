@@ -998,13 +998,13 @@ files = [
 
 [[package]]
 name = "marshmallow"
-version = "3.24.0"
+version = "3.24.1"
 description = "A lightweight library for converting complex datatypes to and from native Python datatypes."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "marshmallow-3.24.0-py3-none-any.whl", hash = "sha256:459922b7a1fd3d29d5082ddcadfcea0efd98985030e71d3ef0dd8f44f406e41d"},
-    {file = "marshmallow-3.24.0.tar.gz", hash = "sha256:378572f727e52123d00de1bdd9b7ea7bed18bbfedc7f9bfbcddaf78925a8d602"},
+    {file = "marshmallow-3.24.1-py3-none-any.whl", hash = "sha256:ddb5c9987017d37be351c184e4e867e7bf55f7331f4da730dedad6b7af662cdd"},
+    {file = "marshmallow-3.24.1.tar.gz", hash = "sha256:efdcb656ac8788f0e3d1d938f8dc0f237bf1a99aff8f6dfbffa594981641cea0"},
 ]
 
 [package.dependencies]
@@ -1453,7 +1453,10 @@ files = [
 [package.dependencies]
 annotated-types = ">=0.6.0"
 pydantic-core = "2.23.4"
-typing-extensions = {version = ">=4.6.1", markers = "python_version < \"3.13\""}
+typing-extensions = [
+    {version = ">=4.12.2", markers = "python_version >= \"3.13\""},
+    {version = ">=4.6.1", markers = "python_version < \"3.13\""},
+]
 
 [package.extras]
 email = ["email-validator (>=2.0.0)"]
@@ -2611,5 +2614,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = ">= 3.12 < 3.13"
-content-hash = "9c6c84f9948f8c0618b600df5fa274628152e884518f0f45b5633bf8ab561159"
+python-versions = "3.12.*|3.13.*"
+content-hash = "a798d19505b52f036d5d408a1f6ee397e9dcdd8672e53581a1801c0f68f258cc"
