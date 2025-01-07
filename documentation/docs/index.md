@@ -11,6 +11,7 @@ See sidebar for a more specific navigation or below for a (global) overview.
 ## [Contributions](explained/hall-of-fame.md#contributions)
 ## [Developing DSMR-reader](how-to/development.md#developing-dsmr-reader)
 ## [Donating](how-to/donating.md#donating)
+## [Third party guides](how-to/third-party/third-party-guides.md#third-party-guides)
 ## [API](reference/API.md#api)
 ## [Environment variables](reference/environment-variables.md#environment-variables)
 ## [Plugins](reference/plugins.md#plugins)
