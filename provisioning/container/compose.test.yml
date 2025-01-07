@@ -12,7 +12,7 @@ services:
       dockerfile: provisioning/container/Containerfile-dev
       target: local-dsmrreader-dev
     volumes:
-      - ./src:/app/src
+      - ./src:/app
       - /app/.venv  # Prevents mirroring it to host
     depends_on:
       tests-dsmr-db:
