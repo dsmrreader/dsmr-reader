@@ -25,21 +25,23 @@ See [``SECRET_KEY`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/se
 
     This setting is **required**.
 
-The database engine to use. Officially DSMR-reader only supports PostgreSQL, but others supported by Django may work as well.
+The database engine to use. 
+
+DSMR-reader is developed and tested with PostgreSQL, but other engines supported by Django may work as well. E.g. MySQL.
 
 See [``DATABASES.ENGINE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#engine) for more information about the setting and what it does.
 
 !!! danger
     
-    Use engines other than ``django.db.backends.postgresql`` at your own risk!
+    Use engines, other than ``django.db.backends.postgresql``, at your own risk!
 
 ----
 
 ## ``DJANGO_DATABASE_HOST``
 
-!!! failure inline end ""
+!!! warning inline end ""
 
-    This setting is **required**. But also depends on the engine used (and may be optional in some situations).
+    This setting is **situationally required**, as it depends on the engine used.
 
 Database connection setting. For the default engine it's the host name to connect to.
 
@@ -49,9 +51,9 @@ See [``DATABASES.HOST`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ## ``DJANGO_DATABASE_PORT``
 
-!!! failure inline end ""
+!!! warning inline end ""
 
-    This setting is **required**. But also depends on the engine used (and may be optional in some situations).
+    This setting is **situationally required**, as it depends on the engine used.
 
 Database connection setting. For the default engine it's the host port to connect to.
 
@@ -61,9 +63,9 @@ See [``DATABASES.PORT`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ## ``DJANGO_DATABASE_NAME``
 
-!!! failure inline end ""
+!!! warning inline end ""
 
-    This setting is **required**. But also depends on the engine used (and may be optional in some situations).
+    This setting is **situationally required**, as it depends on the engine used.
 
 Database connection setting. For the default engine it's the database name to connect to.
 
@@ -73,9 +75,9 @@ See [``DATABASES.NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ## ``DJANGO_DATABASE_USER``
 
-!!! failure inline end ""
+!!! warning inline end ""
 
-    This setting is **required**. But also depends on the engine used (and may be optional in some situations).
+    This setting is **situationally required**, as it depends on the engine used.
 
 Database connection setting. For the default engine it's the database username to connect with.
 
@@ -85,9 +87,9 @@ See [``DATABASES.USER`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ## ``DJANGO_DATABASE_PASSWORD``
 
-!!! failure inline end ""
+!!! warning inline end ""
 
-    This setting is **required**. But also depends on the engine used (and may be optional in some situations).
+    This setting is **situationally required**, as it depends on the engine used.
 
 Database connection setting. For the default engine it's the database password to connect with.
 
@@ -113,13 +115,37 @@ See [``DATABASES.CONN_MAX_AGE`` in Django docs](https://docs.djangoproject.com/e
 
     This setting is **optional**.
 
-The timezone Django should use. Alter at your own risk. Omit to use the default, using the CET/CEST timezone (applicable to the Netherlands).
+The timezone Django should use. Alter at your own risk. 
+
+Omit to use the default, using the CET/CEST timezone (applicable to the Netherlands and other countries in the same timezone).
 
 See [``TIME_ZONE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-TIME_ZONE) for more information about the setting and what it does.
 
-
 ----
 
+## ``DJANGO_ALLOWED_HOSTS``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Setting related to incoming Host headers. Only applicable if you expose your DSMR-reader installation directly to the public Internet.
+
+See [``ALLOWED_HOSTS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#allowed-hosts) for more information about the setting and what it does.
+
+!!! tip
+
+    If you have **multiple hosts** to allow, pass them as a **comma separated** value. E.g.:
+
+    ```ini
+    DJANGO_ALLOWED_HOSTS=https://subdomain1.example.com,https://subdomain2.example.com,https://subdomain3.example.com
+    ```
+
+----
 
 ## ``DJANGO_STATIC_URL``
 
@@ -130,7 +156,6 @@ See [``TIME_ZONE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/set
 See [``STATIC_URL`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#static-url) for more information about the setting and what it does.
 
 ----
-
 
 ## ``DJANGO_FORCE_SCRIPT_NAME``
 
@@ -182,6 +207,193 @@ See [``STATIC_ROOT`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/s
 
 ----
 
+## ``DJANGO_CSRF_COOKIE_AGE``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_AGE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-age) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_COOKIE_DOMAIN``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_DOMAIN`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-domain) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_COOKIE_HTTPONLY``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_HTTPONLY`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-httponly) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_COOKIE_MASKED``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_MASKED`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-masked) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_COOKIE_NAME``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-name) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_COOKIE_PATH``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_PATH`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-path) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_COOKIE_SAMESITE``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_SAMESITE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-samesite) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_COOKIE_SECURE``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_COOKIE_SECURE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-secure) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_USE_SESSIONS``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_USE_SESSIONS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-use-sessions) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_HEADER_NAME``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_HEADER_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-header-name) for more information about the setting and what it does.
+
+----
+
+## ``DJANGO_CSRF_TRUSTED_ORIGINS``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.0*
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
+
+See [``CSRF_TRUSTED_ORIGINS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-trusted-origins) for more information about the setting and what it does.
+
+!!! tip
+
+    If you have **multiple domains** to trust, pass them as a **comma separated** value. E.g.:
+
+    ```ini
+    DJANGO_CSRF_TRUSTED_ORIGINS=https://subdomain1.example.com,https://subdomain2.example.com,https://subdomain3.example.com
+    ```
+
+----
+
+----
+
+----
 
 **DSMR-reader settings**
 
@@ -226,7 +438,7 @@ The latter should only be used for debugging DSMR-reader and pinpointing weird i
 
 ## ``DSMRREADER_PLUGINS``
 
-!!! example inline end ""
+!!! example ""
 
     This setting is **situational**.
 
@@ -242,7 +454,7 @@ DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1,dsmr_plugins.modules.plugin
 
 ## ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
 
-!!! example inline end ""
+!!! example ""
 
     This setting is **situational**.
 
@@ -257,7 +469,7 @@ Set it to ``True`` to **disable the warnings** or omit it to use the default (= 
 
 ## ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
 
-!!! example inline end ""
+!!! example ""
 
     This setting is **situational**.
 
@@ -277,17 +489,19 @@ Omit to use the default (a few thousand).
 
 ## ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
 
-!!! example inline end ""
+!!! example ""
 
     This setting is **situational**.
 
 Updating MQTT topics consecutively **with the same value has no effect**, depending on its usage in your setup.
 
-DSMR-reader sends MQTT messages to your broker with a ``retain`` flag, resulting the broker keeping the last value received for every topic. 
-Which means that any MQTT subscribers should always receive the retained value, even when DSMR-reader has no updates. 
+DSMR-reader always sends MQTT messages to your broker with a ``retain`` flag, resulting the broker keeping the **last value received for every topic**. 
+Which means that any (new) MQTT subscribers should always receive the retained value, even when DSMR-reader has no *new* (different) values for the retained topics. 
 
-DSMR-reader can be set to *cache the last value sent for each topic*. It will cause DSMR-reader to **not send the same value to the same topic consecutively** (within the caching duration).
-This may greatly reduce the number of MQTT messages sent when there is nothing to update. If the value of a topic changes, DSMR-reader will still send the updated value.
+To take advantage of this, DSMR-reader can be set to *cache the last value sent for each topic*. This will hint DSMR-reader to **not send the same consecutive value to the same topic** (within the caching duration).
+This may greatly reduce the number of MQTT messages sent when there is nothing to update, as DSMR-reader will simply not send an update. 
+
+If the value of a topic changes, DSMR-reader will still send the updated value. Data that *constantly changes* will not be affected by this mechanism (and the entire mechanism will be useless for those topics).
 
 !!! danger
 

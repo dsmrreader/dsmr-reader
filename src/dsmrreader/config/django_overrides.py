@@ -3,8 +3,7 @@
     Mostly try-except because we don't want to pin any defaults to fall back to, just let Django set them.
 """
 
-from decouple import config, UndefinedValueError
-
+from decouple import config, UndefinedValueError, Csv
 
 # Not all database engines require the full config.
 DATABASES = {
@@ -43,6 +42,10 @@ except UndefinedValueError:
 SECRET_KEY = config("DJANGO_SECRET_KEY", cast=str)
 TIME_ZONE = config("DJANGO_TIME_ZONE", cast=str, default="Europe/Amsterdam")
 
+try:
+    ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", cast=Csv(post_process=list))
+except UndefinedValueError:
+    pass
 
 try:
     STATIC_URL = config("DJANGO_STATIC_URL", cast=str)
@@ -71,5 +74,59 @@ except UndefinedValueError:
 
 try:
     STATIC_ROOT = config("DJANGO_STATIC_ROOT", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_COOKIE_AGE = config("DJANGO_CSRF_COOKIE_AGE", cast=int)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_COOKIE_DOMAIN = config("DJANGO_CSRF_COOKIE_DOMAIN", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_COOKIE_HTTPONLY = config("DJANGO_CSRF_COOKIE_HTTPONLY", cast=bool)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_COOKIE_MASKED = config("DJANGO_CSRF_COOKIE_MASKED", cast=bool)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_COOKIE_NAME = config("DJANGO_CSRF_COOKIE_NAME", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_COOKIE_PATH = config("DJANGO_CSRF_COOKIE_PATH", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_COOKIE_SAMESITE = config("DJANGO_CSRF_COOKIE_SAMESITE", cast=str)
+except UndefinedValueError:
+    pass
+try:
+    CSRF_COOKIE_SECURE = config("DJANGO_CSRF_COOKIE_SECURE", cast=bool)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_USE_SESSIONS = config("DJANGO_CSRF_USE_SESSIONS", cast=bool)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_HEADER_NAME = config("DJANGO_CSRF_HEADER_NAME", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    CSRF_TRUSTED_ORIGINS = config("DJANGO_CSRF_TRUSTED_ORIGINS", cast=Csv(post_process=list))
 except UndefinedValueError:
     pass
