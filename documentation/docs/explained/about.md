@@ -21,7 +21,7 @@ DSMR-reader only supports the built-in integrations mentioned above and, for pra
 
 
 ## Architecture
-<small>*Below is a very shallow schema of DSMR-reader's architecture. Note that it's subject to be (eventually) outdated.*</small> 
+<small>*Below is a very simplified schema of DSMR-reader's architecture.*</small> 
 ![Drawing](../static/drawings/DSMR-reader-Architecture.svg)
 
 
@@ -33,7 +33,7 @@ DSMR-reader only supports the built-in integrations mentioned above and, for pra
 
 ## Hardware requirements
 
-- RaspberryPi 4 (or similar) and higher.
+- RaspberryPi 4 (or similar) and better.
 - P1 telegram cable (or a network socket when using ``ser2net``).
 - A smart meter supporting any of these DSMR-telegram versions: ``v2`` / ``v4`` / ``v5``.
 
