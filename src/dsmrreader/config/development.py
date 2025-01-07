@@ -1,5 +1,6 @@
 from dsmrreader.config.defaults import *
 
+print('Using LOCAL DEVELOPMENT configuration:', __name__)
 
 DEBUG = True
 
