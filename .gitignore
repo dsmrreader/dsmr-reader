@@ -28,3 +28,4 @@
 /Dockerfile
 /Containerfile
 /.container-data/
+/.vs

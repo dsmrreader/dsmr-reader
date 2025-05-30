@@ -1,5 +1,6 @@
 import logging
 from typing import Optional, Dict
+from decimal import Decimal
 
 from django.conf import settings
 from django.utils import timezone
@@ -104,16 +105,17 @@ def get_export_data(
         hour=0, minute=0, second=0, microsecond=0
     )  # Midnight
     search_end = local_now - timezone.timedelta(minutes=upload_delay)
-
+    
     ecs = ElectricityConsumption.objects.filter(
         read_at__gte=search_start, read_at__lte=search_end
     )
-
+    
     if not ecs.exists():
         return None
 
     first = ecs[0]
-    last = ecs.order_by("-read_at")[0]
+    reverse = ecs.order_by("-read_at")
+    last = reverse[0]
     consumption_timestamp = timezone.localtime(last.read_at)
 
     # Check whether we need to delay the export, until we have data that untill at least the current upload time. (#467)
@@ -132,7 +134,16 @@ def get_export_data(
 
     diff = last - first  # Custom operator for convenience
     total_consumption = diff["delivered_1"] + diff["delivered_2"]
-    net_power = last.currently_delivered - last.currently_returned
+
+    upload_interval = PVOutputAddStatusSettings.get_solo().upload_interval
+    delivered = Decimal("0.000")
+    returned = Decimal("0.000")
+    for x in range(upload_interval):
+        delivered += reverse[x].currently_delivered
+        returned += reverse[x].currently_returned
+    delivered /= upload_interval
+    returned /= upload_interval
+    net_power = delivered - returned
 
     return dict(
         d=consumption_timestamp.date().strftime("%Y%m%d"),
