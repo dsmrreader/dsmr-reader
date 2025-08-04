@@ -22,29 +22,28 @@ RUN pip install pip --upgrade
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-dev
-ARG POETRY_VERSION="1.8.4"
 # Credits to https://www.martinrichards.me/post/python_poetry_docker/
 # Also, the only reason for .venv is the IDE's detection
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache \
+ENV POETRY_VIRTUALENVS_CREATE=true \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_VIRTUALENVS_PATH=/app/.venv \
     DJANGO_SETTINGS_MODULE=dsmrreader.config.development
 
-RUN pip install poetry==${POETRY_VERSION}
+RUN pip install poetry
 
-COPY src/pyproject.toml src/poetry.lock /app/
+# Do NOT copy lock file. It will be mirrored by Compose after building anyway.
+COPY src/pyproject.toml /app/
 RUN touch README.md
-RUN poetry install --with dev --no-root && rm -rf $POETRY_CACHE_DIR
+RUN poetry install
 
 WORKDIR /app
-ENTRYPOINT ["poetry", "run"]
+ENTRYPOINT ["/app/.venv/bin/python3"]
 
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-docs
 WORKDIR /app
 COPY ./documentation/ /app/
-# Do not use Poetry here, as RTD also directly utilizes PIP instead anyway.
+# Do NOT use Poetry here, as RTD also directly utilizes PIP instead anyway.
 RUN pip install -r /app/requirements.txt
 ENTRYPOINT ["mkdocs"]
