@@ -47,14 +47,7 @@ class TelegramParser(object):
         :param str encryption_key: encryption key
         :param str authentication_key: authentication key
         :rtype: dict
-        :returns: Shortened example:
-            {
-                ..
-                r'\d-\d:96\.1\.1.+?\r\n': <CosemObject>,  # EQUIPMENT_IDENTIFIER
-                r'\d-\d:1\.8\.1.+?\r\n': <CosemObject>,   # ELECTRICITY_USED_TARIFF_1
-                r'\d-\d:24\.3\.0.+?\r\n.+?\r\n': <MBusObject>,  # GAS_METER_READING
-                ..
-            }
+        :returns: dict (example dropped due to "SyntaxWarning: invalid escape sequence")
         :raises ParseError:
         :raises InvalidChecksumError:
         """
