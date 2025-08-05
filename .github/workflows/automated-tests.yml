@@ -37,7 +37,7 @@ jobs:
           sleep 5
 
       - name: Check flake8
-        run: docker compose run tests-dsmr-app /app/.venv/bin/python3 flake8 -v
+        run: docker compose run tests-dsmr-app flake8 -v
 
       - name: Run PostgreSQL tests
-        run: docker compose run tests-dsmr-app /app/.venv/bin/python3 pytest
+        run: docker compose run tests-dsmr-app pytest

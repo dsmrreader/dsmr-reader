@@ -6,6 +6,7 @@ services:
   tests-dsmr-app:
     container_name: tests-dsmr-app
     restart: 'no'
+    entrypoint: ['poetry', 'run']
     command: 'sleep 5'  # This is just to make sure the container keeps running.
     build:
       context: .
