@@ -1,6 +1,6 @@
 from dsmrreader.config.defaults import *
 
-print('Using PRODUCTION configuration:', __name__)
+print("Using PRODUCTION configuration:", __name__)
 
 CACHES["default"]["TIMEOUT"] = 60
 

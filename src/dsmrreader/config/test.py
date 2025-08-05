@@ -1,10 +1,10 @@
-""" Tests. """
+"""Tests."""
 
 import secrets
 
 from dsmrreader.config.development import *
 
-print('Using AUTOMATED TESTS configuration:', __name__)
+print("Using AUTOMATED TESTS configuration:", __name__)
 
 # Cache may cause weird stuff during automated testing.
 for k in CACHES.keys():
