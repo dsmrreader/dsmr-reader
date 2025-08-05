@@ -33,8 +33,9 @@ RUN pip install poetry
 
 # Do NOT copy lock file. It will be mirrored by Compose after building anyway.
 COPY src/pyproject.toml /app/
-RUN touch README.md
-RUN poetry install
+RUN touch README.md \
+    && poetry install \
+    && rm /app/pyproject.toml
 
 WORKDIR /app
 ENTRYPOINT ["/app/.venv/bin/python3"]
