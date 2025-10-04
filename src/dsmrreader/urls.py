@@ -29,8 +29,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    import debug_toolbar  # pragma: no cover
+    from debug_toolbar.toolbar import debug_toolbar_urls  # pragma: no cover
 
-    urlpatterns += [
-        path("__debug__/", include(debug_toolbar.urls)),
-    ]  # pragma: no cover
+    urlpatterns += + debug_toolbar_urls()  # pragma: no cover
