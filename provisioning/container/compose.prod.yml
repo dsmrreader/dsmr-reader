@@ -12,9 +12,9 @@ services:
       # Deleting the DSMRDB container will then NOT delete data in the folder mirrored in the container.
       - ./dsmr_database:/var/lib/postgresql
     environment:
-      # Configure DUID & DGID based on the output of "id", e.g. "DUID=1001" and "DGID=1001"
-      - DUID=
-      - DGID=
+      # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
+      - DUID=1001
+      - DGID=1001
       - TZ=Europe/Amsterdam
       - PG_TZ=Europe/Amsterdam
       # Feel free to alter these when needed, greatly depends on whether you host this at home or publicly facing at the Internet.
@@ -48,10 +48,10 @@ services:
     # For DSMR-reader specific environment settings see https://dsmr-reader.readthedocs.io/en/v6/reference/environment-variables/
     # For Xirixiz-specific environment settings see https://github.com/xirixiz/dsmr-reader-docker?tab=readme-ov-file#setup--parameters
     environment:
-      # Configure DUID & DGID based on the output of "id", e.g. "DUID=1001" and "DGID=1001"
-      - DUID=
-      - DGID=
-      # Change DJANGO_SECRET_KEY below to a long TRULY random value if you host DSMR-reader publicly facing on the Internet
+      # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
+      - DUID=1001
+      - DGID=1001
+      # TODO for you: Change DJANGO_SECRET_KEY below to a long TRULY random value if you host DSMR-reader publicly facing on the Internet
       - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
       # These must match with the settings configured in "dsmrdb" above.
       - DJANGO_DATABASE_HOST=dsmrdb
