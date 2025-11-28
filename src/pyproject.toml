@@ -44,10 +44,10 @@ attrs = "^25"
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7"
 flake8-bandit = "^4"
-flake8-black = "^0.3"
-flake8-bugbear = "^24"
+flake8-black = "^0.4"
+flake8-bugbear = "^25"
 polib = "^1"
-pytest-cov = "^5"  # @TODO: Upgrade later to 6+
+pytest-cov = "^7"
 pytest-django = "^4"
 pytest-xdist = "^3"
 mysqlclient = "^2"
