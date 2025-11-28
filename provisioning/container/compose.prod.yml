@@ -1,0 +1,85 @@
+# This is a slightly altered version of the Xirixiz's container setup of DSMR-reader. You should copy it to your needs.
+# For more information, see https://github.com/xirixiz/dsmr-reader-docker
+services:
+  dsmrdb:
+    # When using Postgres, release 14.x, 15.x, 16.x and 17.x are supported only
+    # due to the limited availability of client packages, especially for arm32v7
+    image: docker.io/postgres:17-alpine
+    container_name: dsmrdb
+    restart: always
+    volumes:
+      # This is very important as it mirrors some container data (/var/lib/postgresql) to your host (in dsmr_database/).
+      # Deleting the DSMRDB container will then NOT delete data in the folder mirrored in the container.
+      - ./dsmr_database:/var/lib/postgresql
+    environment:
+      # Configure DUID & DGID based on the output of "id", e.g. "DUID=1001" and "DGID=1001"
+      - DUID=
+      - DGID=
+      - TZ=Europe/Amsterdam
+      - PG_TZ=Europe/Amsterdam
+      # Feel free to alter these when needed, greatly depends on whether you host this at home or publicly facing at the Internet.
+      # Must match settings of "dsmr" below in this file.
+      - POSTGRES_DB=dsmrreader
+      - POSTGRES_USER=dsmrreader_user
+      - POSTGRES_PASSWORD=dsmrreader_password
+    healthcheck:
+      # postgres is the default user, please update with
+      # the DJANGO_DATABASE_USER used for dsmr-reader-docker
+      # default for DSMR Reader is dsmrreader
+      test: [ "CMD-SHELL", "pg_isready -U dsmrreader" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  dsmr:
+    image: ghcr.io/xirixiz/dsmr-reader-docker:development  # TODO: Change to "latest" after releasing DSMR-reader v6.
+    depends_on:
+      dsmrdb:
+        condition: service_healthy
+    container_name: dsmr
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      # This is very important as it mirrors some container data (/app/backups) to your host (in dsmr_backups/).
+      # Deleting the DSMR container will then NOT delete data in the folder mirrored in the container.
+      - ./dsmr_backups:/app/backups
+    # For DSMR-reader specific environment settings see https://dsmr-reader.readthedocs.io/en/v6/reference/environment-variables/
+    # For Xirixiz-specific environment settings see https://github.com/xirixiz/dsmr-reader-docker?tab=readme-ov-file#setup--parameters
+    environment:
+      # Configure DUID & DGID based on the output of "id", e.g. "DUID=1001" and "DGID=1001"
+      - DUID=
+      - DGID=
+      # Change DJANGO_SECRET_KEY below to a long TRULY random value if you host DSMR-reader publicly facing on the Internet
+      - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
+      # These must match with the settings configured in "dsmrdb" above.
+      - DJANGO_DATABASE_HOST=dsmrdb
+      - DJANGO_DATABASE_NAME=dsmrreader
+      - DJANGO_DATABASE_USER=dsmrreader_user
+      - DJANGO_DATABASE_PASSWORD=dsmrreader_password
+      - TZ=Europe/Amsterdam
+      - DJANGO_TIME_ZONE=Europe/Amsterdam
+      - VIRTUAL_HOST=localhost
+    ports:
+      - 7777:80
+      - 7779:443
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-Lsf",
+          "http://127.0.0.1/about",
+          "-o",
+          "/dev/null",
+          "-w",
+          "HTTP_%{http_code}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  dsmr_database: null
+  dsmr_backups: null
