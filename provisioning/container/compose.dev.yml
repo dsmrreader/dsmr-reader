@@ -44,7 +44,9 @@ services:
     volumes:
       # Persist database storage between container recreation
       - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/
-      # Only use for restoring DB-backups. E.g.: psql -U dbuser -f /run/host/Desktop/dsmrreader-postgresql-backup-Tuesday.sql dsmrreader
+      # Only use for creating or restoring DB-backups.
+      # Export: pg_dump -U dbuser dsmrreader > /run/host/Desktop/dsmrreader-postgresql-backup.sql
+      # Import: psql -U dbuser -f /run/host/Desktop/dsmrreader-postgresql-backup.sql dsmrreader
       - ~/Desktop:/run/host/Desktop/
 
   # http://localhost:10000
