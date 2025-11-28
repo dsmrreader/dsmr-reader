@@ -22,3 +22,4 @@ See sidebar for a more specific navigation or below for a (global) overview.
 ## [API](reference/api.md#api)
 ## [Environment variables](reference/environment-variables.md#environment-variables)
 ## [Plugins](reference/plugins.md#plugins)
+## [Container setup installation](tutorial/install-container-setup.md#container-setup-installation)
