@@ -37,7 +37,7 @@ python-decouple = "^3"
 pytz = "^2025"
 pyyaml = "^6"
 requests = "^2"
-urllib3 = "^1"  # @TODO: Upgrade later to 2+
+urllib3 = "^2"
 attrs = "^25"
 
 
@@ -52,10 +52,10 @@ pytest-django = "^4"
 pytest-xdist = "^3"
 mysqlclient = "^2"
 safety = "^3"
-sphinx = "^7"  # @TODO: Upgrade later to 8+
-sphinx-autobuild = "^2024"
+sphinx = "^8"
+sphinx-autobuild = "^2025"
 sphinx-intl = "^2"
-sphinx-rtd-theme = "^2"  # @TODO: Upgrade later to 3+
+sphinx-rtd-theme = "^3"
 mypy = "^1"
 types-pytz = "^2025"
 types-requests = "^2"
