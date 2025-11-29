@@ -2,6 +2,7 @@ from unittest import mock
 
 from django.test import TestCase
 from paho.mqtt.client import Client
+from paho.mqtt.enums import CallbackAPIVersion
 
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_backend.signals import (
@@ -28,7 +29,9 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
         run_persistent_client.send_robust(None, client=None)
         self.assertFalse(run_mock.called)
 
-        mqtt_client = Client()
+        mqtt_client = Client(
+            callback_api_version=CallbackAPIVersion.VERSION2,  # Library version, not MQTT version.
+        )
         self.assertFalse(run_mock.called)
         run_persistent_client.send_robust(None, client=mqtt_client)
         self.assertTrue(run_mock.called)
@@ -40,7 +43,9 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
         terminate_persistent_client.send_robust(None, client=None)
         self.assertFalse(disconnect_mock.called)
 
-        mqtt_client = Client()
+        mqtt_client = Client(
+            callback_api_version=CallbackAPIVersion.VERSION2,  # Library version, not MQTT version.
+        )
         self.assertFalse(disconnect_mock.called)
         terminate_persistent_client.send_robust(None, client=mqtt_client)
         self.assertTrue(disconnect_mock.called)

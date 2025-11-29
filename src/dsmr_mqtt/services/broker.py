@@ -35,9 +35,10 @@ def initialize_client() -> Optional[paho.Client]:
         settings.DSMRREADER_MQTT_QOS_LEVEL,
     )
     mqtt_client = paho.Client(
-        callback_api_version=paho.CallbackAPIVersion.VERSION1,  # @see https://eclipse.dev/paho/files/paho.mqtt.python/html/migrations.html
+        callback_api_version=paho.CallbackAPIVersion.VERSION2,  # Library version, not MQTT version.
         client_id=broker_settings.client_id,
     )
+    # Callbacks.
     mqtt_client.on_connect = on_connect
     mqtt_client.on_disconnect = on_disconnect
     mqtt_client.on_log = on_log
@@ -150,29 +151,19 @@ def signal_reconnect() -> None:
         "MQTT: Client no longer connected. Signaling restart to reconnect..."
     )
 
-
-def on_connect(client, userdata, flags, rc) -> None:
+def on_connect(client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs) -> None:
     """MQTT client callback for connecting. Outputs some debug logging."""
-    # From the docs, rc values:
-    RC_MAPPING = {
-        0: "Connection successful",
-        1: "Connection refused - incorrect protocol version",
-        2: "Connection refused - invalid client identifier",
-        3: "Connection refused - server unavailable",
-        4: "Connection refused - bad username or password",
-        5: "Connection refused - not authorised",
-    }
-    logger.debug("MQTT: (Paho on_connect) %s | %s", flags, rc)
+    logger.debug("MQTT: (Paho on_connect) %s | %s", flags, reason_code.getName())
 
     try:
         logger.debug(
-            "MQTT: --- %s : %s -> %s", client._host, client._port, RC_MAPPING[rc]
+            "MQTT: --- %s : %s -> %s", client.host, client.port, reason_code.getName()
         )
     except KeyError:
         pass
 
 
-def on_disconnect(client, userdata, rc) -> None:
+def on_disconnect(client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs) -> None:
     """MQTT client callback for disconnecting. Outputs some debug logging."""
 
     """
@@ -180,9 +171,9 @@ def on_disconnect(client, userdata, rc) -> None:
         If MQTT_ERR_SUCCESS (0), the callback was called in response to a disconnect() call.
         If any other value the disconnection was unexpected, such as might be caused by a network error.
     """
-    logger.debug("MQTT: (Paho on_disconnect) %s", rc)
+    logger.debug("MQTT: (Paho on_disconnect) %s", reason_code.getName())
 
-    if rc != paho.MQTT_ERR_SUCCESS:
+    if reason_code != paho.MQTT_ERR_SUCCESS:
         logger.warning("MQTT: --- Unexpected disconnect, re-connecting...")
 
         try:
