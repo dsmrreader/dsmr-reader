@@ -34,7 +34,10 @@ def initialize_client() -> Optional[paho.Client]:
         broker_settings.port,
         settings.DSMRREADER_MQTT_QOS_LEVEL,
     )
-    mqtt_client = paho.Client(client_id=broker_settings.client_id)
+    mqtt_client = paho.Client(
+        callback_api_version=paho.CallbackAPIVersion.VERSION1,  # @see https://eclipse.dev/paho/files/paho.mqtt.python/html/migrations.html
+        client_id=broker_settings.client_id,
+    )
     mqtt_client.on_connect = on_connect
     mqtt_client.on_disconnect = on_disconnect
     mqtt_client.on_log = on_log
