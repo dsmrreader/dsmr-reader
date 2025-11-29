@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.test import TestCase
 from django.utils import timezone
-import pytz
+from zoneinfo import ZoneInfo
 
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
@@ -67,7 +67,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
         self.assertEqual(
-            reading.timestamp, datetime(2019, 8, 21, 19, 0, 25, tzinfo=pytz.UTC)
+            reading.timestamp, datetime(2019, 8, 21, 19, 0, 25, tzinfo=ZoneInfo("UTC"))
         )
         self.assertEqual(reading.electricity_delivered_1, Decimal("260.129"))
         self.assertEqual(reading.electricity_returned_1, Decimal("0.010"))
@@ -77,7 +77,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
         self.assertEqual(
             reading.extra_device_timestamp,
-            datetime(2019, 8, 21, 19, 0, 11, tzinfo=pytz.UTC),
+            datetime(2019, 8, 21, 19, 0, 11, tzinfo=ZoneInfo("UTC")),
         )
         self.assertEqual(reading.extra_device_delivered, Decimal("29.553"))
         self.assertEqual(reading.phase_voltage_l1, Decimal("231.0"))
@@ -107,5 +107,5 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(
             # CET > UTC. Minute marker rounded to hours. Because Fluvius may or may not communicate DSMR v5 in telegrams
             reading.extra_device_timestamp,
-            datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=pytz.UTC),
+            datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=ZoneInfo("UTC")),
         )

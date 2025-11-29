@@ -1,6 +1,6 @@
 import datetime
 
-import pytz
+from zoneinfo import ZoneInfo
 
 
 def timestamp(value):
@@ -16,7 +16,7 @@ def timestamp(value):
     else:
         is_dst = False
 
-    local_tz = pytz.timezone("Europe/Amsterdam")
-    localized_datetime = local_tz.localize(naive_datetime, is_dst=is_dst)
+    local_tz = ZoneInfo("Europe/Amsterdam")
+    localized_datetime = naive_datetime.astimezone(local_tz)
 
-    return localized_datetime.astimezone(pytz.utc)
+    return localized_datetime.astimezone(ZoneInfo("UTC"))

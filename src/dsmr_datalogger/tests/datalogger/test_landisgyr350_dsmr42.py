@@ -3,7 +3,7 @@ from decimal import Decimal
 from unittest import mock
 
 from django.test import TestCase
-import pytz
+from zoneinfo import ZoneInfo
 
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
@@ -69,7 +69,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
         self.assertEqual(
-            reading.timestamp, datetime(2016, 2, 10, 19, 30, 34, tzinfo=pytz.UTC)
+            reading.timestamp, datetime(2016, 2, 10, 19, 30, 34, tzinfo=ZoneInfo("UTC"))
         )
         self.assertEqual(reading.electricity_delivered_1, Decimal("756.849"))
         self.assertEqual(reading.electricity_returned_1, Decimal("0"))
@@ -79,7 +79,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
         self.assertEqual(
             reading.extra_device_timestamp,
-            datetime(2016, 2, 10, 19, 0, 0, tzinfo=pytz.UTC),
+            datetime(2016, 2, 10, 19, 0, 0, tzinfo=ZoneInfo("UTC")),
         )
         self.assertEqual(reading.extra_device_delivered, Decimal("1197.484"))
         self.assertEqual(reading.phase_currently_delivered_l1, Decimal("0.123"))
@@ -116,5 +116,5 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(
             # CET > UTC. Minute marker rounded to one hour.
             reading.extra_device_timestamp,
-            datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=pytz.UTC),
+            datetime(2021, 1, 15, 11, 0, 0, 0, tzinfo=ZoneInfo("UTC")),
         )

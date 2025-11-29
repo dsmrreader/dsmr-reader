@@ -1,6 +1,6 @@
 from unittest import mock
 
-import pytz
+from zoneinfo import ZoneInfo
 from django.conf import settings
 from django.utils import timezone
 
@@ -23,7 +23,7 @@ class TestMonitoring(APIv2TestCase):
             MonitoringStatusIssue(
                 "source",
                 "description",
-                timezone.datetime(2020, 1, 15, 12, 34, 56, 0, pytz.UTC),
+                timezone.datetime(2020, 1, 15, 12, 34, 56, 0, ZoneInfo("UTC")),
             )
         ]
 

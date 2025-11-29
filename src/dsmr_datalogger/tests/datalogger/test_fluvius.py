@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.test import TestCase
 from django.utils import timezone
-import pytz
+from zoneinfo import ZoneInfo
 
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
@@ -63,7 +63,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
         self.assertEqual(
-            reading.timestamp, datetime(2020, 8, 7, 6, 27, 11, tzinfo=pytz.UTC)
+            reading.timestamp, datetime(2020, 8, 7, 6, 27, 11, tzinfo=ZoneInfo("UTC"))
         )
         self.assertEqual(reading.electricity_delivered_1, Decimal("1924.771"))
         self.assertEqual(reading.electricity_returned_1, Decimal("1968.710"))
@@ -73,7 +73,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(reading.electricity_currently_returned, Decimal("0.611"))
         self.assertEqual(
             reading.extra_device_timestamp,
-            datetime(2020, 8, 7, 6, 25, 2, tzinfo=pytz.UTC),
+            datetime(2020, 8, 7, 6, 25, 2, tzinfo=ZoneInfo("UTC")),
         )
         self.assertEqual(reading.extra_device_delivered, Decimal("1414.287"))
         self.assertEqual(reading.phase_voltage_l1, Decimal("235.6"))

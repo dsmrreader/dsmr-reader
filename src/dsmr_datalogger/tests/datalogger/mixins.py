@@ -2,7 +2,7 @@ from datetime import datetime
 from unittest import mock
 from unittest.case import TestCase
 
-import pytz
+from zoneinfo import ZoneInfo
 from django.utils import timezone
 from serial import Serial
 
@@ -43,7 +43,8 @@ class FakeDsmrReadingMixin(InterceptCommandStdoutMixin, TestCase):
 
         reading = DsmrReading.objects.get()
         self.assertEqual(
-            reading.timestamp, datetime(2021, 1, 15, 11, 34, 56, 0, tzinfo=pytz.UTC)
+            reading.timestamp,
+            datetime(2021, 1, 15, 11, 34, 56, 0, tzinfo=ZoneInfo("UTC")),
         )  # CET > UTC
 
         return reading

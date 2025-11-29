@@ -4,7 +4,7 @@ from django.db.models.functions.datetime import TruncHour
 from django.db.models.aggregates import Count
 from django.utils import timezone
 from django.conf import settings
-import pytz
+from zoneinfo import ZoneInfo
 
 from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_datalogger.models.reading import DsmrReading
@@ -36,7 +36,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
     data_to_clean_up = False
 
     # We need to force UTC here, to avoid AmbiguousTimeError's on DST changes.
-    timezone.activate(pytz.UTC)
+    timezone.activate(ZoneInfo("UTC"))
 
     for base_queryset, datetime_field in MODELS_TO_CLEANUP.items():
         hours_to_cleanup = (

@@ -3,7 +3,7 @@ from unittest import mock
 
 from django.utils import timezone
 from django.test import TestCase
-import pytz
+from zoneinfo import ZoneInfo
 
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
@@ -174,7 +174,7 @@ class TestDataloggerDuplicateData(
         reading = DsmrReading.objects.get()
         self.assertEqual(
             reading.timestamp,
-            timezone.datetime(2017, 1, 10, 19, 40, 57, tzinfo=pytz.UTC),
+            timezone.datetime(2017, 1, 10, 19, 40, 57, tzinfo=ZoneInfo("UTC")),
         )
         self.assertEqual(reading.electricity_delivered_1, Decimal("9012.345"))
         self.assertEqual(reading.electricity_returned_1, Decimal("9123.456"))
@@ -184,7 +184,7 @@ class TestDataloggerDuplicateData(
         self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
         self.assertEqual(
             reading.extra_device_timestamp,
-            timezone.datetime(2017, 1, 10, 19, 40, 9, tzinfo=pytz.UTC),
+            timezone.datetime(2017, 1, 10, 19, 40, 9, tzinfo=ZoneInfo("UTC")),
         )
         self.assertEqual(reading.extra_device_delivered, Decimal("123.456"))
 

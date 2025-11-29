@@ -3,7 +3,7 @@ from unittest import mock
 from django.utils import timezone
 from django.test import TestCase
 from django.conf import settings
-import pytz
+from zoneinfo import ZoneInfo
 
 from dsmr_backend.dto import Capability
 from dsmr_consumption.models.consumption import ElectricityConsumption
@@ -113,9 +113,7 @@ class TestServices(TestCase):
         next_notification = timezone.localtime(notification_settings.next_notification)
         expected = timezone.datetime(2018, 10, 28, 6, 0, 0)
         expected = timezone.localtime(
-            timezone.make_aware(
-                expected, pytz.timezone(settings.TIME_ZONE), is_dst=True
-            )
+            timezone.make_aware(expected, ZoneInfo(settings.TIME_ZONE))
         )
 
         self.assertEqual(next_notification, expected)
@@ -133,9 +131,7 @@ class TestServices(TestCase):
         next_notification = timezone.localtime(notification_settings.next_notification)
         expected = timezone.datetime(2019, 3, 31, 6, 0, 0)
         expected = timezone.localtime(
-            timezone.make_aware(
-                expected, pytz.timezone(settings.TIME_ZONE), is_dst=True
-            )
+            timezone.make_aware(expected, ZoneInfo(settings.TIME_ZONE))
         )
         self.assertEqual(next_notification, expected)
 

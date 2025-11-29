@@ -1,10 +1,10 @@
 import datetime
+import logging
 from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
-import logging
 from typing import Dict, Optional, List, Tuple
+from zoneinfo import ZoneInfo
 
-import pytz
 from django.conf import settings
 from django.db.models import Avg, Min, Max, Count, Manager
 from django.db.utils import IntegrityError
@@ -176,7 +176,7 @@ def compact(dsmr_reading: DsmrReading) -> None:
     reading_start = timezone.datetime.combine(
         dsmr_reading.timestamp.date(),
         time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
-    ).replace(tzinfo=pytz.UTC)
+    ).replace(tzinfo=ZoneInfo("UTC"))
 
     if (
         consumption_settings.electricity_grouping_type
