@@ -151,7 +151,10 @@ def signal_reconnect() -> None:
         "MQTT: Client no longer connected. Signaling restart to reconnect..."
     )
 
-def on_connect(client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs) -> None:
+
+def on_connect(
+    client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs
+) -> None:
     """MQTT client callback for connecting. Outputs some debug logging."""
     logger.debug("MQTT: (Paho on_connect) %s | %s", flags, reason_code.getName())
 
@@ -163,7 +166,9 @@ def on_connect(client, userdata, flags, reason_code: paho.ReasonCode, *args, **k
         pass
 
 
-def on_disconnect(client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs) -> None:
+def on_disconnect(
+    client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs
+) -> None:
     """MQTT client callback for disconnecting. Outputs some debug logging."""
 
     """

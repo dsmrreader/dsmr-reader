@@ -114,16 +114,17 @@ class TestBroker(TestCase):
             None,
             None,
             reason_code=paho.ReasonCode(
-                packetType=paho.PacketTypes.CONNACK,
-                aName="Success"
-            )
+                packetType=paho.PacketTypes.CONNACK, aName="Success"
+            ),
         )
 
     @mock.patch("paho.mqtt.client.Client.loop")
     @mock.patch("paho.mqtt.client.Client.publish")
     def test_run_no_data(self, publish_mock, loop_mock):
         loop_mock.return_value = paho.MQTT_ERR_SUCCESS
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
 
         self.assertFalse(loop_mock.called)
         dsmr_mqtt.services.broker.run(mqtt_client=client)
@@ -133,7 +134,9 @@ class TestBroker(TestCase):
     @mock.patch("paho.mqtt.client.Client.publish")
     def test_run(self, publish_mock, loop_mock):
         loop_mock.return_value = paho.MQTT_ERR_SUCCESS
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
 
         msginfo_mock = mock.MagicMock()
         msginfo_mock.is_published.side_effect = [
@@ -160,7 +163,9 @@ class TestBroker(TestCase):
         """Test whether any excess of messages is cleared."""
         loop_mock.return_value = paho.MQTT_ERR_SUCCESS
 
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
         MAX = settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
 
         for x in range(1, MAX * 2 + 1):
@@ -201,7 +206,9 @@ class TestBroker(TestCase):
         """Check whether we exit the command when we're disconnected at some point. For all QoS levels."""
         loop_mock.return_value = paho.MQTT_ERR_CONN_LOST  # Connection failure.
 
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
         Message.objects.create(topic="x", payload="y")
 
         with self.assertRaises(RuntimeError):
@@ -222,7 +229,9 @@ class TestBroker(TestCase):
         message_info_mock.is_published.return_value = False
         publish_mock.return_value = message_info_mock
 
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
         Message.objects.create(topic="x", payload="y")
 
         with self.assertRaises(RuntimeError):
@@ -231,7 +240,9 @@ class TestBroker(TestCase):
     @mock.patch("paho.mqtt.client.Client.reconnect")
     def test_on_disconnect(self, reconnect_mock):
         """Test callback reconnect, when required."""
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
 
         # Normal exit.
         self.assertFalse(reconnect_mock.called)
@@ -240,16 +251,17 @@ class TestBroker(TestCase):
             None,
             None,
             reason_code=paho.ReasonCode(
-                packetType=paho.PacketTypes.CONNACK,
-                aName="Success"  # OK
-            )
+                packetType=paho.PacketTypes.CONNACK, aName="Success"  # OK
+            ),
         )
         self.assertFalse(reconnect_mock.called)
 
     @mock.patch("paho.mqtt.client.Client.reconnect")
     def test_reconnect_okay(self, reconnect_mock):
         """Test callback reconnect, when required."""
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
 
         # Unexpected exit.
         self.assertFalse(reconnect_mock.called)
@@ -258,9 +270,8 @@ class TestBroker(TestCase):
             None,
             None,
             reason_code=paho.ReasonCode(
-                packetType=paho.PacketTypes.CONNACK,
-                aName="Unspecified error"  # Fail
-            )
+                packetType=paho.PacketTypes.CONNACK, aName="Unspecified error"  # Fail
+            ),
         )
         self.assertTrue(reconnect_mock.called)
 
@@ -269,7 +280,9 @@ class TestBroker(TestCase):
     def test_reconnect_failed(self, reconnect_mock, disconnect_mock):
         """Test callback reconnect, but still failing."""
         reconnect_mock.side_effect = ConnectionRefusedError()  # Fail.
-        client = paho.Client(callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx")
+        client = paho.Client(
+            callback_api_version=paho.CallbackAPIVersion.VERSION2, client_id="xxx"
+        )
 
         # Still failing, disconnect() should be called.
         reconnect_mock.side_effect = OSError("Some network failure...")
@@ -278,9 +291,8 @@ class TestBroker(TestCase):
             None,
             None,
             reason_code=paho.ReasonCode(
-                packetType=paho.PacketTypes.CONNACK,
-                aName="Protocol error"  # Fail
-            )
+                packetType=paho.PacketTypes.CONNACK, aName="Protocol error"  # Fail
+            ),
         )
         self.assertTrue(disconnect_mock.called)
 
