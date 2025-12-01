@@ -1,7 +1,5 @@
 # Third party guides
 
-[TOC]
-
 ## Home Assistant
 
 - [(Add-on) DSMR-reader & remote datalogger](https://github.com/sanderdw/hassio-addons) - by Sander de Wildt

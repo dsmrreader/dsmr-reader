@@ -16,8 +16,8 @@ In order to link DSMR-reader to your account, please write down the "API Key" an
 
 Enter those values in DSMR-reader's admin pages, at "PVOutput: API configuration". Make sure to enter both:
 
-    * API Key
-    * System ID
+- API Key
+- System ID
 
 ![PVOutput API settings](../../static/screenshots/admin/pvoutput_api.png)
 

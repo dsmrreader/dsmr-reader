@@ -2,17 +2,20 @@
 
 ## Setting up a development environment using Docker
 
->    I'm using JetBrain's PyCharm IDE for local development, which has builtin support for Git and Docker.
->    Therefor some steps or information below may or may not match your own development stack.
+!!! note
+
+    I'm using JetBrain's PyCharm IDE for local development, which has builtin support for Git and Docker.
+    Therefor some steps or information below may or may not match your own development stack.
 
 - Install Docker on your system. E.g. [how-to for Ubuntu](https://docs.docker.com/engine/install/ubuntu/) and consider [Docker rootless](https://docs.docker.com/engine/security/rootless/).
 
 - Clone DSMR-reader repository from GitHub:
 
 ```shell
-    git clone <link to your fork>>
+    git clone <link to your fork>
     cd dsmr-reader/
 ```
+
 - Symlink Docker files required (or just copy them):
 
 ```shell
@@ -24,23 +27,20 @@
 ```
 
 - Try running Docker (compose):
+
 ```shell
     # This should build all the containers for local development
     docker-compose up -d
 ```
+
 - Containers built? See if this command works:
+
 ```shell
     docker exec -it dev-dsmr-app poetry run /app/manage.py check
 
     # Expected output: "System check identified no issues (0 silenced)"
 ```
-- Now check whether tests run well in SQLite:
-```shell
-    ./tools/test-quick.sh
-```
 
-
-> Other DB engines can be tested as well, but the CI will take care of it anyway. The SQLite engine matches 99% of the features DSMR-reader requires and it also runs in-memory, speeding up tests.
 
 - When using PyCharm, you can add a new Interpreter using Docker Compose. Just select ``dev-dsmr-app`` and set ``/opt/venv/bin/python`` as interpreter path. It should now map all dependencies used/installed in the container.
 

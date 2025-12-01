@@ -8,8 +8,6 @@
 
 Notifications on your phone using Prowl, Pushover or Telegram.
 
-[TOC]
-
 !!! note
 
     Please note that DSMR-reader will reset and wipe notification settings **on any error**. 

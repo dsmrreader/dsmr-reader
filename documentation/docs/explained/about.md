@@ -1,7 +1,5 @@
 # About DSMR-reader
 
-[TOC]
-
 DSMR-reader project information.
 
 ## Project goals
@@ -29,13 +27,20 @@ DSMR-reader only supports the built-in integrations mentioned above and, for pra
 - The entire application and its code is written and documented in **English**.
 - The interface is available in both **English** and **Dutch**. <small>Detected by your browser's language preference</small>.
 - Any [support and communication](https://github.com/dsmrreader/dsmr-reader/issues/new/choose) is available in both **English** and **Dutch**.
-- This documentation is only available in **English**. <small>*This documentation used to be available in **Dutch** as well, but the latter was dropped along the release of DSMR-reader v6.x, to be able of spending more time into actual development and support.*</small>
+- This documentation is only available in **English**. 
+ 
+<small>*This documentation used to be available in **Dutch** as well, but the latter was dropped along the release of DSMR-reader v6, to be able of spending more time into actual development and support.*</small>
 
 ## Hardware requirements
 
-- RaspberryPi 4 (or similar) and better.
-- P1 telegram cable (or a network socket when using ``ser2net``).
+- RaspberryPi 5 (or similar) or better.
+- P1 telegram cable or a network socket (when using ``ser2net``).
 - A smart meter supporting any of these DSMR-telegram versions: ``v2`` / ``v4`` / ``v5``.
+
+!!! danger "Heads up"
+
+    Originally this project was built to run on SD-cards, but through the years it became clear that SD-cards are not reliable enough for this purpose.
+    They will randomly and suddenly get corrupted, so be warned!
 
 
 ## Software requirements

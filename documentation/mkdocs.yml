@@ -13,16 +13,11 @@ theme:
     - navigation.indexes
     - toc.follow
 markdown_extensions:
-  - toc:
-      baselevel: 1
   # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - toc:
+      toc_depth: 3
 extra_css:
   - css/style.css
-plugins:
-  - toc-md:
-      toc_page_title: DSMR-reader documentation
-      toc_page_description: See top bar and sidebar for a more specific navigation.
-      header_level: 3

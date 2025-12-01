@@ -1,6 +1,21 @@
-# Container setup installation
-Presumes using a RaspberryPi (5) or similar.
+---
+hide:
+  - toc
+---
 
+# Container setup installation
+
+!!! tip "Recommended installation"
+
+    This installation method is recommended for new installations of DSMR-reader.
+    It uses containerization (Podman) to run DSMR-reader and its dependencies in isolated environments.
+    This approach simplifies the installation process, enhances security, and makes it **a lot** easier for you to update.
+    You'll no longer need to manually update Python or DSMR-reader dependencies manually!
+
+    Presumes using a RaspberryPi (5) or similar hardware. Older hardware *may* work, depending on the I/O.
+
+
+## OS packages
 - Install system packages:
 ```shell
 sudo apt-get update
@@ -11,6 +26,8 @@ podman info --debug
 # but it _may_ avoid some USB permission issues at the "cost" of running ser2net
 sudo apt-get install ser2net
 ```
+
+## OS user
 - Add dedicated system user for DSMR-reader to run on:
 ```shell
 sudo useradd dsmrreader --create-home
@@ -21,6 +38,7 @@ id --user dsmrreader
 id --group dsmrreader
 ```
 
+## DSMR-reader user
 - Login as "dsmrreader" user:
 ```shell
 sudo su - dsmrreader
@@ -53,6 +71,7 @@ services:
         DGID=1001
 ```
 
+## Running
 - Try running the containers:
 ```shell
 # This may take a few minutes, mostly depending on the hardware available.

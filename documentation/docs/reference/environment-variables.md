@@ -1,13 +1,12 @@
 # Environment variables
 
-[TOC]
 
-**Django settings/overrides**
+## Django settings/overrides
 
 DSMR-reader utilizes the Python Django framework. All settings below directly affect or override Django.
 
 
-## ``DJANGO_SECRET_KEY``
+### ``DJANGO_SECRET_KEY``
 
 !!! failure inline end ""
 
@@ -19,7 +18,7 @@ See [``SECRET_KEY`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/se
 
 ---
 
-## ``DJANGO_DATABASE_ENGINE``
+### ``DJANGO_DATABASE_ENGINE``
 
 !!! failure inline end ""
 
@@ -37,7 +36,7 @@ See [``DATABASES.ENGINE`` in Django docs](https://docs.djangoproject.com/en/4.2/
 
 ---
 
-## ``DJANGO_DATABASE_HOST``
+### ``DJANGO_DATABASE_HOST``
 
 !!! warning inline end ""
 
@@ -49,7 +48,7 @@ See [``DATABASES.HOST`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ---
 
-## ``DJANGO_DATABASE_PORT``
+### ``DJANGO_DATABASE_PORT``
 
 !!! warning inline end ""
 
@@ -61,7 +60,7 @@ See [``DATABASES.PORT`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ---
 
-## ``DJANGO_DATABASE_NAME``
+### ``DJANGO_DATABASE_NAME``
 
 !!! warning inline end ""
 
@@ -73,7 +72,7 @@ See [``DATABASES.NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ---
 
-## ``DJANGO_DATABASE_USER``
+### ``DJANGO_DATABASE_USER``
 
 !!! warning inline end ""
 
@@ -85,7 +84,7 @@ See [``DATABASES.USER`` in Django docs](https://docs.djangoproject.com/en/4.2/re
 
 ---
 
-## ``DJANGO_DATABASE_PASSWORD``
+### ``DJANGO_DATABASE_PASSWORD``
 
 !!! warning inline end ""
 
@@ -97,7 +96,7 @@ See [``DATABASES.PASSWORD`` in Django docs](https://docs.djangoproject.com/en/4.
 
 ---
 
-## ``DJANGO_DATABASE_CONN_MAX_AGE``
+### ``DJANGO_DATABASE_CONN_MAX_AGE``
 
 !!! info inline end ""
 
@@ -109,7 +108,7 @@ See [``DATABASES.CONN_MAX_AGE`` in Django docs](https://docs.djangoproject.com/e
 
 ---
 
-## ``DJANGO_TIME_ZONE``
+### ``DJANGO_TIME_ZONE``
 
 !!! info inline end ""
 
@@ -123,7 +122,7 @@ See [``TIME_ZONE`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/set
 
 ---
 
-## ``DJANGO_ALLOWED_HOSTS``
+### ``DJANGO_ALLOWED_HOSTS``
 
 !!! question ""
 
@@ -147,7 +146,7 @@ See [``ALLOWED_HOSTS`` in Django docs](https://docs.djangoproject.com/en/4.2/ref
 
 ---
 
-## ``DJANGO_STATIC_URL``
+### ``DJANGO_STATIC_URL``
 
 !!! example inline end ""
 
@@ -157,7 +156,7 @@ See [``STATIC_URL`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/se
 
 ---
 
-## ``DJANGO_FORCE_SCRIPT_NAME``
+### ``DJANGO_FORCE_SCRIPT_NAME``
 
 !!! example inline end ""
 
@@ -167,7 +166,7 @@ See [``FORCE_SCRIPT_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2
 
 ---
 
-## ``DJANGO_USE_X_FORWARDED_HOST``
+### ``DJANGO_USE_X_FORWARDED_HOST``
 
 !!! example inline end ""
 
@@ -177,7 +176,7 @@ See [``USE_X_FORWARDED_HOST`` in Django docs](https://docs.djangoproject.com/en/
 
 ---
 
-## ``DJANGO_USE_X_FORWARDED_PORT``
+### ``DJANGO_USE_X_FORWARDED_PORT``
 
 !!! example inline end ""
 
@@ -187,7 +186,7 @@ See [``USE_X_FORWARDED_PORT`` in Django docs](https://docs.djangoproject.com/en/
 
 ---
 
-## ``DJANGO_X_FRAME_OPTIONS``
+### ``DJANGO_X_FRAME_OPTIONS``
 
 !!! example inline end ""
 
@@ -197,7 +196,7 @@ See [``X_FRAME_OPTIONS`` in Django docs](https://docs.djangoproject.com/en/4.2/r
 
 ---
 
-## ``DJANGO_STATIC_ROOT``
+### ``DJANGO_STATIC_ROOT``
 
 !!! example inline end ""
 
@@ -207,7 +206,7 @@ See [``STATIC_ROOT`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/s
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_AGE``
+### ``DJANGO_CSRF_COOKIE_AGE``
 
 !!! question ""
 
@@ -223,7 +222,7 @@ See [``CSRF_COOKIE_AGE`` in Django docs](https://docs.djangoproject.com/en/4.2/r
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_DOMAIN``
+### ``DJANGO_CSRF_COOKIE_DOMAIN``
 
 !!! question ""
 
@@ -239,7 +238,7 @@ See [``CSRF_COOKIE_DOMAIN`` in Django docs](https://docs.djangoproject.com/en/4.
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_HTTPONLY``
+### ``DJANGO_CSRF_COOKIE_HTTPONLY``
 
 !!! question ""
 
@@ -255,7 +254,7 @@ See [``CSRF_COOKIE_HTTPONLY`` in Django docs](https://docs.djangoproject.com/en/
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_MASKED``
+### ``DJANGO_CSRF_COOKIE_MASKED``
 
 !!! question ""
 
@@ -271,7 +270,7 @@ See [``CSRF_COOKIE_MASKED`` in Django docs](https://docs.djangoproject.com/en/4.
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_NAME``
+### ``DJANGO_CSRF_COOKIE_NAME``
 
 !!! question ""
 
@@ -287,7 +286,7 @@ See [``CSRF_COOKIE_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_PATH``
+### ``DJANGO_CSRF_COOKIE_PATH``
 
 !!! question ""
 
@@ -303,7 +302,7 @@ See [``CSRF_COOKIE_PATH`` in Django docs](https://docs.djangoproject.com/en/4.2/
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_SAMESITE``
+### ``DJANGO_CSRF_COOKIE_SAMESITE``
 
 !!! question ""
 
@@ -319,7 +318,7 @@ See [``CSRF_COOKIE_SAMESITE`` in Django docs](https://docs.djangoproject.com/en/
 
 ---
 
-## ``DJANGO_CSRF_COOKIE_SECURE``
+### ``DJANGO_CSRF_COOKIE_SECURE``
 
 !!! question ""
 
@@ -335,7 +334,7 @@ See [``CSRF_COOKIE_SECURE`` in Django docs](https://docs.djangoproject.com/en/4.
 
 ---
 
-## ``DJANGO_CSRF_USE_SESSIONS``
+### ``DJANGO_CSRF_USE_SESSIONS``
 
 !!! question ""
 
@@ -351,7 +350,7 @@ See [``CSRF_USE_SESSIONS`` in Django docs](https://docs.djangoproject.com/en/4.2
 
 ---
 
-## ``DJANGO_CSRF_HEADER_NAME``
+### ``DJANGO_CSRF_HEADER_NAME``
 
 !!! question ""
 
@@ -367,7 +366,7 @@ See [``CSRF_HEADER_NAME`` in Django docs](https://docs.djangoproject.com/en/4.2/
 
 ---
 
-## ``DJANGO_CSRF_TRUSTED_ORIGINS``
+### ``DJANGO_CSRF_TRUSTED_ORIGINS``
 
 !!! question ""
 
@@ -395,11 +394,11 @@ See [``CSRF_TRUSTED_ORIGINS`` in Django docs](https://docs.djangoproject.com/en/
 
 ---
 
-**DSMR-reader settings**
+## DSMR-reader settings
 
 These settings are for this project only.
 
-## ``DSMRREADER_ADMIN_USER``
+### ``DSMRREADER_ADMIN_USER``
 
 !!! example inline end ""
 
@@ -409,7 +408,7 @@ The username of the **webinterface** (super)user to create when running ``./mana
 
 ---
 
-## ``DSMRREADER_ADMIN_PASSWORD``
+### ``DSMRREADER_ADMIN_PASSWORD``
 
 !!! example inline end ""
 
@@ -420,7 +419,7 @@ The password of the ``DSMRREADER_ADMIN_USER`` user to create (or update if the u
 ---
 
 
-## ``DSMRREADER_LOGLEVEL``
+### ``DSMRREADER_LOGLEVEL``
 
 !!! example inline end ""
 
@@ -436,7 +435,7 @@ The latter should only be used for debugging DSMR-reader and pinpointing weird i
 
 ---
 
-## ``DSMRREADER_PLUGINS``
+### ``DSMRREADER_PLUGINS``
 
 !!! example ""
 
@@ -452,7 +451,7 @@ DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1,dsmr_plugins.modules.plugin
 
 ---
 
-## ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
+### ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
 
 !!! example ""
 
@@ -467,7 +466,7 @@ Set it to ``True`` to **disable the warnings** or omit it to use the default (= 
 
 ---
 
-## ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
+### ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
 
 !!! example ""
 
@@ -487,7 +486,7 @@ Omit to use the default (a few thousand).
 
 ---
 
-## ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
+### ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
 
 !!! example ""
 

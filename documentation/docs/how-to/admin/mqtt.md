@@ -1,7 +1,5 @@
 # Admin settings: MQTT
 
-[TOC]
-
 The application has native support for MQTT. In the screen displayed below you can enter all information about the broker you're using.
 
 ![Broker settings](../../static/screenshots/admin/mqttbrokersettings.png)
