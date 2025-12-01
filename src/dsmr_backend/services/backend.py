@@ -1,5 +1,5 @@
 import logging
-from distutils.version import StrictVersion
+from packaging.version import Version
 import datetime
 from typing import List, Optional, Tuple
 
@@ -116,12 +116,12 @@ def is_latest_version() -> bool:
         release_tag = current_release["tag_name"].replace("v", "")
         local_version = "{}.{}.{}".format(*settings.DSMRREADER_RAW_VERSION[:3])
 
-        # StrictVersion does not support dashes nor rc's
-        # @see https://www.python.org/dev/peps/pep-0386/
+        # Version does not support dashes nor rc's
+        # @see https://www.python.org/dev/peps/pep-0440/
         comparable_release_tag = release_tag.replace("-", "").replace("rc", "b")
 
         # Ignore same or lower releases.
-        if StrictVersion(comparable_release_tag) <= StrictVersion(local_version):
+        if Version(comparable_release_tag) <= Version(local_version):
             continue
 
         return False
@@ -129,7 +129,7 @@ def is_latest_version() -> bool:
     return True
 
 
-def is_timestamp_passed(timestamp: Optional[timezone.datetime]) -> bool:
+def is_timestamp_passed(timestamp: Optional[datetime.datetime]) -> bool:
     """Generic service to check whether a timestamp has passed/is happening or is empty (None)."""
     if timestamp is None:
         return True
@@ -178,7 +178,7 @@ def request_monitoring_status() -> List[MonitoringStatusIssue]:
 def is_recent_installation() -> bool:
     """Checks whether this is a new installation, by checking the interval to the first migration."""
     has_old_migration = MigrationRecorder.Migration.objects.filter(
-        applied__lt=timezone.now() - timezone.timedelta(hours=1)
+        applied__lt=timezone.now() - datetime.timedelta(hours=1)
     ).exists()
     return not has_old_migration
 
@@ -188,8 +188,8 @@ def hours_in_day(day: datetime.date) -> int:
     Returns the number of hours in a day. Should always be 24, except in DST transitions.
     You should use this whenever you're bumping an entire day with timezone.timedelta(), as it MAY differ.
     """
-    start = timezone.make_aware(timezone.datetime.combine(day, datetime.time.min))
-    end = start + timezone.timedelta(days=1)
+    start = timezone.make_aware(datetime.datetime.combine(day, datetime.time.min))
+    end = start + datetime.timedelta(days=1)
     start = timezone.localtime(start)
     end = timezone.localtime(end)
 
