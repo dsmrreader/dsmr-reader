@@ -2,6 +2,10 @@ name: Check Latest Pre-Release
 
 on:
   workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Repository in owner/repo format'
+        required: true
 
 jobs:
   check-latest-pre-release:
@@ -12,9 +16,15 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const repoInput = '${{ github.event.inputs.repository }}';
+            const [owner, repo] = repoInput.split('/');
+            if (!owner || !repo) {
+              core.setFailed('Invalid repository format. Use owner/repo.');
+              return;
+            }
             const releases = await github.rest.repos.listReleases({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner,
+              repo,
               per_page: 5
             });
             if (!releases.data.length) {
@@ -35,7 +45,6 @@ jobs:
               core.setFailed('No pre-releases in the last 24 hours.');
               return;
             }
-            // Sort by published date descending
             recent.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
             const latest = recent[0];
             core.setOutput('target_commitish', latest.target_commitish);
