@@ -1,11 +1,10 @@
-name: Check Latest Pre-Release
+name: Check Latest Pre-Release on PR
 
 on:
-  workflow_dispatch:
-    inputs:
-      repository:
-        description: 'Repository in owner/repo format'
-        required: true
+  pull_request:
+
+env:
+  REPOSITORY: dsmrreader/dsmr-reader  # Set your default or override in workflow dispatch
 
 jobs:
   check-latest-pre-release:
@@ -14,9 +13,11 @@ jobs:
       - name: Get recent releases
         id: get_releases
         uses: actions/github-script@v7
+        env:
+          REPOSITORY: ${{ env.REPOSITORY }}
         with:
           script: |
-            const repoInput = '${{ github.event.inputs.repository }}';
+            const repoInput = process.env.REPOSITORY;
             const [owner, repo] = repoInput.split('/');
             if (!owner || !repo) {
               core.setFailed('Invalid repository format. Use owner/repo.');
