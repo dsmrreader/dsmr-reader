@@ -58,6 +58,61 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
+    def test_initialize_client_api_url(self, create_bucket_mock, find_bucket_mock):
+        find_bucket_mock.return_value = None
+        self.assertFalse(create_bucket_mock.called)
+
+        InfluxdbIntegrationSettings.objects.update(
+            secure=InfluxdbIntegrationSettings.SECURE_CERT_NONE,
+            api_url="https://influxdb.example.com/api/path",
+        )
+        client = dsmr_influxdb.services.initialize_client()
+        self.assertIsNotNone(client)
+        self.assertTrue(create_bucket_mock.called)
+        self.assertEqual(client.url, "https://influxdb.example.com/api/path")
+
+    @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
+    @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
+    def test_initialize_client_legacy_hostname_port_insecure(
+        self, create_bucket_mock, find_bucket_mock
+    ):
+        find_bucket_mock.return_value = None
+        self.assertFalse(create_bucket_mock.called)
+
+        InfluxdbIntegrationSettings.objects.update(
+            secure=InfluxdbIntegrationSettings.INSECURE,
+            api_url="",
+            hostname="legacy.hostname.example.com",
+            port=8086,
+        )
+        client = dsmr_influxdb.services.initialize_client()
+        self.assertIsNotNone(client)
+        self.assertTrue(create_bucket_mock.called)
+        self.assertEqual(client.url, "http://legacy.hostname.example.com:8086")  # HTTP
+
+    @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
+    @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
+    def test_initialize_client_legacy_hostname_port_insecure(
+        self, create_bucket_mock, find_bucket_mock
+    ):
+        find_bucket_mock.return_value = None
+        self.assertFalse(create_bucket_mock.called)
+
+        InfluxdbIntegrationSettings.objects.update(
+            secure=InfluxdbIntegrationSettings.SECURE_CERT_NONE,
+            api_url="",
+            hostname="legacy.hostname.example.com",
+            port=8086,
+        )
+        client = dsmr_influxdb.services.initialize_client()
+        self.assertIsNotNone(client)
+        self.assertTrue(create_bucket_mock.called)
+        self.assertEqual(
+            client.url, "https://legacy.hostname.example.com:8086"
+        )  # HTTPS
+
+    @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
+    @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
     def test_initialize_client_secure_unverified(
         self, create_bucket_mock, find_bucket_mock
     ):

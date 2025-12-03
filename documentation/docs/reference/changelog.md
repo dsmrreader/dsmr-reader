@@ -33,18 +33,22 @@
     - **PostgreSQL 11**
     - **PostgreSQL 12**
     - **PostgreSQL 13**
-    
+
+!!! abstract "Other changes"
+
+    - Django settings ontsluiten via envvars [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
+    - MinderGas - Toevoegen uitleg over tijdstip van upload naar Mindergas- by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979)
+    - Dropbox - Upgrade Dropbox SDK to version 12 *(version 11 breaks on 1st January 2026)*
+    - InfluxDB - Gebruik Influx URL i.p.v. Influx hostname + port combinatie [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
+    - InfluxDB - Added alias for clearing InfluxDB queue ``./manage.py dsmr_influxdb_clear_queue``
+    - MQTT - Added a for clearing MQTT queue ``./manage.py dsmr_mqtt_clear_queue``
+    - API - Fixed API docs rendering
+    - Simplify documentation  [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
+
 !!! tip "Recommendations"
 
     - Recommended Python version is now **Python 3.13**
     - Recommended PostgreSQL version is now **PostgreSQL 17** (or higher)
-
-!!! abstract "Other changes"
-
-    - Toevoegen uitleg over tijdstip van upload naar Mindergas- by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979)
-    - Upgrade Dropbox SDK to version 12 *(version 11 breaks on 1st January 2026)*
-    - Simplify documentation  [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
-    - Fixed API docs rendering
 
 ---
 

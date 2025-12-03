@@ -35,14 +35,31 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Enabled"),
         help_text=_("Whether the InfluxDB integration is enabled."),
     )
+    api_url = models.CharField(
+        blank=True,
+        max_length=255,
+        default="",
+        verbose_name=_("InfluxDB URL"),
+        help_text=_(
+            "The full http(s)-URL to the InfluxDB instance. Replaces legacy hostname and port below (leave the current field empty if you use the legacy fields). E.g. https://prometheus-prod-01-eu-west-0.grafana.net/api/v1/push/influx"
+        ),
+    )
     hostname = models.CharField(
+        blank=True,
         max_length=128,
-        default="localhost",
-        verbose_name=_("InfluxDB hostname"),
-        help_text=_("The hostname of the InfluxDB."),
+        verbose_name=_("(legacy) InfluxDB hostname"),
+        help_text=_(
+            "Legacy. Will be dropped in a future version. Use InfluxDB URL above instead and leave the current field empty."
+        ),
     )
     port = models.IntegerField(
-        default=8086, verbose_name=_("InfluxDB port."), help_text=_("Default: 8086")
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name=_("(legacy) InfluxDB port"),
+        help_text=_(
+            "Legacy. Will be dropped in a future version. Use InfluxDB URL above instead and leave the current field empty."
+        ),
     )
     # @see https://docs.influxdata.com/influxdb/v2.1/organizations
     organization = models.CharField(
@@ -69,9 +86,9 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
         max_length=24,
         default=INSECURE,
         choices=SECURE_CHOICES,
-        verbose_name=_("Use secure connection (HTTPS)"),
+        verbose_name=_("Use secure connection"),
         help_text=_(
-            "Whether the client should use a secure connection. "
+            "Whether the client should use a secure connection and verify certificates. "
             "Select SECURE (CERT_NONE) for self-signed certificates."
         ),
     )

@@ -30,11 +30,13 @@ def initialize_client() -> Optional[InfluxDBClient]:
         InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
     )
 
-    if use_secure_connection:
+    if len(influxdb_settings.api_url) > 0:
+        server_base_url = influxdb_settings.api_url
+    elif use_secure_connection:  # Legacy
         server_base_url = "https://{}:{}".format(
             influxdb_settings.hostname, influxdb_settings.port
         )
-    else:
+    else:  # Legacy
         server_base_url = "http://{}:{}".format(
             influxdb_settings.hostname, influxdb_settings.port
         )
@@ -48,7 +50,6 @@ def initialize_client() -> Optional[InfluxDBClient]:
         == InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
         timeout=settings.DSMRREADER_CLIENT_TIMEOUT * 1000,  # Ms!
     )
-    # logger.debug('INFLUXDB: InfluxDB client/server status: "%s"', influxdb_client.ready().status)
 
     if (
         influxdb_client.buckets_api().find_bucket_by_name(influxdb_settings.bucket)

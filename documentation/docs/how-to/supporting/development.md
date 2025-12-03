@@ -53,5 +53,21 @@ When running it with the default Docker compose config, the Django Development S
 
 Any Python code changes you make will cause the Django Development Server to reload itself automatically.
 
+## Translations
+
+- Update the code and add translatable strings.
+- Run ``makemessages`` to extract those strings:
+
+```shell
+docker compose exec dev-dsmr-app poetry run /app/manage.py makemessages -l nl
+```
+ 
+- Open ``dsmr_frontend/locale/nl/LC_MESSAGES/django.po`` with PO Editor or a similar tool and translate the new strings.
+- After translation, run ``compilemessages`` to compile the PO-translations into the MO-files:
+
+```shell
+docker compose exec dev-dsmr-app poetry run /app/manage.py compilemessage
+```
+
 ## Other stuff
-There is some more to it, such as tests, translations and documentation. If you ever need to work on those, just see how similar stuff works in the project. Or ask for more information.
+There is some more to it, such as tests and documentation. If you ever need to work on those, just see how similar stuff works in the project. Or ask for more information.

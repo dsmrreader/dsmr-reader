@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.forms import TextInput
 from django.utils.translation import gettext_lazy as _
+from django.db import models
 from solo.admin import SingletonModelAdmin
 
 from dsmr_backend.mixins import DeletionOnlyAdminModel
@@ -10,12 +12,16 @@ from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasuremen
 class InfluxdbIntegrationSettingsAdmin(SingletonModelAdmin):
     save_on_top = True
     change_form_template = "dsmr_influxdb/influxdb_settings/change_form.html"
+    formfield_overrides = {
+        models.CharField: {"widget": TextInput(attrs={"size": "69"})},
+    }
     fieldsets = (
         (
             None,
             {
                 "fields": [
                     "enabled",
+                    "api_url",
                     "hostname",
                     "port",
                     "secure",
