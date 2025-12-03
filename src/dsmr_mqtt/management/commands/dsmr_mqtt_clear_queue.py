@@ -4,8 +4,8 @@ from dsmr_mqtt.models import queue
 
 
 class Command(BaseCommand):
-    help = "Deletes ALL messages in the queue"
+    help = "Deletes ALL MQTT messages from the queue"
 
     def handle(self, **options):
         queue.Message.objects.all().delete()
-        print("Done.")
+        print("Done")
