@@ -69,5 +69,11 @@ docker compose exec dev-dsmr-app poetry run /app/manage.py makemessages -l nl
 docker compose exec dev-dsmr-app poetry run /app/manage.py compilemessage
 ```
 
+## Code style
+```shell
+docker compose exec dev-dsmr-app poetry run black .
+docker compose exec dev-dsmr-app poetry run flake8 -v
+```
+
 ## Other stuff
 There is some more to it, such as tests and documentation. If you ever need to work on those, just see how similar stuff works in the project. Or ask for more information.
