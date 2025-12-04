@@ -93,11 +93,6 @@ except UndefinedValueError:
     pass
 
 try:
-    CSRF_COOKIE_MASKED = config("DJANGO_CSRF_COOKIE_MASKED", cast=bool)
-except UndefinedValueError:
-    pass
-
-try:
     CSRF_COOKIE_NAME = config("DJANGO_CSRF_COOKIE_NAME", cast=str)
 except UndefinedValueError:
     pass

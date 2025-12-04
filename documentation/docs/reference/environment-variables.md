@@ -254,22 +254,6 @@ See [``CSRF_COOKIE_HTTPONLY`` in Django docs](https://docs.djangoproject.com/en/
 
 ---
 
-### ``DJANGO_CSRF_COOKIE_MASKED``
-
-!!! question ""
-
-    *This environment variable was added in DSMR-reader v6.0*
-
-!!! example inline end ""
-
-    This setting is **situational**.
-
-Cross-Site Request Forgery (CSRF) related setting. Usually no customization needed, unless you're integrating DSMR-reader into another application.
-
-See [``CSRF_COOKIE_MASKED`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-masked) for more information about the setting and what it does.
-
----
-
 ### ``DJANGO_CSRF_COOKIE_NAME``
 
 !!! question ""
