@@ -1,27 +1,28 @@
 # Contributions
 
-DSMR-reader is originally created and authored by:
-
-- Dennis Siemensma
-
-
-## Thanks to
-
-- [GitHub](https://github.com/) for hosting the project code and issues.
-- [Read The Docs](https://readthedocs.org/) for hosting all documentation of DSMR-reader.
-
+DSMR-reader is originally created and authored by: **Dennis Siemensma**
 
 ## Special thanks
 
 For providing their time and support.
 
-- [Bram van Dartel](http://www.yunta.nl/) ([@xirixiz](https://github.com/xirixiz))
-- [DSMR-parser](https://github.com/ndokter/dsmr_parser) by [Nigel Dokter](https://www.linkedin.com/in/nigel-dokter-5321ab110/) ([@ndokter](https://github.com/ndokter))
-- [Jeroen Peters](https://www.linkedin.com/in/jeroen-peters-nl/) ([@jeroenpeters1986](https://github.com/jeroenpeters1986))
-- All the [other contributors](https://github.com/dsmrreader/dsmr-reader/graphs/contributors)!
-- [JetBrains](https://www.jetbrains.com/?from=DSMR-reader) for providing an open-source licence to work on DSMR-reader with PyCharm & DataGrip, free-of-charge, for many years.
+[Bram van Dartel](http://www.yunta.nl/){ .md-button } ([@xirixiz](https://github.com/xirixiz))
 
-![Screenshot](../static/jetbrains/jetbrains-variant-4.png)
+[DSMR-parser](https://github.com/ndokter/dsmr_parser){ .md-button } by [Nigel Dokter](https://www.linkedin.com/in/nigel-dokter-5321ab110/){ .md-button } ([@ndokter](https://github.com/ndokter))
+
+[Jeroen Peters](https://www.linkedin.com/in/jeroen-peters-nl/){ .md-button } ([@jeroenpeters1986](https://github.com/jeroenpeters1986))
+
+[All the other contributors](https://github.com/dsmrreader/dsmr-reader/graphs/contributors){ .md-button }!
+
+[JetBrains](https://www.jetbrains.com/?from=DSMR-reader){ .md-button }
+
+*For providing an open-source licence to work on DSMR-reader with PyCharm & DataGrip, free-of-charge, for many years.*
+
+
+## Other thanks to
+
+- [GitHub](https://github.com/) for hosting the project code and issues.
+- [Read The Docs](https://readthedocs.org/) for hosting all documentation of DSMR-reader.
 
 
 ## And don't forget

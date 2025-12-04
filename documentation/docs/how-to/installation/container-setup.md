@@ -17,6 +17,7 @@ hide:
 
 ## OS packages
 - Install system packages:
+
 ```shell
 sudo apt-get update
 sudo apt-get install podman podman-compose podman-docker crun
@@ -29,6 +30,7 @@ sudo apt-get install ser2net
 
 ## OS user
 - Add dedicated system user for DSMR-reader to run on:
+
 ```shell
 sudo useradd dsmrreader --create-home
 sudo loginctl enable-linger dsmrreader
@@ -40,17 +42,20 @@ id --group dsmrreader
 
 ## DSMR-reader user
 - Login as "dsmrreader" user:
+
 ```shell
 sudo su - dsmrreader
 ```
 
 - Download container Compose template file:
+
 ```shell
 # TODO: Change to "latest" after releasing DSMR-reader v6.
 wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/development/provisioning/container/compose.prod.yml -O compose.yml
 ```
 
 - Configure Compose file to your needs
+
 ```shell
 # Or use "nano" instead of "vi" if you prefer that text editor.
 vi compose.yml
@@ -73,17 +78,21 @@ services:
 
 ## Running
 - Try running the containers:
+
 ```shell
 # This may take a few minutes, mostly depending on the hardware available.
 podman-compose up -d
 ```
 
 - Check folders created:
+
 ```shell
 ls -l
 ```
+
 - It should now at least have the file `compose.yml` and folders `dsmr_database` and `dsmr_backups`.
 - Check logs for any weird stuff:
+
 ```shell
 podman-compose logs -f
 ```

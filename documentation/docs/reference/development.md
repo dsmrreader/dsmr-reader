@@ -49,7 +49,7 @@
 
 When running it with the default Docker compose config, the Django Development Server application will be accessible at:
 
--  [http://localhost:8000](http://localhost:8000/)
+[http://localhost:8000](http://localhost:8000/){ .md-button }
 
 Any Python code changes you make will cause the Django Development Server to reload itself automatically.
 

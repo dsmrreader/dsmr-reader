@@ -19,14 +19,16 @@
 
     - Native installations **without containers**
 
-    !!! note ""
+    !!! success ""
 
         *This will ease future upgrades for you, as most of the installation is relocated into the pre-built DSMR-reader container image.*
-        *See [the v6 upgrade guide](../how-to/upgrade/to-v6.md) for more information.*
+        *See the upgrade guide for more information.*
+
+        [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button .md-button--primary }
 
     - **PostgreSQL 13 and lower** - *(Django only supports PostgreSQL 13 and higher)*
 
-    !!! note ""
+    !!! success ""
     
         *Tip: Upgrade to **PostgreSQL 17** if you need to upgrade anyway - This will likely defer future upgrades for a few more years, as it's [expected to be end-of-life in 2029 or later](https://www.postgresql.org/support/versioning/).*
 
