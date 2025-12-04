@@ -1,4 +1,4 @@
-# Admin settings: Dropbox
+# Email backup
 
 !!! abstract "For your information"
 
@@ -6,10 +6,9 @@
 
     Usually this depends on the third party supporting it and the amount of (re)work needed in DSMR-reader to keep it backward/forward compatible.
 
-
 !!! failure "Deprecated feature"
 
-    The Dropbox feature will be **dropped** from DSMR-reader in a future release.
+    The email feature will be **dropped** from DSMR-reader in a future release.
     
     Reworking DSMR-reader to a Docker/container-only setup allows for generic third party integrations more easily.
-    E.g. mounting the DSMR-reader backup by a Dropbox/OneDrive/GoogleDrive compatible container instead.
+    E.g. mounting the DSMR-reader backup by another container instead that can dispatch email.

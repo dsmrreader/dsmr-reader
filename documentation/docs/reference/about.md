@@ -1,6 +1,6 @@
-# About DSMR-reader
+# About this project
 
-DSMR-reader project information.
+What is DSMR-reader? What is its purpose? What are its goals?
 
 ## Project goals
 - Provide a tool to easily extract, store and visualize data transferred by the DSMR protocol of your smart meter.
@@ -29,7 +29,6 @@ DSMR-reader only supports the built-in integrations mentioned above and, for pra
 - Any [support and communication](https://github.com/dsmrreader/dsmr-reader/issues/new/choose) is available in both **English** and **Dutch**.
 - This documentation is only available in **English**. 
  
-<small>*This documentation used to be available in **Dutch** as well, but the latter was dropped along the release of DSMR-reader v6, to be able of spending more time into actual development and support.*</small>
 
 ## Hardware requirements
 

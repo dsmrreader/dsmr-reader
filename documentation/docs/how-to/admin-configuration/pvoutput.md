@@ -1,4 +1,4 @@
-# Admin settings: PVOutput.org
+# PVOutput.org
 
 !!! abstract "For your information"
 

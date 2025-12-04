@@ -1,4 +1,4 @@
-# API
+# REST API
 
 The application has a REST API, allowing you to insert/create readings and retrieve statistics.
 

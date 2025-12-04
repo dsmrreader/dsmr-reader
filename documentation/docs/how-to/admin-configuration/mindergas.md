@@ -1,4 +1,4 @@
-# Admin settings: MinderGas.nl
+# MinderGas.nl
 
 !!! abstract "For your information"
 

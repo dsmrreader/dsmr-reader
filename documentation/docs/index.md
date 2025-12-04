@@ -1,9 +1,11 @@
 # DSMR-reader documentation
-See sidebar and top bar for a more specific navigation. Or search on the top right.
+See "How to" and "Reference" on top of the page. They contain all documentation you need to either get started or sort something out.
 
-!!! tip "Quick links"
+!!! tip "Frequently used links"
 
     - [Changelog](reference/changelog.md)
-    - [About DSMR-reader](explained/about.md)
-    - [Environment variables](reference/environment-variables.md)
-    - [Container setup installation](tutorial/install-container-setup.md)
+    - [About DSMR-reader](reference/about.md)
+    - [Environment variables reference](reference/environment-variables.md)
+    - [How-to install DSMR-reader](how-to/install-container-setup.md)
+    - [How-to reset admin credentials](how-to/admin-configuration/admin-credentials.md)
+

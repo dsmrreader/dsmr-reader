@@ -5,7 +5,7 @@
 !!! note ""
     The releases in this series are currently supported and will receive new features and bug/security fixes until a new major series is released *(give or take once a year)*.
 
-    - Every **minor** release (e.g. `v5.x` -> `v5.y`) is *usually* compatible with any preceding release in the same series and should allow you to update easily. See [how to (minor) update in the same series](../how-to/upgrading/upgrade.md).
+    - Every **minor** release (e.g. `v5.x` -> `v5.y`) is *usually* compatible with any preceding release in the same series and should allow you to update easily.
     - Every new **major** series (e.g. `v5.x` -> `v6.x`) *usually* contains **incompatible changes** that require you to update with additional manual steps. Upgrading to the **last release** of a series (e.g. `v5.12`), should tell you where to find the upgrade steps required.
 
 
@@ -22,7 +22,7 @@
     !!! note ""
 
         *This will ease future upgrades for you, as most of the installation is relocated into the pre-built DSMR-reader container image.*
-        *See [the v6 upgrade guide](../tutorial/upgrading/to-v6.md) for more information.*
+        *See [the v6 upgrade guide](../how-to/upgrade/to-v6.md) for more information.*
 
     - **PostgreSQL 13 and lower** - *(Django only supports PostgreSQL 13 and higher)*
 
@@ -57,10 +57,6 @@
     - Fixed broken API docs rendering cause by legacy ReDoc link
     - Simplify documentation  [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
 
-
----
-
----
 
 ---
 
@@ -237,7 +233,7 @@
 
 !!! info
 
-    This release of DSMR-reader requires you to **manually upgrade** from `v4.x` to `v5.x`. See [the v5 upgrade guide](../tutorial/upgrading/to-v5.md) for more information.
+    This release of DSMR-reader requires you to **manually upgrade** from `v4.x` to `v5.x`. See [the v5 upgrade guide](../how-to/upgrade/to-v5.md) for more information.
 
 ---
 

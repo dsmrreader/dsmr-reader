@@ -1,4 +1,4 @@
-# Admin settings: Notifications
+# Notifications
 
 !!! abstract "For your information"
 

@@ -59,16 +59,16 @@ vi compose.yml
 ```yaml
 # Simplified compose.yml - Find DUID=1001 and DGID=1001 and change them if dsmrreader has different IDs on your system.
 services:
-  dsmrdb:
-      environment:
-        # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
-        DUID=1001
-        DGID=1001
-  dsmr:
-      environment:
-        # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
-        DUID=1001
-        DGID=1001
+    dsmrdb:
+        environment:
+            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
+            DUID=1001
+            DGID=1001
+    dsmr:
+        environment:
+            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
+            DUID=1001
+            DGID=1001
 ```
 
 ## Running

@@ -1,5 +1,131 @@
 # Environment variables
 
+!!! abstract ""
+
+    These environment variables can be used to configure DSMR-reader and its underlying Django framework.
+
+    Apply them by defining them as ``environment`` in your ``compose.yml`` in the ``dsmr`` services and restart the DSMR-reader container (e.g. ``podman-compose restart dsmr``).
+
+
+## DSMR-reader settings
+
+These settings are for this main project only. Others may or may not exist or are specifically created for the DSMR-reader Docker project.
+
+### ``DSMRREADER_ADMIN_USER``
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+The username of the **webinterface** (super)user to create when running ``./manage.py dsmr_superuser``.
+
+---
+
+### ``DSMRREADER_ADMIN_PASSWORD``
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+The password of the ``DSMRREADER_ADMIN_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``.
+
+---
+
+### ``DSMRREADER_LOGLEVEL``
+
+!!! example inline end ""
+
+    This setting is **situational**.
+
+The log level DSMR-reader should use. Choose either:
+
+- ``ERROR`` (omit for this default)
+- ``WARNING``
+- ``DEBUG``
+ 
+The latter should only be used for debugging DSMR-reader and pinpointing weird issues.
+
+---
+
+### ``DSMRREADER_PLUGINS``
+
+!!! example ""
+
+    This setting is **situational**.
+
+The [plugins DSMR-reader should use](./plugins.md). Omit to use the default of no plugins.
+Note that this should be a comma separated list when specifying multiple plugins. E.g.:
+
+```ini
+DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1
+```
+```ini
+DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1,dsmr_plugins.modules.plugin_name2
+```
+
+---
+
+### ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
+
+!!! example ""
+
+    This setting is **situational**.
+
+Whether to suppress any warnings regarding too many readings stored or the database size.
+Set it to ``True`` to **disable the warnings** or omit it to use the default (= ``False``).
+
+!!! danger
+
+    Suppress warnings at your own risk.
+
+---
+
+### ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
+
+!!! example ""
+
+    This setting is **situational**.
+
+The maximum amount of MQTT messages queued in DSMR-reader until new ones will be **rejected**. No need to tweak this for healthy installations.
+
+This prevents creating an infinite backlog of messages queued. 
+For example when the pile of unsent messages keeps increasing and DSMR-reader is unable to send them faster than new ones are created.
+
+However, you may increase the maximum for whatever reason along your local setup.
+Omit to use the default (a few thousand).
+
+!!! danger
+
+    Increase queue size at your own risk.
+
+---
+
+### ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
+
+!!! example ""
+
+    This setting is **situational**.
+
+Updating MQTT topics consecutively **with the same value has no effect**, depending on its usage in your setup.
+
+DSMR-reader always sends MQTT messages to your broker with a ``retain`` flag, resulting the broker keeping the **last value received for every topic**. 
+Which means that any (new) MQTT subscribers should always receive the retained value, even when DSMR-reader has no *new* (different) values for the retained topics. 
+
+To take advantage of this, DSMR-reader can be set to *cache the last value sent for each topic*. This will hint DSMR-reader to **not send the same consecutive value to the same topic** (within the caching duration).
+This may greatly reduce the number of MQTT messages sent when there is nothing to update, as DSMR-reader will simply not send an update. 
+
+If the value of a topic changes, DSMR-reader will still send the updated value. Data that *constantly changes* will not be affected by this mechanism (and the entire mechanism will be useless for those topics).
+
+!!! danger
+
+    Enable caching only if you understand what it does.
+
+---
+
+---
+
+
+---
 
 ## Django settings/overrides
 
@@ -371,121 +497,3 @@ See [``CSRF_TRUSTED_ORIGINS`` in Django docs](https://docs.djangoproject.com/en/
     ```ini
     DJANGO_CSRF_TRUSTED_ORIGINS=https://subdomain1.example.com,https://subdomain2.example.com,https://subdomain3.example.com
     ```
-
----
-
----
-
----
-
-## DSMR-reader settings
-
-These settings are for this project only.
-
-### ``DSMRREADER_ADMIN_USER``
-
-!!! example inline end ""
-
-    This setting is **situational**.
-
-The username of the **webinterface** (super)user to create when running ``./manage.py dsmr_superuser``.
-
----
-
-### ``DSMRREADER_ADMIN_PASSWORD``
-
-!!! example inline end ""
-
-    This setting is **situational**.
-
-The password of the ``DSMRREADER_ADMIN_USER`` user to create (or update if the user exists) when running ``./manage.py dsmr_superuser``.
-
----
-
-
-### ``DSMRREADER_LOGLEVEL``
-
-!!! example inline end ""
-
-    This setting is **situational**.
-
-The log level DSMR-reader should use. Choose either:
-
-- ``ERROR`` (omit for this default)
-- ``WARNING``
-- ``DEBUG``
- 
-The latter should only be used for debugging DSMR-reader and pinpointing weird issues.
-
----
-
-### ``DSMRREADER_PLUGINS``
-
-!!! example ""
-
-    This setting is **situational**.
-
-The [plugins DSMR-reader should use](./plugins.md). Omit to use the default of no plugins.
-Note that this should be a comma separated list when specifying multiple plugins. E.g.:
-
-```ini
-DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1
-DSMRREADER_PLUGINS=dsmr_plugins.modules.plugin_name1,dsmr_plugins.modules.plugin_name2
-```
-
----
-
-### ``DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS``
-
-!!! example ""
-
-    This setting is **situational**.
-
-Whether to suppress any warnings regarding too many readings stored or the database size.
-Set it to ``True`` to **disable the warnings** or omit it to use the default (= ``False``).
-
-!!! danger
-
-    Suppress warnings at your own risk.
-
----
-
-### ``DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE``
-
-!!! example ""
-
-    This setting is **situational**.
-
-The maximum amount of MQTT messages queued in DSMR-reader until new ones will be **rejected**. No need to tweak this for healthy installations.
-
-This prevents creating an infinite backlog of messages queued. 
-For example when the pile of unsent messages keeps increasing and DSMR-reader is unable to send them faster than new ones are created.
-
-However, you may increase the maximum for whatever reason along your local setup.
-Omit to use the default (a few thousand).
-
-!!! danger
-
-    Increase queue size at your own risk.
-
----
-
-### ``DSMRREADER_MQTT_MAX_CACHE_TIMEOUT``
-
-!!! example ""
-
-    This setting is **situational**.
-
-Updating MQTT topics consecutively **with the same value has no effect**, depending on its usage in your setup.
-
-DSMR-reader always sends MQTT messages to your broker with a ``retain`` flag, resulting the broker keeping the **last value received for every topic**. 
-Which means that any (new) MQTT subscribers should always receive the retained value, even when DSMR-reader has no *new* (different) values for the retained topics. 
-
-To take advantage of this, DSMR-reader can be set to *cache the last value sent for each topic*. This will hint DSMR-reader to **not send the same consecutive value to the same topic** (within the caching duration).
-This may greatly reduce the number of MQTT messages sent when there is nothing to update, as DSMR-reader will simply not send an update. 
-
-If the value of a topic changes, DSMR-reader will still send the updated value. Data that *constantly changes* will not be affected by this mechanism (and the entire mechanism will be useless for those topics).
-
-!!! danger
-
-    Enable caching only if you understand what it does.

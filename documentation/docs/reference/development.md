@@ -1,4 +1,4 @@
-# Developing DSMR-reader
+# Developing
 
 ## Setting up a development environment using Docker
 

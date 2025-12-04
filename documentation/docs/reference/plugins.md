@@ -5,9 +5,9 @@ The application allows you to create and add plugins, hooking on certain events 
 !!! danger
     
     These are very technical scripts, and you should **not use any of them** unless you understand what they do.
-    Most of them originate from single-user feature requests in the form of a workaround instead.
+    Most of them originate from historic single-user feature requests, convered to some kind of hacky workaround.
 
-    Refrain from using them if you're not sure.
+    Refrain from using them if you're not sure why you would need one. Also, they are subject to break on future updates.
 
 
 ## Configuration
@@ -18,7 +18,7 @@ where ``plugin_name`` is the name of your plugin.
 Please make sure the ``plugin_name``,
 
 * is lowercase (``plugin_name`` and **not** ``PLUGIN_NAME``),
-* does not contains spaces or dashes, only use underscores and do not start the name with a digit.
+* does not contain spaces or dashes, only use underscores and do not start the name with a digit.
 
 !!! info
 
