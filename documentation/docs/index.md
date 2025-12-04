@@ -3,7 +3,7 @@ See sidebar and top bar for a more specific navigation. Or search on the top rig
 
 !!! tip "Quick links"
 
-    - [Changelog](reference/changelog)
-    - [About DSMR-reader](explained/about)
-    - [Environment variables](reference/environment-variables)
-    - [Container setup installation](tutorial/install-container-setup)
+    - [Changelog](reference/changelog.md)
+    - [About DSMR-reader](explained/about.md)
+    - [Environment variables](reference/environment-variables.md)
+    - [Container setup installation](tutorial/install-container-setup.md)
