@@ -7,7 +7,6 @@ services:
   dev-dsmr-app:
     container_name: dev-dsmr-app
     restart: 'unless-stopped'
-    command: '/app/manage.py runserver 0.0.0.0:8000'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev

@@ -31,15 +31,12 @@ ENV POETRY_VIRTUALENVS_CREATE=true \
 
 RUN pip install poetry
 
-# Do NOT copy lock file. It will be mirrored by Compose after building anyway.
-COPY src/pyproject.toml /app/
-RUN touch README.md \
-    && poetry install \
-    && rm /app/pyproject.toml
+# This cannot reside in /app as it will be mounted during development.
+COPY provisioning/container/dsmr-dev/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-WORKDIR /app
-ENTRYPOINT ["/app/.venv/bin/python3"]
-
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["poetry", "run", "/app/manage.py", "runserver", "0.0.0.0:8000"]
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-docs
