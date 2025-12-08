@@ -54,6 +54,9 @@
     #### MQTT
     - Added command-line alias for clearing MQTT queue: ``./manage.py dsmr_mqtt_clear_queue``
 
+    ### Misc
+    - Updated FontAwesome icons to version 7.1
+
     #### Docs
     - Dropped Dutch translation for the documentation *(DSMR-reader application translations are **not** affected)*
     - Fixed broken API docs rendering caused by legacy ReDoc link
