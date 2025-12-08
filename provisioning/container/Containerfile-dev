@@ -44,7 +44,7 @@ ENTRYPOINT ["/app/.venv/bin/python3"]
 
 FROM local-dsmrreader-base AS local-dsmrreader-docs
 WORKDIR /app
-COPY ./documentation/ /app/
+COPY ./documentation/requirements.txt /requirements.txt
 # Do NOT use Poetry here, as RTD also directly utilizes PIP instead anyway.
-RUN pip install -r /app/requirements.txt
+RUN pip install -r /requirements.txt
 ENTRYPOINT ["mkdocs"]
