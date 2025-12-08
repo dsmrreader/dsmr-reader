@@ -56,7 +56,7 @@
 
     #### Docs
     - Dropped Dutch translation for the documentation *(DSMR-reader application translations are **not** affected)*
-    - Fixed broken API docs rendering cause by legacy ReDoc link
+    - Fixed broken API docs rendering caused by legacy ReDoc link
     - Simplify documentation  [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
 
 
