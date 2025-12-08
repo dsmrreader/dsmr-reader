@@ -32,11 +32,21 @@ ENV POETRY_VIRTUALENVS_CREATE=true \
 RUN pip install poetry
 
 # This cannot reside in /app as it will be mounted during development.
-COPY provisioning/container/dsmr-dev/entrypoint.sh /entrypoint.sh
+COPY provisioning/container/entrypoint-dev.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["poetry", "run", "/app/manage.py", "runserver", "0.0.0.0:8000"]
+
+
+
+FROM local-dsmrreader-dev AS local-dsmrreader-test
+
+COPY provisioning/container/entrypoint-test.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-docs
