@@ -3,7 +3,8 @@
 # Trigger an error if non-zero exit code is encountered
 set -e
 
-poetry install -v
+poetry install
+poetry run /app/manage.py migrate --noinput
 
-# E.g. "runserver"
+# E.g. "poetry run /app/manage.py runserver 8000"
 exec ${@}
