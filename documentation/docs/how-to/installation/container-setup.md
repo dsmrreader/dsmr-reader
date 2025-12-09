@@ -5,18 +5,19 @@ hide:
 
 # Container setup installation
 
+!!! abstract ""
+
+    The [containerized version of DSMR-reader](https://github.com/xirixiz/dsmr-reader-docker) is created and maintained by [Xirixiz a.k.a. Bram van Dartel](https://github.com/xirixiz).
+    He has been working on it since 2017 and it is widely used by the DSMR-reader community. Since DSMR-reader v6, this is also the only installation method supported.
+
+
+
+This installation method is recommended for new installations of DSMR-reader.
+It uses containerization (Podman) to run DSMR-reader and its dependencies in isolated environments.
+
+Recommended is using a RaspberryPi 5 or similar hardware. Older hardware *may* work, depending on the I/O.
+
 This guide presumes you use Podman, however you can also use Docker or other container hosts that are compatible.
-
-!!! tip "Recommended installation"
-
-    This installation method is recommended for new installations of DSMR-reader.
-    It uses containerization (Podman) to run DSMR-reader and its dependencies in isolated environments.
-    This approach simplifies the installation process, enhances security, and makes it **a lot** easier for you to update.
-    You'll no longer need to manually update Python or DSMR-reader dependencies manually!
-
-    Presumes using a RaspberryPi (5) or similar hardware. Older hardware *may* work, depending on the I/O.
-
-
 See also: [Container setup upgrade instructions](../../how-to/upgrade/to-v6.md) for a schematic overview of the setup.
 
 

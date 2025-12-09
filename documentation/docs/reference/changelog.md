@@ -17,7 +17,7 @@
 
 !!! danger "Dropped installation support for"
     
-    - Native installations **without containers**
+    - Native installations ==without containers==
 
     [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button .md-button--primary }
 
@@ -43,7 +43,7 @@
     
         *Most versions are either end-of-life or no longer supported by the Django Framework.*        
 
-        *Tip: Upgrade to **PostgreSQL 17** if you need to upgrade anyway - This will likely defer following database upgrades for a few more years, as it's [expected to be end-of-life in 2029 or later](https://www.postgresql.org/support/versioning/).*
+        *Tip: Upgrade to ==PostgreSQL 17== if you need to upgrade anyway - This will likely defer following database upgrades for a few more years, as it's [expected to be end-of-life in 2029 or later](https://www.postgresql.org/support/versioning/).*
 
 !!! danger "Dropped Python support for"
 
@@ -64,25 +64,31 @@
 !!! note "New features or changes"
 
     #### Hosting
-    - Django settings ontsluiten via envvars [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
+    - Django settings ontsluiten via envvars [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010){ .md-button }
 
     #### MinderGas
-    - Toevoegen uitleg over tijdstip van upload naar Mindergas- by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979)
+    - Toevoegen uitleg over tijdstip van upload naar Mindergas- by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979){ .md-button }
     
     #### Dropbox
-    - Upgrade Dropbox SDK to version 12 *(version 11 breaks on 1st of January 2026)*
+    - Upgrade Dropbox SDK to version 12 ==*(version 11 breaks on 1st of January 2026)*==
 
     #### InfluxDB
-    - Gebruik Influx URL i.p.v. Influx hostname + port combinatie [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
-    - Added command-line alias for clearing InfluxDB queue: ``./manage.py dsmr_influxdb_clear_queue``
+    - Gebruik Influx URL i.p.v. Influx hostname + port combinatie [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984){ .md-button }
+    - Added command-line alias for clearing InfluxDB queue
+        ``` shell
+        ./manage.py dsmr_influxdb_clear_queue
+        ``` 
 
     #### MQTT
-    - Added command-line alias for clearing MQTT queue: ``./manage.py dsmr_mqtt_clear_queue``
+    - Added command-line alias for clearing MQTT queue
+        ``` shell
+        ./manage.py dsmr_mqtt_clear_queue
+        ``` 
 
     #### Docs
-    - Dropped Dutch translation for the documentation *(DSMR-reader application translations are **not** affected)*
+    - Dropped Dutch translation for the documentation ==*(DSMR-reader application translations are **not** affected)*==
     - Fixed broken API docs rendering caused by legacy ReDoc link
-    - Simplify documentation  [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
+    - Simplify documentation [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686){ .md-button }
 
     #### Misc
     - Updated Django to 5.2 LTS
@@ -97,7 +103,7 @@
 ---
 
 
-## Older release series
+## Previous release series
 
 !!! warning
 

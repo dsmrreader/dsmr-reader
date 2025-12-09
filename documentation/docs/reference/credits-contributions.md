@@ -1,6 +1,8 @@
 # Contributions
 
-DSMR-reader is originally created and authored by: **Dennis Siemensma**
+## Author
+
+DSMR-reader is originally created and authored by **Dennis Siemensma** in **2015**.
 
 ## Special thanks
 
@@ -12,11 +14,10 @@ For providing their time and support.
 
 [Jeroen Peters](https://www.linkedin.com/in/jeroen-peters-nl/){ .md-button } ([@jeroenpeters1986](https://github.com/jeroenpeters1986))
 
-[All the other contributors](https://github.com/dsmrreader/dsmr-reader/graphs/contributors){ .md-button }!
+[All the other contributors](https://github.com/dsmrreader/dsmr-reader/graphs/contributors){ .md-button }
 
+*For providing an open-source license to work on DSMR-reader with PyCharm & DataGrip, free-of-charge, for many years.*:
 [JetBrains](https://www.jetbrains.com/?from=DSMR-reader){ .md-button }
-
-*For providing an open-source licence to work on DSMR-reader with PyCharm & DataGrip, free-of-charge, for many years.*
 
 
 ## Other thanks to
