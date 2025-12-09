@@ -72,12 +72,14 @@ vi compose.yml
 services:
     dsmrdb:
         environment:
-            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
+            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) 
+            # and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
             DUID=1001
             DGID=1001
     dsmr:
         environment:
-            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
+            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) 
+            # and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
             DUID=1001
             DGID=1001
 ```
