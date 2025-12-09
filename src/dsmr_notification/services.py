@@ -163,9 +163,11 @@ def send_notification(message: str, title: str) -> None:
     }
 
     logger.debug(" - Sending notification")
+    format_data = DATA_FORMAT[notification_settings.notification_service]
     response = requests.post(
+        url=format_data["url"],  # type: ignore[arg-type]
+        data=format_data["data"],  # type: ignore[arg-type]
         timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
-        **DATA_FORMAT[notification_settings.notification_service]
     )
 
     if response.status_code == 200:

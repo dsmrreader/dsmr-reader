@@ -11,4 +11,4 @@ When assessing a project, agents should consider the following criteria:
 
 Caveats:
 - The `src/` path in the project is mapped to `/app/` in the Docker container. Make sure to adjust paths accordingly when running commands inside the container.
-- Tests to verify changes can be run with: ` docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test -e DJANGO_DATABASE_HOST=tests-dsmr-db -e DJANGO_DATABASE_NAME=test_dsmrreader -e DJANGO_DATABASE_USER=testuser -e DJANGO_DATABASE_PASSWORD=testpasswd dev-dsmr-app poetry run pytest --cov --cov-report=html`
+- Tests to verify changes can be run with: ` docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test -e DJANGO_DATABASE_HOST=tests-dsmr-db -e DJANGO_DATABASE_NAME=test_dsmrreader -e DJANGO_DATABASE_USER=testuser -e DJANGO_DATABASE_PASSWORD=testpasswd dev-dsmr-app poetry run pytest --cov --cov-report=html -q`
