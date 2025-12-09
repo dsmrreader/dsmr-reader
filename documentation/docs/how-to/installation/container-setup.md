@@ -5,6 +5,8 @@ hide:
 
 # Container setup installation
 
+This guide presumes you use Podman, however you can also use Docker or other container hosts that are compatible.
+
 !!! tip "Recommended installation"
 
     This installation method is recommended for new installations of DSMR-reader.
@@ -13,6 +15,9 @@ hide:
     You'll no longer need to manually update Python or DSMR-reader dependencies manually!
 
     Presumes using a RaspberryPi (5) or similar hardware. Older hardware *may* work, depending on the I/O.
+
+
+See also: [Container setup upgrade instructions](../../how-to/upgrade/to-v6.md) for a schematic overview of the setup.
 
 
 ## OS packages
