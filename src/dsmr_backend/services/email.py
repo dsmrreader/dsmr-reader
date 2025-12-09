@@ -10,7 +10,7 @@ logger = logging.getLogger("dsmrreader")
 
 
 def send(
-    email_from: str, email_to: str, subject: str, body: str, attachment: str = None
+    email_from: str, email_to: str, subject: str, body: str, attachment: str | None = None
 ) -> None:
     """Sends an email using the outgoing email settings."""
     email_settings = EmailSettings.get_solo()
