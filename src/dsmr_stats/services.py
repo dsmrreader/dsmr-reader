@@ -217,13 +217,13 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
     )
 
     if not electricity_readings.exists():
-        return
+        return None
 
     creation_kwargs = {"hour_start": hour_start}
 
     if HourStatistics.objects.filter(**creation_kwargs).exists():
         logger.debug("Stats: Skipping duplicate hour statistics for: %s", hour_start)
-        return
+        return None
 
     electricity_start = electricity_readings.first()
     electricity_end = electricity_readings.last()
@@ -332,7 +332,7 @@ def average_consumption_by_hour(start: date, end: date) -> List:
     return hour_statistics
 
 
-def range_statistics(start: datetime.date, end: datetime.date):
+def range_statistics(start: datetime.date, end: datetime.date) -> Dict:
     """Returns the statistics (totals) and the number of data points for a target range."""
     queryset = DayStatistics.objects.filter(day__gte=start, day__lt=end)
     aggregate = queryset.aggregate(
@@ -407,13 +407,13 @@ def range_statistics(start: datetime.date, end: datetime.date):
     return sanitized_aggregate
 
 
-def day_statistics(target_date: datetime.date):
+def day_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a day targeted."""
     next_day = timezone.datetime.combine(target_date + relativedelta(days=1), time.min)
     return range_statistics(start=target_date, end=next_day)
 
 
-def month_statistics(target_date: datetime.date):
+def month_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a month targeted."""
     start_of_month = timezone.datetime(
         year=target_date.year, month=target_date.month, day=1
@@ -424,7 +424,7 @@ def month_statistics(target_date: datetime.date):
     return range_statistics(start=start_of_month, end=end_of_month)
 
 
-def year_statistics(target_date: datetime.date):
+def year_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a year targeted."""
     start_of_year = timezone.datetime(year=target_date.year, month=1, day=1)
     end_of_year = timezone.datetime.combine(
