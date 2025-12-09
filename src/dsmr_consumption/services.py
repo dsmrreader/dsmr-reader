@@ -2,7 +2,7 @@ import datetime
 import logging
 from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
-from typing import Dict, Optional, List, Tuple
+from typing import Dict, Optional, List, Tuple, Any
 from zoneinfo import ZoneInfo
 
 from django.conf import settings
@@ -372,7 +372,7 @@ def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
 
 def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
-    consumption = {"day": day}
+    consumption: dict[str, Any] = {"day": day}
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
     day_start = timezone.make_aware(
         timezone.datetime(year=day.year, month=day.month, day=day.day)
@@ -518,7 +518,7 @@ def day_consumption(day: datetime.date) -> Dict:
 # @TODO: Rework to no longer use consumption models data
 def live_electricity_consumption() -> Dict:
     """Returns the current latest/live electricity consumption."""
-    data = {}
+    data: dict[str, Any] = {}
 
     try:
         latest_reading = DsmrReading.objects.all().order_by("-timestamp")[0]
@@ -588,7 +588,7 @@ def live_electricity_consumption() -> Dict:
 
 def live_gas_consumption() -> Dict:
     """Returns the current latest/live gas consumption."""
-    data = {}
+    data: dict[str, Any] = {}
 
     try:
         latest_data = GasConsumption.objects.all().order_by("-read_at")[0]
