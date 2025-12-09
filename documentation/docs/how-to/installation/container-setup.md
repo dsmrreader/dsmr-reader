@@ -84,8 +84,6 @@ services:
 - Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
 - Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and replace the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
 
-```shell
-
 ```yaml
 # Simplified compose.yml - Find DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet and change them if dsmrreader has different IDs on your system.
 services:
