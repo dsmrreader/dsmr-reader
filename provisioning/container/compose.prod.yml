@@ -53,6 +53,8 @@ services:
       - DGID=1001
       # TODO for you: Change DJANGO_SECRET_KEY below to a long TRULY random value if you host DSMR-reader publicly facing on the Internet
       - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
+      # Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to restart the container after changing this.
+      ###- DSMRREADER_LOGLEVEL=DEBUG
       # These must match with the settings configured in "dsmrdb" above.
       - DJANGO_DATABASE_HOST=dsmrdb
       - DJANGO_DATABASE_NAME=dsmrreader
