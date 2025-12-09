@@ -7,11 +7,11 @@ hide:
 
 DSMR-reader technically consists of these processes:
 
-| Process      | Name                | Description                                                                                                                                     |
-|--------------|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| Backend      | `dsmr_backend`      | Handles all background processing, such as telegram processing, MQTT, backups, health checks and everything that runs without user-interaction. |
-| Datalogger   | `dsmr_datalogger`   | Local datalogger reading telegrams (if used).                                                                                                   |
-| Webinterface | `dsmr_webinterface` | Graphical interface of DSMR-reader.                                                                                                             |
+| Process      | Name                | Description                                                                          |
+|--------------|---------------------|--------------------------------------------------------------------------------------|
+| Backend      | `dsmr_backend`      | Handles all background processing for everything that runs without user-interaction. |
+| Datalogger   | `dsmr_datalogger`   | Local datalogger reading telegrams (if used).                                        |
+| Webinterface | `dsmr_webinterface` | Graphical interface of DSMR-reader.                                                  |
 
 
 ``` mermaid
@@ -26,9 +26,9 @@ graph LR
 
 ### DSMRDB logs
 
-- Login as the `dsmrreader` user and run:
+- To view the database logs, login as the `dsmrreader` user and run:
 
-```shell
+``` shell
 podman-compose logs -f dsmrdb
 
 # Or when there are a lot of old logs, you can limit it to recent logs only:
@@ -36,11 +36,10 @@ podman-compose logs --since 30s -f dsmrdb
 ```
 
 ### DSMR logs
-You can view logs of all processes combined.
 
-- Login as the `dsmrreader` user and run:
+- To view the application logs, login as the `dsmrreader` user and run:
 
-```shell
+``` shell
 sudo su - dsmrreader
 
 podman-compose logs -f dsmr
@@ -49,7 +48,7 @@ podman-compose logs --since 30s -f dsmr
 ```
 
 ### DEBUG logging
-By default, mostly errors are logged. You can enable DEBUG logging which will make **specifically** the backend log greatly more verbose.
+By default, mostly errors are logged. You can enable DEBUG logging which will make **specifically** the DSMR backend log more information about what it's doing.
 
 !!! tip "Heads up"
 
@@ -63,13 +62,13 @@ You can enable the DEBUG logging by setting the `DSMRREADER_LOGLEVEL` env var to
 
 - Login as the `dsmrreader` user and edit the `compose.yml` file:
 
-```shell
+``` shell
 sudo su - dsmrreader
 vi compose.yml
 ```
 
-```yaml
-# Simplified compose.yml - Find DSMRREADER_LOGLEVEL=DEBUG
+``` yaml title="compose.yml" hl_lines="6"
+# Simplified - Find DSMRREADER_LOGLEVEL=DEBUG
 services:
     dsmr:
         environment:
@@ -83,6 +82,6 @@ services:
 
 - Apply changes:
 
-```shell
+``` shell
 podman-compose restart dsmr
 ```

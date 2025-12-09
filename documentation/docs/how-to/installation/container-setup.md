@@ -23,7 +23,7 @@ See also: [Container setup upgrade instructions](../../how-to/upgrade/to-v6.md) 
 ## OS packages
 - Install system packages:
 
-```shell
+``` shell
 sudo apt-get update
 sudo apt-get install podman podman-compose podman-docker crun
 podman info --debug
@@ -36,7 +36,7 @@ sudo apt-get install ser2net
 ## OS user
 - Add dedicated system user for DSMR-reader to run on:
 
-```shell
+``` shell
 sudo useradd dsmrreader --create-home
 sudo loginctl enable-linger dsmrreader
 
@@ -48,26 +48,26 @@ id --group dsmrreader
 ## DSMR-reader user
 - Login as "dsmrreader" user:
 
-```shell
+``` shell
 sudo su - dsmrreader
 ```
 
 - Download container Compose template file:
 
-```shell
+``` shell
 # TODO: Change to "latest" after releasing DSMR-reader v6.
 wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/development/provisioning/container/compose.prod.yml -O compose.yml
 ```
 
 - Configure Compose file to your needs:
 
-```shell
+``` shell
 # Or use "nano" instead of "vi" if you prefer that text editor.
 vi compose.yml
 ```
 
-```yaml
-# Simplified compose.yml - Find DUID=1001 and DGID=1001 and change them if dsmrreader has different IDs on your system.
+``` yaml title="compose.yml" hl_lines="6 7 11 12"
+# Simplified - Find DUID=1001 and DGID=1001 and change them if dsmrreader has different IDs on your system.
 services:
     dsmrdb:
         environment:
@@ -84,8 +84,8 @@ services:
 - Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
 - Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and replace the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
 
-```yaml
-# Simplified compose.yml - Find DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet and change them if dsmrreader has different IDs on your system.
+``` yaml title="compose.yml" hl_lines="6"
+# Simplified - Find DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet and change them if dsmrreader has different IDs on your system.
 services:
     dsmr:
         environment:
@@ -96,21 +96,21 @@ services:
 ## Running
 - Try running the containers:
 
-```shell
+``` shell
 # This may take a few minutes, mostly depending on the hardware available.
 podman-compose up -d
 ```
 
 - Check folders created:
 
-```shell
+``` shell
 ls -l
 ```
 
 - It should now at least have the file `compose.yml` and folders `dsmr_database` and `dsmr_backups`.
 - Check logs for any weird stuff:
 
-```shell
+``` shell
 podman-compose logs -f
 ```
 

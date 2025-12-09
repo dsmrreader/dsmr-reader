@@ -11,11 +11,17 @@ theme:
     - navigation.expand
     - navigation.path
     - navigation.indexes
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
     - toc.follow
 markdown_extensions:
   # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types
   - admonition
   - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
   - pymdownx.superfences:
       custom_fences:
           - name: mermaid

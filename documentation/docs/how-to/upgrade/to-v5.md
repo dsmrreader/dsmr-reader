@@ -38,7 +38,7 @@ Over a year ago the DSMR-reader project was moved to `https://github.com/dsmrrea
 
 Execute the following:
 
-```shell
+``` shell
 sudo su - dsmr
 git remote -v
 ```
@@ -52,14 +52,14 @@ origin	https://github.com/dsmrreader/dsmr-reader.git (push)
 
 **If not**, update it and check again:
 
-```shell
+``` shell
 git remote set-url origin https://github.com/dsmrreader/dsmr-reader.git
 git remote -v
 ```
 
 Execute the following:
 
-```shell
+``` shell
 logout
 ```
 
@@ -69,7 +69,7 @@ DSMR-reader `5.x` requires `Python 3.7` or higher.
 
 Execute the following:
 
-```shell
+``` shell
 sudo su - dsmr
 python3 --version
 ```
@@ -78,7 +78,7 @@ If you're already running `Python 3.7` (or higher), you can ignore the next sect
 
 Execute the following:
 
-```shell
+``` shell
 logout
 ```
 
@@ -92,7 +92,7 @@ There are several guides, depending on your OS. We assume Raspbian OS here.
 
 Execute the following:
 
-```shell
+``` shell
 # Credits to Jeroen Peters @ issue #624
 sudo apt-get install python3-dev libffi-dev libssl-dev -y
 wget https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tar.xz
@@ -112,7 +112,7 @@ The next thing you'll absolutely need to do, is create a fresh database backup a
 
 Execute the following:
 
-```shell
+``` shell
 sudo su - dsmr
 ./manage.py dsmr_backup_create --full
 ```
@@ -125,7 +125,7 @@ Created full backup: /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgres
 
 Execute the following (your file name may differ):
 
-```shell
+``` shell
 ls -lh /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wednesday.sql.gz
 ```
 
@@ -133,7 +133,7 @@ Make sure the file is of some (reasonable) size.
 
 Execute the following (your file name may differ):
 
-```shell
+``` shell
 zcat /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wednesday.sql.gz | tail
 ```
 
@@ -147,7 +147,7 @@ Make sure the output ends with:
 
 Execute the following:
 
-```shell
+``` shell
 logout
 ```
 
@@ -163,26 +163,26 @@ logout
 
 Install Python venv:
 
-```shell
+``` shell
 sudo apt-get install python3-venv
 ```
 
 Install `libopenjp2-7-dev` as well, to prevent a possible error later:
 
-```shell
+``` shell
 # "ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory"
 sudo apt-get install libopenjp2-7-dev
 ```
 
 Stop DSMR-reader:
 
-```shell
+``` shell
 sudo supervisorctl stop all
 ```
 
 Disable `v4.x` virtualenv:
 
-```shell
+``` shell
 sudo su - dsmr
 deactivate
 mv ~/.virtualenvs/ ~/.old-v4-virtualenvs
@@ -190,7 +190,7 @@ mv ~/.virtualenvs/ ~/.old-v4-virtualenvs
 
 Create new `v5.x` virtualenv:
 
-```shell
+``` shell
 python3 -m venv ~/dsmr-reader/.venv/
 ```
 
@@ -209,7 +209,7 @@ source ~/dsmr-reader/.venv/bin/activate
 
 Update DSMR-reader codebase:
 
-```shell
+``` shell
 git fetch
 git checkout -b v5 origin/v5
 
@@ -221,7 +221,7 @@ git pull
 
 Install dependencies:
 
-```shell
+``` shell
 source ~/dsmr-reader/.venv/bin/activate
 
 pip3 install pip --upgrade
@@ -230,7 +230,7 @@ pip3 install -r ~/dsmr-reader/dsmrreader/provisioning/requirements/base.txt
 
 > Tip: If installation fails with Pillow/jpeg header errors, try installing `libjpeg-dev`:
 >
-> ```shell
+> ``` shell
 > logout
 > sudo apt-get install libjpeg-dev
 >
@@ -256,7 +256,7 @@ If you find any variables on the left, rename them to the right:
 
 Check DSMR-reader:
 
-```shell
+``` shell
 ./manage.py check
 ```
 
@@ -270,7 +270,7 @@ It should output something similar to: "System check identified no issues (0 sil
 >
 > Make sure you've installed `libopenjp2-7-dev` and re-run:
 >
-> ```shell
+> ``` shell
 > logout
 > sudo apt-get install libopenjp2-7-dev
 >
@@ -280,13 +280,13 @@ It should output something similar to: "System check identified no issues (0 sil
 
 Execute:
 
-```shell
+``` shell
 ./manage.py migrate
 ```
 
 Execute:
 
-```shell
+``` shell
 logout
 ```
 
@@ -294,21 +294,21 @@ logout
 
 Update Nginx config:
 
-```shell
+``` shell
 sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/sites-available/
 sudo ln -s -f /etc/nginx/sites-available/dsmr-webinterface /etc/nginx/sites-enabled/
 ```
 
 Reload Nginx:
 
-```shell
+``` shell
 sudo nginx -t
 sudo systemctl reload nginx.service
 ```
 
 Update Supervisor configs:
 
-```shell
+``` shell
 sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_datalogger.conf /etc/supervisor/conf.d/
 sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_backend.conf /etc/supervisor/conf.d/
 sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterface.conf /etc/supervisor/conf.d/
@@ -316,14 +316,14 @@ sudo cp /home/dsmr/dsmr-reader/dsmrreader/provisioning/supervisor/dsmr_webinterf
 
 Reload Supervisor configs:
 
-```shell
+``` shell
 sudo supervisorctl reread
 sudo supervisorctl update
 ```
 
 Start DSMR-reader:
 
-```shell
+``` shell
 sudo supervisorctl start all
 ```
 
@@ -331,7 +331,7 @@ sudo supervisorctl start all
 
 Finally, execute the deploy script:
 
-```shell
+``` shell
 sudo su - dsmr
 ./deploy.sh
 ```
