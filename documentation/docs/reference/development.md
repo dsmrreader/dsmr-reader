@@ -75,5 +75,10 @@ docker compose exec dev-dsmr-app poetry run black .
 docker compose exec dev-dsmr-app poetry run flake8 -v
 ```
 
+## Tests
+``` shell
+docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test -e DJANGO_DATABASE_HOST=tests-dsmr-db -e DJANGO_DATABASE_NAME=test_dsmrreader -e DJANGO_DATABASE_USER=testuser -e DJANGO_DATABASE_PASSWORD=testpasswd dev-dsmr-app poetry run pytest -q
+```
+
 ## Other stuff
 There is some more to it, such as tests and documentation. If you ever need to work on those, just see how similar stuff works in the project. Or ask for more information.
