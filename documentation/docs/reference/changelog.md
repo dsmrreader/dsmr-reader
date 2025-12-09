@@ -2,7 +2,7 @@
 
 ## Current release series
 
-!!! note ""
+!!! abstract ""
     The releases in this series are currently supported and will receive new features and bug/security fixes until a new major series is released *(give or take once a year)*.
 
     - Every **minor** release (e.g. `v5.x` -> `v5.y`) is *usually* compatible with any preceding release in the same series and should allow you to update easily.
@@ -13,30 +13,55 @@
 
 *This is a major release. See the release notes below for incompatible (conflicting) changes and all other changes.*
 
-!!! danger "Incompatible changes"
-    
-    #### Dropped support for:
+#### Incompatible changes
 
+!!! danger "Dropped installation support for"
+    
     - Native installations **without containers**
 
-    !!! success ""
+    [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button .md-button--primary }
+
+    !!! note ""
 
         *This will ease future upgrades for you, as most of the installation is relocated into the pre-built DSMR-reader container image.*
         *See the upgrade guide for more information.*
 
-        [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button .md-button--primary }
+!!! danger "Dropped database support for"
 
-    - **PostgreSQL 13 and lower** - *(Django only supports PostgreSQL 13 and higher)*
+    - **PostgreSQL 10**
+    - **PostgreSQL 11**
+    - **PostgreSQL 12**
+    - **PostgreSQL 13**
+    - **MariaDB 10.1**
+    - **MariaDB 10.2**
+    - **MariaDB 10.3**
+    - **MariaDB 10.4**
+    - **MySQL 5.x**
+    - **MySQL 8.0.10** (and lower)
 
-    !!! success ""
+    !!! note ""
     
-        *Tip: Upgrade to **PostgreSQL 17** if you need to upgrade anyway - This will likely defer future upgrades for a few more years, as it's [expected to be end-of-life in 2029 or later](https://www.postgresql.org/support/versioning/).*
+        *Most versions are either end-of-life or no longer supported by the Django Framework.*        
 
-    - **Python 3.12 and lower** - *(DSMR-reader is developed, built and tested on Python 3.13+, additionally Django only supports Python 3.12 and higher)*
-    - **MySQL 8.0.10 and lower** - *(Django only supports MySQL 8.0.11 and higher)*
-    - **MariaDB 10.5 and lower** - *(Django also only supports MariaDB 10.6 and higher)*
+        *Tip: Upgrade to **PostgreSQL 17** if you need to upgrade anyway - This will likely defer following database upgrades for a few more years, as it's [expected to be end-of-life in 2029 or later](https://www.postgresql.org/support/versioning/).*
 
-!!! abstract "Other changes"
+!!! danger "Dropped Python support for"
+
+    - **Python 3.7**
+    - **Python 3.8**
+    - **Python 3.9**
+    - **Python 3.10**
+    - **Python 3.11**
+    - **Python 3.12**
+
+    !!! note ""
+
+        *DSMR-reader is developed, tested and built on Python 3.13+. Older versions are unlikely to work due to dependency pinning.*
+
+
+#### Other changes
+
+!!! note "New features or changes"
 
     #### Hosting
     - Django settings ontsluiten via envvars [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
@@ -54,13 +79,15 @@
     #### MQTT
     - Added command-line alias for clearing MQTT queue: ``./manage.py dsmr_mqtt_clear_queue``
 
-    ### Misc
-    - Updated FontAwesome icons to version 7.1
-
     #### Docs
     - Dropped Dutch translation for the documentation *(DSMR-reader application translations are **not** affected)*
     - Fixed broken API docs rendering caused by legacy ReDoc link
     - Simplify documentation  [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
+
+    #### Misc
+    - Updated Django to 5.2 LTS
+    - Updated a lot of other dependencies to a more recent version
+    - Updated FontAwesome icons to version 7.1
 
 
 ---

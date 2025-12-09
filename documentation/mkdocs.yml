@@ -16,7 +16,11 @@ markdown_extensions:
   # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_code_format
   - attr_list
   - toc:
       toc_depth: 3
