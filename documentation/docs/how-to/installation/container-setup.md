@@ -54,7 +54,7 @@ sudo su - dsmrreader
 wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/development/provisioning/container/compose.prod.yml -O compose.yml
 ```
 
-- Configure Compose file to your needs
+- Configure Compose file to your needs:
 
 ```shell
 # Or use "nano" instead of "vi" if you prefer that text editor.
@@ -74,6 +74,20 @@ services:
             # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
             DUID=1001
             DGID=1001
+```
+
+- Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
+- Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and replace the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
+
+```shell
+
+```yaml
+# Simplified compose.yml - Find DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet and change them if dsmrreader has different IDs on your system.
+services:
+    dsmr:
+        environment:
+            # Sample generated key, use your own!
+            DJANGO_SECRET_KEY=1XfxLJX28ooPoE1SB6BjaZayFDmx2JoDf5bsfIa9MZIP8HOesw
 ```
 
 ## Running
@@ -96,3 +110,6 @@ ls -l
 ```shell
 podman-compose logs -f
 ```
+
+If everything looks good, you should be able to access DSMR-reader at: `http://<hostname>:7777`.
+E.g. is your hardware is accessible at `123.456.78.90`, go to: `http://123.456.78.90:7777`.
