@@ -1,6 +1,16 @@
 [flake8]
 select = B,C,E,F,I,S,W
-ignore = B902,B903,E501,B950,E203,S311,W503
-exclude = .venv/*,docs/*,provisioning/*,tools/*,*/migrations/*,*/tests/*,dsmrreader/*,dsmr_plugins/modules/*,dsmr_parser/*
+# B902/B903: Methods should take at least two arguments - false positives on classmethods
+# B950: Line too long - handled by Black at 120 chars
+# E203: Whitespace before ':' - conflicts with Black formatting
+# W503: Line break before binary operator - conflicts with Black formatting
+# S311: Use of random module for security purposes - valid for non-crypto use
+ignore = B902,B903,B950,E203,S311,W503
+exclude = .venv/*,docs/*,provisioning/*,tools/*,*/migrations/*,dsmrreader/*,dsmr_plugins/modules/*,dsmr_parser/*
 max-complexity = 10
 max-line-length = 120
+
+# Per-file ignores for gradual migration to stricter linting
+per-file-ignores =
+    */tests/*:E501  # Allow longer lines in tests
+
