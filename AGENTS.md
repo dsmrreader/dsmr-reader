@@ -14,3 +14,4 @@ Additional directives:
 - Tests to verify changes can be run with: ` docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test -e DJANGO_DATABASE_HOST=tests-dsmr-db -e DJANGO_DATABASE_NAME=test_dsmrreader -e DJANGO_DATABASE_USER=testuser -e DJANGO_DATABASE_PASSWORD=testpasswd dev-dsmr-app poetry run pytest --cov --cov-report=html -q`
 - Temporary files and reports can be placed in `.agent-data/` as it's ignored for Git commits.
 - Delete temporary files created for command output.
+- Run Black after making changes to ensure code formatting.
