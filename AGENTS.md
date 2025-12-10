@@ -14,7 +14,6 @@
 - Run djLint: `docker compose exec dev-dsmr-app poetry run djlint --reformat .`
 - Run Flake8: `docker compose exec dev-dsmr-app poetry run flake8 -v`
 - Run MyPy: `docker compose exec dev-dsmr-app poetry run mypy /app`
-- Run Safety: `docker compose exec dev-dsmr-app poetry run safety check`
 - Run Tests: `docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -q`
 
 
