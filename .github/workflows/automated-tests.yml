@@ -46,9 +46,5 @@ jobs:
       - name: Type check with MyPy
         run: docker compose run tests-dsmr-app poetry run mypy /app
 
-      - name: Check dependency vulnerabilities with Safety
-        run: docker compose run tests-dsmr-app poetry run safety scan --json
-        continue-on-error: true
-
       - name: Run PostgreSQL tests
         run: docker compose run tests-dsmr-app poetry run pytest
