@@ -5,7 +5,6 @@ on:
     branches:
       - 'v*'
       - 'development'
-      - 'work-in-progress/*'  # Future TODO: Remove me
   pull_request:
     branches-ignore:
       - 'dependabot/'
@@ -14,7 +13,7 @@ jobs:
   main_test:
     name: 'Python ${{ matrix.python-version }}'
     runs-on: ubuntu-latest
-    timeout-minutes: 10  # Don't run forever when stale
+    timeout-minutes: 15
     strategy:
       matrix:
         python-version:
@@ -35,8 +34,18 @@ jobs:
           docker compose up -d
           sleep 5
 
+      - name: Check code formatting with Black
+        run: docker compose run tests-dsmr-app poetry run black --check .
+
       - name: Check flake8
         run: docker compose run tests-dsmr-app poetry run flake8 -v
+
+      - name: Type check with MyPy
+        run: docker compose run tests-dsmr-app poetry run mypy /app
+
+      - name: Check dependency vulnerabilities with Safety
+        run: docker compose run tests-dsmr-app poetry run safety check --json
+        continue-on-error: true
 
       - name: Run PostgreSQL tests
         run: docker compose run tests-dsmr-app poetry run pytest
