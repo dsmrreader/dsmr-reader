@@ -10,7 +10,7 @@ from dsmr_pvoutput.models.settings import PVOutputAddStatusSettings
 class TestAdmin(TestCase):
     def setUp(self):
         username = "testuser"
-        password = "passwd"
+        password = "passwd"  # noqa: S105
         User.objects.create_superuser(username, "unknown@localhost", password)
 
         self.client = Client()
@@ -26,7 +26,7 @@ class TestAdmin(TestCase):
 
         response = self.client.post(
             API_URL,
-            dict(
+            dict(  # noqa: S106
                 auth_token="test",
                 system_identifier="12345",
             ),

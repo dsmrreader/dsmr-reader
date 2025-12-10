@@ -36,7 +36,7 @@ class TestSupportXhrDebugInfo(TestCase):
     def test_authenticated(self, dump_mock):
         dump_mock.return_value = "some fake dump"
 
-        self.client.login(username="testuser", password="passwd")
+        self.client.login(username="testuser", password="passwd")  # noqa: S106
 
         response = self.client.get(reverse(self._ROUTE))
         self.assertEqual(response.status_code, 200, response.content)
@@ -48,7 +48,7 @@ class TestSupportXhrLatestTelegram(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user("testuser", "unknown@localhost", "passwd")
+        self.user = User.objects.create_user("testuser", "unknown@localhost", "passwd")  # noqa: S106
 
     def test_unauthenticated(self):
         view_url = reverse(self._ROUTE)
@@ -60,7 +60,7 @@ class TestSupportXhrLatestTelegram(TestCase):
     def test_authenticated(self):
         MeterStatistics.get_solo().update(latest_telegram="fake-telegram")
 
-        self.client.login(username="testuser", password="passwd")
+        self.client.login(username="testuser", password="passwd")  # noqa: S106
 
         response = self.client.get(reverse(self._ROUTE))
         self.assertEqual(response.status_code, 200, response.content)

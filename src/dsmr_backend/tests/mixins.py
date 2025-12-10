@@ -9,7 +9,7 @@ class InterceptCommandStdoutMixin:
         """Suppresses stderr for tests. Returns stdout."""
         stdout = StringIO()
         stderr = StringIO()
-        call_command(command, stdout=stdout, stderr=stderr, *args, **kwargs)
+        call_command(command, *args, stdout=stdout, stderr=stderr, **kwargs)  # noqa: B026
         stdout.seek(0)
         return stdout.read()
 
@@ -17,7 +17,7 @@ class InterceptCommandStdoutMixin:
         """Returns stdout and stderr."""
         stdout = StringIO()
         stderr = StringIO()
-        call_command(command, stdout=stdout, stderr=stderr, *args, **kwargs)
+        call_command(command, *args, stdout=stdout, stderr=stderr, **kwargs)  # noqa: B026
         stdout.seek(0)
         stderr.seek(0)
 

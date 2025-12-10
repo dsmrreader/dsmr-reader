@@ -21,7 +21,7 @@ class TestAdmin(TestCase):
 
     def setUp(self):
         username = "testuser"
-        password = "passwd"
+        password = "passwd"  # noqa: S105
         User.objects.create_superuser(username, "unknown@localhost", password)
 
         self.client = Client()
@@ -96,7 +96,7 @@ class TestAdmin(TestCase):
         )
 
         # Setting refresh token should enable SP
-        DropboxSettings.objects.all().update(refresh_token="fake")
+        DropboxSettings.objects.all().update(refresh_token="fake")  # noqa: S106
         response = self.client.post(URL)
 
         self.assertEqual(response.status_code, 302, response.content)

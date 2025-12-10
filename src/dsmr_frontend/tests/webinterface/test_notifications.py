@@ -34,7 +34,7 @@ class TestViews(TestCase):
         self.assertEqual(response["Location"], "/admin/login/?next={}".format(view_url))
 
         # Logged in.
-        self.client.login(username="testuser", password="passwd")
+        self.client.login(username="testuser", password="passwd")  # noqa: S106
         response = self.client.post(view_url, data={"notification_id": notification.pk})
         self.assertEqual(response.status_code, 200, response.content)
 
@@ -53,7 +53,7 @@ class TestViews(TestCase):
         self.assertEqual(response["Location"], "/admin/login/?next={}".format(view_url))
 
         # Logged in.
-        self.client.login(username="testuser", password="passwd")
+        self.client.login(username="testuser", password="passwd")  # noqa: S106
         response = self.client.post(view_url)
         self.assertEqual(response.status_code, 200, response.content)
         self.assertEqual(Notification.objects.unread().count(), 0)

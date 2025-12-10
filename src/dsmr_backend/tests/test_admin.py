@@ -19,7 +19,7 @@ class TestAdmin(TestCase):
 
     def setUp(self):
         username = "testuser"
-        password = "passwd"
+        password = "passwd"  # noqa: S105
         User.objects.create_superuser(username, "unknown@localhost", password)
 
         self.client = Client()

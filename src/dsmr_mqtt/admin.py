@@ -346,7 +346,7 @@ class JSONQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(SingletonModelA
                     """.format(
                         [
                             x.default
-                            for x in consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()
+                            for x in consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()  # noqa: E501
                             if x.name == "formatting"
                         ][0]
                     )
@@ -375,7 +375,7 @@ class SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(Singleton
                     """.format(
                         [
                             x.default
-                            for x in consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()
+                            for x in consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()  # noqa: E501
                             if x.name == "formatting"
                         ][0]
                     )

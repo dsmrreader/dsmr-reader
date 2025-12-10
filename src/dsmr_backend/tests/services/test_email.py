@@ -12,7 +12,7 @@ class TestEmail(TestCase):
         es.host = "host"
         es.port = 1234
         es.username = "username"
-        es.password = "password"
+        es.password = "password"  # noqa: S105
         es.use_tls = True
         es.save()
 
@@ -37,7 +37,7 @@ class TestEmail(TestCase):
             email_to="root@localhost",
             subject="Test",
             body="Body",
-            attachment="/tmp/test",
+            attachment="/tmp/test",  # noqa: S108
         )
 
         self.assertTrue(send_mock.called)

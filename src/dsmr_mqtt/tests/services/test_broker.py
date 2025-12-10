@@ -89,7 +89,7 @@ class TestBroker(TestCase):
     def test_initialize_credentials(self, *mocks):
         """User/password set."""
         USER = "x"
-        PASS = "y"
+        PASS = "y"  # noqa: S105
         MQTTBrokerSettings.objects.update()
 
         mqtt_client = dsmr_mqtt.services.broker.initialize_client()

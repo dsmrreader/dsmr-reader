@@ -219,7 +219,7 @@ class TestAlwaysRequireLoginDisabled(TestCase):
         user = User.objects.create_user("testuser", "unknown@localhost", "testpasswd")
 
         if self.LOGGED_IN:
-            self.client.login(username=user.username, password="testpasswd")
+            self.client.login(username=user.username, password="testpasswd")  # noqa: S106
 
     def test_frontend_views(self):
         import dsmr_frontend.urls

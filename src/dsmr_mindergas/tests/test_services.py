@@ -18,7 +18,7 @@ class TestServices(TestCase):
 
     def setUp(self):
         self.mindergas_settings = MinderGasSettings.get_solo()
-        self.mindergas_settings.update(export=True, auth_token="12345")
+        self.mindergas_settings.update(export=True, auth_token="12345")  # noqa: S106
 
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT)
         self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2017, 1, 1)))

@@ -19,7 +19,7 @@ import dsmr_dropbox.services
 class TestServices(InterceptCommandStdoutMixin, TestCase):
     def setUp(self):
         DropboxSettings.get_solo()
-        DropboxSettings.objects.all().update(refresh_token="FAKE")
+        DropboxSettings.objects.all().update(refresh_token="FAKE")  # noqa: S106
 
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT)
         self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
@@ -56,7 +56,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # Dropbox Auth Error. Will reset credentials. Warning message should be created and SP disabled.
         self.schedule_process.reschedule_asap()
-        DropboxSettings.objects.all().update(refresh_token="invalid-token")
+        DropboxSettings.objects.all().update(refresh_token="invalid-token")  # noqa: S106
         refresh_access_token_mock.reset_mock()
         refresh_access_token_mock.side_effect = dropbox.exceptions.AuthError(12345, "Some error")
 
@@ -71,7 +71,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.schedule_process.reschedule_asap()
         refresh_access_token_mock.reset_mock()
         refresh_access_token_mock.side_effect = None
-        DropboxSettings.objects.all().update(refresh_token="token")
+        DropboxSettings.objects.all().update(refresh_token="token")  # noqa: S106
 
         dsmr_dropbox.services.get_dropbox_client(self.schedule_process)
 
@@ -84,7 +84,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     def test_sync(self, now_mock, _, should_mock, sync_file_mock, list_files_in_dir_mock, *mocks):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         should_mock.side_effect = [False, True]  # Both branches.
-        list_files_in_dir_mock.return_value = ["/tmp/fake1", "/tmp/fake2"]
+        list_files_in_dir_mock.return_value = ["/tmp/fake1", "/tmp/fake2"]  # noqa: S108
 
         self.assertFalse(sync_file_mock.called)
         self.assertIsNotNone(DropboxSettings.get_solo().refresh_token)
@@ -159,9 +159,9 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         with self.assertRaises(dropbox.exceptions.ApiError):
             dsmr_dropbox.services.sync_file(
                 scheduled_process=self.schedule_process,
-                dropbox_client=dropbox.Dropbox("fake"),
-                local_root_dir="/tmp/",
-                abs_file_path="/tmp/fake",
+                dropbox_client=dropbox.Dropbox("fake"),  # noqa: S106
+                local_root_dir="/tmp/",  # noqa: S108
+                abs_file_path="/tmp/fake",  # noqa: S108
             )
 
         # Warning message should be created and next sync should be skipped ahead.
@@ -186,7 +186,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         stat_result = mock.MagicMock()
         stat_result.st_size = 1234
         stat_mock.return_value = stat_result
-        get_dropbox_client_mock.return_value = dropbox.Dropbox("fake")
+        get_dropbox_client_mock.return_value = dropbox.Dropbox("fake")  # noqa: S106
 
         # Unknown file remote.
         files_get_metadata_mock.side_effect = dropbox.exceptions.ApiError(
@@ -216,7 +216,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("os.stat")
     def test_should_sync_file(self, stat_mock, time_mock):
         time_mock.return_value = 1500000100
-        FILE = "/tmp/fake"
+        FILE = "/tmp/fake"  # noqa: S108
 
         # Skip empty file.
         stat_result = mock.MagicMock()

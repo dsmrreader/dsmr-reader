@@ -18,7 +18,7 @@ class TestServices(TestCase):
         self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
 
     def _apply_fake_settings(self):
-        PVOutputAPISettings.get_solo().update(
+        PVOutputAPISettings.get_solo().update(  # noqa: S106
             auth_token="XXXXX",
             system_identifier=12345,
         )
@@ -92,7 +92,7 @@ class TestServices(TestCase):
         self.assertFalse(post_mock.called)
 
         self._apply_fake_settings()
-        PVOutputAPISettings.get_solo().update(auth_token="")
+        PVOutputAPISettings.get_solo().update(auth_token="")  # noqa: S106
         dsmr_pvoutput.services.run(scheduled_process=self.schedule_process)
         self.assertFalse(post_mock.called)
 

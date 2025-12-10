@@ -19,7 +19,8 @@ class NotificationSettingsAdmin(SingletonModelAdmin):
                 "fields": ["notification_service"],
                 "description": _(
                     "Detailed instructions for configuring notifications can be found here: "
-                    '<a href="https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/notifications.html">Documentation</a>'
+                    '<a href="https://dsmr-reader.readthedocs.io/nl/v5/how-to/admin/notifications.html">'  # noqa: E501
+                    "Documentation</a>"
                 ),
             },
         ),

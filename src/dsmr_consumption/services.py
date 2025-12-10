@@ -399,9 +399,9 @@ def day_consumption(day: datetime.date) -> Dict:
         first_reading = gas_readings[0]
         last_reading = gas_readings[gas_reading_count - 1]
         consumption["gas"] = last_reading.delivered - first_reading.delivered
-        # @TODO: START might be slightly off for an hour, use dsmr_datalogger.services.readings.first_meter_positions_of_day() instead later
+        # @TODO: START might be slightly off for an hour, use dsmr_datalogger.services.readings.first_meter_positions_of_day() instead later  # noqa: E501
         consumption["gas_start"] = first_reading.delivered
-        # @TODO: END may be inaccurate as well be slightly off, create a reliable service like first_meter_positions_of_day() later
+        # @TODO: END may be inaccurate as well be slightly off, create a reliable service like first_meter_positions_of_day() later  # noqa: E501
         consumption["gas_end"] = last_reading.delivered
         consumption["gas_cost"] = round_decimal(consumption["gas"] * daily_energy_price.gas_price)
         consumption["total_cost"] += consumption["gas_cost"]

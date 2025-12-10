@@ -145,7 +145,7 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     logger.debug("Stats: Creating day statistics for: %s", day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
-    # @TODO: Due to #1770. Fix for wrong gas consumption in some cases. Fix day_consumption() later. Just use the hour totals instead, for now.
+    # @TODO: Due to #1770. Fix for wrong gas consumption in some cases. Fix day_consumption() later. Just use the hour totals instead, for now.  # noqa: E501
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
     start_of_day = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0))
     end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)

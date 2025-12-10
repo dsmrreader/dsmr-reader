@@ -25,7 +25,7 @@ class TestNote(TestCase):
     def test_admin_day_parameter(self):
         """The admin form supports a parameter for setting the initial day used."""
         view_url = reverse("admin:dsmr_stats_note_add")
-        self.client.login(username="testuser", password="passwd")
+        self.client.login(username="testuser", password="passwd")  # noqa: S106
 
         # Test both without and with day parameter.
         response = self.client.get(view_url)

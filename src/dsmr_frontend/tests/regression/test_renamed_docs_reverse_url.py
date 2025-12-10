@@ -20,9 +20,9 @@ class TestRegression(TestCase):
         return apps.get_containing_app_config(type(self).__module__).name
 
     def setUp(self):
-        self.user = User.objects.create_user("testuser", "unknown@localhost", "passwd")
+        self.user = User.objects.create_user("testuser", "unknown@localhost", "passwd")  # noqa: S106
         self.client = Client()
-        self.client.login(username="testuser", password="passwd")
+        self.client.login(username="testuser", password="passwd")  # noqa: S106
 
     def test_no_reverse_match_docs(self):
         """Test whether the docs URL in old notfications are converted to their new location."""

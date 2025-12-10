@@ -413,7 +413,7 @@ class TestIsLocalTimestampPassed(TestCase):
 
 @mock.patch.dict(
     "os.environ",
-    dict(
+    dict(  # noqa: S106
         DJANGO_DATABASE_ENGINE="my-engine",
         DJANGO_DATABASE_HOST="my-host",
         DJANGO_DATABASE_PORT="11111",
