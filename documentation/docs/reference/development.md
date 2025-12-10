@@ -77,7 +77,7 @@ docker compose exec dev-dsmr-app poetry run flake8 -v
 
 ## Tests
 ``` shell
-docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test -e DJANGO_DATABASE_HOST=tests-dsmr-db -e DJANGO_DATABASE_NAME=test_dsmrreader -e DJANGO_DATABASE_USER=testuser -e DJANGO_DATABASE_PASSWORD=testpasswd dev-dsmr-app poetry run pytest -q
+docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest
 ```
 
 ## Other stuff

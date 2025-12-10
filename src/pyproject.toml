@@ -42,9 +42,10 @@ attrs = "^25"
 
 
 [tool.poetry.group.dev.dependencies]
+black = "^25"
 flake8 = "^7"
+flake8-pyproject = "^1"
 flake8-bandit = "^4"
-flake8-black = "^0.4"
 flake8-bugbear = "^25"
 polib = "^1"
 pytest-cov = "^7"
@@ -59,3 +60,65 @@ types-python-dateutil = "^2"
 types-polib = "^1"
 types-six = "^1"
 uritemplate = "^4"
+
+
+[tool.black]
+line-length = 120
+
+
+[tool.flake8]
+select = ["B", "C", "E", "F", "I", "S", "W"]
+# B902/B903: Methods should take at least two arguments - false positives on classmethods
+# B950: Line too long - handled by Black at 120 chars
+# E203: Whitespace before ':' - conflicts with Black formatting
+# W503: Line break before binary operator - conflicts with Black formatting
+# S311: Use of random module for security purposes - valid for non-crypto use
+ignore = ["B902", "B903", "B950", "E203", "S311", "W503"]
+exclude = [".venv/*", "docs/*", "provisioning/*", "tools/*", "*/migrations/*", "dsmrreader/*", "dsmr_plugins/modules/*", "dsmr_parser/*"]
+max-complexity = 10
+max-line-length = 120
+
+per-file-ignores = [
+    "*/tests/*:E501",  # Allow longer lines in tests
+]
+
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "paho.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "dropbox.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "influxdb_client.*"
+ignore_missing_imports = true
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "dsmrreader.settings"
+pythonpath = "."
+addopts = "--cov=. --cov-report=html:coverage_report/html -q"
+testpaths = ["dsmr_api/tests", "dsmr_backend/tests", "dsmr_backup/tests", "dsmr_consumption/tests", "dsmr_datalogger/tests", "dsmr_dropbox/tests", "dsmr_frontend/tests", "dsmr_influxdb/tests", "dsmr_mindergas/tests", "dsmr_mqtt/tests", "dsmr_notification/tests", "dsmr_plugins/tests", "dsmr_pvoutput/tests", "dsmr_stats/tests", "dsmr_weather/tests"]
+
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "./*/__init__.py",
+    "./.venv/*",
+    "./*/tests/*",
+    "./*/migrations/*",
+    "./dsmr_backend/mixins.py",
+    "./dsmr_plugins/modules/*",
+    "./dsmr_dropbox/dropboxinc/*",
+    "./dsmr_parser/*",
+    "./dsmrreader/config/*",
+]
+
+[tool.coverage.html]
+directory = "coverage_report/html"

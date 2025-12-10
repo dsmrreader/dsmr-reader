@@ -838,25 +838,6 @@ bandit = ">=1.7.3"
 flake8 = ">=5.0.0"
 
 [[package]]
-name = "flake8-black"
-version = "0.4.0"
-description = "flake8 plugin to call black as a code style validator"
-optional = false
-python-versions = ">=3.9"
-groups = ["dev"]
-files = [
-    {file = "flake8_black-0.4.0-py3-none-any.whl", hash = "sha256:288762d0c9ea065782d87eeecbcc20c69079d17fe1d0f0445f0eb0b0ffb80c39"},
-    {file = "flake8_black-0.4.0.tar.gz", hash = "sha256:bf226868f695dee48d55ff6d7747e900709bfd6f605b7a378c70e711e3fc26cb"},
-]
-
-[package.dependencies]
-black = ">=22.1.0"
-flake8 = ">=3"
-
-[package.extras]
-develop = ["build", "twine"]
-
-[[package]]
 name = "flake8-bugbear"
 version = "25.11.29"
 description = "A plugin for flake8 finding likely bugs and design problems in your program. Contains warnings that don't belong in pyflakes and pycodestyle."
@@ -874,6 +855,23 @@ flake8 = ">=7.2.0"
 
 [package.extras]
 dev = ["coverage", "hypothesis", "hypothesmith (>=0.2)", "pre-commit", "pytest", "tox"]
+
+[[package]]
+name = "flake8-pyproject"
+version = "1.2.4"
+description = "Flake8 plug-in loading the configuration from pyproject.toml"
+optional = false
+python-versions = ">=3.6"
+groups = ["dev"]
+files = [
+    {file = "flake8_pyproject-1.2.4-py3-none-any.whl", hash = "sha256:ea34c057f9a9329c76d98723bb2bb498cc6ba8ff9872c4d19932d48c91249a77"},
+]
+
+[package.dependencies]
+Flake8 = ">=5"
+
+[package.extras]
+dev = ["Flit (>=3.4)", "pyTest (>=7)", "pyTest-cov (>=7) ; python_version >= \"3.10\""]
 
 [[package]]
 name = "gunicorn"
@@ -2753,4 +2751,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.13"
-content-hash = "f9954e11351de5924528d8bd4d349ffe4c0fe884f57217813664852633880bfb"
+content-hash = "8ca608ebb95278e3d910f1a949f5c95048131f8f54ea9914b1db4b7cee7f59cc"
