@@ -20,3 +20,4 @@
 - Run the "Project state guidelines" mentioned above.
 - Ensure code follows best practices and coding standards.
 - Suggest commonly used tools for code quality and consistency.
+- Check documentation for typos and errors. It resides in the `documentation` folder.
