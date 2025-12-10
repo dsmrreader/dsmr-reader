@@ -18,13 +18,15 @@ for k in CACHES.keys():
     CACHES[k]["BACKEND"] = "django.core.cache.backends.dummy.DummyCache"
 
 # Disable Django Toolbar.
-INSTALLED_APPS = list(INSTALLED_APPS)
-INSTALLED_APPS.remove("debug_toolbar")
+_installed_apps: list[str] = list(INSTALLED_APPS)  # type: ignore
+_installed_apps.remove("debug_toolbar")  # type: ignore
+INSTALLED_APPS = _installed_apps  # type: ignore
 
-MIDDLEWARE = list(MIDDLEWARE)
-MIDDLEWARE.remove("debug_toolbar.middleware.DebugToolbarMiddleware")
+_middleware: list[str] = list(MIDDLEWARE)  # type: ignore
+_middleware.remove("debug_toolbar.middleware.DebugToolbarMiddleware")  # type: ignore
+MIDDLEWARE = _middleware  # type: ignore
 
-INTERNAL_IPS = None
+INTERNAL_IPS: str | None = None  # type: ignore
 DSMRREADER_MAX_DATABASE_CONNECTION_SESSION_IN_SECONDS = 9999  # Never
 
 DSMRREADER_PLUGINS = [

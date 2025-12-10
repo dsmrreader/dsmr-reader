@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 
 class TelegramParser(object):
-    crc16_tab = []
+    crc16_tab: list[int] = []
 
     def __init__(self, telegram_specification, apply_checksum_validation=True):
         """

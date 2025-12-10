@@ -209,7 +209,7 @@ BELGIUM_FLUVIUS = {
 }
 
 LUXEMBOURG_SMARTY = deepcopy(V5)
-LUXEMBOURG_SMARTY["objects"].update(
+LUXEMBOURG_SMARTY["objects"].update(  # type: ignore
     {
         obis.LUXEMBOURG_EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
         obis.ELECTRICITY_IMPORTED_TOTAL: CosemParser(ValueParser(Decimal)),

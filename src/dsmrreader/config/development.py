@@ -7,8 +7,8 @@ DEBUG = True
 for k in CACHES.keys():
     CACHES[k]["TIMEOUT"] = 0
 
-INSTALLED_APPS = list(INSTALLED_APPS)
-INSTALLED_APPS.append("debug_toolbar")
+INSTALLED_APPS = list(INSTALLED_APPS)  # type: ignore
+INSTALLED_APPS.append("debug_toolbar")  # type: ignore
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 

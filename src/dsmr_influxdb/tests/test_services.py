@@ -88,7 +88,7 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
-    def test_initialize_client_legacy_hostname_port_insecure(self, create_bucket_mock, find_bucket_mock):
+    def test_initialize_client_legacy_hostname_port_secure_cert_none(self, create_bucket_mock, find_bucket_mock):
         find_bucket_mock.return_value = None
         self.assertFalse(create_bucket_mock.called)
 

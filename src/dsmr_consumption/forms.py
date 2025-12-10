@@ -7,7 +7,7 @@ from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 
 class EnergySupplierPriceForm(forms.ModelForm):
     class Meta:
-        exclude = []
+        exclude: list[str] = []
         model = EnergySupplierPrice
 
     def clean_electricity_delivered_1_price(self):

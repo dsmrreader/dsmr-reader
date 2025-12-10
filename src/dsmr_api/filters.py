@@ -52,7 +52,7 @@ class EnergySupplierPriceFilter(filters.FilterSet):
 
     class Meta:
         model = EnergySupplierPrice
-        fields = []
+        fields: list[str] = []
 
 
 class ElectricityConsumptionFilter(filters.FilterSet):
@@ -99,7 +99,7 @@ class QuarterHourPeakElectricityConsumptionFilter(filters.FilterSet):
 
     class Meta:
         model = QuarterHourPeakElectricityConsumption
-        fields = []
+        fields: list[str] = []
 
 
 class GasConsumptionFilter(filters.FilterSet):

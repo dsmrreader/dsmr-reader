@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
     target_influx_bucket: str
     max_batches: int = 1
-    influxdb_client: InfluxDBClient = None
+    influxdb_client: InfluxDBClient | None = None
     field_mapping = None
 
     def add_arguments(self, parser):

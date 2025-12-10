@@ -129,7 +129,7 @@ def publish_dsmr_reading(instance: DsmrReading) -> None:
 def get_reading_to_measurement_mapping() -> Dict:
     """Parses and returns the formatting mapping as defined by the user."""
     READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
-    mapping = defaultdict(dict)
+    mapping: dict = defaultdict(dict)
 
     config_parser = configparser.ConfigParser()
     config_parser.read_string(InfluxdbIntegrationSettings.get_solo().formatting)
