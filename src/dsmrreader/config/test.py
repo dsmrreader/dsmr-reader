@@ -30,3 +30,29 @@ DSMRREADER_MAX_DATABASE_CONNECTION_SESSION_IN_SECONDS = 9999  # Never
 DSMRREADER_PLUGINS = [
     "os",  # Bad example, but it works for testing anyway.
 ]
+
+# When defined, just use these.
+try:
+    DATABASES["default"]["HOST"] = config("TEST_DJANGO_DATABASE_HOST", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    DATABASES["default"]["PORT"] = config("TEST_DJANGO_DATABASE_PORT", cast=int)
+except UndefinedValueError:
+    pass
+
+try:
+    DATABASES["default"]["NAME"] = config("TEST_DJANGO_DATABASE_NAME", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    DATABASES["default"]["USER"] = config("TEST_DJANGO_DATABASE_USER", cast=str)
+except UndefinedValueError:
+    pass
+
+try:
+    DATABASES["default"]["PASSWORD"] = config("TEST_DJANGO_DATABASE_PASSWORD", cast=str)
+except UndefinedValueError:
+    pass
