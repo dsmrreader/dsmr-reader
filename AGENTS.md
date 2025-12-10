@@ -5,7 +5,7 @@
 - Run Black, MyPy and tests to verify changes after making modifications.
 - Temporary files and reports must be placed in `.agent-data/` to prevent them from being committed.
 - Delete temporary files created for command output.
-- Do not rebuild the docker container if it does not respond.
+- If the docker container for running commands is not available, pause and inform the user to manually fix it.
 
 
 ## Project integrity guidelines
