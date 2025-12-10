@@ -85,6 +85,7 @@ per-file-ignores = [
 
 [tool.mypy]
 ignore_missing_imports = true
+exclude = [".*/migrations/"]
 
 [[tool.mypy.overrides]]
 module = "paho.*"
