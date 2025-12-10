@@ -39,5 +39,5 @@ rejected_telegrams = dsmr/meter-stats/rejected_telegrams
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Meter Statistics: Split topic")

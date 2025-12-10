@@ -92,5 +92,5 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         return self.name
 
     class Meta:
-        default_permissions = []
+        default_permissions: list[str] = []
         verbose_name = _("Scheduled process")

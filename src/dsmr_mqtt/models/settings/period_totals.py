@@ -67,7 +67,7 @@ current_year_total_cost = current_year_total_cost
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Current month/year totals: JSON")
 
 
@@ -125,5 +125,5 @@ current_year_total_cost = dsmr/current-year/total_cost
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Current month/year totals: Split topic")

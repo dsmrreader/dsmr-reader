@@ -139,7 +139,7 @@ extra_device_delivered = delivered
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("InfluxDB integration")
 
 

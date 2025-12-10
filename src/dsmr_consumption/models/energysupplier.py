@@ -89,6 +89,6 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         return self.description or gettext("Energy supplier price contract")
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Energy supplier (price) contract")
         verbose_name_plural = _("Energy supplier (price) contracts")

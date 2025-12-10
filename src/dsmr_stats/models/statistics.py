@@ -166,7 +166,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         return (self.electricity1_cost or 0) + (self.electricity2_cost or 0)
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Day statistics (automatically generated data)")
         verbose_name_plural = verbose_name
         ordering = ["day"]
@@ -217,7 +217,7 @@ class HourStatistics(ModelUpdateMixin, models.Model):
         return self.electricity1_returned + self.electricity2_returned
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Hour statistics (automatically generated data)")
         verbose_name_plural = verbose_name
         ordering = ["hour_start"]
@@ -373,5 +373,5 @@ class ElectricityStatistics(SingletonModel):
         return data
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Electricity statistics")

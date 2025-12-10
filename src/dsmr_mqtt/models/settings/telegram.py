@@ -25,7 +25,7 @@ class RawTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Telegram: Raw")
 
 
@@ -89,7 +89,7 @@ phase_power_current_l3 = phase_power_current_l3
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Telegram: JSON")
 
 
@@ -147,5 +147,5 @@ phase_power_current_l3 = dsmr/reading/phase_power_current_l3
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Telegram: Split topic")

@@ -167,7 +167,7 @@ class DsmrReading(ModelUpdateMixin, models.Model):
     )
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         ordering = ["timestamp"]
         verbose_name = _("DSMR reading")
         verbose_name_plural = _("DSMR readings")

@@ -74,7 +74,7 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
     )
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("DSMR Meter statistics (read only)")
         verbose_name_plural = verbose_name
 
@@ -97,7 +97,7 @@ class MeterStatisticsChange(models.Model):
     new_value = models.CharField(verbose_name=_("New value"), max_length=32)
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("DSMR Meter statistics change")
         verbose_name_plural = _("DSMR Meter statistics changes")
 

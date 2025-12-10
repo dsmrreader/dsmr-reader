@@ -183,7 +183,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Frontend configuration")
 
 
@@ -198,7 +198,7 @@ class SortedGraph(SortableMixin, models.Model):
         return self.name
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Sorted graph")
         verbose_name_plural = _("Sorted graphs")
         ordering = ["sorting_order"]

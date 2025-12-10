@@ -33,7 +33,7 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("PVOutput: API configuration")
 
 
@@ -90,5 +90,5 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("PVOutput: Add Status configuration")

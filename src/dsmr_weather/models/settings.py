@@ -82,5 +82,5 @@ class WeatherSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Weather configuration")

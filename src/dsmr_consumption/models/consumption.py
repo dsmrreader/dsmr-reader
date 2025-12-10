@@ -156,7 +156,7 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         )
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Electricity consumption")
         verbose_name_plural = verbose_name
 
@@ -183,7 +183,7 @@ class GasConsumption(ModelUpdateMixin, models.Model):
         )
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Gas consumption")
         verbose_name_plural = verbose_name
 
@@ -225,6 +225,6 @@ class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
 
     class Meta:
         ordering = ["read_at_start"]
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Quarter hour peak electricity consumption")
         verbose_name_plural = _("Quarter hour peak electricity consumptions")

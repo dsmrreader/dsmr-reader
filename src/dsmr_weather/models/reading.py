@@ -18,4 +18,4 @@ class TemperatureReading(ModelUpdateMixin, models.Model):
         return "{}: {} ℃".format(self.read_at, self.degrees_celcius)
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()

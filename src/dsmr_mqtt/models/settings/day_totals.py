@@ -60,7 +60,7 @@ energy_supplier_price_gas = energy_supplier_price_gas
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Day consumption: JSON")
 
 
@@ -111,5 +111,5 @@ energy_supplier_price_gas = dsmr/day-consumption/energy_supplier_price_gas
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("(Data source) Day consumption: Split topic")

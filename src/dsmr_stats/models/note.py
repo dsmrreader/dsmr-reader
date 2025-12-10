@@ -11,7 +11,7 @@ class Note(ModelUpdateMixin, models.Model):
     description = models.CharField(max_length=256, verbose_name=_("Description"))
 
     class Meta:
-        default_permissions = tuple()
+        default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Note")
         verbose_name_plural = _("Notes")
 
