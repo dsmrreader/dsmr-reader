@@ -4,51 +4,57 @@
 {% load i18n %}
 {% load l10n %}
 
-{% block title %}{% translate "Dashboard" %}{% endblock %}
-{% block header %}{% translate "Dashboard" %} &nbsp; <i class="fas fa-tachometer-alt"></i>{% endblock %}
+{% block title %}
+    {% translate "Dashboard" %}
+{% endblock %}
+{% block header %}
+    {% translate "Dashboard" %} &nbsp; <i class="fas fa-tachometer-alt"></i>
+{% endblock %}
 
 {% block content %}
-<!-- Main content -->
-<section class="content">
-    {% if not capabilities.any %}
-    <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No data found yet. Please make sure either the dsmr_datalogger process is running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktranslate %}
-    </div>
-    {% endif %}
+    <!-- Main content -->
+    <section class="content">
+        {% if not capabilities.any %}
+            <div class="alert alert-warning" role="alert">
+                <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No data found yet. Please make sure either the dsmr_datalogger process is running or you supply data using the API. The dsmr_backend process should run as well.{% endblocktranslate %}
+            </div>
+        {% endif %}
 
-    {% if capabilities.electricity %}
-    {% include "dsmr_frontend/fragments/live-header-include.html" with capabilities=capabilities %}
-    {% endif %}
+        {% if capabilities.electricity %}
+            {% include "dsmr_frontend/fragments/live-header-include.html" with capabilities=capabilities %}
+        {% endif %}
 
-    {% if notification_count > 0 %}
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel header-panel">
-                <header class="panel-heading">
-                    {% translate "Unread notifications" %} &nbsp; <span class="badge bg-blue">{{ notification_count }}</span>
-                </header>
-                <div class="panel-body">
-                    <a class="btn btn-sm btn-primary" href="{% url 'frontend:notifications' %}"><i class="fas fa-external-link-alt"></i> {% translate "Go to notification overview" %}</a>
+        {% if notification_count > 0 %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel header-panel">
+                        <header class="panel-heading">
+                            {% translate "Unread notifications" %} &nbsp; <span class="badge bg-blue">{{ notification_count }}</span>
+                        </header>
+                        <div class="panel-body">
+                            <a class="btn btn-sm btn-primary"
+                               href="{% url 'frontend:notifications' %}"><i class="fas fa-external-link-alt"></i> {% translate "Go to notification overview" %}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    {% endif %}
+        {% endif %}
 
-    {% if capabilities.any %}
-        {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.today date_formatter=today_date_format capabilities=capabilities day=period_totals.day %}
-        {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.month date_formatter=month_date_format capabilities=capabilities day=period_totals.day %}
-        {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.year date_formatter=year_date_format capabilities=capabilities day=period_totals.day %}
-    {% endif %}
+        {% if capabilities.any %}
+            {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.today date_formatter=today_date_format capabilities=capabilities day=period_totals.day %}
+            {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.month date_formatter=month_date_format capabilities=capabilities day=period_totals.day %}
+            {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.year date_formatter=year_date_format capabilities=capabilities day=period_totals.day %}
+        {% endif %}
 
-</section>
+    </section>
 {% endblock %}
 
 
 {% block javascript %}
     {{ block.super }}
 
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
     <script type="text/javascript">
         $(".help-trigger").click(function () {
             $(this).next().show();

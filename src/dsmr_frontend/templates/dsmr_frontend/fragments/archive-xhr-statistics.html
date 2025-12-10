@@ -1,5 +1,6 @@
 {% load humanize %}
-{% load i18n %} 
+{% load i18n %}
+
 {% load l10n %}
 
 <div class="panel">
@@ -7,86 +8,200 @@
         {{ title|unlocalize }}
 
         {% if selected_level == 'days' %}
-        <small class="pull-right">
-            <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}" title="{% translate "Add note for this date" %}">
-                <span class="badge bg-green"><i class="fas fa-plus"></i></span>
-            </a>
-        </small>
+            <small class="pull-right">
+                <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}"
+                   title="{% translate "Add note for this date" %}">
+                    <span class="badge bg-green"><i class="fas fa-plus"></i></span>
+                </a>
+            </small>
         {% endif %}
     </header>
     <div class="panel-body archive-header-panel-body">
         <table class="table table-hover">
             <tr>
-                <th class="col-sm-4"></th>
-                <th class="col-sm-3">{% if capabilities.electricity %}{% translate "Consumed" %}{% endif %}</th>
-                <th class="col-sm-3">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
-                <th class="col-sm-2">{% if capabilities.costs %}{% translate "Costs" %} <span class="unit">&euro;</span>{% endif %}</th>
+                <th class="col-sm-4">
+                </th>
+                <th class="col-sm-3">
+                    {% if capabilities.electricity %}
+                        {% translate "Consumed" %}
+                    {% endif %}
+                </th>
+                <th class="col-sm-3">
+                    {% if capabilities.electricity_returned %}
+                        {% translate "Returned" %}
+                    {% endif %}
+                </th>
+                <th class="col-sm-2">
+                    {% if capabilities.costs %}
+                        {% translate "Costs" %} <span class="unit">&euro;</span>
+                    {% endif %}
+                </th>
             </tr>
             {% if frontend_settings.merge_electricity_tariffs %}
-            <tr>
-                <td>{% if capabilities.electricity %}{% translate "Electricity (total)" %} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
-                <td>{% if capabilities.electricity and statistics.electricity_merged %}<span class="badge bg-red">{{ statistics.electricity_merged|default:'-' }} </span>{% endif %}</td>
-                <td>{% if capabilities.electricity_returned and statistics.electricity_returned_merged %}<span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-' }}</span>{% endif %}</td>
-                <td>{% if capabilities.electricity and statistics.electricity_cost_merged %}<span class="badge bg-black">{{ statistics.electricity_cost_merged|default:'-' }}</span>{% endif %}</td>
-            </tr>
+                <tr>
+                    <td>
+                        {% if capabilities.electricity %}
+                            {% translate "Electricity (total)" %} <span class="unit">{% translate "kWh" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity and statistics.electricity_merged %}
+                            <span class="badge bg-red">{{ statistics.electricity_merged|default:'-' }} </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity_returned and statistics.electricity_returned_merged %}
+                            <span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-' }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity and statistics.electricity_cost_merged %}
+                            <span class="badge bg-black">{{ statistics.electricity_cost_merged|default:'-' }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
             {% else %}
-            <tr>
-                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
-                <td>{% if capabilities.electricity and statistics.electricity1 %}<span class="badge bg-red">{{ statistics.electricity1|default:'-' }} </span>{% endif %}</td>
-                <td>{% if capabilities.electricity_returned and statistics.electricity1_returned %}<span class="badge bg-green">{{ statistics.electricity1_returned|default:'-' }}</span>{% endif %}</td>
-                <td>{% if capabilities.electricity and statistics.electricity1_cost %}<span class="badge bg-black">{{ statistics.electricity1_cost|default:'-' }}</span>{% endif %}</td>
-            </tr>
-            <tr>
-                <td>{% if capabilities.electricity %}{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>{% endif %}</td>
-                <td>{% if capabilities.electricity and statistics.electricity2 %}<span class="badge bg-red">{{ statistics.electricity2|default:'-' }}</span>{% endif %}</td>
-                <td>{% if capabilities.electricity_returned and statistics.electricity2_returned %}<span class="badge bg-green">{{ statistics.electricity2_returned|default:'-' }}</span>{% endif %}</td>
-                <td>{% if capabilities.electricity and statistics.electricity2_cost %}<span class="badge bg-black">{{ statistics.electricity2_cost|default:'-' }}</span>{% endif %}</td>
-            </tr>
+                <tr>
+                    <td>
+                        {% if capabilities.electricity %}
+                            {{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity and statistics.electricity1 %}
+                            <span class="badge bg-red">{{ statistics.electricity1|default:'-' }} </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity_returned and statistics.electricity1_returned %}
+                            <span class="badge bg-green">{{ statistics.electricity1_returned|default:'-' }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity and statistics.electricity1_cost %}
+                            <span class="badge bg-black">{{ statistics.electricity1_cost|default:'-' }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% if capabilities.electricity %}
+                            {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity and statistics.electricity2 %}
+                            <span class="badge bg-red">{{ statistics.electricity2|default:'-' }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity_returned and statistics.electricity2_returned %}
+                            <span class="badge bg-green">{{ statistics.electricity2_returned|default:'-' }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if capabilities.electricity and statistics.electricity2_cost %}
+                            <span class="badge bg-black">{{ statistics.electricity2_cost|default:'-' }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
             {% endif %}
             <tr>
-                <td> {% if capabilities.gas %}{% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>{% endif %}</td>
-                <td>{% if capabilities.gas and statistics.gas %}<span class="badge bg-orange">{{ statistics.gas|default:'-' }}</span>{% endif %}</td>
-                <td>&nbsp;</td>
-                <td>{% if capabilities.gas and statistics.gas_cost %}<span class="badge bg-black">{{ statistics.gas_cost|default:'-' }}</span>{% endif %}</td>
+                <td>
+                    {% if capabilities.gas %}
+                        {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if capabilities.gas and statistics.gas %}
+                        <span class="badge bg-orange">{{ statistics.gas|default:'-' }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    {% if capabilities.gas and statistics.gas_cost %}
+                        <span class="badge bg-black">{{ statistics.gas_cost|default:'-' }}</span>
+                    {% endif %}
+                </td>
             </tr>
             {% if capabilities.costs and statistics.fixed_cost %}
-            <tr>
-                <td> {% translate "Fixed costs" %} <span class="unit">&euro;</span></td>
-                <td>
-                    <span class="unit">
-                        {{ statistics.number_of_days|default:'-' }}
-                        {% blocktranslate count counter=statistics.number_of_days %}day{% plural %}days{% endblocktranslate %}
-                    </span>
-                </td>
-                <td>&nbsp;</td>
-                <td><span class="badge bg-black">{{ statistics.fixed_cost|default:'-' }}</span></td>
-            </tr>
+                <tr>
+                    <td>
+                        {% translate "Fixed costs" %} <span class="unit">&euro;</span>
+                    </td>
+                    <td>
+                        <span class="unit">
+                            {{ statistics.number_of_days|default:'-' }}
+                            {% blocktranslate count counter=statistics.number_of_days %}day{% plural %}days{% endblocktranslate %}
+                        </span>
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        <span class="badge bg-black">{{ statistics.fixed_cost|default:'-' }}</span>
+                    </td>
+                </tr>
             {% endif %}
             <tr class="highlight">
-                <td style="font-weight: bold;">{% translate "Total" %}</td>
-                <td>{% if capabilities.electricity and statistics.electricity_merged %}<span class="badge bg-red">{{ statistics.electricity_merged|default:'-' }}  </span>{% endif %}</td>
-                <td>{% if capabilities.electricity_returned and statistics.electricity_returned_merged %}<span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-' }}</span>{% endif %}</td>
-                <td>{% if capabilities.costs and statistics.total_cost %}<span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span>{% endif %}</td>
+                <td style="font-weight: bold;">
+                    {% translate "Total" %}
+                </td>
+                <td>
+                    {% if capabilities.electricity and statistics.electricity_merged %}
+                        <span class="badge bg-red">{{ statistics.electricity_merged|default:'-' }}  </span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if capabilities.electricity_returned and statistics.electricity_returned_merged %}
+                        <span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-' }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if capabilities.costs and statistics.total_cost %}
+                        <span class="badge bg-black">{{ statistics.total_cost|default:'-' }}</span>
+                    {% endif %}
+                </td>
             </tr>
 
             {% if statistics.temperature_avg %}
-            <tr>
-                <td colspan="4">&nbsp;</td>
-            </tr>
-            <tr>
-                <td> {% translate "°C" %}</td>
-                <td>{% if statistics.temperature_min %}<span class="badge bg-blue">{{ statistics.temperature_min|floatformat|default:'-' }}</span> <span class="unit">{% translate "Min" %}</span>{% endif %}</td>
-                <td>{% if statistics.temperature_max %}<span class="badge bg-blue">{{ statistics.temperature_max|floatformat|default:'-' }}</span> <span class="unit">{% translate "Max" %}</span>{% endif %}</td>
-                <td>{% if statistics.temperature_avg %}<span class="badge bg-blue">{{ statistics.temperature_avg|floatformat|default:'-' }}</span> <span class="unit">{% translate "Avg" %}</span>{% endif %}</td>
-            </tr>
+                <tr>
+                    <td colspan="4">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% translate "°C" %}
+                    </td>
+                    <td>
+                        {% if statistics.temperature_min %}
+                            <span class="badge bg-blue">{{ statistics.temperature_min|floatformat|default:'-' }}</span> <span class="unit">{% translate "Min" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if statistics.temperature_max %}
+                            <span class="badge bg-blue">{{ statistics.temperature_max|floatformat|default:'-' }}</span> <span class="unit">{% translate "Max" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if statistics.temperature_avg %}
+                            <span class="badge bg-blue">{{ statistics.temperature_avg|floatformat|default:'-' }}</span> <span class="unit">{% translate "Avg" %}</span>
+                        {% endif %}
+                    </td>
+                </tr>
             {% endif %}
         </table>
-        
-{% if notes %}
-	    {% for current_note in notes %}
-	    <div class="alert alert-warning" role="alert"><i class="fas fa-comments"></i> {{ current_note.description|linebreaksbr }}</div>
-	    {% endfor %}
-{% endif %}
+
+        {% if notes %}
+            {% for current_note in notes %}
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-comments"></i> {{ current_note.description|linebreaksbr }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 
@@ -102,31 +217,67 @@
                 <div class="panel-body">
                     <table class="table table-hover">
                         <tr>
-                            <th class="col-sm-4"></th>
-                            <th class="col-sm-3">{% translate "Delivered" %}</th>
-                            <th class="col-sm-3">{% if capabilities.electricity_returned %}{% translate "Returned" %}{% endif %}</th>
-                            <th class="col-sm-2">{% translate "Timestamp" %}</th>
+                            <th class="col-sm-4">
+                            </th>
+                            <th class="col-sm-3">
+                                {% translate "Delivered" %}
+                            </th>
+                            <th class="col-sm-3">
+                                {% if capabilities.electricity_returned %}
+                                    {% translate "Returned" %}
+                                {% endif %}
+                            </th>
+                            <th class="col-sm-2">
+                                {% translate "Timestamp" %}
+                            </th>
                         </tr>
                         <tr>
-                            <td>{{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
-                            <td><span class="badge bg-red">{{ day_statistics.electricity1_reading }} </span></td>
-                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ day_statistics.electricity1_returned_reading}}</span>{% endif %}</td>
-                            <td class="col-sm-2"><span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
+                            <td>
+                                {{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-red">{{ day_statistics.electricity1_reading }} </span>
+                            </td>
+                            <td>
+                                {% if capabilities.electricity_returned %}
+                                    <span class="badge bg-green">{{ day_statistics.electricity1_returned_reading }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="col-sm-2">
+                                <span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td>{{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span></td>
-                            <td><span class="badge bg-red">{{ day_statistics.electricity2_reading }}</span></td>
-                            <td>{% if capabilities.electricity_returned %}<span class="badge bg-green">{{ day_statistics.electricity2_returned_reading}}</span>{% endif %}</td>
-                            <td class="col-sm-2"><span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
+                            <td>
+                                {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-red">{{ day_statistics.electricity2_reading }}</span>
+                            </td>
+                            <td>
+                                {% if capabilities.electricity_returned %}
+                                    <span class="badge bg-green">{{ day_statistics.electricity2_returned_reading }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="col-sm-2">
+                                <span class="unit">{{ day_statistics.electricity_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span>
+                            </td>
                         </tr>
 
                         {% if capabilities.gas %}
-                        <tr>
-                            <td>{% translate "Gas" %} <span class="unit">{% translate "m³" %}</span></td>
-                            <td><span class="badge bg-orange">{{ day_statistics.gas_reading }}</span></td>
-                            <td></td>
-                            <td class="col-sm-2"><span class="unit">{{ day_statistics.gas_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span></td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-orange">{{ day_statistics.gas_reading }}</span>
+                                </td>
+                                <td>
+                                </td>
+                                <td class="col-sm-2">
+                                    <span class="unit">{{ day_statistics.gas_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span>
+                                </td>
+                            </tr>
                         {% endif %}
                     </table>
 

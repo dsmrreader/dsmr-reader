@@ -16,10 +16,20 @@
                             </span>
                             <span class="unit" id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
                         </th>
-                        <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">{% if capabilities.electricity %}{% translate "Consuming" %}{% endif %}</th>
-                        <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">{% if capabilities.electricity_returned %}{% translate "Returning" %}{% endif %}</th>
+                        <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
+                            {% if capabilities.electricity %}
+                                {% translate "Consuming" %}
+                            {% endif %}
+                        </th>
+                        <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
+                            {% if capabilities.electricity_returned %}
+                                {% translate "Returning" %}
+                            {% endif %}
+                        </th>
                         {% if capabilities.costs %}
-                        <th class="col-sm-2">&euro; <span class="unit">/ {% translate 'hour' %}</span></th>
+                            <th class="col-sm-2">
+                                &euro; <span class="unit">/ {% translate 'hour' %}</span>
+                            </th>
                         {% endif %}
                     </tr>
                     <tr>
@@ -37,11 +47,11 @@
                             {% endif %}
                         </td>
                         {% if capabilities.costs %}
-                        <td>
-                            {% if capabilities.electricity %}
-                                <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
-                            {% endif %}
-                        </td>
+                            <td>
+                                {% if capabilities.electricity %}
+                                    <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
+                                {% endif %}
+                            </td>
                         {% endif %}
                     </tr>
                 </table>

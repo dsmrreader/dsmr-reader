@@ -1,5 +1,6 @@
 {% extends 'admin/change_form.html' %}
-{% load i18n %} 
+{% load i18n %}
+
 
 {% block field_sets %}
 
@@ -8,8 +9,11 @@
         <small><a href="{% url 'admin:dsmr_backup_emailbackupsettings_change' 1 %}">
             {% blocktranslate %}Optional: View your settings for sending backups by email here.{% endblocktranslate %}
         </a></small>
-        <br><br>
-        <input type="submit" value="{% translate 'Send test email' %}" name="send_test_email">
+        <br>
+        <br>
+        <input type="submit"
+               value="{% translate 'Send test email' %}"
+               name="send_test_email">
     </div>
 
     {{ block.super }}

@@ -2,113 +2,136 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% translate "Archive" %}{% endblock %}
-{% block header %}{% translate "Archive" %} &nbsp; <i class="fas fa-history"></i>{% endblock %}
+{% block title %}
+    {% translate "Archive" %}
+{% endblock %}
+{% block header %}
+    {% translate "Archive" %} &nbsp; <i class="fas fa-history"></i>
+{% endblock %}
 
 {% block content %}
-<!-- Main content -->
-<section class="content">
-{% if not capabilities.any or not start_date or not end_date %}
-    <div class="alert alert-warning" role="alert">
-        <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktranslate %} <i class="fas fa-smile-wink"></i>
-    </div>
-{% endif %}
+    <!-- Main content -->
+    <section class="content">
+        {% if not capabilities.any or not start_date or not end_date %}
+            <div class="alert alert-warning" role="alert">
+                <span class="fas fa-exclamation-triangle fa-2x"></span> &nbsp; {% blocktranslate %}No day statistics found yet. Usually you can find data here after the first day of running DSMR-reader.{% endblocktranslate %} <i class="fas fa-smile-wink"></i>
+            </div>
+        {% endif %}
 
-{% if capabilities.any and start_date and end_date %}
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel datepicker-panel">
-                <header class="panel-heading centered-header">
-                    {% blocktranslate %}Data selection{% endblocktranslate %}
-                </header>
-                <div class="panel-body archive-header-panel-body">
-                    <div class="row">
-                        <div class="col-lg-push-4 col-lg-4">
-                            <div class="center-block centered-header">
-                                <div class="italic">{% blocktranslate %}Select level of detail.{% endblocktranslate %}</div>
+        {% if capabilities.any and start_date and end_date %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel datepicker-panel">
+                        <header class="panel-heading centered-header">
+                            {% blocktranslate %}Data selection{% endblocktranslate %}
+                        </header>
+                        <div class="panel-body archive-header-panel-body">
+                            <div class="row">
+                                <div class="col-lg-push-4 col-lg-4">
+                                    <div class="center-block centered-header">
+                                        <div class="italic">
+                                            {% blocktranslate %}Select level of detail.{% endblocktranslate %}
+                                        </div>
 
-                                <span class="datepicker-level-icon">
-                                    <span class="center-block datepicker-level-name">{% translate "Days" %}</span>
-                                    <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
-                                </span>
+                                        <span class="datepicker-level-icon">
+                                            <span class="center-block datepicker-level-name">{% translate "Days" %}</span>
+                                            <span class="sm-st-icon st-gray datepicker-trigger"
+                                                  id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
+                                        </span>
 
-                                &nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;
 
-                                <span class="datepicker-level-icon">
-                                    <span class="center-block datepicker-level-name">{% translate "Months" %}</span>
-                                    <span class="sm-st-icon st-green datepicker-trigger" id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
-                                </span>
+                                        <span class="datepicker-level-icon">
+                                            <span class="center-block datepicker-level-name">{% translate "Months" %}</span>
+                                            <span class="sm-st-icon st-green datepicker-trigger"
+                                                  id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
+                                        </span>
 
-                                &nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;
 
-                                <span class="datepicker-level-icon">
-                                    <span class="center-block datepicker-level-name">{% translate "Years" %}</span>
-                                    <span class="sm-st-icon st-gray datepicker-trigger" id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
-                                </span>
+                                        <span class="datepicker-level-icon">
+                                            <span class="center-block datepicker-level-name">{% translate "Years" %}</span>
+                                            <span class="sm-st-icon st-gray datepicker-trigger"
+                                                  id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-push-4 col-lg-4">
-                            <div class="center-block centered-header">
-                                <div id="datepicker"></div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-push-4 col-lg-4">
+                                    <div class="center-block centered-header">
+                                        <div id="datepicker">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-12 datepicker-panel">
-            <div id="summary-loader" class="xhr-hidden text-center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></div>
-            <div id="summary-holder"></div>
-        </div>
-    </div>
-
-    <div class="row chart-holder">
-        <div class="col-sm-12">
-            <div class="panel">
-                <header class="panel-heading centered-header">
-                    {% blocktranslate %}Graphs{% endblocktranslate %}
-                </header>
-                <div class="panel-body">
-                    {% if capabilities.electricity %}
-                    <div id="echarts-electricity-graph" class="graph-canvas"></div>
-                    {% endif %}
-
-                    {% if capabilities.electricity_returned %}
-                    <div id="echarts-electricity-returned-graph" class="graph-canvas"></div>
-                    {% endif %}
-
-                    {% if capabilities.gas %}
-                    <div id="echarts-gas-graph" class="graph-canvas"></div>
-                    {% endif %}
+            <div class="row">
+                <div class="col-sm-12 datepicker-panel">
+                    <div id="summary-loader" class="xhr-hidden text-center">
+                        <i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    </div>
+                    <div id="summary-holder">
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-{% endif %}
-</section>
+
+            <div class="row chart-holder">
+                <div class="col-sm-12">
+                    <div class="panel">
+                        <header class="panel-heading centered-header">
+                            {% blocktranslate %}Graphs{% endblocktranslate %}
+                        </header>
+                        <div class="panel-body">
+                            {% if capabilities.electricity %}
+                                <div id="echarts-electricity-graph" class="graph-canvas">
+                                </div>
+                            {% endif %}
+
+                            {% if capabilities.electricity_returned %}
+                                <div id="echarts-electricity-returned-graph" class="graph-canvas">
+                                </div>
+                            {% endif %}
+
+                            {% if capabilities.gas %}
+                                <div id="echarts-gas-graph" class="graph-canvas">
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </section>
 {% endblock %}
 
 {% block stylesheets %}
-{{ block.super }}
-        <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet" type="text/css" />
+    {{ block.super }}
+    <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}"
+          rel="stylesheet"
+          type="text/css" />
 {% endblock %}
 
 {% block javascript %}
-	{{ block.super }}
-	 
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/echarts.common-5.3.3.min.js' %}"></script>
+    {{ block.super }}
 
-	{% get_current_language as LANGUAGE_CODE %}
-	<script type="text/javascript" src="{% static 'dsmr_frontend/js/moment-with-locales-2.29.4.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/js/echarts.common-5.3.3.min.js' %}"></script>
+
+    {% get_current_language as LANGUAGE_CODE %}
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/js/moment-with-locales-2.29.4.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
 
     <script type="text/javascript">
         let echarts_electricity_graph = null;
@@ -200,16 +223,20 @@
     </script>
 
     {% if capabilities.electricity %}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity.js' %}?r=v{{ dsmr_version }}"></script>
+        <script type="text/javascript"
+                src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.electricity_returned %}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity-returned.js' %}?r=v{{ dsmr_version }}"></script>
+        <script type="text/javascript"
+                src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity-returned.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.gas %}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/archive/gas.js' %}?r=v{{ dsmr_version }}"></script>
+        <script type="text/javascript"
+                src="{% static 'dsmr_frontend/js/dsmr-reader/archive/gas.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
-    <script type="text/javascript" src="{% static 'dsmr_frontend/js/dsmr-reader/archive/archive.js' %}?r=v{{ dsmr_version }}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/js/dsmr-reader/archive/archive.js' %}?r=v{{ dsmr_version }}"></script>
 {% endblock %}

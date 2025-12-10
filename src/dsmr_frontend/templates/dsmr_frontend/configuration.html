@@ -1,48 +1,62 @@
 {% extends "dsmr_frontend/base.html" %}
-{% load humanize %} 
-{% load static %} 
+{% load humanize %}
+
+{% load static %}
+
 {% load i18n %}
 
-{% block title %}{% translate "Configuration" %}{% endblock %}
-{% block header %}{% translate "Configuration" %} &nbsp; <i class="fas fa-wrench"></i>{% endblock %}
+{% block title %}
+    {% translate "Configuration" %}
+{% endblock %}
+{% block header %}
+    {% translate "Configuration" %} &nbsp; <i class="fas fa-wrench"></i>
+{% endblock %}
 
 {% block content %}
-<!-- Main content -->
-<section class="content search-section">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel">
-                <header class="panel-heading">
-                    {% translate "Search for a topic or setting" %}
-                </header>
-                <div class="panel-body">
-                    <div class="ui search">
-                        <div class="ui icon input">
-                            <input id="search" class="prompt" type="text" placeholder="{% translate "Type here to search..." %}">
+    <!-- Main content -->
+    <section class="content search-section">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <header class="panel-heading">
+                        {% translate "Search for a topic or setting" %}
+                    </header>
+                    <div class="panel-body">
+                        <div class="ui search">
+                            <div class="ui icon input">
+                                <input id="search"
+                                       class="prompt"
+                                       type="text"
+                                       placeholder="{% translate "Type here to search..." %}">
+                            </div>
+
+                            &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% translate "Skip search and go directly to admin" %}</a>
+
+                            <div class="results">
+                            </div>
                         </div>
 
-                        &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% translate "Skip search and go directly to admin" %}</a>
-
-                        <div class="results"></div>
+                        <small>{% translate "Click a topic below to display a pop-up with more details to choose from." %}</small>
+                        <ul id="category-suggestions">
+                        </ul>
                     </div>
-
-                    <small>{% translate "Click a topic below to display a pop-up with more details to choose from." %}</small>
-                    <ul id="category-suggestions"></ul>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
 
 {% block stylesheets %}
     {{ block.super }}
-    <link href="{% static 'dsmr_frontend/semantic-2.4/semantic.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'dsmr_frontend/semantic-2.4/semantic.min.css' %}"
+          rel="stylesheet"
+          type="text/css" />
 {% endblock %}
 
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'dsmr_frontend/semantic-2.4/semantic.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'dsmr_frontend/semantic-2.4/semantic.min.js' %}"></script>
 
     <script>
         const api_settings_url = '{% url "admin:dsmr_api_apisettings_change" api_settings.pk %}';
