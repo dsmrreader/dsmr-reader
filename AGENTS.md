@@ -5,11 +5,13 @@
 - Run Black, MyPy and tests to verify changes after making modifications.
 - Temporary files and reports must be placed in `.agent-data/` to prevent them from being committed.
 - Delete temporary files created for command output.
+- Do not rebuild the docker container if it does not respond.
 
 
-## Project state guidelines
+## Project integrity guidelines
 - Run Poetry updates: `docker compose exec dev-dsmr-app poetry update`
 - Run Black: `docker compose exec dev-dsmr-app poetry run black .`
+- Run djLint: `docker compose exec dev-dsmr-app poetry run djlint --reformat .`
 - Run Flake8: `docker compose exec dev-dsmr-app poetry run flake8 -v`
 - Run MyPy: `docker compose exec dev-dsmr-app poetry run mypy /app`
 - Run Safety: `docker compose exec dev-dsmr-app poetry run safety check`
@@ -21,3 +23,4 @@
 - Ensure code follows best practices and coding standards.
 - Suggest commonly used tools for code quality and consistency.
 - Check documentation for typos and errors. It resides in the `documentation` folder.
+- In `pyproject.toml` the `[tool.poetry.dependencies]` and `[tool.poetry.group.dev.dependencies]` sections should have all packages sorted alphabetically.

@@ -37,6 +37,9 @@ jobs:
       - name: Check code formatting with Black
         run: docker compose run tests-dsmr-app poetry run black --check .
 
+      - name: Check Django templates with djLint
+        run: docker compose run tests-dsmr-app poetry run djlint --check .
+
       - name: Check flake8
         run: docker compose run tests-dsmr-app poetry run flake8 -v
 

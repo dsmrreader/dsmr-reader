@@ -15,6 +15,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.13"
 
+attrs = "^25"
 crcmod = "^1"
 django = "^5.2"
 django-admin-rangefilter = "^0.13"
@@ -23,8 +24,8 @@ django-colorfield = "^0.14"
 django-debug-toolbar = "^6"
 django-filter = "^24"  # v25 is incompatible and requires "drf-spectacular"
 django-mathfilters = "^1"
-djangorestframework = "^3"
 django-solo = "^2"
+djangorestframework = "^3"
 dropbox = "^12"
 gunicorn = "^23"
 influxdb-client = "^1"
@@ -38,26 +39,26 @@ python-decouple = "^3"
 pyyaml = "^6"
 requests = "^2"
 urllib3 = "^2"
-attrs = "^25"
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^25"
+djlint = "^1"
 flake8 = "^7"
-flake8-pyproject = "^1"
 flake8-bandit = "^4"
 flake8-bugbear = "^25"
+flake8-pyproject = "^1"
+mypy = "^1"
+mysqlclient = "^2"
 polib = "^1"
 pytest-cov = "^7"
 pytest-django = "^4"
 pytest-xdist = "^3"
-mysqlclient = "^2"
 safety = "^3"
-mypy = "^1"
+types-polib = "^1"
+types-python-dateutil = "^2"
 types-pytz = "^2025"
 types-requests = "^2"
-types-python-dateutil = "^2"
-types-polib = "^1"
 types-six = "^1"
 uritemplate = "^4"
 
@@ -123,3 +124,10 @@ omit = [
 
 [tool.coverage.html]
 directory = "coverage_report/html"
+
+[tool.djlint]
+profile = "django"
+line_break_after_multiline_tag = true
+preserve_blank_lines = true
+exclude = "^.*(\\.venv|migrations|dsmr_parser|dsmr_plugins/modules).*$"
+
