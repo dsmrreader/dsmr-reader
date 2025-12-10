@@ -15,9 +15,7 @@ class Migration(migrations.Migration):
             return
 
         DataloggerSettings = apps.get_model("dsmr_datalogger", "DataloggerSettings")
-        DataloggerSettings.objects.all().update(
-            log_telegrams=decimal.Decimal(settings.DSMRREADER_LOG_TELEGRAMS)
-        )
+        DataloggerSettings.objects.all().update(log_telegrams=decimal.Decimal(settings.DSMRREADER_LOG_TELEGRAMS))
 
     def migrate_backward(apps, schema_editor):
         pass  # Nothing to do, but allow going backwards.

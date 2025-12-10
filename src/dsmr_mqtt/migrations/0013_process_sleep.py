@@ -15,9 +15,7 @@ class Migration(migrations.Migration):
             return
 
         MQTTBrokerSettings = apps.get_model("dsmr_mqtt", "MQTTBrokerSettings")
-        MQTTBrokerSettings.objects.all().update(
-            process_sleep=decimal.Decimal(settings.DSMRREADER_MQTT_SLEEP)
-        )
+        MQTTBrokerSettings.objects.all().update(process_sleep=decimal.Decimal(settings.DSMRREADER_MQTT_SLEEP))
 
     def migrate_backward(apps, schema_editor):
         pass  # Nothing to do, but allow going backwards.

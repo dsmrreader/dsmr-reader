@@ -90,14 +90,10 @@ class QuarterHourPeakElectricityConsumptionAdmin(DeletionOnlyAdminModel):
     list_filter = (("read_at_start", DateTimeRangeFilter),)
 
     def read_at_start_formatted(self, obj):
-        return formats.date_format(
-            timezone.localtime(obj.read_at_start), "DSMR_VERBOSE_DATETIME_FORMAT"
-        )
+        return formats.date_format(timezone.localtime(obj.read_at_start), "DSMR_VERBOSE_DATETIME_FORMAT")
 
     def read_at_end_formatted(self, obj):
-        return formats.date_format(
-            timezone.localtime(obj.read_at_end), "DSMR_VERBOSE_DATETIME_FORMAT"
-        )
+        return formats.date_format(timezone.localtime(obj.read_at_end), "DSMR_VERBOSE_DATETIME_FORMAT")
 
     read_at_start_formatted.short_description = _("Start")  # type: ignore[attr-defined]
     read_at_end_formatted.short_description = _("End")  # type: ignore[attr-defined]

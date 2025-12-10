@@ -18,9 +18,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
 
     def setUp(self):
         DataloggerSettings.get_solo()
-        DataloggerSettings.objects.all().update(
-            dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS
-        )
+        DataloggerSettings.objects.all().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
 
     def _dsmr_dummy_data(self):
         return [
@@ -71,9 +69,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(
-            reading.timestamp, datetime(2023, 2, 1, 14, 50, 56, tzinfo=ZoneInfo("UTC"))
-        )
+        self.assertEqual(reading.timestamp, datetime(2023, 2, 1, 14, 50, 56, tzinfo=ZoneInfo("UTC")))
         self.assertEqual(reading.electricity_delivered_1, Decimal("143.608"))
         self.assertEqual(reading.electricity_returned_1, Decimal("2.963"))
         self.assertEqual(reading.electricity_delivered_2, Decimal("170.853"))
@@ -81,9 +77,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(reading.electricity_currently_delivered, Decimal("0.182"))
         self.assertEqual(reading.electricity_currently_returned, Decimal("0"))
         self.assertEqual(reading.extra_device_timestamp, None)  # Error handled.
-        self.assertEqual(
-            reading.extra_device_delivered, None
-        )  # Should be NONE too due to timestamp.
+        self.assertEqual(reading.extra_device_delivered, None)  # Should be NONE too due to timestamp.
         self.assertEqual(reading.phase_voltage_l1, Decimal("227.8"))
         self.assertEqual(reading.phase_voltage_l2, Decimal("0"))
         self.assertEqual(reading.phase_voltage_l3, Decimal("231.5"))
@@ -108,6 +102,4 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         """Tests whether this user setting overrides as expectedly."""
         reading = self._reading_with_override_telegram_timestamp_active(now_mock)
 
-        self.assertEqual(
-            reading.extra_device_delivered, None
-        )  # Should be NONE too due to timestamp.
+        self.assertEqual(reading.extra_device_delivered, None)  # Should be NONE too due to timestamp.

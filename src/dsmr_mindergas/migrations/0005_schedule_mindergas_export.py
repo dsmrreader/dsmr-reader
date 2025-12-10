@@ -13,9 +13,7 @@ def migrate_forward(apps, schema_editor):
     (
         app_settings,
         _,
-    ) = (
-        MinderGasSettings.objects.get_or_create()
-    )  # Ensure we have at least an instance.
+    ) = MinderGasSettings.objects.get_or_create()  # Ensure we have at least an instance.
 
     ScheduledProcess.objects.create(
         name="Upload gas meter position to MinderGas.nl",
@@ -27,9 +25,7 @@ def migrate_forward(apps, schema_editor):
 
 def migrate_backward(apps, schema_editor):
     ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT
-    ).delete()
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT).delete()
 
 
 class Migration(migrations.Migration):

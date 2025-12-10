@@ -23,9 +23,7 @@ class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "hostname", "port", "secure", "client_id"],
-                "description": _(
-                    "The backend process should automatically restart to apply changes."
-                ),
+                "description": _("The backend process should automatically restart to apply changes."),
             },
         ),
         (
@@ -63,9 +61,7 @@ class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "topic", "formatting", "use_local_timezone"],
-                "description": _(
-                    "Triggered by any method of reading insertion (datalogger or API)."
-                )
+                "description": _("Triggered by any method of reading insertion (datalogger or API).")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
@@ -94,9 +90,7 @@ class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting", "use_local_timezone"],
-                "description": _(
-                    "Triggered by any method of reading insertion (datalogger or API)."
-                )
+                "description": _("Triggered by any method of reading insertion (datalogger or API).")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
@@ -128,9 +122,7 @@ class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "topic", "formatting"],
-                "description": _(
-                    "Triggered by any method of reading insertion (datalogger or API)."
-                )
+                "description": _("Triggered by any method of reading insertion (datalogger or API).")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
@@ -159,9 +151,7 @@ class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _(
-                    "Triggered by any method of reading insertion (datalogger or API)."
-                )
+                "description": _("Triggered by any method of reading insertion (datalogger or API).")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
@@ -193,9 +183,7 @@ class JSONPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "topic", "formatting"],
-                "description": _(
-                    "Contains the totals for the current month and current year."
-                )
+                "description": _("Contains the totals for the current month and current year.")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
@@ -224,9 +212,7 @@ class SplitTopicPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _(
-                    "Contains the totals for the current month and current year."
-                )
+                "description": _("Contains the totals for the current month and current year.")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
@@ -255,9 +241,7 @@ class SplitTopicMeterStatisticsMQTTSettingsAdmin(SingletonModelAdmin):
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _(
-                    "Triggered by any method of reading insertion (datalogger or API)."
-                )
+                "description": _("Triggered by any method of reading insertion (datalogger or API).")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "
@@ -350,9 +334,7 @@ class JSONQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(SingletonModelA
             None,
             {
                 "fields": ["enabled", "topic", "formatting"],
-                "description": _(
-                    "Triggered when a quarter-hour peak consumption is calculated."
-                )
+                "description": _("Triggered when a quarter-hour peak consumption is calculated.")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, as a JSON message. You can alter the field names "
@@ -375,17 +357,13 @@ class JSONQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(SingletonModelA
 
 
 @admin.register(consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings)
-class SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(
-    SingletonModelAdmin
-):
+class SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
         (
             None,
             {
                 "fields": ["enabled", "formatting"],
-                "description": _(
-                    "Triggered when a quarter-hour peak consumption is calculated."
-                )
+                "description": _("Triggered when a quarter-hour peak consumption is calculated.")
                 + " "
                 + _(
                     "Allows you to send this data to the MQTT broker, split per-field. You can designate each field "

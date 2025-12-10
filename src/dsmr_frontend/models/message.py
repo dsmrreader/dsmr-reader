@@ -15,9 +15,7 @@ class Notification(ModelUpdateMixin, models.Model):
     objects = NotificationManager()
 
     message = models.TextField()
-    redirect_to = models.CharField(
-        max_length=64, null=True, blank=True, default=None
-    )  # = a Django reverse URL!
+    redirect_to = models.CharField(max_length=64, null=True, blank=True, default=None)  # = a Django reverse URL!
     read = models.BooleanField(default=False)
 
     class Meta:

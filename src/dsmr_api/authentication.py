@@ -21,19 +21,13 @@ class HeaderAuthentication(authentication.BaseAuthentication):
         if not api_settings.allow:
             raise exceptions.PermissionDenied("API is disabled")
 
-        if request.META.get(
-            "HTTP_X_AUTHKEY"
-        ) != api_settings.auth_key and request.META.get(
+        if request.META.get("HTTP_X_AUTHKEY") != api_settings.auth_key and request.META.get(
             "HTTP_AUTHORIZATION"
-        ) != "Token {}".format(
-            api_settings.auth_key
-        ):
+        ) != "Token {}".format(api_settings.auth_key):
             raise exceptions.AuthenticationFailed("Invalid auth key")
 
         try:
-            user = User.objects.get(
-                username=settings.DSMRREADER_REST_FRAMEWORK_API_USER
-            )
+            user = User.objects.get(username=settings.DSMRREADER_REST_FRAMEWORK_API_USER)
         except User.DoesNotExist as exc:
             raise exceptions.APIException("API user not found") from exc
 

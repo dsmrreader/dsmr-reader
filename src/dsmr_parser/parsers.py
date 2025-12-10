@@ -35,9 +35,7 @@ class TelegramParser(object):
         self.telegram_specification = telegram_specification
         self.apply_checksum_validation = apply_checksum_validation
 
-    def parse(
-        self, telegram_data, encryption_key="", authentication_key=""
-    ):  # noqa: C901
+    def parse(self, telegram_data, encryption_key="", authentication_key=""):  # noqa: C901
         """
         Parse telegram from string to dict.
         The telegram str type makes python 2.x integration easier.
@@ -94,10 +92,7 @@ class TelegramParser(object):
         #     except Exception:
         #         pass
 
-        if (
-            self.apply_checksum_validation
-            and self.telegram_specification["checksum_support"]
-        ):
+        if self.apply_checksum_validation and self.telegram_specification["checksum_support"]:
             self.validate_checksum(telegram_data)
 
         telegram = {}
@@ -113,9 +108,7 @@ class TelegramParser(object):
                     telegram[signature] = parser.parse(current_match)
                 except Exception:
                     logger.error(
-                        "ignore line with signature {}, because parsing failed.".format(
-                            signature
-                        ),
+                        "ignore line with signature {}, because parsing failed.".format(signature),
                         exc_info=True,
                     )
 
@@ -151,9 +144,7 @@ class TelegramParser(object):
         if calculated_crc != expected_crc:
             raise InvalidChecksumError(
                 "Invalid telegram CRC. The calculated checksum '{}' ({}) does not match the "
-                "telegram checksum '{}' ({})".format(
-                    calculated_crc, calculated_crc_hex, expected_crc, expected_crc_hex
-                )
+                "telegram checksum '{}' ({})".format(calculated_crc, calculated_crc_hex, expected_crc, expected_crc_hex)
             )
 
     @staticmethod

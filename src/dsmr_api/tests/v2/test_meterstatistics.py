@@ -63,10 +63,7 @@ class TestMeterStatistics(APIv2TestCase):
         )
 
         # Check default (empty) state in database.
-        [
-            self.assertEqual(getattr(instance, k), expected_value, k)
-            for k, expected_value in EXPECTED.items()
-        ]
+        [self.assertEqual(getattr(instance, k), expected_value, k) for k, expected_value in EXPECTED.items()]
 
         # Partial update.
         self._request(
@@ -97,13 +94,8 @@ class TestMeterStatistics(APIv2TestCase):
 
         # Check partial updated state in database.
         instance.refresh_from_db()
-        [
-            self.assertEqual(getattr(instance, k), expected_value, k)
-            for k, expected_value in EXPECTED.items()
-        ]
-        self.assertEqual(
-            str(instance.timestamp), "2020-01-15 11:34:56+00:00"
-        )  # Shifted to UTC
+        [self.assertEqual(getattr(instance, k), expected_value, k) for k, expected_value in EXPECTED.items()]
+        self.assertEqual(str(instance.timestamp), "2020-01-15 11:34:56+00:00")  # Shifted to UTC
 
         self._request(
             "meter-statistics",
@@ -138,7 +130,4 @@ class TestMeterStatistics(APIv2TestCase):
 
         # Check final updated state in database.
         instance.refresh_from_db()
-        [
-            self.assertEqual(getattr(instance, k), expected_value, k)
-            for k, expected_value in EXPECTED.items()
-        ]
+        [self.assertEqual(getattr(instance, k), expected_value, k) for k, expected_value in EXPECTED.items()]

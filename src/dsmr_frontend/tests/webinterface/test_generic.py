@@ -58,13 +58,9 @@ class TestViews(TestCase):
 
     def test_read_the_docs_redirects(self):
         for current in ("docs", "feedback"):
-            response = self.client.get(
-                reverse("{}:{}-redirect".format(self.namespace, current))
-            )
+            response = self.client.get(reverse("{}:{}-redirect".format(self.namespace, current)))
             self.assertEqual(response.status_code, 302)
-            self.assertTrue(
-                response["Location"].startswith("https://dsmr-reader.readthedocs.io")
-            )
+            self.assertTrue(response["Location"].startswith("https://dsmr-reader.readthedocs.io"))
 
     @mock.patch("django.utils.timezone.now")
     def test_dashboard_xhr_header(self, now_mock):
@@ -77,9 +73,7 @@ class TestViews(TestCase):
                 meter_statistics.electricity_tariff = current_tariff
                 meter_statistics.save()
 
-            response = self.client.get(
-                reverse("{}:xhr-consumption-header".format(self.namespace))
-            )
+            response = self.client.get(reverse("{}:xhr-consumption-header".format(self.namespace)))
             self.assertEqual(response.status_code, 200, response.content)
             self.assertEqual(response["Content-Type"], "application/json")
 
@@ -109,9 +103,7 @@ class TestViews(TestCase):
             timestamp=timezone.now() + timezone.timedelta(weeks=1),
         )
 
-        response = self.client.get(
-            reverse("{}:xhr-consumption-header".format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:xhr-consumption-header".format(self.namespace)))
         self.assertEqual(response.status_code, 200, response.content)
         self.assertEqual(response["Content-Type"], "application/json")
 
@@ -134,9 +126,7 @@ class TestViews(TestCase):
                 electricity_currently_returned=Decimal(1.234),
             )
 
-        response = self.client.get(
-            reverse("{}:xhr-consumption-header".format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:xhr-consumption-header".format(self.namespace)))
         self.assertEqual(response.status_code, 200, response.content)
         self.assertEqual(response["Content-Type"], "application/json")
 

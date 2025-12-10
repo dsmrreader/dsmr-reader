@@ -28,9 +28,7 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
                     "dsmr_version",
                     "dsmr_extra_device_channel",
                 ],
-                "description": _(
-                    "The datalogger process should automatically restart to apply changes."
-                ),
+                "description": _("The datalogger process should automatically restart to apply changes."),
             },
         ),
         (
@@ -58,9 +56,7 @@ class DataloggerSettingsAdmin(SingletonModelAdmin):
             _("System"),
             {
                 "fields": ["restart_required"],
-                "description": _(
-                    "The datalogger process should automatically restart to apply changes."
-                ),
+                "description": _("The datalogger process should automatically restart to apply changes."),
             },
         ),
     )
@@ -88,9 +84,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
     )
     list_filter = (("timestamp", DateTimeRangeFilter),)
 
-    def formatted_electricity_delivered_1(
-        self, obj: DsmrReading
-    ) -> str:  # pragma: no cover
+    def formatted_electricity_delivered_1(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_delivered_1:
             return "-"
 
@@ -98,9 +92,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
 
     formatted_electricity_delivered_1.short_description = "electricity 1"  # type: ignore[attr-defined]
 
-    def formatted_electricity_delivered_2(
-        self, obj: DsmrReading
-    ) -> str:  # pragma: no cover
+    def formatted_electricity_delivered_2(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_delivered_2:
             return "-"
 
@@ -108,9 +100,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
 
     formatted_electricity_delivered_2.short_description = "electricity 2"  # type: ignore[attr-defined]
 
-    def formatted_electricity_returned_1(
-        self, obj: DsmrReading
-    ) -> str:  # pragma: no cover
+    def formatted_electricity_returned_1(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_returned_1:
             return "-"
 
@@ -118,9 +108,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
 
     formatted_electricity_returned_1.short_description = "electricity returned 1"  # type: ignore[attr-defined]
 
-    def formatted_electricity_returned_2(
-        self, obj: DsmrReading
-    ) -> str:  # pragma: no cover
+    def formatted_electricity_returned_2(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.electricity_returned_2:
             return "-"
 
@@ -128,9 +116,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
 
     formatted_electricity_returned_2.short_description = "electricity returned 2"  # type: ignore[attr-defined]
 
-    def formatted_extra_device_timestamp(
-        self, obj: DsmrReading
-    ) -> str:  # pragma: no cover
+    def formatted_extra_device_timestamp(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.extra_device_timestamp:
             return "-"
 
@@ -138,9 +124,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
 
     formatted_extra_device_timestamp.short_description = "gas timestamp"  # type: ignore[attr-defined]
 
-    def formatted_extra_device_delivered(
-        self, obj: DsmrReading
-    ) -> str:  # pragma: no cover
+    def formatted_extra_device_delivered(self, obj: DsmrReading) -> str:  # pragma: no cover
         if not obj.extra_device_delivered:
             return "-"
 
@@ -162,9 +146,7 @@ class MeterStatisticsChangeAdmin(ReadOnlyAdminModel):
 @receiver(django.db.models.signals.post_save, sender=RetentionSettings)
 def handle_retention_settings_update(sender, instance, **kwargs):
     """Hook to toggle related scheduled process."""
-    retention_enabled = (
-        instance.data_retention_in_hours != RetentionSettings.RETENTION_NONE
+    retention_enabled = instance.data_retention_in_hours != RetentionSettings.RETENTION_NONE
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION).update(
+        planned=timezone.now(), active=retention_enabled
     )
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION
-    ).update(planned=timezone.now(), active=retention_enabled)

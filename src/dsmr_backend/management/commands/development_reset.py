@@ -22,9 +22,7 @@ from dsmr_mqtt.models import queue
 
 
 class Command(BaseCommand):
-    help = _(
-        "Resets the environment for development purposes. Not intended for production."
-    )
+    help = _("Resets the environment for development purposes. Not intended for production.")
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
@@ -38,18 +36,14 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         if not settings.DEBUG:
-            raise CommandError(
-                "Intended usage is NOT production! Only allowed when DEBUG = True"
-            )
+            raise CommandError("Intended usage is NOT production! Only allowed when DEBUG = True")
 
         # Show queries for feedback.
         logging.getLogger("django.db").setLevel(logging.DEBUG)
 
         # Just wipe all settings which can affect the environment.
         APISettings.objects.update(allow=not options["no_api"], auth_key="test")
-        BackendSettings.objects.update(
-            disable_electricity_returned_capability=False, process_sleep=0
-        )
+        BackendSettings.objects.update(disable_electricity_returned_capability=False, process_sleep=0)
         BackupSettings.objects.update(daily_backup=False)
         BackupSettings.get_solo().save()  # Trigger signal
         EmailBackupSettings.objects.update(interval=EmailBackupSettings.INTERVAL_NONE)

@@ -28,21 +28,13 @@ class TestPeriodTotals(TestCase):
         result = dsmr_mqtt.services.callbacks.convert_period_totals()
         self.assertEqual(result["current_month_electricity1"], Decimal("100.000"))
         self.assertEqual(result["current_month_electricity2"], Decimal("200.000"))
-        self.assertEqual(
-            result["current_month_electricity1_returned"], Decimal("50.000")
-        )
-        self.assertEqual(
-            result["current_month_electricity2_returned"], Decimal("100.000")
-        )
+        self.assertEqual(result["current_month_electricity1_returned"], Decimal("50.000"))
+        self.assertEqual(result["current_month_electricity2_returned"], Decimal("100.000"))
         self.assertEqual(result["current_month_electricity_merged"], Decimal("300.000"))
-        self.assertEqual(
-            result["current_month_electricity_returned_merged"], Decimal("150.000")
-        )
+        self.assertEqual(result["current_month_electricity_returned_merged"], Decimal("150.000"))
         self.assertEqual(result["current_month_electricity1_cost"], Decimal("10.00"))
         self.assertEqual(result["current_month_electricity2_cost"], Decimal("20.00"))
-        self.assertEqual(
-            result["current_month_electricity_cost_merged"], Decimal("30.00")
-        )
+        self.assertEqual(result["current_month_electricity_cost_merged"], Decimal("30.00"))
         self.assertEqual(result["current_month_gas"], Decimal("300.000"))
         self.assertEqual(result["current_month_gas_cost"], Decimal("30"))
         self.assertEqual(result["current_month_fixed_cost"], Decimal("1.00"))
@@ -50,21 +42,13 @@ class TestPeriodTotals(TestCase):
 
         self.assertEqual(result["current_year_electricity1"], Decimal("200.000"))
         self.assertEqual(result["current_year_electricity2"], Decimal("400.000"))
-        self.assertEqual(
-            result["current_year_electricity1_returned"], Decimal("100.000")
-        )
-        self.assertEqual(
-            result["current_year_electricity2_returned"], Decimal("200.000")
-        )
+        self.assertEqual(result["current_year_electricity1_returned"], Decimal("100.000"))
+        self.assertEqual(result["current_year_electricity2_returned"], Decimal("200.000"))
         self.assertEqual(result["current_year_electricity_merged"], Decimal("600.000"))
-        self.assertEqual(
-            result["current_year_electricity_returned_merged"], Decimal("300.000")
-        )
+        self.assertEqual(result["current_year_electricity_returned_merged"], Decimal("300.000"))
         self.assertEqual(result["current_year_electricity1_cost"], Decimal("20.00"))
         self.assertEqual(result["current_year_electricity2_cost"], Decimal("40.00"))
-        self.assertEqual(
-            result["current_year_electricity_cost_merged"], Decimal("60.00")
-        )
+        self.assertEqual(result["current_year_electricity_cost_merged"], Decimal("60.00"))
         self.assertEqual(result["current_year_gas"], Decimal("600.000"))
         self.assertEqual(result["current_year_gas_cost"], Decimal("60"))
         self.assertEqual(result["current_year_fixed_cost"], Decimal("2.00"))
@@ -75,9 +59,7 @@ class TestJSONPeriodTotals(TestCase):
     fixtures = ["dsmr_mqtt/test_period_totals.json"]
 
     def setUp(self):
-        self.json_settings = (
-            period_totals.JSONCurrentPeriodTotalsMQTTSettings.get_solo()
-        )
+        self.json_settings = period_totals.JSONCurrentPeriodTotalsMQTTSettings.get_solo()
 
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     def test_disabled(self, queue_message_mock):
@@ -100,9 +82,7 @@ class TestJSONPeriodTotals(TestCase):
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     @mock.patch("django.utils.timezone.now")
     def test_json(self, now_mock, queue_message_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2021, 2, 15, hour=12)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2021, 2, 15, hour=12))
         self.json_settings.update(enabled=True)
 
         dsmr_mqtt.services.callbacks.publish_json_period_totals()
@@ -144,9 +124,7 @@ class TestSplitTopicPeriodTotals(TestCase):
     fixtures = ["dsmr_mqtt/test_period_totals.json"]
 
     def setUp(self):
-        self.split_topic_settings = (
-            period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo()
-        )
+        self.split_topic_settings = period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo()
 
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     def test_disabled(self, queue_message_mock):
@@ -169,9 +147,7 @@ class TestSplitTopicPeriodTotals(TestCase):
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     @mock.patch("django.utils.timezone.now")
     def test_split_topic(self, now_mock, queue_message_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2021, 2, 15, hour=12)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2021, 2, 15, hour=12))
         self.split_topic_settings.update(enabled=True)
 
         dsmr_mqtt.services.callbacks.publish_split_topic_period_totals()
@@ -210,6 +186,4 @@ class TestSplitTopicPeriodTotals(TestCase):
         }
 
         for expected_topic, expected_payload in expected_data.items():
-            self.assertIn(
-                {"payload": expected_payload, "topic": expected_topic}, called_kwargs
-            )
+            self.assertIn({"payload": expected_payload, "topic": expected_topic}, called_kwargs)

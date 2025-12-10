@@ -18,9 +18,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
 
     def setUp(self):
         DataloggerSettings.get_solo()
-        DataloggerSettings.objects.all().update(
-            dsmr_version=DataloggerSettings.DSMR_LUXEMBOURG_SMARTY
-        )
+        DataloggerSettings.objects.all().update(dsmr_version=DataloggerSettings.DSMR_LUXEMBOURG_SMARTY)
 
     def _dsmr_dummy_data(self):
         return [

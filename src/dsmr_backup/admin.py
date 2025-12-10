@@ -70,21 +70,15 @@ class DropboxSettingsAdmin(SingletonModelAdmin):
     def save_model(self, request, obj, form, change):  # pragma: no cover
         """Hook for finishing Dropbox app authorization flow."""
         if not obj.serialized_auth_flow or not obj.one_time_authorization_code:
-            return super(DropboxSettingsAdmin, self).save_model(
-                request, obj, form, change
-            )
+            return super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
 
         auth_flow = pickle.loads(obj.serialized_auth_flow)  # noqa: S3-1
 
         try:
-            oauth_result = auth_flow.finish(
-                form.cleaned_data["one_time_authorization_code"]
-            )
+            oauth_result = auth_flow.finish(form.cleaned_data["one_time_authorization_code"])
         except Exception as e:
             messages.error(request, _("Dropbox app authorization failed: {}".format(e)))
-            return super(DropboxSettingsAdmin, self).save_model(
-                request, obj, form, change
-            )
+            return super(DropboxSettingsAdmin, self).save_model(request, obj, form, change)
 
         obj.serialized_auth_flow = None
         obj.refresh_token = oauth_result.refresh_token
@@ -124,18 +118,12 @@ class EmailBackupSettingsAdmin(SingletonModelAdmin):
         ),
     )
 
-    def render_change_form(
-        self, request, context, add=False, change=False, form_url="", obj=None
-    ):
+    def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
         context.update(dict(email_address=EmailSettings.get_solo().email_to))
-        return super(EmailBackupSettingsAdmin, self).render_change_form(
-            request, context, add, change, form_url, obj
-        )
+        return super(EmailBackupSettingsAdmin, self).render_change_form(request, context, add, change, form_url, obj)
 
     def response_change(self, request, obj):
-        ScheduledProcess.objects.filter(
-            module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
-        ).update(planned=timezone.now())
+        ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_EMAIL_BACKUP).update(planned=timezone.now())
         return super(EmailBackupSettingsAdmin, self).response_change(request, obj)
 
 
@@ -144,20 +132,20 @@ class EmailBackupSettingsAdmin(SingletonModelAdmin):
 
 @receiver(django.db.models.signals.post_save, sender=EmailBackupSettings)
 def handle_email_backup_settings_update(sender, instance, **kwargs):
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
-    ).update(active=instance.interval != EmailBackupSettings.INTERVAL_NONE)
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_EMAIL_BACKUP).update(
+        active=instance.interval != EmailBackupSettings.INTERVAL_NONE
+    )
 
 
 @receiver(django.db.models.signals.post_save, sender=BackupSettings)
 def handle_backup_settings_update(sender, instance, **kwargs):
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_DAILY_BACKUP
-    ).update(planned=timezone.now(), active=instance.daily_backup)
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_DAILY_BACKUP).update(
+        planned=timezone.now(), active=instance.daily_backup
+    )
 
 
 @receiver(django.db.models.signals.post_save, sender=DropboxSettings)
 def handle_dropbox_settings_update(sender, instance, **kwargs):
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT
-    ).update(planned=timezone.now(), active=bool(instance.refresh_token))
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT).update(
+        planned=timezone.now(), active=bool(instance.refresh_token)
+    )

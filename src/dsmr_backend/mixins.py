@@ -66,9 +66,7 @@ class InfiniteManagementCommandMixin:
 
         # We simply keep executing the management command until we are told otherwise.
         self._keep_alive = True
-        logger.debug(
-            "%s: Starting infinite command loop...", self.name
-        )  # Just to make sure it gets printed.
+        logger.debug("%s: Starting infinite command loop...", self.name)  # Just to make sure it gets printed.
         self._update_next_reconnect()
 
         while self._keep_alive:
@@ -104,9 +102,7 @@ class InfiniteManagementCommandMixin:
         except Exception:
             # Unforeseen errors.
             _, _, exc_traceback = sys.exc_info()
-            logger.error(
-                "%s: [!] Exception raised. %s", self.name, traceback.format_exc()
-            )
+            logger.error("%s: [!] Exception raised. %s", self.name, traceback.format_exc())
             self._stop()
 
     def initialize(self):
@@ -118,9 +114,7 @@ class InfiniteManagementCommandMixin:
         return
 
     def run(self, *args, **options):
-        raise NotImplementedError(
-            "Subclasses of InfiniteManagementCommandMixin must provide a run() method"
-        )
+        raise NotImplementedError("Subclasses of InfiniteManagementCommandMixin must provide a run() method")
 
     def __del__(self):
         """Tear down, always called on destruction."""

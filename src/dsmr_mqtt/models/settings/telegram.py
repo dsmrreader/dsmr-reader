@@ -71,18 +71,12 @@ phase_power_current_l2 = phase_power_current_l2
 phase_power_current_l3 = phase_power_current_l3
 """,
         verbose_name=_("Formatting"),
-        help_text=_(
-            "Maps the field names used in the JSON message sent to the broker."
-        ),
+        help_text=_("Maps the field names used in the JSON message sent to the broker."),
     )
     use_local_timezone = models.BooleanField(
         default=False,
         verbose_name=_("Use local timezone"),
-        help_text=_(
-            "Whether to use the local timezone ({}) in the timestamp sent.".format(
-                settings.TIME_ZONE
-            )
-        ),
+        help_text=_("Whether to use the local timezone ({}) in the timestamp sent.".format(settings.TIME_ZONE)),
     )
 
     def __str__(self):
@@ -99,9 +93,7 @@ class SplitTopicTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
     enabled = models.BooleanField(
         default=False,
         verbose_name=_("Enabled"),
-        help_text=_(
-            "Whether parsed telegrams are sent to the broker, having each field sent to a different topic."
-        ),
+        help_text=_("Whether parsed telegrams are sent to the broker, having each field sent to a different topic."),
     )
     formatting = models.TextField(
         default="""
@@ -136,11 +128,7 @@ phase_power_current_l3 = dsmr/reading/phase_power_current_l3
     use_local_timezone = models.BooleanField(
         default=False,
         verbose_name=_("Use local timezone"),
-        help_text=_(
-            "Whether to use the local timezone ({}) in the timestamp sent.".format(
-                settings.TIME_ZONE
-            )
-        ),
+        help_text=_("Whether to use the local timezone ({}) in the timestamp sent.".format(settings.TIME_ZONE)),
     )
 
     def __str__(self):

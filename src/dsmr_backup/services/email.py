@@ -31,9 +31,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     with translation.override(language=BackendSettings.get_solo().language):
         subject = _("DSMR-reader day/hour statistics backup")
-        body = _(
-            "This is an automated email, containing a backup of the day and hour statistics in the attachment."
-        )
+        body = _("This is an automated email, containing a backup of the day and hour statistics in the attachment.")
 
     email_settings = EmailSettings.get_solo()
     dsmr_backend.services.email.send(

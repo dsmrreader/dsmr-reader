@@ -36,13 +36,9 @@ class TestScript(TestCase):
             DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT="0",
         ),
     )
-    @mock.patch(
-        "dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader"
-    )
+    @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader")
     @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram")
-    def test_main_no_reconnect(
-        self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks
-    ):
+    def test_main_no_reconnect(self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
         """Persistent connection."""
         read_telegram_mock_mock.side_effect = [
             iter(["fake-serial-telegram"]),
@@ -52,13 +48,9 @@ class TestScript(TestCase):
         with self.assertRaises(StopIteration):
             dsmr_datalogger.scripts.dsmr_datalogger_api_client.main()
 
-    @mock.patch(
-        "dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader"
-    )
+    @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader")
     @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram")
-    def test_main_serial(
-        self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks
-    ):
+    def test_main_serial(self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
         """Serial port input."""
         read_telegram_mock_mock.side_effect = [
             iter(["fake-serial-telegram"]),
@@ -104,13 +96,9 @@ class TestScript(TestCase):
             DSMRREADER_REMOTE_DATALOGGER_NETWORK_PORT="23",
         ),
     )
-    @mock.patch(
-        "dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader"
-    )
+    @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader")
     @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram")
-    def test_main_ipv4(
-        self, read_telegram_mock, send_telegram_to_remote_dsmrreader_mock, *mocks
-    ):
+    def test_main_ipv4(self, read_telegram_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
         """Network socket input."""
         read_telegram_mock.side_effect = [
             iter(["fake-network-telegram"]),
@@ -142,17 +130,11 @@ class TestScript(TestCase):
             ),
         )
 
-    @mock.patch(
-        "dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader"
-    )
+    @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader")
     @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram")
-    def test_main_exception(
-        self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks
-    ):
+    def test_main_exception(self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, *mocks):
         """Exception triggered by send_telegram_to_remote_dsmrreader()."""
-        send_telegram_to_remote_dsmrreader_mock.side_effect = (
-            requests.exceptions.Timeout("Fake timeout")
-        )
+        send_telegram_to_remote_dsmrreader_mock.side_effect = requests.exceptions.Timeout("Fake timeout")
         read_telegram_mock_mock.side_effect = [
             iter(["fake-telegram"]),
             StopIteration(),
@@ -170,21 +152,13 @@ class TestScript(TestCase):
         ),
     )
     @mock.patch("logging.Logger.setLevel")
-    @mock.patch(
-        "dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader"
-    )
+    @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader")
     @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram")
     def test_main_exception_with_debug_logging(
-        self,
-        read_telegram_mock_mock,
-        send_telegram_to_remote_dsmrreader_mock,
-        set_level_mock,
-        *mocks
+        self, read_telegram_mock_mock, send_telegram_to_remote_dsmrreader_mock, set_level_mock, *mocks
     ):
         """Similar to test_main_exception(), but check DSMRREADER_REMOTE_DATALOGGER_DEBUG_LOGGING enabled."""
-        send_telegram_to_remote_dsmrreader_mock.side_effect = (
-            requests.exceptions.Timeout("Fake timeout")
-        )
+        send_telegram_to_remote_dsmrreader_mock.side_effect = requests.exceptions.Timeout("Fake timeout")
         read_telegram_mock_mock.side_effect = [
             iter(["fake-telegram"]),
             StopIteration(),
@@ -207,9 +181,7 @@ class TestScript(TestCase):
     )
     @mock.patch("logging.Logger.setLevel")
     @mock.patch("dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram")
-    def test_main_without_debug_logging(
-        self, read_telegram_mock_mock, set_level_mock, *mocks
-    ):
+    def test_main_without_debug_logging(self, read_telegram_mock_mock, set_level_mock, *mocks):
         """Similar to test_main_exception_with_debug_logging(), but check DATALOGGER_DEBUG_LOGGING disabled."""
         read_telegram_mock_mock.return_value = iter([])
 
@@ -221,9 +193,7 @@ class TestScript(TestCase):
 
     @mock.patch("logging.Logger.error")
     @mock.patch("requests.post")
-    def test_send_telegram_to_remote_dsmrreader(
-        self, post_mock, error_logging_mock, *mocks
-    ):
+    def test_send_telegram_to_remote_dsmrreader(self, post_mock, error_logging_mock, *mocks):
         kwargs = dict(
             telegram="telegram-data",
             api_url="http://localhost/api",
@@ -233,9 +203,7 @@ class TestScript(TestCase):
 
         # Okay
         post_mock.return_value = mock.MagicMock(status_code=201)
-        dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader(
-            **kwargs
-        )
+        dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader(**kwargs)
         self.assertTrue(post_mock.called)
         self.assertEqual(post_mock.call_args[0][0], "http://localhost/api")
         self.assertEqual(
@@ -250,9 +218,7 @@ class TestScript(TestCase):
         # Fail
         post_mock.reset_mock()
         post_mock.return_value = mock.MagicMock(status_code=400, text="Error message")
-        dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader(
-            **kwargs
-        )
+        dsmr_datalogger.scripts.dsmr_datalogger_api_client._send_telegram_to_remote_dsmrreader(**kwargs)
         self.assertTrue(post_mock.called)
         self.assertTrue(error_logging_mock.called)
 
@@ -337,9 +303,7 @@ class TestScriptSerialSocket(TestCase):
     def test_telegram_timeout(self, serial_for_url_mock):
         """It took too long to detect a telegram."""
         cli_serial = Serial()
-        cli_serial.read = mock.MagicMock(
-            return_value=bytes("!@#$%", "utf8")
-        )  # Garbage data will never match telegram
+        cli_serial.read = mock.MagicMock(return_value=bytes("!@#$%", "utf8"))  # Garbage data will never match telegram
         serial_for_url_mock.return_value = cli_serial
 
         generator = dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(

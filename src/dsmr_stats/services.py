@@ -53,9 +53,7 @@ def get_next_day_to_generate() -> datetime.date:
     search_start = timezone.make_aware(search_start)
 
     try:
-        next_consumption = ElectricityConsumption.objects.filter(
-            read_at__gt=search_start
-        ).order_by("read_at")[0]
+        next_consumption = ElectricityConsumption.objects.filter(read_at__gt=search_start).order_by("read_at")[0]
     except IndexError:
         # Last resort.
         return next_day
@@ -77,15 +75,11 @@ def run(scheduled_process: ScheduledProcess) -> None:
     # Skip current day, wait until midnight.
     if target_day >= now.date():
         logger.debug("Stats: Waiting for day to pass: %s", target_day)
-        scheduled_process.reschedule(
-            timezone.make_aware(timezone.datetime.combine(next_day, time.min))
-        )
+        scheduled_process.reschedule(timezone.make_aware(timezone.datetime.combine(next_day, time.min)))
         return
 
     # All readings of the day must be processed.
-    unprocessed_readings = (
-        DsmrReading.objects.unprocessed().filter(timestamp__date=target_day).exists()
-    )
+    unprocessed_readings = DsmrReading.objects.unprocessed().filter(timestamp__date=target_day).exists()
 
     if unprocessed_readings:
         logger.debug("Stats: Found unprocessed readings for: %s", target_day)
@@ -93,9 +87,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
         return
 
     # Ensure we have any consumption.
-    consumption_found = ElectricityConsumption.objects.filter(
-        read_at__date=target_day
-    ).exists()
+    consumption_found = ElectricityConsumption.objects.filter(read_at__date=target_day).exists()
 
     if not consumption_found:
         logger.debug("Stats: Missing consumption data for: %s", target_day)
@@ -110,11 +102,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
     # Unless it was disabled.
     gas_capability = dsmr_backend.services.backend.get_capability(Capability.GAS)
 
-    if (
-        gas_capability
-        and recently_gas_read
-        and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists()
-    ):
+    if gas_capability and recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
         logger.debug("Stats: Waiting for first gas reading on the next day...")
         scheduled_process.delay(minutes=5)
         return
@@ -159,20 +147,18 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
 
     # @TODO: Due to #1770. Fix for wrong gas consumption in some cases. Fix day_consumption() later. Just use the hour totals instead, for now.
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
-    start_of_day = timezone.make_aware(
-        timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0)
-    )
+    start_of_day = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0))
     end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)
     hours_gas_sum = HourStatistics.objects.filter(
         hour_start__gte=start_of_day,
         hour_start__lt=end_of_day,
-    ).aggregate(gas_sum=Sum("gas"),)["gas_sum"]
+    ).aggregate(
+        gas_sum=Sum("gas"),
+    )["gas_sum"]
 
     try:
         # @TODO: day_consumption() is still unreliable at this time due to #1770, rework later before marking OK again.
-        meter_positions = (
-            dsmr_datalogger.services.readings.first_meter_positions_of_day(day=day)
-        )
+        meter_positions = dsmr_datalogger.services.readings.first_meter_positions_of_day(day=day)
     except LookupError:
         meter_positions_kwargs = {}
     else:
@@ -212,9 +198,7 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
     """Calculates and returns an hour summary, when applicable. Persists it as well."""
     logger.debug("Stats: Creating hour statistics for: %s", hour_start)
     hour_end = hour_start + timezone.timedelta(hours=1)
-    electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(
-        start=hour_start, end=hour_end
-    )
+    electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(start=hour_start, end=hour_end)
 
     if not electricity_readings.exists():
         return None
@@ -227,18 +211,10 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
 
     electricity_start = electricity_readings.first()
     electricity_end = electricity_readings.last()
-    creation_kwargs["electricity1"] = (
-        electricity_end.delivered_1 - electricity_start.delivered_1
-    )
-    creation_kwargs["electricity2"] = (
-        electricity_end.delivered_2 - electricity_start.delivered_2
-    )
-    creation_kwargs["electricity1_returned"] = (
-        electricity_end.returned_1 - electricity_start.returned_1
-    )
-    creation_kwargs["electricity2_returned"] = (
-        electricity_end.returned_2 - electricity_start.returned_2
-    )
+    creation_kwargs["electricity1"] = electricity_end.delivered_1 - electricity_start.delivered_1
+    creation_kwargs["electricity2"] = electricity_end.delivered_2 - electricity_start.delivered_2
+    creation_kwargs["electricity1_returned"] = electricity_end.returned_1 - electricity_start.returned_1
+    creation_kwargs["electricity2_returned"] = electricity_end.returned_2 - electricity_start.returned_2
 
     # DSMR v4.
     if len(gas_readings) == 1:
@@ -294,9 +270,7 @@ def average_consumption_by_hour(start: date, end: date) -> List:
     set_time_zone_sql = connection.ops.set_time_zone_sql()
 
     if set_time_zone_sql:
-        connection.connection.cursor().execute(
-            set_time_zone_sql, [settings.TIME_ZONE]
-        )  # pragma: no cover
+        connection.connection.cursor().execute(set_time_zone_sql, [settings.TIME_ZONE])  # pragma: no cover
 
     hour_statistics = (
         HourStatistics.objects.filter(  # noqa: S610
@@ -311,12 +285,8 @@ def average_consumption_by_hour(start: date, end: date) -> List:
             avg_electricity2=Avg("electricity2"),
             avg_electricity1_returned=Avg("electricity1_returned"),
             avg_electricity2_returned=Avg("electricity2_returned"),
-            avg_electricity_merged=Avg(
-                models.F("electricity1") + models.F("electricity2")
-            ),
-            avg_electricity_returned_merged=Avg(
-                models.F("electricity1_returned") + models.F("electricity2_returned")
-            ),
+            avg_electricity_merged=Avg(models.F("electricity1") + models.F("electricity2")),
+            avg_electricity_returned_merged=Avg(models.F("electricity1_returned") + models.F("electricity2_returned")),
             avg_gas=Avg("gas"),
         )
     )
@@ -325,9 +295,7 @@ def average_consumption_by_hour(start: date, end: date) -> List:
 
     if set_time_zone_sql:
         # Prevents "database connection isn't set to UTC" error.
-        connection.connection.cursor().execute(
-            set_time_zone_sql, ["UTC"]
-        )  # pragma: no cover
+        connection.connection.cursor().execute(set_time_zone_sql, ["UTC"])  # pragma: no cover
 
     return hour_statistics
 
@@ -343,12 +311,8 @@ def range_statistics(start: datetime.date, end: datetime.date) -> Dict:
         electricity2_cost_sum=Sum("electricity2_cost"),
         electricity2_returned_sum=Sum("electricity2_returned"),
         electricity_merged_sum=Sum(models.F("electricity1") + models.F("electricity2")),
-        electricity_cost_merged_sum=Sum(
-            models.F("electricity1_cost") + models.F("electricity2_cost")
-        ),
-        electricity_returned_merged_sum=Sum(
-            models.F("electricity1_returned") + models.F("electricity2_returned")
-        ),
+        electricity_cost_merged_sum=Sum(models.F("electricity1_cost") + models.F("electricity2_cost")),
+        electricity_returned_merged_sum=Sum(models.F("electricity1_returned") + models.F("electricity2_returned")),
         gas_sum=Sum("gas"),
         gas_cost_sum=Sum("gas_cost"),
         fixed_cost_sum=Sum("fixed_cost"),
@@ -398,10 +362,8 @@ def range_statistics(start: datetime.date, end: datetime.date) -> Dict:
             if sanitized_aggregate[current_field] is None:
                 continue
 
-            sanitized_aggregate[current_field] = (
-                dsmr_consumption.services.round_decimal(
-                    sanitized_aggregate[current_field], decimal_count
-                )
+            sanitized_aggregate[current_field] = dsmr_consumption.services.round_decimal(
+                sanitized_aggregate[current_field], decimal_count
             )
 
     return sanitized_aggregate
@@ -415,21 +377,15 @@ def day_statistics(target_date: datetime.date) -> Dict:
 
 def month_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a month targeted."""
-    start_of_month = timezone.datetime(
-        year=target_date.year, month=target_date.month, day=1
-    )
-    end_of_month = timezone.datetime.combine(
-        start_of_month + relativedelta(months=1), time.min
-    )
+    start_of_month = timezone.datetime(year=target_date.year, month=target_date.month, day=1)
+    end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
     return range_statistics(start=start_of_month, end=end_of_month)
 
 
 def year_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a year targeted."""
     start_of_year = timezone.datetime(year=target_date.year, month=1, day=1)
-    end_of_year = timezone.datetime.combine(
-        start_of_year + relativedelta(years=1), time.min
-    )
+    end_of_year = timezone.datetime.combine(start_of_year + relativedelta(years=1), time.min)
     return range_statistics(start=start_of_year, end=end_of_year)
 
 
@@ -537,16 +493,10 @@ def recalculate_prices() -> None:
             - (current_day.electricity2_returned * prices.electricity_returned_2_price)
         )
 
-        total_cost = (
-            current_day.electricity1_cost
-            + current_day.electricity2_cost
-            + current_day.fixed_cost
-        )
+        total_cost = current_day.electricity1_cost + current_day.electricity2_cost + current_day.fixed_cost
 
         if current_day.gas is not None:
-            current_day.gas_cost = dsmr_consumption.services.round_decimal(
-                current_day.gas * prices.gas_price
-            )
+            current_day.gas_cost = dsmr_consumption.services.round_decimal(current_day.gas * prices.gas_price)
             total_cost += current_day.gas_cost
 
         current_day.total_cost = dsmr_consumption.services.round_decimal(total_cost)
@@ -601,9 +551,7 @@ def reconstruct_missing_day_statistics_by_hours() -> None:
     for current_day in dates_to_generate:
         print(" - Reconstructing:", current_day)
 
-        day_totals = HourStatistics.objects.filter(
-            hour_start__date=current_day
-        ).aggregate(
+        day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(
             electricity1_sum=Sum("electricity1"),
             electricity2_sum=Sum("electricity2"),
             electricity1_returned_sum=Sum("electricity1_returned"),

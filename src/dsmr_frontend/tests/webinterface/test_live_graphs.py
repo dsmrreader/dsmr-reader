@@ -114,9 +114,7 @@ class TestViews(TestCase):
         self.assertEqual(
             json_content,
             {
-                "latest_delta_id": json_content[
-                    "latest_delta_id"
-                ],  # Not hardcoded due to DB backend differences.
+                "latest_delta_id": json_content["latest_delta_id"],  # Not hardcoded due to DB backend differences.
                 "read_at": ["Sat 23:00", "Sun 0:00"],
                 "currently_delivered": [2500, 1500],
                 "currently_returned": [200, 100],
@@ -213,9 +211,7 @@ class TestViews(TestCase):
         self.assertEqual(
             json_content,
             {
-                "latest_delta_id": json_content[
-                    "latest_delta_id"
-                ],  # Not hardcoded due to DB backend differences.
+                "latest_delta_id": json_content["latest_delta_id"],  # Not hardcoded due to DB backend differences.
                 "read_at": ["Sat 23:00"],
                 "currently_delivered": [2500.0],
                 "currently_returned": [200.0],
@@ -246,9 +242,7 @@ class TestViews(TestCase):
         self.assertEqual(
             json_content,
             {
-                "latest_delta_id": json_content[
-                    "latest_delta_id"
-                ],  # Not hardcoded due to DB backend differences.
+                "latest_delta_id": json_content["latest_delta_id"],  # Not hardcoded due to DB backend differences.
                 "read_at": ["Sat 23:00"],
                 "currently_delivered": [],
                 "currently_returned": [],
@@ -279,9 +273,7 @@ class TestViews(TestCase):
         self.assertEqual(
             json_content,
             {
-                "latest_delta_id": json_content[
-                    "latest_delta_id"
-                ],  # Not hardcoded due to DB backend differences.
+                "latest_delta_id": json_content["latest_delta_id"],  # Not hardcoded due to DB backend differences.
                 "read_at": ["Sat 23:00"],
                 "currently_delivered": [],
                 "currently_returned": [],
@@ -312,9 +304,7 @@ class TestViews(TestCase):
 
     @mock.patch("django.utils.timezone.now")
     def test_live_xhr_electricity_peaks(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2022, 7, 1, 12, 0, 3)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 7, 1, 12, 0, 3))
 
         if self.support_data:
             QuarterHourPeakElectricityConsumption.objects.create(
@@ -323,9 +313,7 @@ class TestViews(TestCase):
                 average_delivered=1.234,
             )
 
-        response = self.client.get(
-            reverse("{}:live-xhr-electricity-peaks".format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:live-xhr-electricity-peaks".format(self.namespace)))
         json_content = json.loads(response.content.decode("utf8"))
 
         if self.support_data:
@@ -389,9 +377,7 @@ class TestViews(TestCase):
                 degrees_celcius=30,
             )
 
-        response = self.client.get(
-            reverse("{}:live-xhr-temperature".format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:live-xhr-temperature".format(self.namespace)))
         json_content = json.loads(response.content.decode("utf8"))
 
         if self.support_data:

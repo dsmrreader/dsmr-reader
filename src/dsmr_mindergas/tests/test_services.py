@@ -20,12 +20,8 @@ class TestServices(TestCase):
         self.mindergas_settings = MinderGasSettings.get_solo()
         self.mindergas_settings.update(export=True, auth_token="12345")
 
-        self.schedule_process = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT
-        )
-        self.schedule_process.update(
-            active=True, planned=timezone.make_aware(timezone.datetime(2017, 1, 1))
-        )
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2017, 1, 1)))
 
     def test_no_auth_token(self):
         """Having no auth token should disable settings."""
@@ -49,9 +45,7 @@ class TestServices(TestCase):
 
         self.schedule_process.refresh_from_db()
         self.assertTrue(self.schedule_process.active)
-        self.assertEqual(
-            self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1)
-        )
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
     @mock.patch("dsmr_backend.services.backend.get_capability")
     @mock.patch("dsmr_mindergas.services.export")
@@ -87,16 +81,12 @@ class TestServices(TestCase):
 
         self.assertTrue(message_mock.called)
         self.schedule_process.refresh_from_db()
-        self.assertEqual(
-            self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1)
-        )
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
     @mock.patch("django.utils.timezone.now")
     def test_export_no_gas(self, now_mock):
         """Test without gas data."""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 12, hour=0, minute=5)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=5))
 
         # Drop all gas data.
         GasConsumption.objects.all().delete()
@@ -109,15 +99,11 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_export_fail(self, now_mock, requests_post_mock):
         """Test failing by denied API call."""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 12, hour=4, minute=45)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=4, minute=45))
 
         # Mindergas error codes according to docs.
         for current_error_code in (401, 422):
-            requests_post_mock.return_value = mock.MagicMock(
-                status_code=current_error_code, text="Error message"
-            )
+            requests_post_mock.return_value = mock.MagicMock(status_code=current_error_code, text="Error message")
 
             with self.assertRaises(AssertionError):
                 dsmr_mindergas.services.export()
@@ -126,12 +112,8 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_export_okay(self, now_mock, requests_post_mock):
         """Test as designed."""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 12, hour=0, minute=5)
-        )
-        requests_post_mock.return_value = mock.MagicMock(
-            status_code=201, text="Fake OK"
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=5))
+        requests_post_mock.return_value = mock.MagicMock(status_code=201, text="Fake OK")
 
         dsmr_mindergas.services.export()
 

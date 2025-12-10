@@ -31,9 +31,7 @@ class Archive(ConfigurableLoginRequiredMixin, TemplateView):
         except IndexError:
             pass
 
-        context_data["datepicker_locale_format"] = formats.get_format(
-            "DSMR_DATEPICKER_LOCALE_FORMAT"
-        )
+        context_data["datepicker_locale_format"] = formats.get_format("DSMR_DATEPICKER_LOCALE_FORMAT")
         context_data["datepicker_date_format"] = "DSMR_DATEPICKER_DATE_FORMAT"
         return context_data
 
@@ -51,9 +49,7 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         now = timezone.now().strftime(formats.get_format("DSMR_STRFTIME_DATE_FORMAT"))
         given_date = self.request.GET.get("date", now)
         selected_datetime = timezone.make_aware(
-            timezone.datetime.strptime(
-                given_date, formats.get_format("DSMR_STRFTIME_DATE_FORMAT")
-            )
+            timezone.datetime.strptime(given_date, formats.get_format("DSMR_STRFTIME_DATE_FORMAT"))
         )
         selected_level = self.request.GET.get("level", "days")
 
@@ -67,12 +63,8 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         context_data["statistics"] = data
 
         context_data["title"] = {
-            "days": formats.date_format(
-                selected_datetime.date(), "DSMR_GRAPH_LONG_DATE_FORMAT"
-            ),
-            "months": formats.date_format(
-                selected_datetime.date(), "DSMR_DATEPICKER_MONTH"
-            ),
+            "days": formats.date_format(selected_datetime.date(), "DSMR_GRAPH_LONG_DATE_FORMAT"),
+            "months": formats.date_format(selected_datetime.date(), "DSMR_DATEPICKER_MONTH"),
             "years": selected_datetime.date().year,
         }[selected_level]
 
@@ -81,9 +73,7 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
             context_data["notes"] = Note.objects.filter(day=selected_datetime.date())
 
             try:
-                context_data["day_statistics"] = DayStatistics.objects.get(
-                    day=selected_datetime.date()
-                )
+                context_data["day_statistics"] = DayStatistics.objects.get(day=selected_datetime.date())
             except DayStatistics.DoesNotExist:
                 pass
 
@@ -103,9 +93,7 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
         now = timezone.now().strftime(formats.get_format("DSMR_STRFTIME_DATE_FORMAT"))
         given_date = request.GET.get("date", now)
         selected_datetime = timezone.make_aware(
-            timezone.datetime.strptime(
-                given_date, formats.get_format("DSMR_STRFTIME_DATE_FORMAT")
-            )
+            timezone.datetime.strptime(given_date, formats.get_format("DSMR_STRFTIME_DATE_FORMAT"))
         )
         selected_level = request.GET.get("level", "days")
 
@@ -126,13 +114,10 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
 
         # Zoom to hourly data.
         if selected_level == "days":
-            hours_in_day = dsmr_backend.services.backend.hours_in_day(
-                day=selected_datetime.date()
-            )
+            hours_in_day = dsmr_backend.services.backend.hours_in_day(day=selected_datetime.date())
             source_data = HourStatistics.objects.filter(
                 hour_start__gte=selected_datetime,
-                hour_start__lte=selected_datetime
-                + timezone.timedelta(hours=hours_in_day),
+                hour_start__lte=selected_datetime + timezone.timedelta(hours=hours_in_day),
             ).order_by("hour_start")
             x_format = "DSMR_GRAPH_SHORT_TIME_FORMAT"
             x_axis = "hour_start"
@@ -140,30 +125,20 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
 
         # Zoom to daily data.
         elif selected_level == "months":
-            start_of_month = timezone.datetime(
-                year=selected_datetime.year, month=selected_datetime.month, day=1
-            )
-            end_of_month = timezone.datetime.combine(
-                start_of_month + relativedelta(months=1), time.min
-            )
-            source_data = DayStatistics.objects.filter(
-                day__gte=start_of_month, day__lt=end_of_month
-            ).order_by("day")
+            start_of_month = timezone.datetime(year=selected_datetime.year, month=selected_datetime.month, day=1)
+            end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
+            source_data = DayStatistics.objects.filter(day__gte=start_of_month, day__lt=end_of_month).order_by("day")
             x_format = "DSMR_GRAPH_SHORT_DATE_FORMAT"
             x_axis = "day"
 
         # Zoom to monthly data.
         elif selected_level == "years":
             source_data = []
-            start_of_year = timezone.datetime(
-                year=selected_datetime.year, month=1, day=1
-            )
+            start_of_year = timezone.datetime(year=selected_datetime.year, month=1, day=1)
 
             for increment in range(0, 12):
                 current_month = start_of_year + relativedelta(months=increment)
-                current_month_stats = dsmr_stats.services.month_statistics(
-                    current_month.date()
-                )
+                current_month_stats = dsmr_stats.services.month_statistics(current_month.date())
                 current_month_stats["month"] = current_month.date()
                 source_data.append(current_month_stats)
 

@@ -27,9 +27,7 @@ class TestRegression(TestCase):
     def test_no_reverse_match_docs(self):
         """Test whether the docs URL in old notfications are converted to their new location."""
         if connection.vendor == "sqlite":  # pragma: no cover
-            return self.skipTest(
-                reason="SQLite cannot be used while foreign key constraint checks are enabled"
-            )
+            return self.skipTest(reason="SQLite cannot be used while foreign key constraint checks are enabled")
 
         Notification.objects.create(
             message="Fake",
@@ -41,12 +39,8 @@ class TestRegression(TestCase):
         self.assertEqual(response.status_code, 500)
 
         # Now we fake applying the migration (again for this test).
-        MigrationRecorder.Migration.objects.filter(
-            app="dsmr_frontend", name="0009_docs_no_reverse_match"
-        ).delete()
-        MigrationExecutor(connection=connection).migrate(
-            [(self.app, "0009_docs_no_reverse_match")]
-        )
+        MigrationRecorder.Migration.objects.filter(app="dsmr_frontend", name="0009_docs_no_reverse_match").delete()
+        MigrationExecutor(connection=connection).migrate([(self.app, "0009_docs_no_reverse_match")])
 
         # The error should be fixed now.
         response = self.client.get(reverse("frontend:notifications"))

@@ -16,9 +16,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             return
 
         installed_apps = [x.label for x in apps.get_app_configs()]
-        sql = self._intercept_command_stdout(
-            "sqlsequencereset", *installed_apps, no_color=True
-        )
+        sql = self._intercept_command_stdout("sqlsequencereset", *installed_apps, no_color=True)
 
         # Django's migrations does not have an app, so we'll just hard code it.
         sql += """

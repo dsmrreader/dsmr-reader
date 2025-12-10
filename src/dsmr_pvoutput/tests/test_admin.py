@@ -21,9 +21,7 @@ class TestAdmin(TestCase):
         STATUS_URL = reverse("admin:dsmr_pvoutput_pvoutputaddstatussettings_changelist")
 
         self.assertFalse(
-            ScheduledProcess.objects.filter(
-                module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True
-            ).exists()
+            ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True).exists()
         )
 
         response = self.client.post(
@@ -36,9 +34,7 @@ class TestAdmin(TestCase):
         self.assertEqual(response.status_code, 302)
         # Unchanged
         self.assertFalse(
-            ScheduledProcess.objects.filter(
-                module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True
-            ).exists()
+            ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True).exists()
         )
 
         # Pt. II
@@ -53,7 +49,5 @@ class TestAdmin(TestCase):
         self.assertEqual(response.status_code, 302)
         # Affected
         self.assertTrue(
-            ScheduledProcess.objects.filter(
-                module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True
-            ).exists()
+            ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT, active=True).exists()
         )

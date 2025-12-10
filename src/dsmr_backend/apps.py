@@ -28,9 +28,7 @@ class BackendAppConfig(AppConfig):
             errors = []
 
             # DB Engine check.
-            if (
-                connection.vendor not in settings.DSMRREADER_SUPPORTED_DB_VENDORS
-            ):  # pragma: no cover
+            if connection.vendor not in settings.DSMRREADER_SUPPORTED_DB_VENDORS:  # pragma: no cover
                 errors.append(
                     Warning(
                         'Unsupported database engine "{}" active, some features might not work properly'.format(
@@ -58,14 +56,10 @@ class BackendAppConfig(AppConfig):
                     stdout.seek(0)
                     migrate_output = stdout.read()
 
-                    if (
-                        migrate_output
-                    ):  # e.g. " Alter field phase_voltage_l2 on dsmrreading"
+                    if migrate_output:  # e.g. " Alter field phase_voltage_l2 on dsmrreading"
                         errors.append(
                             Critical(
-                                'There are unapplied migrations, please run "migrate"\n\n{}'.format(
-                                    migrate_output
-                                ),
+                                'There are unapplied migrations, please run "migrate"\n\n{}'.format(migrate_output),
                                 obj=None,
                                 id=settings.DSMRREADER_SYSTEM_CHECK_002,
                             )
@@ -115,8 +109,6 @@ def postgresql_check_database_size(
 
     return MonitoringStatusIssue(
         __name__,
-        _(
-            "Database growing large: {}, consider data cleanup (if not already enabled)"
-        ).format(pretty_size),
+        _("Database growing large: {}, consider data cleanup (if not already enabled)").format(pretty_size),
         timezone.now(),
     )

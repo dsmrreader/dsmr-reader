@@ -57,9 +57,7 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
         default=1,
         validators=[MinValueValidator(1), MaxValueValidator(9)],
         verbose_name=_("Compression level"),
-        help_text=_(
-            "The gzip compression level used. Level 9 = best, level 1 = fastest."
-        ),
+        help_text=_("The gzip compression level used. Level 9 = best, level 1 = fastest."),
     )
 
     def __str__(self):
@@ -79,17 +77,13 @@ class DropboxSettings(ModelUpdateMixin, SingletonModel):
         null=True,
         blank=True,
         verbose_name=_("Access Code by Dropbox"),
-        help_text=_(
-            "Enter the one-time Access Code here that Dropbox generates for you after authorizing DSMR-reader"
-        ),
+        help_text=_("Enter the one-time Access Code here that Dropbox generates for you after authorizing DSMR-reader"),
     )
     serialized_auth_flow = models.BinaryField(
         default=None,
         null=True,
         blank=True,
-        help_text=_(
-            "Automatically managed by DSMR-reader - Only used once during authorization set up"
-        ),
+        help_text=_("Automatically managed by DSMR-reader - Only used once during authorization set up"),
     )
     refresh_token = models.CharField(
         max_length=255,

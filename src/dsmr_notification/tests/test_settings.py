@@ -18,9 +18,7 @@ class TestSettings(TestCase):
         self.assertTrue(site.is_registered(NotificationSetting))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_notification_service(self):
         self.assertIsNone(self.instance.notification_service)
@@ -49,9 +47,7 @@ class TestStatusNotificationSetting(TestCase):
         self.assertTrue(site.is_registered(StatusNotificationSetting))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_next_check(self):
         self.assertIsNone(self.instance.next_check)

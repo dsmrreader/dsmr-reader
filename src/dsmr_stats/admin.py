@@ -108,9 +108,7 @@ class HourStatisticsAdmin(admin.ModelAdmin):
     )
     list_filter = (("hour_start", DateTimeRangeFilter),)
 
-    def formatted_electricity_merged(
-        self, obj: HourStatistics
-    ) -> str:  # pragma: no cover
+    def formatted_electricity_merged(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.electricity_merged:
             return "-"
 
@@ -118,9 +116,7 @@ class HourStatisticsAdmin(admin.ModelAdmin):
 
     formatted_electricity_merged.short_description = "electricity delivered"  # type: ignore[attr-defined]
 
-    def formatted_electricity_returned_merged(
-        self, obj: HourStatistics
-    ) -> str:  # pragma: no cover
+    def formatted_electricity_returned_merged(self, obj: HourStatistics) -> str:  # pragma: no cover
         if not obj.electricity_returned_merged:
             return "-"
 

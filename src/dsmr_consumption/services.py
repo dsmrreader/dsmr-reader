@@ -33,9 +33,7 @@ logger = logging.getLogger("dsmrreader")
 
 def run(scheduled_process: ScheduledProcess) -> None:
     """Compacts all unprocessed readings, capped by a max to prevent hanging backend."""
-    for current_reading in DsmrReading.objects.unprocessed()[
-        0 : settings.DSMRREADER_COMPACT_MAX
-    ]:
+    for current_reading in DsmrReading.objects.unprocessed()[0 : settings.DSMRREADER_COMPACT_MAX]:
         try:
             compact(dsmr_reading=current_reading)
         except CompactorNotReadyError:
@@ -55,17 +53,13 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     fuzzy_start = scheduled_process.planned.replace(second=0, microsecond=0)
 
     # The fuzzy start should be just beyond whatever we target. E.g. fuzzy start = currently 14:34
-    logger.debug(
-        "Quarter hour peaks: Using %s as fuzzy start", timezone.localtime(fuzzy_start)
-    )
+    logger.debug("Quarter hour peaks: Using %s as fuzzy start", timezone.localtime(fuzzy_start))
 
     # Rewind at least 15 minutes. E.g. currently 14:34 -> 14:19 (rewind_minutes = 15)
     rewind_minutes = MINUTE_INTERVAL
 
     # Map to xx:00, xx:15, xx:30 or xx:45. E.g. 14:19 -> 14:15. Makes 19 % 15 = 4 (rewind_minutes = 15 + 4)
-    rewind_minutes += (
-        fuzzy_start - timezone.timedelta(minutes=rewind_minutes)
-    ).minute % MINUTE_INTERVAL
+    rewind_minutes += (fuzzy_start - timezone.timedelta(minutes=rewind_minutes)).minute % MINUTE_INTERVAL
 
     # E.g. Fuzzy start was 14:34. Now we start/end at 14:15/14:30.
     start = fuzzy_start - timezone.timedelta(minutes=rewind_minutes)
@@ -84,9 +78,7 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
         scheduled_process.postpone(seconds=5)
         return
 
-    quarter_hour_readings = DsmrReading.objects.filter(
-        timestamp__gte=start, timestamp__lte=end
-    )
+    quarter_hour_readings = DsmrReading.objects.filter(timestamp__gte=start, timestamp__lte=end)
 
     # Only happens for data gaps or directly after new installations (edge cases). This will keep pushing forward.
     if len(quarter_hour_readings) < 2:
@@ -115,21 +107,13 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     ).exists()
 
     if existing_data:
-        logger.debug(
-            "Quarter hour peaks: Ready but quarter already processed, rescheduling for next quarter..."
-        )
-        scheduled_process.reschedule(
-            planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL)
-        )
+        logger.debug("Quarter hour peaks: Ready but quarter already processed, rescheduling for next quarter...")
+        scheduled_process.reschedule(planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL))
         return
 
     # Calculate quarter data.
-    total_delivered_start = (
-        first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2
-    )
-    total_delivered_end = (
-        last_reading.electricity_delivered_1 + last_reading.electricity_delivered_2
-    )
+    total_delivered_start = first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2
+    total_delivered_end = last_reading.electricity_delivered_1 + last_reading.electricity_delivered_2
     avg_delivered_in_quarter = total_delivered_end - total_delivered_start
     logger.debug(
         "Quarter hour peaks: Calculating for %s - %s",
@@ -141,9 +125,7 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     time_diff = last_reading.timestamp - first_reading.timestamp
 
     # avg_delivered_in_quarter = kW QUARTER peak during ~15 minutes... x ~4 maps it to avg per hour for kW HOUR peak
-    average_delivered_hour = avg_delivered_in_quarter * Decimal(
-        3600 / time_diff.total_seconds()
-    )
+    average_delivered_hour = avg_delivered_in_quarter * Decimal(3600 / time_diff.total_seconds())
 
     # Make sure to round here.
     average_delivered_hour = round_decimal(average_delivered_hour, decimal_count=3)
@@ -162,10 +144,7 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     )
 
     # Reschedule around the next moment we can expect to process the next quarter. Also works retroactively/with gaps.
-    scheduled_process.reschedule(
-        planned_at=new_instance.read_at_end
-        + timezone.timedelta(minutes=MINUTE_INTERVAL)
-    )
+    scheduled_process.reschedule(planned_at=new_instance.read_at_end + timezone.timedelta(minutes=MINUTE_INTERVAL))
 
 
 def compact(dsmr_reading: DsmrReading) -> None:
@@ -178,13 +157,8 @@ def compact(dsmr_reading: DsmrReading) -> None:
         time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
     ).replace(tzinfo=ZoneInfo("UTC"))
 
-    if (
-        consumption_settings.electricity_grouping_type
-        == ConsumptionSettings.ELECTRICITY_GROUPING_BY_MINUTE
-    ):
-        system_time_past_minute = timezone.now() >= reading_start + timezone.timedelta(
-            minutes=1
-        )
+    if consumption_settings.electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_MINUTE:
+        system_time_past_minute = timezone.now() >= reading_start + timezone.timedelta(minutes=1)
         reading_past_minute_exists = DsmrReading.objects.filter(
             timestamp__gte=reading_start + timezone.timedelta(minutes=1)
         ).exists()
@@ -256,9 +230,7 @@ def _compact_electricity(
     if ElectricityConsumption.objects.filter(read_at=minute_end).exists():
         return
 
-    grouped_reading = DsmrReading.objects.filter(
-        timestamp__gte=reading_start, timestamp__lt=minute_end
-    ).aggregate(
+    grouped_reading = DsmrReading.objects.filter(timestamp__gte=reading_start, timestamp__lt=minute_end).aggregate(
         # Average Watt
         avg_delivered=Avg("electricity_currently_delivered"),
         avg_returned=Avg("electricity_currently_returned"),
@@ -313,10 +285,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     time by reporting it over the previous hour.
     DSMR v5 will just allow small intervals, depending on whether the readings are grouped or not.
     """
-    if (
-        not dsmr_reading.extra_device_timestamp
-        or not dsmr_reading.extra_device_delivered
-    ):
+    if not dsmr_reading.extra_device_timestamp or not dsmr_reading.extra_device_delivered:
         # Some households aren't connected to a gas meter at all.
         return
 
@@ -374,9 +343,7 @@ def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
     consumption: dict[str, Any] = {"day": day}
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
-    day_start = timezone.make_aware(
-        timezone.datetime(year=day.year, month=day.month, day=day.day)
-    )
+    day_start = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day))
     day_end = day_start + timezone.timedelta(hours=hours_in_day)
 
     try:
@@ -384,9 +351,7 @@ def day_consumption(day: datetime.date) -> Dict:
     except EnergySupplierPrice.DoesNotExist:
         daily_energy_price = get_fallback_prices()
 
-    electricity_readings, gas_readings = consumption_by_range(
-        start=day_start, end=day_end
-    )
+    electricity_readings, gas_readings = consumption_by_range(start=day_start, end=day_end)
 
     if not electricity_readings.exists():
         raise LookupError("No electricity readings found for: {}".format(day))
@@ -403,19 +368,13 @@ def day_consumption(day: datetime.date) -> Dict:
     consumption["electricity1_end"] = last_reading.delivered_1
     consumption["electricity2_start"] = first_reading.delivered_2
     consumption["electricity2_end"] = last_reading.delivered_2
-    consumption["electricity1_returned"] = (
-        last_reading.returned_1 - first_reading.returned_1
-    )
-    consumption["electricity2_returned"] = (
-        last_reading.returned_2 - first_reading.returned_2
-    )
+    consumption["electricity1_returned"] = last_reading.returned_1 - first_reading.returned_1
+    consumption["electricity2_returned"] = last_reading.returned_2 - first_reading.returned_2
     consumption["electricity1_returned_start"] = first_reading.returned_1
     consumption["electricity1_returned_end"] = last_reading.returned_1
     consumption["electricity2_returned_start"] = first_reading.returned_2
     consumption["electricity2_returned_end"] = last_reading.returned_2
-    consumption["electricity_merged"] = (
-        consumption["electricity1"] + consumption["electricity2"]
-    )
+    consumption["electricity_merged"] = consumption["electricity1"] + consumption["electricity2"]
     consumption["electricity_returned_merged"] = (
         consumption["electricity1_returned"] + consumption["electricity2_returned"]
     )
@@ -423,23 +382,15 @@ def day_consumption(day: datetime.date) -> Dict:
     # Cost per tariff. Taking electricity return into account.
     consumption["electricity1_cost"] = round_decimal(
         (consumption["electricity1"] * daily_energy_price.electricity_delivered_1_price)
-        - (
-            consumption["electricity1_returned"]
-            * daily_energy_price.electricity_returned_1_price
-        )
+        - (consumption["electricity1_returned"] * daily_energy_price.electricity_returned_1_price)
     )
     consumption["electricity2_cost"] = round_decimal(
         (consumption["electricity2"] * daily_energy_price.electricity_delivered_2_price)
-        - (
-            consumption["electricity2_returned"]
-            * daily_energy_price.electricity_returned_2_price
-        )
+        - (consumption["electricity2_returned"] * daily_energy_price.electricity_returned_2_price)
     )
 
     # Totals.
-    consumption["electricity_cost_merged"] = (
-        consumption["electricity1_cost"] + consumption["electricity2_cost"]
-    )
+    consumption["electricity_cost_merged"] = consumption["electricity1_cost"] + consumption["electricity2_cost"]
     consumption["total_cost"] = consumption["electricity_cost_merged"]
 
     # Gas readings are optional, as not all meters support this.
@@ -452,9 +403,7 @@ def day_consumption(day: datetime.date) -> Dict:
         consumption["gas_start"] = first_reading.delivered
         # @TODO: END may be inaccurate as well be slightly off, create a reliable service like first_meter_positions_of_day() later
         consumption["gas_end"] = last_reading.delivered
-        consumption["gas_cost"] = round_decimal(
-            consumption["gas"] * daily_energy_price.gas_price
-        )
+        consumption["gas_cost"] = round_decimal(consumption["gas"] * daily_energy_price.gas_price)
         consumption["total_cost"] += consumption["gas_cost"]
 
     # Fixed costs.
@@ -463,27 +412,15 @@ def day_consumption(day: datetime.date) -> Dict:
     consumption["total_cost"] = round_decimal(consumption["total_cost"])
 
     # Current prices as well.
-    consumption["energy_supplier_price_electricity_delivered_1"] = (
-        daily_energy_price.electricity_delivered_1_price
-    )
-    consumption["energy_supplier_price_electricity_delivered_2"] = (
-        daily_energy_price.electricity_delivered_2_price
-    )
-    consumption["energy_supplier_price_electricity_returned_1"] = (
-        daily_energy_price.electricity_returned_1_price
-    )
-    consumption["energy_supplier_price_electricity_returned_2"] = (
-        daily_energy_price.electricity_returned_2_price
-    )
+    consumption["energy_supplier_price_electricity_delivered_1"] = daily_energy_price.electricity_delivered_1_price
+    consumption["energy_supplier_price_electricity_delivered_2"] = daily_energy_price.electricity_delivered_2_price
+    consumption["energy_supplier_price_electricity_returned_1"] = daily_energy_price.electricity_returned_1_price
+    consumption["energy_supplier_price_electricity_returned_2"] = daily_energy_price.electricity_returned_2_price
     consumption["energy_supplier_price_gas"] = daily_energy_price.gas_price
-    consumption["energy_supplier_price_fixed_daily_cost"] = (
-        daily_energy_price.fixed_daily_cost
-    )
+    consumption["energy_supplier_price_fixed_daily_cost"] = daily_energy_price.fixed_daily_cost
 
     # Any notes of that day.
-    consumption["notes"] = Note.objects.filter(day=day).values_list(
-        "description", flat=True
-    )
+    consumption["notes"] = Note.objects.filter(day=day).values_list("description", flat=True)
 
     # Temperature readings are not mandatory as well.
     temperature_readings = TemperatureReading.objects.filter(
@@ -508,9 +445,7 @@ def day_consumption(day: datetime.date) -> Dict:
         )["avg_temperature"]
         or 0
     )
-    consumption["average_temperature"] = round_decimal(
-        consumption["average_temperature"]
-    )
+    consumption["average_temperature"] = round_decimal(consumption["average_temperature"])
 
     return consumption
 
@@ -531,12 +466,8 @@ def live_electricity_consumption() -> Dict:
     latest_timestamp = min(timezone.now(), latest_timestamp)
 
     data["timestamp"] = latest_timestamp
-    data["currently_delivered"] = int(
-        latest_reading.electricity_currently_delivered * 1000
-    )
-    data["currently_returned"] = int(
-        latest_reading.electricity_currently_returned * 1000
-    )
+    data["currently_delivered"] = int(latest_reading.electricity_currently_delivered * 1000)
+    data["currently_returned"] = int(latest_reading.electricity_currently_returned * 1000)
     data["cost_per_hour"] = None
     data["tariff_name"] = None
 
@@ -567,21 +498,13 @@ def live_electricity_consumption() -> Dict:
     }
 
     try:
-        delivered_cost_per_hour = (
-            latest_reading.electricity_currently_delivered
-            * delivered_prices_per_tariff[tariff]
-        )
-        returned_cost_per_hour = (
-            latest_reading.electricity_currently_returned
-            * returned_prices_per_tariff[tariff]
-        )
+        delivered_cost_per_hour = latest_reading.electricity_currently_delivered * delivered_prices_per_tariff[tariff]
+        returned_cost_per_hour = latest_reading.electricity_currently_returned * returned_prices_per_tariff[tariff]
     except KeyError:
         return data
 
     # Some users have a setup that delivers and returns simultaneously. So we need to take both into account.
-    data["cost_per_hour"] = formats.number_format(
-        round_decimal(delivered_cost_per_hour - returned_cost_per_hour)
-    )
+    data["cost_per_hour"] = formats.number_format(round_decimal(delivered_cost_per_hour - returned_cost_per_hour))
 
     return data
 
@@ -605,9 +528,7 @@ def live_gas_consumption() -> Dict:
         return data
 
     # Note that we use generic 'interval' here, as it may differ, depending on the smart meter's protocol version.
-    data["cost_per_interval"] = formats.number_format(
-        round_decimal(latest_data.currently_delivered * prices.gas_price)
-    )
+    data["cost_per_interval"] = formats.number_format(round_decimal(latest_data.currently_delivered * prices.gas_price))
 
     return data
 
@@ -617,9 +538,7 @@ def round_decimal(value, decimal_count: int = 2) -> Decimal:
     if not isinstance(value, Decimal):
         value = Decimal(str(value))
 
-    return value.quantize(
-        Decimal(".{}".format("1".zfill(decimal_count))), rounding=ROUND_HALF_UP
-    )
+    return value.quantize(Decimal(".{}".format("1".zfill(decimal_count))), rounding=ROUND_HALF_UP)
 
 
 def calculate_slumber_consumption_watt() -> Optional[int]:
@@ -676,9 +595,7 @@ def calculate_min_max_consumption_watt() -> Dict:
         data.update(
             {
                 name: (
-                    formats.date_format(
-                        timezone.localtime(read_at), "DSMR_GRAPH_LONG_DATE_FORMAT"
-                    ),
+                    formats.date_format(timezone.localtime(read_at), "DSMR_GRAPH_LONG_DATE_FORMAT"),
                     int(value * 1000),
                 )
             }
@@ -727,9 +644,7 @@ def summarize_energy_contracts() -> List[Dict]:
             summary["total_cost"] += summary[summary_field]
 
         try:
-            first_day = DayStatistics.objects.filter(
-                day__gte=current.start, day__lt=current.end
-            ).order_by("day")[0]
+            first_day = DayStatistics.objects.filter(day__gte=current.start, day__lt=current.end).order_by("day")[0]
         except IndexError:
             first_day = None
 
@@ -777,11 +692,7 @@ def get_day_prices(day: datetime.date) -> EnergySupplierPrice:
     )
 
     for current_field in PRICE_FIELDS:
-        prices = [
-            getattr(x, current_field)
-            for x in contracts_found
-            if getattr(x, current_field) > 0
-        ]
+        prices = [getattr(x, current_field) for x in contracts_found if getattr(x, current_field) > 0]
 
         # None set.
         if not prices:

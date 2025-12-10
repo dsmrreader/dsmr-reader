@@ -30,9 +30,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
         GasConsumption.objects.all(): "read_at",
     }
 
-    retention_date = timezone.now() - timezone.timedelta(
-        hours=retention_settings.data_retention_in_hours
-    )
+    retention_date = timezone.now() - timezone.timedelta(hours=retention_settings.data_retention_in_hours)
     data_to_clean_up = False
 
     # We need to force UTC here, to avoid AmbiguousTimeError's on DST changes.
@@ -47,9 +45,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
             .order_by()
             .filter(item_count__gt=ITEM_COUNT_PER_HOUR)
             .order_by("item_hour")
-            .values_list("item_hour", flat=True)[
-                : settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN
-            ]
+            .values_list("item_hour", flat=True)[: settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN]
         )
 
         hours_to_cleanup = list(hours_to_cleanup)  # Force evaluation.
@@ -64,8 +60,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
             data_set = base_queryset.filter(
                 **{
                     "{}__gte".format(datetime_field): current_hour,
-                    "{}__lt".format(datetime_field): current_hour
-                    + timezone.timedelta(hours=1),
+                    "{}__lt".format(datetime_field): current_hour + timezone.timedelta(hours=1),
                 }
             )
 

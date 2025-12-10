@@ -25,9 +25,7 @@ class Migration(migrations.Migration):
                 ("message", models.TextField()),
                 (
                     "redirect_to",
-                    models.CharField(
-                        max_length=64, blank=True, default=None, null=True
-                    ),
+                    models.CharField(max_length=64, blank=True, default=None, null=True),
                 ),
                 ("read", models.BooleanField(default=False)),
             ],

@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 def disable_influxdb_integration(apps, schema_editor):
     """Ensure the user manually reconfigures the integration first."""
-    InfluxdbIntegrationSettings = apps.get_model(
-        "dsmr_influxdb", "InfluxdbIntegrationSettings"
-    )
+    InfluxdbIntegrationSettings = apps.get_model("dsmr_influxdb", "InfluxdbIntegrationSettings")
 
     instance, _ = InfluxdbIntegrationSettings.objects.get_or_create()
     instance.update(enabled=False)
@@ -63,7 +61,5 @@ class Migration(migrations.Migration):
             name="password",
         ),
         # The same disable applies both ways.
-        migrations.RunPython(
-            disable_influxdb_integration, disable_influxdb_integration
-        ),
+        migrations.RunPython(disable_influxdb_integration, disable_influxdb_integration),
     ]

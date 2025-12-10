@@ -20,17 +20,11 @@ class TestRetention(TestCase):
     schedule_process = None
 
     def setUp(self):
-        self.schedule_process = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION
-        )
-        self.schedule_process.update(
-            active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1))
-        )
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
 
         RetentionSettings.get_solo()
-        RetentionSettings.objects.update(
-            data_retention_in_hours=None
-        )  # Legacy tests: This used to be the default.
+        RetentionSettings.objects.update(data_retention_in_hours=None)  # Legacy tests: This used to be the default.
         self.assertEqual(DsmrReading.objects.count(), 52)
         self.assertEqual(ElectricityConsumption.objects.count(), 67)
         self.assertEqual(GasConsumption.objects.count(), 33)
@@ -54,9 +48,7 @@ class TestRetention(TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
 
         # Retention active, but point of retention not yet passed.
-        RetentionSettings.objects.update(
-            data_retention_in_hours=RetentionSettings.RETENTION_YEAR
-        )
+        RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_YEAR)
         RetentionSettings.get_solo().save()  # Trigger hook, faking interface action.
 
         dsmr_datalogger.services.retention.run(self.schedule_process)
@@ -66,9 +58,7 @@ class TestRetention(TestCase):
         self.assertEqual(GasConsumption.objects.count(), 33)
 
         # Allow point of retention to pass.
-        RetentionSettings.objects.update(
-            data_retention_in_hours=RetentionSettings.RETENTION_WEEK
-        )
+        RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_WEEK)
         RetentionSettings.get_solo().save()  # Trigger hook, faking interface action.
 
         # Should affect data now.
@@ -96,9 +86,7 @@ class TestRetention(TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
 
         # Clean.
-        RetentionSettings.objects.update(
-            data_retention_in_hours=RetentionSettings.RETENTION_WEEK
-        )
+        RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_WEEK)
         dsmr_datalogger.services.retention.run(self.schedule_process)
 
         # No effect calling multiple times.
@@ -110,6 +98,4 @@ class TestRetention(TestCase):
 
         # Should be delayed for a few hours now, nothing to do.
         self.schedule_process.refresh_from_db()
-        self.assertEqual(
-            self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12)
-        )
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12))

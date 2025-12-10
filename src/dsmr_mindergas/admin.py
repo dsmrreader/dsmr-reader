@@ -29,6 +29,4 @@ class MinderGasSettingsAdmin(SingletonModelAdmin):
 @receiver(django.db.models.signals.post_save, sender=MinderGasSettings)
 def handle_mindergas_settings_update(sender, instance, **kwargs):
     """Hook to toggle related scheduled process."""
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT
-    ).update(active=instance.export)
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_MINDERGAS_EXPORT).update(active=instance.export)

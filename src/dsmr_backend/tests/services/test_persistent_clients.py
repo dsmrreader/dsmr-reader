@@ -32,9 +32,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         dsmr_backend.services.persistent_clients.run([self.fake_client])
         self.assertTrue(send_robust_mock.called)
 
-        self.assertEqual(
-            send_robust_mock.call_args_list[0][1]["client"], self.fake_client
-        )
+        self.assertEqual(send_robust_mock.call_args_list[0][1]["client"], self.fake_client)
 
         # Test exception handling.
         send_robust_mock.return_value = [
@@ -49,9 +47,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         dsmr_backend.services.persistent_clients.terminate([self.fake_client])
         self.assertTrue(send_robust_mock.called)
 
-        self.assertEqual(
-            send_robust_mock.call_args_list[0][1]["client"], self.fake_client
-        )
+        self.assertEqual(send_robust_mock.call_args_list[0][1]["client"], self.fake_client)
 
         # Test exception handling.
         send_robust_mock.return_value = [

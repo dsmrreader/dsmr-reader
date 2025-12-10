@@ -15,9 +15,7 @@ class TestSettings(TestCase):
         self.assertTrue(site.is_registered(APISettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_allow(self):
         self.assertFalse(self.instance.allow)

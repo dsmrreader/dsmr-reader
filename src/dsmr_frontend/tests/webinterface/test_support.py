@@ -32,9 +32,7 @@ class TestSupportXhrDebugInfo(TestCase):
         self.assertEqual(response.status_code, 302, response.content)
         self.assertEqual(response["Location"], "/admin/login/?next={}".format(view_url))
 
-    @mock.patch(
-        "dsmr_frontend.views.support.SupportXhrDebugInfo._intercept_command_stdout"
-    )
+    @mock.patch("dsmr_frontend.views.support.SupportXhrDebugInfo._intercept_command_stdout")
     def test_authenticated(self, dump_mock):
         dump_mock.return_value = "some fake dump"
 

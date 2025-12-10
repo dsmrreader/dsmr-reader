@@ -7,9 +7,7 @@ from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 class TestBackendInfra(InterceptCommandStdoutMixin, TestCase):
     def test_supported_vendors(self):
         """Check whether supported vendors is as expected."""
-        self.assertEqual(
-            settings.DSMRREADER_SUPPORTED_DB_VENDORS, ("postgresql", "mysql")
-        )
+        self.assertEqual(settings.DSMRREADER_SUPPORTED_DB_VENDORS, ("postgresql", "mysql"))
 
     def test_timezone(self):
         """Verify timezone setting, as it should never be altered."""

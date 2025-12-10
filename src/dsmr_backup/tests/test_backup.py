@@ -22,12 +22,8 @@ import dsmr_backup.services.backup
 class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     def setUp(self):
         BackupSettings.get_solo()
-        self.schedule_process = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_DAILY_BACKUP
-        )
-        self.schedule_process.update(
-            active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1))
-        )
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_DAILY_BACKUP)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
 
     @mock.patch("dsmr_backup.services.backup.create_partial")
     @mock.patch("dsmr_backup.services.backup.create_full")
@@ -48,9 +44,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(create_full_mock.called)
 
         # Partials only run on mondays (Sunday now)
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 3, hour=18)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 3, hour=18))
         dsmr_backup.services.backup.run(self.schedule_process)
         self.assertFalse(create_partial_mock.called)
         self.assertTrue(create_full_mock.called)
@@ -59,9 +53,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         create_full_mock.reset_mock()
 
         # Partials only run on mondays (Monday now)
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 4, hour=18)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 4, hour=18))
         dsmr_backup.services.backup.run(self.schedule_process)
         self.assertTrue(create_partial_mock.called)
         self.assertTrue(create_full_mock.called)
@@ -69,14 +61,10 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("dsmr_backup.services.backup.create_partial")
     @mock.patch("dsmr_backup.services.backup.create_full")
     @mock.patch("django.utils.timezone.now")
-    def test_check_backup_folders(
-        self, now_mock, create_full_mock, create_partial_mock
-    ):
+    def test_check_backup_folders(self, now_mock, create_full_mock, create_partial_mock):
         """Test whether the backups use the expected folders."""
         # Partials only run on mondays (Monday now)
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 1, 4, hour=18)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 4, hour=18))
         base_dir = dsmr_backup.services.backup.get_backup_directory()
 
         # Should create initial backup.
@@ -94,9 +82,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
     @override_settings(DSMRREADER_BACKUP_INTERVAL_DAYS=1)
     def test_rescheduling(self, now_mock, create_full_mock, create_partial_mock):
         """Test scheduling after success."""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2020, 1, 1, hour=12)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1, hour=12))
 
         backup_settings = BackupSettings.get_solo()
         backup_settings.backup_time = time(6, 0, 0)  # 6:00:00
@@ -122,9 +108,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         FOLDER = "/tmp/test-dsmr"
         BackupSettings.objects.all().update(folder=FOLDER)
 
-        self.assertEqual(
-            dsmr_backup.services.backup.get_backup_directory(), os.path.join(FOLDER)
-        )
+        self.assertEqual(dsmr_backup.services.backup.get_backup_directory(), os.path.join(FOLDER))
 
     @mock.patch("subprocess.Popen")
     @mock.patch("dsmr_backup.services.backup.compress")
@@ -140,9 +124,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(subprocess_mock.called)
         self.assertFalse(on_backup_failed_mock.called)
 
-        dsmr_backup.services.backup.create_full(
-            folder=dsmr_backup.services.backup.get_backup_directory()
-        )
+        dsmr_backup.services.backup.create_full(folder=dsmr_backup.services.backup.get_backup_directory())
         self.assertTrue(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
         self.assertFalse(on_backup_failed_mock.called)
@@ -150,9 +132,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         subprocess_mock.reset_mock()
 
         # Test again, different branch coverage, as folder now exists.
-        dsmr_backup.services.backup.create_full(
-            folder=dsmr_backup.services.backup.get_backup_directory()
-        )
+        dsmr_backup.services.backup.create_full(folder=dsmr_backup.services.backup.get_backup_directory())
 
         self.assertTrue(compress_mock.called)
         self.assertTrue(subprocess_mock.called)
@@ -162,9 +142,7 @@ class TestBackupServices(InterceptCommandStdoutMixin, TestCase):
         handle_mock.returncode = -1
         subprocess_mock.return_value = handle_mock
 
-        dsmr_backup.services.backup.create_full(
-            folder=dsmr_backup.services.backup.get_backup_directory()
-        )
+        dsmr_backup.services.backup.create_full(folder=dsmr_backup.services.backup.get_backup_directory())
         self.assertTrue(on_backup_failed_mock.called)
 
         shutil.rmtree(FOLDER)

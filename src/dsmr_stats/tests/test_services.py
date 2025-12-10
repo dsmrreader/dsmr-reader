@@ -33,12 +33,8 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     schedule_process = None
 
     def setUp(self):
-        self.schedule_process = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_STATS_GENERATOR
-        )
-        self.schedule_process.update(
-            active=True, planned=timezone.make_aware(timezone.datetime(2015, 1, 1))
-        )
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_STATS_GENERATOR)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2015, 1, 1)))
 
     def _get_statistics_dict(self, target_date):
         """Used multiple times to setup proper day statistics data."""
@@ -65,9 +61,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     def test_get_next_day_to_generate_no_stats(self):
         self.assertFalse(DayStatistics.objects.exists())
-        self.assertEqual(
-            dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 12)
-        )
+        self.assertEqual(dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 12))
 
     @mock.patch("dsmr_backend.services.backend.get_capability")
     @mock.patch("django.utils.timezone.now")
@@ -85,19 +79,13 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             currently_delivered=0,
             currently_returned=0,
         )
-        self.assertEqual(
-            dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 12)
-        )
+        self.assertEqual(dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 12))
 
         dsmr_stats.services.run(self.schedule_process)
-        self.assertEqual(
-            dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 15)
-        )
+        self.assertEqual(dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 15))
 
         dsmr_stats.services.run(self.schedule_process)
-        self.assertEqual(
-            dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 20)
-        )
+        self.assertEqual(dsmr_stats.services.get_next_day_to_generate(), datetime.date(2015, 12, 20))
 
     @mock.patch("django.utils.timezone.now")
     def test_get_next_day_to_generate_with_stats(self, now_mock):
@@ -114,9 +102,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("dsmr_stats.services.is_data_available")
     @mock.patch("dsmr_stats.services.get_next_day_to_generate")
     @mock.patch("django.utils.timezone.now")
-    def test_analyze_no_data(
-        self, now_mock, get_next_day_to_generate_mock, is_data_available_mock
-    ):
+    def test_analyze_no_data(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
         """Fail analyze because here is no data."""
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
         is_data_available_mock.return_value = False
@@ -125,16 +111,12 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(get_next_day_to_generate_mock.called)
 
         self.schedule_process.refresh_from_db()
-        self.assertEqual(
-            self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1)
-        )
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
     @mock.patch("dsmr_stats.services.is_data_available")
     @mock.patch("dsmr_stats.services.get_next_day_to_generate")
     @mock.patch("django.utils.timezone.now")
-    def test_analyze_skip_current_day(
-        self, now_mock, get_next_day_to_generate_mock, is_data_available_mock
-    ):
+    def test_analyze_skip_current_day(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
         """Fail analyze because it's today."""
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
         is_data_available_mock.return_value = True
@@ -143,16 +125,12 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         dsmr_stats.services.run(self.schedule_process)
 
         self.schedule_process.refresh_from_db()
-        self.assertEqual(
-            self.schedule_process.planned, timezone.now() + timezone.timedelta(days=1)
-        )
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(days=1))
 
     @mock.patch("dsmr_stats.services.is_data_available")
     @mock.patch("dsmr_stats.services.get_next_day_to_generate")
     @mock.patch("django.utils.timezone.now")
-    def test_analyze_check_unprocessed_readings(
-        self, now_mock, get_next_day_to_generate_mock, is_data_available_mock
-    ):
+    def test_analyze_check_unprocessed_readings(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
         """Fail analyze due to pending unprocessed readings."""
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
         is_data_available_mock.return_value = True
@@ -182,9 +160,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("dsmr_stats.services.is_data_available")
     @mock.patch("dsmr_stats.services.get_next_day_to_generate")
     @mock.patch("django.utils.timezone.now")
-    def test_analyze_no_consumption(
-        self, now_mock, get_next_day_to_generate_mock, is_data_available_mock
-    ):
+    def test_analyze_no_consumption(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
         """Fail analyze due to no consumption available."""
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
         is_data_available_mock.return_value = True
@@ -197,9 +173,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         dsmr_stats.services.run(self.schedule_process)
 
         self.schedule_process.refresh_from_db()
-        self.assertEqual(
-            self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1)
-        )
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=1))
 
     @mock.patch("dsmr_stats.services.create_statistics")
     @mock.patch("dsmr_stats.services.is_data_available")
@@ -247,9 +221,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Specifically validating an edge case situation of issue #818.
-        GasConsumption.objects.all().update(
-            read_at=target_datetime - timezone.timedelta(days=7)
-        )
+        GasConsumption.objects.all().update(read_at=target_datetime - timezone.timedelta(days=7))
         dsmr_stats.services.run(self.schedule_process)
         self.assertTrue(create_statistics_mock.called)  # Should now pass.
 
@@ -302,9 +274,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             "currently_returned": 0,
         }
         ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
-        GasConsumption.objects.create(
-            read_at=hour_start, delivered=5, currently_delivered=1
-        )
+        GasConsumption.objects.create(read_at=hour_start, delivered=5, currently_delivered=1)
 
         self.assertEqual(HourStatistics.objects.count(), 0)
         dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
@@ -322,9 +292,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             "currently_returned": 0,
         }
         ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
-        GasConsumption.objects.create(
-            read_at=hour_start, delivered=5, currently_delivered=0
-        )
+        GasConsumption.objects.create(read_at=hour_start, delivered=5, currently_delivered=0)
         GasConsumption.objects.create(
             read_at=hour_start + timezone.timedelta(minutes=15),
             delivered=7,
@@ -433,41 +401,27 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             currently_returned=0,
         )
         ElectricityConsumption.objects.all().delete()
+        ElectricityConsumption.objects.create(read_at=timezone.now(), delivered_1=0, **default_kwargs)
         ElectricityConsumption.objects.create(
-            read_at=timezone.now(), delivered_1=0, **default_kwargs
+            read_at=timezone.now() + timezone.timedelta(minutes=58), delivered_1=0.58, **default_kwargs
         )
         ElectricityConsumption.objects.create(
-            read_at=timezone.now() + timezone.timedelta(minutes=58),
-            delivered_1=0.58,
-            **default_kwargs
+            read_at=timezone.now() + timezone.timedelta(minutes=59), delivered_1=0.59, **default_kwargs
         )
         ElectricityConsumption.objects.create(
-            read_at=timezone.now() + timezone.timedelta(minutes=59),
-            delivered_1=0.59,
-            **default_kwargs
+            read_at=timezone.now() + timezone.timedelta(minutes=60), delivered_1=0.60, **default_kwargs
         )
         ElectricityConsumption.objects.create(
-            read_at=timezone.now() + timezone.timedelta(minutes=60),
-            delivered_1=0.60,
-            **default_kwargs
-        )
-        ElectricityConsumption.objects.create(
-            read_at=timezone.now() + timezone.timedelta(minutes=61),
-            delivered_1=0.61,
-            **default_kwargs
+            read_at=timezone.now() + timezone.timedelta(minutes=61), delivered_1=0.61, **default_kwargs
         )
         dsmr_stats.services.create_statistics(target_day=timezone.now().date())
-        self.assertEqual(
-            HourStatistics.objects.all().count(), 2
-        )  # First hour is empty.
+        self.assertEqual(HourStatistics.objects.all().count(), 2)  # First hour is empty.
 
     @mock.patch("django.core.cache.cache.clear")
     @mock.patch("dsmr_stats.services.create_daily_statistics")
     @mock.patch("dsmr_stats.services.create_hourly_statistics")
     @mock.patch("django.utils.timezone.now")
-    def test_create_statistics_hours_per_day_cet_cest(
-        self, now_mock, hourly_mock, daily_mock, cache_mock
-    ):
+    def test_create_statistics_hours_per_day_cet_cest(self, now_mock, hourly_mock, daily_mock, cache_mock):
         """Transitions to and from DST affect the number of hours logged of a day. Check it."""
         # CET > CEST
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 29))
@@ -494,24 +448,18 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # Fixtures lack these values. Have some sample data for assertions.
         DsmrReading.objects.create(
-            timestamp=timezone.make_aware(
-                timezone.datetime(2015, 12, 11, hour=23, minute=59)
-            ),
+            timestamp=timezone.make_aware(timezone.datetime(2015, 12, 11, hour=23, minute=59)),
             electricity_delivered_1=595.000,
             electricity_returned_1=0.001,
             electricity_delivered_2=593.000,
             electricity_returned_2=0.002,
             electricity_currently_delivered=0,
             electricity_currently_returned=0,
-            extra_device_timestamp=timezone.make_aware(
-                timezone.datetime(2015, 12, 11, hour=23, minute=0)
-            ),
+            extra_device_timestamp=timezone.make_aware(timezone.datetime(2015, 12, 11, hour=23, minute=0)),
             extra_device_delivered=955.000,
         )
         DsmrReading.objects.create(
-            timestamp=timezone.make_aware(
-                timezone.datetime(2015, 12, 12, hour=0, minute=0)
-            ),
+            timestamp=timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=0)),
             electricity_delivered_1=595.187,  # First value of the day
             electricity_returned_1=0.111,  # First value of the day
             electricity_delivered_2=593.558,  # First value of the day
@@ -519,24 +467,18 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             electricity_currently_delivered=0,
             electricity_currently_returned=0,
             # Gas lagging behind on DSMR v4 telegrams
-            extra_device_timestamp=timezone.make_aware(
-                timezone.datetime(2015, 12, 11, hour=23, minute=0)
-            ),
+            extra_device_timestamp=timezone.make_aware(timezone.datetime(2015, 12, 11, hour=23, minute=0)),
             extra_device_delivered=955.000,
         )
         DsmrReading.objects.create(
-            timestamp=timezone.make_aware(
-                timezone.datetime(2015, 12, 12, hour=0, minute=5)
-            ),
+            timestamp=timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=5)),
             electricity_delivered_1=596.000,
             electricity_returned_1=0.112,
             electricity_delivered_2=594.000,
             electricity_returned_2=0.223,
             electricity_currently_delivered=0,
             electricity_currently_returned=0,
-            extra_device_timestamp=timezone.make_aware(
-                timezone.datetime(2015, 12, 12, hour=0, minute=0)
-            ),
+            extra_device_timestamp=timezone.make_aware(timezone.datetime(2015, 12, 12, hour=0, minute=0)),
             extra_device_delivered=956.739,  # First value of the day
         )
 
@@ -576,9 +518,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             # Regression, Django defaults to UTC, so '11' here.
             self.assertEqual(hour_stat["hour_start"], 12)
         else:
-            return self.skipTest(
-                "Test cannot be fixed for backends other than PostgreSQL"
-            )
+            return self.skipTest("Test cannot be fixed for backends other than PostgreSQL")
 
     def test_range_statistics(self):
         target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
@@ -603,9 +543,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(statistics["gas_cost"], 3)
 
         # Now we fetch one outside our range.
-        no_statistics = dsmr_stats.services.range_statistics(
-            target_date - timezone.timedelta(days=1), target_date
-        )
+        no_statistics = dsmr_stats.services.range_statistics(target_date - timezone.timedelta(days=1), target_date)
         self.assertEqual(no_statistics["number_of_days"], 0)
         self.assertIsNone(no_statistics["total_cost"])
 
@@ -614,9 +552,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # Create statistics for multiple days in month, and beyond.
         for x in range(-5, 5):
-            DayStatistics.objects.create(
-                **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
-            )
+            DayStatistics.objects.create(**self._get_statistics_dict(target_date + timezone.timedelta(days=x)))
 
         data = dsmr_stats.services.day_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
@@ -629,9 +565,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(data["electricity2"], daily["electricity2"])
         self.assertEqual(data["electricity2_cost"], daily["electricity2_cost"])
         self.assertEqual(data["electricity2_returned"], daily["electricity2_returned"])
-        self.assertEqual(
-            data["electricity_merged"], daily["electricity1"] + daily["electricity2"]
-        )
+        self.assertEqual(data["electricity_merged"], daily["electricity1"] + daily["electricity2"])
         self.assertEqual(
             data["electricity_cost_merged"],
             daily["electricity1_cost"] + daily["electricity2_cost"],
@@ -648,9 +582,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # Create statistics for multiple days.
         for x in range(0, 40):
-            DayStatistics.objects.create(
-                **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
-            )
+            DayStatistics.objects.create(**self._get_statistics_dict(target_date + timezone.timedelta(days=x)))
 
         data = dsmr_stats.services.month_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
@@ -662,17 +594,13 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.
         self.assertEqual(data["total_cost"], daily["total_cost"] * days_in_month)
         self.assertEqual(data["electricity1"], daily["electricity1"] * days_in_month)
-        self.assertEqual(
-            data["electricity1_cost"], daily["electricity1_cost"] * days_in_month
-        )
+        self.assertEqual(data["electricity1_cost"], daily["electricity1_cost"] * days_in_month)
         self.assertEqual(
             data["electricity1_returned"],
             daily["electricity1_returned"] * days_in_month,
         )
         self.assertEqual(data["electricity2"], daily["electricity2"] * days_in_month)
-        self.assertEqual(
-            data["electricity2_cost"], daily["electricity2_cost"] * days_in_month
-        )
+        self.assertEqual(data["electricity2_cost"], daily["electricity2_cost"] * days_in_month)
         self.assertEqual(
             data["electricity2_returned"],
             daily["electricity2_returned"] * days_in_month,
@@ -687,8 +615,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         )
         self.assertEqual(
             data["electricity_returned_merged"],
-            (daily["electricity1_returned"] + daily["electricity2_returned"])
-            * days_in_month,
+            (daily["electricity1_returned"] + daily["electricity2_returned"]) * days_in_month,
         )
         self.assertEqual(data["gas"], daily["gas"] * days_in_month)
         self.assertEqual(data["gas_cost"], daily["gas_cost"] * days_in_month)
@@ -698,9 +625,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         # Create statistics for multiple days in year, and beyond.
         for x in range(-5, 400):
-            DayStatistics.objects.create(
-                **self._get_statistics_dict(target_date + timezone.timedelta(days=x))
-            )
+            DayStatistics.objects.create(**self._get_statistics_dict(target_date + timezone.timedelta(days=x)))
 
         data = dsmr_stats.services.year_statistics(target_date=target_date)
         daily = self._get_statistics_dict(target_date)
@@ -712,19 +637,11 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         # Since January only has 31 days and we we've generated 40, we should multiply by 31.
         self.assertEqual(data["total_cost"], daily["total_cost"] * days_in_year)
         self.assertEqual(data["electricity1"], daily["electricity1"] * days_in_year)
-        self.assertEqual(
-            data["electricity1_cost"], daily["electricity1_cost"] * days_in_year
-        )
-        self.assertEqual(
-            data["electricity1_returned"], daily["electricity1_returned"] * days_in_year
-        )
+        self.assertEqual(data["electricity1_cost"], daily["electricity1_cost"] * days_in_year)
+        self.assertEqual(data["electricity1_returned"], daily["electricity1_returned"] * days_in_year)
         self.assertEqual(data["electricity2"], daily["electricity2"] * days_in_year)
-        self.assertEqual(
-            data["electricity2_cost"], daily["electricity2_cost"] * days_in_year
-        )
-        self.assertEqual(
-            data["electricity2_returned"], daily["electricity2_returned"] * days_in_year
-        )
+        self.assertEqual(data["electricity2_cost"], daily["electricity2_cost"] * days_in_year)
+        self.assertEqual(data["electricity2_returned"], daily["electricity2_returned"] * days_in_year)
         self.assertEqual(
             data["electricity_merged"],
             (daily["electricity1"] + daily["electricity2"]) * days_in_year,
@@ -735,8 +652,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         )
         self.assertEqual(
             data["electricity_returned_merged"],
-            (daily["electricity1_returned"] + daily["electricity2_returned"])
-            * days_in_year,
+            (daily["electricity1_returned"] + daily["electricity2_returned"]) * days_in_year,
         )
         self.assertEqual(data["gas"], daily["gas"] * days_in_year)
         self.assertEqual(data["gas_cost"], daily["gas_cost"] * days_in_year)
@@ -781,9 +697,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("django.utils.timezone.now")
     def test_update_electricity_statistics(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1, hour=0)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=0))
         stats = ElectricityStatistics.get_solo()
         self.assertIsNone(stats.highest_usage_l1_value)
         self.assertIsNone(stats.highest_usage_l2_value)
@@ -811,9 +725,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Alter time, processing of reading is later.
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1, hour=12)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=12))
         self.assertNotEqual(reading_timestamp, timezone.now())
         dsmr_stats.services.update_electricity_statistics(reading=reading)
 
@@ -838,9 +750,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             electricity_grouping_type=ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING
         )
 
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1, hour=0)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=0))
         stats = ElectricityStatistics.get_solo()
         self.assertIsNone(stats.highest_usage_l1_value)
         self.assertIsNone(stats.highest_usage_l2_value)
@@ -867,9 +777,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Alter time, processing of reading is later.
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1, hour=12)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=12))
         self.assertNotEqual(reading_timestamp, timezone.now())
         dsmr_stats.services.update_electricity_statistics(reading=reading)
 

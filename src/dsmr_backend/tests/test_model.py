@@ -18,14 +18,10 @@ class TestBackendSettings(TestCase):
         self.assertTrue(site.is_registered(BackendSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_handle_settings_update_hook(self):
-        sp = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
-        )
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER)
         self.assertTrue(sp.active)
 
         self.instance.automatic_update_checker = False
@@ -48,9 +44,7 @@ class TestScheduledProcess(TestCase):
 
     def test_managers(self):
         self.assertTrue(ScheduledProcess.objects.ready().exists())
-        ScheduledProcess.objects.update(
-            planned=timezone.now() + timezone.timedelta(minutes=1)
-        )
+        ScheduledProcess.objects.update(planned=timezone.now() + timezone.timedelta(minutes=1))
         self.assertFalse(ScheduledProcess.objects.ready().exists())
 
     def test_delay(self):
@@ -88,6 +82,4 @@ class EmailSettingsSettings(TestCase):
         self.assertTrue(site.is_registered(EmailSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))

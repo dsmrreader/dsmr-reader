@@ -43,9 +43,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
     def _dump_application_info(self):
         pending_migrations = []
 
-        for line in self._intercept_command_stdout(
-            "showmigrations", no_color=True
-        ).split("\n"):
+        for line in self._intercept_command_stdout("showmigrations", no_color=True).split("\n"):
             if line.startswith(" [ ]"):
                 pending_migrations.append(line)
 
@@ -86,9 +84,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
 
     def _dump_data_info(self):
         reading_count = self._table_record_count(DsmrReading._meta.db_table)
-        electricity_count = self._table_record_count(
-            ElectricityConsumption._meta.db_table
-        )
+        electricity_count = self._table_record_count(ElectricityConsumption._meta.db_table)
         gas_count = self._table_record_count(GasConsumption._meta.db_table)
 
         self._print_header("Data")
@@ -137,9 +133,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):  # pragma: nocover
             if not results:
                 return
 
-            self._print_header(
-                "PostgreSQL size of largest tables (> {} MB)".format(MIN_SIZE_MB)
-            )
+            self._print_header("PostgreSQL size of largest tables (> {} MB)".format(MIN_SIZE_MB))
 
             for table, size in results:
                 self._pretty_print(table, size)

@@ -47,9 +47,7 @@ class TestViews(TestCase):
             self.assertEqual(response.context["returned_sum"], Decimal("124.356"))
 
     def test_statistics_xhr_data(self):
-        response = self.client.get(
-            reverse("{}:statistics-xhr-data".format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:statistics-xhr-data".format(self.namespace)))
         self.assertEqual(response.status_code, 200, response.content)
         self.assertEqual(response["Content-Type"], "application/json")
 

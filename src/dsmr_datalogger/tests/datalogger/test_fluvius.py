@@ -18,9 +18,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
 
     def setUp(self):
         DataloggerSettings.get_solo()
-        DataloggerSettings.objects.all().update(
-            dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS
-        )
+        DataloggerSettings.objects.all().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
 
     def _dsmr_dummy_data(self):
         return [
@@ -62,9 +60,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(
-            reading.timestamp, datetime(2020, 8, 7, 6, 27, 11, tzinfo=ZoneInfo("UTC"))
-        )
+        self.assertEqual(reading.timestamp, datetime(2020, 8, 7, 6, 27, 11, tzinfo=ZoneInfo("UTC")))
         self.assertEqual(reading.electricity_delivered_1, Decimal("1924.771"))
         self.assertEqual(reading.electricity_returned_1, Decimal("1968.710"))
         self.assertEqual(reading.electricity_delivered_2, Decimal("2549.919"))

@@ -129,9 +129,7 @@ def create_full(folder: str) -> str:
             "--password={}".format(db_settings["PASSWORD"]),
             db_settings["NAME"],
         ]
-        backup_process = subprocess.Popen(  # noqa: S603
-            command, stdout=open(backup_file, "w")
-        )  # pragma: no cover
+        backup_process = subprocess.Popen(command, stdout=open(backup_file, "w"))  # noqa: S603  # pragma: no cover
     # SQLite backup.
     elif connection.vendor == "sqlite":  # pragma: no cover
         command = [
@@ -143,9 +141,7 @@ def create_full(folder: str) -> str:
             command, stdout=open(backup_file, "w"), stderr=subprocess.PIPE
         )  # pragma: no cover
     else:
-        raise NotImplementedError(
-            "Unsupported backup backend: {}".format(connection.vendor)
-        )  # pragma: no cover
+        raise NotImplementedError("Unsupported backup backend: {}".format(connection.vendor))  # pragma: no cover
 
     backup_process.wait()
     logger.debug(" - Backup exit code: %s", backup_process.returncode)
@@ -213,13 +209,9 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
             "--password={}".format(db_settings["PASSWORD"]),
             db_settings["NAME"],
         ] + [x._meta.db_table for x in models_to_backup]
-        backup_process = subprocess.Popen(  # noqa: S603
-            command, stdout=open(backup_file, "w")
-        )  # pragma: no cover
+        backup_process = subprocess.Popen(command, stdout=open(backup_file, "w"))  # noqa: S603  # pragma: no cover
     else:
-        raise NotImplementedError(
-            "Unsupported backup backend: {}".format(connection.vendor)
-        )
+        raise NotImplementedError("Unsupported backup backend: {}".format(connection.vendor))
 
     backup_process.wait()
     logger.debug(" - Backup exit code: %s", backup_process.returncode)

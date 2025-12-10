@@ -87,9 +87,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="daystatistics",
             name="electricity1_cost",
-            field=models.DecimalField(
-                decimal_places=2, max_digits=8, verbose_name="Electricity tariff 1 cost"
-            ),
+            field=models.DecimalField(decimal_places=2, max_digits=8, verbose_name="Electricity tariff 1 cost"),
         ),
         migrations.AlterField(
             model_name="daystatistics",
@@ -114,9 +112,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="daystatistics",
             name="electricity2_cost",
-            field=models.DecimalField(
-                decimal_places=2, max_digits=8, verbose_name="Electricity tariff 2 cost"
-            ),
+            field=models.DecimalField(decimal_places=2, max_digits=8, verbose_name="Electricity tariff 2 cost"),
         ),
         migrations.AlterField(
             model_name="daystatistics",
@@ -131,9 +127,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="daystatistics",
             name="fixed_cost",
-            field=models.DecimalField(
-                decimal_places=2, default=0, max_digits=8, verbose_name="Fixed cost"
-            ),
+            field=models.DecimalField(decimal_places=2, default=0, max_digits=8, verbose_name="Fixed cost"),
         ),
         migrations.AlterField(
             model_name="daystatistics",

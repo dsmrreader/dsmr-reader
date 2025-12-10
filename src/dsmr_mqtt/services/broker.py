@@ -18,9 +18,7 @@ def initialize_client() -> Optional[paho.Client]:
     broker_settings = MQTTBrokerSettings.get_solo()
 
     if not broker_settings.enabled:
-        logger.debug(
-            "MQTT: Integration disabled in settings (or it was disabled due to a configuration error)"
-        )
+        logger.debug("MQTT: Integration disabled in settings (or it was disabled due to a configuration error)")
         return None
 
     if not broker_settings.hostname:
@@ -78,22 +76,15 @@ def run(mqtt_client: paho.Client) -> None:
         # Keep batches small, only send the latest X messages. So drop any excess first and fetch the remainder after.
         lowest_pk_to_preserve = (
             queue.Message.objects.all()
-            .order_by("-pk")[
-                settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
-                - 1  # Zero indexed, so -1
-            ]
+            .order_by("-pk")[settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE - 1]  # Zero indexed, so -1
             .pk
         )
     except IndexError:
         # Total count within limits. No cleanup required.
         pass
     else:
-        deletion_count, _ = queue.Message.objects.filter(
-            pk__lt=lowest_pk_to_preserve
-        ).delete()
-        logger.warning(
-            "MQTT: Dropped %d message(s) from queue due to limit", deletion_count
-        )
+        deletion_count, _ = queue.Message.objects.filter(pk__lt=lowest_pk_to_preserve).delete()
+        logger.warning("MQTT: Dropped %d message(s) from queue due to limit", deletion_count)
 
     # Remainder, preserving order.
     message_queue = queue.Message.objects.all().order_by("pk")
@@ -137,9 +128,7 @@ def run(mqtt_client: paho.Client) -> None:
             # Prevents infinite loop on connection errors.
             if loop_result != paho.MQTT_ERR_SUCCESS:
                 signal_reconnect()
-                raise RuntimeError(
-                    "MQTT: Client loop() failed, requesting restart to prevent waiting forever..."
-                )
+                raise RuntimeError("MQTT: Client loop() failed, requesting restart to prevent waiting forever...")
 
         logger.debug("MQTT: Deleting published message (#%s) from queue", current.pk)
         current.delete()
@@ -147,28 +136,20 @@ def run(mqtt_client: paho.Client) -> None:
 
 def signal_reconnect() -> None:
     backend_restart_required.send_robust(None)
-    logger.warning(
-        "MQTT: Client no longer connected. Signaling restart to reconnect..."
-    )
+    logger.warning("MQTT: Client no longer connected. Signaling restart to reconnect...")
 
 
-def on_connect(
-    client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs
-) -> None:
+def on_connect(client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs) -> None:
     """MQTT client callback for connecting. Outputs some debug logging."""
     logger.debug("MQTT: (Paho on_connect) %s | %s", flags, reason_code.getName())
 
     try:
-        logger.debug(
-            "MQTT: --- %s : %s -> %s", client.host, client.port, reason_code.getName()
-        )
+        logger.debug("MQTT: --- %s : %s -> %s", client.host, client.port, reason_code.getName())
     except KeyError:
         pass
 
 
-def on_disconnect(
-    client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs
-) -> None:
+def on_disconnect(client, userdata, flags, reason_code: paho.ReasonCode, *args, **kwargs) -> None:
     """MQTT client callback for disconnecting. Outputs some debug logging."""
 
     """

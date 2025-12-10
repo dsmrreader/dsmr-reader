@@ -60,9 +60,7 @@ def publish_split_topic_dsmr_reading(reading: DsmrReading) -> None:
     if split_topic_settings.use_local_timezone:
         reading.convert_to_local_timezone()
 
-    publish_split_topic_data(
-        mapping_format=split_topic_settings.formatting, data_source=reading
-    )
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=reading)
 
 
 def publish_day_consumption() -> None:
@@ -73,9 +71,7 @@ def publish_day_consumption() -> None:
         return
 
     try:
-        latest_electricity = ElectricityConsumption.objects.all().order_by("-read_at")[
-            0
-        ]
+        latest_electricity = ElectricityConsumption.objects.all().order_by("-read_at")[0]
     except IndexError:
         # Don't even bother when no data available.
         return
@@ -92,9 +88,7 @@ def publish_day_consumption() -> None:
         )
 
     if split_topic_settings.enabled:
-        publish_split_topic_data(
-            mapping_format=split_topic_settings.formatting, data_source=day_consumption
-        )
+        publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=day_consumption)
 
 
 def publish_json_period_totals() -> None:
@@ -116,9 +110,7 @@ def publish_json_period_totals() -> None:
 
 
 def publish_split_topic_period_totals() -> None:
-    split_topic_settings = (
-        period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo()
-    )
+    split_topic_settings = period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings.get_solo()
 
     if not split_topic_settings.enabled:
         return
@@ -128,9 +120,7 @@ def publish_split_topic_period_totals() -> None:
     if not totals:
         return
 
-    publish_split_topic_data(
-        mapping_format=split_topic_settings.formatting, data_source=totals
-    )
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=totals)
 
 
 def convert_period_totals() -> Dict:
@@ -161,9 +151,7 @@ def convert_period_totals() -> Dict:
 
 
 def publish_split_topic_meter_statistics() -> None:
-    split_topic_settings = (
-        meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
-    )
+    split_topic_settings = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
 
     if not split_topic_settings.enabled:
         return
@@ -193,32 +181,24 @@ def publish_split_topic_gas_consumption(instance: GasConsumption) -> None:
     if not split_topic_settings.enabled:
         return
 
-    publish_split_topic_data(
-        mapping_format=split_topic_settings.formatting, data_source=instance
-    )
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=instance)
 
 
 def publish_split_topic_quarter_hour_peak_consumption(
     instance: QuarterHourPeakElectricityConsumption,
 ) -> None:
-    split_topic_settings = (
-        consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
-    )
+    split_topic_settings = consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
 
     if not split_topic_settings.enabled:
         return
 
-    publish_split_topic_data(
-        mapping_format=split_topic_settings.formatting, data_source=instance
-    )
+    publish_split_topic_data(mapping_format=split_topic_settings.formatting, data_source=instance)
 
 
 def publish_json_quarter_hour_peak_consumption(
     instance: QuarterHourPeakElectricityConsumption,
 ) -> None:
-    json_settings = (
-        consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
-    )
+    json_settings = consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
 
     if not json_settings.enabled:
         return

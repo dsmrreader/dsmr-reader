@@ -36,13 +36,9 @@ class TestAdmin(TestCase):
 
     def test_add_esp_okay(self):
         """Add ESP in new range."""
-        self.assertFalse(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertFalse(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
         self.client.post(self.url, data=self.data)
-        self.assertTrue(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertTrue(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
 
     def test_add_esp_lonely(self):
         """Add ESP in void."""
@@ -53,19 +49,13 @@ class TestAdmin(TestCase):
                 fixed_daily_cost=1,
             )
         )
-        self.assertFalse(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertFalse(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
         self.client.post(self.url, data=self.data)
-        self.assertTrue(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertTrue(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
 
     def test_add_esp_conflict(self):
         """Add ESP in conflicting range with conflicting price."""
-        self.assertFalse(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertFalse(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
         self.data.update(
             dict(
                 # Existing contract is between 2015-01-01 and 2018-01-01.
@@ -76,15 +66,11 @@ class TestAdmin(TestCase):
             )
         )
         self.client.post(self.url, data=self.data)
-        self.assertFalse(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertFalse(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
 
     def test_add_esp_merged(self):
         """Add ESP in conflicting range with different prices that can be merged."""
-        self.assertFalse(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertFalse(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
 
         # Unset gas in existing.
         EnergySupplierPrice.objects.all().update(gas_price=0)
@@ -101,9 +87,7 @@ class TestAdmin(TestCase):
             )
         )
         self.client.post(self.url, data=self.data)
-        self.assertTrue(
-            EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists()
-        )
+        self.assertTrue(EnergySupplierPrice.objects.filter(description=self.ESP_TEXT).exists())
 
     def test_add_esp_invalid_date(self):
         """This used to crash first."""

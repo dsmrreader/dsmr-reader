@@ -30,9 +30,7 @@ def get_dsmr_connection_parameters() -> Dict:
     }
 
     datalogger_settings = DataloggerSettings.get_solo()
-    is_default_dsmr_protocol = (
-        datalogger_settings.dsmr_version != DataloggerSettings.DSMR_VERSION_2_3
-    )
+    is_default_dsmr_protocol = datalogger_settings.dsmr_version != DataloggerSettings.DSMR_VERSION_2_3
     connection_parameters = dict(
         telegram_timeout=20,  # After this threshold, the datalogger will throw an exception to break the infinite loop.
         specifications=DSMR_VERSION_MAPPING[datalogger_settings.dsmr_version],
@@ -43,9 +41,7 @@ def get_dsmr_connection_parameters() -> Dict:
             url_or_port=datalogger_settings.serial_port,
             baudrate=115200 if is_default_dsmr_protocol else 9600,
             bytesize=serial.EIGHTBITS if is_default_dsmr_protocol else serial.SEVENBITS,
-            parity=(
-                serial.PARITY_NONE if is_default_dsmr_protocol else serial.PARITY_EVEN
-            ),
+            parity=(serial.PARITY_NONE if is_default_dsmr_protocol else serial.PARITY_EVEN),
             stopbits=serial.STOPBITS_ONE,
             xonxoff=1,
             rtscts=0,
@@ -69,9 +65,7 @@ def get_telegram_generator() -> Iterator:
     connection_parameters = get_dsmr_connection_parameters()
     del connection_parameters["specifications"]
 
-    return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(
-        **connection_parameters
-    )
+    return dsmr_datalogger.scripts.dsmr_datalogger_api_client.read_telegram(**connection_parameters)
 
 
 def telegram_to_reading(data: str) -> DsmrReading:
@@ -84,9 +78,7 @@ def telegram_to_reading(data: str) -> DsmrReading:
         parsed_telegram = parser.parse(data)
     except (InvalidChecksumError, ParseError) as error:
         # Hook to keep track of failed readings count.
-        MeterStatistics.objects.all().update(
-            rejected_telegrams=F("rejected_telegrams") + 1
-        )
+        MeterStatistics.objects.all().update(rejected_telegrams=F("rejected_telegrams") + 1)
         logger.warning("Rejected telegram: %s", error)
         raise InvalidTelegramError(error) from error
 
@@ -95,11 +87,7 @@ def telegram_to_reading(data: str) -> DsmrReading:
 
 def _map_telegram_to_model(parsed_telegram: Dict, data: str):
     """Maps parsed telegram to the fields."""
-    READING_FIELDS = [
-        x.name
-        for x in DsmrReading._meta.get_fields()
-        if x.name not in ("id", "processed")
-    ]
+    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
     STATISTICS_FIELDS = [
         x.name
         for x in MeterStatistics._meta.get_fields()
@@ -125,12 +113,8 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
 
     # Defaults for telegrams with missing data.
     model_fields["timestamp"] = model_fields["timestamp"] or timezone.now()
-    model_fields["electricity_delivered_2"] = (
-        model_fields["electricity_delivered_2"] or 0
-    )  # type:ignore[assignment]
-    model_fields["electricity_returned_2"] = (
-        model_fields["electricity_returned_2"] or 0
-    )  # type:ignore[assignment]
+    model_fields["electricity_delivered_2"] = model_fields["electricity_delivered_2"] or 0  # type:ignore[assignment]
+    model_fields["electricity_returned_2"] = model_fields["electricity_returned_2"] or 0  # type:ignore[assignment]
 
     # Ignore invalid dates on device bus. Reset the delivered value as well. This MUST be checked before override below.
     if model_fields["extra_device_timestamp"] is None:
@@ -145,20 +129,15 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
 
         if model_fields["extra_device_timestamp"] is not None:
             # WARNING: So None (v2, v3, Fluvius) default to v4 behaviour.
-            is_v5 = model_fields["dsmr_version"] is not None and model_fields[
-                "dsmr_version"
-            ].startswith("5")
+            is_v5 = model_fields["dsmr_version"] is not None and model_fields["dsmr_version"].startswith("5")
 
-            model_fields["extra_device_timestamp"] = (
-                calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
-            )
+            model_fields["extra_device_timestamp"] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
 
     # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
     discard_after = timezone.now() + timezone.timedelta(hours=24)
 
     if model_fields["timestamp"] > discard_after or (
-        model_fields["extra_device_timestamp"] is not None
-        and model_fields["extra_device_timestamp"] > discard_after
+        model_fields["extra_device_timestamp"] is not None and model_fields["extra_device_timestamp"] > discard_after
     ):
         error_message = "Discarded telegram with future timestamp(s): {} / {}".format(
             model_fields["timestamp"], model_fields["extra_device_timestamp"]
@@ -175,15 +154,11 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
 
     # There should already be one in database, created when migrating.
     statistics_kwargs["latest_telegram"] = data  # type:ignore[assignment]
-    MeterStatistics.get_solo().update(
-        **statistics_kwargs
-    )  # Update() is required for signal!
+    MeterStatistics.get_solo().update(**statistics_kwargs)  # Update() is required for signal!
 
     # Creation should be completed, can now be broadcasted for post processing.
     dsmr_datalogger.signals.raw_telegram.send_robust(None, data=data)
-    dsmr_datalogger.signals.dsmr_reading_created.send_robust(
-        None, instance=new_instance
-    )
+    dsmr_datalogger.signals.dsmr_reading_created.send_robust(None, instance=new_instance)
 
     return new_instance
 
@@ -275,9 +250,7 @@ def postgresql_approximate_reading_count() -> Optional[int]:  # pragma: nocover
         return int(reading_count)
 
 
-def calculate_fake_gas_reading_timestamp(
-    now: timezone.datetime, is_dsmr_v5: bool
-) -> timezone.datetime:
+def calculate_fake_gas_reading_timestamp(now: timezone.datetime, is_dsmr_v5: bool) -> timezone.datetime:
     """When overriding time, we cannot fake each gas reading to have its own timestamp. Simulate meters instead."""
     now = now.replace(second=0, microsecond=0)
 

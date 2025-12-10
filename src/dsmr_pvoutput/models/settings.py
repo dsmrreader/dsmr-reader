@@ -14,9 +14,7 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
         blank=True,
         default=None,
         verbose_name=_("API key"),
-        help_text=_(
-            'The API key for your PVOutput account. Listed in PVOutput at Settings -> "API Settings".'
-        ),
+        help_text=_('The API key for your PVOutput account. Listed in PVOutput at Settings -> "API Settings".'),
     )
     system_identifier = models.CharField(
         null=True,
@@ -24,9 +22,7 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
         default=None,
         max_length=32,
         verbose_name=_("System ID (digit)"),
-        help_text=_(
-            'The "System ID" for your device. Listed in PVOutput at Settings -> "Registered Systems".'
-        ),
+        help_text=_('The "System ID" for your device. Listed in PVOutput at Settings -> "Registered Systems".'),
     )
 
     def __str__(self):
@@ -52,9 +48,7 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
     export = models.BooleanField(
         default=False,
         verbose_name=_("Enabled"),
-        help_text=_(
-            "Whether the system uploads consumption using the Add Status Service API call."
-        ),
+        help_text=_("Whether the system uploads consumption using the Add Status Service API call."),
     )
     upload_interval = models.IntegerField(
         default=INTERVAL_5_MINUTES,

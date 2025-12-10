@@ -70,9 +70,7 @@ def get_capabilities() -> CapabilityReport:  # noqa: C901
     if ElectricityConsumption.objects.filter(phase_voltage_l1__isnull=False).exists():
         capability_report.add(Capability.VOLTAGE)
 
-    if ElectricityConsumption.objects.filter(
-        phase_power_current_l1__isnull=False
-    ).exists():
+    if ElectricityConsumption.objects.filter(phase_power_current_l1__isnull=False).exists():
         capability_report.add(Capability.POWER_CURRENT)
 
     if not backend_settings.disable_gas_capability and GasConsumption.objects.exists():

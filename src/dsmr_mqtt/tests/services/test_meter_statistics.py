@@ -9,9 +9,7 @@ import dsmr_mqtt.services.callbacks
 
 class TestDaytotals(TestCase):
     def setUp(self):
-        self.split_topic_settings = (
-            meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
-        )
+        self.split_topic_settings = meter_statistics.SplitTopicMeterStatisticsMQTTSettings.get_solo()
 
         # Mapping.
         self.split_topic_settings.formatting = """

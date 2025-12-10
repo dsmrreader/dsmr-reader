@@ -13,24 +13,12 @@ def migrate_forward(apps, schema_editor):
     GRAPH_TYPE_ELECTRICITY_PEAKS = "electricity-peaks"
 
     SortedGraph = apps.get_model("dsmr_frontend", "SortedGraph")
-    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_ELECTRICITY).update(
-        name="Recent Electricity usage"
-    )
-    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_PHASES).update(
-        name="Recent phase usage"
-    )
-    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_VOLTAGE).update(
-        name="Recent phase voltages"
-    )
-    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_POWER_CURRENT).update(
-        name="Recent phase currents"
-    )
-    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_GAS).update(
-        name="Recent gas consumption"
-    )
-    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_WEATHER).update(
-        name="Recent temperatures"
-    )
+    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_ELECTRICITY).update(name="Recent Electricity usage")
+    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_PHASES).update(name="Recent phase usage")
+    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_VOLTAGE).update(name="Recent phase voltages")
+    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_POWER_CURRENT).update(name="Recent phase currents")
+    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_GAS).update(name="Recent gas consumption")
+    SortedGraph.objects.filter(graph_type=GRAPH_TYPE_WEATHER).update(name="Recent temperatures")
     SortedGraph.objects.filter(graph_type=GRAPH_TYPE_ELECTRICITY_PEAKS).update(
         name="Recent quarter hour electricity peak consumption"
     )

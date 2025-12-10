@@ -54,9 +54,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(
-            reading.timestamp, datetime(2016, 3, 3, 15, 43, 47, tzinfo=ZoneInfo("UTC"))
-        )
+        self.assertEqual(reading.timestamp, datetime(2016, 3, 3, 15, 43, 47, tzinfo=ZoneInfo("UTC")))
         self.assertEqual(reading.electricity_delivered_1, Decimal("1073.079"))
         self.assertEqual(reading.electricity_returned_1, Decimal("0"))
         self.assertEqual(reading.electricity_delivered_2, Decimal("1263.199"))

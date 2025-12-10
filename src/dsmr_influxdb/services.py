@@ -20,9 +20,7 @@ def initialize_client() -> Optional[InfluxDBClient]:
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
 
     if not influxdb_settings.enabled:
-        logger.debug(
-            "INFLUXDB: Integration disabled in settings (or due to an error previously)"
-        )
+        logger.debug("INFLUXDB: Integration disabled in settings (or due to an error previously)")
         return None
 
     use_secure_connection = influxdb_settings.secure in (
@@ -33,31 +31,21 @@ def initialize_client() -> Optional[InfluxDBClient]:
     if len(influxdb_settings.api_url) > 0:
         server_base_url = influxdb_settings.api_url
     elif use_secure_connection:  # Legacy
-        server_base_url = "https://{}:{}".format(
-            influxdb_settings.hostname, influxdb_settings.port
-        )
+        server_base_url = "https://{}:{}".format(influxdb_settings.hostname, influxdb_settings.port)
     else:  # Legacy
-        server_base_url = "http://{}:{}".format(
-            influxdb_settings.hostname, influxdb_settings.port
-        )
+        server_base_url = "http://{}:{}".format(influxdb_settings.hostname, influxdb_settings.port)
 
     logger.debug('INFLUXDB: Initializing InfluxDB client for "%s"', server_base_url)
 
     influxdb_client = InfluxDBClient(
         url=server_base_url,
         token=influxdb_settings.api_token,
-        verify_ssl=influxdb_settings.secure
-        == InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
+        verify_ssl=influxdb_settings.secure == InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED,
         timeout=settings.DSMRREADER_CLIENT_TIMEOUT * 1000,  # Ms!
     )
 
-    if (
-        influxdb_client.buckets_api().find_bucket_by_name(influxdb_settings.bucket)
-        is None
-    ):  # pragma: nocover
-        logger.debug(
-            'INFLUXDB: Creating InfluxDB bucket "%s"', influxdb_settings.bucket
-        )
+    if influxdb_client.buckets_api().find_bucket_by_name(influxdb_settings.bucket) is None:  # pragma: nocover
+        logger.debug('INFLUXDB: Creating InfluxDB bucket "%s"', influxdb_settings.bucket)
 
         try:
             influxdb_client.buckets_api().create_bucket(
@@ -65,9 +53,7 @@ def initialize_client() -> Optional[InfluxDBClient]:
             )
         except Exception as e:
             InfluxdbIntegrationSettings.objects.update(enabled=False)
-            logger.error(
-                "Failed to instantiate InfluxDB connection, disabling InfluxDB integration"
-            )
+            logger.error("Failed to instantiate InfluxDB connection, disabling InfluxDB integration")
             raise e
 
     return influxdb_client
@@ -142,11 +128,7 @@ def publish_dsmr_reading(instance: DsmrReading) -> None:
 
 def get_reading_to_measurement_mapping() -> Dict:
     """Parses and returns the formatting mapping as defined by the user."""
-    READING_FIELDS = [
-        x.name
-        for x in DsmrReading._meta.get_fields()
-        if x.name not in ("id", "processed")
-    ]
+    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
     mapping = defaultdict(dict)
 
     config_parser = configparser.ConfigParser()
@@ -154,9 +136,7 @@ def get_reading_to_measurement_mapping() -> Dict:
 
     for current_measurement in config_parser.sections():
         for instance_field_name in config_parser[current_measurement]:
-            influxdb_field_name = config_parser[current_measurement][
-                instance_field_name
-            ]
+            influxdb_field_name = config_parser[current_measurement][instance_field_name]
 
             if instance_field_name not in READING_FIELDS:
                 logger.warning(

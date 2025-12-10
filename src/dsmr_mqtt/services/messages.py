@@ -17,10 +17,7 @@ def queue_message(topic: str, payload: str) -> None:
     - Each message sent MAY be cached, as it'll be dispatched with the "retain" flag.
     """
 
-    if (
-        queue.Message.objects.all().count()
-        >= settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE
-    ):
+    if queue.Message.objects.all().count() >= settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE:
         logger.warning(
             "MQTT: Rejecting message for topic due to maximum queue size (%d): %s",
             settings.DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE,

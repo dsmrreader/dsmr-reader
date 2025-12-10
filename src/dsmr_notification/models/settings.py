@@ -29,9 +29,7 @@ class NotificationSetting(SingletonModel):
         default=None,
         choices=NOTIFICATION_CHOICES,
         verbose_name=_("Notification service"),
-        help_text=_(
-            "Which notification service to use for sending daily usage notifications"
-        ),
+        help_text=_("Which notification service to use for sending daily usage notifications"),
     )
     prowl_api_key = models.CharField(
         max_length=64,
@@ -69,9 +67,7 @@ class NotificationSetting(SingletonModel):
         null=True,
         blank=True,
         default=None,
-        help_text=_(
-            'Identifier for the target chat ID, or @handle of a channel (without the "@")'
-        ),
+        help_text=_('Identifier for the target chat ID, or @handle of a channel (without the "@")'),
     )
     next_notification = models.DateTimeField(
         default=None,

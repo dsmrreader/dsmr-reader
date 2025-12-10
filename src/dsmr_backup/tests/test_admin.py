@@ -37,9 +37,7 @@ class TestAdmin(TestCase):
     @mock.patch("os.path.exists")
     def test_reschedule_backup(self, exists_mock, mkdirs_mock, now_mock):
         URL = reverse("admin:dsmr_backup_backupsettings_changelist")
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2019, 1, 1)
-        )  # Lock time
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2019, 1, 1))  # Lock time
 
         BackupSettings.get_solo()
 
@@ -72,9 +70,7 @@ class TestAdmin(TestCase):
     def test_reschedule_email_backup(self):
         URL = reverse("admin:dsmr_backup_emailbackupsettings_changelist")
 
-        ScheduledProcess.objects.all().update(
-            planned=timezone.now() + timezone.timedelta(hours=1)
-        )
+        ScheduledProcess.objects.all().update(planned=timezone.now() + timezone.timedelta(hours=1))
         self.assertFalse(
             ScheduledProcess.objects.filter(
                 module=settings.DSMRREADER_MODULE_EMAIL_BACKUP,
@@ -96,9 +92,7 @@ class TestAdmin(TestCase):
         URL = reverse("admin:dsmr_backup_dropboxsettings_changelist")
 
         self.assertFalse(
-            ScheduledProcess.objects.filter(
-                module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT, active=True
-            ).exists()
+            ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT, active=True).exists()
         )
 
         # Setting refresh token should enable SP
@@ -107,7 +101,5 @@ class TestAdmin(TestCase):
 
         self.assertEqual(response.status_code, 302, response.content)
         self.assertTrue(
-            ScheduledProcess.objects.filter(
-                module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT, active=True
-            ).exists()
+            ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT, active=True).exists()
         )

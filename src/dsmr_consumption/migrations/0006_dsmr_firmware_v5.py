@@ -34,8 +34,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="gasconsumption",
             name="delivered",
-            field=models.DecimalField(
-                decimal_places=3, help_text="Last meter position read", max_digits=9
-            ),
+            field=models.DecimalField(decimal_places=3, help_text="Last meter position read", max_digits=9),
         ),
     ]

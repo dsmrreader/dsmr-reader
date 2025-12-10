@@ -15,9 +15,7 @@ class Migration(migrations.Migration):
             return
 
         BackendSettings = apps.get_model("dsmr_backend", "BackendSettings")
-        BackendSettings.objects.all().update(
-            process_sleep=decimal.Decimal(settings.DSMRREADER_BACKEND_SLEEP)
-        )
+        BackendSettings.objects.all().update(process_sleep=decimal.Decimal(settings.DSMRREADER_BACKEND_SLEEP))
 
     def migrate_backward(apps, schema_editor):
         pass  # Nothing to do, but allow going backwards.

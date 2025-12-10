@@ -13,30 +13,22 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
     delivered_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter Reading electricity delivered to client (Dutch users: low tariff) in 0,001 kWh"
-        ),
+        help_text=_("Meter Reading electricity delivered to client (Dutch users: low tariff) in 0,001 kWh"),
     )
     returned_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter Reading electricity delivered by client (Dutch users: low tariff) in 0,001 kWh"
-        ),
+        help_text=_("Meter Reading electricity delivered by client (Dutch users: low tariff) in 0,001 kWh"),
     )
     delivered_2 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"
-        ),
+        help_text=_("Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"),
     )
     returned_2 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"
-        ),
+        help_text=_("Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"),
     )
     currently_delivered = models.DecimalField(
         max_digits=9,
@@ -165,9 +157,7 @@ class GasConsumption(ModelUpdateMixin, models.Model):
     """Interpolated gas reading, containing the actual usage, based on the reading before (if any)."""
 
     read_at = models.DateTimeField(unique=True)
-    delivered = models.DecimalField(
-        max_digits=9, decimal_places=3, help_text=_("Last meter position read")
-    )
+    delivered = models.DecimalField(max_digits=9, decimal_places=3, help_text=_("Last meter position read"))
     # This value is not provided by DSMR so we calculate the difference relative to the previous reading.
     currently_delivered = models.DecimalField(
         max_digits=9,

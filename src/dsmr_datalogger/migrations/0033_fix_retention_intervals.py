@@ -6,9 +6,7 @@ from django.db import migrations, models
 def migrate_forward(apps, schema_editor):
     """See #1945."""
     RetentionSettings = apps.get_model("dsmr_datalogger", "RetentionSettings")
-    RetentionSettings.objects.filter(data_retention_in_hours=28 * 24).update(
-        data_retention_in_hours=31 * 24
-    )  # 1M
+    RetentionSettings.objects.filter(data_retention_in_hours=28 * 24).update(data_retention_in_hours=31 * 24)  # 1M
     RetentionSettings.objects.filter(data_retention_in_hours=3 * 28 * 24).update(
         data_retention_in_hours=3 * 31 * 24
     )  # 3M
@@ -23,9 +21,7 @@ def migrate_forward(apps, schema_editor):
 def migrate_backward(apps, schema_editor):
     """See #1945."""
     RetentionSettings = apps.get_model("dsmr_datalogger", "RetentionSettings")
-    RetentionSettings.objects.filter(data_retention_in_hours=31 * 24).update(
-        data_retention_in_hours=28 * 24
-    )  # 1M
+    RetentionSettings.objects.filter(data_retention_in_hours=31 * 24).update(data_retention_in_hours=28 * 24)  # 1M
     RetentionSettings.objects.filter(data_retention_in_hours=3 * 31 * 24).update(
         data_retention_in_hours=3 * 28 * 24
     )  # 3M

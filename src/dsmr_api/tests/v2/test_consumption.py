@@ -19,9 +19,7 @@ class TestToday(APIv2TestCase):
         result = self._request("today-consumption")
         self.assertEqual(result, "No electricity readings found for: 2017-01-01")
 
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2015, 12, 12, hour=12)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 12, 12, hour=12))
         result = self._request("today-consumption")
 
         self.assertEqual(result["day"], "2015-12-12")
@@ -93,9 +91,7 @@ class ElectricityLive(APIv2TestCase):
 
 
 class GasLive(APIv2TestCase):
-    @mock.patch(
-        "django.db.models.signals.post_save.send"
-    )  # Disable signals for side effects.
+    @mock.patch("django.db.models.signals.post_save.send")  # Disable signals for side effects.
     @mock.patch("django.utils.timezone.now")
     def test_get(self, now_mock, *mocks):
         # Without gas.
@@ -150,19 +146,11 @@ class TestEnergySupplierPrice(APIv2TestCase):
         self.assertEqual(resultset["results"][0]["start"], "2015-01-01")
         self.assertEqual(resultset["results"][0]["end"], "2018-01-01")
         self.assertEqual(resultset["results"][0]["description"], "Test")
-        self.assertEqual(
-            resultset["results"][0]["electricity_delivered_1_price"], "1.000000"
-        )
-        self.assertEqual(
-            resultset["results"][0]["electricity_delivered_2_price"], "2.000000"
-        )
+        self.assertEqual(resultset["results"][0]["electricity_delivered_1_price"], "1.000000")
+        self.assertEqual(resultset["results"][0]["electricity_delivered_2_price"], "2.000000")
         self.assertEqual(resultset["results"][0]["gas_price"], "5.000000")
-        self.assertEqual(
-            resultset["results"][0]["electricity_returned_1_price"], "0.500000"
-        )
-        self.assertEqual(
-            resultset["results"][0]["electricity_returned_2_price"], "1.500000"
-        )
+        self.assertEqual(resultset["results"][0]["electricity_returned_1_price"], "0.500000")
+        self.assertEqual(resultset["results"][0]["electricity_returned_2_price"], "1.500000")
         self.assertEqual(resultset["results"][0]["fixed_daily_cost"], "1.234560")
 
         # Limit.
@@ -171,23 +159,17 @@ class TestEnergySupplierPrice(APIv2TestCase):
         self.assertEqual(len(resultset["results"]), 1)
 
         # Sort.
-        resultset = self._request(
-            "energy-supplier-price", data={"ordering": "-start", "limit": 10}
-        )
+        resultset = self._request("energy-supplier-price", data={"ordering": "-start", "limit": 10})
         self.assertEqual(resultset["count"], 2)
         self.assertEqual(resultset["results"][0]["id"], 2)
         self.assertEqual(resultset["results"][1]["id"], 1)
 
         # Search
-        resultset = self._request(
-            "energy-supplier-price", data={"start__gte": "2017-12-12"}
-        )
+        resultset = self._request("energy-supplier-price", data={"start__gte": "2017-12-12"})
         self.assertEqual(resultset["count"], 1)
         self.assertEqual(resultset["results"][0]["id"], 2)
 
-        resultset = self._request(
-            "energy-supplier-price", data={"start__lte": "2017-12-12"}
-        )
+        resultset = self._request("energy-supplier-price", data={"start__lte": "2017-12-12"})
         self.assertEqual(resultset["count"], 1)
         self.assertEqual(resultset["results"][0]["id"], 1)
 
@@ -209,9 +191,7 @@ class TestElectricity(APIv2TestCase):
         self.assertEqual(len(resultset["results"]), 10)
 
         # Sort.
-        resultset = self._request(
-            "electricity-consumption", data={"ordering": "-read_at", "limit": 100}
-        )
+        resultset = self._request("electricity-consumption", data={"ordering": "-read_at", "limit": 100})
         self.assertEqual(resultset["count"], 67)
         self.assertEqual(resultset["results"][0]["id"], 218)
         self.assertEqual(resultset["results"][1]["id"], 217)
@@ -219,9 +199,7 @@ class TestElectricity(APIv2TestCase):
         self.assertEqual(resultset["results"][66]["id"], 95)
 
         # Search
-        resultset = self._request(
-            "electricity-consumption", data={"read_at__gte": "2015-12-12 02:00:00"}
-        )  # Z+01:00
+        resultset = self._request("electricity-consumption", data={"read_at__gte": "2015-12-12 02:00:00"})  # Z+01:00
         self.assertEqual(resultset["count"], 4)
         self.assertEqual(resultset["results"][0]["id"], 215)
         self.assertEqual(resultset["results"][1]["id"], 216)
@@ -241,18 +219,14 @@ class TestQuarterHourPeakElectricity(APIv2TestCase):
     fixtures = ["dsmr_api/test_quarter_hour_peak_electricity_consumption.json"]
 
     def test_get(self):
-        resultset = self._request(
-            "quarter-hour-peak-electricity-consumption", data={"limit": 100}
-        )
+        resultset = self._request("quarter-hour-peak-electricity-consumption", data={"limit": 100})
         self.assertEqual(resultset["count"], 3)
         self.assertEqual(resultset["results"][0]["id"], 1)
         self.assertEqual(resultset["results"][1]["id"], 2)
         self.assertEqual(resultset["results"][2]["id"], 3)
 
         # Limit.
-        resultset = self._request(
-            "quarter-hour-peak-electricity-consumption", data={"limit": 1}
-        )
+        resultset = self._request("quarter-hour-peak-electricity-consumption", data={"limit": 1})
         self.assertEqual(resultset["count"], 3)
         self.assertEqual(resultset["results"][0]["id"], 1)
         self.assertEqual(len(resultset["results"]), 1)
@@ -324,9 +298,7 @@ class TestGas(APIv2TestCase):
         self.assertEqual(len(resultset["results"]), 10)
 
         # Sort.
-        resultset = self._request(
-            "gas-consumption", data={"ordering": "-read_at", "limit": 100}
-        )
+        resultset = self._request("gas-consumption", data={"ordering": "-read_at", "limit": 100})
         self.assertEqual(resultset["count"], 31)
         self.assertEqual(resultset["results"][0]["id"], 31)
         self.assertEqual(resultset["results"][1]["id"], 30)
@@ -334,9 +306,7 @@ class TestGas(APIv2TestCase):
         self.assertEqual(resultset["results"][30]["id"], 1)
 
         # Search
-        resultset = self._request(
-            "gas-consumption", data={"read_at__gte": "2015-12-13 00:00:00"}
-        )  # Z+01:00
+        resultset = self._request("gas-consumption", data={"read_at__gte": "2015-12-13 00:00:00"})  # Z+01:00
         self.assertEqual(resultset["count"], 4)
         self.assertEqual(resultset["results"][0]["id"], 28)
         self.assertEqual(resultset["results"][1]["id"], 29)

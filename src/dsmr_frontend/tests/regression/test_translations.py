@@ -31,8 +31,6 @@ class TestTranslations(InterceptCommandStdoutMixin, TestCase):
         )
 
         for current_locale in self.locales:
-            po_file_path = os.path.join(
-                settings.LOCALE_PATHS[0], current_locale, "LC_MESSAGES", "django.po"
-            )
+            po_file_path = os.path.join(settings.LOCALE_PATHS[0], current_locale, "LC_MESSAGES", "django.po")
             po = polib.pofile(po_file_path)
             self.assertEqual(po.percent_translated(), 100)

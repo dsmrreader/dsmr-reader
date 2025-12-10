@@ -105,9 +105,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="daystatistics",
             name="total_cost",
-            field=models.DecimalField(
-                decimal_places=2, verbose_name="Total cost", max_digits=8
-            ),
+            field=models.DecimalField(decimal_places=2, verbose_name="Total cost", max_digits=8),
         ),
         migrations.AlterField(
             model_name="hourstatistics",
@@ -148,9 +146,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="hourstatistics",
             name="gas",
-            field=models.DecimalField(
-                decimal_places=3, verbose_name="Gas", max_digits=9, default=0
-            ),
+            field=models.DecimalField(decimal_places=3, verbose_name="Gas", max_digits=9, default=0),
         ),
         migrations.AlterField(
             model_name="hourstatistics",

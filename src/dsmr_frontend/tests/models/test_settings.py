@@ -15,9 +15,7 @@ class TestSettings(TestCase):
         self.assertTrue(site.is_registered(FrontendSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_merge_electricity_tariffs(self):
         self.assertFalse(self.instance.merge_electricity_tariffs)
@@ -64,6 +62,4 @@ class TestSortedGraph(TestCase):
         self.assertTrue(site.is_registered(SortedGraph))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{}".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{}".format(self.instance.__class__.__name__))

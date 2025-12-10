@@ -17,9 +17,7 @@ class TestSettings(TestCase):
         self.assertTrue(site.is_registered(WeatherSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_track(self):
         self.assertFalse(self.instance.track)
@@ -28,9 +26,7 @@ class TestSettings(TestCase):
         self.assertEqual(self.instance.buienradar_station, 6260)
 
     def test_handle_settings_update_hook(self):
-        sp = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_WEATHER_UPDATE
-        )
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE)
         self.assertFalse(sp.active)
 
         self.instance.track = True

@@ -28,11 +28,7 @@ def regenerate_data(apps, schema_editor):
         )
 
         try:
-            meter_positions = (
-                dsmr_datalogger.services.readings.first_meter_positions_of_day(
-                    day=current.day
-                )
-            )
+            meter_positions = dsmr_datalogger.services.readings.first_meter_positions_of_day(day=current.day)
         except LookupError:
             print(" - No data found for {}, skipping...".format(current.day))
             continue
@@ -44,10 +40,7 @@ def regenerate_data(apps, schema_editor):
         current.electricity2_returned_reading = meter_positions.electricity_returned_2
 
         # Do not override old values, when they happen to be gone by now (e.g. a user lost readings in the past year).
-        if (
-            meter_positions.extra_device_delivered is not None
-            or current.gas_reading is None
-        ):
+        if meter_positions.extra_device_delivered is not None or current.gas_reading is None:
             current.gas_reading_timestamp = meter_positions.extra_device_timestamp
             current.gas_reading = meter_positions.extra_device_delivered
 

@@ -44,9 +44,7 @@ consumption_url_patterns = [
         views.QuarterHourPeakElectricityConsumptionViewSet.as_view({"get": "list"}),
         name="quarter-hour-peak-electricity-consumption",
     ),
-    path(
-        "electricity-live", views.ElectricityLiveView.as_view(), name="electricity-live"
-    ),
+    path("electricity-live", views.ElectricityLiveView.as_view(), name="electricity-live"),
     path(
         "gas",
         views.GasConsumptionViewSet.as_view({"get": "list"}),

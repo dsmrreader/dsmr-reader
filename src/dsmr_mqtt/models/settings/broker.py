@@ -18,9 +18,7 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         (INSECURE, _("INSECURE - No SSL/TLS")),
         (
             SECURE_CERT_NONE,
-            _(
-                "SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certificates)"
-            ),
+            _("SECURE (CERT_NONE) - Validation errors are ignored (untrusted or expired certificates)"),
         ),
         (
             SECURE_CERT_REQUIRED,
@@ -85,16 +83,12 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         max_length=256,
         default="DSMR-reader",
         verbose_name=_("Client ID"),
-        help_text=_(
-            "The client ID used to identify DSMR-reader sending the MQTT messages."
-        ),
+        help_text=_("The client ID used to identify DSMR-reader sending the MQTT messages."),
     )
     restart_required = models.BooleanField(
         default=False,
         verbose_name=_("Restart required"),
-        help_text=_(
-            "Whether the process requires a restart, forcing the client-broker connection to be reset."
-        ),
+        help_text=_("Whether the process requires a restart, forcing the client-broker connection to be reset."),
     )
 
     def __str__(self):

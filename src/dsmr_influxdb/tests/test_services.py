@@ -36,9 +36,7 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
-    def test_initialize_client_connection_error(
-        self, create_bucket_mock, find_bucket_mock
-    ):
+    def test_initialize_client_connection_error(self, create_bucket_mock, find_bucket_mock):
         find_bucket_mock.return_value = None
         create_bucket_mock.side_effect = RuntimeError("Connection failed")
 
@@ -73,9 +71,7 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
-    def test_initialize_client_legacy_hostname_port_insecure(
-        self, create_bucket_mock, find_bucket_mock
-    ):
+    def test_initialize_client_legacy_hostname_port_insecure(self, create_bucket_mock, find_bucket_mock):
         find_bucket_mock.return_value = None
         self.assertFalse(create_bucket_mock.called)
 
@@ -92,9 +88,7 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
-    def test_initialize_client_legacy_hostname_port_insecure(
-        self, create_bucket_mock, find_bucket_mock
-    ):
+    def test_initialize_client_legacy_hostname_port_insecure(self, create_bucket_mock, find_bucket_mock):
         find_bucket_mock.return_value = None
         self.assertFalse(create_bucket_mock.called)
 
@@ -107,19 +101,13 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
         client = dsmr_influxdb.services.initialize_client()
         self.assertIsNotNone(client)
         self.assertTrue(create_bucket_mock.called)
-        self.assertEqual(
-            client.url, "https://legacy.hostname.example.com:8086"
-        )  # HTTPS
+        self.assertEqual(client.url, "https://legacy.hostname.example.com:8086")  # HTTPS
 
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
-    def test_initialize_client_secure_unverified(
-        self, create_bucket_mock, find_bucket_mock
-    ):
+    def test_initialize_client_secure_unverified(self, create_bucket_mock, find_bucket_mock):
         find_bucket_mock.return_value = None
-        InfluxdbIntegrationSettings.objects.update(
-            secure=InfluxdbIntegrationSettings.SECURE_CERT_NONE
-        )
+        InfluxdbIntegrationSettings.objects.update(secure=InfluxdbIntegrationSettings.SECURE_CERT_NONE)
         self.assertFalse(create_bucket_mock.called)
 
         client = dsmr_influxdb.services.initialize_client()
@@ -129,13 +117,9 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.find_bucket_by_name")
     @mock.patch("influxdb_client.client.bucket_api.BucketsApi.create_bucket")
-    def test_initialize_client_secure_verify_ssl(
-        self, create_bucket_mock, find_bucket_mock
-    ):
+    def test_initialize_client_secure_verify_ssl(self, create_bucket_mock, find_bucket_mock):
         find_bucket_mock.return_value = None
-        InfluxdbIntegrationSettings.objects.update(
-            secure=InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED
-        )
+        InfluxdbIntegrationSettings.objects.update(secure=InfluxdbIntegrationSettings.SECURE_CERT_REQUIRED)
         self.assertFalse(create_bucket_mock.called)
 
         client = dsmr_influxdb.services.initialize_client()
@@ -201,36 +185,12 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
         # Assumes default mapping.
         self.assertEqual(InfluxdbMeasurement.objects.count(), 6)
-        self.assertTrue(
-            InfluxdbMeasurement.objects.filter(
-                measurement_name="electricity_live"
-            ).exists()
-        )
-        self.assertTrue(
-            InfluxdbMeasurement.objects.filter(
-                measurement_name="electricity_positions"
-            ).exists()
-        )
-        self.assertTrue(
-            InfluxdbMeasurement.objects.filter(
-                measurement_name="electricity_voltage"
-            ).exists()
-        )
-        self.assertTrue(
-            InfluxdbMeasurement.objects.filter(
-                measurement_name="electricity_phases"
-            ).exists()
-        )
-        self.assertTrue(
-            InfluxdbMeasurement.objects.filter(
-                measurement_name="electricity_power"
-            ).exists()
-        )
-        self.assertTrue(
-            InfluxdbMeasurement.objects.filter(
-                measurement_name="gas_positions"
-            ).exists()
-        )
+        self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="electricity_live").exists())
+        self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="electricity_positions").exists())
+        self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="electricity_voltage").exists())
+        self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="electricity_phases").exists())
+        self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="electricity_power").exists())
+        self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="gas_positions").exists())
 
     @mock.patch("logging.Logger.warning")
     def test_publish_dsmr_reading_invalid_mapping(self, warning_logger_mock):
@@ -248,7 +208,5 @@ non_existing_field = whatever
 
         # Invalid mapping.
         self.assertEqual(InfluxdbMeasurement.objects.count(), 0)
-        self.assertFalse(
-            InfluxdbMeasurement.objects.filter(measurement_name="fake").exists()
-        )
+        self.assertFalse(InfluxdbMeasurement.objects.filter(measurement_name="fake").exists())
         self.assertTrue(warning_logger_mock.callled)

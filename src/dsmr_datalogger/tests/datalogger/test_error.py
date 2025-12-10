@@ -60,9 +60,7 @@ class TestDataloggerError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, Tes
         self.assertEqual(DsmrReading.objects.count(), 1)
 
 
-class TestDataloggerCrcError(
-    FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
-):
+class TestDataloggerCrcError(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     def _dsmr_dummy_data(self):
         """Returns invalid telegram."""
         return [
@@ -98,9 +96,7 @@ class TestDataloggerCrcError(
         self.assertFalse(DsmrReading.objects.exists())
 
 
-class TestDataloggerDuplicateData(
-    FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
-):
+class TestDataloggerDuplicateData(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
     """Test Iskra meter, DSMR v5.0, with somewhat duplicate data."""
 
     def _dsmr_dummy_data(self):
@@ -165,9 +161,7 @@ class TestDataloggerDuplicateData(
     @mock.patch("django.utils.timezone.now")
     def test_reading_values(self, now_mock):
         """Test whether dsmr_datalogger reads the correct values."""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2017, 2, 1, hour=0, minute=0, second=0)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 2, 1, hour=0, minute=0, second=0))
 
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
@@ -236,9 +230,7 @@ class TestFutureTelegrams(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, Tes
     @mock.patch("django.utils.timezone.now")
     def test_discard_telegram_with_future_timestamp(self, now_mock):
         """Telegrams with timestamps in the (far) future should be rejected."""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2017, 1, 1, hour=9, minute=0, second=0)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1, hour=9, minute=0, second=0))
 
         self.assertFalse(DsmrReading.objects.exists())
         self._fake_dsmr_reading()

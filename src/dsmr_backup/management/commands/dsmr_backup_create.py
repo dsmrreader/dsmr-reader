@@ -30,9 +30,7 @@ class Command(BaseCommand):
         if not options.get("full") and not options.get("compact"):
             raise CommandError("Missing --full or --compact argument")
 
-        base_folder = os.path.join(
-            dsmr_backup.services.backup.get_backup_directory(), "manually"
-        )
+        base_folder = os.path.join(dsmr_backup.services.backup.get_backup_directory(), "manually")
 
         if options.get("full"):
             backup_file = dsmr_backup.services.backup.create_full(folder=base_folder)

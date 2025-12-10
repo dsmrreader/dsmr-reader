@@ -79,9 +79,7 @@ class TestAPIv1(TestCase):
         self.assertEqual(response.status_code, 403)
         self.assertEqual(response.content, b"Invalid auth key")
 
-        response = self.client.post(
-            self._api_url, HTTP_X_AUTHKEY=self._api_settings.auth_key
-        )
+        response = self.client.post(self._api_url, HTTP_X_AUTHKEY=self._api_settings.auth_key)
         self.assertNotEqual(response.status_code, 403)
 
     def test_alternative_auth_header(self):
@@ -97,9 +95,7 @@ class TestAPIv1(TestCase):
 
     def test_data_validation(self):
         """Shallow data verification."""
-        response = self.client.post(
-            self._api_url, HTTP_X_AUTHKEY=self._api_settings.auth_key
-        )
+        response = self.client.post(self._api_url, HTTP_X_AUTHKEY=self._api_settings.auth_key)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.content, b"Invalid data")
 

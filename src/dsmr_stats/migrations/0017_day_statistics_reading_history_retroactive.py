@@ -35,12 +35,8 @@ def regenerate_data(apps, schema_editor):
 
         current.electricity1_reading = day_consumption["electricity1_start"]
         current.electricity2_reading = day_consumption["electricity2_start"]
-        current.electricity1_returned_reading = day_consumption[
-            "electricity1_returned_start"
-        ]
-        current.electricity2_returned_reading = day_consumption[
-            "electricity2_returned_start"
-        ]
+        current.electricity1_returned_reading = day_consumption["electricity1_returned_start"]
+        current.electricity2_returned_reading = day_consumption["electricity2_returned_start"]
         current.gas_reading = day_consumption.get("gas_start")
         current.save()
 

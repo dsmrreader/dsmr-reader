@@ -43,12 +43,8 @@ class TestViews(TestCase):
         response = self.client.get(reverse("{}:archive".format(self.namespace)))
         # XHR's.
         data = {
-            "base_date": formats.date_format(
-                timezone.now().date(), "DSMR_DATEPICKER_DATE_FORMAT"
-            ),
-            "comparison_date": formats.date_format(
-                timezone.now().date(), "DSMR_DATEPICKER_DATE_FORMAT"
-            ),
+            "base_date": formats.date_format(timezone.now().date(), "DSMR_DATEPICKER_DATE_FORMAT"),
+            "comparison_date": formats.date_format(timezone.now().date(), "DSMR_DATEPICKER_DATE_FORMAT"),
         }
 
         for current_level in ("days", "months", "years"):
@@ -59,16 +55,12 @@ class TestViews(TestCase):
                 frontend_settings.save()
 
                 data.update({"level": current_level})
-                response = self.client.get(
-                    reverse("{}:compare-xhr-summary".format(self.namespace)), data=data
-                )
+                response = self.client.get(reverse("{}:compare-xhr-summary".format(self.namespace)), data=data)
                 self.assertEqual(response.status_code, 200, response.content)
 
         # Invalid XHR.
         data.update({"level": "INVALID DATA"})
-        response = self.client.get(
-            reverse("{}:compare-xhr-summary".format(self.namespace)), data=data
-        )
+        response = self.client.get(reverse("{}:compare-xhr-summary".format(self.namespace)), data=data)
         self.assertEqual(response.status_code, 500)
 
 

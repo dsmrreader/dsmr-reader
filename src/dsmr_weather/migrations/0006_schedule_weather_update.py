@@ -24,9 +24,7 @@ def migrate_forward(apps, schema_editor):
 
 def migrate_backward(apps, schema_editor):
     ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_WEATHER_UPDATE
-    ).delete()
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_WEATHER_UPDATE).delete()
 
 
 class Migration(migrations.Migration):

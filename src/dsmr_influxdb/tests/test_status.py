@@ -21,6 +21,4 @@ class TestStatus(TestCase):
 
     @override_settings(DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE=1)
     def test_check_influxdb_measurements_queue_fail(self):
-        self.assertIsInstance(
-            check_influxdb_measurements_queue(), MonitoringStatusIssue
-        )
+        self.assertIsInstance(check_influxdb_measurements_queue(), MonitoringStatusIssue)

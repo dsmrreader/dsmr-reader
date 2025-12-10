@@ -15,9 +15,7 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
         help_text=_("Timestamp indicating when the reading was taken"),
         default=timezone.now,
     )
-    dsmr_version = models.CharField(
-        help_text=_("DSMR version"), max_length=2, null=True, default=None
-    )
+    dsmr_version = models.CharField(help_text=_("DSMR version"), max_length=2, null=True, default=None)
     electricity_tariff = models.IntegerField(
         help_text=_(
             "Tariff indicator electricity. The tariff indicator can be used to switch tariff  "

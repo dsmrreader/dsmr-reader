@@ -24,9 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="temperaturereading",
             name="degrees_celcius",
-            field=models.DecimalField(
-                decimal_places=1, verbose_name="Temperature (in ℃)", max_digits=4
-            ),
+            field=models.DecimalField(decimal_places=1, verbose_name="Temperature (in ℃)", max_digits=4),
         ),
         migrations.AlterField(
             model_name="weathersettings",

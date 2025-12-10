@@ -48,24 +48,12 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(capabilities[Capability.COSTS])
         self.assertFalse(capabilities[Capability.ANY])
 
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY)
-        )
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(
-                Capability.ELECTRICITY_RETURNED
-            )
-        )
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
         self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.GAS))
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES)
-        )
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(Capability.WEATHER)
-        )
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(Capability.POWER_CURRENT)
-        )
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.WEATHER))
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.POWER_CURRENT))
         self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.COSTS))
         self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ANY))
 
@@ -85,9 +73,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             currently_returned=0,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(
-            dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY)
-        )
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY))
         self.assertTrue(capabilities[Capability.ELECTRICITY])
         self.assertTrue(capabilities[Capability.ANY])
 
@@ -110,9 +96,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Should fail.
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES)
-        )
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now() + timezone.timedelta(minutes=1),
@@ -128,9 +112,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             phase_currently_returned_l3=2,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(
-            dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES)
-        )
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
         self.assertTrue(capabilities[Capability.MULTI_PHASES])
         self.assertTrue(capabilities[Capability.ANY])
@@ -154,9 +136,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         )
 
         # Should fail.
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES)
-        )
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
         ElectricityConsumption.objects.create(
             read_at=timezone.now() + timezone.timedelta(minutes=1),
@@ -170,9 +150,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
             phase_voltage_l3=2,
         )
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(
-            dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES)
-        )
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.MULTI_PHASES))
 
         self.assertTrue(capabilities[Capability.MULTI_PHASES])
         self.assertTrue(capabilities[Capability.ANY])
@@ -199,11 +177,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         consumption.currently_returned = 0.001
         consumption.save(update_fields=["currently_returned"])
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(
-            dsmr_backend.services.backend.get_capability(
-                Capability.ELECTRICITY_RETURNED
-            )
-        )
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
         self.assertTrue(capabilities[Capability.ELECTRICITY_RETURNED])
         self.assertTrue(capabilities[Capability.ANY])
 
@@ -243,9 +217,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
 
         TemperatureReading.objects.create(read_at=timezone.now(), degrees_celcius=0.0)
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertTrue(
-            dsmr_backend.services.backend.get_capability(Capability.WEATHER)
-        )
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.WEATHER))
         self.assertTrue(capabilities[Capability.WEATHER])
         self.assertTrue(capabilities[Capability.ANY])
 
@@ -287,11 +259,7 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         capabilities = dsmr_backend.services.backend.get_capabilities()
         self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.GAS))
         self.assertTrue(capabilities[Capability.GAS])
-        self.assertTrue(
-            dsmr_backend.services.backend.get_capability(
-                Capability.ELECTRICITY_RETURNED
-            )
-        )
+        self.assertTrue(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
         self.assertTrue(capabilities[Capability.ELECTRICITY_RETURNED])
 
         # Disable gas.
@@ -302,16 +270,10 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(capabilities[Capability.GAS])
 
         # Disable return.
-        BackendSettings.objects.all().update(
-            disable_electricity_returned_capability=True
-        )
+        BackendSettings.objects.all().update(disable_electricity_returned_capability=True)
 
         capabilities = dsmr_backend.services.backend.get_capabilities()
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(
-                Capability.ELECTRICITY_RETURNED
-            )
-        )
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
         self.assertFalse(capabilities[Capability.ELECTRICITY_RETURNED])
 
     @mock.patch("django.core.cache.cache.set")
@@ -341,19 +303,13 @@ class TestBackend(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_hours_in_day(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 3, 29))
-        self.assertEqual(
-            dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 23
-        )
+        self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 23)
 
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 7, 1))
-        self.assertEqual(
-            dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 24
-        )
+        self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 24)
 
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 10, 25))
-        self.assertEqual(
-            dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 25
-        )
+        self.assertEqual(dsmr_backend.services.backend.hours_in_day(day=timezone.now().date()), 25)
 
     @mock.patch("dsmr_backend.signals.request_status.send_robust")
     def test_request_monitoring_status_coverage(self, signal_mock):
@@ -439,24 +395,16 @@ class TestIslatestVersion(TestCase):
 class TestIsLocalTimestampPassed(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_true(self, now_mock):
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2017, 1, 1, hour=13, minute=37)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1, hour=13, minute=37))
 
         self.assertTrue(
-            dsmr_backend.services.backend.is_timestamp_passed(
-                timestamp=timezone.now() - timezone.timedelta(minutes=1)
-            )
+            dsmr_backend.services.backend.is_timestamp_passed(timestamp=timezone.now() - timezone.timedelta(minutes=1))
         )
-        self.assertTrue(
-            dsmr_backend.services.backend.is_timestamp_passed(timestamp=timezone.now())
-        )
+        self.assertTrue(dsmr_backend.services.backend.is_timestamp_passed(timestamp=timezone.now()))
 
     def test_false(self):
         self.assertFalse(
-            dsmr_backend.services.backend.is_timestamp_passed(
-                timestamp=timezone.now() + timezone.timedelta(minutes=1)
-            )
+            dsmr_backend.services.backend.is_timestamp_passed(timestamp=timezone.now() + timezone.timedelta(minutes=1))
         )
 
     def test_none(self):
@@ -501,12 +449,8 @@ class TestEnvSettings(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(settings_used.DATABASES["default"]["CONN_MAX_AGE"], 111)
         self.assertEqual(settings_used.SECRET_KEY, "my-secret-key")
         self.assertEqual(settings_used.TIME_ZONE, "my-timezone")
-        self.assertEqual(
-            settings_used.LOGGING["loggers"]["dsmrreader"]["level"], "WARNING"
-        )
-        self.assertEqual(
-            settings_used.DSMRREADER_PLUGINS, ("module1-path", "module2-path")
-        )
+        self.assertEqual(settings_used.LOGGING["loggers"]["dsmrreader"]["level"], "WARNING")
+        self.assertEqual(settings_used.DSMRREADER_PLUGINS, ("module1-path", "module2-path"))
         self.assertEqual(settings_used.STATIC_URL, "static-url")
         self.assertEqual(settings_used.FORCE_SCRIPT_NAME, "script")
         self.assertEqual(settings_used.USE_X_FORWARDED_HOST, True)

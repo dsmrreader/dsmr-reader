@@ -61,14 +61,10 @@ urlpatterns = [
     path("xhr/gas", LiveXhrGasConsumption.as_view(), name="live-xhr-gas"),
     path("xhr/temperature", LiveXhrTemperature.as_view(), name="live-xhr-temperature"),
     path("archive", Archive.as_view(), name="archive"),
-    path(
-        "archive/xhr/summary", ArchiveXhrSummary.as_view(), name="archive-xhr-summary"
-    ),
+    path("archive/xhr/summary", ArchiveXhrSummary.as_view(), name="archive-xhr-summary"),
     path("archive/xhr/graphs", ArchiveXhrGraphs.as_view(), name="archive-xhr-graphs"),
     path("statistics", Statistics.as_view(), name="statistics"),
-    path(
-        "statistics/xhr/data", StatisticsXhrData.as_view(), name="statistics-xhr-data"
-    ),
+    path("statistics/xhr/data", StatisticsXhrData.as_view(), name="statistics-xhr-data"),
     path("energy-contracts", EnergyContracts.as_view(), name="energy-contracts"),
     path("trends", Trends.as_view(), name="trends"),
     path(
@@ -82,9 +78,7 @@ urlpatterns = [
         name="trends-xhr-consumption-by-tariff",
     ),
     path("compare", Compare.as_view(), name="compare"),
-    path(
-        "compare/xhr/summary", CompareXhrSummary.as_view(), name="compare-xhr-summary"
-    ),
+    path("compare/xhr/summary", CompareXhrSummary.as_view(), name="compare-xhr-summary"),
     path("status", StatusRedirectView.as_view(), name="status"),
     path("about", About.as_view(), name="about"),
     path(
@@ -100,12 +94,8 @@ urlpatterns = [
     path("docs-redirect", DocsRedirect.as_view(), name="docs-redirect"),
     path("feedback-redirect", FeedbackRedirect.as_view(), name="feedback-redirect"),
     path("donations-redirect", DonationsRedirect.as_view(), name="donations-redirect"),
-    path(
-        "v4-upgrade-redirect", V4UpgradeRedirect.as_view(), name="v4-upgrade-redirect"
-    ),
-    path(
-        "v5-upgrade-redirect", V5UpgradeRedirect.as_view(), name="v5-upgrade-redirect"
-    ),
+    path("v4-upgrade-redirect", V4UpgradeRedirect.as_view(), name="v4-upgrade-redirect"),
+    path("v5-upgrade-redirect", V5UpgradeRedirect.as_view(), name="v5-upgrade-redirect"),
     # Views always requiring authentication.
     path("support", Support.as_view(), name="support"),
     path("configuration", Configuration.as_view(), name="configuration"),

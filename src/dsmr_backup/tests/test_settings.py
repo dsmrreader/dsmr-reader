@@ -21,9 +21,7 @@ class TestBackupSettings(TestCase):
         self.assertTrue(site.is_registered(BackupSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_daily_backup(self):
         self.assertTrue(self.instance.daily_backup)
@@ -41,9 +39,7 @@ class TestDropboxSettings(TestCase):
         self.assertTrue(site.is_registered(DropboxSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_refresh_token(self):
         self.assertIsNone(self.instance.refresh_token)
@@ -58,17 +54,13 @@ class TestEmailBackupSettings(TestCase):
         self.assertTrue(site.is_registered(EmailBackupSettings))
 
     def test_to_string(self):
-        self.assertNotEqual(
-            str(self.instance), "{} object".format(self.instance.__class__.__name__)
-        )
+        self.assertNotEqual(str(self.instance), "{} object".format(self.instance.__class__.__name__))
 
     def test_interval(self):
         self.assertIsNone(self.instance.interval)
 
     def test_handle_settings_update_hook(self):
-        sp = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_EMAIL_BACKUP
-        )
+        sp = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_EMAIL_BACKUP)
         self.assertFalse(sp.active)
 
         self.instance.interval = EmailBackupSettings.INTERVAL_DAILY

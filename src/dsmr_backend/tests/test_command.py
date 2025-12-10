@@ -20,6 +20,4 @@ class TestCommand(InterceptCommandStdoutMixin, TestCase):
         _, stderr = self._intercept_command("check", deploy=True)
 
         self.assertIn(settings.DSMRREADER_SYSTEM_CHECK_001, stderr)  # SQLite
-        self.assertNotIn(
-            settings.DSMRREADER_SYSTEM_CHECK_002, stderr
-        )  # Migrations - Should be OK
+        self.assertNotIn(settings.DSMRREADER_SYSTEM_CHECK_002, stderr)  # Migrations - Should be OK

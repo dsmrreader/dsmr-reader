@@ -71,9 +71,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
     def run(self, **options):
         """InfiniteManagementCommandMixin listens to handle() and calls run() in a loop."""
         if not settings.DEBUG and not options["use_demo_mode_and_override_checks"]:
-            raise CommandError(
-                "Intended usage is NOT production! Only allowed when DEBUG = True"
-            )
+            raise CommandError("Intended usage is NOT production! Only allowed when DEBUG = True")
 
         if options["sleep_time"] is not None:
             self.sleep_time = options["sleep_time"]
@@ -114,15 +112,11 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         graph_base = math.cos(now.timestamp() / 20)
 
         current_unix_time = time.mktime(now.timetuple())
-        second_since = int(
-            current_unix_time - 1420070400
-        )  # 1420070400: 01 Jan 2015 00:00:00 GMT
+        second_since = int(current_unix_time - 1420070400)  # 1420070400: 01 Jan 2015 00:00:00 GMT
         electricity_base = second_since * 0.0001  # Averages around 3000 kWh for a year.
 
         electricity_1 = electricity_base
-        electricity_2 = (
-            electricity_1 * 0.6
-        )  # Consumption during daylight is a bit lower.
+        electricity_2 = electricity_1 * 0.6  # Consumption during daylight is a bit lower.
         electricity_1_returned = electricity_base * 0.2  # Low return on low tariff
         electricity_2_returned = electricity_base * 0.8
         gas = electricity_base * 0.3  # Random as well.
@@ -133,15 +127,11 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         currently_delivered_l1 = 0
         currently_delivered_l2 = current_base + random.randint(0, 25) * 0.001  # kW
         currently_delivered_l3 = current_base + random.randint(0, 100) * 0.001  # kW
-        currently_delivered = (
-            currently_delivered_l1 + currently_delivered_l2 + currently_delivered_l3
-        )
+        currently_delivered = currently_delivered_l1 + currently_delivered_l2 + currently_delivered_l3
         currently_returned_l1 = current_base + random.randint(0, 40) * 0.001  # kW
         currently_returned_l2 = 0
         currently_returned_l3 = 0
-        currently_returned = (
-            currently_returned_l1 + currently_returned_l2 + currently_returned_l3
-        )
+        currently_returned = currently_returned_l1 + currently_returned_l2 + currently_returned_l3
 
         # Voltage around 235 with 210 and 260 as bound (+ few random Volt)
         voltage_base = 235 + ((graph_base * 100) / 5)
@@ -157,22 +147,14 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "/XMX5LGBBFFB123456789\r\n",
             "\r\n",
             "1-3:0.2.8(50)\r\n",
-            "0-0:1.0.0({timestamp}W)\r\n".format(
-                timestamp=now.strftime("%y%m%d%H%M%S")
-            ),
+            "0-0:1.0.0({timestamp}W)\r\n".format(timestamp=now.strftime("%y%m%d%H%M%S")),
             "0-0:96.1.1(12345678901234567890123456789000)\r\n",
             "1-0:1.8.1({}*kWh)\r\n".format(self._round_precision(electricity_1, 10)),
-            "1-0:2.8.1({}*kWh)\r\n".format(
-                self._round_precision(electricity_1_returned, 10)
-            ),
+            "1-0:2.8.1({}*kWh)\r\n".format(self._round_precision(electricity_1_returned, 10)),
             "1-0:1.8.2({}*kWh)\r\n".format(self._round_precision(electricity_2, 10)),
-            "1-0:2.8.2({}*kWh)\r\n".format(
-                self._round_precision(electricity_2_returned, 10)
-            ),
+            "1-0:2.8.2({}*kWh)\r\n".format(self._round_precision(electricity_2_returned, 10)),
             "0-0:96.14.0(0001)\r\n",  # Should switch high/low tariff, but not used anyway.
-            "1-0:1.7.0({}*kW)\r\n".format(
-                self._round_precision(currently_delivered, 6)
-            ),
+            "1-0:1.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered, 6)),
             "1-0:2.7.0({}*kW)\r\n".format(self._round_precision(currently_returned, 6)),
             "0-0:96.7.21(00003)\r\n",
             "0-0:96.7.9(00000)\r\n",
@@ -191,31 +173,17 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
             "1-0:31.7.0({}*A)\r\n".format(phase_power_current_l1),
             "1-0:51.7.0({}*A)\r\n".format(phase_power_current_l2),
             "1-0:71.7.0({}*A)\r\n".format(phase_power_current_l3),
-            "1-0:21.7.0({}*kW)\r\n".format(
-                self._round_precision(currently_delivered_l1, 6)
-            ),
-            "1-0:41.7.0({}*kW)\r\n".format(
-                self._round_precision(currently_delivered_l2, 6)
-            ),
-            "1-0:61.7.0({}*kW)\r\n".format(
-                self._round_precision(currently_delivered_l3, 6)
-            ),
-            "1-0:22.7.0({}*kW)\r\n".format(
-                self._round_precision(currently_returned_l1, 6)
-            ),
-            "1-0:42.7.0({}*kW)\r\n".format(
-                self._round_precision(currently_returned_l2, 6)
-            ),
-            "1-0:62.7.0({}*kW)\r\n".format(
-                self._round_precision(currently_returned_l3, 6)
-            ),
+            "1-0:21.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l1, 6)),
+            "1-0:41.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l2, 6)),
+            "1-0:61.7.0({}*kW)\r\n".format(self._round_precision(currently_delivered_l3, 6)),
+            "1-0:22.7.0({}*kW)\r\n".format(self._round_precision(currently_returned_l1, 6)),
+            "1-0:42.7.0({}*kW)\r\n".format(self._round_precision(currently_returned_l2, 6)),
+            "1-0:62.7.0({}*kW)\r\n".format(self._round_precision(currently_returned_l3, 6)),
         ]
 
         if with_gas:
             # Evens out the grouping per interval a bit.
-            gas_timestamp = dsmr_datalogger.services.datalogger.calculate_fake_gas_reading_timestamp(
-                now, True
-            )
+            gas_timestamp = dsmr_datalogger.services.datalogger.calculate_fake_gas_reading_timestamp(now, True)
             data += [
                 "0-1:24.1.0(003)\r\n",
                 "0-1:96.1.0(12345678901234567890123456789001)\r\n",
@@ -235,9 +203,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         calculated_checksum = crc16_function(unicode_telegram)
 
         hexed_checksum = hex(calculated_checksum)[2:].upper()
-        hexed_checksum = "{:0>4}".format(
-            hexed_checksum
-        )  # Zero any spacing on the left hand size.
+        hexed_checksum = "{:0>4}".format(hexed_checksum)  # Zero any spacing on the left hand size.
 
         return "{}{}\n".format(telegram, hexed_checksum)
 

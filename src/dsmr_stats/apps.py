@@ -41,9 +41,7 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
     try:
         latest_day_statistics = DayStatistics.objects.all().order_by("-day")[0]
     except IndexError:
-        return MonitoringStatusIssue(
-            __name__, _("No day statistics found"), timezone.now()
-        )
+        return MonitoringStatusIssue(__name__, _("No day statistics found"), timezone.now())
 
     offset = timezone.now().date() - timezone.timedelta(
         days=settings.DSMRREADER_STATUS_ALLOWED_DAY_STATISTICS_LAGG_IN_DAYS

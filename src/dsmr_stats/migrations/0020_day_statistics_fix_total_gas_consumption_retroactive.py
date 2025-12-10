@@ -87,9 +87,7 @@ def regenerate_data(apps, schema_editor):
         for year, total in total_difference_per_year.items():
             total_text += f"{year} | {total} m³\n"
 
-        total_text += (
-            f"\nOccurrences by year ({total_difference_occurrences} x in total):\n"
-        )
+        total_text += f"\nOccurrences by year ({total_difference_occurrences} x in total):\n"
         for year, count in difference_occurrences_per_year.items():
             total_text += f"{year} | {count} x\n"
 

@@ -50,17 +50,13 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_notify_pre_check_dummy_message(self, now_mock, send_notification_mock):
         """Notifications: Test notify_pre_check()'s output when service is set"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1, 0, 0, 0)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, 0, 0, 0))
 
         # Should fail because we haven't set a service
         self.assertFalse(dsmr_notification.services.notify_pre_check())
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = (
-            NotificationSetting.NOTIFICATION_PROWL
-        )
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.save()
 
         # Should be okay now, with dummy message being sent.
@@ -82,9 +78,7 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_set_next_notification_date(self, now_mock):
         """Notifications: Test if next notification date is set"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 16, 0, 0, 0)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 16, 0, 0, 0))
 
         now = timezone.localtime(timezone.now())
         NotificationSetting.objects.update(next_notification=now)
@@ -100,9 +94,7 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_set_next_notification_date_for_dst_change(self, now_mock):
         """Notifications: Test if next notification date is set due to DST change"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 10, 27, 2, 0, 0)
-        )  # Do NOT change hour.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 10, 27, 2, 0, 0))  # Do NOT change hour.
         now = timezone.localtime(timezone.now())
         NotificationSetting.objects.update(next_notification=now)
 
@@ -112,16 +104,12 @@ class TestServices(TestCase):
         notification_settings = NotificationSetting.get_solo()
         next_notification = timezone.localtime(notification_settings.next_notification)
         expected = timezone.datetime(2018, 10, 28, 6, 0, 0)
-        expected = timezone.localtime(
-            timezone.make_aware(expected, ZoneInfo(settings.TIME_ZONE))
-        )
+        expected = timezone.localtime(timezone.make_aware(expected, ZoneInfo(settings.TIME_ZONE)))
 
         self.assertEqual(next_notification, expected)
 
         # Check other way around as well, in March.
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2019, 3, 30, 1, 0, 0)
-        )  # Do NOT change hour.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2019, 3, 30, 1, 0, 0))  # Do NOT change hour.
         now = timezone.localtime(timezone.now())
         NotificationSetting.objects.update(next_notification=now)
 
@@ -130,9 +118,7 @@ class TestServices(TestCase):
         notification_settings = NotificationSetting.get_solo()
         next_notification = timezone.localtime(notification_settings.next_notification)
         expected = timezone.datetime(2019, 3, 31, 6, 0, 0)
-        expected = timezone.localtime(
-            timezone.make_aware(expected, ZoneInfo(settings.TIME_ZONE))
-        )
+        expected = timezone.localtime(timezone.make_aware(expected, ZoneInfo(settings.TIME_ZONE)))
         self.assertEqual(next_notification, expected)
 
     @mock.patch("dsmr_notification.services.send_notification")
@@ -154,17 +140,11 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_notification_api_fail_4xx(self, now_mock, requests_post_mock):
         """Notifications: Test API failure for notify() - HTTP 4xx"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 17, hour=0, minute=5)
-        )
-        requests_post_mock.return_value = mock.MagicMock(
-            status_code=403, text="Forbidden"
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
+        requests_post_mock.return_value = mock.MagicMock(status_code=403, text="Forbidden")
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = (
-            NotificationSetting.NOTIFICATION_PROWL
-        )
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.prowl_api_key = self.API_KEY
         notification_settings.next_notification = timezone.now()
         notification_settings.save()
@@ -188,17 +168,11 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_notification_api_fail_5xx(self, now_mock, requests_post_mock):
         """Notifications: Test API failure for notify() - HTTP 5xx"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 17, hour=0, minute=5)
-        )
-        requests_post_mock.return_value = mock.MagicMock(
-            status_code=503, text="Server Error"
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
+        requests_post_mock.return_value = mock.MagicMock(status_code=503, text="Server Error")
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = (
-            NotificationSetting.NOTIFICATION_PROWL
-        )
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.prowl_api_key = self.API_KEY
         notification_settings.next_notification = timezone.now()
         notification_settings.save()
@@ -220,17 +194,11 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_notification_api_fail_other(self, now_mock, requests_post_mock):
         """Notifications: Test API failure for notify() - HTTP xxx"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 17, hour=0, minute=5)
-        )
-        requests_post_mock.return_value = mock.MagicMock(
-            status_code=300, text="xxxxx"
-        )  # Just for code coverage.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
+        requests_post_mock.return_value = mock.MagicMock(status_code=300, text="xxxxx")  # Just for code coverage.
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = (
-            NotificationSetting.NOTIFICATION_PROWL
-        )
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.prowl_api_key = self.API_KEY
         notification_settings.next_notification = timezone.now()
         notification_settings.save()
@@ -248,14 +216,10 @@ class TestServices(TestCase):
         if not self.fixtures:
             return
 
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 17, hour=0, minute=5)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 17, hour=0, minute=5))
 
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = (
-            NotificationSetting.NOTIFICATION_DUMMY
-        )
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_DUMMY
         notification_settings.next_notification = timezone.now()
         notification_settings.save()
 
@@ -267,18 +231,14 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_notifications(self, now_mock, requests_post_mock):
         """Notifications: Test notify() (actual notification sender)"""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2016, 11, 18, hour=0, minute=5)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 11, 18, hour=0, minute=5))
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text="OK")
 
         notification_settings = NotificationSetting.get_solo()
         self.assertIsNone(notification_settings.next_notification)
         self.assertFalse(requests_post_mock.called)
 
-        notification_settings.notification_service = (
-            NotificationSetting.NOTIFICATION_PROWL
-        )
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.prowl_api_key = self.API_KEY
         notification_settings.next_notification = timezone.now()
         notification_settings.save()
@@ -291,40 +251,30 @@ class TestServices(TestCase):
             return self.assertFalse(requests_post_mock.called)
 
         # Next notification should be pushed.
-        self.assertGreater(
-            NotificationSetting.get_solo().next_notification, timezone.now()
-        )
+        self.assertGreater(NotificationSetting.get_solo().next_notification, timezone.now())
 
     @mock.patch("requests.post")
     @mock.patch("django.utils.timezone.now")
     def test_check_status(self, now_mock, requests_post_mock):
         """Check whether downtime of the datalogger triggers notifications."""
-        now_mock.return_value = timezone.make_aware(
-            timezone.datetime(2018, 1, 1, hour=12)
-        )
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 1, 1, hour=12))
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text="OK")
 
         StatusNotificationSetting.get_solo()
         notification_settings = NotificationSetting.get_solo()
-        notification_settings.notification_service = (
-            NotificationSetting.NOTIFICATION_PROWL
-        )
+        notification_settings.notification_service = NotificationSetting.NOTIFICATION_PROWL
         notification_settings.prowl_api_key = self.API_KEY
         notification_settings.save()
 
         # Schedule ahead.
-        StatusNotificationSetting.objects.update(
-            next_check=timezone.now() + timezone.timedelta(minutes=1)
-        )
+        StatusNotificationSetting.objects.update(next_check=timezone.now() + timezone.timedelta(minutes=1))
         dsmr_notification.services.check_status()
 
         # No data.
         StatusNotificationSetting.objects.update(next_check=timezone.now())
         DsmrReading.objects.all().delete()
         dsmr_notification.services.check_status()
-        self.assertGreater(
-            StatusNotificationSetting.get_solo().next_check, timezone.now()
-        )
+        self.assertGreater(StatusNotificationSetting.get_solo().next_check, timezone.now())
 
         # Recent data.
         StatusNotificationSetting.objects.update(next_check=timezone.now())
@@ -339,9 +289,7 @@ class TestServices(TestCase):
         )
         dsmr_notification.services.check_status()
 
-        self.assertGreater(
-            StatusNotificationSetting.get_solo().next_check, timezone.now()
-        )
+        self.assertGreater(StatusNotificationSetting.get_solo().next_check, timezone.now())
         self.assertFalse(requests_post_mock.called)
 
         # Data from a while ago.
@@ -382,15 +330,9 @@ class TestServicesWithoutElectricityReturned(TestServices):
 
     def setUp(self):
         super(TestServicesWithoutElectricityReturned, self).setUp()
-        DayStatistics.objects.all().update(
-            electricity1_returned=0, electricity2_returned=0
-        )
+        DayStatistics.objects.all().update(electricity1_returned=0, electricity2_returned=0)
         ElectricityConsumption.objects.update(currently_returned=0)
-        self.assertFalse(
-            dsmr_backend.services.backend.get_capability(
-                Capability.ELECTRICITY_RETURNED
-            )
-        )
+        self.assertFalse(dsmr_backend.services.backend.get_capability(Capability.ELECTRICITY_RETURNED))
 
 
 class TestServicesWithPrices(TestServices):

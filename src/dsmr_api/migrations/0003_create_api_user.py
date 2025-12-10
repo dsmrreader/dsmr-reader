@@ -9,14 +9,10 @@ from django.conf import settings
 def migrate_forward(apps, schema_editor):
     User = apps.get_model("auth", "User")
 
-    if User.objects.filter(
-        username=settings.DSMRREADER_REST_FRAMEWORK_API_USER
-    ).exists():
+    if User.objects.filter(username=settings.DSMRREADER_REST_FRAMEWORK_API_USER).exists():
         return
 
-    User.objects.create(
-        username=settings.DSMRREADER_REST_FRAMEWORK_API_USER, email="root@localhost"
-    )
+    User.objects.create(username=settings.DSMRREADER_REST_FRAMEWORK_API_USER, email="root@localhost")
 
 
 def migrate_backward(apps, schema_editor):

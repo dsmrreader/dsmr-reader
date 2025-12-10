@@ -48,10 +48,7 @@ class EnergySupplierPriceForm(forms.ModelForm):
         existing_contracts = EnergySupplierPrice.objects.exclude(
             # Not do block ourselves.
             pk=self.instance.pk
-        ).filter(
-            Q(start__lte=current_start, end__gte=current_start)
-            | Q(start__lte=current_end, end__gte=current_end)
-        )
+        ).filter(Q(start__lte=current_start, end__gte=current_start) | Q(start__lte=current_end, end__gte=current_end))
 
         if not existing_contracts:
             return

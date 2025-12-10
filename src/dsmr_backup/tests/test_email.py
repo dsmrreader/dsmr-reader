@@ -23,9 +23,7 @@ class TestEmailServices(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(send_mock.called)
 
         # Now with settings enabled.
-        EmailBackupSettings.objects.all().update(
-            interval=EmailBackupSettings.INTERVAL_DAILY
-        )
+        EmailBackupSettings.objects.all().update(interval=EmailBackupSettings.INTERVAL_DAILY)
 
         dsmr_backup.services.email.run(scheduled_process=sp)
 

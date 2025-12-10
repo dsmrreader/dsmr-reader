@@ -27,9 +27,7 @@ class TestDay(APIv2TestCase):
         self.assertEqual(resultset["results"][6]["id"], 756)
 
         # Search
-        resultset = self._request(
-            "day-statistics", data={"day__gte": "2015-12-14"}
-        )  # Z+01:00
+        resultset = self._request("day-statistics", data={"day__gte": "2015-12-14"})  # Z+01:00
         self.assertEqual(resultset["count"], 4)
         self.assertEqual(resultset["results"][0]["id"], 759)
         self.assertEqual(resultset["results"][1]["id"], 760)
@@ -57,9 +55,7 @@ class TestDay(APIv2TestCase):
         }
         self.assertEqual(DayStatistics.objects.all().count(), 7)
 
-        resultset = self._request(
-            "day-statistics", expected_code=201, method="post", data=DATA
-        )
+        resultset = self._request("day-statistics", expected_code=201, method="post", data=DATA)
 
         self.assertEqual(resultset["day"], "2020-12-16")
         self.assertEqual(float(resultset["total_cost"]), 18.5)
@@ -103,18 +99,14 @@ class TestHour(APIv2TestCase):
         self.assertEqual(resultset["results"][12]["id"], 14551)
 
         # Search
-        resultset = self._request(
-            "hour-statistics", data={"hour_start__gte": "2015-12-13 00:00:00"}
-        )  # Z+01:00
+        resultset = self._request("hour-statistics", data={"hour_start__gte": "2015-12-13 00:00:00"})  # Z+01:00
         self.assertEqual(resultset["count"], 11)
         self.assertEqual(resultset["results"][0]["id"], 14553)
         self.assertEqual(resultset["results"][1]["id"], 14554)
         self.assertEqual(resultset["results"][2]["id"], 14555)
         self.assertEqual(resultset["results"][3]["id"], 14556)
 
-        resultset = self._request(
-            "hour-statistics", data={"hour_start__lte": "2015-12-13 00:00:00"}
-        )
+        resultset = self._request("hour-statistics", data={"hour_start__lte": "2015-12-13 00:00:00"})
         self.assertEqual(resultset["count"], 3)
         self.assertEqual(resultset["results"][0]["id"], 14551)
         self.assertEqual(resultset["results"][1]["id"], 14552)

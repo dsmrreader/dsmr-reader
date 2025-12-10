@@ -46,22 +46,16 @@ class Command(BaseCommand):
 
     def _test_electricity_consumption(self):
         URI = "consumption/electricity"
-        self._request(
-            uri=URI, limit=5, ordering="-read_at", read_at__lte="2017-04-10 03:00:00"
-        )
+        self._request(uri=URI, limit=5, ordering="-read_at", read_at__lte="2017-04-10 03:00:00")
 
     def _test_gas_consumption(self):
         URI = "consumption/gas"
-        self._request(
-            uri=URI, limit=5, ordering="-read_at", read_at__gte="2017-04-10 03:00:00"
-        )
+        self._request(uri=URI, limit=5, ordering="-read_at", read_at__gte="2017-04-10 03:00:00")
 
     def _test_day_statistics(self):
         URI = "statistics/day"
         self._request(uri=URI, day="2017-01-01")
-        self._request(
-            uri=URI, ordering="-day", day__gte="2016-01-01", day__lte="2016-02-01"
-        )
+        self._request(uri=URI, ordering="-day", day__gte="2016-01-01", day__lte="2016-02-01")
 
     def _test_hour_statistics(self):
         URI = "statistics/hour"

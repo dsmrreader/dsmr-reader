@@ -36,9 +36,7 @@ class LiveGraphs(ConfigurableLoginRequiredMixin, TemplateView):
         )
 
         today = timezone.localtime(timezone.now()).date()
-        context_data["month_statistics"] = dsmr_stats.services.month_statistics(
-            target_date=today
-        )
+        context_data["month_statistics"] = dsmr_stats.services.month_statistics(target_date=today)
         return context_data
 
 
@@ -84,64 +82,40 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
         latest_delta_id = form.cleaned_data.get("latest_delta_id")
 
         # Optimize queries for large datasets by restricting the data (when using the installation default).
-        base_timestamp = timezone.now() - timezone.timedelta(
-            hours=FrontendSettings.get_solo().live_graphs_hours_range
-        )
-        electricity = ElectricityConsumption.objects.filter(
-            read_at__gt=base_timestamp
-        ).order_by("read_at")
+        base_timestamp = timezone.now() - timezone.timedelta(hours=FrontendSettings.get_solo().live_graphs_hours_range)
+        electricity = ElectricityConsumption.objects.filter(read_at__gt=base_timestamp).order_by("read_at")
 
         if latest_delta_id:
             electricity = electricity.filter(id__gt=latest_delta_id)
 
         for current in electricity:
-            read_at = formats.date_format(
-                timezone.localtime(current.read_at), "DSMR_GRAPH_LONG_TIME_FORMAT"
-            )
+            read_at = formats.date_format(timezone.localtime(current.read_at), "DSMR_GRAPH_LONG_TIME_FORMAT")
 
             data["read_at"].append(read_at)
 
             if form.cleaned_data.get("delivered"):
-                data["currently_delivered"].append(
-                    self._convert_to_watt(current.currently_delivered)
-                )
+                data["currently_delivered"].append(self._convert_to_watt(current.currently_delivered))
 
             if form.cleaned_data.get("returned"):
-                data["currently_returned"].append(
-                    self._convert_to_watt(current.currently_returned)
-                )
+                data["currently_returned"].append(self._convert_to_watt(current.currently_returned))
 
             if form.cleaned_data.get("total_delivered"):
-                data["total_delivered"].append(
-                    current.delivered_1 + current.delivered_2
-                )
+                data["total_delivered"].append(current.delivered_1 + current.delivered_2)
 
             if form.cleaned_data.get("total_returned"):
                 data["total_returned"].append(current.returned_1 + current.returned_2)
 
             if form.cleaned_data.get("phases"):
                 # 'or 0' is required due to empty data.
-                data["phases_delivered"]["l1"].append(
-                    self._convert_to_watt(current.phase_currently_delivered_l1)
-                )
-                data["phases_delivered"]["l2"].append(
-                    self._convert_to_watt(current.phase_currently_delivered_l2)
-                )
-                data["phases_delivered"]["l3"].append(
-                    self._convert_to_watt(current.phase_currently_delivered_l3)
-                )
+                data["phases_delivered"]["l1"].append(self._convert_to_watt(current.phase_currently_delivered_l1))
+                data["phases_delivered"]["l2"].append(self._convert_to_watt(current.phase_currently_delivered_l2))
+                data["phases_delivered"]["l3"].append(self._convert_to_watt(current.phase_currently_delivered_l3))
 
                 if form.cleaned_data.get("returned"):
                     # 'or 0' is required due to backwards compatibility.
-                    data["phases_returned"]["l1"].append(
-                        self._convert_to_watt(current.phase_currently_returned_l1)
-                    )
-                    data["phases_returned"]["l2"].append(
-                        self._convert_to_watt(current.phase_currently_returned_l2)
-                    )
-                    data["phases_returned"]["l3"].append(
-                        self._convert_to_watt(current.phase_currently_returned_l3)
-                    )
+                    data["phases_returned"]["l1"].append(self._convert_to_watt(current.phase_currently_returned_l1))
+                    data["phases_returned"]["l2"].append(self._convert_to_watt(current.phase_currently_returned_l2))
+                    data["phases_returned"]["l3"].append(self._convert_to_watt(current.phase_currently_returned_l3))
 
             if form.cleaned_data.get("voltage"):
                 data["phase_voltage"]["l1"].append(float(current.phase_voltage_l1 or 0))
@@ -149,15 +123,9 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
                 data["phase_voltage"]["l3"].append(float(current.phase_voltage_l3 or 0))
 
             if form.cleaned_data.get("power_current"):
-                data["phase_power_current"]["l1"].append(
-                    current.phase_power_current_l1 or 0
-                )
-                data["phase_power_current"]["l2"].append(
-                    current.phase_power_current_l2 or 0
-                )
-                data["phase_power_current"]["l3"].append(
-                    current.phase_power_current_l3 or 0
-                )
+                data["phase_power_current"]["l1"].append(current.phase_power_current_l1 or 0)
+                data["phase_power_current"]["l2"].append(current.phase_power_current_l2 or 0)
+                data["phase_power_current"]["l3"].append(current.phase_power_current_l3 or 0)
 
             data["latest_delta_id"] = current.id
 
@@ -173,9 +141,7 @@ class LiveXhrElectricityConsumption(ConfigurableLoginRequiredMixin, View):
         return int(kw_or_none * 1000)
 
 
-class LiveXhrQuarterHourPeakElectricityConsumption(
-    ConfigurableLoginRequiredMixin, View
-):
+class LiveXhrQuarterHourPeakElectricityConsumption(ConfigurableLoginRequiredMixin, View):
     """XHR view for fetching the quarter hour peak consumption graph data, in JSON."""
 
     def get(self, request):  # noqa: C901
@@ -185,21 +151,15 @@ class LiveXhrQuarterHourPeakElectricityConsumption(
         }
 
         # Optimize queries for large datasets by restricting the data to the last week in the first place.
-        base_timestamp = timezone.now() - timezone.timedelta(
-            hours=FrontendSettings.get_solo().live_graphs_hours_range
+        base_timestamp = timezone.now() - timezone.timedelta(hours=FrontendSettings.get_solo().live_graphs_hours_range)
+        peaks = QuarterHourPeakElectricityConsumption.objects.filter(read_at_start__gt=base_timestamp).order_by(
+            "read_at_start"
         )
-        peaks = QuarterHourPeakElectricityConsumption.objects.filter(
-            read_at_start__gt=base_timestamp
-        ).order_by("read_at_start")
         FORMAT = "DSMR_GRAPH_ACCURATE_TIME_FORMAT"
 
         for current in peaks:
-            read_at_start = formats.date_format(
-                timezone.localtime(current.read_at_start), FORMAT
-            )
-            read_at_end = formats.date_format(
-                timezone.localtime(current.read_at_end), FORMAT
-            )
+            read_at_start = formats.date_format(timezone.localtime(current.read_at_start), FORMAT)
+            read_at_end = formats.date_format(timezone.localtime(current.read_at_end), FORMAT)
             data["read_at"].append("{} - {}".format(read_at_start, read_at_end))
             data["average_delivered"].append(float(current.average_delivered))
 
@@ -219,17 +179,11 @@ class LiveXhrGasConsumption(ConfigurableLoginRequiredMixin, View):
         }
 
         # Optimize queries for large datasets by restricting the data to the last week in the first place.
-        base_timestamp = timezone.now() - timezone.timedelta(
-            hours=FrontendSettings.get_solo().live_graphs_hours_range
-        )
-        gas = GasConsumption.objects.filter(read_at__gt=base_timestamp).order_by(
-            "read_at"
-        )
+        base_timestamp = timezone.now() - timezone.timedelta(hours=FrontendSettings.get_solo().live_graphs_hours_range)
+        gas = GasConsumption.objects.filter(read_at__gt=base_timestamp).order_by("read_at")
 
         for current in gas:
-            read_at = formats.date_format(
-                timezone.localtime(current.read_at), "DSMR_GRAPH_LONG_TIME_FORMAT"
-            )
+            read_at = formats.date_format(timezone.localtime(current.read_at), "DSMR_GRAPH_LONG_TIME_FORMAT")
             data["read_at"].append(read_at)
             data["currently_delivered"].append(float(current.currently_delivered))
 
@@ -249,17 +203,11 @@ class LiveXhrTemperature(ConfigurableLoginRequiredMixin, View):
         }
 
         # Optimize queries for large datasets by restricting the data to the last week in the first place.
-        base_timestamp = timezone.now() - timezone.timedelta(
-            hours=FrontendSettings.get_solo().live_graphs_hours_range
-        )
-        temperature = TemperatureReading.objects.filter(
-            read_at__gt=base_timestamp
-        ).order_by("read_at")
+        base_timestamp = timezone.now() - timezone.timedelta(hours=FrontendSettings.get_solo().live_graphs_hours_range)
+        temperature = TemperatureReading.objects.filter(read_at__gt=base_timestamp).order_by("read_at")
 
         for current in temperature:
-            read_at = formats.date_format(
-                timezone.localtime(current.read_at), "DSMR_GRAPH_LONG_TIME_FORMAT"
-            )
+            read_at = formats.date_format(timezone.localtime(current.read_at), "DSMR_GRAPH_LONG_TIME_FORMAT")
             data["read_at"].append(read_at)
             data["degrees_celcius"].append(float(current.degrees_celcius))
 

@@ -33,6 +33,4 @@ class TestSettings(TestCase):
     def test_to_string(self):
         for current in self.CLASSES:
             instance = current.get_solo()
-            self.assertNotEqual(
-                str(instance), "{} object".format(instance.__class__.__name__)
-            )
+            self.assertNotEqual(str(instance), "{} object".format(instance.__class__.__name__))

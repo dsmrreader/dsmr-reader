@@ -7,9 +7,7 @@ from django.conf import settings
 def migrate_forward(apps, schema_editor):
     ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
     PVOutputAPISettings = apps.get_model("dsmr_pvoutput", "PVOutputAPISettings")
-    PVOutputAddStatusSettings = apps.get_model(
-        "dsmr_pvoutput", "PVOutputAddStatusSettings"
-    )
+    PVOutputAddStatusSettings = apps.get_model("dsmr_pvoutput", "PVOutputAddStatusSettings")
 
     api_settings, _ = PVOutputAPISettings.objects.get_or_create()
     add_status_settings, _ = PVOutputAddStatusSettings.objects.get_or_create()
@@ -29,9 +27,7 @@ def migrate_forward(apps, schema_editor):
 
 def migrate_backward(apps, schema_editor):
     ScheduledProcess = apps.get_model("dsmr_backend", "ScheduledProcess")
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT
-    ).delete()
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT).delete()
 
 
 class Migration(migrations.Migration):

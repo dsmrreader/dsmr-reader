@@ -81,9 +81,7 @@ class TestQuarterHourPeakElectricityConsumption(TestCase):
         )
 
     def test_duration(self):
-        self.assertTrue(
-            self.instance.duration, timezone.timedelta(minutes=12, seconds=34)
-        )
+        self.assertTrue(self.instance.duration, timezone.timedelta(minutes=12, seconds=34))
 
     def test_str(self):
         """Model should override string formatting."""

@@ -63,9 +63,7 @@ def _on_pvoutput_setting_update():
     api_settings = PVOutputAPISettings.get_solo()
     add_status_settings = PVOutputAddStatusSettings.get_solo()
 
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT
-    ).update(
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT).update(
         planned=timezone.now(),
         active=all(
             [

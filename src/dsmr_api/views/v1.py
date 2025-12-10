@@ -23,17 +23,11 @@ class DataloggerDsmrReading(View):
         api_settings = APISettings.get_solo()
 
         if not api_settings.allow:
-            return HttpResponseNotAllowed(
-                permitted_methods=["POST"], content="API is disabled"
-            )
+            return HttpResponseNotAllowed(permitted_methods=["POST"], content="API is disabled")
 
-        if request.META.get(
-            "HTTP_X_AUTHKEY"
-        ) != api_settings.auth_key and request.META.get(
+        if request.META.get("HTTP_X_AUTHKEY") != api_settings.auth_key and request.META.get(
             "HTTP_AUTHORIZATION"
-        ) != "Token {}".format(
-            api_settings.auth_key
-        ):
+        ) != "Token {}".format(api_settings.auth_key):
             return HttpResponseForbidden(content="Invalid auth key")
 
         post_form = DsmrReadingForm(request.POST)

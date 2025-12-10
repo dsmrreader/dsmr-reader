@@ -25,9 +25,7 @@ class DsmrReadingFilter(filters.FilterSet):
 
     class Meta:
         model = DsmrReading
-        fields = [
-            "timestamp"
-        ]  # Deprecated. Revert to empty list in some major API bump.
+        fields = ["timestamp"]  # Deprecated. Revert to empty list in some major API bump.
 
 
 class EnergySupplierPriceFilter(filters.FilterSet):
@@ -124,12 +122,8 @@ class GasConsumptionFilter(filters.FilterSet):
 
 class DayStatisticsFilter(filters.FilterSet):
     FIELD = "day"
-    day__gte = filters.DateFilter(
-        field_name=FIELD, lookup_expr="gte", label="Date must be after or equal to `X`"
-    )
-    day__lte = filters.DateFilter(
-        field_name=FIELD, lookup_expr="lte", label="Date must be before or equal to `X`"
-    )
+    day__gte = filters.DateFilter(field_name=FIELD, lookup_expr="gte", label="Date must be after or equal to `X`")
+    day__lte = filters.DateFilter(field_name=FIELD, lookup_expr="lte", label="Date must be before or equal to `X`")
 
     class Meta:
         model = DayStatistics
@@ -151,6 +145,4 @@ class HourStatisticsFilter(filters.FilterSet):
 
     class Meta:
         model = HourStatistics
-        fields = [
-            "hour_start"
-        ]  # Deprecated. Revert to empty list in some major API bump.
+        fields = ["hour_start"]  # Deprecated. Revert to empty list in some major API bump.

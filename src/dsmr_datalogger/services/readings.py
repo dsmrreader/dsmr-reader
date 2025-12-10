@@ -14,9 +14,7 @@ def first_meter_positions_of_day(day: datetime.date) -> MeterPositionsDTO:
     Raises LookupError when nothing matched.
     """
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
-    start_of_day = timezone.make_aware(
-        timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0)
-    )
+    start_of_day = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0))
     end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)
 
     first_electricity_reading_of_day = (
@@ -54,14 +52,6 @@ def first_meter_positions_of_day(day: datetime.date) -> MeterPositionsDTO:
         electricity_returned_1=first_electricity_reading_of_day.electricity_returned_1,
         electricity_delivered_2=first_electricity_reading_of_day.electricity_delivered_2,
         electricity_returned_2=first_electricity_reading_of_day.electricity_returned_2,
-        extra_device_timestamp=(
-            first_gas_reading_of_day.extra_device_timestamp
-            if first_gas_reading_of_day
-            else None
-        ),
-        extra_device_delivered=(
-            first_gas_reading_of_day.extra_device_delivered
-            if first_gas_reading_of_day
-            else None
-        ),
+        extra_device_timestamp=(first_gas_reading_of_day.extra_device_timestamp if first_gas_reading_of_day else None),
+        extra_device_delivered=(first_gas_reading_of_day.extra_device_delivered if first_gas_reading_of_day else None),
     )

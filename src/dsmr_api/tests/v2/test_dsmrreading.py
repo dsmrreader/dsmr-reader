@@ -27,16 +27,12 @@ class TestDsmrreading(APIv2TestCase):
         self.assertEqual(resultset["results"][2]["id"], 1)
 
         # Search
-        resultset = self._request(
-            "dsmrreading", data={"timestamp__gte": "2016-07-01 21:00:00"}
-        )  # Z+02:00
+        resultset = self._request("dsmrreading", data={"timestamp__gte": "2016-07-01 21:00:00"})  # Z+02:00
         self.assertEqual(resultset["count"], 2)
         self.assertEqual(resultset["results"][0]["id"], 2)
         self.assertEqual(resultset["results"][1]["id"], 3)
 
-        resultset = self._request(
-            "dsmrreading", data={"timestamp__lte": "2016-07-01 21:00:00"}
-        )  # Z+02:00
+        resultset = self._request("dsmrreading", data={"timestamp__lte": "2016-07-01 21:00:00"})  # Z+02:00
         self.assertEqual(resultset["count"], 2)
         self.assertEqual(resultset["results"][0]["id"], 1)
         self.assertEqual(resultset["results"][1]["id"], 2)
@@ -55,9 +51,7 @@ class TestDsmrreading(APIv2TestCase):
         self.assertEqual(DsmrReading.objects.all().count(), 3)
 
         self.assertFalse(send_robust_mock.called)
-        resultset = self._request(
-            "dsmrreading", expected_code=201, method="post", data=TELEGRAM
-        )
+        resultset = self._request("dsmrreading", expected_code=201, method="post", data=TELEGRAM)
         self.assertTrue(send_robust_mock.called)
 
         self.assertEqual(float(resultset["electricity_currently_delivered"]), 1.5)
@@ -79,9 +73,7 @@ class TestDsmrreading(APIv2TestCase):
 
         # Again, with UTC.
         TELEGRAM["timestamp"] = "2017-01-01T00:00:00Z"
-        resultset = self._request(
-            "dsmrreading", expected_code=201, method="post", data=TELEGRAM
-        )
+        resultset = self._request("dsmrreading", expected_code=201, method="post", data=TELEGRAM)
         self.assertEqual(resultset["timestamp"], "2017-01-01T01:00:00+01:00")
         self.assertEqual(DsmrReading.objects.all().count(), 5)
 
@@ -95,13 +87,9 @@ class TestDsmrreading(APIv2TestCase):
         TELEGRAM["phase_currently_returned_l1"] = 1.5
         TELEGRAM["phase_currently_returned_l2"] = 1.75
         TELEGRAM["phase_currently_returned_l3"] = 1.25
-        resultset = self._request(
-            "dsmrreading", expected_code=201, method="post", data=TELEGRAM
-        )
+        resultset = self._request("dsmrreading", expected_code=201, method="post", data=TELEGRAM)
         self.assertEqual(resultset["timestamp"], "2017-01-02T01:00:00+01:00")
-        self.assertEqual(
-            resultset["extra_device_timestamp"], "2017-01-02T02:00:00+01:00"
-        )
+        self.assertEqual(resultset["extra_device_timestamp"], "2017-01-02T02:00:00+01:00")
         self.assertEqual(float(resultset["extra_device_delivered"]), 1234)
         self.assertEqual(float(resultset["phase_currently_delivered_l1"]), 0.5)
         self.assertEqual(float(resultset["phase_currently_delivered_l2"]), 0.75)

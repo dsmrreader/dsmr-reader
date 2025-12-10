@@ -9,8 +9,6 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         if not settings.DEBUG:
-            raise CommandError(
-                "Intended usage is NOT production! Only allowed when DEBUG = True"
-            )
+            raise CommandError("Intended usage is NOT production! Only allowed when DEBUG = True")
 
         dsmr_stats.services.clear_statistics()

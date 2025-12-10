@@ -24,43 +24,31 @@ class DsmrReading(ModelUpdateMixin, models.Model):
     processed = models.BooleanField(
         default=False,
         db_index=True,
-        help_text=_(
-            "Whether this reading has been processed for merging into statistics"
-        ),
+        help_text=_("Whether this reading has been processed for merging into statistics"),
     )
     timestamp = models.DateTimeField(
         db_index=True,
-        help_text=_(
-            "Timestamp indicating when the reading was taken, according to the smart meter"
-        ),
+        help_text=_("Timestamp indicating when the reading was taken, according to the smart meter"),
     )
     electricity_delivered_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter position stating electricity delivered (Dutch users: low tariff) in kWh"
-        ),
+        help_text=_("Meter position stating electricity delivered (Dutch users: low tariff) in kWh"),
     )
     electricity_returned_1 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter position stating electricity returned (Dutch users: low tariff) in kWh"
-        ),
+        help_text=_("Meter position stating electricity returned (Dutch users: low tariff) in kWh"),
     )
     electricity_delivered_2 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter position stating electricity delivered (normal tariff) in kWh"
-        ),
+        help_text=_("Meter position stating electricity delivered (normal tariff) in kWh"),
     )
     electricity_returned_2 = models.DecimalField(
         max_digits=9,
         decimal_places=3,
-        help_text=_(
-            "Meter position stating electricity returned (normal tariff) in kWh"
-        ),
+        help_text=_("Meter position stating electricity returned (normal tariff) in kWh"),
     )
     electricity_currently_delivered = models.DecimalField(
         max_digits=9,
@@ -177,9 +165,7 @@ class DsmrReading(ModelUpdateMixin, models.Model):
         self.timestamp = timezone.localtime(self.timestamp)
 
         if self.extra_device_timestamp:
-            self.extra_device_timestamp = timezone.localtime(
-                self.extra_device_timestamp
-            )
+            self.extra_device_timestamp = timezone.localtime(self.extra_device_timestamp)
 
     def __str__(self):
         return "{} @ {}".format(self.id, timezone.localtime(self.timestamp))

@@ -11,9 +11,7 @@ from dsmr_stats.models.note import Note
 class TestNote(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_superuser(
-            "testuser", "unknown@localhost", "passwd"
-        )
+        self.user = User.objects.create_superuser("testuser", "unknown@localhost", "passwd")
         self.instance = Note.objects.create(day=timezone.now(), description="Test")
 
     def test_admin(self):

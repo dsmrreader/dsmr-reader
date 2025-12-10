@@ -29,9 +29,7 @@ class InfluxdbIntegrationSettingsAdmin(SingletonModelAdmin):
                     "api_token",
                     "bucket",
                 ],
-                "description": _(
-                    "The backend process should automatically restart to apply changes."
-                ),
+                "description": _("The backend process should automatically restart to apply changes."),
             },
         ),
         (

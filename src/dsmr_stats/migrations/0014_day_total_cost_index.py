@@ -12,8 +12,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="daystatistics",
             name="total_cost",
-            field=models.DecimalField(
-                db_index=True, decimal_places=2, max_digits=8, verbose_name="Total cost"
-            ),
+            field=models.DecimalField(db_index=True, decimal_places=2, max_digits=8, verbose_name="Total cost"),
         ),
     ]

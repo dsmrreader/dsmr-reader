@@ -22,12 +22,8 @@ class Trends(ConfigurableLoginRequiredMixin, TemplateView):
         context_data = super(Trends, self).get_context_data(**kwargs)
         context_data["capabilities"] = capabilities
         context_data["frontend_settings"] = FrontendSettings.get_solo()
-        context_data["has_statistics"] = (
-            DayStatistics.objects.exists() and HourStatistics.objects.exists()
-        )
-        context_data["datepicker_locale_format"] = formats.get_format(
-            "DSMR_DATEPICKER_LOCALE_FORMAT"
-        )
+        context_data["has_statistics"] = DayStatistics.objects.exists() and HourStatistics.objects.exists()
+        context_data["datepicker_locale_format"] = formats.get_format("DSMR_DATEPICKER_LOCALE_FORMAT")
         context_data["datepicker_date_format"] = "DSMR_DATEPICKER_DATE_FORMAT"
 
         day_statistics = DayStatistics.objects.all().order_by("day")
@@ -68,38 +64,23 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
             )
             data["hour_start"].append(hour_start)
 
-            avg_electricity = (
-                current["avg_electricity1"] + current["avg_electricity2"]
-            ) / 2
+            avg_electricity = (current["avg_electricity1"] + current["avg_electricity2"]) / 2
 
             data["avg_electricity"].append(
-                float(
-                    dsmr_consumption.services.round_decimal(
-                        avg_electricity, decimal_count=5
-                    )
-                )
+                float(dsmr_consumption.services.round_decimal(avg_electricity, decimal_count=5))
             )
 
             if capabilities[Capability.ELECTRICITY_RETURNED]:
                 avg_electricity_returned = (
-                    current["avg_electricity1_returned"]
-                    + current["avg_electricity2_returned"]
+                    current["avg_electricity1_returned"] + current["avg_electricity2_returned"]
                 ) / 2
                 data["avg_electricity_returned"].append(
-                    float(
-                        dsmr_consumption.services.round_decimal(
-                            avg_electricity_returned, decimal_count=5
-                        )
-                    )
+                    float(dsmr_consumption.services.round_decimal(avg_electricity_returned, decimal_count=5))
                 )
 
             if capabilities[Capability.GAS]:
                 data["avg_gas"].append(
-                    float(
-                        dsmr_consumption.services.round_decimal(
-                            current["avg_gas"], decimal_count=5
-                        )
-                    )
+                    float(dsmr_consumption.services.round_decimal(current["avg_gas"], decimal_count=5))
                 )
 
         response = JsonResponse(data)
@@ -122,18 +103,13 @@ class TrendsXhrElectricityByTariff(ConfigurableLoginRequiredMixin, View):
             "electricity1": frontend_settings.tariff_1_delivered_name.capitalize(),
             "electricity2": frontend_settings.tariff_2_delivered_name.capitalize(),
         }
-        electricity_tariff_percentage = (
-            dsmr_stats.services.electricity_tariff_percentage(
-                start=form.cleaned_data["start_date"],
-                end=form.cleaned_data["end_date"],
-            )
+        electricity_tariff_percentage = dsmr_stats.services.electricity_tariff_percentage(
+            start=form.cleaned_data["start_date"],
+            end=form.cleaned_data["end_date"],
         )
 
         result = {
-            "data": [
-                {"name": translation_mapping[k], "value": v}
-                for k, v in electricity_tariff_percentage.items()
-            ]
+            "data": [{"name": translation_mapping[k], "value": v} for k, v in electricity_tariff_percentage.items()]
         }
 
         response = JsonResponse(result)

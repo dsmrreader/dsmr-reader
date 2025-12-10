@@ -11,9 +11,7 @@ class JSONDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
     enabled = models.BooleanField(
         default=False,
         verbose_name=_("Enabled"),
-        help_text=_(
-            "Whether the day consumption is sent to the broker, in JSON format."
-        ),
+        help_text=_("Whether the day consumption is sent to the broker, in JSON format."),
     )
     topic = models.CharField(
         max_length=256,
@@ -51,9 +49,7 @@ energy_supplier_price_electricity_returned_2 = energy_supplier_price_electricity
 energy_supplier_price_gas = energy_supplier_price_gas
 """,
         verbose_name=_("Formatting"),
-        help_text=_(
-            "Maps the field names used in the JSON message sent to the broker."
-        ),
+        help_text=_("Maps the field names used in the JSON message sent to the broker."),
     )
 
     def __str__(self):
@@ -70,9 +66,7 @@ class SplitTopicDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
     enabled = models.BooleanField(
         default=False,
         verbose_name=_("Enabled"),
-        help_text=_(
-            "Whether day consumption is sent to the broker, having each field sent to a different topic."
-        ),
+        help_text=_("Whether day consumption is sent to the broker, having each field sent to a different topic."),
     )
     formatting = models.TextField(
         default="""

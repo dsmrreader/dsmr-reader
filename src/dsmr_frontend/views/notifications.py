@@ -28,9 +28,7 @@ class XhrMarkNotificationRead(LoginRequiredMixin, FormView):
     form_class = NotificationReadForm
 
     def form_valid(self, form):
-        Notification.objects.filter(
-            pk=form.cleaned_data["notification_id"], read=False
-        ).update(read=True)
+        Notification.objects.filter(pk=form.cleaned_data["notification_id"], read=False).update(read=True)
         return JsonResponse({})
 
 

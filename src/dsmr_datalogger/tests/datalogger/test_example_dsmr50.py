@@ -69,9 +69,7 @@ class TestSerial(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase):
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
         reading = DsmrReading.objects.get()
-        self.assertEqual(
-            reading.timestamp, datetime(2010, 12, 9, 10, 30, 20, tzinfo=ZoneInfo("UTC"))
-        )
+        self.assertEqual(reading.timestamp, datetime(2010, 12, 9, 10, 30, 20, tzinfo=ZoneInfo("UTC")))
         self.assertEqual(reading.electricity_delivered_1, Decimal("123456.789"))
         self.assertEqual(reading.electricity_returned_1, Decimal("123456.789"))
         self.assertEqual(reading.electricity_delivered_2, Decimal("123456.789"))

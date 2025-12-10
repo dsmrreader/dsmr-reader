@@ -11,9 +11,7 @@ class SplitTopicMeterStatisticsMQTTSettings(ModelUpdateMixin, SingletonModel):
     enabled = models.BooleanField(
         default=False,
         verbose_name=_("Enabled"),
-        help_text=_(
-            "Whether meter statistics are sent to the broker, having each field sent to a different topic."
-        ),
+        help_text=_("Whether meter statistics are sent to the broker, having each field sent to a different topic."),
     )
     formatting = models.TextField(
         default="""

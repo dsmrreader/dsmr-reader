@@ -26,9 +26,7 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         null=True,
         default=None,
         verbose_name=_("Last executed at"),
-        help_text=_(
-            "The last moment this process ran (disregarding whether it succeeded or failed)."
-        ),
+        help_text=_("The last moment this process ran (disregarding whether it succeeded or failed)."),
     )
     planned = models.DateTimeField(
         default=timezone.now,
@@ -40,9 +38,7 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         default=True,
         db_index=True,
         verbose_name=_("Active"),
-        help_text=_(
-            "Related configuration settings manage whether this process is active or disabled for you."
-        ),
+        help_text=_("Related configuration settings manage whether this process is active or disabled for you."),
     )
 
     def execute(self):
@@ -79,9 +75,7 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
             'SP: Rescheduled "%s" to %s (ETA %s)',
             self.name,
             timezone.localtime(self.planned),
-            (
-                self.planned - now if self.planned > now else "-"
-            ),  # Negative timedelta formats weird for some reason
+            (self.planned - now if self.planned > now else "-"),  # Negative timedelta formats weird for some reason
         )
 
     def reschedule_asap(self):

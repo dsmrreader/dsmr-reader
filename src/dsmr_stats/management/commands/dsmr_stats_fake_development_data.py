@@ -12,16 +12,12 @@ from dsmr_datalogger.models.reading import DsmrReading
 
 
 class Command(BaseCommand):
-    help = _(
-        "Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks."
-    )
+    help = _("Alters any stats generate to fake data. DO NOT USE in production! Used for integration checks.")
 
     def handle(self, **options):
         """InfiniteManagementCommandMixin listens to handle() and calls run() in a loop."""
         if not settings.DEBUG:
-            raise CommandError(
-                "Intended usage is NOT production! Only allowed when DEBUG = True"
-            )
+            raise CommandError("Intended usage is NOT production! Only allowed when DEBUG = True")
 
         self._randomize()
 
@@ -34,26 +30,19 @@ class Command(BaseCommand):
         DsmrReading.objects.all().order_by("-pk").update(
             electricity_returned_1=models.F("electricity_delivered_1") * factor,
             electricity_returned_2=models.F("electricity_delivered_2") * factor,
-            electricity_currently_returned=models.F("electricity_currently_delivered")
-            * factor,
+            electricity_currently_returned=models.F("electricity_currently_delivered") * factor,
         )
 
-        print(
-            "Altering electricity consumption... (might take quite some time as well)"
-        )
+        print("Altering electricity consumption... (might take quite some time as well)")
         ElectricityConsumption.objects.all().update(
             returned_1=models.F("delivered_1") * factor,
             returned_2=models.F("delivered_2") * factor,
             currently_returned=models.F("currently_delivered") * factor,
-            phase_currently_delivered_l1=models.F("currently_delivered")
-            * factor,  # Split.
-            phase_currently_delivered_l2=models.F("currently_delivered")
-            * (1 - factor),  # Remainder of split.
+            phase_currently_delivered_l1=models.F("currently_delivered") * factor,  # Split.
+            phase_currently_delivered_l2=models.F("currently_delivered") * (1 - factor),  # Remainder of split.
             phase_currently_delivered_l3=0.005,  # Weird constant, to keep it simple.
-            phase_currently_returned_l1=models.F("currently_returned")
-            * factor,  # Split.
-            phase_currently_returned_l2=models.F("currently_returned")
-            * (1 - factor),  # Remainder of split.
+            phase_currently_returned_l1=models.F("currently_returned") * factor,  # Split.
+            phase_currently_returned_l2=models.F("currently_returned") * (1 - factor),  # Remainder of split.
             phase_currently_returned_l3=0.005,  # Weird constant, to keep it simple.
         )
 

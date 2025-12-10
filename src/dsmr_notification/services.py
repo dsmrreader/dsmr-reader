@@ -39,10 +39,7 @@ def notify_pre_check() -> bool:
         return True
 
     # Ready to go, but not time yet.
-    if (
-        notification_settings.next_notification is not None
-        and timezone.now() < notification_settings.next_notification
-    ):
+    if notification_settings.next_notification is not None and timezone.now() < notification_settings.next_notification:
         return False
 
     return True
@@ -66,9 +63,7 @@ def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C
         )
 
     if capabilities[Capability.GAS]:
-        message += _("Gas consumed") + ": {} m³\n".format(
-            formats.number_format(day_statistics.gas)
-        )
+        message += _("Gas consumed") + ": {} m³\n".format(formats.number_format(day_statistics.gas))
 
     if capabilities[Capability.COSTS]:
         message += "\n"
@@ -76,31 +71,18 @@ def create_consumption_message(day_statistics: DayStatistics) -> str:  # noqa: C
     if (
         capabilities[Capability.COSTS]
         and capabilities[Capability.ELECTRICITY]
-        and (
-            day_statistics.electricity1_cost is not None
-            or day_statistics.electricity2_cost is not None
-        )
+        and (day_statistics.electricity1_cost is not None or day_statistics.electricity2_cost is not None)
     ):
-        electricity_costs_merged = dsmr_consumption.services.round_decimal(
-            day_statistics.electricity_costs_merged
-        )
-        message += _("Electricity costs") + ": € {}\n".format(
-            formats.number_format(electricity_costs_merged)
-        )
+        electricity_costs_merged = dsmr_consumption.services.round_decimal(day_statistics.electricity_costs_merged)
+        message += _("Electricity costs") + ": € {}\n".format(formats.number_format(electricity_costs_merged))
 
-    if (
-        capabilities[Capability.COSTS]
-        and capabilities[Capability.GAS]
-        and day_statistics.gas_cost is not None
-    ):
+    if capabilities[Capability.COSTS] and capabilities[Capability.GAS] and day_statistics.gas_cost is not None:
         gas_cost = dsmr_consumption.services.round_decimal(day_statistics.gas_cost)
         message += _("Gas costs") + ": € {}\n".format(formats.number_format(gas_cost))
 
     if capabilities[Capability.COSTS] and day_statistics.fixed_cost is not None:
         fixed_cost = dsmr_consumption.services.round_decimal(day_statistics.fixed_cost)
-        message += _("Fixed costs") + ": € {}\n".format(
-            formats.number_format(fixed_cost)
-        )
+        message += _("Fixed costs") + ": € {}\n".format(formats.number_format(fixed_cost))
 
     if capabilities[Capability.COSTS] and day_statistics.total_cost is not None:
         total_cost = dsmr_consumption.services.round_decimal(day_statistics.total_cost)
@@ -119,13 +101,10 @@ def send_notification(message: str, title: str) -> None:
 
     # Plugins only require the hook above.
     if (
-        notification_settings.notification_service
-        == NotificationSetting.NOTIFICATION_DUMMY
+        notification_settings.notification_service == NotificationSetting.NOTIFICATION_DUMMY
         or notification_settings.notification_service is None
     ):
-        logger.debug(
-            " - Notification service is dummy (or not set). Hook triggered, skipping notification."
-        )
+        logger.debug(" - Notification service is dummy (or not set). Hook triggered, skipping notification.")
         return
 
     DATA_FORMAT = {
@@ -187,24 +166,16 @@ def send_notification(message: str, title: str) -> None:
             telegram_chat_id=None,
         )
         Notification.objects.create(
-            message="Notification API error, settings are reset. Error: {}".format(
-                response.text
-            ),
+            message="Notification API error, settings are reset. Error: {}".format(response.text),
             redirect_to="admin:dsmr_notification_notificationsetting_changelist",
         )
 
     # Server error, delay a bit.
     elif str(response.status_code).startswith("5"):
         logger.warning(" - Notification API returned server error, retrying later...")
-        NotificationSetting.objects.update(
-            next_notification=timezone.now() + timezone.timedelta(minutes=5)
-        )
+        NotificationSetting.objects.update(next_notification=timezone.now() + timezone.timedelta(minutes=5))
 
-    raise AssertionError(
-        "Notify API call failed: {0} (HTTP {1})".format(
-            response.text, response.status_code
-        )
-    )
+    raise AssertionError("Notify API call failed: {0} (HTTP {1})".format(response.text, response.status_code))
 
 
 def set_next_notification() -> None:
@@ -269,34 +240,24 @@ def check_status() -> None:
     status_settings = StatusNotificationSetting.get_solo()
     notification_settings = NotificationSetting.get_solo()
 
-    if (
-        notification_settings.notification_service is None
-        or not dsmr_backend.services.backend.is_timestamp_passed(
-            timestamp=status_settings.next_check
-        )
+    if notification_settings.notification_service is None or not dsmr_backend.services.backend.is_timestamp_passed(
+        timestamp=status_settings.next_check
     ):
         return
 
     if not DsmrReading.objects.exists():
-        return StatusNotificationSetting.objects.update(
-            next_check=timezone.now() + timezone.timedelta(minutes=5)
-        )
+        return StatusNotificationSetting.objects.update(next_check=timezone.now() + timezone.timedelta(minutes=5))
 
     # Check for recent data.
     has_recent_reading = DsmrReading.objects.filter(
-        timestamp__gt=timezone.now()
-        - timezone.timedelta(minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES)
+        timestamp__gt=timezone.now() - timezone.timedelta(minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES)
     ).exists()
 
     if has_recent_reading:
-        return StatusNotificationSetting.objects.update(
-            next_check=timezone.now() + timezone.timedelta(minutes=5)
-        )
+        return StatusNotificationSetting.objects.update(next_check=timezone.now() + timezone.timedelta(minutes=5))
 
     # Alert!
-    logger.debug(
-        "Notification: Sending notification about datalogger lagging behind..."
-    )
+    logger.debug("Notification: Sending notification about datalogger lagging behind...")
 
     with translation.override(language=BackendSettings.get_solo().language):
         send_notification(
@@ -311,8 +272,5 @@ def check_status() -> None:
         )
 
     StatusNotificationSetting.objects.update(
-        next_check=timezone.now()
-        + timezone.timedelta(
-            hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS
-        )
+        next_check=timezone.now() + timezone.timedelta(hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS)
     )

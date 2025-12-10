@@ -21,12 +21,8 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         DropboxSettings.get_solo()
         DropboxSettings.objects.all().update(refresh_token="FAKE")
 
-        self.schedule_process = ScheduledProcess.objects.get(
-            module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT
-        )
-        self.schedule_process.update(
-            active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1))
-        )
+        self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_DROPBOX_EXPORT)
+        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
 
     @mock.patch("dsmr_dropbox.services.upload_chunked")
     @mock.patch("dropbox.Dropbox.files_get_metadata")
@@ -41,9 +37,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("dropbox.Dropbox.refresh_access_token")
     @mock.patch("dropbox.Dropbox.check_user")
     @mock.patch("django.utils.timezone.now")
-    def test_get_dropbox_client(
-        self, now_mock, check_user_mock, refresh_access_token_mock
-    ):
+    def test_get_dropbox_client(self, now_mock, check_user_mock, refresh_access_token_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1))
         check_user_mock.return_value = None
 
@@ -64,9 +58,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.schedule_process.reschedule_asap()
         DropboxSettings.objects.all().update(refresh_token="invalid-token")
         refresh_access_token_mock.reset_mock()
-        refresh_access_token_mock.side_effect = dropbox.exceptions.AuthError(
-            12345, "Some error"
-        )
+        refresh_access_token_mock.side_effect = dropbox.exceptions.AuthError(12345, "Some error")
 
         with self.assertRaises(dropbox.exceptions.AuthError):
             dsmr_dropbox.services.get_dropbox_client(self.schedule_process)
@@ -89,9 +81,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     @mock.patch("dsmr_dropbox.services.should_sync_file")
     @mock.patch("dropbox.Dropbox.files_get_metadata")
     @mock.patch("django.utils.timezone.now")
-    def test_sync(
-        self, now_mock, _, should_mock, sync_file_mock, list_files_in_dir_mock, *mocks
-    ):
+    def test_sync(self, now_mock, _, should_mock, sync_file_mock, list_files_in_dir_mock, *mocks):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
         should_mock.side_effect = [False, True]  # Both branches.
         list_files_in_dir_mock.return_value = ["/tmp/fake1", "/tmp/fake2"]
@@ -179,11 +169,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.schedule_process.refresh_from_db()
         self.assertGreater(
             self.schedule_process.planned,
-            timezone.make_aware(
-                timezone.datetime(
-                    2000, 1, 1, hour=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL - 1
-                )
-            ),
+            timezone.make_aware(timezone.datetime(2000, 1, 1, hour=settings.DSMRREADER_DROPBOX_ERROR_INTERVAL - 1)),
         )
 
     @mock.patch("dsmr_dropbox.services.get_dropbox_client")
@@ -250,9 +236,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         # OK path.
         stat_result = mock.MagicMock()
         stat_result.st_size = 12345
-        stat_result.st_mtime = (
-            1500000090  # Within settings range (10s diff, 60s allowed)
-        )
+        stat_result.st_mtime = 1500000090  # Within settings range (10s diff, 60s allowed)
         stat_mock.return_value = stat_result
 
         self.assertTrue(dsmr_dropbox.services.should_sync_file(FILE))
@@ -270,9 +254,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
     ):
         DATA = b"Lots of data."
         session_start_result = mock.MagicMock()
-        type(session_start_result).session_id = mock.PropertyMock(
-            side_effect=["session-xxxxx"]
-        )
+        type(session_start_result).session_id = mock.PropertyMock(side_effect=["session-xxxxx"])
         session_start_mock.return_value = session_start_result
 
         self.assertFalse(files_upload_mock.called)
@@ -284,9 +266,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             temp_file.write(DATA)
             temp_file.flush()
 
-            dsmr_dropbox.services.upload_chunked(
-                dropbox.Dropbox("fake"), temp_file.name, "/remote-path.ext"
-            )
+            dsmr_dropbox.services.upload_chunked(dropbox.Dropbox("fake"), temp_file.name, "/remote-path.ext")
 
         # Only small file upload should be called.
         self.assertTrue(files_upload_mock.called)
@@ -299,17 +279,11 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             temp_file.write(DATA * 2 * 1024 * 1024)
             temp_file.flush()
 
-            dsmr_dropbox.services.upload_chunked(
-                dropbox.Dropbox("fake"), temp_file.name, "/remote-path.ext"
-            )
+            dsmr_dropbox.services.upload_chunked(dropbox.Dropbox("fake"), temp_file.name, "/remote-path.ext")
         self.assertTrue(session_start_mock.called)
         self.assertTrue(session_append_mock.called)
         self.assertTrue(session_finish_mock.called)
 
     def test_calculate_content_hash(self):
-        result = dsmr_dropbox.services.calculate_content_hash(
-            os.path.join(os.path.dirname(__file__), "dummy.txt")
-        )
-        self.assertEqual(
-            result, "5b1cfae049eea4a702abd22437f54a775044dbc22cc99fa97c2dce68eb368b5a"
-        )
+        result = dsmr_dropbox.services.calculate_content_hash(os.path.join(os.path.dirname(__file__), "dummy.txt"))
+        self.assertEqual(result, "5b1cfae049eea4a702abd22437f54a775044dbc22cc99fa97c2dce68eb368b5a")

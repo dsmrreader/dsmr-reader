@@ -20,11 +20,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
     status_settings = PVOutputAddStatusSettings.get_solo()
 
     # Only when enabled and credentials set.
-    if (
-        not status_settings.export
-        or not api_settings.auth_token
-        or not api_settings.system_identifier
-    ):
+    if not status_settings.export or not api_settings.auth_token or not api_settings.system_identifier:
         logger.error("PVOutput: Export disabled or no auth token/system ID set")
         scheduled_process.disable()
         return
@@ -62,9 +58,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
     )
 
     if response.status_code != 200:
-        logger.error(
-            "PVOutput: Upload failed (HTTP %s): %s", response.status_code, response.text
-        )
+        logger.error("PVOutput: Upload failed (HTTP %s): %s", response.status_code, response.text)
         scheduled_process.delay(minutes=5)
         return
 
@@ -75,9 +69,7 @@ def schedule_next_export(scheduled_process: ScheduledProcess) -> None:
     """Schedules the next export, according to user preference."""
     next_export = get_next_export()
 
-    logger.debug(
-        "PVOutput:  Delaying the next export until: %s", timezone.localtime(next_export)
-    )
+    logger.debug("PVOutput:  Delaying the next export until: %s", timezone.localtime(next_export))
     scheduled_process.reschedule(next_export)
 
 
@@ -94,20 +86,14 @@ def get_next_export() -> timezone.datetime:
     return next_export.replace(minute=minute_marker, second=0, microsecond=0)
 
 
-def get_export_data(
-    next_export: Optional[timezone.datetime], upload_delay: int
-) -> Optional[Dict]:
+def get_export_data(next_export: Optional[timezone.datetime], upload_delay: int) -> Optional[Dict]:
     """Returns the data to export. Raises exception when 'not ready'."""
     # Find the first and last consumption of today, taking any delay into account.
     local_now = timezone.localtime(timezone.now())
-    search_start = local_now.replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )  # Midnight
+    search_start = local_now.replace(hour=0, minute=0, second=0, microsecond=0)  # Midnight
     search_end = local_now - timezone.timedelta(minutes=upload_delay)
 
-    ecs = ElectricityConsumption.objects.filter(
-        read_at__gte=search_start, read_at__lte=search_end
-    )
+    ecs = ElectricityConsumption.objects.filter(read_at__gte=search_start, read_at__lte=search_end)
 
     if not ecs.exists():
         return None
@@ -118,9 +104,7 @@ def get_export_data(
 
     # Check whether we need to delay the export, until we have data that untill at least the current upload time. (#467)
     if next_export is not None:
-        expected_data_timestamp = timezone.localtime(
-            next_export - timezone.timedelta(minutes=upload_delay)
-        )
+        expected_data_timestamp = timezone.localtime(next_export - timezone.timedelta(minutes=upload_delay))
 
         if consumption_timestamp < expected_data_timestamp:
             logger.warning(

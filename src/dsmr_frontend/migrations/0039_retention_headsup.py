@@ -13,9 +13,7 @@ def migrate_forward(apps, schema_editor):
         return
 
     RetentionSettings = apps.get_model("dsmr_datalogger", "RetentionSettings")
-    retention_is_enabled = RetentionSettings.objects.filter(
-        data_retention_in_hours__isnull=False
-    )
+    retention_is_enabled = RetentionSettings.objects.filter(data_retention_in_hours__isnull=False)
 
     if retention_is_enabled:
         # Skip when already using retention.

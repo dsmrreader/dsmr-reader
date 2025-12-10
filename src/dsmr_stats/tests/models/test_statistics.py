@@ -31,9 +31,7 @@ class TestHourStatistics(TestCase):
             start=(now - timezone.timedelta(weeks=4)).date(),
             end=now.date(),
         )
-        self.assertEqual(
-            average_consumption[0]["avg_gas"], 0
-        )  # Would have been 'None' before.
+        self.assertEqual(average_consumption[0]["avg_gas"], 0)  # Would have been 'None' before.
 
 
 class TestDayStatistics(TestCase):

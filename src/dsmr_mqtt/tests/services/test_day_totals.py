@@ -14,9 +14,7 @@ import dsmr_mqtt.services.callbacks
 class TestDaytotals(TestCase):
     def setUp(self):
         self.json_settings = day_totals.JSONDayTotalsMQTTSettings.get_solo()
-        self.split_topic_settings = (
-            day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
-        )
+        self.split_topic_settings = day_totals.SplitTopicDayTotalsMQTTSettings.get_solo()
         self.timestamp = timezone.now()
 
         # Mapping.
@@ -246,17 +244,11 @@ fixed_cost = dsmr/rrr
         called_kwargs = [x[1] for x in queue_message_mock.call_args_list]
 
         # Without gas or costs.
-        self.assertIn(
-            {"payload": Decimal("12.000"), "topic": "dsmr/aaa"}, called_kwargs
-        )
-        self.assertIn(
-            {"payload": Decimal("14.000"), "topic": "dsmr/bbb"}, called_kwargs
-        )
+        self.assertIn({"payload": Decimal("12.000"), "topic": "dsmr/aaa"}, called_kwargs)
+        self.assertIn({"payload": Decimal("14.000"), "topic": "dsmr/bbb"}, called_kwargs)
         self.assertIn({"payload": Decimal("3.000"), "topic": "dsmr/ccc"}, called_kwargs)
         self.assertIn({"payload": Decimal("5.000"), "topic": "dsmr/ddd"}, called_kwargs)
-        self.assertIn(
-            {"payload": Decimal("26.000"), "topic": "dsmr/eee"}, called_kwargs
-        )
+        self.assertIn({"payload": Decimal("26.000"), "topic": "dsmr/eee"}, called_kwargs)
         self.assertIn({"payload": Decimal("8.000"), "topic": "dsmr/fff"}, called_kwargs)
 
         self.assertIn({"payload": Decimal("4.500"), "topic": "dsmr/jjj"}, called_kwargs)
@@ -265,26 +257,12 @@ fixed_cost = dsmr/rrr
         self.assertIn({"payload": Decimal("33.00"), "topic": "dsmr/ggg"}, called_kwargs)
         self.assertIn({"payload": Decimal("60.00"), "topic": "dsmr/hhh"}, called_kwargs)
         self.assertIn({"payload": Decimal("93.00"), "topic": "dsmr/iii"}, called_kwargs)
-        self.assertIn(
-            {"payload": Decimal("136.00"), "topic": "dsmr/lll"}, called_kwargs
-        )
+        self.assertIn({"payload": Decimal("136.00"), "topic": "dsmr/lll"}, called_kwargs)
 
-        self.assertIn(
-            {"payload": Decimal("3.000000"), "topic": "dsmr/mmm"}, called_kwargs
-        )
-        self.assertIn(
-            {"payload": Decimal("5.000000"), "topic": "dsmr/nnn"}, called_kwargs
-        )
-        self.assertIn(
-            {"payload": Decimal("1.000000"), "topic": "dsmr/ooo"}, called_kwargs
-        )
-        self.assertIn(
-            {"payload": Decimal("2.000000"), "topic": "dsmr/ppp"}, called_kwargs
-        )
-        self.assertIn(
-            {"payload": Decimal("8.000000"), "topic": "dsmr/qqq"}, called_kwargs
-        )
+        self.assertIn({"payload": Decimal("3.000000"), "topic": "dsmr/mmm"}, called_kwargs)
+        self.assertIn({"payload": Decimal("5.000000"), "topic": "dsmr/nnn"}, called_kwargs)
+        self.assertIn({"payload": Decimal("1.000000"), "topic": "dsmr/ooo"}, called_kwargs)
+        self.assertIn({"payload": Decimal("2.000000"), "topic": "dsmr/ppp"}, called_kwargs)
+        self.assertIn({"payload": Decimal("8.000000"), "topic": "dsmr/qqq"}, called_kwargs)
 
-        self.assertIn(
-            {"payload": Decimal("7.000000"), "topic": "dsmr/rrr"}, called_kwargs
-        )
+        self.assertIn({"payload": Decimal("7.000000"), "topic": "dsmr/rrr"}, called_kwargs)

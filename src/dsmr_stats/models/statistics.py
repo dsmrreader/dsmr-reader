@@ -36,12 +36,8 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         verbose_name=_("Electricity tariff 2 returned diff"),
         help_text=_("The difference between the first and last reading of the day"),
     )
-    electricity1_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 1 cost")
-    )
-    electricity2_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 2 cost")
-    )
+    electricity1_cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 1 cost"))
+    electricity2_cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 2 cost"))
     # Gas readings are optional/not guaranteed.
     gas = models.DecimalField(
         max_digits=9,
@@ -80,12 +76,8 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         default=None,
         verbose_name=_("Average temperature"),
     )
-    fixed_cost = models.DecimalField(
-        max_digits=8, decimal_places=2, default=0, verbose_name=_("Fixed cost")
-    )
-    total_cost = models.DecimalField(
-        db_index=True, max_digits=8, decimal_places=2, verbose_name=_("Total cost")
-    )
+    fixed_cost = models.DecimalField(max_digits=8, decimal_places=2, default=0, verbose_name=_("Fixed cost"))
+    total_cost = models.DecimalField(db_index=True, max_digits=8, decimal_places=2, verbose_name=_("Total cost"))
 
     """ Historic meter positions """
     electricity_reading_timestamp = models.DateTimeField(
@@ -93,9 +85,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         blank=True,
         default=None,
         verbose_name=_("Electricity reading timestamp"),
-        help_text=_(
-            "When the first absolute meter position (for electricity) was read at the start of the day"
-        ),
+        help_text=_("When the first absolute meter position (for electricity) was read at the start of the day"),
     )
     electricity1_reading = models.DecimalField(
         max_digits=9,
@@ -139,9 +129,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         blank=True,
         default=None,
         verbose_name=_("Gas reading timestamp"),
-        help_text=_(
-            "When the first absolute meter position (for gas) was read at the start of the day"
-        ),
+        help_text=_("When the first absolute meter position (for gas) was read at the start of the day"),
     )
     gas_reading = models.DecimalField(
         max_digits=9,
@@ -178,9 +166,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
 class HourStatistics(ModelUpdateMixin, models.Model):
     """Hourly consumption usage summary."""
 
-    hour_start = models.DateTimeField(
-        unique=True, db_index=True, verbose_name=_("Hour start")
-    )
+    hour_start = models.DateTimeField(unique=True, db_index=True, verbose_name=_("Hour start"))
 
     electricity1 = models.DecimalField(
         max_digits=9,
@@ -204,9 +190,7 @@ class HourStatistics(ModelUpdateMixin, models.Model):
     )
 
     # Gas readings are optional/not guaranteed. But need to be zero due to averages.
-    gas = models.DecimalField(
-        max_digits=9, decimal_places=3, default=0, verbose_name=_("Gas")
-    )
+    gas = models.DecimalField(max_digits=9, decimal_places=3, default=0, verbose_name=_("Gas"))
 
     @property
     def electricity_merged(self):
@@ -223,9 +207,7 @@ class HourStatistics(ModelUpdateMixin, models.Model):
         ordering = ["hour_start"]
 
     def __str__(self):
-        return "{}: {}".format(
-            self.__class__.__name__, timezone.localtime(self.hour_start)
-        )
+        return "{}: {}".format(self.__class__.__name__, timezone.localtime(self.hour_start))
 
 
 class ElectricityStatistics(SingletonModel):

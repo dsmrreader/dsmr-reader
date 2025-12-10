@@ -19,18 +19,14 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
     automatic_update_checker = models.BooleanField(
         default=True,
         verbose_name=_("Automatically check for updates"),
-        help_text=_(
-            "Whether the application checks once in a while for new DSMR-reader release in GitHub"
-        ),
+        help_text=_("Whether the application checks once in a while for new DSMR-reader release in GitHub"),
     )
     process_sleep = models.DecimalField(
         default=1,
         max_digits=4,
         decimal_places=1,
         verbose_name=_("Backend process sleep"),
-        help_text=_(
-            "The number of seconds the application will sleep after completing a backend run."
-        ),
+        help_text=_("The number of seconds the application will sleep after completing a backend run."),
     )
     disable_gas_capability = models.BooleanField(
         default=False,
@@ -50,9 +46,7 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
     restart_required = models.BooleanField(
         default=False,
         verbose_name=_("Process restart required"),
-        help_text=_(
-            "Whether the backend process requires a restart. It should occur automatically."
-        ),
+        help_text=_("Whether the backend process requires a restart. It should occur automatically."),
     )
 
     def __str__(self):
@@ -111,9 +105,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         null=True,
         blank=True,
         verbose_name=_("Username"),
-        help_text=_(
-            "Optional: The username required to authenticate on the email server"
-        ),
+        help_text=_("Optional: The username required to authenticate on the email server"),
     )
     password = models.CharField(
         max_length=255,
@@ -121,9 +113,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         null=True,
         blank=True,
         verbose_name=_("Password"),
-        help_text=_(
-            "Optional: The password required to authenticate on the email server"
-        ),
+        help_text=_("Optional: The password required to authenticate on the email server"),
     )
     use_tls = models.BooleanField(
         default=False,

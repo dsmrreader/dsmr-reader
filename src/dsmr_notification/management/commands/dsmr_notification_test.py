@@ -17,10 +17,6 @@ class Command(BaseCommand):
             except IndexError:
                 message = "Test. 1. 2. 3."
             else:
-                message = dsmr_notification.services.create_consumption_message(
-                    day_statistics
-                )
+                message = dsmr_notification.services.create_consumption_message(day_statistics)
 
-            dsmr_notification.services.send_notification(
-                title="Test message from DSMR-reader", message=message
-            )
+            dsmr_notification.services.send_notification(title="Test message from DSMR-reader", message=message)

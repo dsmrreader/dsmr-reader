@@ -16,6 +16,4 @@ class Note(ModelUpdateMixin, models.Model):
         verbose_name_plural = _("Notes")
 
     def __str__(self):
-        return "{} | {} ({})".format(
-            self.__class__.__name__, self.description, self.day
-        )
+        return "{} | {} ({})".format(self.__class__.__name__, self.description, self.day)

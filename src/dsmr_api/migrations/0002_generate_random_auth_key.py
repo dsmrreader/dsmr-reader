@@ -12,10 +12,7 @@ def generate_random_auth_key(apps, schema_editor):
     if APISettings.objects.exists():
         return
 
-    random_auth_key = "".join(
-        random.SystemRandom().choice(string.ascii_uppercase + string.digits)
-        for _ in range(64)
-    )
+    random_auth_key = "".join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(64))
     APISettings.objects.create(auth_key=random_auth_key)
 
 

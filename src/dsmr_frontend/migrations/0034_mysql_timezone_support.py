@@ -12,9 +12,7 @@ def migrate_forward(apps, schema_editor):
 
     with connection.cursor() as cursor:
         # This will result in NULL when the timezone is unknown or unsupported.
-        cursor.execute(
-            "SELECT CONVERT_TZ('2020-01-01 00:00:00', 'UTC', 'Europe/Amsterdam')"
-        )
+        cursor.execute("SELECT CONVERT_TZ('2020-01-01 00:00:00', 'UTC', 'Europe/Amsterdam')")
 
         if cursor.fetchone() is not None:
             return

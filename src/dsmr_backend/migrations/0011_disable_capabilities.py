@@ -15,9 +15,7 @@ class Migration(migrations.Migration):
         BackendSettings = apps.get_model("dsmr_backend", "BackendSettings")
 
         if "electricity_returned" in settings.DSMRREADER_DISABLED_CAPABILITIES:
-            BackendSettings.objects.all().update(
-                disable_electricity_returned_capability=True
-            )
+            BackendSettings.objects.all().update(disable_electricity_returned_capability=True)
 
         if "gas" in settings.DSMRREADER_DISABLED_CAPABILITIES:
             BackendSettings.objects.all().update(disable_gas_capability=True)

@@ -12,8 +12,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="daystatistics",
             name="fixed_cost",
-            field=models.DecimalField(
-                decimal_places=2, default=0, max_digits=8, verbose_name="Fixed costs"
-            ),
+            field=models.DecimalField(decimal_places=2, default=0, max_digits=8, verbose_name="Fixed costs"),
         ),
     ]

@@ -36,8 +36,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="meterstatistics",
             name="dsmr_version",
-            field=models.CharField(
-                default=None, help_text="DSMR version", max_length=2, null=True
-            ),
+            field=models.CharField(default=None, help_text="DSMR version", max_length=2, null=True),
         ),
     ]

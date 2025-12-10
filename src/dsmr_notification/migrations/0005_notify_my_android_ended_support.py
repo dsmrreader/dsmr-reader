@@ -13,9 +13,7 @@ def migrate_forward(apps, schema_editor):
         return
 
     # Did we use NMA? Disable it.
-    NotificationSetting.objects.update(
-        notification_service=None, api_key=None, next_notification=None
-    )
+    NotificationSetting.objects.update(notification_service=None, api_key=None, next_notification=None)
 
     import dsmr_frontend.services
 

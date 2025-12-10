@@ -47,28 +47,18 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         }
 
         base_data = DATA_MAPPING[selected_level](selected_base_datetime.date())
-        comparison_data = DATA_MAPPING[selected_level](
-            selected_comparison_datetime.date()
-        )
+        comparison_data = DATA_MAPPING[selected_level](selected_comparison_datetime.date())
         diff_data = {}
 
         context_data["base_title"] = {
-            "days": formats.date_format(
-                selected_base_datetime.date(), "DSMR_GRAPH_LONG_DATE_FORMAT"
-            ),
-            "months": formats.date_format(
-                selected_base_datetime.date(), "DSMR_DATEPICKER_MONTH"
-            ),
+            "days": formats.date_format(selected_base_datetime.date(), "DSMR_GRAPH_LONG_DATE_FORMAT"),
+            "months": formats.date_format(selected_base_datetime.date(), "DSMR_DATEPICKER_MONTH"),
             "years": selected_base_datetime.date().year,
         }[selected_level]
 
         context_data["comparison_title"] = {
-            "days": formats.date_format(
-                selected_comparison_datetime.date(), "DSMR_GRAPH_LONG_DATE_FORMAT"
-            ),
-            "months": formats.date_format(
-                selected_comparison_datetime.date(), "DSMR_DATEPICKER_MONTH"
-            ),
+            "days": formats.date_format(selected_comparison_datetime.date(), "DSMR_GRAPH_LONG_DATE_FORMAT"),
+            "months": formats.date_format(selected_comparison_datetime.date(), "DSMR_DATEPICKER_MONTH"),
             "years": selected_comparison_datetime.date().year,
         }[selected_level]
 
@@ -76,16 +66,11 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
         unused_keys = []
 
         for k in base_data.keys():
-            if (
-                k in ("temperature_avg", "temperature_max", "temperature_min")
-                or "cost" in k
-            ):
+            if k in ("temperature_avg", "temperature_max", "temperature_min") or "cost" in k:
                 unused_keys.append(k)
 
         base_data = {k: v for k, v in base_data.items() if k not in unused_keys}
-        comparison_data = {
-            k: v for k, v in comparison_data.items() if k not in unused_keys
-        }
+        comparison_data = {k: v for k, v in comparison_data.items() if k not in unused_keys}
 
         # Calculate percentages of selection compared to base, as difference in percent.
         for k in base_data.keys():
@@ -99,9 +84,7 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
             ):
                 diff_data[k] = 0
 
-            diff_data[k] = (
-                diff_data[k] * -1
-            )  # If the result above is 10%, then we'd like to display it as -10% usage.
+            diff_data[k] = diff_data[k] * -1  # If the result above is 10%, then we'd like to display it as -10% usage.
             diff_data[k] = dsmr_consumption.services.round_decimal(diff_data[k])
 
         context_data["diff"] = diff_data

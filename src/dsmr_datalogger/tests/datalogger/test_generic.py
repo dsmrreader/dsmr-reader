@@ -111,9 +111,7 @@ class TestServices(TestCase):
             ]
         )
 
-        self.assertIsNone(
-            MeterStatistics.get_solo().electricity_tariff
-        )  # Empty model in DB.
+        self.assertIsNone(MeterStatistics.get_solo().electricity_tariff)  # Empty model in DB.
         dsmr_datalogger.services.datalogger.telegram_to_reading(data=telegram)
 
         # Should be populated now.
@@ -158,28 +156,16 @@ class TestServices(TestCase):
             "!6013\n",
         ]
         self.assertFalse(DsmrReading.objects.exists())
-        dsmr_datalogger.services.datalogger.telegram_to_reading(
-            data="".join(fake_telegram)
-        )
-        self.assertFalse(
-            DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists()
-        )
+        dsmr_datalogger.services.datalogger.telegram_to_reading(data="".join(fake_telegram))
+        self.assertFalse(DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists())
 
         # Alter extra device m-bus to 2, 3 and 4.
         for current_mbus in (2, 3, 4):
-            fake_telegram[-3] = "0-{}:24.2.1(151110190000W)(00845.206*m3)\r\n".format(
-                current_mbus
-            )
-            self.assertNotIn(
-                "0-1:24.2.1(151110190000W)(00845.206*m3)\r\n", fake_telegram
-            )
+            fake_telegram[-3] = "0-{}:24.2.1(151110190000W)(00845.206*m3)\r\n".format(current_mbus)
+            self.assertNotIn("0-1:24.2.1(151110190000W)(00845.206*m3)\r\n", fake_telegram)
 
-            dsmr_datalogger.services.datalogger.telegram_to_reading(
-                data="".join(fake_telegram)
-            )
-            self.assertFalse(
-                DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists()
-            )
+            dsmr_datalogger.services.datalogger.telegram_to_reading(data="".join(fake_telegram))
+            self.assertFalse(DsmrReading.objects.filter(extra_device_timestamp__isnull=True).exists())
 
     def test_validate_checksum(self):
         """Verify that CRC checks."""
@@ -226,9 +212,7 @@ class TestServices(TestCase):
         ]
 
         with self.assertRaises(InvalidTelegramError):
-            dsmr_datalogger.services.datalogger.telegram_to_reading(
-                data="".join(telegram)
-            )
+            dsmr_datalogger.services.datalogger.telegram_to_reading(data="".join(telegram))
 
         # Again, with the expected checksum.
         telegram[-1] = "!58C8\n"
@@ -253,9 +237,7 @@ class TestDsmrVersionMapping(InterceptCommandStdoutMixin, TestCase):
             DataloggerSettings.DSMR_VERSION_2_3,
         )
 
-        connection_parameters = (
-            dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
-        )
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters["baudrate"], 9600)
         self.assertEqual(connection_parameters["bytesize"], serial.SEVENBITS)
         self.assertEqual(connection_parameters["parity"], serial.PARITY_EVEN)
@@ -267,41 +249,31 @@ class TestDsmrVersionMapping(InterceptCommandStdoutMixin, TestCase):
             DataloggerSettings.DSMR_VERSION_4_PLUS,
         )
 
-        connection_parameters = (
-            dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
-        )
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters["baudrate"], 115200)
         self.assertEqual(connection_parameters["bytesize"], serial.EIGHTBITS)
         self.assertEqual(connection_parameters["parity"], serial.PARITY_NONE)
 
     def test_dsmr_fluvius(self):
-        DataloggerSettings.get_solo().update(
-            dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS
-        )
+        DataloggerSettings.get_solo().update(dsmr_version=DataloggerSettings.DSMR_BELGIUM_FLUVIUS)
         self.assertEqual(
             DataloggerSettings.get_solo().dsmr_version,
             DataloggerSettings.DSMR_BELGIUM_FLUVIUS,
         )
 
-        connection_parameters = (
-            dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
-        )
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters["baudrate"], 115200)
         self.assertEqual(connection_parameters["bytesize"], serial.EIGHTBITS)
         self.assertEqual(connection_parameters["parity"], serial.PARITY_NONE)
 
     def test_dsmr_smarty(self):
-        DataloggerSettings.get_solo().update(
-            dsmr_version=DataloggerSettings.DSMR_LUXEMBOURG_SMARTY
-        )
+        DataloggerSettings.get_solo().update(dsmr_version=DataloggerSettings.DSMR_LUXEMBOURG_SMARTY)
         self.assertEqual(
             DataloggerSettings.get_solo().dsmr_version,
             DataloggerSettings.DSMR_LUXEMBOURG_SMARTY,
         )
 
-        connection_parameters = (
-            dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
-        )
+        connection_parameters = dsmr_datalogger.services.datalogger.get_dsmr_connection_parameters()
         self.assertEqual(connection_parameters["baudrate"], 115200)
         self.assertEqual(connection_parameters["bytesize"], serial.EIGHTBITS)
         self.assertEqual(connection_parameters["parity"], serial.PARITY_NONE)
@@ -332,23 +304,11 @@ class TestMeterStatistics(TestCase):
         )
         # Some changes should not be logged and some should.
         self.assertEqual(MeterStatisticsChange.objects.count(), 5)
-        self.assertTrue(
-            MeterStatisticsChange.objects.filter(field="power_failure_count").exists()
-        )
-        self.assertTrue(
-            MeterStatisticsChange.objects.filter(field="voltage_sag_count_l2").exists()
-        )
-        self.assertTrue(
-            MeterStatisticsChange.objects.filter(field="voltage_sag_count_l3").exists()
-        )
-        self.assertTrue(
-            MeterStatisticsChange.objects.filter(field="power_failure_count").exists()
-        )
-        self.assertTrue(
-            MeterStatisticsChange.objects.filter(
-                field="voltage_swell_count_l3"
-            ).exists()
-        )
+        self.assertTrue(MeterStatisticsChange.objects.filter(field="power_failure_count").exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field="voltage_sag_count_l2").exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field="voltage_sag_count_l3").exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field="power_failure_count").exists())
+        self.assertTrue(MeterStatisticsChange.objects.filter(field="voltage_swell_count_l3").exists())
 
         self.assertTrue(
             MeterStatisticsChange.objects.filter(

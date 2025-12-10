@@ -26,9 +26,7 @@ class Command(BaseCommand):  # noqa
             user = User.objects.get(username=username, is_superuser=True)
         except User.DoesNotExist:
             print('Creating new superuser "{}"'.format(username))
-            user = User.objects.create_superuser(
-                username, "{}@localhost".format(username), password
-            )
+            user = User.objects.create_superuser(username, "{}@localhost".format(username), password)
         else:
             print('Updating password of superuser "{}"'.format(username))
             user.set_password(password)
@@ -37,6 +35,4 @@ class Command(BaseCommand):  # noqa
 
         # Do not allow any other users to be active at the same time.
         print("Deactivating any other existing superusers")
-        User.objects.filter(is_superuser=True).exclude(pk=user.pk).update(
-            is_active=False
-        )
+        User.objects.filter(is_superuser=True).exclude(pk=user.pk).update(is_active=False)

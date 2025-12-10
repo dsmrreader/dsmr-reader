@@ -60,9 +60,7 @@ class Command(BaseCommand):
         if self.max_batches < 0:
             self.max_batches = 1
 
-        logger.info(
-            "INFLUXDB EXPORT: Connecting to InfluxDB (ignore bucket name logged)"
-        )
+        logger.info("INFLUXDB EXPORT: Connecting to InfluxDB (ignore bucket name logged)")
         self.influxdb_client = dsmr_influxdb.services.initialize_client()
 
         logger.info(
@@ -70,9 +68,7 @@ class Command(BaseCommand):
             self.target_influx_bucket,
         )
 
-        if not self.influxdb_client.buckets_api().find_bucket_by_name(
-            self.target_influx_bucket
-        ):
+        if not self.influxdb_client.buckets_api().find_bucket_by_name(self.target_influx_bucket):
             self.influxdb_client.buckets_api().create_bucket(
                 bucket_name=self.target_influx_bucket,
                 org=influxdb_settings.organization,
@@ -84,9 +80,7 @@ class Command(BaseCommand):
         logger.info("INFLUXDB EXPORT: Listing mapped reading fields")
         reading_fields = self.list_reading_fields()
 
-        logger.info(
-            "INFLUXDB EXPORT: Fetching last PK synced from export_progress_meta in InfluxDB"
-        )
+        logger.info("INFLUXDB EXPORT: Fetching last PK synced from export_progress_meta in InfluxDB")
         last_pk = self.fetch_last_pk_synced()
 
         logger.info(
@@ -100,9 +94,7 @@ class Command(BaseCommand):
             last_pk,
             max_readings,
         )
-        readings = DsmrReading.objects.filter(pk__gt=last_pk).values_list(
-            *reading_fields, named=True
-        )[0:max_readings]
+        readings = DsmrReading.objects.filter(pk__gt=last_pk).values_list(*reading_fields, named=True)[0:max_readings]
         paginator = Paginator(readings, self.READINGS_PER_BATCH)
 
         if not paginator.count:
@@ -112,9 +104,7 @@ class Command(BaseCommand):
 
     def list_reading_fields(self):
         """For performance."""
-        return ["pk", "timestamp"] + [
-            f for _, y in self.field_mapping.items() for f, _ in y.items()
-        ]
+        return ["pk", "timestamp"] + [f for _, y in self.field_mapping.items() for f, _ in y.items()]
 
     def fetch_last_pk_synced(self):
         """Continue progress where left off."""
@@ -172,16 +162,12 @@ class Command(BaseCommand):
                     if value is None:
                         continue
 
-                    measurement_fields[influxdb_field] = getattr(
-                        current_reading, reading_field
-                    )
+                    measurement_fields[influxdb_field] = getattr(current_reading, reading_field)
 
                 if not measurement_fields:
                     continue
 
-                with self.influxdb_client.write_api(
-                    write_options=SYNCHRONOUS
-                ) as write_api:
+                with self.influxdb_client.write_api(write_options=SYNCHRONOUS) as write_api:
                     try:
                         write_api.write(
                             bucket=self.target_influx_bucket,
@@ -193,9 +179,7 @@ class Command(BaseCommand):
                             },
                         )
                     except Exception as error:
-                        logger.error(
-                            "INFLUXDB EXPORT: Writing measurement(s) failed: %s", error
-                        )
+                        logger.error("INFLUXDB EXPORT: Writing measurement(s) failed: %s", error)
                         raise
 
                     write_api.write(

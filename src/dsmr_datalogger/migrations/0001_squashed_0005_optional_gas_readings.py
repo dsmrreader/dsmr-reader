@@ -137,51 +137,35 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "power_failure_count",
-                    models.IntegerField(
-                        help_text="Number of power failures in any phase"
-                    ),
+                    models.IntegerField(help_text="Number of power failures in any phase"),
                 ),
                 (
                     "long_power_failure_count",
-                    models.IntegerField(
-                        help_text="Number of long power failures in any phase"
-                    ),
+                    models.IntegerField(help_text="Number of long power failures in any phase"),
                 ),
                 (
                     "voltage_sag_count_l1",
-                    models.IntegerField(
-                        help_text="Number of voltage sags/dips in phase L1"
-                    ),
+                    models.IntegerField(help_text="Number of voltage sags/dips in phase L1"),
                 ),
                 (
                     "voltage_sag_count_l2",
-                    models.IntegerField(
-                        help_text="Number of voltage sags/dips in phase L2 (polyphase meters only)"
-                    ),
+                    models.IntegerField(help_text="Number of voltage sags/dips in phase L2 (polyphase meters only)"),
                 ),
                 (
                     "voltage_sag_count_l3",
-                    models.IntegerField(
-                        help_text="Number of voltage sags/dips in phase L3 (polyphase meters only)"
-                    ),
+                    models.IntegerField(help_text="Number of voltage sags/dips in phase L3 (polyphase meters only)"),
                 ),
                 (
                     "voltage_swell_count_l1",
-                    models.IntegerField(
-                        help_text="Number of voltage swells in phase L1"
-                    ),
+                    models.IntegerField(help_text="Number of voltage swells in phase L1"),
                 ),
                 (
                     "voltage_swell_count_l2",
-                    models.IntegerField(
-                        help_text="Number of voltage swells in phase L2 (polyphase meters only)"
-                    ),
+                    models.IntegerField(help_text="Number of voltage swells in phase L2 (polyphase meters only)"),
                 ),
                 (
                     "voltage_swell_count_l3",
-                    models.IntegerField(
-                        help_text="Number of voltage swells in phase L3 (polyphase meters only)"
-                    ),
+                    models.IntegerField(help_text="Number of voltage swells in phase L3 (polyphase meters only)"),
                 ),
                 (
                     "extra_device_timestamp",
@@ -386,8 +370,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="dsmrreading",
             name="extra_device_timestamp",
-            field=models.DateTimeField(
-                default=None, help_text="Last hourly reading timestamp", null=True
-            ),
+            field=models.DateTimeField(default=None, help_text="Last hourly reading timestamp", null=True),
         ),
     ]

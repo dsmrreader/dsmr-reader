@@ -18,15 +18,11 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
         (INSECURE, _("INSECURE - No HTTPS (default)")),
         (
             SECURE_CERT_NONE,
-            _(
-                "SECURE (CERT_NONE) - HTTPS, but errors are ignored (untrusted or expired certificates)"
-            ),
+            _("SECURE (CERT_NONE) - HTTPS, but errors are ignored (untrusted or expired certificates)"),
         ),
         (
             SECURE_CERT_REQUIRED,
-            _(
-                "SECURE (CERT_REQUIRED) - HTTPS and requires a valid/trusted certificate"
-            ),
+            _("SECURE (CERT_REQUIRED) - HTTPS and requires a valid/trusted certificate"),
         ),
     )
 
@@ -130,9 +126,7 @@ phase_power_current_l3 = current_l3
 extra_device_delivered = delivered
 """,
         verbose_name=_("Formatting"),
-        help_text=_(
-            "Mapping used for the measurements used in your InfluxDB database."
-        ),
+        help_text=_("Mapping used for the measurements used in your InfluxDB database."),
     )
 
     def __str__(self):

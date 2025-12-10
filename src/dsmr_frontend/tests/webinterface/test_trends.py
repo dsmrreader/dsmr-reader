@@ -41,14 +41,10 @@ class TestViews(TestCase):
         self.assertIn("frontend_settings", response.context)
 
     def test_trends_xhr_bad_request(self):
-        response = self.client.get(
-            reverse("{}:trends-xhr-avg-consumption".format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:trends-xhr-avg-consumption".format(self.namespace)))
         self.assertEqual(response.status_code, 400)
 
-        response = self.client.get(
-            reverse("{}:trends-xhr-consumption-by-tariff".format(self.namespace))
-        )
+        response = self.client.get(reverse("{}:trends-xhr-consumption-by-tariff".format(self.namespace)))
         self.assertEqual(response.status_code, 400)
 
         response = self.client.get(

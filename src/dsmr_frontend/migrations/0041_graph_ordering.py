@@ -5,14 +5,10 @@ from django.db import migrations, models
 
 def migrate_forward(apps, schema_editor):
     SortedGraph = apps.get_model("dsmr_frontend", "SortedGraph")
-    SortedGraph.objects.create(
-        name="Electricity", graph_type="electricity", sorting_order=1
-    )
+    SortedGraph.objects.create(name="Electricity", graph_type="electricity", sorting_order=1)
     SortedGraph.objects.create(name="Phases", graph_type="phases", sorting_order=2)
     SortedGraph.objects.create(name="Voltage", graph_type="voltage", sorting_order=3)
-    SortedGraph.objects.create(
-        name="Power", graph_type="power_current", sorting_order=4
-    )
+    SortedGraph.objects.create(name="Power", graph_type="power_current", sorting_order=4)
     SortedGraph.objects.create(name="Gas", graph_type="gas", sorting_order=5)
     SortedGraph.objects.create(name="Weather", graph_type="weather", sorting_order=6)
 
@@ -39,9 +35,7 @@ class Migration(migrations.Migration):
                 ("graph_type", models.CharField(max_length=32)),
                 (
                     "sorting_order",
-                    models.PositiveIntegerField(
-                        db_index=True, default=0, editable=False
-                    ),
+                    models.PositiveIntegerField(db_index=True, default=0, editable=False),
                 ),
             ],
             options={

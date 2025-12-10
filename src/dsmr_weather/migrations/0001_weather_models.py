@@ -23,9 +23,7 @@ class Migration(migrations.Migration):
                 ("read_at", models.DateTimeField(unique=True)),
                 (
                     "degrees_celcius",
-                    models.DecimalField(
-                        decimal_places=1, max_digits=4, verbose_name="Temperature (℃)"
-                    ),
+                    models.DecimalField(decimal_places=1, max_digits=4, verbose_name="Temperature (℃)"),
                 ),
             ],
         ),

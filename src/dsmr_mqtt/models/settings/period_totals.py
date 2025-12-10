@@ -11,9 +11,7 @@ class JSONCurrentPeriodTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
     enabled = models.BooleanField(
         default=False,
         verbose_name=_("Enabled"),
-        help_text=_(
-            "Whether the period totals are sent to the broker, in JSON format."
-        ),
+        help_text=_("Whether the period totals are sent to the broker, in JSON format."),
     )
     topic = models.CharField(
         max_length=256,
@@ -58,9 +56,7 @@ current_year_fixed_cost = current_year_fixed_cost
 current_year_total_cost = current_year_total_cost
 """,
         verbose_name=_("Formatting"),
-        help_text=_(
-            "Maps the field names used in the JSON message sent to the broker."
-        ),
+        help_text=_("Maps the field names used in the JSON message sent to the broker."),
     )
 
     def __str__(self):
@@ -77,9 +73,7 @@ class SplitTopicCurrentPeriodTotalsMQTTSettings(ModelUpdateMixin, SingletonModel
     enabled = models.BooleanField(
         default=False,
         verbose_name=_("Enabled"),
-        help_text=_(
-            "Whether period totals are sent to the broker, having each field sent to a different topic."
-        ),
+        help_text=_("Whether period totals are sent to the broker, having each field sent to a different topic."),
     )
     formatting = models.TextField(
         default="""

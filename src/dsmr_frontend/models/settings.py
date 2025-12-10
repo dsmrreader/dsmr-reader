@@ -29,9 +29,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
     merge_electricity_tariffs = models.BooleanField(
         default=False,
         verbose_name=_("Merge electricity tariffs"),
-        help_text=_(
-            "Whether you are using a single electricity tariff and both (high/low) should be displayed merged"
-        ),
+        help_text=_("Whether you are using a single electricity tariff and both (high/low) should be displayed merged"),
     )
 
     frontend_theme = models.IntegerField(
@@ -120,9 +118,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         choices=GRAPH_STYLES,
         default=GRAPH_STYLE_BAR,
         verbose_name=_("Gas graph style"),
-        help_text=_(
-            "Using the bar style will help you distinguish empty values better"
-        ),
+        help_text=_("Using the bar style will help you distinguish empty values better"),
     )
     electricity_graph_style = models.CharField(
         max_length=4,
@@ -134,9 +130,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
     stack_electricity_graphs = models.BooleanField(
         default=True,
         verbose_name=_("Stack electricity graphs"),
-        help_text=_(
-            "Stacking, in combination with the bar graph style, distinguishes tariffs better"
-        ),
+        help_text=_("Stacking, in combination with the bar graph style, distinguishes tariffs better"),
     )
     tariff_1_delivered_name = models.CharField(
         max_length=30,
@@ -190,9 +184,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
 class SortedGraph(SortableMixin, models.Model):
     name = models.CharField(max_length=64)
     graph_type = models.CharField(max_length=32)
-    sorting_order = models.PositiveIntegerField(
-        default=0, editable=False, db_index=True
-    )
+    sorting_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
     def __str__(self):
         return self.name

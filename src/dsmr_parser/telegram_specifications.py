@@ -93,9 +93,7 @@ V4 = {
         obis.INSTANTANEOUS_ACTIVE_POWER_L2_NEGATIVE: CosemParser(ValueParser(Decimal)),
         obis.INSTANTANEOUS_ACTIVE_POWER_L3_NEGATIVE: CosemParser(ValueParser(Decimal)),
         obis.EQUIPMENT_IDENTIFIER_GAS: CosemParser(ValueParser(str)),
-        obis.HOURLY_GAS_METER_READING: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        obis.HOURLY_GAS_METER_READING: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
     },
 }
 
@@ -139,9 +137,7 @@ V5 = {
         obis.INSTANTANEOUS_ACTIVE_POWER_L2_NEGATIVE: CosemParser(ValueParser(Decimal)),
         obis.INSTANTANEOUS_ACTIVE_POWER_L3_NEGATIVE: CosemParser(ValueParser(Decimal)),
         obis.EQUIPMENT_IDENTIFIER_GAS: CosemParser(ValueParser(str)),
-        obis.HOURLY_GAS_METER_READING: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        obis.HOURLY_GAS_METER_READING: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
     },
 }
 
@@ -186,49 +182,29 @@ BELGIUM_FLUVIUS = {
         obis.BELGIUM_MBUS1_DEVICE_TYPE: CosemParser(ValueParser(int)),
         obis.BELGIUM_MBUS1_EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
         obis.BELGIUM_MBUS1_VALVE_POSITION: CosemParser(ValueParser(int)),
-        obis.BELGIUM_MBUS1_METER_READING1: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
-        obis.BELGIUM_MBUS1_METER_READING2: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        obis.BELGIUM_MBUS1_METER_READING1: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
+        obis.BELGIUM_MBUS1_METER_READING2: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
         obis.BELGIUM_MBUS2_DEVICE_TYPE: CosemParser(ValueParser(int)),
         obis.BELGIUM_MBUS2_EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
         obis.BELGIUM_MBUS2_VALVE_POSITION: CosemParser(ValueParser(int)),
-        obis.BELGIUM_MBUS2_METER_READING1: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
-        obis.BELGIUM_MBUS2_METER_READING2: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        obis.BELGIUM_MBUS2_METER_READING1: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
+        obis.BELGIUM_MBUS2_METER_READING2: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
         obis.BELGIUM_MBUS3_DEVICE_TYPE: CosemParser(ValueParser(int)),
         obis.BELGIUM_MBUS3_EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
         obis.BELGIUM_MBUS3_VALVE_POSITION: CosemParser(ValueParser(int)),
-        obis.BELGIUM_MBUS3_METER_READING1: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
-        obis.BELGIUM_MBUS3_METER_READING2: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        obis.BELGIUM_MBUS3_METER_READING1: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
+        obis.BELGIUM_MBUS3_METER_READING2: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
         obis.BELGIUM_MBUS4_DEVICE_TYPE: CosemParser(ValueParser(int)),
         obis.BELGIUM_MBUS4_EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
         obis.BELGIUM_MBUS4_VALVE_POSITION: CosemParser(ValueParser(int)),
-        obis.BELGIUM_MBUS4_METER_READING1: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
-        obis.BELGIUM_MBUS4_METER_READING2: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        obis.BELGIUM_MBUS4_METER_READING1: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
+        obis.BELGIUM_MBUS4_METER_READING2: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
         # @TODO DSMR-reader legacy. Should eventually be dropped or selected automatically in a future release.
         obis.BELGIUM_MBUS_WILDCARD_DEVICE_TYPE: CosemParser(ValueParser(int)),
         obis.BELGIUM_MBUS_WILDCARD_EQUIPMENT_IDENTIFIER: CosemParser(ValueParser(str)),
         obis.BELGIUM_MBUS_WILDCARD_VALVE_POSITION: CosemParser(ValueParser(int)),
-        obis.BELGIUM_MBUS_WILDCARD_METER_READING1: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
-        obis.BELGIUM_MBUS_WILDCARD_METER_READING2: MBusParser(
-            ValueParser(timestamp), ValueParser(Decimal)
-        ),
+        obis.BELGIUM_MBUS_WILDCARD_METER_READING1: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
+        obis.BELGIUM_MBUS_WILDCARD_METER_READING2: MBusParser(ValueParser(timestamp), ValueParser(Decimal)),
     },
 }
 

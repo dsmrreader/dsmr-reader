@@ -30,9 +30,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_("Tariff 1 delivered price (€/kWh)"),
-        help_text=_(
-            "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
-        ),
+        help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
     electricity_delivered_2_price = models.DecimalField(
         max_digits=11,
@@ -40,9 +38,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_("Tariff 2 delivered price (€/kWh)"),
-        help_text=_(
-            "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
-        ),
+        help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
     gas_price = models.DecimalField(
         max_digits=11,
@@ -50,9 +46,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_("Gas price (€/m³)"),
-        help_text=_(
-            "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
-        ),
+        help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
     electricity_returned_1_price = models.DecimalField(
         max_digits=11,
@@ -60,9 +54,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_("Tariff 1 returned price (€/kWh)"),
-        help_text=_(
-            "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
-        ),
+        help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
     electricity_returned_2_price = models.DecimalField(
         max_digits=11,
@@ -70,9 +62,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         default=0,
         validators=[MinValueValidator(0)],
         verbose_name=_("Tariff 2 returned price (€/kWh)"),
-        help_text=_(
-            "Set to zero when: Unused / Defined in other contract / Not applicable to your situation"
-        ),
+        help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
     fixed_daily_cost = models.DecimalField(
         max_digits=11,

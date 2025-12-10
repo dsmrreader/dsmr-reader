@@ -14,14 +14,10 @@ import dsmrreader
 DSMR-reader project settings (non Django related).
 """
 
-DSMRREADER_LOGLEVEL = config(
-    "DSMRREADER_LOGLEVEL", cast=Choices(["DEBUG", "WARNING", "ERROR"]), default="ERROR"
-)
+DSMRREADER_LOGLEVEL = config("DSMRREADER_LOGLEVEL", cast=Choices(["DEBUG", "WARNING", "ERROR"]), default="ERROR")
 
 if DSMRREADER_LOGLEVEL in ("DEBUG", "WARNING"):
-    LOGGING["loggers"]["dsmrreader"][
-        "level"
-    ] = DSMRREADER_LOGLEVEL  # type:ignore[index]
+    LOGGING["loggers"]["dsmrreader"]["level"] = DSMRREADER_LOGLEVEL  # type:ignore[index]
 
 # Query debugging. VERY VERBOSE! Undocumented on purpose as well.
 DSMRREADER_LOG_QUERIES = config("DSMRREADER_LOG_QUERIES", cast=bool, default=False)
@@ -29,28 +25,20 @@ DSMRREADER_LOG_QUERIES = config("DSMRREADER_LOG_QUERIES", cast=bool, default=Fal
 if DSMRREADER_LOG_QUERIES:
     LOGGING["loggers"]["django.db"]["level"] = "DEBUG"  # type:ignore[index]
 
-CACHES["mqtt"]["TIMEOUT"] = config(
-    "DSMRREADER_MQTT_MAX_CACHE_TIMEOUT", cast=int, default=0
-)
+CACHES["mqtt"]["TIMEOUT"] = config("DSMRREADER_MQTT_MAX_CACHE_TIMEOUT", cast=int, default=0)
 
-DSMRREADER_PLUGINS = config(
-    "DSMRREADER_PLUGINS", cast=Csv(post_process=tuple), default=""
-)
+DSMRREADER_PLUGINS = config("DSMRREADER_PLUGINS", cast=Csv(post_process=tuple), default="")
 
 # Officially we only support PostgreSQL, but w/e.
 DSMRREADER_SUPPORTED_DB_VENDORS = ("postgresql", "mysql")
 
 DSMRREADER_BACKUP_PG_DUMP = "pg_dump"
 DSMRREADER_BACKUP_MYSQLDUMP = "mysqldump"
-DSMRREADER_BACKUP_NAME_PREFIX = (
-    config(  # @deprecated since v5.9, will be dropped in v6.x
-        "DSMRREADER_BACKUP_NAME_PREFIX", cast=str, default=""
-    )
+DSMRREADER_BACKUP_NAME_PREFIX = config(  # @deprecated since v5.9, will be dropped in v6.x
+    "DSMRREADER_BACKUP_NAME_PREFIX", cast=str, default=""
 )
-DSMRREADER_BACKUP_INTERVAL_DAYS = (
-    config(  # @deprecated since v5.9, will be dropped in v6.x
-        "DSMRREADER_BACKUP_INTERVAL_DAYS", cast=int, default=0
-    )
+DSMRREADER_BACKUP_INTERVAL_DAYS = config(  # @deprecated since v5.9, will be dropped in v6.x
+    "DSMRREADER_BACKUP_INTERVAL_DAYS", cast=int, default=0
 )
 
 DSMRREADER_BACKUP_SQLITE = "sqlite3"
@@ -62,9 +50,7 @@ DSMRREADER_MAIN_BRANCH = "v6"
 DSMRREADER_VERSION = dsmrreader.__version__
 DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_USER_AGENT = "DSMR-reader v{}".format(DSMRREADER_VERSION)
-DSMRREADER_LATEST_RELEASES_LIST = (
-    "https://api.github.com/repos/dsmrreader/dsmr-reader/releases"
-)
+DSMRREADER_LATEST_RELEASES_LIST = "https://api.github.com/repos/dsmrreader/dsmr-reader/releases"
 
 # Scheduled Process modules. DO NOT RELOCATE WITHOUT DB MIGRATION!
 DSMRREADER_MODULE_EMAIL_BACKUP = "dsmr_backup.services.email.run"
@@ -73,9 +59,7 @@ DSMRREADER_MODULE_WEATHER_UPDATE = "dsmr_weather.services.run"
 DSMRREADER_MODULE_STATS_GENERATOR = "dsmr_stats.services.run"
 DSMRREADER_MODULE_MINDERGAS_EXPORT = "dsmr_mindergas.services.run"
 DSMRREADER_MODULE_GENERATE_CONSUMPTION = "dsmr_consumption.services.run"
-DSMRREADER_MODULE_CALCULATE_QUARTER_HOUR_PEAKS = (
-    "dsmr_consumption.services.run_quarter_hour_peaks"
-)
+DSMRREADER_MODULE_CALCULATE_QUARTER_HOUR_PEAKS = "dsmr_consumption.services.run_quarter_hour_peaks"
 DSMRREADER_MODULE_RETENTION_DATA_ROTATION = "dsmr_datalogger.services.retention.run"
 DSMRREADER_MODULE_DAILY_BACKUP = "dsmr_backup.services.backup.run"
 DSMRREADER_MODULE_DROPBOX_EXPORT = "dsmr_dropbox.services.run"
@@ -86,15 +70,11 @@ DSMRREADER_LOGGER_STACKTRACE_LIMIT = 20 if DSMRREADER_LOGLEVEL == "DEBUG" else 0
 
 
 # Refers to the Dropbox app "Official DSMR-Reader" which is a "Scoped App (App Folder)". Public access allowed with PKCE
-DSMRREADER_DROPBOX_APP_KEY = config(
-    "DSMRREADER_DROPBOX_APP_KEY", cast=str, default="w5z4vlw9t2dqq5g"
-)
+DSMRREADER_DROPBOX_APP_KEY = config("DSMRREADER_DROPBOX_APP_KEY", cast=str, default="w5z4vlw9t2dqq5g")
 
 DSMRREADER_DROPBOX_MAX_FILE_MODIFICATION_TIME = 60 * 60 * 24 * 7
 DSMRREADER_DROPBOX_SYNC_INTERVAL = 1  # Only check for changes once per hour.
-DSMRREADER_DROPBOX_ERROR_INTERVAL = (
-    12  # Skip new files for 12 hours when insufficient space in Dropbox account.
-)
+DSMRREADER_DROPBOX_ERROR_INTERVAL = 12  # Skip new files for 12 hours when insufficient space in Dropbox account.
 
 DSMRREADER_CLIENT_TIMEOUT = 20
 
@@ -125,9 +105,7 @@ DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES = 15
 DSMRREADER_STATUS_ALLOWED_DAY_STATISTICS_LAGG_IN_DAYS = 2
 
 # Number of queued messages the application will retain. Any excess will be purged.
-DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = config(
-    "DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE", cast=int, default=5000
-)
+DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE = config("DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE", cast=int, default=5000)
 DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE = 500
 
 # Number of hours to clean up in one run of applying retention.
@@ -147,12 +125,8 @@ DSMRREADER_MONITORING_CACHE = "monitoring_status"
 
 # Allow users to disable the warnings. Use at own risk.
 if config("DSMRREADER_SUPPRESS_STORAGE_SIZE_WARNINGS", cast=bool, default=False):
-    DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_READING_COUNT = (
-        999 * 1000 * 1000
-    )  # In millions
-    DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_DATABASE_SIZE = (
-        999 * 1000 * 1000 * 1000
-    )  # In GB
+    DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_READING_COUNT = 999 * 1000 * 1000  # In millions
+    DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_DATABASE_SIZE = 999 * 1000 * 1000 * 1000  # In GB
 
 DSMRREADER_SYSTEM_CHECK_001 = "dsmrreader.E001"
 DSMRREADER_SYSTEM_CHECK_002 = "dsmrreader.E002"

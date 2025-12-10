@@ -37,8 +37,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="hourstatistics",
             name="hour_start",
-            field=models.DateTimeField(
-                db_index=True, unique=True, verbose_name="Hour start"
-            ),
+            field=models.DateTimeField(db_index=True, unique=True, verbose_name="Hour start"),
         ),
     ]

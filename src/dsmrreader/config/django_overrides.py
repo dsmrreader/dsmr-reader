@@ -122,8 +122,6 @@ except UndefinedValueError:
     pass
 
 try:
-    CSRF_TRUSTED_ORIGINS = config(
-        "DJANGO_CSRF_TRUSTED_ORIGINS", cast=Csv(post_process=list)
-    )
+    CSRF_TRUSTED_ORIGINS = config("DJANGO_CSRF_TRUSTED_ORIGINS", cast=Csv(post_process=list))
 except UndefinedValueError:
     pass

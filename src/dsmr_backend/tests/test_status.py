@@ -8,9 +8,7 @@ from dsmr_backend.models.schedule import ScheduledProcess
 
 class TestStatus(TestCase):
     def setUp(self):
-        ScheduledProcess.objects.all().update(
-            active=True, planned=timezone.now() - timezone.timedelta(minutes=1)
-        )
+        ScheduledProcess.objects.all().update(active=True, planned=timezone.now() - timezone.timedelta(minutes=1))
         self.assertEqual(ScheduledProcess.objects.all().count(), 11)
 
     @override_settings(DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES=2)

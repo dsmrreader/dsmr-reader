@@ -34,9 +34,7 @@ class Export(LoginRequiredMixin, TemplateView):
             context_data["start_date"] = None
             context_data["end_date"] = None
 
-        context_data["datepicker_locale_format"] = formats.get_format(
-            "DSMR_DATEPICKER_LOCALE_FORMAT"
-        )
+        context_data["datepicker_locale_format"] = formats.get_format("DSMR_DATEPICKER_LOCALE_FORMAT")
         context_data["datepicker_date_format"] = "DSMR_DATEPICKER_DATE_FORMAT"
         return context_data
 
@@ -52,22 +50,18 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
     def form_valid(self, form):
         start_date = form.cleaned_data["start_date"]
         start_date = timezone.localtime(
-            timezone.make_aware(
-                timezone.datetime(start_date.year, start_date.month, start_date.day)
-            )
+            timezone.make_aware(timezone.datetime(start_date.year, start_date.month, start_date.day))
         )
         end_date = form.cleaned_data["end_date"]
         end_date = timezone.localtime(
-            timezone.make_aware(
-                timezone.datetime(end_date.year, end_date.month, end_date.day)
-            )
+            timezone.make_aware(timezone.datetime(end_date.year, end_date.month, end_date.day))
         )
         data_type = form.cleaned_data["data_type"]
 
         if data_type == ExportAsCsvForm.DATA_TYPE_DAY:
-            source_data = DayStatistics.objects.filter(
-                day__gte=start_date.date(), day__lte=end_date.date()
-            ).order_by("day")
+            source_data = DayStatistics.objects.filter(day__gte=start_date.date(), day__lte=end_date.date()).order_by(
+                "day"
+            )
             export_fields = [
                 "day",
                 "electricity1",
@@ -90,9 +84,9 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
             ]
 
         elif data_type == ExportAsCsvForm.DATA_TYPE_HOUR:
-            source_data = HourStatistics.objects.filter(
-                hour_start__gte=start_date, hour_start__lte=end_date
-            ).order_by("hour_start")
+            source_data = HourStatistics.objects.filter(hour_start__gte=start_date, hour_start__lte=end_date).order_by(
+                "hour_start"
+            )
             export_fields = [
                 "hour_start",
                 "electricity1",
@@ -103,9 +97,9 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
             ]
 
         else:  # if data_type == ExportAsCsvForm.DATA_TYPE_TEMPERATURE:
-            source_data = TemperatureReading.objects.filter(
-                read_at__gte=start_date, read_at__lte=end_date
-            ).order_by("read_at")
+            source_data = TemperatureReading.objects.filter(read_at__gte=start_date, read_at__lte=end_date).order_by(
+                "read_at"
+            )
             export_fields = ["read_at", "degrees_celcius"]
 
         # Direct copy from Django docs.
@@ -125,9 +119,7 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
         attachment_name = "dsmrreader-data-export---{}__{}__{}.csv".format(
             data_type, start_date.date(), end_date.date()
         )
-        response["Content-Disposition"] = 'attachment; filename="{}"'.format(
-            attachment_name
-        )
+        response["Content-Disposition"] = 'attachment; filename="{}"'.format(attachment_name)
         return response
 
     def _generate_csv_row(self, writer, data, fields):
@@ -142,10 +134,7 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
 
         for current_data in data:
             yield writer.writerow(
-                [
-                    self._serialize_field(getattr(current_data, current_field))
-                    for current_field in fields
-                ]
+                [self._serialize_field(getattr(current_data, current_field)) for current_field in fields]
             )
 
     def _serialize_field(self, data):

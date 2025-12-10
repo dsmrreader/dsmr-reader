@@ -64,10 +64,7 @@ def on_terminate_persistent_client(client, **kwargs):
 def check_influxdb_measurements_queue(**kwargs) -> Optional[MonitoringStatusIssue]:
     from dsmr_influxdb.models import InfluxdbMeasurement
 
-    if (
-        InfluxdbMeasurement.objects.count()
-        < settings.DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE
-    ):
+    if InfluxdbMeasurement.objects.count() < settings.DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE:
         return None
 
     return MonitoringStatusIssue(

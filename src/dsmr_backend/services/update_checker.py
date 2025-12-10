@@ -22,9 +22,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
     if not is_latest_version:
         logger.debug("Update checker: Newer version of DSMR-reader available")
         dsmr_frontend.services.display_dashboard_message(
-            message=_(
-                "There is a newer version of DSMR-reader available. See the changelog for more information."
-            ),
+            message=_("There is a newer version of DSMR-reader available. See the changelog for more information."),
             redirect_to="frontend:changelog-redirect",
         )
 

@@ -11,12 +11,12 @@ def migrate_forward(apps, schema_editor):
         return
 
     FrontendSettings = apps.get_model("dsmr_frontend", "FrontendSettings")
-    FrontendSettings.objects.filter(
-        electricity_delivered_alternate_color="#7D311A"
-    ).update(electricity_delivered_alternate_color="#A43737")
-    FrontendSettings.objects.filter(
-        electricity_returned_alternate_color="#C8C864"
-    ).update(electricity_returned_alternate_color="#166C2A")
+    FrontendSettings.objects.filter(electricity_delivered_alternate_color="#7D311A").update(
+        electricity_delivered_alternate_color="#A43737"
+    )
+    FrontendSettings.objects.filter(electricity_returned_alternate_color="#C8C864").update(
+        electricity_returned_alternate_color="#166C2A"
+    )
 
 
 def migrate_backward(apps, schema_editor):

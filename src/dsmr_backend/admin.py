@@ -60,9 +60,9 @@ class BackendSettingsAdmin(SingletonModelAdmin):
 @receiver(django.db.models.signals.post_save, sender=BackendSettings)
 def handle_backend_settings_update(sender, instance, **kwargs):
     """Hook to toggle related scheduled process."""
-    ScheduledProcess.objects.filter(
-        module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER
-    ).update(active=instance.automatic_update_checker)
+    ScheduledProcess.objects.filter(module=settings.DSMRREADER_MODULE_AUTO_UPDATE_CHECKER).update(
+        active=instance.automatic_update_checker
+    )
 
 
 @admin.register(EmailSettings)
@@ -128,9 +128,7 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 
         self.message_user(
             request,
-            _(
-                "Email sent succesfully, please check your email inbox (or spam folder)."
-            ),
+            _("Email sent succesfully, please check your email inbox (or spam folder)."),
         )
         return HttpResponseRedirect(".")
 
@@ -155,9 +153,7 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
             {
                 "fields": ["planned"],
                 "description": _(
-                    _(
-                        "Only reschedule a process if you really need to, as it could cause mistimings at some point."
-                    )
+                    _("Only reschedule a process if you really need to, as it could cause mistimings at some point.")
                 ),
             },
         ),

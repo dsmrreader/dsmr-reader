@@ -22,9 +22,7 @@ def insert_notifications(apps, schema_editor):
 
     Notification.objects.create(
         message=dsmr_frontend.services.get_translated_string(
-            text=_(
-                "Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!"
-            )
+            text=_("Welcome to DSMR-reader! Please make sure to check your settings in the Configuration page!")
         ),
         redirect_to="admin:index",
     )

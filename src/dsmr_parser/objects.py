@@ -56,9 +56,7 @@ class Telegram(object):
         return output
 
     def to_json(self):
-        return json.dumps(
-            dict([[attr, json.loads(value.to_json())] for attr, value in self])
-        )
+        return json.dumps(dict([[attr, json.loads(value.to_json())] for attr, value in self]))
 
 
 class DSMRObject(object):
@@ -96,9 +94,7 @@ class MBusObject(DSMRObject):
             return self.values[1]["unit"]
 
     def __str__(self):
-        output = "{}\t[{}] at {}".format(
-            str(self.value), str(self.unit), str(self.datetime.astimezone().isoformat())
-        )
+        output = "{}\t[{}] at {}".format(str(self.value), str(self.unit), str(self.datetime.astimezone().isoformat()))
         return output
 
     def to_json(self):
@@ -223,9 +219,7 @@ class ProfileGenericObject(DSMRObject):
             values_offset = 2
             for i in range(self.buffer_length):
                 offset = values_offset + i * 2
-                self._buffer_list.append(
-                    MBusObject([self.values[offset], self.values[offset + 1]])
-                )
+                self._buffer_list.append(MBusObject([self.values[offset], self.values[offset + 1]]))
         return self._buffer_list
 
     def __str__(self):

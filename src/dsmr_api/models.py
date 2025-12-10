@@ -11,9 +11,7 @@ class APISettings(ModelUpdateMixin, SingletonModel):
     allow = models.BooleanField(
         default=False,
         verbose_name=_("Enable DSMR-reader API"),
-        help_text=_(
-            "When disabled it will reject incoming requests and return an HTTP 403 error"
-        ),
+        help_text=_("When disabled it will reject incoming requests and return an HTTP 403 error"),
     )
     auth_key = models.CharField(
         max_length=256,

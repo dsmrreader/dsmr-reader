@@ -73,9 +73,7 @@ class WeatherSettings(ModelUpdateMixin, SingletonModel):
         choices=BUIENRADAR_STATIONS,
         default=6260,  # "De Bilt"
         verbose_name=_("Buienradar weather station"),
-        help_text=_(
-            "The weather station used to measure and log outside temperatures. Choose one nearby."
-        ),
+        help_text=_("The weather station used to measure and log outside temperatures. Choose one nearby."),
     )
 
     def __str__(self):

@@ -42,9 +42,7 @@ import dsmr_backend.services.backend
 import dsmr_datalogger.signals
 
 
-class DsmrReadingViewSet(
-    mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
-):
+class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     list:
     Retrieves any readings stored. The readings are either constructed from incoming telegrams or were created using
@@ -110,14 +108,10 @@ class DsmrReadingViewSet(
     def perform_create(self, serializer):
         """Overwritten to support custom model creation signal."""
         new_instance = serializer.save()
-        dsmr_datalogger.signals.dsmr_reading_created.send_robust(
-            None, instance=new_instance
-        )
+        dsmr_datalogger.signals.dsmr_reading_created.send_robust(None, instance=new_instance)
 
 
-class MeterStatisticsViewSet(
-    mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet
-):
+class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     """
     retrieve:
     Retrieve meter statistics extracted by the datalogger. Also contains the latest telegram read for convenience.
@@ -135,9 +129,7 @@ class MeterStatisticsViewSet(
     *It should auto-update otherwise!*
     """
 
-    schema = DsmrReaderSchema(
-        get="Meter statistics: Get", patch="Meter statistics: Partial update"
-    )
+    schema = DsmrReaderSchema(get="Meter statistics: Get", patch="Meter statistics: Partial update")
     serializer_class = MeterStatisticsSerializer
 
     def get_queryset(self):  # pragma: nocover
@@ -419,6 +411,4 @@ class MonitoringIssuesView(APIView):
     def get(self, request):
         issues = dsmr_backend.services.backend.request_monitoring_status()
 
-        return Response(
-            {"problems": len(issues), "details": [x.serialize() for x in issues]}
-        )
+        return Response({"problems": len(issues), "details": [x.serialize() for x in issues]})

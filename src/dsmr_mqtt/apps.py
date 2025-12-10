@@ -33,9 +33,7 @@ class MqttAppConfig(AppConfig):
             QuarterHourPeakElectricityConsumption,
         )
 
-        raw_telegram.connect(
-            receiver=self._on_raw_telegram_signal, dispatch_uid=self.__class__
-        )
+        raw_telegram.connect(receiver=self._on_raw_telegram_signal, dispatch_uid=self.__class__)
         django.db.models.signals.post_save.connect(
             receiver=self._on_gas_consumption_created_signal,
             dispatch_uid=self.__class__,
@@ -74,15 +72,11 @@ class MqttAppConfig(AppConfig):
             logger.error("publish_json_gas_consumption() failed: %s", error)
 
         try:
-            dsmr_mqtt.services.callbacks.publish_split_topic_gas_consumption(
-                instance=instance
-            )
+            dsmr_mqtt.services.callbacks.publish_split_topic_gas_consumption(instance=instance)
         except Exception as error:
             logger.error("publish_split_topic_gas_consumption() failed: %s", error)
 
-    def _on_electricity_consumption_created_signal(
-        self, instance, created, raw, **kwargs
-    ):
+    def _on_electricity_consumption_created_signal(self, instance, created, raw, **kwargs):
         if not created or raw:
             return
 
@@ -103,9 +97,7 @@ class MqttAppConfig(AppConfig):
         except Exception as error:
             logger.error("publish_split_topic_period_totals() failed: %s", error)
 
-    def _on_quarter_hour_peak_consumption_created_signal(
-        self, instance, created, raw, **kwargs
-    ):
+    def _on_quarter_hour_peak_consumption_created_signal(self, instance, created, raw, **kwargs):
         if not created or raw:
             return
 
@@ -116,22 +108,14 @@ class MqttAppConfig(AppConfig):
         instance.read_at_end = timezone.localtime(instance.read_at_end)
 
         try:
-            dsmr_mqtt.services.callbacks.publish_json_quarter_hour_peak_consumption(
-                instance=instance
-            )
+            dsmr_mqtt.services.callbacks.publish_json_quarter_hour_peak_consumption(instance=instance)
         except Exception as error:
-            logger.error(
-                "publish_json_quarter_hour_peak_consumption() failed: %s", error
-            )
+            logger.error("publish_json_quarter_hour_peak_consumption() failed: %s", error)
 
         try:
-            dsmr_mqtt.services.callbacks.publish_split_topic_quarter_hour_peak_consumption(
-                instance=instance
-            )
+            dsmr_mqtt.services.callbacks.publish_split_topic_quarter_hour_peak_consumption(instance=instance)
         except Exception as error:
-            logger.error(
-                "publish_split_topic_quarter_hour_peak_consumption() failed: %s", error
-            )
+            logger.error("publish_split_topic_quarter_hour_peak_consumption() failed: %s", error)
 
 
 @receiver(dsmr_reading_created)

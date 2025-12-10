@@ -72,9 +72,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         blank=True,
         null=True,
         verbose_name=_("Serial port"),
-        help_text=_(
-            "For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0"
-        ),
+        help_text=_("For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0"),
     )
     network_socket_address = models.CharField(
         max_length=196,
@@ -82,17 +80,13 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         blank=True,
         null=True,
         verbose_name=_("Network socket address"),
-        help_text=_(
-            "For network input: IP address or hostname of the network device connected to smartmeter."
-        ),
+        help_text=_("For network input: IP address or hostname of the network device connected to smartmeter."),
     )
     network_socket_port = models.IntegerField(
         default=23,
         validators=[MinValueValidator(1), MaxValueValidator(65535)],
         verbose_name=_("Network socket port"),
-        help_text=_(
-            "For network input: Port of the network device connected to smartmeter."
-        ),
+        help_text=_("For network input: Port of the network device connected to smartmeter."),
     )
     process_sleep = models.DecimalField(
         default=5.0,
@@ -108,9 +102,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
     restart_required = models.BooleanField(
         default=False,
         verbose_name=_("Process restart required"),
-        help_text=_(
-            "Whether the datalogger process requires a restart. It should occur automatically."
-        ),
+        help_text=_("Whether the datalogger process requires a restart. It should occur automatically."),
     )
     override_telegram_timestamp = models.BooleanField(
         default=False,

@@ -13,9 +13,7 @@ class TestMessages(TestCase):
 
     def test_okay(self):
         self.assertFalse(queue.Message.objects.exists())
-        dsmr_mqtt.services.messages.queue_message(
-            topic=self.TOPIC, payload=self.PAYLOAD
-        )
+        dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.PAYLOAD)
         self.assertTrue(queue.Message.objects.exists())
 
     @override_settings(DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE=1)
@@ -25,15 +23,11 @@ class TestMessages(TestCase):
         cache_mock.return_value = None
 
         self.assertEqual(queue.Message.objects.all().count(), 0)
-        dsmr_mqtt.services.messages.queue_message(
-            topic=self.TOPIC, payload=self.PAYLOAD
-        )
+        dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.PAYLOAD)
         self.assertEqual(queue.Message.objects.all().count(), 1)
 
         # Max reached, should be ignored.
-        dsmr_mqtt.services.messages.queue_message(
-            topic=self.TOPIC, payload=self.DIFFERENT_PAYLOAD
-        )
+        dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.DIFFERENT_PAYLOAD)
         self.assertEqual(queue.Message.objects.all().count(), 1)
 
     @mock.patch("django.core.cache.backends.dummy.DummyCache.get")
@@ -43,16 +37,12 @@ class TestMessages(TestCase):
 
         # Same topic/payload should block message.
         self.assertFalse(queue.Message.objects.exists())
-        dsmr_mqtt.services.messages.queue_message(
-            topic=self.TOPIC, payload=self.PAYLOAD
-        )
+        dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.PAYLOAD)
         self.assertFalse(queue.Message.objects.exists())
 
         # Different payload for the same topic should be allowed
         cache_set_mock.reset_mock()
-        dsmr_mqtt.services.messages.queue_message(
-            topic=self.TOPIC, payload=self.DIFFERENT_PAYLOAD
-        )
+        dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.DIFFERENT_PAYLOAD)
         self.assertTrue(queue.Message.objects.exists())
 
         # Cache should be updated with new value.

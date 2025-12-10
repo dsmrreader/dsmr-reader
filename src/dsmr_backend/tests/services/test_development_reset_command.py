@@ -22,6 +22,4 @@ class TestCommands(InterceptCommandStdoutMixin, TestCase):
         User.objects.create_superuser("admin", "root@localhost", "some-password")
         self._intercept_command_stdout("development_reset")
 
-        self.assertIsNotNone(
-            authenticate(username="admin", password="admin")  # Success
-        )
+        self.assertIsNotNone(authenticate(username="admin", password="admin"))  # Success
