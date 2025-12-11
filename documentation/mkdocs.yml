@@ -1,9 +1,10 @@
-site_name: DSMR-reader v6 Documentation
+site_name: DSMR-reader Documentation
 site_description: DSMR-reader
 site_author: Dennis Siemensma
 copyright: © Dennis Siemensma
 theme:
   name: material
+  custom_dir: overrides
   features:  # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation
     - navigation.instant
     - navigation.tabs
@@ -14,6 +15,8 @@ theme:
     - content.code.copy
     - content.code.select
     - content.code.annotate
+    - header.autohide
+    - announce.dismiss
     - toc.follow
 markdown_extensions:
   # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types

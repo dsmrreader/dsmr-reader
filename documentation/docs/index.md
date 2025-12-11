@@ -14,6 +14,7 @@ This is the DSMR-reader documentation. See the menu on top of the page:
     [Updates](how-to/upgrade/updates.md){ .md-button }
     [Environment variables](reference/environment-variables.md){ .md-button }
     [Logs and debugging](troubleshooting/logs-debugging.md){ .md-button }
+    
     [Errors](troubleshooting/errors.md){ .md-button }
     [Smart meter issues](troubleshooting/smart-meter-issues.md){ .md-button }
     [REST API](reference/rest-api.md){ .md-button }
