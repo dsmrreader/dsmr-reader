@@ -151,7 +151,7 @@ jobs:
           pip install --upgrade pip poetry
           poetry config virtualenvs.in-project true
           poetry check
-          poetry install
+          poetry install --no-root
 
       - name: Run SQLite tests
         run: poetry run py.test --cov --cov-report=xml
