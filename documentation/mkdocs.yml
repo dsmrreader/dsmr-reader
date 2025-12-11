@@ -1,6 +1,7 @@
 site_name: DSMR-reader Documentation
 site_description: DSMR-reader
 site_author: Dennis Siemensma
+repo_url: https://github.com/dsmrreader/dsmr-reader
 copyright: © Dennis Siemensma
 theme:
   name: material
