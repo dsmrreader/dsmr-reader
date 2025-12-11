@@ -6,7 +6,7 @@ This is the DSMR-reader documentation. See the menu on top of the page:
 - **Reference** - Technical documentation and project changelog
 - **Troubleshooting** - Solutions for (common) issues
 
- They contain all documentation you need to either get started or sort something out.
+They contain all documentation you need to either get started or sort something out.
 
 !!! tip "Frequently used links"
 

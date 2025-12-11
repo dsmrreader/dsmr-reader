@@ -64,16 +64,16 @@
 !!! note "New features or changes"
 
     #### Hosting
-    - Django settings ontsluiten via envvars [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010){ .md-button }
+    - Django settings exposed via envvars [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010){ .md-button }
 
     #### MinderGas
-    - Toevoegen uitleg over tijdstip van upload naar Mindergas- by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979){ .md-button }
+    - Added explanation about upload time to MinderGas - by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979){ .md-button }
     
     #### Dropbox
     - Upgrade Dropbox SDK to version 12 ==*(version 11 breaks on 1st of January 2026)*==
 
     #### InfluxDB
-    - Gebruik Influx URL i.p.v. Influx hostname + port combinatie [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984){ .md-button }
+    - Use Influx URL instead of Influx hostname + port combination [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984){ .md-button }
     - Added command-line alias for clearing InfluxDB queue
         ``` shell
         ./manage.py dsmr_influxdb_clear_queue
@@ -116,8 +116,8 @@
 - **Fixed** Bugfix for Archive which was causing the electricity returned meter positions to be displayed at all times.
 - **Fixed** [#1767](https://github.com/dsmrreader/dsmr-reader/issues/1767) Slightly alter debug info for unsupported database engines.
 - **Fixed** [#1841](https://github.com/dsmrreader/dsmr-reader/issues/1841) Restored broken `v4-upgrade-redirect` route for legacy upgrades.
-- **Fixed** [#1901](https://github.com/dsmrreader/dsmr-reader/issues/1901) Naamgeving in configuratie van sorted graphs.
-- **Fixed** [#1945](https://github.com/dsmrreader/dsmr-reader/issues/1945) Maak intervallen in retentie nauwkeuriger. - by `RichieB2B`
+- **Fixed** [#1901](https://github.com/dsmrreader/dsmr-reader/issues/1901) Naming in sorted graphs configuration.
+- **Fixed** [#1945](https://github.com/dsmrreader/dsmr-reader/issues/1945) Make retention intervals more accurate. - by `RichieB2B`
 
 - **Changed** [#1827](https://github.com/dsmrreader/dsmr-reader/issues/1827) Update to python 3.11.2 - by `goegol`
 - **Changed** [#1861](https://github.com/dsmrreader/dsmr-reader/issues/1861) Added undocumented env var for low level datalogger usage
@@ -198,7 +198,7 @@
 
 - **Added** [#1685](https://github.com/dsmrreader/dsmr-reader/issues/1685) New undocumented `DSMRREADER_BACKUP_INTERVAL_DAYS` for overriding backup intervals - ⚠️ *Dropped again in future release*
 - **Changed** [#1636](https://github.com/dsmrreader/dsmr-reader/issues/1636) Entire codebase reformatted with Black
-- **Changed** [#1711](https://github.com/dsmrreader/dsmr-reader/issues/1711) Gebruik temperature ipv groundtemperature uit Buienradar API - by @mind04
+- **Changed** [#1711](https://github.com/dsmrreader/dsmr-reader/issues/1711) Use temperature instead of ground temperature from Buienradar API - by @mind04
 
 ### v5.6.0 - August 2022
 
