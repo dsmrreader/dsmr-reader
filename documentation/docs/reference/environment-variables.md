@@ -1,6 +1,6 @@
 # Environment variables
 
-!!! abstract ""
+!!! note ""
 
     These environment variables can be used to configure DSMR-reader and its underlying Django framework.
 
@@ -224,7 +224,7 @@ See [``DATABASES.PASSWORD`` in Django docs](https://docs.djangoproject.com/en/4.
 
 ### ``DJANGO_DATABASE_CONN_MAX_AGE``
 
-!!! info inline end ""
+!!! note inline end ""
 
     This setting is **optional**.
 
@@ -236,7 +236,7 @@ See [``DATABASES.CONN_MAX_AGE`` in Django docs](https://docs.djangoproject.com/e
 
 ### ``DJANGO_TIME_ZONE``
 
-!!! info inline end ""
+!!! note inline end ""
 
     This setting is **optional**.
 

@@ -20,9 +20,9 @@ Please make sure the ``plugin_name``,
 * is lowercase (``plugin_name`` and **not** ``PLUGIN_NAME``),
 * does not contain spaces or dashes, only use underscores and do not start the name with a digit.
 
-!!! info
+!!! note
 
-    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md).
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
 Your plugin file is imported once, so you should make sure to hook any events you want.
 
@@ -58,20 +58,23 @@ More signals may be available for use, please be careful when binding Django sav
 ## Examples:
 
 ### Example #1: Upload data to second PVOutput account
-This is an example of issue `#407 <https://github.com/dsmrreader/dsmr-reader/issues/407>`_, requesting the feature to upload data to a second PVOuput account.
+This is an example of issue [#407](https://github.com/dsmrreader/dsmr-reader/issues/407), requesting the feature to upload data to a second PVOutput account.
 
-!!! info
+!!! note
 
-    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md).
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ```ini
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.secondary_pvoutput_upload
+    ``` yaml title="compose.yml" hl_lines="4"
+    services:
+        dsmr:
+            environment:
+                DSMRREADER_PLUGINS=dsmr_plugins.modules.secondary_pvoutput_upload
     ```
 
 
 Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file):
 
-```python
+```python title="dsmr_plugins/modules/secondary_pvoutput_upload.py" hl_lines="16-17"
 import requests
 
 from django.dispatch import receiver
@@ -95,8 +98,8 @@ def handle_secondary_pvoutput_upload(**kwargs):
 
     if response.status_code != 200:
         print(' [!] PVOutput upload failed (HTTP {}): {}'.format(response.status_code, response.text))
-
 ```
+
 !!! tip
 
     Note that the ``XXXXX`` and ``YYYYY`` variables should be replace by your second set of PVOutput API credentials.
@@ -105,18 +108,21 @@ def handle_secondary_pvoutput_upload(**kwargs):
 ### Example #2: Forwarding raw telegram data to another serial port
 This is an example of issue [#557](https://github.com/dsmrreader/dsmr-reader/issues/557), allowing raw DSMR telegrams to be forwarded to another serial port.
 
-!!! info
+!!! note
 
-    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md).
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ```ini
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_serial
+    ``` yaml title="compose.yml" hl_lines="4"
+    services:
+        dsmr:
+            environment:
+                DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_serial
     ```
 
 
 Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new file):
 
-```python
+```python title="dsmr_plugins/modules/forward_raw_telegram_to_serial.py" hl_lines="11"
 import serial
 
 from django.dispatch import receiver
@@ -162,17 +168,20 @@ def handle_forward_raw_telegram_to_serial(**kwargs):
 This can be quite handy if you run multiple instances of DSMR-reader (i.e.: RaspberryPI + somewhere in cloud).
 
 
-!!! info
+!!! note
 
-    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md).
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ```ini
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
+    ``` yaml title="compose.yml" hl_lines="4"
+    services:
+        dsmr:
+            environment:
+                DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
     ```
 
 Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (new file):
 
-```python
+```python title="dsmr_plugins/modules/forward_raw_telegram_to_api.py" hl_lines="11-13"
 import requests
 import logging
 
@@ -200,7 +209,6 @@ def handle_forward_raw_telegram_to_api(**kwargs):
 
     if response.status_code != 201:
         logging.error('Server Error forwarding telegram: {}'.format(response.text))
-
 ```
 
 !!! tip
@@ -211,19 +219,21 @@ def handle_forward_raw_telegram_to_api(**kwargs):
 ### Example #4: Forwarding DSMR readings in JSON format to some API
 Use this to send DSMR readings in JSON format to some (arbitrary) API.
 
-!!! info
+!!! note
 
-    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md).
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ```ini
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_json_dsmrreading_to_api
+    ``` yaml title="compose.yml" hl_lines="4"
+    services:
+        dsmr:
+            environment:
+                DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_json_dsmrreading_to_api
     ```
 
 
 Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new file):
 
-```python
-
+```python title="dsmr_plugins/modules/forward_json_dsmrreading_to_api.py" hl_lines="26"
 import requests
 import json
 
@@ -256,23 +266,30 @@ def handle_forward_json_dsmrreading_to_api(sender, instance, created, raw, **kwa
         )
     except Exception as error:
         print('forward_json_dsmrreading_to_api:', error)
-
 ```
+
+!!! tip
+
+    Note that the ``YOUR-DSMR-HOST`` string should be replace by your second set of PVOutput API credentials.
+
 
 ### Example #5: Read telegrams using DSMRloggerWS API
 
 
-!!! info
+!!! note
 
-    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md).
+    Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ```ini
-    DSMRREADER_PLUGINS=dsmr_plugins.modules.poll_dsmrloggerws_api
+    ``` yaml title="compose.yml" hl_lines="4"
+    services:
+        dsmr:
+            environment:
+                DSMRREADER_PLUGINS=dsmr_plugins.modules.poll_dsmrloggerws_api
     ```
 
 Plugin file ``dsmr_plugins/modules/poll_dsmrloggerws_api.py`` (new file):
 
-```python
+```python title="dsmr_plugins/modules/poll_dsmrloggerws_api.py" hl_lines="10"
 import requests
 
 from django.dispatch import receiver
@@ -281,7 +298,7 @@ from dsmr_backend.signals import backend_called
 import dsmr_datalogger.services.datalogger
 
 
-# Preverve a low timeout to prevent the entire backend process from hanging too long.
+# Preserve a low timeout to prevent the entire backend process from hanging too long.
 DSMRLOGGERWS_ENDPOINT = 'http://localhost/api/v1/sm/telegram'
 DSMRLOGGERWS_TIMEOUT = 5
 
@@ -299,9 +316,8 @@ def handle_backend_called(**kwargs):
         return
 
     dsmr_datalogger.services.datalogger.telegram_to_reading(data=response.text)
-
 ```
 
 !!! tip
 
-    Note that you might need to update the ``http://localhost`` value to your own situation.
+    Note that the ``DSMRLOGGERWS_ENDPOINT`` variable should be changed to your own situation.

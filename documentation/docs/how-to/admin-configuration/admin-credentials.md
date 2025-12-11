@@ -4,8 +4,8 @@ Admin and management interface require admin access. Set credentials as follows:
 
 - Open ``compose.yml`` and add ``DSMRREADER_ADMIN_USER`` and ``DSMRREADER_ADMIN_PASSWORD`` environment variables under the `dsmr` service:
 
-``` yaml
-# Simplified compose.yml
+``` yaml title="compose.yml" hl_lines="5-6"
+# Simplified
 services:
     dsmr:
         environment:

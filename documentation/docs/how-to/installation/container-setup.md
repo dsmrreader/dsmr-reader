@@ -75,7 +75,7 @@ wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/develop
 vi compose.yml
 ```
 
-``` yaml title="compose.yml" hl_lines="6 7 11 12"
+``` yaml title="compose.yml" hl_lines="6-7 11-12"
 # Simplified - Find DUID=1001 and DGID=1001 and change them if dsmrreader has different IDs on your system.
 services:
     dsmrdb:

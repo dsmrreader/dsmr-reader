@@ -1,6 +1,6 @@
 # PVOutput.org
 
-!!! abstract "For your information"
+!!! note "For your information"
 
     This is a feature using or integrating a **third party** and may or may not break along the years.
 

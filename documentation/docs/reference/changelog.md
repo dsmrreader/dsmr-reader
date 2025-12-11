@@ -2,7 +2,7 @@
 
 ## Current release series
 
-!!! abstract ""
+!!! note ""
     The releases in this series are currently supported and will receive new features and bug/security fixes until a new major series is released *(give or take once a year)*.
 
     - Every **minor** release (e.g. `v5.x` -> `v5.y`) is *usually* compatible with any preceding release in the same series and should allow you to update easily.
@@ -269,7 +269,7 @@
 
 ### v5.0.0 - February 2022
 
-!!! info
+!!! note
 
     This release of DSMR-reader requires you to **manually upgrade** from `v4.x` to `v5.x`. See [the v5 upgrade guide](../how-to/upgrade/to-v5.md) for more information.
 

@@ -16,7 +16,8 @@ For providing their time and support.
 
 [All the other contributors](https://github.com/dsmrreader/dsmr-reader/graphs/contributors){ .md-button }
 
-*For providing an open-source license to work on DSMR-reader with PyCharm & DataGrip, free-of-charge, for many years.*:
+*For providing an open-source license to work on DSMR-reader with PyCharm & DataGrip, free-of-charge, for many years*:
+
 [JetBrains](https://www.jetbrains.com/?from=DSMR-reader){ .md-button }
 
 
@@ -28,7 +29,7 @@ For providing their time and support.
 
 ## And don't forget
 
-Credits to the following software and projects:
+Credits to the following software and projects, as DSMR-reader would not be possible without them either:
 
 - [Django Framework](https://www.djangoproject.com/)
 - Director Responsive Admin template <small>*(former website is offline)*</small>

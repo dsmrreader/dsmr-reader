@@ -22,6 +22,7 @@ This is the DSMR-reader documentation. See the menu on top of the page:
 
     [Reset admin credentials](how-to/admin-configuration/admin-credentials.md){ .md-button }
     [Credits & contributions](reference/credits-contributions.md){ .md-button }
+    [Getting help](troubleshooting/help.md){ .md-button }
 
     [About DSMR-reader](reference/about.md){ .md-button }
     [DSMR-reader on GitHub](https://github.com/dsmrreader/dsmr-reader){ .md-button .md-button--primary }

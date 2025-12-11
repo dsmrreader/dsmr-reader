@@ -4,7 +4,7 @@ DSMR-reader update process. To see (recent) updates check the [Changelog](../../
 
 ## Major updates
 
-!!! abstract ""
+!!! note ""
     
     When a new major version of DSMR-reader is released (e.g. ``v5.x`` to ``v6.0``) you need to follow additional steps.
 
@@ -17,7 +17,7 @@ When running containers, you may not even need to do anything special, other tha
 
 ## Minor updates
 
-!!! abstract ""
+!!! note ""
     
     When a new minor version of DSMR-reader is released (e.g. ``v6.0`` to ``v6.1``).
 
