@@ -47,7 +47,6 @@ sudo apt-get install ser2net
 
 ``` shell
 sudo useradd dsmrreader --create-home
-sudo loginctl enable-linger dsmrreader
 
 # Write down the IDs in the output (they are likely the same, e.g. "1001") 
 id --user dsmrreader
@@ -61,7 +60,9 @@ id --group dsmrreader
 sudo su - dsmrreader
 ```
 
-- Download container Compose template file:
+- Download container Compose template file by manually downloading it or running the command below:
+
+[View compose.yml on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/development/provisioning/container/compose.prod.yml){ .md-button }
 
 ``` shell
 # TODO: Change to "latest" after releasing DSMR-reader v6.
@@ -71,8 +72,8 @@ wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/develop
 - Configure Compose file to your needs:
 
 ``` shell
-# Or use "nano" instead of "vi" if you prefer that text editor.
 vi compose.yml
+# Or use "nano" instead of "vi" if you prefer another text editor.
 ```
 
 ``` yaml title="compose.yml" hl_lines="6-7 11-12"
@@ -108,7 +109,7 @@ services:
 - Try running the containers:
 
 ``` shell
-# This may take a few minutes, mostly depending on the hardware available.
+# This may take a moment, mostly depending on the hardware available.
 podman-compose up -d
 ```
 
@@ -129,3 +130,41 @@ podman-compose logs -f
 
 If everything looks good, you should be able to access DSMR-reader at: `http://<hostname>:7777`.
 E.g. is your hardware is accessible at `123.456.78.90`, go to: `http://123.456.78.90:7777`.
+
+
+### Automatic startup
+
+- To have DSMR-reader start automatically on boot, create a systemd user service.
+
+```shell
+mkdir -p ~/.config/systemd/user/
+```
+
+```shell
+podman generate systemd --new --name dsmr -f
+podman generate systemd --new --name dsmrdb -f
+
+mv *.service ~/.config/systemd/user/
+```
+
+- Go to root user:
+
+``` shell
+logout
+# Or press CTRL + D
+```
+
+- Enable and start the service:
+
+```shell
+sudo loginctl enable-linger dsmrreader
+sudo systemctl daemon-reload --user
+sudo systemctl --user -M dsmrreader@ enable container-dsmr.service
+sudo systemctl --user -M dsmrreader@ enable container-dsmrdb.service
+sudo systemctl --user -M dsmrreader@ enable podman-restart.service
+```
+
+- Reboot to test automatic startup:
+```shell
+sudo reboot
+```
