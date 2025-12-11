@@ -1,6 +1,6 @@
 # Updates
 
-DSMR-reader update process.
+DSMR-reader update process. To see (recent) updates check the [Changelog](../../reference/changelog.md){ .md-button }
 
 ## Major updates
 

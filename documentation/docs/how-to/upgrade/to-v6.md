@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Upgrading v5.x to v6.x
 
 DSMR-reader 6.x is not only incompatible, it also requires a different setup approach compared to DSMR-reader 5.x. See the schema's below for a schematic overview of both setups.

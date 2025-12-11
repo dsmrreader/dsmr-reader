@@ -76,12 +76,12 @@ services:
             ###- DSMRREADER_LOGLEVEL=DEBUG
 ```
 
-!!! warning "Caution"
-
-    Don't forget to **disable** DEBUG logging again whenever you are done debugging.
-
 - Apply changes:
 
 ``` shell
 podman-compose restart dsmr
 ```
+
+!!! warning "Caution"
+
+    Don't forget to **disable** DEBUG logging again whenever you are done debugging.

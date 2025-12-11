@@ -5,36 +5,44 @@ hide:
 
 # Container setup installation
 
-!!! abstract ""
+!!! note ""
 
-    The [containerized version of DSMR-reader](https://github.com/xirixiz/dsmr-reader-docker) is created and maintained by [Xirixiz a.k.a. Bram van Dartel](https://github.com/xirixiz).
-    He has been working on it since 2017 and it is widely used by the DSMR-reader community. Since DSMR-reader v6, this is also the only installation method supported.
+    The [containerized version of DSMR-reader](https://github.com/xirixiz/dsmr-reader-docker) is created and maintained by Xirixiz a.k.a. Bram van Dartel.
+    He has been working on it since 2017 and it is widely used by the DSMR-reader community. Since DSMR-reader v6 this is the only installation method supported.
 
+    [DSMR-reader Docker on GitHub](https://github.com/xirixiz/dsmr-reader-docker){ .md-button .md-button--primary } [Xirixiz](https://github.com/xirixiz){ .md-button .md-button--primary }
 
 
 This installation method is recommended for new installations of DSMR-reader.
 It uses containerization (Podman) to run DSMR-reader and its dependencies in isolated environments.
 
-Recommended is using a RaspberryPi 5 or similar hardware. Older hardware *may* work, depending on the I/O.
+!!! tip
+
+    Recommended is using a RaspberryPi 5 or similar hardware. Older hardware *may* work, depending on the I/O.
 
 This guide presumes you use Podman, however you can also use Docker or other container hosts that are compatible.
-See also: [Container setup upgrade instructions](../../how-to/upgrade/to-v6.md) for a schematic overview of the setup.
+See also [container setup upgrade instructions](../../how-to/upgrade/to-v6.md) for a schematic overview of the setup.
+
+[Schematic overview](../../how-to/upgrade/to-v6.md){ .md-button }
 
 
-## OS packages
+## Installation
+### OS packages
 - Install system packages:
 
 ``` shell
 sudo apt-get update
 sudo apt-get install podman podman-compose podman-docker crun
 podman info --debug
+```
 
+``` shell
 # It's not mandatory to use "ser2net", 
 # but it _may_ avoid some USB permission issues at the "cost" of running ser2net
 sudo apt-get install ser2net
 ```
 
-## OS user
+### OS user
 - Add dedicated system user for DSMR-reader to run on:
 
 ``` shell
@@ -46,7 +54,7 @@ id --user dsmrreader
 id --group dsmrreader
 ```
 
-## DSMR-reader user
+### DSMR-reader user
 - Login as "dsmrreader" user:
 
 ``` shell
@@ -96,7 +104,7 @@ services:
             DJANGO_SECRET_KEY=1XfxLJX28ooPoE1SB6BjaZayFDmx2JoDf5bsfIa9MZIP8HOesw
 ```
 
-## Running
+### Running
 - Try running the containers:
 
 ``` shell
@@ -116,6 +124,8 @@ ls -l
 ``` shell
 podman-compose logs -f
 ```
+
+### Testing
 
 If everything looks good, you should be able to access DSMR-reader at: `http://<hostname>:7777`.
 E.g. is your hardware is accessible at `123.456.78.90`, go to: `http://123.456.78.90:7777`.
