@@ -23,7 +23,8 @@ services:
       - POSTGRES_USER=dsmrreader_user
       - POSTGRES_PASSWORD=dsmrreader_password
     healthcheck:
-      test: [ "CMD", "pg_isready -U dsmrreader_user -d dsmrreader" ]  # TODO for you: Must match with POSTGRES_USER and POSTGRES_DB above
+      # TODO for you: Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d) above
+      test: [ "CMD", "pg_isready -U dsmrreader_user -d dsmrreader" ]
       interval: 10s
       timeout: 5s
       retries: 10
