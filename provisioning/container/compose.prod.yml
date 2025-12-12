@@ -67,17 +67,7 @@ services:
       - 7777:80
       - 7779:443
     healthcheck:
-      test:
-        [
-          "CMD",
-          "curl",
-          "-Lsf",
-          "http://127.0.0.1/healthcheck",
-          "-o",
-          "/dev/null",
-          "-w",
-          "HTTP_%{http_code}"
-        ]
+      test: ["CMD", "curl", "-Lsf", "http://127.0.0.1/healthcheck", "-o", "/dev/null", "-w", "HTTP_%{http_code}"]
       interval: 10s
       timeout: 5s
       retries: 10
