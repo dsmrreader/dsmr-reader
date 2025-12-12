@@ -23,10 +23,7 @@ services:
       - POSTGRES_USER=dsmrreader_user
       - POSTGRES_PASSWORD=dsmrreader_password
     healthcheck:
-      # postgres is the default user, please update with
-      # the DJANGO_DATABASE_USER used for dsmr-reader-docker
-      # default for DSMR Reader is dsmrreader
-      test: [ "CMD-SHELL", "pg_isready -U dsmrreader" ]
+      test: [ "CMD-SHELL", "pg_isready -U dsmrreader_user" ]  # TODO for you: Must match with POSTGRES_USER above
       interval: 10s
       timeout: 5s
       retries: 10
