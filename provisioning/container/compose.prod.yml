@@ -48,7 +48,10 @@ services:
       # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
       - DUID=1001
       - DGID=1001
-      # TODO for you: Change DJANGO_SECRET_KEY below to a long TRULY random value if you host DSMR-reader publicly facing on the Internet
+      # TODO for you: Change this if you want to use Xirixiz's built-in datalogger mapping. Set to "standalone" to resort to DSMR-reader's internals.
+      - DSMRREADER_OPERATION_MODE=standalone
+      # TODO for you: Change DJANGO_SECRET_KEY below to a truly random value if you host DSMR-reader publicly facing on the Internet
+      # TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
       - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
       # Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to restart the container after changing this.
       ###- DSMRREADER_LOGLEVEL=DEBUG
