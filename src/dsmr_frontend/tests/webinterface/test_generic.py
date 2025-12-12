@@ -62,6 +62,10 @@ class TestViews(TestCase):
             self.assertEqual(response.status_code, 302)
             self.assertTrue(response["Location"].startswith("https://dsmr-reader.readthedocs.io"))
 
+    def test_healthcheck(self):
+        response = self.client.get(reverse("{}:healthcheck".format(self.namespace)))
+        self.assertEqual(response.status_code, 200)
+
     @mock.patch("django.utils.timezone.now")
     def test_dashboard_xhr_header(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2015, 11, 15))
@@ -198,6 +202,7 @@ class TestAlwaysRequireLoginDisabled(TestCase):
         "v5-upgrade-redirect",
         "configuration",
         "status",
+        "healthcheck",
         "support",
         "export",
         "export-as-csv",

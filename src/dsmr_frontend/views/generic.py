@@ -2,7 +2,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.utils.cache import patch_response_headers
 from django.views.generic.base import RedirectView
 from django.views.generic.base import View
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 from typing import Optional
 
@@ -67,3 +67,8 @@ class V4UpgradeRedirect(ReadTheDocsRedirectView):
 class V5UpgradeRedirect(ReadTheDocsRedirectView):
     subpage = "tutorial/upgrading/to-v5.html"
     branch = "v5"
+
+
+class HealthCheck(View):
+    def get(self, request):
+        return HttpResponse(status=200)

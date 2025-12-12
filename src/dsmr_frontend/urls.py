@@ -32,6 +32,7 @@ from dsmr_frontend.views.generic import (
     V4UpgradeRedirect,
     V5UpgradeRedirect,
     StatusRedirectView,
+    HealthCheck,
 )
 from dsmr_frontend.views.energy_contracts import EnergyContracts
 from dsmr_frontend.views.live_graphs import (
@@ -80,6 +81,7 @@ urlpatterns = [
     path("compare", Compare.as_view(), name="compare"),
     path("compare/xhr/summary", CompareXhrSummary.as_view(), name="compare-xhr-summary"),
     path("status", StatusRedirectView.as_view(), name="status"),
+    path("healthcheck", HealthCheck.as_view(), name="healthcheck"),
     path("about", About.as_view(), name="about"),
     path(
         "about/xhr/update-check",
