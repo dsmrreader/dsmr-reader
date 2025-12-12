@@ -72,7 +72,7 @@ services:
           "CMD",
           "curl",
           "-Lsf",
-          "http://127.0.0.1/about",
+          "http://127.0.0.1/healthcheck",
           "-o",
           "/dev/null",
           "-w",
