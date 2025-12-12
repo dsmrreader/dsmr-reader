@@ -34,3 +34,8 @@ class TestTranslations(InterceptCommandStdoutMixin, TestCase):
             po_file_path = os.path.join(settings.LOCALE_PATHS[0], current_locale, "LC_MESSAGES", "django.po")
             po = polib.pofile(po_file_path)
             self.assertEqual(po.percent_translated(), 100)
+
+            # Strip POT-Creation-Date header to avoid timestamp differences in version control
+            if "POT-Creation-Date" in po.metadata:
+                del po.metadata["POT-Creation-Date"]
+                po.save(po_file_path)
