@@ -153,9 +153,7 @@ class InfiniteManagementCommandMixin:
 
         print(
             'Current logging level set to "{}". More information can be found here: '
-            "https://dsmr-reader.readthedocs.io".format(
-                logging.getLevelName(logging_level)
-            )
+            "https://dsmr-reader.readthedocs.io".format(logging.getLevelName(logging_level))
         )
 
 
