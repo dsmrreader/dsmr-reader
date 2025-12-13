@@ -60,16 +60,19 @@ id --group dsmrreader
 sudo su - dsmrreader
 ```
 
-- Download container Compose template file by manually downloading it or running the command below:
+- Download container Compose template file by [manually downloading](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml) it or running the command below:
 
-[View compose.yml on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/development/provisioning/container/compose.prod.yml){ .md-button }
+[View compose.yml on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml){ .md-button }
 
 ``` shell
-# TODO: Change to "latest" after releasing DSMR-reader v6.
-wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/development/provisioning/container/compose.prod.yml -O compose.yml
+wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml -O compose.yml
 ```
 
 - Configure Compose file to your needs:
+
+!!! tip
+
+    You can remove all `# TODO for you:` lines from the `compose.yml` file after completing them, or if you don't need them.
 
 ``` shell
 vi compose.yml
@@ -77,33 +80,50 @@ vi compose.yml
 ```
 
 ``` yaml title="compose.yml" hl_lines="6-7 11-12"
-# Simplified - Find DUID=1001 and DGID=1001 and change them if dsmrreader has different IDs on your system.
+# Simplified
 services:
     dsmrdb:
         environment:
-            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) 
-            # and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
+            # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
             DUID=1001
             DGID=1001
     dsmr:
         environment:
-            # Set the user and group IDs, e.g. DUID=1001 (id --user dsmrreader) 
-            # and DGID=1001 (id --group dsmrreader) of the "id" commands executed above.
+            # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
             DUID=1001
             DGID=1001
 ```
 
 - Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
-- Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and replace the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
+- Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and **replace** the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
 
-``` yaml title="compose.yml" hl_lines="6"
-# Simplified - Find DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet and change them if dsmrreader has different IDs on your system.
+``` yaml title="compose.yml" hl_lines="7"
+# Simplified
 services:
     dsmr:
         environment:
-            # Sample generated key, use your own!
-            DJANGO_SECRET_KEY=1XfxLJX28ooPoE1SB6BjaZayFDmx2JoDf5bsfIa9MZIP8HOesw
+            # TODO for you: Change DJANGO_SECRET_KEY below to a truly random value if you host DSMR-reader publicly facing the Internet
+            # TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
+            - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
 ```
+
+- Configure a password for the admin interface of DSMR-reader by setting `DSMRREADER_ADMIN_PASSWORD`:
+
+``` yaml title="compose.yml" hl_lines="6"
+# Simplified
+services:
+    dsmr:
+        environment:
+            # TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
+            - DSMRREADER_ADMIN_PASSWORD=
+```
+
+- The default admin username is `admin`. You can update it by setting `DSMRREADER_ADMIN_USERNAME` if you want to.
+
+!!! tip
+
+    You can remove all `# TODO for you:` lines from the `compose.yml` file after completing them, or if you don't need them.
+
 
 ### Running
 - Try running the containers:
@@ -123,6 +143,7 @@ ls -l
 - Check logs for any weird stuff:
 
 ``` shell
+podman-compose ps
 podman-compose logs -f
 ```
 
@@ -165,6 +186,15 @@ sudo systemctl --user -M dsmrreader@ enable podman-restart.service
 ```
 
 - Reboot to test automatic startup:
+
 ```shell
 sudo reboot
+```
+
+- After reboot, login as `dsmrreader` user again and check if containers are running:
+
+``` shell
+sudo su - dsmrreader
+
+podman-compose ps
 ```
