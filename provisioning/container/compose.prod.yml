@@ -52,9 +52,11 @@ services:
       - DGID=1001
       # TODO for you: Change this if you want to use Xirixiz's built-in datalogger mapping. Set to "standalone" to resort to DSMR-reader's internals.
       - DSMRREADER_OPERATION_MODE=standalone
-      # TODO for you: Change DJANGO_SECRET_KEY below to a truly random value if you host DSMR-reader publicly facing on the Internet
+      # TODO for you: Change DJANGO_SECRET_KEY below to a truly random value if you host DSMR-reader publicly facing the Internet
       # TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
       - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
+      # TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
+      - DSMRREADER_ADMIN_PASSWORD=
       # Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to restart the container after changing this.
       ###- DSMRREADER_LOGLEVEL=DEBUG
       # These must match with the settings configured in "dsmrdb" above.
