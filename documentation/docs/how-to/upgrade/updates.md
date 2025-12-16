@@ -26,7 +26,7 @@ When running containers, you may not even need to do anything special, other tha
 ``` shell
 sudo su - dsmrreader
 podman-compose pull
-podman-compose up -d --force-recreate
+podman-compose up -d
 ```
 
 Check in DSMR-reader if you are now running the latest version in the series.
