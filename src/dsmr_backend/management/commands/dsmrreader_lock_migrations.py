@@ -39,14 +39,10 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):
 
             latest_line = line
 
-        file_path = os.path.abspath(
-            os.path.join(
-                settings.BASE_DIR,
-                "provisioning/downgrade",
-                "v{}.sh".format(version_string),
-            )
+        file_path = os.path.join(
+            "provisioning/container/downgrade",
+            "v{}.sh".format(version_string),
         )
-        with open(file_path, "w") as handle:
-            handle.write(lock_content)
 
-        print("Locked into", file_path)
+        print("File name:", file_path)
+        print("File Contents:", lock_content)
