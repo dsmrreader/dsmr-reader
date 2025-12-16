@@ -85,6 +85,9 @@
         ./manage.py dsmr_mqtt_clear_queue
         ``` 
 
+    #### PVOutput
+    - Improved net power calculation to use average of consumption data instead of single record value [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064){ .md-button }
+
     #### Docs
     - Dropped Dutch translation for the documentation ==*(DSMR-reader application translations are **not** affected)*==
     - Fixed broken API docs rendering caused by legacy ReDoc link
@@ -189,7 +192,7 @@
 - **Fixed** [#1714](https://github.com/dsmrreader/dsmr-reader/issues/1714) Outgoing MQTT message queue not maintaining its own order
 
 > **Attention:**
-> This release fixes a four year old bug that may have disrupted the order of your MQTT messages sent by DSMR-reader.
+> This release fixes a four-year-old bug that may have disrupted the order of your MQTT messages sent by DSMR-reader.
 >
 > It only affected installations with either a high throughput of data or a delayed backend process (or both).
 > You probably may only have noticed it when running an installation similar to the one above, along using per-topic data sources.

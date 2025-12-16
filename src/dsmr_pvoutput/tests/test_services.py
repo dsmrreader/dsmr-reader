@@ -63,12 +63,12 @@ class TestServices(TestCase):
         # First sync, next day.
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.
         result = dsmr_pvoutput.services.get_export_data(next_export=None, upload_delay=0)
-        self.assertEqual(result, {"d": "20171001", "n": 1, "t": "13:00", "v3": 4000, "v4": -750})
+        self.assertEqual(result, {"d": "20171001", "n": 1, "t": "13:00", "v3": 4000, "v4": 125})
 
         # Now with all test EC's.
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))  # Include all 3 EC's.
         result = dsmr_pvoutput.services.get_export_data(next_export=None, upload_delay=0)
-        self.assertEqual(result, {"d": "20171001", "n": 1, "t": "15:00", "v3": 7000, "v4": 450})
+        self.assertEqual(result, {"d": "20171001", "n": 1, "t": "15:00", "v3": 7000, "v4": 233})
 
         # Now with delay, should not be allowed, as we wait for more data.
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.

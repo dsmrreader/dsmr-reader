@@ -22,6 +22,7 @@ Always run these in order:
 - Ensure code consistency across the project.
 - Check `documentation/` folder for typos and clarity.
 - Run all quality checks (above) before considering work complete.
+- Imports should always reside at the top of the file.
 
 ## Release Steps
 ### Verify Stable Version

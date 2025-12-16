@@ -1,0 +1,8 @@
+- Origin: https://github.com/dsmrreader/dsmr-reader/pull/2064
+- Load `agents.md` into context
+- Rework `src/dsmr_pvoutput/services.py`
+- Have `get_export_data()` return `net_power` the average of the ElectricityConsumption data queried
+- Consider directly using the ORM's average query function in favor of performance
+- Update tests accordingly
+- Shortly mention the changes in `CHANGELOG.md` below `Other changes` with a new header "PVOutput"
+- Create a `result.md` file with your output of the session and identify yourself as the author of it and name the model (with its version) used as well
