@@ -20,6 +20,11 @@ It uses containerization (Podman) to run DSMR-reader and its dependencies in iso
 
     Recommended is using a RaspberryPi 5 or similar hardware. Older hardware *may* work, depending on the I/O.
 
+!!! danger "Heads up"
+
+    Originally this project was built to run on SD-cards, but through the years it became clear that SD-cards are not reliable enough for this purpose.
+    They will randomly and suddenly get corrupted, so be warned!
+
 This guide presumes you use Podman, however you can also use Docker or other container hosts that are compatible.
 See also [container setup upgrade instructions](../../how-to/upgrade/to-v6.md) for a schematic overview of the setup.
 
@@ -36,17 +41,13 @@ sudo apt-get install podman podman-compose podman-docker crun
 podman info --debug
 ```
 
-``` shell
-# It's not mandatory to use "ser2net", 
-# but it _may_ avoid some USB permission issues at the "cost" of running ser2net
-sudo apt-get install ser2net
-```
 
 ### OS user
 - Add dedicated system user for DSMR-reader to run on:
 
 ``` shell
 sudo useradd dsmrreader --create-home
+sudo usermod -a -G dialout dsmrreader
 
 # Write down the IDs in the output (they are likely the same, e.g. "1001") 
 id --user dsmrreader
@@ -78,6 +79,20 @@ wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/prov
 vi compose.yml
 # Or use "nano" instead of "vi" if you prefer another text editor.
 ```
+
+- If your smart meter is connected via a different port or device than `/dev/ttyUSB0`, change it accordingly.
+  Or if you use the API to provide data, you can disable this line by adding a `#` at the start of the line:
+
+``` yaml title="compose.yml" hl_lines="6"
+# Simplified
+services:
+    dsmr:
+        devices:
+            # TODO for you: Disable (#) or change this if your smart meter is connected via another port or device. Or if you use the API to provide data.
+            - /dev/ttyUSB0:/dev/ttyUSB0
+```
+
+- Configure the user and group IDs for the `dsmrreader` user created earlier.
 
 ``` yaml title="compose.yml" hl_lines="6-7 11-12"
 # Simplified
