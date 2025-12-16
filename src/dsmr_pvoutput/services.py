@@ -102,7 +102,7 @@ def get_export_data(next_export: Optional[timezone.datetime], upload_delay: int)
     last = ecs.order_by("-read_at")[0]
     consumption_timestamp = timezone.localtime(last.read_at)
 
-    # Check whether we need to delay the export, until we have data that untill at least the current upload time. (#467)
+    # Check whether we need to delay the export, until we have data that until at least the current upload time. (#467)
     if next_export is not None:
         expected_data_timestamp = timezone.localtime(next_export - timezone.timedelta(minutes=upload_delay))
 
