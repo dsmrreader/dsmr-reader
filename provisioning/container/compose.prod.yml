@@ -39,6 +39,9 @@ services:
     cap_add:
       - NET_ADMIN
     restart: always
+    devices:
+      # TODO for you: Disable (#) or change this if your smart meter is connected via another port or device. Or if you use the API to provide data.
+      - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
       - /etc/localtime:/etc/localtime:ro
       # This is very important as it mirrors some container data (/app/backups) to your host (in dsmr_backups/).
@@ -57,7 +60,7 @@ services:
       - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
       # TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
       - DSMRREADER_ADMIN_PASSWORD=
-      # Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to restart the container after changing this.
+      # Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to reload the container after changing this.
       ###- DSMRREADER_LOGLEVEL=DEBUG
       # These must match with the settings configured in "dsmrdb" above.
       - DJANGO_DATABASE_HOST=dsmrdb
