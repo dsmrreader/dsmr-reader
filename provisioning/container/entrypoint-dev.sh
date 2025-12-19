@@ -3,7 +3,10 @@
 # Trigger an error if non-zero exit code is encountered
 set -e
 
-poetry install
+# Automatically check and install. Will also work with changed Python versions in the container.
+poetry update
+
+# This could collide if you happen to work on a migration yourself and you restart the container.
 poetry run /app/manage.py migrate --noinput
 
 # E.g. "poetry run /app/manage.py runserver 8000"
