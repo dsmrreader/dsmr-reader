@@ -32,7 +32,8 @@ services:
     image: postgres:17-alpine
     restart: 'unless-stopped'
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dsmrreader"]
+      # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d)
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d dsmrreader"]
       interval: 1s
       timeout: 5s
       retries: 20
@@ -87,7 +88,8 @@ services:
     image: postgres:17-alpine
     restart: 'unless-stopped'
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U testuser"]
+      # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d)
+      test: ["CMD-SHELL", "pg_isready -U testuser -d test_dsmrreader"]
       interval: 1s
       timeout: 5s
       retries: 20
