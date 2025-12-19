@@ -61,6 +61,8 @@ id --group dsmrreader
 sudo su - dsmrreader
 ```
 
+- Create a "Compose" YAML file named `compose.yml`. This will tell Podman which containers to run and how to run them (with which settings).
+
 - Download container Compose template file by [manually downloading](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml) it or running the command below:
 
 [View compose.yml on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml){ .md-button }
