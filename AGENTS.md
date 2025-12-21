@@ -1,10 +1,15 @@
 # Agent Directives
 
-## Environment Setup
+## Development
 - **Container paths**: `src/` maps to `/app/` in Docker. Use `/app/` for container commands (MyPy, linting, tests).
-- **Container unavailable**: If Docker container is unreachable, pause and request manual intervention from user.
+- **Container unavailable**: If Docker container is unreachable, do not debug but request manual intervention from user.
+- **CLI**: Prevent your CLI commands and their output from being stored in the local user's bash history.
 
 ## After Code Changes: Quality Verification
+- **Test paths**: `src/` maps to `/app/` in Docker. Use `/app/` for container commands (MyPy, linting, tests).
+- **Test optimization**: Run a single test first to ensure nothing big is broken.
+- **Test output**: Never use pipes to see testing output, it does not work.
+
 Always run these in order:
 1. **Format**: `docker compose exec dev-dsmr-app poetry run black .`
 2. **Lint HTML**: `docker compose exec dev-dsmr-app poetry run djlint --reformat .`
@@ -45,6 +50,7 @@ Execute the following command to lock migrations for a new release:
 ```bash
 docker compose exec dev-dsmr-app poetry run /app/manage.py dsmrreader_lock_migrations
 ```
+
 **Process**:
 1. The command outputs a file name (e.g., `provisioning/downgrade/v6.0.0.sh`)
 2. Extract the file name from the output

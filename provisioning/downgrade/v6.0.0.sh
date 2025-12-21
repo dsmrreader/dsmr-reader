@@ -10,9 +10,8 @@
 ./manage.py migrate dsmr_frontend 0051_alter_frontendsettings_electricity_delivered_alternate_color_and_more
 ./manage.py migrate dsmr_influxdb 0007_influxdb_api_url
 ./manage.py migrate dsmr_mindergas 0005_schedule_mindergas_export
-./manage.py migrate dsmr_mqtt 0021_quarter_hour_peak_mqtt
+./manage.py migrate dsmr_mqtt 0022_alter_message_id
 ./manage.py migrate dsmr_notification 0008_dummy_notification_provider
 ./manage.py migrate dsmr_pvoutput 0004_pvoutput_setting_refactoring
 ./manage.py migrate dsmr_stats 0020_day_statistics_fix_total_gas_consumption_retroactive
 ./manage.py migrate dsmr_weather 0006_schedule_weather_update
-
