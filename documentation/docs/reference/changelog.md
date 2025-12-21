@@ -98,6 +98,7 @@
     - Updated Django to 5.2 LTS
     - Updated a lot of other dependencies to a more recent version
     - Updated FontAwesome icons to version 7.1
+    - Added missing favicon for admin interface
     - Added dedicated route for monitoring purposes: `/healthcheck`
 
 
