@@ -29,6 +29,9 @@ Always run these in order:
 - Run all quality checks (above) before considering work complete.
 - Imports should always reside at the top of the file.
 
+## Translation updates
+- Run `docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -q dsmr_frontend/tests/regression/test_translations.py` for translation status.
+
 ## Release Steps
 ### Verify Stable Version
 Verify that the version in `dsmrreader/__init__.py` is configured for a stable release.
