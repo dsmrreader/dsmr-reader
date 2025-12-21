@@ -202,7 +202,7 @@ msgid ""
 "meter erroneously reports electricity returned data, but you do not own any "
 "solar panels."
 msgstr ""
-"Geeft aan of teruglevering van elektriciteut uitgeschakeld wordt in de "
+"Geeft aan of teruglevering van elektriciteit uitgeschakeld wordt in de "
 "applicatie. Bijvoorbeeld wanneer de slimme meter ten onrechte (ooit) "
 "teruglevering heeft geregistreerd."
 
@@ -896,7 +896,7 @@ msgstr ""
 "ingeschakeld)"
 
 msgid "Performs an DSMR P1 telegram reading on the serial port."
-msgstr "Leest een DSMR P1 telegram uit van de seriële poort (meti."
+msgstr "Leest een DSMR P1 telegram uit van de seriële poort."
 
 msgid ""
 "The system just applied a one-time update to the datalogger sleep setting, "
@@ -936,7 +936,7 @@ msgid "Meter position stating electricity delivered (normal tariff) in kWh"
 msgstr "Meterstand van verbruikte elektriciteit (piektarief) in kWh"
 
 msgid "Meter position stating electricity returned (normal tariff) in kWh"
-msgstr "Meterstand van teruggeleverde elektriciteit (piektarief) kWh"
+msgstr "Meterstand van teruggeleverde elektriciteit (piektarief) in kWh"
 
 msgid "Current electricity delivered in kW"
 msgstr "Huidig elektriciteitsverbruik in kW"
@@ -1199,7 +1199,7 @@ msgid "Old value"
 msgstr "Oude waarde"
 
 msgid "New value"
-msgstr "Nieuwe waard"
+msgstr "Nieuwe waarde"
 
 msgid "DSMR Meter statistics change"
 msgstr "Meterstatistieken wijziging"
@@ -1946,7 +1946,7 @@ msgid "Backup settings"
 msgstr "Back-up instellingen"
 
 msgid "Backup interval"
-msgstr "Back-up mintervalap"
+msgstr "Back-up interval"
 
 msgid "Backup folder path"
 msgstr "Back-up map"
