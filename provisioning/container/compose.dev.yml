@@ -63,6 +63,7 @@ services:
     ports:
       - '10000:10000'
 
+  # Listen to all topics: mosquitto_sub -t '#'
   mosquitto:
     container_name: mosquitto-dev
     image: eclipse-mosquitto:2
