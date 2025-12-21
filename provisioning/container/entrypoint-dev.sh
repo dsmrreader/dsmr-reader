@@ -4,7 +4,7 @@
 set -e
 
 # Automatically check and install. Will also work with changed Python versions in the container.
-poetry update
+#poetry update
 
 # This could collide if you happen to work on a migration yourself and you restart the container.
 poetry run /app/manage.py migrate --noinput
