@@ -73,6 +73,7 @@ services:
     ports:
       - '1883:1883'
 
+  # http://localhost:8086 (dsmrreader / dsmrreader)
   influxdb:
     container_name: influxdb-dev
     image: influxdb:2.0-alpine
