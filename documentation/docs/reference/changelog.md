@@ -100,6 +100,7 @@
     - Updated FontAwesome icons to version 7.1
     - Added missing favicon for admin interface
     - Added dedicated route for monitoring purposes: `/healthcheck`
+    - Fixed some small typo's and translations
 
 
 ---

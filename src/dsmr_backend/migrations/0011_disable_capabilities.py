@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
             name="disable_electricity_returned_capability",
             field=models.BooleanField(
                 default=False,
-                help_text="Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports electricity returned data, but you do not own any solar panels.",
+                help_text="Whether to disable electricity return capability. E.g.: When your smart meter erroneously reports electricity returned data, but you do not own any solar panels.",
             ),
         ),
         migrations.AddField(

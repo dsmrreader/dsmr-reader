@@ -64,8 +64,8 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
     )
     latest_telegram = models.TextField(
         help_text=_(
-            "The latest telegram succesfully read. Please note that only the latest telegram is saved here and will be "
-            "overwritten each time."
+            "The latest telegram successfully read. Please note that only "
+            "the latest telegram is saved here and will be overwritten each time."
         ),
         null=True,
         default=None,

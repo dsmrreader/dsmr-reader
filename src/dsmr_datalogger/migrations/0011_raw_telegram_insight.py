@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name="latest_telegram",
             field=models.TextField(
                 default=None,
-                help_text="The latest telegram succesfully read. Please note that only the latest telegram is saved here and will be overwritten each time.",
+                help_text="The latest telegram successfully read. Please note that only the latest telegram is saved here and will be overwritten each time.",
                 null=True,
             ),
         ),

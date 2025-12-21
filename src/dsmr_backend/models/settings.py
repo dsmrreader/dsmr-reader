@@ -39,7 +39,7 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
         default=False,
         verbose_name=_("Disable electricity returned capability"),
         help_text=_(
-            "Whether to disable electricity return capability. E.g.: When your smart meter erroneous reports "
+            "Whether to disable electricity return capability. E.g.: When your smart meter erroneously reports "
             "electricity returned data, but you do not own any solar panels."
         ),
     )
@@ -90,7 +90,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         null=True,
         blank=True,
         verbose_name=_("Host"),
-        help_text=_("The hostname of the server used to send emails with"),
+        help_text=_("The hostname of the email server used for sending emails"),
     )
     port = models.IntegerField(
         default=None,

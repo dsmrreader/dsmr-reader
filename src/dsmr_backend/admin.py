@@ -95,7 +95,7 @@ class EmailSettingsAdmin(SingletonModelAdmin):
                     "Enter your outgoing email settings here, which DSMR-reader will use to send emails. "
                     "<br><br>Do you have GMail? Enter host <strong>aspmx.l.google.com</strong>, "
                     "port <strong>25</strong> and use <strong>TLS</strong>. "
-                    'Do NOT fill in any username of password, but just enter your GMail address as "Email to" above.'
+                    'Do NOT fill in any username or password, but just enter your GMail address as "Email to" above.'
                 ),
             },
         ),
@@ -128,7 +128,7 @@ class EmailSettingsAdmin(SingletonModelAdmin):
 
         self.message_user(
             request,
-            _("Email sent succesfully, please check your email inbox (or spam folder)."),
+            _("Email sent successfully, please check your email inbox (or spam folder)."),
         )
         return HttpResponseRedirect(".")
 

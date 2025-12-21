@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                     models.CharField(
                         blank=True,
                         default=None,
-                        help_text="The hostname of the server used to send emails with",
+                        help_text="The hostname of the email server used for sending emails",
                         max_length=255,
                         null=True,
                         verbose_name="Host",
