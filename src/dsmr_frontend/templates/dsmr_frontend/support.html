@@ -26,7 +26,7 @@
                                 {% translate "Wondering if there are any issues with your installation? See" %}:
                             </div>
                             <div class="col-sm-6">
-                                <i class="fa-solid fa-robot"></i> &nbsp; <a href="{% url 'frontend:about' %}">{% translate "About" %} </a>
+                                <i class="fa-solid fa-heart-pulse"></i> &nbsp; <a href="{% url 'frontend:about' %}">{% translate "About" %} </a>
                                 {% if monitoring_status_issues %}
                                     <span class="badge bg-red">
                                         {% blocktranslate count issue_counter=monitoring_status_issues|length %}

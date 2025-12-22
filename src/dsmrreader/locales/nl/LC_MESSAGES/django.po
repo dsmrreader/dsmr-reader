@@ -1756,11 +1756,14 @@ msgstr "Update beschikbaar"
 msgid "Credits"
 msgstr "Credits"
 
-msgid "Originally created and authored by"
-msgstr "Oorspronkelijk gemaakt en onderhouden door"
+msgid "Created and authored by"
+msgstr "Gemaakt en onderhouden door"
 
-msgid "Improved by"
-msgstr "Verbeterd door"
+msgid "Powered by the work of"
+msgstr "Draait op het werk van"
+
+msgid "Improved by the feedback and ideas of"
+msgstr "Verbeterd door de feedback en ideeën van"
 
 msgid "Many contributors"
 msgstr "Vele bijdrages"
@@ -3669,6 +3672,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Improved by"
+#~ msgstr "Verbeterd door"
 
 #~ msgid "Want to say thanks?"
 #~ msgstr "Wil je iets teruggeven?"

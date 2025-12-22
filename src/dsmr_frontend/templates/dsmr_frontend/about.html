@@ -7,7 +7,7 @@
     {% translate "About" %}
 {% endblock %}
 {% block header %}
-    {% translate "About" %} &nbsp; <i class="fas fa-robot"></i>
+    {% translate "About" %} &nbsp; <i class="fas fa-heart-pulse"></i>
 {% endblock %}
 
 {% block content %}
@@ -103,7 +103,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                {% translate "Originally created and authored by" %}
+                                {% translate "Created and authored by" %}
                             </div>
                             <div class="col-sm-6">
                                 <i class="fa-solid fa-user-ninja"></i>
@@ -119,10 +119,25 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                {% translate "Improved by" %}
+                                {% translate "Powered by the work of" %}
                             </div>
                             <div class="col-sm-6">
-                                <i class="fa-solid fa-people-group"></i>
+                                <i class="fa-solid fa-user-secret"></i>
+                                &nbsp;
+                                <a href="https://github.com/xirixiz" target="_blank">
+                                    Bram van Dartel
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {% translate "Improved by the feedback and ideas of" %}
+                            </div>
+                            <div class="col-sm-6">
+                                <i class="fa-solid fa-users-gear"></i>
                                 &nbsp;
                                 <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html"
                                    target="_blank"
