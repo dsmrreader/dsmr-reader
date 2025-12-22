@@ -2,6 +2,10 @@
 
 Common error messages and their solutions.
 
+!!! abstract ""
+
+    Note that we are using `podman-compose` here, **not** `docker compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
+
 ## Key (id) already exists
 
 ```sql
@@ -42,3 +46,14 @@ Alternatively:
     
     Check the logs for `Stats:` statements, which may identify a root cause.
 
+----
+
+## Too many outgoing MQTT messages queued for transit
+
+If this happens, either DSMR-reader is creating MQTT-messages faster than your MQTT broker can handle, or your MQTT broker is not reachable.
+Whatever the reason, if you want to clear the queue **which will delete all those messages**, you can do so by running:
+
+``` shell
+sudo su - dsmrreader
+podman-compose exec dsmr /app/manage.py dsmr_mqtt_clear_queue
+```

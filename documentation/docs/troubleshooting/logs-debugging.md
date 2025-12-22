@@ -30,6 +30,7 @@ graph LR
 
 ``` shell
 podman-compose logs -f dsmrdb
+# Press CTRL + C to stop following the logs
 
 # Or when there are a lot of old logs, you can limit it to recent logs only:
 podman-compose logs --since 30s -f dsmrdb
@@ -43,6 +44,8 @@ podman-compose logs --since 30s -f dsmrdb
 sudo su - dsmrreader
 
 podman-compose logs -f dsmr
+# Press CTRL + C to stop following the logs
+
 # Or when there are a lot of old logs, you can limit it to recent logs only:
 podman-compose logs --since 30s -f dsmr
 ```

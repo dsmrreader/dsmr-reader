@@ -21,6 +21,10 @@ When running containers, you may not even need to do anything special, other tha
     
     When a new minor version of DSMR-reader is released (e.g. ``v6.0`` to ``v6.1``).
 
+!!! abstract ""
+
+    Note that we are using `podman-compose` here, **not** `docker compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
+
 - Log in as the `dsmrreader` user and run:
 
 ``` shell
