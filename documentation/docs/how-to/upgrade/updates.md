@@ -23,7 +23,7 @@ When running containers, you may not even need to do anything special, other tha
 
 !!! abstract ""
 
-    Note that we are using `podman-compose` here, **not** `docker compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
+    Note that we are using `podman-compose`, everywhere, and **not** `podman compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
 
 - Log in as the `dsmrreader` user and run:
 

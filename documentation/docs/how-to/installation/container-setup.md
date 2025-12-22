@@ -32,7 +32,7 @@ See also [container setup upgrade instructions](../../how-to/upgrade/to-v6.md) f
 
 
 ## Installation
-### OS packages
+### Step 1: OS packages
 - Install system packages:
 
 ``` shell
@@ -41,29 +41,82 @@ sudo apt-get install podman podman-compose podman-docker crun
 podman info --debug
 ```
 
+- Optional: Install ``cu`` package to manually read from the P1 port:
 
-### OS user
-- Add dedicated system user for DSMR-reader to run on:
+``` shell
+# Skip this if you have already read your meter's P1 telegram port (ever) before or are an existing DSMR-reader user.
+sudo apt-get install cu
+```
+
+----
+
+### Step 2: OS user
+
+!!! abstract ""
+
+    There are multiple ways to run containers. This guide uses a dedicated system user (`dsmrreader`) for DSMR-reader to make it does **not** run as `root` user. 
+    This is similar to the legacy setup with the legacy system user (`dsmr`) in the past. Feel free to run it any other (unsupported) way to your liking.
+
+    The username (`dsmrreader`) purposely differs from legacy to avoid confusion with the old setup. And to allow legacy users to easily migrate (or roll back).
+
+- Add dedicated `dsmrreader` system user for DSMR-reader (and its database) to run on:
 
 ``` shell
 sudo useradd dsmrreader --create-home
 sudo usermod -a -G dialout dsmrreader
 
-# Write down the IDs in the output (they are likely the same, e.g. "1001") 
+# Write down the IDs in the output (they are likely the same, e.g. "1001")
 id --user dsmrreader
 id --group dsmrreader
 ```
 
-### DSMR-reader user
+- Enable lingering and a systemd service to allow autostart of containers on (re)boot:
+
+```shell
+sudo loginctl enable-linger dsmrreader
+sudo podman-compose systemd -a create-unit
+```
+
+----
+
+### Step 3: Containers for DSMR-reader and database
+Now we'll configure the DSMR-reader system user we just created.
+
 - Login as "dsmrreader" user:
 
 ``` shell
 sudo su - dsmrreader
 ```
 
-- Create a "Compose" YAML file named `compose.yml`. This will tell Podman which containers to run and how to run them (with which settings).
+!!! abstract "Optional: Your first reading"
 
-- Download container Compose template file by [manually downloading](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml) it or running the command below:
+    You may skip this section as it's **not** required for the application to install. 
+    However, if you have never read your meter's P1 telegram port before, it's recommended to perform an initial reading to make sure everything works as expected.
+
+    Also, this will only work if your smart meter is connected via a serial-to-USB adapter or similar, and not via network or other API.
+
+    - Test with ``cu`` for **DSMR 4/5** first (your meter will likely use this):
+    
+    ``` shell
+    cu -l /dev/ttyUSB0 -s 115200 --parity=none -E q
+    ```
+    
+    - Or test with ``cu`` for **DSMR 2.2**:
+    
+    ``` shell
+    cu -l /dev/ttyUSB0 -s 9600 --parity=none
+    ```
+    
+    - You now should see something similar to ``Connected.`` and a wall of text and numbers *within 10 seconds*. 
+    - Nothing? Try different BAUD rate, as mentioned above. Still nothing? Consider [asking for help](../../troubleshooting/help.md).
+    
+    - To exit ``cu`` if it worked, type "``q.``", hit `Enter` and wait for a few seconds. It should exit shortly with the message ``Disconnected.``
+
+Continuing the setup:
+
+- Create a "Compose" YAML file named `compose.yml` in the home directory. This will tell Podman *which* containers to run and *how* to run them (with which settings).
+
+- Download container Compose template file by manually downloading it below or running the command under the button:
 
 [View compose.yml on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml){ .md-button }
 
@@ -75,7 +128,7 @@ wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/prov
 
 !!! tip
 
-    You can remove all `# TODO for you:` lines from the `compose.yml` file after completing them, or if you don't need them.
+    You can remove all `# TODO for you:` lines from the `compose.yml` file after completing them. Or if you don't need them at all.
 
 ``` shell
 vi compose.yml
@@ -119,7 +172,7 @@ services:
 services:
     dsmr:
         environment:
-            # TODO for you: Change DJANGO_SECRET_KEY below to a truly random value if you host DSMR-reader publicly facing the Internet
+            # TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader publicly facing the Internet
             # TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
             - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
 ```
@@ -137,12 +190,19 @@ services:
 
 - The default admin username is `admin`. You can update it by setting `DSMRREADER_ADMIN_USERNAME` if you want to.
 
-!!! tip
+
+!!! tip "Reminder"
 
     You can remove all `# TODO for you:` lines from the `compose.yml` file after completing them, or if you don't need them.
 
+----
 
-### Running
+### Step 4: First run
+
+!!! abstract ""
+
+    Note that we are using `podman-compose`, everywhere, and **not** `podman compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
+
 - Try running the containers:
 
 ``` shell
@@ -162,44 +222,46 @@ ls -l
 ``` shell
 podman-compose ps
 podman-compose logs -f
+# Press CTRL + C to stop following the logs
 ```
 
-### Testing
+----
+
+### Step 5: Testing DSMR-reader
 
 If everything looks good, you should be able to access DSMR-reader at: `http://<hostname>:7777`.
 E.g. is your hardware is accessible at `123.456.78.90`, go to: `http://123.456.78.90:7777`.
 
+----
 
-### Automatic startup
+### Step 6: Configure automatic startup
+Now we will make sure DSMR-reader starts automatically on (re)boot. E.g. after system updates or a power outage.
+
+- Stop the containers first:
+
+``` shell
+# Still as "dsmrreader" user
+podman-compose down
+```
 
 - To have DSMR-reader start automatically on boot, create a systemd user service.
 
 ```shell
-mkdir -p ~/.config/systemd/user/
+podman-compose systemd -a register
 ```
 
-```shell
-podman generate systemd --new --name dsmr -f
-podman generate systemd --new --name dsmrdb -f
-
-mv *.service ~/.config/systemd/user/
-```
-
-- Go to root user:
+- Go back to root/sudo user (e.g. `pi` user) with:
 
 ``` shell
 logout
 # Or press CTRL + D
 ```
 
-- Enable and start the service:
+- Enable the service and start it:
 
 ```shell
-sudo loginctl enable-linger dsmrreader
-sudo systemctl daemon-reload --user
-sudo systemctl --user -M dsmrreader@ enable container-dsmr.service
-sudo systemctl --user -M dsmrreader@ enable container-dsmrdb.service
-sudo systemctl --user -M dsmrreader@ enable podman-restart.service
+sudo systemctl enable podman-compose@dsmrreader --user -M dsmrreader@
+sudo systemctl start podman-compose@dsmrreader --user -M dsmrreader@
 ```
 
 - Reboot to test automatic startup:
@@ -215,3 +277,6 @@ sudo su - dsmrreader
 
 podman-compose ps
 ```
+
+- Test the web interface again (see step 5 above).
+- Everything should be working now!

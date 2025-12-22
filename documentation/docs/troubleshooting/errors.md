@@ -4,7 +4,7 @@ Common error messages and their solutions.
 
 !!! abstract ""
 
-    Note that we are using `podman-compose` here, **not** `docker compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
+    Note that we are using `podman-compose`, everywhere, and **not** `podman compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
 
 ## Key (id) already exists
 
