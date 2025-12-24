@@ -363,7 +363,6 @@ sudo reboot
 
 ``` shell
 sudo su - dsmrreader
-
 podman-compose ps
 ```
 
