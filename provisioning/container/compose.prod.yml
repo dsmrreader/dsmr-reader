@@ -62,6 +62,8 @@ services:
       - DSMRREADER_ADMIN_PASSWORD=
       # Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to reload the container after changing this.
       ###- DSMRREADER_LOGLEVEL=DEBUG
+      # TODO for you: If you want to first run DSMR-reader with an imported backup, but WITHOUT running background processes, enable this. Drop it otherwise.
+      ###- DSMRREADER_BACKEND_HIBERNATE=True
       # These must match with the settings configured in "dsmrdb" above.
       - DJANGO_DATABASE_HOST=dsmrdb
       - DJANGO_DATABASE_NAME=dsmrreader

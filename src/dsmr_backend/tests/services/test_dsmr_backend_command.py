@@ -1,6 +1,6 @@
 from unittest import mock
 
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 from dsmr_backend.models.schedule import ScheduledProcess
@@ -101,6 +101,35 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
 
         self.assertTrue(execute_mock.called)
         self.assertTrue(logging_mock.called)
+
+    @override_settings(DSMRREADER_BACKEND_HIBERNATE=True)
+    @mock.patch("logging.Logger.critical")
+    @mock.patch("dsmr_backend.services.schedule.execute_scheduled_processes")
+    @mock.patch("dsmr_backend.services.persistent_clients.run")
+    @mock.patch("dsmr_backend.services.persistent_clients.initialize")
+    def test_backend_hibernation_enabled(self, init_mock, run_mock, schedule_mock, logging_mock):
+        """Test backend hibernation when DSMRREADER_BACKEND_HIBERNATE is True."""
+        BackendSettings.get_solo().update(restart_required=False)
+
+        # The command should exit early and not call schedule or persistent clients' run
+        self._intercept_command_stdout("dsmr_backend", run_once=True)
+
+        # schedule_execute_scheduled_processes should NOT be called (hibernation stops it)
+        self.assertFalse(schedule_mock.called)
+        # persistent_clients.run should NOT be called (hibernation stops it)
+        self.assertFalse(run_mock.called)
+        # But initialize is called during setup (before hibernation check)
+        self.assertTrue(init_mock.called)
+        # The critical log should be called
+        self.assertTrue(logging_mock.called)
+
+        # Verify restart_required was reset
+        self.assertFalse(BackendSettings.get_solo().restart_required)
+
+        # Verify the critical log message mentions hibernation
+        log_call_args = logging_mock.call_args[0][0]
+        self.assertIn("hibernation", log_call_args.lower())
+        self.assertIn("DSMRREADER_BACKEND_HIBERNATE", log_call_args)
 
     @mock.patch("dsmr_backup.services.email.run")
     @mock.patch("dsmr_backend.services.update_checker.run")

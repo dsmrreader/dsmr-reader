@@ -1,6 +1,7 @@
 import logging
 
 from django.core.management.base import BaseCommand
+from django.conf import settings
 
 from dsmr_backend.models.settings import BackendSettings
 from dsmr_backend.mixins import InfiniteManagementCommandMixin, StopInfiniteRun
@@ -33,6 +34,8 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         """InfiniteManagementCommandMixin listens to handle() and calls run() in a loop."""
+        self._check_hibernation()
+
         dsmr_backend.services.schedule.execute_scheduled_processes()
         dsmr_backend.services.schedule.dispatch_signals()  # Legacy
 
@@ -41,7 +44,22 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
         self._check_restart_required()
 
+    def _check_hibernation(self):
+        """
+        Checks whether the process has a directive to never run and just hibernate.
+
+        This can be used to prevent new installations using a backup from disrupting some centralize processes outside
+        DSMR-reader (e.g. Dropbox, MQTT, etc).
+        """
+        if not settings.DSMRREADER_BACKEND_HIBERNATE:
+            return
+
+        BackendSettings.objects.update(restart_required=False)
+        logger.critical("Detected backend hibernation (DSMRREADER_BACKEND_HIBERNATE), stopping process...")
+        raise StopInfiniteRun()
+
     def _check_restart_required(self):
+        """Checks whether a restart has been requested and stops the process if so."""
         if not BackendSettings.get_solo().restart_required:
             return
 

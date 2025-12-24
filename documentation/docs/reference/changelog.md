@@ -101,6 +101,7 @@
     - Added missing favicon for admin interface
     - Added dedicated route for monitoring purposes: `/healthcheck`
     - Fixed some small typo's and translations
+    - Added ``DSMRREADER_BACKEND_HIBERNATE`` in favor of migrating to containerized setup
 
 
 ---

@@ -122,6 +122,39 @@ If the value of a topic changes, DSMR-reader will still send the updated value. 
 
 ---
 
+### ``DSMRREADER_BACKEND_HIBERNATE``
+
+!!! example ""
+
+    This setting is **situational** and should only be used **temporarily**.
+
+Allows you to run DSMR-reader with the **backend process disabled**. 
+This will stop all background tasks and allow you to run through the webinterface and datalogger without any background processing interfering.
+You do not need this if you have no other installation running. Or when they are not interfering with each other.
+
+This should only be a temporary state to test your database backup import. 
+After testing, you should either wipe the entire installation and start fresh, or disable this setting when you are happy with the imported data and want to continue using the installation.
+Don't forget to disable your previous installation if you go for the latter.
+
+!!! abstract ""
+
+    Example processes that *may interfere* with your other installation running:
+
+    - Datalogger USB device
+    - Dropbox backup upload
+    - MQTT upload
+    - InfluxDB upload
+    - MinderGas upload
+    - PVOutput upload
+
+    Set to ``DSMRREADER_BACKEND_HIBERNATE=True`` to enable hibernation mode. Dropping this option will suffice to disable it again.
+
+!!! danger
+
+    Enable only if you understand what it does. Don't forget to disabled it later!
+
+---
+
 ---
 
 
