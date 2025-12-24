@@ -1,30 +1,33 @@
-# Based on Xirixiz's container setup of DSMR-reader. This is just "a" version, you should alter it to your needs.
-# For more information, see https://github.com/xirixiz/dsmr-reader-docker
+### Based on Xirixiz's container setup of DSMR-reader. This is just "a" version, you should alter it to your needs.
+### For more information, see https://github.com/xirixiz/dsmr-reader-docker
 services:
   dsmrdb:
-    # When using Postgres, release 14.x, 15.x, 16.x and 17.x are supported only
-    # due to the limited availability of client packages, especially for arm32v7
+    ### When using Postgres, release 14.x, 15.x, 16.x and 17.x are supported only
+    ### due to the limited availability of client packages, especially for arm32v7
     image: docker.io/postgres:17-alpine  # Change the volume mapping below when changing the PostgreSQL version
     container_name: dsmrdb
     restart: always
     volumes:
-      # This is very important as it mirrors some container data (/var/lib/postgresql/*) to your host (in dsmr_database/).
-      # Deleting the DSMRDB container will then NOT delete data in the folder mirrored in the container.
+      ### Only used for backup imports. Add files to dsmr_database/import/ to access them in the container from /run/database-import/.
+      ### psql -U dsmrreader_user -f /run/database-import/dsmrreader-postgresql-backup.sql dsmrreader
+      - ./dsmr_database/import:/run/database-import
+      ### This is very important as it mirrors some container data (/var/lib/postgresql/*) to your host (in dsmr_database/).
+      ### Deleting the DSMRDB container will then NOT delete data in the folder mirrored in the container.
       - ./dsmr_database/postgresql17:/var/lib/postgresql/data  # PostgreSQL version 17 and lower
 #      - ./dsmr_database/postgresql18:/var/lib/postgresql/18/docker  # PostgreSQL version 18
     environment:
-      # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
+      ### TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
       - DUID=1001
       - DGID=1001
       - TZ=Europe/Amsterdam
       - PG_TZ=Europe/Amsterdam
-      # Feel free to alter these when needed, greatly depends on whether you host this at home or publicly facing at the Internet.
-      # Must match settings of "dsmr" below in this file.
+      ### Feel free to alter these when needed, greatly depends on whether you host this at home or publicly facing at the Internet.
+      ### Must match settings of "dsmr" below in this file.
       - POSTGRES_DB=dsmrreader
       - POSTGRES_USER=dsmrreader_user
       - POSTGRES_PASSWORD=dsmrreader_password
     healthcheck:
-      # TODO for you: Must match below with POSTGRES_USER (-U) and POSTGRES_DB (-d) above
+      ### TODO for you: Must match below with POSTGRES_USER (-U) and POSTGRES_DB (-d) above
       test: [ "CMD", "pg_isready -U dsmrreader_user -d dsmrreader" ]
       interval: 10s
       timeout: 5s
@@ -39,32 +42,32 @@ services:
     cap_add:
       - NET_ADMIN
     restart: always
-    devices:
-      # TODO for you: Disable (#) or change this if your smart meter is connected via another port or device. Or if you use the API to provide data.
-      - /dev/ttyUSB0:/dev/ttyUSB0
+    ### TODO for you: Enable these two lines below when you want to connect a physical smart meter to the container using USB.
+    #devices:
+      # - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      # This is very important as it mirrors some container data (/app/backups) to your host (in dsmr_backups/).
-      # Deleting the DSMR container will then NOT delete data in the folder mirrored in the container.
+      ### This is very important as it mirrors some container data (/app/backups) to your host (in dsmr_backups/).
+      ### Deleting the DSMR container will then NOT delete data in the folder mirrored in the container.
       - ./dsmr_backups:/app/backups
-    # For DSMR-reader specific environment settings see https://dsmr-reader.readthedocs.io/en/v6/reference/environment-variables/
-    # For Xirixiz-specific environment settings see https://github.com/xirixiz/dsmr-reader-docker?tab=readme-ov-file#setup--parameters
+    ### For DSMR-reader specific environment settings see https://dsmr-reader.readthedocs.io/en/v6/reference/environment-variables/
+    ### For Xirixiz-specific environment settings see https://github.com/xirixiz/dsmr-reader-docker?tab=readme-ov-file#setup--parameters
     environment:
-      # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
+      ### TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
       - DUID=1001
       - DGID=1001
-      # TODO for you: Change this if you want to use Xirixiz's built-in datalogger mapping. Set to "standalone" to resort to DSMR-reader's internals.
+      ### TODO for you: Change this if you want to use Xirixiz's built-in datalogger mapping. Set to "standalone" to resort to DSMR-reader's internals.
       - DSMRREADER_OPERATION_MODE=standalone
-      # TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader publicly facing the Internet
-      # TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
+      ### TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader publicly facing the Internet
+      ### TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
       - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
-      # TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
+      ### TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
       - DSMRREADER_ADMIN_PASSWORD=
-      # Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to reload the container after changing this.
-      ###- DSMRREADER_LOGLEVEL=DEBUG
-      # TODO for you: If you want to first run DSMR-reader with an imported backup, but WITHOUT running background processes, enable this. Drop it otherwise.
-      ###- DSMRREADER_BACKEND_HIBERNATE=True
-      # These must match with the settings configured in "dsmrdb" above.
+      ### Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT. Don't forget to reload the container after changing this.
+      #- DSMRREADER_LOGLEVEL=DEBUG
+      ### TODO for you: If you run DSMR-reader with an imported backup and first want to try it WITHOUT running background processes, enable this. Drop it otherwise.
+      #- DSMRREADER_BACKEND_HIBERNATE=True
+      ### These must match with the settings configured in "dsmrdb" above.
       - DJANGO_DATABASE_HOST=dsmrdb
       - DJANGO_DATABASE_NAME=dsmrreader
       - DJANGO_DATABASE_USER=dsmrreader_user

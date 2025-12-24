@@ -136,7 +136,7 @@ This should only be a temporary state to test your database backup import.
 After testing, you should either wipe the entire installation and start fresh, or disable this setting when you are happy with the imported data and want to continue using the installation.
 Don't forget to disable your previous installation if you go for the latter.
 
-!!! abstract ""
+!!! example
 
     Example processes that *may interfere* with your other installation running:
 

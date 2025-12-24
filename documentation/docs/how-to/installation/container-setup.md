@@ -32,25 +32,30 @@ See also [container setup upgrade instructions](../../how-to/upgrade/to-v6.md) f
 
 
 ## Installation
-### Step 1: OS packages
+### Installation step 1: OS packages
 - Install system packages:
 
 ``` shell
 sudo apt-get update
 sudo apt-get install podman podman-compose podman-docker crun
+```
+
+``` shell
 podman info --debug
 ```
 
-- Optional: Install ``cu`` package to manually read from the P1 port:
+!!! abstract "Optional"
 
-``` shell
-# Skip this if you have already read your meter's P1 telegram port (ever) before or are an existing DSMR-reader user.
-sudo apt-get install cu
-```
+    - Install ``cu`` package to manually read from the P1 port:
+
+    ``` shell
+    # Skip this if you have already read your meter's P1 telegram port (ever) before or are an existing DSMR-reader user.
+    sudo apt-get install cu
+    ```
 
 ----
 
-### Step 2: OS user
+### Installation step 2: OS user
 
 !!! abstract ""
 
@@ -64,7 +69,9 @@ sudo apt-get install cu
 ``` shell
 sudo useradd dsmrreader --create-home
 sudo usermod -a -G dialout dsmrreader
+```
 
+```shell
 # Write down the IDs in the output (they are likely the same, e.g. "1001")
 id --user dsmrreader
 id --group dsmrreader
@@ -79,7 +86,7 @@ sudo podman-compose systemd -a create-unit
 
 ----
 
-### Step 3: Containers for DSMR-reader and database
+### Installation step 3: Containers for DSMR-reader and database
 Now we'll configure the DSMR-reader system user we just created.
 
 - Login as "dsmrreader" user:
@@ -135,18 +142,6 @@ vi compose.yml
 # Or use "nano" instead of "vi" if you prefer another text editor.
 ```
 
-- If your smart meter is connected via a different port or device than `/dev/ttyUSB0`, change it accordingly.
-  Or if you use the API to provide data, you can disable this line by adding a `#` at the start of the line:
-
-``` yaml title="compose.yml" hl_lines="6"
-# Simplified
-services:
-    dsmr:
-        devices:
-            # TODO for you: Disable (#) or change this if your smart meter is connected via another port or device. Or if you use the API to provide data.
-            - /dev/ttyUSB0:/dev/ttyUSB0
-```
-
 - Configure the user and group IDs for the `dsmrreader` user created earlier.
 
 ``` yaml title="compose.yml" hl_lines="6-7 11-12"
@@ -154,14 +149,26 @@ services:
 services:
     dsmrdb:
         environment:
-            # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
+            ### TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
             DUID=1001
             DGID=1001
     dsmr:
         environment:
-            # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
+            ### TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
             DUID=1001
             DGID=1001
+```
+
+- If your smart meter is connected via a different port or device than `/dev/ttyUSB0`, change it accordingly.
+  Or if you use the API to provide data, you can disable this line by adding a `#` at the start of the line:
+
+``` yaml title="compose.yml" hl_lines="5-6"
+# Simplified
+services:
+    dsmr:
+        ### TODO for you: Enable these two lines below when you want to connect a physical smart meter to the container using USB.
+        #devices:
+          # - /dev/ttyUSB0:/dev/ttyUSB0
 ```
 
 - Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
@@ -172,8 +179,8 @@ services:
 services:
     dsmr:
         environment:
-            # TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader publicly facing the Internet
-            # TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
+            ### TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader publicly facing the Internet
+            ### TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
             - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
 ```
 
@@ -184,30 +191,51 @@ services:
 services:
     dsmr:
         environment:
-            # TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
+            ### TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
             - DSMRREADER_ADMIN_PASSWORD=
 ```
 
 - The default admin username is `admin`. You can update it by setting `DSMRREADER_ADMIN_USERNAME` if you want to.
 
+- If you are installing a new instance of DSMR-reader and you first want to dry-run it after database import, enable `DSMRREADER_ADMIN_PASSWORD`:
+
+``` yaml title="compose.yml" hl_lines="6"
+# Simplified
+services:
+    dsmr:
+        environment:
+            ### TODO for you: If you run DSMR-reader with an imported backup and first want to try it WITHOUT running background processes, enable this. Drop it otherwise.
+            - DSMRREADER_BACKEND_HIBERNATE=True
+```
+
+- Omit the option if you don't need it.
+- Continue to step 4 below.
 
 !!! tip "Reminder"
 
-    You can remove all `# TODO for you:` lines from the `compose.yml` file after completing them, or if you don't need them.
+    You can remove all `### TODO for you:` lines from the `compose.yml` file after completing them, or if you don't need them.
 
 ----
 
-### Step 4: First run
+### Installation step 4: Optional import and first run
 
 !!! abstract ""
 
     Note that we are using `podman-compose`, everywhere, and **not** `podman compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
 
-- Try running the containers:
+- Try running the DB container first:
 
 ``` shell
-# This may take a moment, mostly depending on the hardware available.
-podman-compose up -d
+# This may take a few moments, mostly depending on the hardware and Internet connection available.
+# Please wait patiently.
+podman-compose up -d dsmrdb
+```
+
+- If there are any errors, try:
+
+``` shell
+podman-compose logs -f dsmrdb
+# Press CTRL + C to stop following the logs
 ```
 
 - Check folders created:
@@ -216,25 +244,86 @@ podman-compose up -d
 ls -l
 ```
 
-- It should now at least have the file `compose.yml` and folders `dsmr_database` and `dsmr_backups`.
-- Check logs for any weird stuff:
+- It should now have created the `dsmr_database` folder.
+
+!!! warning "Important if you have a backup to restore"
+
+    The database should now be created and initialized. It's important to **not** start DSMR-reader before importing your backup.
+    If you have no backup to restore, just skip this warning and continue further below.
+
+    Make sure your backup is moved into the `dsmr_database/import/` folder. E.g.
+
+    ``` shell
+    logout
+    sudo mv /home/pi/dsmrreader-postgresql-backup-Wednesday.sql.gz /home/dsmrreader/dsmr_database/import/
+    ```
+
+    Go back to the `dsmrreader` user and into the DB container:
+
+    ``` shell
+    sudo su - dsmrreader
+    podman-compose exec dsmrdb sh
+    ```
+
+    - For `.sql` backups, run:
+
+    ``` shell
+    psql -U dsmrreader_user -d dsmrreader -f /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql.gz
+    ```
+
+    - For `.sql.gz` backups, run:
+    ``` shell
+    zcat /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql.gz | psql -U dsmrreader_user -d dsmrreader
+    ```
+
+    Exit with `CTRL + D`.
+
+!!! abstract ""
+
+    At this point we can start DSMR-reader. If you started it before importing your backup, the database would be initialized by DSMR-reader and you cannot import your backup.
+
+- Start DSMR-reader container:
+
+``` shell
+podman-compose down dsmrdb
+
+# This may take a few moments, mostly depending on the hardware and Internet connection available.
+# Please wait patiently.
+podman-compose up -d
+```
+
+- If there are any errors, try:
+
+``` shell
+podman-compose logs -f dsmr
+# Press CTRL + C to stop following the logs
+```
+
+- Run this command to see the status of the containers:
 
 ``` shell
 podman-compose ps
-podman-compose logs -f
-# Press CTRL + C to stop following the logs
+```
+
+- Now the folders `dsmr_database` and `dsmr_backups` should both exist:
+
+``` shell
+ls -l
 ```
 
 ----
 
-### Step 5: Testing DSMR-reader
+### Installation step 5: Testing DSMR-reader
 
-If everything looks good, you should be able to access DSMR-reader at: `http://<hostname>:7777`.
-E.g. is your hardware is accessible at `123.456.78.90`, go to: `http://123.456.78.90:7777`.
+If everything looks good, you should be able to access DSMR-reader at: `http://<hostname>:7777`
+
+E.g. is your hardware is accessible at `123.456.78.90`, go to: http://123.456.78.90:7777
+
+- Click around a bit to see if things work and whether you also can log in on the Configuration menu item.
 
 ----
 
-### Step 6: Configure automatic startup
+### Installation step 6: Configure automatic startup
 Now we will make sure DSMR-reader starts automatically on (re)boot. E.g. after system updates or a power outage.
 
 - Stop the containers first:
