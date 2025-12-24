@@ -91,6 +91,20 @@ def check_scheduled_processes(**kwargs) -> List[MonitoringStatusIssue]:
 
 
 @receiver(request_status)
+def check_backend_hibernation(**kwargs) -> List[MonitoringStatusIssue]:
+    if not settings.DSMRREADER_BACKEND_HIBERNATE:
+        return []
+
+    return [
+        MonitoringStatusIssue(
+            __name__,
+            _("Backend hibernation is (still) enabled (DSMRREADER_BACKEND_HIBERNATE)"),
+            timezone.now(),
+        )
+    ]
+
+
+@receiver(request_status)
 def postgresql_check_database_size(
     **kwargs,
 ) -> Optional[MonitoringStatusIssue]:  # pragma: nocover

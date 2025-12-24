@@ -104,6 +104,9 @@ msgstr "Backend (dsmr_backend)"
 msgid "Process behind schedule: {}"
 msgstr "Proces loopt achter op schema: {}"
 
+msgid "Backend hibernation is (still) enabled (DSMRREADER_BACKEND_HIBERNATE)"
+msgstr "Backend hibernation staat (nog) aan (DSMRREADER_BACKEND_HIBERNATE)"
+
 msgid ""
 "Database growing large: {}, consider data cleanup (if not already enabled)"
 msgstr ""
