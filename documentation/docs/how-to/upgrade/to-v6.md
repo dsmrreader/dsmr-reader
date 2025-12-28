@@ -126,4 +126,7 @@ sudo mv /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wed
 ----
 
 ### Upgrade step 3: Decide what to do with your old DSMR-reader v5.x installation
-- Depending on if you want to switch to DSMR-reader v6.x permanently, or just want to have 
+- Depending on if you want to switch to DSMR-reader v6.x permanently, or just want to have it run parallel for a while, you can either:
+- 
+- Remove the old DSMR-reader v5.x installation to free up disk space.
+- Keep the old DSMR-reader v5.x installation as a fallback option.

@@ -18,12 +18,13 @@ They contain all documentation you need to either get started or sort something 
     [Errors](troubleshooting/errors.md){ .md-button }
     [Smart meter issues](troubleshooting/smart-meter-issues.md){ .md-button }
     [REST API](reference/rest-api.md){ .md-button }
-    [Install DSMR-reader](how-to/installation/container-setup.md){ .md-button .md-button--primary }
+    [Installation of DSMR-reader](how-to/installation/container-setup.md){ .md-button .md-button--primary }
 
     [Reset admin credentials](how-to/admin-configuration/admin-credentials.md){ .md-button }
+    [Upgrade to v6](how-to/upgrade/to-v6){ .md-button .md-button--primary }
     [Credits & contributions](reference/credits-contributions.md){ .md-button }
     [Getting help](troubleshooting/help.md){ .md-button }
 
-    [About DSMR-reader](reference/about.md){ .md-button }
     [DSMR-reader on GitHub](https://github.com/dsmrreader/dsmr-reader){ .md-button .md-button--primary }
+    [About DSMR-reader](reference/about.md){ .md-button }
     [DSMR-reader Docker on GitHub](https://github.com/xirixiz/dsmr-reader-docker){ .md-button .md-button--primary }
