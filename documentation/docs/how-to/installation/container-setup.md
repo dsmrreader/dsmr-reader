@@ -268,7 +268,7 @@ ls -l
     - For `.sql` backups, run:
 
     ``` shell
-    psql -U dsmrreader_user -d dsmrreader -f /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql.gz
+    psql -U dsmrreader_user -d dsmrreader -f /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql
     ```
 
     - For `.sql.gz` backups, run:
