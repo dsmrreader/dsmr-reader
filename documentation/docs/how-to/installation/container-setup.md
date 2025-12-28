@@ -272,6 +272,7 @@ ls -l
     ```
 
     - For `.sql.gz` backups, run:
+
     ``` shell
     zcat /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql.gz | psql -U dsmrreader_user -d dsmrreader
     ```
