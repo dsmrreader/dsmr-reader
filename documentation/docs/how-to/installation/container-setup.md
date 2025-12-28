@@ -265,15 +265,17 @@ ls -l
     podman-compose exec dsmrdb sh
     ```
 
-    - For `.sql` backups, run:
+    Import the backup, depending on how you created it:
 
     ``` shell
+    # For .sql files, use:
     psql -U dsmrreader_user -d dsmrreader -f /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql
     ```
 
-    - For `.sql.gz` backups, run:
+    Or
 
     ``` shell
+    # For .sql.gz files, use:
     zcat /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql.gz | psql -U dsmrreader_user -d dsmrreader
     ```
 
