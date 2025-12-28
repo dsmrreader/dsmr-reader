@@ -126,7 +126,62 @@ sudo mv /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wed
 ----
 
 ### Upgrade step 3: Decide what to do with your old DSMR-reader v5.x installation
-- Depending on if you want to switch to DSMR-reader v6.x permanently, or just want to have it run parallel for a while, you can either:
-- 
-- Remove the old DSMR-reader v5.x installation to free up disk space.
-- Keep the old DSMR-reader v5.x installation as a fallback option.
+Depending on if you want to switch to DSMR-reader v6.x permanently, or just want to have it run parallel for a while, you can either:
+
+- Remove the old DSMR-reader v5.x installation entirely.
+- Keep the old DSMR-reader v5.x installation.
+
+
+#### Remove the old DSMR-reader v5.x installation entirely
+- To remove DSMR-reader v5 from your system, execute the following commands:
+
+```shell
+# Nginx.
+sudo rm /etc/nginx/sites-enabled/dsmr-webinterface
+sudo service nginx reload
+sudo rm -rf /var/www/dsmrreader
+
+# Supervisor.
+sudo supervisorctl stop all
+sudo rm /etc/supervisor/conf.d/dsmr*.conf
+sudo supervisorctl reread
+sudo supervisorctl update
+
+# Homedir & user.
+sudo rm -rf /home/dsmr/
+sudo userdel dsmr
+To delete your data (the database) as well:
+
+sudo -u postgres dropdb dsmrreader
+```
+
+- Optionally, you can remove these packages:
+
+```shell
+sudo apt-get remove postgresql postgresql-server-dev-all python3-psycopg2 nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
+```
+
+#### Keep the old DSMR-reader v5.x installation
+- Just stop the processes and prevent them from automatically starting:
+
+```shell
+sudo supervisorctl stop all
+sudo mv /etc/supervisor/conf.d/dsmr_backend.conf /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED
+sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED
+sudo mv /etc/supervisor/conf.d/dsmr_webinterface.conf /etc/supervisor/conf.d/dsmr_webinterface.conf.DISABLED
+sudo supervisorctl reread
+sudo supervisorctl update
+```
+
+!!! abstract ""
+
+    If you want to revert it later:
+    
+    ```shell
+    sudo mv /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED /etc/supervisor/conf.d/dsmr_backend.conf
+    sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED /etc/supervisor/conf.d/dsmr_datalogger.conf
+    sudo mv /etc/supervisor/conf.d/dsmr_webinterface.conf.DISABLED /etc/supervisor/conf.d/dsmr_webinterface.conf
+    sudo supervisorctl reread
+    sudo supervisorctl update
+    sudo supervisorctl start all
+    ```
