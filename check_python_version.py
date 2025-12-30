@@ -2,7 +2,7 @@
 import sys
 
 # EOL table @ https://www.python.org/downloads/
-MINIMUM_VERSION = (3, 9, 0)
+MINIMUM_VERSION = (3, 7, 0)
 PREFERRED_MINIMUM_VERSION = (3, 11, 0)
 
 
@@ -21,9 +21,7 @@ def check():
     if sys.version_info < PREFERRED_MINIMUM_VERSION:
         print(
             "[WARNING] Your Python version can still be used with your current DSMR-reader version. "
-            "However, Python {} or higher is preferred. Consider using it for new installations in the future.".format(
-                ".".join([str(x) for x in PREFERRED_MINIMUM_VERSION])
-            )
+            "Updating to DSMR-reader v6 will no longer require you to upgrade Python anymore."
         )
 
 
