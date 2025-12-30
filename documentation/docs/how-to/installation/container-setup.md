@@ -26,9 +26,6 @@ It uses containerization (Podman) to run DSMR-reader and its dependencies in iso
     They will randomly and suddenly get corrupted, so be warned!
 
 This guide presumes you use Podman, however you can also use Docker or other container hosts that are compatible.
-See also [container setup upgrade instructions](../../how-to/upgrade/to-v6.md) for a schematic overview of the setup.
-
-[Schematic overview](../../how-to/upgrade/to-v6.md){ .md-button }
 
 
 ## Installation

@@ -1,14 +1,11 @@
 # Changelog
 
-## Current release series
-
 !!! note ""
-    The releases in this series are currently supported and will receive new features and bug/security fixes until a new major series is released *(give or take once a year)*.
 
-    - Every **minor** release (e.g. `v5.x` -> `v5.y`) is *usually* compatible with any preceding release in the same series and should allow you to update easily.
-    - Every new **major** series (e.g. `v5.x` -> `v6.x`) *usually* contains **incompatible changes** that require you to update with additional manual steps. Upgrading to the **last release** of a series (e.g. `v5.12`), should tell you where to find the upgrade steps required.
+    Before updating, make sure to check the changelog for any incompatible changes that may affect your installation.
+    Usually only major version updates contain **incompatible changes**. E.g. upgrading from `v6.x` to `v7.x`.
 
-
+## Current release series
 ### v6.0.0 - December 2025
 
 *This is a major release. See the release notes below for incompatible (conflicting) changes and all other changes.*
@@ -90,7 +87,7 @@
     - Improved net power calculation to use average of consumption data instead of single record value [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064){ .md-button }
 
     #### Docs
-    - Dropped Dutch translation for the documentation ==*(DSMR-reader application translations are **not** affected)*==
+    - Dropped Dutch translation for the documentation ==*(DSMR-reader translations inside the application are **not** affected)*==
     - Fixed broken API docs rendering caused by legacy ReDoc link
     - Simplify documentation [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686){ .md-button }
 
