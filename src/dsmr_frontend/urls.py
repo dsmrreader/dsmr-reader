@@ -26,11 +26,7 @@ from dsmr_frontend.views.export import Export, ExportAsCsv
 from dsmr_frontend.views.generic import (
     ChangelogRedirect,
     DocsRedirect,
-    FeedbackRedirect,
-    DonationsRedirect,
     XhrHeader,
-    V4UpgradeRedirect,
-    V5UpgradeRedirect,
     StatusRedirectView,
     HealthCheck,
 )
@@ -94,10 +90,6 @@ urlpatterns = [
     # Generic redirects to external (help) pages.
     path("changelog-redirect", ChangelogRedirect.as_view(), name="changelog-redirect"),
     path("docs-redirect", DocsRedirect.as_view(), name="docs-redirect"),
-    path("feedback-redirect", FeedbackRedirect.as_view(), name="feedback-redirect"),
-    path("donations-redirect", DonationsRedirect.as_view(), name="donations-redirect"),
-    path("v4-upgrade-redirect", V4UpgradeRedirect.as_view(), name="v4-upgrade-redirect"),
-    path("v5-upgrade-redirect", V5UpgradeRedirect.as_view(), name="v5-upgrade-redirect"),
     # Views always requiring authentication.
     path("support", Support.as_view(), name="support"),
     path("configuration", Configuration.as_view(), name="configuration"),

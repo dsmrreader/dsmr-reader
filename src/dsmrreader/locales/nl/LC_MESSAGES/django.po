@@ -2460,8 +2460,8 @@ msgstr[1] ""
 msgid "Looking for something specific? A good place to start might be the FAQ"
 msgstr "Zoek je iets specifieks? Een goede plek om te beginnen is de FAQ"
 
-msgid "Frequently asked questions (FAQ)"
-msgstr "Veelgestelde vragen (FAQ)"
+msgid "View documentation"
+msgstr "Bekijk documentatie"
 
 msgid "Did something change after updating? Check out the latest changes"
 msgstr "Is er iets veranderd na updaten? Bekijk de laatste wijzigingen"
@@ -3675,6 +3675,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Frequently asked questions (FAQ)"
+#~ msgstr "Veelgestelde vragen (FAQ)"
 
 #~ msgid "Improved by"
 #~ msgstr "Verbeterd door"
