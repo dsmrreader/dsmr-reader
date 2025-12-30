@@ -57,7 +57,7 @@ class TestViews(TestCase):
             self.client.get(reverse("{}:dashboard".format(self.namespace)))
 
     def test_read_the_docs_redirects(self):
-        for current in ("docs", "feedback"):
+        for current in ("docs", "changelog"):
             response = self.client.get(reverse("{}:{}-redirect".format(self.namespace, current)))
             self.assertEqual(response.status_code, 302)
             self.assertTrue(response["Location"].startswith("https://dsmr-reader.readthedocs.io"))
