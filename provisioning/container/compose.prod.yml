@@ -34,7 +34,9 @@ services:
       retries: 10
 
   dsmr:
-    image: ghcr.io/xirixiz/dsmr-reader-docker:development  # TODO: Change to "latest" after releasing DSMR-reader v6.
+    # This will always use the latest minor release within the major DSMR-reader
+    # version specified below (e.g. "dsmr-reader-docker:6" for DSMR-reader v6.x).
+    image: ghcr.io/xirixiz/dsmr-reader-docker:6
     depends_on:
       dsmrdb:
         condition: service_healthy
