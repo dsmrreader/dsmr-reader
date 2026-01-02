@@ -72,14 +72,14 @@
     #### InfluxDB
     - Use Influx URL instead of Influx hostname + port combination [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984){ .md-button }
     - Added command-line alias for clearing InfluxDB queue
-        ``` shell
+        ```shell
         ./manage.py dsmr_influxdb_clear_queue
         ``` 
 
     #### MQTT
     - Changed message queue primary key from AutoField to BigAutoField to reduce sequence resets needed [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000){ .md-button }
     - Added command-line alias for clearing MQTT queue
-        ``` shell
+        ```shell
         ./manage.py dsmr_mqtt_clear_queue
         ``` 
 

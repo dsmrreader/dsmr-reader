@@ -15,7 +15,7 @@ DSMR-reader `v3.x` is backwards incompatible with `2.x`. You will have to manual
 
 Execute the following:
 
-``` shell
+```shell
 sudo su - dsmr
 ./deploy.sh
 ```
@@ -26,7 +26,7 @@ DSMR-reader `3.x` requires `Python 3.6` or higher.
 
 Execute the following:
 
-``` shell
+```shell
 sudo su - dsmr
 python3 --version
 ```
@@ -41,7 +41,7 @@ There are several guides, depending on your OS. We assume Raspbian OS here.
 
 Execute the following:
 
-``` shell
+```shell
 # Credits to Jeroen Peters @ issue #624
 sudo apt-get install python3-dev libffi-dev libssl-dev -y
 wget https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tar.xz
@@ -63,7 +63,7 @@ Create a fresh database backup and store it somewhere safe.
 
 Execute the following:
 
-``` shell
+```shell
 sudo su - dsmr
 ./manage.py dsmr_backup_create --full
 ```
@@ -76,7 +76,7 @@ Created full backup: /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgres
 
 Execute the following (your file name may differ):
 
-``` shell
+```shell
 ls -lh /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wednesday.sql.gz
 ```
 
@@ -88,7 +88,7 @@ Make sure the file is of some (reasonable) size, e.g.:
 
 Execute the following (your file name may differ):
 
-``` shell
+```shell
 zcat /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wednesday.sql.gz | tail
 ```
 
@@ -108,7 +108,7 @@ Now we're ready to remove the environment DSMR-reader uses.
 
 Execute the following:
 
-``` shell
+```shell
 sudo supervisorctl stop all
 
 sudo su - dsmr
@@ -123,7 +123,7 @@ logout
 
 > Note: If you're getting any errors, you can revert to the old version by running:
 >
-> ``` shell
+> ```shell
 > sudo su - dsmr
 >
 > # One of these checkouts might fail, but it's okay:
@@ -156,7 +156,7 @@ DSMR-reader `v3.x` lives in a different branch, to prevent any users from unexpe
 
 Execute the following:
 
-``` shell
+```shell
 sudo supervisorctl stop all
 
 sudo su - dsmr

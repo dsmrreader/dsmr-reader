@@ -21,7 +21,7 @@ You can create plugins in their own file in ``dsmr_plugins/modules/plugin_name.p
 
     Open ``compose.yml`` and **enable** the highlighted line below, remove the ``#``.
     
-    ``` yaml title="compose.yml (simplified version)" hl_lines="4"
+    ```yaml title="compose.yml (simplified version)" hl_lines="4"
     services:
         dsmr:
             volumes:
@@ -90,7 +90,7 @@ This is an example of issue [#407](https://github.com/dsmrreader/dsmr-reader/iss
 
     Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ``` yaml title="compose.env" hl_lines="1"
+    ```yaml title="compose.env" hl_lines="1"
     DSMRREADER_PLUGINS=dsmr_plugins.modules.secondary_pvoutput_upload
     ```
 
@@ -135,7 +135,7 @@ This is an example of issue [#557](https://github.com/dsmrreader/dsmr-reader/iss
 
     Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ``` yaml title="compose.env" hl_lines="1"
+    ```yaml title="compose.env" hl_lines="1"
     DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_serial
     ```
 
@@ -192,7 +192,7 @@ This can be quite handy if you run multiple instances of DSMR-reader (i.e.: Rasp
 
     Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ``` yaml title="compose.env" hl_lines="1"
+    ```yaml title="compose.env" hl_lines="1"
     DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
     ```
 
@@ -240,7 +240,7 @@ Use this to send DSMR readings in JSON format to some (arbitrary) API.
 
     Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ``` yaml title="compose.env" hl_lines="1"
+    ```yaml title="compose.env" hl_lines="1"
     DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_json_dsmrreading_to_api
     ```
 
@@ -294,7 +294,7 @@ def handle_forward_json_dsmrreading_to_api(sender, instance, created, raw, **kwa
 
     Add the **dotted** path as ``DSMRREADER_PLUGINS`` env var. For more information see [Environment variables](./environment-variables.md){ .md-button }
 
-    ``` yaml title="compose.env" hl_lines="1"
+    ```yaml title="compose.env" hl_lines="1"
     DSMRREADER_PLUGINS=dsmr_plugins.modules.poll_dsmrloggerws_api
     ```
 

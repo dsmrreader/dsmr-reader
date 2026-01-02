@@ -14,7 +14,7 @@ Key (id)=(1292) already exists.
 
 This depends on the situation, but you can always try the following yourself first:
 
-``` shell
+```shell
 sudo su - dsmrreader
 podman-compose exec dsmr /app/manage.py dsmr_sqlsequencereset
 ```
@@ -54,7 +54,7 @@ If this happens, either DSMR-reader is creating MQTT-messages faster than your M
 
 Whatever the reason, if you want to clear the queue **which will permanently delete all those pending messages**, you can do so by running:
 
-``` shell
+```shell
 sudo su - dsmrreader
 podman-compose exec dsmr /app/manage.py dsmr_mqtt_clear_queue
 ```
@@ -65,7 +65,7 @@ podman-compose exec dsmr /app/manage.py dsmr_mqtt_clear_queue
 
 Similar to MQTT above, this will clear the InfluxDB queue **permanently deleting all those pending measurements**:
 
-``` shell
+```shell
 sudo su - dsmrreader
 podman-compose exec dsmr /app/manage.py dsmr_influxdb_clear_queue
 ```

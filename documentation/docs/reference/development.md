@@ -11,14 +11,14 @@
 
 - Clone DSMR-reader repository from GitHub:
 
-``` shell
+```shell
     git clone <link to your fork>
     cd dsmr-reader/
 ```
 
 - Symlink Compose/ev files required (or just copy them):
 
-``` shell
+```shell
     # Either symlink
     ln -s provisioning/container/compose.dev.yml compose.yml
     ln -s provisioning/container/dev.env compose.env
@@ -30,14 +30,14 @@
 
 - Try running Docker (compose):
 
-``` shell
+```shell
     # This should build all the containers for local development
     docker-compose up -d
 ```
 
 - Containers built? See if this command works:
 
-``` shell
+```shell
     docker exec -it dev-dsmr-app poetry run /app/manage.py check
 
     # Expected output: "System check identified no issues (0 silenced)"
@@ -60,25 +60,25 @@ Any Python code changes you make will cause the Django Development Server to rel
 - Update the code and add translatable strings.
 - Run ``makemessages`` to extract those strings:
 
-``` shell
+```shell
 docker compose exec dev-dsmr-app poetry run /app/manage.py makemessages -l nl
 ```
  
 - Open ``dsmr_frontend/locale/nl/LC_MESSAGES/django.po`` with PO Editor or a similar tool and translate the new strings.
 - After translation, run ``compilemessages`` to compile the PO-translations into the MO-files:
 
-``` shell
+```shell
 docker compose exec dev-dsmr-app poetry run /app/manage.py compilemessage
 ```
 
 ## Code style
-``` shell
+```shell
 docker compose exec dev-dsmr-app poetry run black .
 docker compose exec dev-dsmr-app poetry run flake8 -v
 ```
 
 ## Tests
-``` shell
+```shell
 docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest
 ```
 

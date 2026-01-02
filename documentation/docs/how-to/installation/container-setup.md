@@ -32,12 +32,12 @@ This guide presumes you use Podman, however you can also use Docker or other con
 ### Installation step 1: OS packages
 - Install system packages:
 
-``` shell
+```shell
 sudo apt-get update
 sudo apt-get install podman podman-compose podman-docker crun
 ```
 
-``` shell
+```shell
 podman info --debug
 ```
 
@@ -45,7 +45,7 @@ podman info --debug
 
     - Install ``cu`` package to manually read from the P1 port:
 
-    ``` shell
+    ```shell
     # Skip this if you have already read your meter's P1 telegram port (ever) before or are an existing DSMR-reader user.
     sudo apt-get install cu
     ```
@@ -63,7 +63,7 @@ podman info --debug
 
 - Add dedicated `dsmrreader` system user for DSMR-reader (and its database) to run on:
 
-``` shell
+```shell
 sudo useradd dsmrreader --create-home
 sudo usermod -a -G dialout dsmrreader
 ```
@@ -88,7 +88,7 @@ Now we'll configure the DSMR-reader system user we just created.
 
 - Login as "dsmrreader" user:
 
-``` shell
+```shell
 sudo su - dsmrreader
 ```
 
@@ -101,13 +101,13 @@ sudo su - dsmrreader
 
     - Test with ``cu`` for **DSMR 4/5** first (your meter will likely use this):
     
-    ``` shell
+    ```shell
     cu -l /dev/ttyUSB0 -s 115200 --parity=none -E q
     ```
     
     - Or test with ``cu`` for **DSMR 2.2**:
     
-    ``` shell
+    ```shell
     cu -l /dev/ttyUSB0 -s 9600 --parity=none
     ```
     
@@ -127,7 +127,7 @@ Continuing the setup:
 [View compose.YML on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml){ .md-button }
 [View compose.ENV on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.env){ .md-button }
 
-``` shell
+```shell
 # Or use these to download the files directly:
 wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml -O /home/dsmrreader/compose.yml
 wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.env -O /home/dsmrreader/compose.env
@@ -135,7 +135,7 @@ wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/prov
 
 - Configure Compose ENV file to your needs:
 
-``` shell
+```shell
 vi compose.env
 # Or use "nano" instead of "vi" if you prefer another text editor.
 ```
@@ -146,7 +146,7 @@ vi compose.env
 
 - Configure the user and group IDs for the `dsmrreader` user created earlier.
 
-``` yaml title="compose.env" hl_lines="2-3"
+```yaml title="compose.env" hl_lines="2-3"
 # TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system (used in both containers) 
 DUID=1001
 DGID=1001
@@ -155,7 +155,7 @@ DGID=1001
 - Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
 - Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and **replace** the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
 
-``` yaml title="compose.env" hl_lines="3"
+```yaml title="compose.env" hl_lines="3"
 # TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader
 # TODO for you: publicly facing the Internet. E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
 DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
@@ -163,7 +163,7 @@ DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
 
 - Configure a password for the admin interface of DSMR-reader by setting `DSMRREADER_ADMIN_PASSWORD`:
 
-``` yaml title="compose.env" hl_lines="2"
+```yaml title="compose.env" hl_lines="2"
 # TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
 DSMRREADER_ADMIN_PASSWORD=your-own-password-here
 ```
@@ -172,7 +172,7 @@ DSMRREADER_ADMIN_PASSWORD=your-own-password-here
 
 - If you are installing a new instance of DSMR-reader and you first want to dry-run it after database import, enable `DSMRREADER_ADMIN_PASSWORD`:
 
-``` yaml title="compose.env" hl_lines="2"
+```yaml title="compose.env" hl_lines="2"
 # TODO for you: If you run DSMR-reader with an imported backup and first want to try it WITHOUT running background processes, enable this. Drop it otherwise.
 DSMRREADER_BACKEND_HIBERNATE=True
 ```
@@ -187,7 +187,7 @@ DSMRREADER_BACKEND_HIBERNATE=True
 
 - If your smart meter is connected via a **different port or device** than `/dev/ttyUSB0`, change it accordingly in the ==other file==, **Compose YAML**.
 
-``` yaml title="compose.yml (simplified version)" hl_lines="4-5"
+```yaml title="compose.yml (simplified version)" hl_lines="4-5"
 services:
     dsmr:
         # TODO for you: Alter "ttyUSB0" if your system uses a different name. Or disable these two lines if you use a network-connected smart meter.
@@ -197,7 +197,7 @@ services:
 
 - Or, if you use the API to provide data, you can **disable** this mapping by adding a `#` at the start of the **two** lines (or just remove them):
 
-``` yaml title="compose.yml (simplified version)" hl_lines="4-5"
+```yaml title="compose.yml (simplified version)" hl_lines="4-5"
 services:
     dsmr:
         # TODO for you: Alter "ttyUSB0" if your system uses a different name. Or disable these two lines if you use a network-connected smart meter.
@@ -215,7 +215,7 @@ services:
 
 - Try running the DB container first:
 
-``` shell
+```shell
 # This may take a few moments, mostly depending on the hardware and Internet connection available.
 # Please wait patiently.
 podman-compose up -d dsmrdb
@@ -223,14 +223,14 @@ podman-compose up -d dsmrdb
 
 - If there are any errors, try:
 
-``` shell
+```shell
 podman-compose logs -f dsmrdb
 # Press CTRL + C to stop following the logs
 ```
 
 - Check folders created:
 
-``` shell
+```shell
 ls -l
 ```
 
@@ -243,28 +243,28 @@ ls -l
 
     Make sure your backup is moved into the `dsmr_database/import/` folder. E.g.
 
-    ``` shell
+    ```shell
     logout
     sudo mv /home/pi/dsmrreader-postgresql-backup-Wednesday.sql.gz /home/dsmrreader/dsmr_database/import/
     ```
 
     Go back to the `dsmrreader` user and into the DB container:
 
-    ``` shell
+    ```shell
     sudo su - dsmrreader
     podman-compose exec dsmrdb sh
     ```
 
     Import the backup, depending on how you created it:
 
-    ``` shell
+    ```shell
     # For .sql files, use:
     psql -U dsmrreader_user -d dsmrreader -f /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql
     ```
 
     Or
 
-    ``` shell
+    ```shell
     # For .sql.gz files, use:
     zcat /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql.gz | psql -U dsmrreader_user -d dsmrreader
     ```
@@ -277,7 +277,7 @@ ls -l
 
 - Start DSMR-reader container:
 
-``` shell
+```shell
 podman-compose down dsmrdb
 
 # This may take a few moments, mostly depending on the hardware and Internet connection available.
@@ -287,20 +287,20 @@ podman-compose up -d
 
 - If there are any errors, try:
 
-``` shell
+```shell
 podman-compose logs -f dsmr
 # Press CTRL + C to stop following the logs
 ```
 
 - Run this command to see the status of the containers:
 
-``` shell
+```shell
 podman-compose ps
 ```
 
 - Now the folders `dsmr_database` and `dsmr_backups` should both exist:
 
-``` shell
+```shell
 ls -l
 ```
 
@@ -321,7 +321,7 @@ Now we will make sure DSMR-reader starts automatically on (re)boot. E.g. after s
 
 - Stop the containers first:
 
-``` shell
+```shell
 # Still as "dsmrreader" user
 podman-compose down
 ```
@@ -334,7 +334,7 @@ podman-compose systemd -a register
 
 - Go back to root/sudo user (e.g. `pi` user) with:
 
-``` shell
+```shell
 logout
 # Or press CTRL + D
 ```
@@ -354,7 +354,7 @@ sudo reboot
 
 - After reboot, login as `dsmrreader` user again and check if containers are running:
 
-``` shell
+```shell
 sudo su - dsmrreader
 podman-compose ps
 ```
