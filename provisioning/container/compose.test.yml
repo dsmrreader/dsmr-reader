@@ -1,0 +1,41 @@
+######################################################################
+# Compose for DSMR-reader development only, NEVER use in production! #
+######################################################################
+
+services:
+  tests-dsmr-app:
+    container_name: tests-dsmr-app
+    restart: 'no'
+    command: 'sleep 5'  # This is just to make sure the container keeps running.
+    build:
+      context: .
+      dockerfile: provisioning/container/Containerfile-dev
+      target: local-dsmrreader-test
+    volumes:
+      - ./src:/app
+    depends_on:
+      tests-dsmr-db:
+        condition: service_healthy
+    environment:
+      DJANGO_SETTINGS_MODULE: 'dsmrreader.config.test'
+      DJANGO_SECRET_KEY: 'automated-tests'
+      DJANGO_DATABASE_ENGINE: 'django.db.backends.postgresql'
+      DJANGO_DATABASE_HOST: 'tests-dsmr-db'
+      DJANGO_DATABASE_PORT: 5432
+      DJANGO_DATABASE_NAME: 'test_dsmrreader'
+      DJANGO_DATABASE_USER: 'dbtestuser'
+      DJANGO_DATABASE_PASSWORD: 'dbtestpasswd'
+
+  tests-dsmr-db:
+    container_name: tests-dsmr-db
+    image: postgres:17-alpine
+    restart: 'unless-stopped'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbtestuser"]
+      interval: 1s
+      timeout: 5s
+      retries: 20
+    environment:
+      POSTGRES_DB: 'test_dsmrreader'
+      POSTGRES_USER: 'dbtestuser'
+      POSTGRES_PASSWORD: 'dbtestpasswd'

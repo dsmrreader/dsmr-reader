@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    <link rel="shortcut icon"
+          sizes="192x192"
+          href="{% static 'dsmr_frontend/img/favicons/android-chrome-192x192.png' %}">
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'dsmr_frontend/img/favicons/favicon.png' %}">
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="{% static 'dsmr_frontend/img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'dsmr_frontend/img/favicons/favicon-32x32.png' %}"
+          sizes="32x32">
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'dsmr_frontend/img/favicons/favicon-16x16.png' %}"
+          sizes="16x16">
+    <link rel="manifest"
+          href="{% static 'dsmr_frontend/img/favicons/manifest.json' %}">
+    <link rel="mask-icon"
+          href="{% static 'dsmr_frontend/img/favicons/safari-pinned-tab.svg' %}">
+{% endblock %}

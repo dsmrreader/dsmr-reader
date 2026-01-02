@@ -1,0 +1,50 @@
+############################################################################
+# Containerfile for DSMR-reader DEVELOPMENT only, NEVER use in production! #
+############################################################################
+
+ARG PYTHON_VERSION="3.13"
+
+FROM python:${PYTHON_VERSION}-slim-trixie AS local-dsmrreader-base
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+RUN apt-get update
+RUN apt-get install -y libpq-dev gettext
+RUN pip install pip --upgrade
+
+
+
+FROM local-dsmrreader-base AS local-dsmrreader-dev
+# Credits to https://www.martinrichards.me/post/python_poetry_docker/
+# Also, the only reason for .venv is the IDE's detection
+ENV POETRY_VIRTUALENVS_CREATE=true \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_VIRTUALENVS_PATH=/app/.venv \
+    DJANGO_SETTINGS_MODULE=dsmrreader.config.development
+
+RUN pip install poetry
+
+# This cannot reside in /app as it will be mounted during development.
+COPY provisioning/container/entrypoint-dev.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["poetry", "run", "/app/manage.py", "runserver", "0.0.0.0:8000"]
+
+
+
+FROM local-dsmrreader-dev AS local-dsmrreader-test
+
+COPY provisioning/container/entrypoint-test.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+
+
+FROM local-dsmrreader-base AS local-dsmrreader-docs
+WORKDIR /app
+COPY ./documentation/requirements.txt /requirements.txt
+# Do NOT use Poetry here, as RTD also directly utilizes PIP instead anyway.
+RUN pip install -r /requirements.txt
+ENTRYPOINT ["mkdocs"]

@@ -1,0 +1,61 @@
+### This is just a version to get started with, feel fre to alter it when needed. Most settings are in compose.env
+services:
+  dsmrdb:
+    # Change the "volumes" mapping below when changing the PostgreSQL version
+    image: docker.io/postgres:17-alpine
+    container_name: dsmrdb
+    restart: always
+    volumes:
+      # Only used for backup imports. Add files to dsmr_database/import/ to access them in the container from /run/database-import/.
+      # psql -U dsmrreader_user -f /run/database-import/dsmrreader-postgresql-backup.sql dsmrreader
+      - ./dsmr_database/import:/run/database-import
+
+      # This is important as it mirrors some container data (/var/lib/postgresql/*) to your host (in dsmr_database/).
+      # Deleting the DSMRDB container will then NOT delete data in the folder mirrored in the container.
+      - ./dsmr_database/postgresql17:/var/lib/postgresql/data  # PostgreSQL version 17 and lower
+#      - ./dsmr_database/postgresql18:/var/lib/postgresql/18/docker  # PostgreSQL version 18
+    env_file:
+      - compose.env
+    healthcheck:
+      # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d) in compose.env
+      test: [ "CMD", "pg_isready -U dsmrreader_user -d dsmrreader" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  dsmr:
+    # This will always use the latest minor release within the major DSMR-reader vX version specified below (dsmr-reader-docker:X)
+    image: ghcr.io/xirixiz/dsmr-reader-docker:6
+    depends_on:
+      dsmrdb:
+        condition: service_healthy
+    container_name: dsmr
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    # TODO for you: Alter "ttyUSB0" if your system uses a different name. Or disable these two lines if you use a network-connected smart meter (or API).
+    devices:
+       - /dev/ttyUSB0:/dev/ttyUSB0
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+      # This is important as it mirrors some container data (/app/backups) to your host (in dsmr_backups/).
+      # Deleting the DSMR container will then NOT delete data in the folder mirrored in the container.
+      - ./dsmr_backups:/app/backups
+
+      # Only enable if you use plugins, keep disabled otherwise.
+#      - ./dsmr_plugins:/app/dsmr_plugins/modules
+    env_file:
+      - compose.env
+    ports:
+      - 7777:80
+      - 7779:443
+    healthcheck:
+      test: ["CMD", "curl", "-Lsf", "http://127.0.0.1/healthcheck", "-o", "/dev/null", "-w", "HTTP_%{http_code}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  dsmr_database: null
+  dsmr_backups: null

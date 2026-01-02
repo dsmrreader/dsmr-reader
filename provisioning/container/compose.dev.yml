@@ -1,0 +1,101 @@
+######################################################################
+# Compose for DSMR-reader development only, NEVER use in production! #
+######################################################################
+
+services:
+  # http://localhost:8000
+  dev-dsmr-app:
+    container_name: dev-dsmr-app
+    restart: 'unless-stopped'
+    build:
+      context: .
+      dockerfile: provisioning/container/Containerfile-dev
+      target: local-dsmrreader-dev
+    volumes:
+      - ./src:/app
+      - /app/.venv  # Prevents mirroring it to host
+    ports:
+      # Use these env vars for your IDE's Python interpreter. Set Python path to /app/.venv/bin/python3 as well.
+      - '${HOST_DJANGO_PORT:-8000}:${CONTAINER_DJANGO_PORT:-8000}'
+    depends_on:
+      dev-dsmr-db:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+      influxdb:
+        condition: service_started
+    env_file:
+      - compose.env
+
+  dev-dsmr-db:
+    container_name: dev-dsmr-db
+    image: postgres:17-alpine
+    restart: 'unless-stopped'
+    healthcheck:
+      # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d)
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d dsmrreader"]
+      interval: 1s
+      timeout: 5s
+      retries: 20
+    ports:
+      - '5432:5432'
+    env_file:
+      - compose.env
+    volumes:
+      # Persist database storage between container recreation
+      - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/
+      # Only use for creating or restoring DB-backups.
+      # Export: pg_dump -U dbuser dsmrreader > /run/host/Desktop/dsmrreader-postgresql-backup.sql
+      # Import: psql -U dbuser -f /run/host/Desktop/dsmrreader-postgresql-backup.sql dsmrreader
+      - ~/Desktop:/run/host/Desktop/
+
+  # http://localhost:10000
+  dsmr-docs:
+    container_name: dsmr-docs
+    restart: 'on-failure'
+    command: 'serve --dev-addr 0.0.0.0:10000'
+    build:
+      context: .
+      dockerfile: provisioning/container/Containerfile-dev
+      target: local-dsmrreader-docs
+    volumes:
+      - ./documentation:/app
+    ports:
+      - '10000:10000'
+
+  # Listen to all topics: mosquitto_sub -t '#'
+  mosquitto:
+    container_name: mosquitto-dev
+    image: eclipse-mosquitto:2
+    restart: 'unless-stopped'
+    volumes:
+      - ./provisioning/container/mosquitto-dev/:/mosquitto/config/
+    ports:
+      - '1883:1883'
+
+  # http://localhost:8086 (dsmrreader / dsmrreader)
+  influxdb:
+    container_name: influxdb-dev
+    image: influxdb:2.0-alpine
+    restart: 'unless-stopped'
+    ports:
+      - '8086:8086'
+    env_file:
+      - compose.env
+
+
+  ##### Automated testing #####
+  tests-dsmr-db:
+    container_name: tests-dsmr-db
+    image: postgres:17-alpine
+    restart: 'unless-stopped'
+    healthcheck:
+      # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d)
+      test: ["CMD-SHELL", "pg_isready -U testuser -d test_dsmrreader"]
+      interval: 1s
+      timeout: 5s
+      retries: 20
+    environment:
+      POSTGRES_DB: 'test_dsmrreader'
+      POSTGRES_USER: 'testuser'
+      POSTGRES_PASSWORD: 'testpasswd'

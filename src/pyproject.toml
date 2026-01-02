@@ -1,0 +1,132 @@
+[tool.poetry]
+name = "DSMR-reader"
+description = "DSMR-protocol reader, P1 telegram data storage and energy consumption visualizer"
+license = "Creative Commons Attribution-NonCommercial 4 International Public License"
+readme = 'README.md'
+repository = "https://github.com/dsmrreader/dsmr-reader"
+homepage = "https://dsmr-reader.readthedocs.io/"
+authors = [
+    "Dennis Siemensma",
+    "https://github.com/dsmrreader/dsmr-reader/graphs/contributors"
+]
+package-mode = false
+
+
+[tool.poetry.dependencies]
+python = "^3.13"
+
+attrs = "^25"
+crcmod = "^1"
+django = "^5.2"
+django-admin-rangefilter = "^0.13"
+django-admin-sortable = "^2"
+django-colorfield = "^0.14"
+django-debug-toolbar = "^6"
+django-filter = "^24"  # v25 is incompatible and requires "drf-spectacular"
+django-mathfilters = "^1"
+django-solo = "^2"
+djangorestframework = "^3"
+dropbox = "^12"
+gunicorn = "^23"
+influxdb-client = "^1"
+packaging = "^25"
+paho-mqtt = "^2"
+psycopg2-binary = "^2"
+pyserial = "^3"
+pyserial-asyncio = "^0.6"
+python-dateutil = "^2"
+python-decouple = "^3"
+pyyaml = "^6"
+requests = "^2"
+urllib3 = "^2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^25"
+djlint = "^1"
+flake8 = "^7"
+flake8-bandit = "^4"
+flake8-bugbear = "^25"
+flake8-pyproject = "^1"
+mypy = "^1"
+polib = "^1"
+pytest-cov = "^7"
+pytest-django = "^4"
+pytest-xdist = "^3"
+types-polib = "^1"
+types-python-dateutil = "^2"
+types-pytz = "^2025"
+types-requests = "^2"
+types-six = "^1"
+uritemplate = "^4"
+
+
+[tool.black]
+line-length = 120
+
+
+[tool.flake8]
+select = ["B", "C", "E", "F", "I", "S", "W"]
+# B902/B903: Methods should take at least two arguments - false positives on classmethods
+# B950: Line too long - handled by Black at 120 chars
+# E203: Whitespace before ':' - conflicts with Black formatting
+# W503: Line break before binary operator - conflicts with Black formatting
+# S311: Use of random module for security purposes - valid for non-crypto use
+ignore = ["B902", "B903", "B950", "E203", "S311", "W503"]
+exclude = [".venv/*", "docs/*", "provisioning/*", "tools/*", "*/migrations/*", "dsmrreader/*", "dsmr_plugins/modules/*", "dsmr_parser/*"]
+max-complexity = 10
+max-line-length = 120
+
+per-file-ignores = [
+    "*/tests/*:E501",  # Allow longer lines in tests
+]
+
+
+[tool.mypy]
+ignore_missing_imports = true
+exclude = [".*/migrations/"]
+
+[[tool.mypy.overrides]]
+module = "paho.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "dropbox.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "influxdb_client.*"
+ignore_missing_imports = true
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "dsmrreader.settings"
+pythonpath = "."
+addopts = "--cov=. --cov-report=html:coverage_report/html -q"
+testpaths = ["dsmr_api/tests", "dsmr_backend/tests", "dsmr_backup/tests", "dsmr_consumption/tests", "dsmr_datalogger/tests", "dsmr_dropbox/tests", "dsmr_frontend/tests", "dsmr_influxdb/tests", "dsmr_mindergas/tests", "dsmr_mqtt/tests", "dsmr_notification/tests", "dsmr_plugins/tests", "dsmr_pvoutput/tests", "dsmr_stats/tests", "dsmr_weather/tests"]
+
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "./*/__init__.py",
+    "./.venv/*",
+    "./*/tests/*",
+    "./*/migrations/*",
+    "./dsmr_backend/mixins.py",
+    "./dsmr_plugins/modules/*",
+    "./dsmr_dropbox/dropboxinc/*",
+    "./dsmr_parser/*",
+    "./dsmrreader/config/*",
+]
+
+[tool.coverage.html]
+directory = "coverage_report/html"
+
+[tool.djlint]
+profile = "django"
+line_break_after_multiline_tag = true
+preserve_blank_lines = true
+exclude = "^.*(\\.venv|coverage_report|migrations|dsmr_parser|dsmr_plugins/modules).*$"
+
+

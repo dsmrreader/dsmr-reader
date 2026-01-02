@@ -1,0 +1,191 @@
+{% extends "dsmr_frontend/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% translate "About" %}
+{% endblock %}
+{% block header %}
+    {% translate "About" %} &nbsp; <i class="fas fa-heart-pulse"></i>
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <header class="panel-heading">
+                        {% translate "Application status" %}
+                        {% if monitoring_status_issues %}
+                            &nbsp;
+                            <span class="badge bg-red">
+                                {% blocktranslate count issue_counter=monitoring_status_issues|length %}
+                            {{ issue_counter }} issue
+                        {% plural %}
+                            {{ issue_counter }} issues
+                        {% endblocktranslate %}
+                            </span>
+                        {% endif %}
+                    </header>
+                    <div class="panel-body">
+                        {% for current in monitoring_issues %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-without-padding alert-danger" role="alert">
+                                        <i class="fas fa-exclamation-triangle"></i> &nbsp; <strong>{{ current.description }}</strong>
+                                        &nbsp;
+                                        <small>(<strong>{{ current.since|naturaltime|default:'-' }}</strong>)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-without-padding alert-success" role="alert">
+                                        <i class="fas fa-check"></i> &nbsp; <small>{% translate "Everything seems to run smoothly. Any issues, such as missing data or stale processes, will be reported here." %}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <header class="panel-heading">
+                        {% translate "Version" %}
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {% translate "DSMR-reader" %}: <strong>v{{ dsmr_version }}</strong>
+                                <br>
+                                <br>
+                                <a href="{% url 'frontend:changelog-redirect' %}"
+                                   target="_blank"
+                                   rel="noopener noreferrer">{% translate "View changelog" %} </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info trigger-update-check" href="#">{% translate "Check for updates" %}</a>
+                                <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden update-check"></i>
+
+                                <div id="update_check_no_update_available" class="xhr-hidden">
+                                    <div class="alert alert-without-padding alert-info" role="alert">
+                                        <i class="fas fa-check-circle"></i> &nbsp; {% translate "You are running the latest version" %}
+                                    </div>
+                                </div>
+                                <div id="update_check_update_available" class="xhr-hidden">
+                                    <div class="alert alert-without-padding alert-warning" role="alert">
+                                        <i class="fas fa-exclamation-circle"></i> &nbsp; {% translate "Update available" %} &nbsp; <a href="{% url 'frontend:changelog-redirect' %}"
+    target="_blank"
+    rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <header class="panel-heading">
+                        {% translate "Credits" %}
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {% translate "Created and authored by" %}
+                            </div>
+                            <div class="col-sm-6">
+                                <i class="fa-solid fa-user-ninja"></i>
+                                &nbsp;
+                                <a href="https://github.com/dennissiemensma" target="_blank">
+                                    Dennis Siemensma
+                                </a>
+                                &nbsp; <i class="far fa-xs fa-copyright"></i> 2015 - {% now "Y" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {% translate "Powered by the work of" %}
+                            </div>
+                            <div class="col-sm-6">
+                                <i class="fa-solid fa-user-secret"></i>
+                                &nbsp;
+                                <a href="https://github.com/xirixiz" target="_blank">
+                                    Bram van Dartel
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {% translate "Improved by the feedback and ideas of" %}
+                            </div>
+                            <div class="col-sm-6">
+                                <i class="fa-solid fa-users-gear"></i>
+                                &nbsp;
+                                <a href="https://dsmr-reader.readthedocs.io/{{ LANGUAGE_CODE }}/{{ DSMRREADER_MAIN_BRANCH }}/credits.html"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    {% translate "Many contributors" %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.trigger-update-check').click(function(){
+    	    $('.trigger-update-check').hide();
+   		    fetch_xhr_update_check();
+   		    return false;
+    	})
+    });
+
+    function fetch_xhr_update_check()
+    {
+        $(".xhr-loader").filter('.update-check').removeClass("hidden").show();
+
+        $.ajax({
+            dataType: "json",
+            url: "{% url 'frontend:about-xhr-update-check' %}",
+        }).done(function(response) {
+            if (response.is_latest_version) {
+                $("#update_check_no_update_available").show();
+            } else {
+                $("#update_check_update_available").show();
+            }
+        }).always(function(){
+            $(".xhr-loader").filter('.update-check').hide();
+        });
+    }
+
+    </script>
+{% endblock %}

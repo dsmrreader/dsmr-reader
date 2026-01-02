@@ -1,0 +1,39 @@
+site_name: DSMR-reader Documentation
+site_description: DSMR-reader
+site_author: Dennis Siemensma
+repo_url: https://github.com/dsmrreader/dsmr-reader
+copyright: © Dennis Siemensma
+theme:
+  name: material
+  custom_dir: overrides
+  features:  # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - header.autohide
+    - announce.dismiss
+    - toc.follow
+markdown_extensions:
+  # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#supported-types
+  - admonition
+  - pymdownx.details
+  - pymdownx.mark
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list
+  - toc:
+      toc_depth: 3
+extra_css:
+  - css/style.css

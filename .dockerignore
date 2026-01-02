@@ -1,0 +1,5 @@
+/.git/
+/.github/
+Containerfile
+compose.yml
+compose.env

@@ -5,157 +5,46 @@ on:
     branches:
       - 'v*'
       - 'development'
-      - 'wip/*'
   pull_request:
     branches-ignore:
       - 'dependabot/'
 
 jobs:
-  # The most verbose and complete job.
   main_test:
     name: 'Python ${{ matrix.python-version }}'
     runs-on: ubuntu-latest
-    timeout-minutes: 10  # Don't run forever when stale
+    timeout-minutes: 15
     strategy:
       matrix:
         python-version:
-          - '3.11'
-    services:
-      postgres:
-        image: 'postgres:14-alpine'
-        ports:
-          - 5432
-        env:
-            POSTGRES_USER: root
-            POSTGRES_DB: test_dsmrreader
-            POSTGRES_PASSWORD: testpasswd
-        options: --health-cmd pg_isready --health-interval 5s --health-timeout 1s --health-retries 10
-
-      mysql:
-        image: 'mysql:8'
-        ports:
-          - 3306
-        env:
-            MYSQL_DATABASE: test_dsmrreader
-            MYSQL_ALLOW_EMPTY_PASSWORD: yes
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=1s --health-retries=10
+          - '3.13'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install APT dependencies
+      - name: Build docker image(s)
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
+          ln -s provisioning/container/compose.test.yml compose.yml
+          docker compose build
 
-      - name: Cached dependencies & virtualenv
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/pypoetry/
-            ~/dsmr-reader/.venv
-          key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
-
-      - name: Install dependencies
+      - name: Run docker image(s)
         run: |
-          pip install --upgrade pip poetry
-          poetry config virtualenvs.in-project true
-          poetry check
-          poetry run pip install -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/base.txt -r $GITHUB_WORKSPACE/dsmrreader/provisioning/requirements/dev.txt
+          docker compose up -d
+          sleep 5
+
+      - name: Check code formatting with Black
+        run: docker compose run tests-dsmr-app poetry run black --check .
+
+      - name: Check Django templates with djLint
+        run: docker compose run tests-dsmr-app poetry run djlint --check .
 
       - name: Check flake8
-        run: poetry run flake8
+        run: docker compose run tests-dsmr-app poetry run flake8 -v
 
-      - name: Check translation status
-        run: sphinx-intl stat -d dsmrreader/locales/ -d docs/_locale/ | grep -v "0 fuzzy, 0 untranslated" | grep -v changelog.po | wc -l | grep -e '^0$'
-
-      - name: Run SQLite tests
-        run: poetry run py.test --cov --cov-report=xml
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
+      - name: Type check with MyPy
+        run: docker compose run tests-dsmr-app poetry run mypy /app
 
       - name: Run PostgreSQL tests
-        run: poetry run py.test
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: unsafe-test-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.postgresql
-            DJANGO_DATABASE_HOST: 127.0.0.1
-            DJANGO_DATABASE_PORT: '${{ job.services.postgres.ports[5432] }}'
-            DJANGO_DATABASE_NAME: test_dsmrreader
-            DJANGO_DATABASE_USER: root
-            DJANGO_DATABASE_PASSWORD: testpasswd
-
-      - name: Run MySQL tests
-        run: poetry run py.test
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: unsafe-test-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.mysql
-            DJANGO_DATABASE_HOST: 127.0.0.1
-            DJANGO_DATABASE_PORT: '${{ job.services.mysql.ports[3306] }}'
-            DJANGO_DATABASE_NAME: dsmrreader  # NOT a typo, django prefixes "test_" automatically.
-            DJANGO_DATABASE_USER: root
-            DJANGO_DATABASE_PASSWORD: ''
-
-      - name: Code coverage upload
-        uses: codecov/codecov-action@v4
-
-
-  # Shallow tests for (older) supported Python versions.
-  matrix_tests:
-    needs: main_test
-    name: 'Python ${{ matrix.python-version }}'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    strategy:
-      matrix:
-        python-version:
-          - '3.9'
-          - '3.10'
-    env:
-      # Do not log verbosely
-      DSMRREADER_LOGLEVEL: ERROR
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install APT dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gettext libgettextpo-dev libmariadb-dev-compat libmariadb-dev
-
-      - name: Cached dependencies & virtualenv
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/pypoetry/
-            ~/dsmr-reader/dsmr-reader/.venv
-          key: dependencies-update-check-${{ hashFiles('poetry.lock') }}
-
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip poetry
-          poetry config virtualenvs.in-project true
-          poetry check
-          poetry install --no-root
-
-      - name: Run SQLite tests
-        run: poetry run py.test --cov --cov-report=xml
-        env:
-            DJANGO_SETTINGS_MODULE: dsmrreader.config.test
-            DJANGO_SECRET_KEY: non-production-value
-            DJANGO_DATABASE_ENGINE: django.db.backends.sqlite3
+        run: docker compose run tests-dsmr-app poetry run pytest
