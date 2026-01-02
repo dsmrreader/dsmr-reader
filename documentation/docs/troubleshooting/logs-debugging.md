@@ -5,15 +5,6 @@ hide:
 
 # Logs and debugging
 
-DSMR-reader technically consists of these processes:
-
-| Process      | Name                | Description                                                                          |
-|--------------|---------------------|--------------------------------------------------------------------------------------|
-| Backend      | `dsmr_backend`      | Handles all background processing for everything that runs without user-interaction. |
-| Datalogger   | `dsmr_datalogger`   | Local datalogger reading telegrams (if used).                                        |
-| Webinterface | `dsmr_webinterface` | Graphical interface of DSMR-reader.                                                  |
-
-
 ``` mermaid
 graph LR
   A{Which logs?};
@@ -37,6 +28,14 @@ podman-compose logs --since 30s -f dsmrdb
 ```
 
 ### DSMR logs
+
+DSMR-reader technically consists of these processes:
+
+| Process      | Description                                                                          |
+|--------------|--------------------------------------------------------------------------------------|
+| Backend      | Handles all background processing for everything that runs without user-interaction. |
+| Datalogger   | Local datalogger reading telegrams (if used).                                        |
+| Webinterface | Graphical interface of DSMR-reader.                                                  |
 
 - To view the application logs, login as the `dsmrreader` user and run:
 
@@ -63,26 +62,22 @@ By default, mostly errors are logged. You can enable DEBUG logging which will ma
 
 You can enable the DEBUG logging by setting the `DSMRREADER_LOGLEVEL` env var to `DEBUG`. Follow these steps:
 
-- Login as the `dsmrreader` user and edit the `compose.yml` file:
+- Login as the `dsmrreader` user and edit the `compose.env` file:
 
 ``` shell
 sudo su - dsmrreader
-vi compose.yml
+vi compose.env
 ```
 
-``` yaml title="compose.yml" hl_lines="6"
-# Simplified - Find DSMRREADER_LOGLEVEL=DEBUG
-services:
-    dsmr:
-        environment:
-            # Remove the leading "###" to enable DEBUG logging. Or add "- DSMRREADER_LOGLEVEL=DEBUG" if you used a different Compose template.
-            ###- DSMRREADER_LOGLEVEL=DEBUG
+``` yaml title="compose.env" hl_lines="2"
+# Only enable debug logging for DSMR-reader for troubleshooting as it LOGS A LOT.
+DSMRREADER_LOGLEVEL=DEBUG
 ```
 
 - Apply changes:
 
 ``` shell
-podman-compose restart dsmr
+podman-compose up -d
 ```
 
 !!! warning "Caution"

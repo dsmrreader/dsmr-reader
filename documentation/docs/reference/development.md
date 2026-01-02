@@ -16,14 +16,16 @@
     cd dsmr-reader/
 ```
 
-- Symlink Docker files required (or just copy them):
+- Symlink Compose/ev files required (or just copy them):
 
 ``` shell
     # Either symlink
     ln -s provisioning/container/compose.dev.yml compose.yml
+    ln -s provisioning/container/dev.env compose.env
 
     # Or copy
     cp provisioning/container/compose.dev.yml compose.yml
+    cp provisioning/container/dev.env compose.env
 ```
 
 - Try running Docker (compose):

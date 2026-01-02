@@ -4,7 +4,7 @@
 
     These environment variables can be used to configure DSMR-reader and its underlying Django framework.
 
-    Apply them by defining them as ``environment`` in your ``compose.yml`` in the ``dsmr`` services and restart the DSMR-reader container (e.g. ``podman-compose restart dsmr``).
+    Apply them by defining them in your ``compose.env`` and restart the DSMR-reader container (e.g. ``podman-compose up -d``).
 
 
 ## DSMR-reader settings

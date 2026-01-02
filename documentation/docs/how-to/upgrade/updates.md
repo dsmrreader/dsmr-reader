@@ -46,5 +46,5 @@ E.g. due to altered settings that need to be reapplied to DSMR-reader.
 
 ``` shell
 sudo su - dsmrreader
-podman-compose restart dsmr
+podman-compose up -d
 ```

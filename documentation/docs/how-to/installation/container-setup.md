@@ -118,91 +118,63 @@ sudo su - dsmrreader
 
 Continuing the setup:
 
-- Create a "Compose" YAML file named `compose.yml` in the home directory. This will tell Podman *which* containers to run and *how* to run them (with which settings).
+- Create:
+    - a Compose YAML file named `compose.yml` in the home directory. This will tell Podman *which* containers to run.
+    - a Compose ENV file named `compose.env` in the home directory. This will tell Podman *how* to run the containers (which settings).
 
-- Download container Compose template file by manually downloading it below or running the command under the button:
+- Download template files by manually downloading it below (or by running the commands under the buttons):
 
-[View compose.yml on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml){ .md-button }
+[View compose.YML on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml){ .md-button }
+[View compose.ENV on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.env){ .md-button }
 
 ``` shell
-wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml -O compose.yml
+# Or use these to download the files directly:
+wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml -O /home/dsmrreader/compose.yml
+wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.env -O /home/dsmrreader/compose.env
 ```
 
-- Configure Compose file to your needs:
-
-!!! tip
-
-    You can remove all `# TODO for you:` lines from the `compose.yml` file after completing them. Or if you don't need them at all.
+- Configure Compose ENV file to your needs:
 
 ``` shell
-vi compose.yml
+vi compose.env
 # Or use "nano" instead of "vi" if you prefer another text editor.
 ```
 
+!!! tip
+
+    You can remove all `# TODO for you:` lines from the `compose.env` file after completing them. Or if you don't need them at all.
+
 - Configure the user and group IDs for the `dsmrreader` user created earlier.
 
-``` yaml title="compose.yml" hl_lines="6-7 11-12"
-# Simplified
-services:
-    dsmrdb:
-        environment:
-            ### TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
-            DUID=1001
-            DGID=1001
-    dsmr:
-        environment:
-            ### TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system
-            DUID=1001
-            DGID=1001
-```
-
-- If your smart meter is connected via a different port or device than `/dev/ttyUSB0`, change it accordingly.
-  Or if you use the API to provide data, you can disable this line by adding a `#` at the start of the line:
-
-``` yaml title="compose.yml" hl_lines="5-6"
-# Simplified
-services:
-    dsmr:
-        ### TODO for you: Enable these two lines below when you want to connect a physical smart meter to the container using USB.
-        #devices:
-          # - /dev/ttyUSB0:/dev/ttyUSB0
+``` yaml title="compose.env" hl_lines="2-3"
+# TODO for you: Check whether the "1001" ID defaults below match the "dsmrreader" user on your system (used in both containers) 
+DUID=1001
+DGID=1001
 ```
 
 - Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
 - Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and **replace** the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
 
-``` yaml title="compose.yml" hl_lines="7"
-# Simplified
-services:
-    dsmr:
-        environment:
-            ### TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader publicly facing the Internet
-            ### TODO for you: E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
-            - DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
+``` yaml title="compose.env" hl_lines="3"
+# TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader
+# TODO for you: publicly facing the Internet. E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
+DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
 ```
 
 - Configure a password for the admin interface of DSMR-reader by setting `DSMRREADER_ADMIN_PASSWORD`:
 
-``` yaml title="compose.yml" hl_lines="6"
-# Simplified
-services:
-    dsmr:
-        environment:
-            ### TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
-            - DSMRREADER_ADMIN_PASSWORD=
+``` yaml title="compose.env" hl_lines="2"
+# TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
+DSMRREADER_ADMIN_PASSWORD=your-own-password-here
 ```
 
 - The default admin username is `admin`. You can update it by setting `DSMRREADER_ADMIN_USERNAME` if you want to.
 
 - If you are installing a new instance of DSMR-reader and you first want to dry-run it after database import, enable `DSMRREADER_ADMIN_PASSWORD`:
 
-``` yaml title="compose.yml" hl_lines="6"
-# Simplified
-services:
-    dsmr:
-        environment:
-            ### TODO for you: If you run DSMR-reader with an imported backup and first want to try it WITHOUT running background processes, enable this. Drop it otherwise.
-            - DSMRREADER_BACKEND_HIBERNATE=True
+``` yaml title="compose.env" hl_lines="2"
+# TODO for you: If you run DSMR-reader with an imported backup and first want to try it WITHOUT running background processes, enable this. Drop it otherwise.
+DSMRREADER_BACKEND_HIBERNATE=True
 ```
 
 - Omit the option if you don't need it.
@@ -210,7 +182,28 @@ services:
 
 !!! tip "Reminder"
 
-    You can remove all `### TODO for you:` lines from the `compose.yml` file after completing them, or if you don't need them.
+    You can remove all `# TODO for you:` lines from the compose files after completing them, or if you don't need them.
+
+
+- If your smart meter is connected via a **different port or device** than `/dev/ttyUSB0`, change it accordingly in the ==other file==, **Compose YAML**.
+
+``` yaml title="compose.yml (simplified version)" hl_lines="4-5"
+services:
+    dsmr:
+        # TODO for you: Alter "ttyUSB0" if your system uses a different name. Or disable these two lines if you use a network-connected smart meter.
+        devices:
+          - /dev/ttyUSB0:/dev/ttyUSB0
+```
+
+- Or, if you use the API to provide data, you can **disable** this mapping by adding a `#` at the start of the **two** lines:
+
+``` yaml title="compose.yml (simplified version)" hl_lines="4-5"
+services:
+    dsmr:
+        # TODO for you: Alter "ttyUSB0" if your system uses a different name. Or disable these two lines if you use a network-connected smart meter.
+#        devices:
+#          - /dev/ttyUSB0:/dev/ttyUSB0
+```
 
 ----
 
