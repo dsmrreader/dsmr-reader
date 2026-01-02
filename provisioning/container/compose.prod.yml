@@ -33,7 +33,7 @@ services:
     cap_add:
       - NET_ADMIN
     restart: always
-    # TODO for you: Alter "ttyUSB0" if your system uses a different name. Or disable these two lines if you use a network-connected smart meter.
+    # TODO for you: Alter "ttyUSB0" if your system uses a different name. Or disable these two lines if you use a network-connected smart meter (or API).
     devices:
        - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
