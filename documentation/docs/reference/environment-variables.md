@@ -155,8 +155,177 @@ Don't forget to disable your previous installation if you go for the latter.
 
 ---
 
+## DSMR-reader remote datalogger settings
+
+These settings are specifically for the using the remote datalogger. You probably don't need these when using `ser2net` or a direct USB connection.
+
+### ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD``
+
+!!! failure inline end ""
+
+    This setting is **required** for the remote datalogger script.
+
+The input method the remote datalogger should use. Choose either:
+
+- ``serial`` - For reading telegrams directly from a serial port
+- ``ipv4`` - For reading telegrams from a network socket (e.g. ``ser2net``)
+
 ---
 
+### ``DSMRREADER_REMOTE_DATALOGGER_API_HOSTS``
+
+!!! failure inline end ""
+
+    This setting is **required** for the remote datalogger script.
+
+The DSMR-reader API host(s) to forward telegrams to. Include the schema (``http://`` or ``https://``) and port if needed.
+
+For multiple hosts, use a comma separated list. E.g.:
+
+```ini
+DSMRREADER_REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78
+```
+```ini
+DSMRREADER_REMOTE_DATALOGGER_API_HOSTS=http://12.34.56.78:7777,http://87.65.43.21:7777
+```
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_API_KEYS``
+
+!!! failure inline end ""
+
+    This setting is **required** for the remote datalogger script.
+
+The DSMR-reader API key(s) corresponding to the host(s) specified in ``DSMRREADER_REMOTE_DATALOGGER_API_HOSTS``.
+
+For multiple keys, use a comma separated list (in the same order as the hosts). E.g.:
+
+```ini
+DSMRREADER_REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH
+```
+```ini
+DSMRREADER_REMOTE_DATALOGGER_API_KEYS=1234567890ABCDEFGH,0987654321HGFEDCBA
+```
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT``
+
+!!! warning inline end ""
+
+    This setting is **required** when ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=serial``.
+
+The serial port to read telegrams from. E.g.:
+
+```ini
+DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT=/dev/ttyUSB0
+```
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE``
+
+!!! note inline end ""
+
+    This setting is **optional** when ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=serial``.
+
+The baud rate for the serial port connection. Omit to use the default (``115200``).
+
+- For DSMR v4/v5 meters: ``115200`` (default)
+- For DSMR v2/v3 meters: ``9600``
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_BYTESIZE``
+
+!!! note inline end ""
+
+    This setting is **optional** when ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=serial``.
+
+The byte size for the serial port connection. Omit to use the default (``8``).
+
+- For DSMR v4/v5 meters: ``8`` (default)
+- For DSMR v2/v3 meters: ``7``
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_SERIAL_PARITY``
+
+!!! note inline end ""
+
+    This setting is **optional** when ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=serial``.
+
+The parity for the serial port connection. Omit to use the default (``N``).
+
+- For DSMR v4/v5 meters: ``N`` (default)
+- For DSMR v2/v3 meters: ``E``
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_NETWORK_HOST``
+
+!!! warning inline end ""
+
+    This setting is **required** when ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=ipv4``.
+
+The hostname or IP address of the network socket to read telegrams from (e.g. when using ``ser2net``).
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_NETWORK_PORT``
+
+!!! warning inline end ""
+
+    This setting is **required** when ``DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD=ipv4``.
+
+The port of the network socket to read telegrams from.
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_TIMEOUT``
+
+!!! note inline end ""
+
+    This setting is **optional**.
+
+The timeout in seconds that applies to reading the serial port and/or writing to the DSMR-reader API. Omit to use the default (``20``).
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_SLEEP``
+
+!!! note inline end ""
+
+    This setting is **optional**.
+
+The time in seconds that the datalogger will pause after each telegram written to the DSMR-reader API. Omit to use the default (``0.5``).
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_MIN_SLEEP_FOR_RECONNECT``
+
+!!! note inline end ""
+
+    This setting is **optional**.
+
+The minimum sleep time in seconds before the datalogger will reconnect to the serial port or network socket. Omit to use the default (``1.0``).
+
+---
+
+### ``DSMRREADER_REMOTE_DATALOGGER_DEBUG_LOGGING``
+
+!!! note inline end ""
+
+    This setting is **optional**.
+
+Set to ``True`` or ``1`` to enable verbose debug logging. Omit to disable.
+
+!!! warning
+
+    Enabling this logging for a long period of time on a Raspberry Pi may cause accelerated wearing of your SD card!
+
+---
 
 ---
 
