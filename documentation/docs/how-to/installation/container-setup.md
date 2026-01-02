@@ -153,19 +153,18 @@ DGID=1001
 ```
 
 - Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
-- Configure the generated key in the Compose file as `DJANGO_SECRET_KEY` and **replace** the dummy `change_me_if_you_host_dsmr_reader_on_the_internet` value.
+- Configure it in the Compose file as `DJANGO_SECRET_KEY`.
 
-```yaml title="compose.env" hl_lines="3"
-# TODO for you: Change "change_me_if_you_host_dsmr_reader_on_the_internet" below to a truly random value if you host DSMR-reader
-# TODO for you: publicly facing the Internet. E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
-DJANGO_SECRET_KEY=change_me_if_you_host_dsmr_reader_on_the_internet
+```yaml title="compose.env" hl_lines="2"
+# TODO for you: Set DJANGO_SECRET_KEY below to a truly random value. E.g. by using https://www.lastpass.com/features/password-generator - 50 characters and NO symbols
+DJANGO_SECRET_KEY=
 ```
 
 - Configure a password for the admin interface of DSMR-reader by setting `DSMRREADER_ADMIN_PASSWORD`:
 
 ```yaml title="compose.env" hl_lines="2"
 # TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
-DSMRREADER_ADMIN_PASSWORD=your-own-password-here
+DSMRREADER_ADMIN_PASSWORD=
 ```
 
 - The default admin username is `admin`. You can update it by setting `DSMRREADER_ADMIN_USERNAME` if you want to.
