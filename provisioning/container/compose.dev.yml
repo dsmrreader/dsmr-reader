@@ -25,7 +25,7 @@ services:
       influxdb:
         condition: service_started
     env_file:
-      - provisioning/container/dev.env
+      - compose.env
 
   dev-dsmr-db:
     container_name: dev-dsmr-db
@@ -40,7 +40,7 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - provisioning/container/dev.env
+      - compose.env
     volumes:
       # Persist database storage between container recreation
       - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/
@@ -81,7 +81,7 @@ services:
     ports:
       - '8086:8086'
     env_file:
-      - provisioning/container/dev.env
+      - compose.env
 
 
   ##### Automated testing #####
