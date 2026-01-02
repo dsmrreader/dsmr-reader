@@ -19,7 +19,7 @@ You can create plugins in their own file in ``dsmr_plugins/modules/plugin_name.p
     Starting from DSMR-reader v6, you cannot edit files inside the containers without risking losing them.
     You can mount a local directory to the container to store your plugins. This option is disabled by default.
 
-    Open ``compose.yml`` and **enable** the highlighted line below, remove the ``#``. Don't forget to run ``docker-compose up -d`` afterwards.
+    Open ``compose.yml`` and **enable** the highlighted line below, remove the ``#``.
     
     ``` yaml title="compose.yml (simplified version)" hl_lines="4"
     services:
@@ -28,8 +28,17 @@ You can create plugins in their own file in ``dsmr_plugins/modules/plugin_name.p
                 - ./dsmr_plugins:/app/dsmr_plugins/modules
     ```
 
-    There should now be a directory ``dsmr_plugins`` in the same directory as your ``compose.yml`` file. 
+    Don't forget to run ``docker-compose up -d`` afterwards. There should now be a directory ``dsmr_plugins`` in the same directory as your ``compose.yml`` file. 
+    
     You can create plugins files here. Any file you create there will be available inside the container in the correct location (``dsmr_plugins/modules/``).
+
+    If you have trouble adding or editing files due to **permissions**, type `logout` and reset permissions by running:
+
+    ```shell
+    sudo chown -R dsmrreader:dsmrreader /home/dsmrreader/dsmr_plugins
+    ```
+
+    This may happen multiple times, but you should not have to do this often anyway.
 
 
 Please make sure the ``plugin_name``,
