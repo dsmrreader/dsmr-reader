@@ -48,6 +48,8 @@ sudo mv /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wed
 
 - Follow the [containerized installation guide](../installation/container-setup.md) to set up DSMR-reader v6.x.
 
+[containerized installation guide](../installation/container-setup.md){ .md-button }
+
 ----
 
 ### Upgrade step 3: Decide what to do with your old DSMR-reader v5.x installation
