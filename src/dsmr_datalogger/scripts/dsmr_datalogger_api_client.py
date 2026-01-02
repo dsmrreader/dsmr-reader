@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-"""
-https://dsmr-reader.readthedocs.io/en/latest/installation/datalogger.html
-
-Installation:
-    pip3 install pyserial==3.5 requests==2.26.0 python-decouple==3.5
-
-NOTE: Since DSMR-reader v5.x, all env vars for this script were prefixed with "DSMRREADER_REMOTE_".
-      E.g.: "DATALOGGER_INPUT_METHOD" is now "DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD"
-"""
 import datetime
 import logging
 import time
