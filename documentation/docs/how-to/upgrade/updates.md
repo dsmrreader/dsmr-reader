@@ -1,21 +1,33 @@
 # Updates
 
-DSMR-reader update process. To see (recent) updates check the [Changelog](../../reference/changelog.md){ .md-button }
+DSMR-reader update process. To see (recent) updates check the changelog.
 
-## Major updates
-
-!!! note ""
-    
-    When a new major version of DSMR-reader is released (e.g. ``v5.x`` to ``v6.0``) you need to follow additional steps.
-
-
-Start by updating to the latest minor version of your current major version first (e.g. ``v5.10`` to ``v5.11``).
-
-When running containers, you may not even need to do anything special, other than following the minor update steps below.
+[Changelog](../../reference/changelog.md){ .md-button .md-button--primary }
+[Recent Xirixiz container updates](https://ghcr.io/xirixiz/dsmr-reader-docker){ .md-button .md-button--primary }
 
 ----
 
-## Minor updates
+## Restarting DSMR-reader
+
+You might want or need to restart DSMR-reader manually at some time, without updating.
+E.g. due to altered settings that need to be reapplied to DSMR-reader.
+
+- Log in as the `dsmrreader` user and run:
+
+``` shell
+sudo su - dsmrreader
+podman-compose up -d
+```
+
+- If no settings were changed, this will have no effect. Then run this instead:
+
+``` shell
+podman-compose restart dsmr
+```
+
+----
+
+## Minor updates (``v6.X`` to ``v6.Y``)
 
 !!! note ""
     
@@ -37,14 +49,37 @@ Check in DSMR-reader if you are now running the latest version in the series.
 
 ----
 
-## Restarting DSMR-reader
+## Major updates (``vX.*`` to ``vY.*``)
 
-You might want or need to restart DSMR-reader manually at some time, without updating.
-E.g. due to altered settings that need to be reapplied to DSMR-reader.
+!!! note ""
+    
+    When a new major version of DSMR-reader is released (e.g. ``v6.x`` to ``v7.0``) you need to follow additional steps.
 
-- Log in as the `dsmrreader` user and run:
+- Start by updating to the **latest minor version** of your current major version first (e.g. ``v5.11`` to ``v5.12``). See minor updates above.
+
+If that works, check the [Changelog](../../reference/changelog.md) for any special instructions before updating to the next major.
+Some incompatible changes may be there, e.g. unsupported database versions or featured **removed** from DSMR-reader.
+
+- Log in as the `dsmrreader` user:
 
 ``` shell
 sudo su - dsmrreader
+```
+
+- Open the Compose YAML file and change the image tag to the new major version. 
+    - *For example, to upgrade to DSMR-reader v7.x (in the future), change ``dsmr-reader-docker:6`` to ``dsmr-reader-docker:7``*
+
+``` yaml title="compose.yml (simplified version)" hl_lines="4"
+services:
+    dsmr:
+        # This will always use the latest minor release within the major DSMR-reader vX version specified below (dsmr-reader-docker:X)
+        image: ghcr.io/xirixiz/dsmr-reader-docker:7
+```
+
+- To apply, now run:
+
+``` shell
 podman-compose up -d
 ```
+
+Check in DSMR-reader if you are now running the latest version in the series.
