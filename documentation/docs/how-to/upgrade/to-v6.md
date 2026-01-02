@@ -123,7 +123,7 @@ You are done! If you want to know more about the differences between the native 
 ## Visual: Native setup for DSMR-reader v5.x
 *All dependencies reside on the OS and required end-user to manually install/upgrade.*
 
-``` mermaid
+```mermaid
 sequenceDiagram
     participant OS as Server (host)
     Note over OS: E.g. RaspberryPi OS
@@ -150,7 +150,7 @@ sequenceDiagram
 ## Visual: New setup for DSMR-reader v6.x
 *All dependencies are moved into containers and do no longer require end-user installation or upgrades.*
 
-``` mermaid
+```mermaid
 sequenceDiagram
     participant OS as Server (host)
     Note over OS: E.g. RaspberryPi OS

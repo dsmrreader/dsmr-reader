@@ -5,7 +5,7 @@ hide:
 
 # Logs and debugging
 
-``` mermaid
+```mermaid
 graph LR
   A{Which logs?};
   A --->|Database issues| B[View DSMRDB logs];
