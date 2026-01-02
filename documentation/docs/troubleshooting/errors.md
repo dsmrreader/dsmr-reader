@@ -6,6 +6,35 @@ Common error messages and their solutions.
 
     Note that we are using `podman-compose`, everywhere, and **not** `podman compose` (note the dash/whitespace difference). Using the latter will result in different behavior!
 
+
+### Creating container storage: the container name is already in use by...
+If you see an error like this when (re)starting DSMR-reader with `podman-compose up -d`:
+
+```shell
+Error: creating container storage: the container name "dsmrdb" is already 
+in use by 520d7e8b1ec65d5a1b69967338e9d98671aa05d6f483481a243657c3ab92a2a1. 
+
+You have to remove that container to be able to reuse that name: that name
+is already in use, or use --replace to instruct Podman to do so.
+dsmrdb
+
+
+Error: creating container storage: the container name "dsmr" is already 
+in use by ae51bc4715d50c31be5cd5c6f48023518dd2e53b1f696791e6eaaa1dd8da40f9. 
+
+You have to remove that container to be able to reuse that name: that name
+is already in use, or use --replace to instruct Podman to do so.
+dsmr
+```
+
+Just use ``--force-recreate`` instead:
+
+```shell
+podman-compose up -d --force-recreate
+```
+
+----
+
 ## Key (id) already exists
 
 ```sql
