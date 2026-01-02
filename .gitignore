@@ -25,6 +25,7 @@
 /docker-compose.yml
 /compose.override.yml
 /compose.yml
+/compose.env
 /Dockerfile
 /Containerfile
 /.container-data/
