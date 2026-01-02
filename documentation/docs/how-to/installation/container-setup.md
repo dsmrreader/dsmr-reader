@@ -177,7 +177,7 @@ DSMRREADER_ADMIN_PASSWORD=your-own-password-here
 DSMRREADER_BACKEND_HIBERNATE=True
 ```
 
-- Omit the option if you don't need it.
+- Remove or ignore the option if you don't need it.
 - Continue to step 4 below.
 
 !!! tip "Reminder"
@@ -195,7 +195,7 @@ services:
           - /dev/ttyUSB0:/dev/ttyUSB0
 ```
 
-- Or, if you use the API to provide data, you can **disable** this mapping by adding a `#` at the start of the **two** lines:
+- Or, if you use the API to provide data, you can **disable** this mapping by adding a `#` at the start of the **two** lines (or just remove them):
 
 ``` yaml title="compose.yml (simplified version)" hl_lines="4-5"
 services:

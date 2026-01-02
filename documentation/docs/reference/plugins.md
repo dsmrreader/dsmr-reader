@@ -88,7 +88,7 @@ This is an example of issue [#407](https://github.com/dsmrreader/dsmr-reader/iss
 
 Plugin file ``dsmr_plugins/secondary_pvoutput_upload.py`` (new file):
 
-```python title="dsmr_plugins/secondary_pvoutput_upload.py" hl_lines="16-17"
+```python title="/home/dsmrreader/dsmr_plugins/secondary_pvoutput_upload.py (on container host)" hl_lines="16-17"
 import requests
 
 from django.dispatch import receiver
@@ -133,7 +133,7 @@ This is an example of issue [#557](https://github.com/dsmrreader/dsmr-reader/iss
 
 Plugin file ``dsmr_plugins/forward_raw_telegram_to_serial.py`` (new file):
 
-```python title="dsmr_plugins/forward_raw_telegram_to_serial.py" hl_lines="11"
+```python title="/home/dsmrreader/dsmr_plugins/forward_raw_telegram_to_serial.py (on container host)" hl_lines="11"
 import serial
 
 from django.dispatch import receiver
@@ -189,7 +189,7 @@ This can be quite handy if you run multiple instances of DSMR-reader (i.e.: Rasp
 
 Plugin file ``dsmr_plugins/forward_raw_telegram_to_api.py`` (new file):
 
-```python title="dsmr_plugins/forward_raw_telegram_to_api.py" hl_lines="11-13"
+```python title="/home/dsmrreader/dsmr_plugins/forward_raw_telegram_to_api.py (on container host)" hl_lines="11-13"
 import requests
 import logging
 
@@ -238,7 +238,7 @@ Use this to send DSMR readings in JSON format to some (arbitrary) API.
 
 Plugin file ``dsmr_plugins/forward_json_dsmrreading_to_api.py`` (new file):
 
-```python title="dsmr_plugins/forward_json_dsmrreading_to_api.py" hl_lines="26"
+```python title="/home/dsmrreader/dsmr_plugins/forward_json_dsmrreading_to_api.py (on container host)" hl_lines="26"
 import requests
 import json
 
@@ -291,7 +291,7 @@ def handle_forward_json_dsmrreading_to_api(sender, instance, created, raw, **kwa
 
 Plugin file ``dsmr_plugins/poll_dsmrloggerws_api.py`` (new file):
 
-```python title="dsmr_plugins/poll_dsmrloggerws_api.py" hl_lines="10"
+```python title="/home/dsmrreader/dsmr_plugins/poll_dsmrloggerws_api.py (on container host)" hl_lines="10"
 import requests
 
 from django.dispatch import receiver
