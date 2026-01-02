@@ -12,8 +12,25 @@ The application allows you to create and add plugins, hooking on certain events 
 
 ## Configuration
 
-You can create plugins in their own file in ``dsmr_plugins/modules/plugin_name.py``, 
-where ``plugin_name`` is the name of your plugin. 
+You can create plugins in their own file in ``dsmr_plugins/modules/plugin_name.py``, where ``plugin_name`` is the name of your plugin.
+
+!!! abstract "Container users"
+
+    Starting from DSMR-reader v6, you cannot edit files inside the containers without risking losing them.
+    You can mount a local directory to the container to store your plugins. This option is disabled by default.
+
+    Open ``compose.yml`` and **enable** the highlighted line below, remove the ``#``. Don't forget to run ``docker-compose up -d`` afterwards.
+    
+    ``` yaml title="compose.yml (simplified version)" hl_lines="4"
+    services:
+        dsmr:
+            volumes:
+                - ./dsmr_plugins:/app/dsmr_plugins/modules
+    ```
+
+    There should now be a directory ``dsmr_plugins`` in the same directory as your ``compose.yml`` file. 
+    You can create plugins files here. Any file you create there will be available inside the container in the correct location (``dsmr_plugins/modules/``).
+
 
 Please make sure the ``plugin_name``,
 
@@ -69,9 +86,9 @@ This is an example of issue [#407](https://github.com/dsmrreader/dsmr-reader/iss
     ```
 
 
-Plugin file ``dsmr_plugins/modules/secondary_pvoutput_upload.py`` (new file):
+Plugin file ``dsmr_plugins/secondary_pvoutput_upload.py`` (new file):
 
-```python title="dsmr_plugins/modules/secondary_pvoutput_upload.py" hl_lines="16-17"
+```python title="dsmr_plugins/secondary_pvoutput_upload.py" hl_lines="16-17"
 import requests
 
 from django.dispatch import receiver
@@ -114,9 +131,9 @@ This is an example of issue [#557](https://github.com/dsmrreader/dsmr-reader/iss
     ```
 
 
-Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_serial.py`` (new file):
+Plugin file ``dsmr_plugins/forward_raw_telegram_to_serial.py`` (new file):
 
-```python title="dsmr_plugins/modules/forward_raw_telegram_to_serial.py" hl_lines="11"
+```python title="dsmr_plugins/forward_raw_telegram_to_serial.py" hl_lines="11"
 import serial
 
 from django.dispatch import receiver
@@ -170,9 +187,9 @@ This can be quite handy if you run multiple instances of DSMR-reader (i.e.: Rasp
     DSMRREADER_PLUGINS=dsmr_plugins.modules.forward_raw_telegram_to_api
     ```
 
-Plugin file ``dsmr_plugins/modules/forward_raw_telegram_to_api.py`` (new file):
+Plugin file ``dsmr_plugins/forward_raw_telegram_to_api.py`` (new file):
 
-```python title="dsmr_plugins/modules/forward_raw_telegram_to_api.py" hl_lines="11-13"
+```python title="dsmr_plugins/forward_raw_telegram_to_api.py" hl_lines="11-13"
 import requests
 import logging
 
@@ -219,9 +236,9 @@ Use this to send DSMR readings in JSON format to some (arbitrary) API.
     ```
 
 
-Plugin file ``dsmr_plugins/modules/forward_json_dsmrreading_to_api.py`` (new file):
+Plugin file ``dsmr_plugins/forward_json_dsmrreading_to_api.py`` (new file):
 
-```python title="dsmr_plugins/modules/forward_json_dsmrreading_to_api.py" hl_lines="26"
+```python title="dsmr_plugins/forward_json_dsmrreading_to_api.py" hl_lines="26"
 import requests
 import json
 
@@ -272,9 +289,9 @@ def handle_forward_json_dsmrreading_to_api(sender, instance, created, raw, **kwa
     DSMRREADER_PLUGINS=dsmr_plugins.modules.poll_dsmrloggerws_api
     ```
 
-Plugin file ``dsmr_plugins/modules/poll_dsmrloggerws_api.py`` (new file):
+Plugin file ``dsmr_plugins/poll_dsmrloggerws_api.py`` (new file):
 
-```python title="dsmr_plugins/modules/poll_dsmrloggerws_api.py" hl_lines="10"
+```python title="dsmr_plugins/poll_dsmrloggerws_api.py" hl_lines="10"
 import requests
 
 from django.dispatch import receiver

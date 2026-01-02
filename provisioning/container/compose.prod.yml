@@ -42,6 +42,9 @@ services:
       # This is important as it mirrors some container data (/app/backups) to your host (in dsmr_backups/).
       # Deleting the DSMR container will then NOT delete data in the folder mirrored in the container.
       - ./dsmr_backups:/app/backups
+
+      # Only enable if you use plugins, keep disabled otherwise.
+#      - ./dsmr_plugins:/app/dsmr_plugins/modules
     env_file:
       - compose.env
     ports:
