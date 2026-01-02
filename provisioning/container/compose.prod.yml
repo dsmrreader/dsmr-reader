@@ -17,7 +17,7 @@ services:
     env_file:
       - compose.env
     healthcheck:
-      # TODO for you: Must match below with POSTGRES_USER (-U) and POSTGRES_DB (-d) above
+      # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d) in compose.env
       test: [ "CMD", "pg_isready -U dsmrreader_user -d dsmrreader" ]
       interval: 10s
       timeout: 5s
