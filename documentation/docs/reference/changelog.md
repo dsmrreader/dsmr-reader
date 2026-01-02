@@ -6,7 +6,7 @@
     Usually only major version updates contain **incompatible changes**. E.g. upgrading from `v6.x` to `v7.x`.
 
 ## Current release series
-### v6.0.0 - December 2025
+### v6.0.0 - January 2026
 
 *This is a major release. See the release notes below for incompatible (conflicting) changes and all other changes.*
 
