@@ -4,19 +4,12 @@
 
 ARG PYTHON_VERSION="3.13"
 
-FROM python:${PYTHON_VERSION}-alpine AS local-dsmrreader-base
+FROM python:${PYTHON_VERSION}-slim-trixie AS local-dsmrreader-base
 WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
-RUN apk add --update \
-    build-base \
-    gcc \
-    libffi-dev \
-    inetutils-telnet \
-    gettext \
-    openjpeg \
-    mariadb-dev \
-    postgresql-client
+RUN apt-get update
+RUN apt-get install -y libpq-dev
 RUN pip install pip --upgrade
 
 
