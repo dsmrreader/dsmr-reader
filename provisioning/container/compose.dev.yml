@@ -43,7 +43,7 @@ services:
       - compose.env
     volumes:
       # Persist database storage between container recreation
-      - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/
+      - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/data
       # Only use for creating or restoring DB-backups.
       # Export: pg_dump -U dbuser dsmrreader > /run/host/Desktop/dsmrreader-postgresql-backup.sql
       # Import: psql -U dbuser -f /run/host/Desktop/dsmrreader-postgresql-backup.sql dsmrreader
