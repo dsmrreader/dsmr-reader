@@ -1,6 +1,0 @@
-- Update dsmrreader/__init__.py to final version
-- Update pyproject.toml version
-- Update CHANGELOG latest version + release date
-- Dump migration lock with: ./manage.py dsmrreader_lock_migrations
-- Merge to release branch
-- Tag the version in GitHub and add changelog info
