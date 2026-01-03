@@ -14,9 +14,6 @@ services:
     volumes:
       - ./src:/app
       - /app/.venv  # Prevents mirroring it to host
-    ports:
-      # Use these env vars for your IDE's Python interpreter. Set Python path to /app/.venv/bin/python3 as well.
-      - '${HOST_DJANGO_PORT:-8000}:${CONTAINER_DJANGO_PORT:-8000}'
     depends_on:
       dev-dsmr-db:
         condition: service_healthy
@@ -26,21 +23,14 @@ services:
         condition: service_started
     env_file:
       - compose.env
+    ports:
+      # Use these env vars for your IDE's Python interpreter. Set Python path to /app/.venv/bin/python3 as well.
+      - '${HOST_DJANGO_PORT:-8000}:${CONTAINER_DJANGO_PORT:-8000}'
 
   dev-dsmr-db:
     container_name: dev-dsmr-db
     image: postgres:17-alpine
     restart: 'unless-stopped'
-    healthcheck:
-      # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d)
-      test: ["CMD-SHELL", "pg_isready -U dbuser -d dsmrreader"]
-      interval: 1s
-      timeout: 5s
-      retries: 20
-    ports:
-      - '5432:5432'
-    env_file:
-      - compose.env
     volumes:
       # Persist database storage between container recreation
       - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/data
@@ -48,6 +38,15 @@ services:
       # Export: pg_dump -U dbuser dsmrreader > /run/host/Desktop/dsmrreader-postgresql-backup.sql
       # Import: psql -U dbuser -f /run/host/Desktop/dsmrreader-postgresql-backup.sql dsmrreader
       - ~/Desktop:/run/host/Desktop/
+    ports:
+      - '5432:5432'
+    env_file:
+      - compose.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d dsmrreader"]  # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d)
+      interval: 1s
+      timeout: 5s
+      retries: 20
 
   # http://localhost:10000
   dsmr-docs:
