@@ -360,3 +360,78 @@ podman-compose ps
 
 - Test the web interface again (see step 5 above).
 - Everything should be working now!
+
+----
+
+## Post-installation
+### Alternatives
+
+Instead of direct USB device connection, you could also use `ser2net` (Serial to Network) instead. 
+This works around the hassle of USB permissions, broadcasts the telegrams on a TCP port and also allows multiple devices to use it, without interfering. 
+
+- Install Ser2net
+```shell
+sudo apt install ser2net
+```
+
+- It should automatically make it a system service that starts on (re)boot.
+- Depending on the Ser2net version you are using and the DSMR-protocol version of your smart meter, configure:
+
+**Ser2net version 4+**
+```yaml title="/etc/ser2net.yaml (DSMR v4/v5 meters)" hl_lines="7-17"
+%YAML 1.1
+---
+# This is a ser2net configuration file, tailored to be rather simple
+
+define: &banner \r\nser2net port \p device \d [\B] (Debian GNU/Linux)\r\n\r\n
+
+connection: &con0096
+    accepter: tcp,4000
+    enable: on
+    options:
+      max-connections: 3
+      banner: *banner
+      kickolduser: true
+      telnet-brk-on-sync: true
+    connector: serialdev,
+              /dev/ttyUSB0,
+              115200n81,local
+```
+
+Or (older meters)
+
+```yaml title="/etc/ser2net.yaml (DSMR v2 meters)" hl_lines="7-17"
+%YAML 1.1
+---
+# This is a ser2net configuration file, tailored to be rather simple
+
+define: &banner \r\nser2net port \p device \d [\B] (Debian GNU/Linux)\r\n\r\n
+
+connection: &con0096
+    accepter: tcp,4000
+    enable: on
+    options:
+      max-connections: 3
+      banner: *banner
+      kickolduser: true
+      telnet-brk-on-sync: true
+    connector: serialdev,
+              /dev/ttyUSB0,
+              9600e71,local
+```
+
+!!! abstract "Older Ser2net versions"
+    
+    ```ini title="/etc/ser2net.conf (DSMR v4/v5 meters)" hl_lines="1"
+    4000:telnet:600:/dev/ttyUSB0:115200 8DATABITS NONE 1STOPBIT banner max-connections=3
+    ```
+
+    Or (older meters)
+
+    ```ini title="/etc/ser2net.conf (DSMR v2 meters)" hl_lines="1"
+    4000:raw:600:/dev/ttyUSB0:9600 EVEN 1STOPBIT 7DATABITS XONXOFF banner max-connections=3
+    ```
+
+- If you are running `ser2net` on the same host as the DSMR-reader container, just enter these networksettings into DSMR-reader datalogger configuration:
+    - Network socket address: `host.containers.internal`
+    - network socket port: `4000`
