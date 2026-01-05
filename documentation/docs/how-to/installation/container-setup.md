@@ -162,8 +162,9 @@ DJANGO_SECRET_KEY=
 
 - Configure a password for the admin interface of DSMR-reader by setting `DSMRREADER_ADMIN_PASSWORD`:
 
-```yaml title="compose.env" hl_lines="2"
-# TODO for you: Set an admin interface password to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
+```yaml title="compose.env" hl_lines="2-3"
+# TODO for you: Set an admin interface username (and password) to your liking - make it a strong one if you host DSMR-reader publicly facing the Internet
+DSMRREADER_ADMIN_USER=
 DSMRREADER_ADMIN_PASSWORD=
 ```
 
