@@ -37,8 +37,6 @@ services:
     devices:
        - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-
       # This is important as it mirrors some container data (/app/backups) to your host (in dsmr_backups/).
       # Deleting the DSMR container will then NOT delete data in the folder mirrored in the container.
       - ./dsmr_backups:/app/backups
