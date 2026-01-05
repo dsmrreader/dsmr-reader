@@ -56,7 +56,7 @@ podman info --debug
 
 !!! abstract ""
 
-    There are multiple ways to run containers. This guide uses a dedicated system user (`dsmrreader`) for DSMR-reader to make it does **not** run as `root` user. 
+    There are multiple ways to run containers. This guide uses a dedicated system user (`dsmrreader`) for DSMR-reader to make sure it does **not** run as `root` user. 
     This is similar to the legacy setup with the legacy system user (`dsmr`) in the past. Feel free to run it any other (unsupported) way to your liking.
 
     The username (`dsmrreader`) purposely differs from legacy to avoid confusion with the old setup. And to allow legacy users to easily migrate (or roll back).
