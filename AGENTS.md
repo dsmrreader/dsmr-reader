@@ -37,12 +37,7 @@ Always run these in order:
 Verify that the version in `dsmrreader/__init__.py` is configured for a stable release.
 
 **Requirements**:
-- Fourth element must be: `"final"` (indicates stable release)
-- Last element must be: `0` (indicates first release of that version)
-- Example: `VERSION = (6, 0, 0, "final", 0)` ✅
-
-**Process**:
-1. Check `src/dsmrreader/__init__.py` for the `VERSION` tuple
+1. Check `src/dsmrreader/__init__.py` for the `VERSION` tuple (e.g: `VERSION = (6, 0, 0, "final", 0)`)
 2. Verify fourth element is `"final"` (not "beta" or "rc")
 3. Verify last element is `0`
 4. If requirements are not met, update the version tuple before proceeding with release
