@@ -152,7 +152,7 @@ DUID=1001
 DGID=1001
 ```
 
-- Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator)) and generate a new `DJANGO_SECRET_KEY` (50 characters, no symbols).
+- Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator), 50 characters, **no** symbols) and generate a new `DJANGO_SECRET_KEY`.
 - Configure it in the Compose file as `DJANGO_SECRET_KEY`.
 
 ```yaml title="compose.env" hl_lines="2"

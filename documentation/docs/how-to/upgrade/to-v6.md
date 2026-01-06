@@ -5,15 +5,62 @@ hide:
 
 # Upgrading v5.x to v6.x
 
-!!! warning "Target audience"
+!!! bug "Warning"
 
-    This guide is only required for users upgrading from DSMR-reader v5.x to v6.x that were using the **native** installation method (**non-containerized**).
+    DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in January 2026](https://github.com/dsmrreader/dsmr-reader/releases).
+    Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until **stable release**. The documentation hosted is also subject to change.
 
-!!! abstract "Before you start"
+!!! abstract ""
 
-    Read the [v6 changelog](../../reference/changelog.md) for all changes. You will likely need to upgrade your database version as well.
+    Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
 
 ----
+
+## Upgrading existing container installations
+
+!!! warning ""
+
+    This guide is only for users that were already using the ==**containerized** installation== method.
+
+- DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **PostgreSQL 17**, if you need to upgrade PostgreSQL anyway.
+    - The easiest way of upgrading is to **stop** DSMR-reader (keep the database running), **export** the database as SQL, **update** PostgreSQL, **import** the SQL again, **start** DSMR-reader again.
+    - **Export**: E.g. if your database user is ``dsmrreader_user`` and the database name ``dsmrreader``:
+        - ``docker-compose exec dsmrdb pg_dump -U dsmrreader_user -d dsmrreader | gzip --fast > dsmrreader-export.sql.gz`` 
+    - **Update**: E.g. updating to PostgreSQL 17:
+        - Make sure to update the ==volume mapping== to ``/var/lib/postgresql/data``, as this [was changed since PostgreSQL 17 Docker](https://hub.docker.com/_/postgres#pgdata) and will change again in the version after! E.g. ``./dsmr_database/postgresql17:/var/lib/postgresql/data``
+    - **Import**: E.g. to import the backup created:
+        - ``zcat dsmrreader-export.sql.gz | docker-compose exec dsmrdb psql -U dsmrreader_user -d dsmrreader`` 
+
+- DSMR-reader v6 now requires you to set your own username and password for the admin panel, the former _defaults_ have been removed.
+    - Set `DSMRREADER_ADMIN_USER` and `DSMRREADER_ADMIN_PASSWORD` env vars. See [Environment variables](../../reference/environment-variables.md).
+
+- DSMR-reader v6 now requires you to set your own secret for security internals, the former _defaults_ have been removed.
+    - Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
+
+!!! abstract ""
+
+    DSMR-reader Docker now also tags the major versions of DSMR-reader:
+
+    - If you are currently using ``dsmr-reader-docker:latest``, this will continue to work, but _may_ push incompatible updates.
+    - You are advised to use ``dsmr-reader-docker:6`` instead, as this will always give you the latest version in the release series and _should_ never break.
+
+- Set your compose config (or whatever you are using) to use:
+    - ``ghcr.io/xirixiz/dsmr-reader-docker:6`` (advised)
+    - or ``ghcr.io/xirixiz/dsmr-reader-docker:latest`` (use at own risk)
+
+- Pull or update the container and you should be good to go!
+
+!!! success ""
+
+    You are done! Welcome to DSMR-reader 6.x 
+
+----
+
+## Upgrading existing native installations
+
+!!! warning ""
+
+    This guide is only for users that were using the ==**native** installation== method (**non-containerized**).
 
 ### Upgrade step 1: Backup your DSMR-reader v5.x data
 
@@ -27,8 +74,9 @@ sudo su - dsmr
 # Created full backup: /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wednesday.sql.gz
 ```
 
-- If you are installing DSMR-reader on a new device, make sure to export the created backup file to your new device.
-- If the new DSMR-reader installation will be on the same device, you may want to relocate it to the home directory of a sudo user, e.g. `pi`:
+- What is your situation?
+  - If you are installing DSMR-reader on a **new device**, make sure to export the created backup file to your new device.
+  - If the new DSMR-reader installation will be on the **same device**, you may want to relocate it to the home directory of a sudo user, e.g. `pi`:
 
 ```shell
 # Or press CTRL+D
@@ -113,11 +161,15 @@ sudo supervisorctl update
     sudo supervisorctl start all
     ```
 
+!!! success ""
+
+    You are done! Welcome to DSMR-reader 6.x 
+
 ---
 
 ### Visual overview of the differences between DSMR-reader v5.x and v6.x
 
-You are done! If you want to know more about the differences between the native setup of DSMR-reader v5.x and the containerized setup of DSMR-reader v6.x, see the diagrams below. Or just skip it entirely.
+If you want to know more about the differences between the native setup of DSMR-reader v5.x and the containerized setup of DSMR-reader v6.x, see the diagrams below. Or just skip it entirely.
 
 
 ## Visual: Native setup for DSMR-reader v5.x

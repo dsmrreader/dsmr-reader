@@ -340,7 +340,8 @@ DSMR-reader utilizes the Python Django framework. All settings below directly af
 
     This setting is **required**.
 
-The secret key Django should use for some security internals. Should be unique and kept a secret. Generate a random value
+The secret key Django should use for some security internals. Should be unique and kept a secret.
+Find a password generator (e.g. [LastPass Password Generator](https://www.lastpass.com/features/password-generator), 50 characters, **no** symbols) and generate a new `DJANGO_SECRET_KEY`.
 
 See [``SECRET_KEY`` in Django docs](https://docs.djangoproject.com/en/4.2/ref/settings/#secret-key) for more information about the setting and what it does.
 

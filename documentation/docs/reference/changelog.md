@@ -8,6 +8,12 @@
 ## Current release series
 ### v6.0.0 - January 2026
 
+!!! bug "Warning"
+
+    DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in January 2026](https://github.com/dsmrreader/dsmr-reader/releases).
+    Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until **stable release**. The documentation hosted is also subject to change.
+
+
 *This is a major release. See the release notes below for incompatible (conflicting) changes and all other changes.*
 
 #### Incompatible changes
