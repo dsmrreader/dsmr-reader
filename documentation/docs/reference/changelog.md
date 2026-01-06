@@ -16,12 +16,12 @@
     
     - Native installations ==without containers==
 
-    [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button .md-button--primary }
-
     !!! note ""
 
         *This will ease future upgrades for you, as most of the installation is relocated into the pre-built DSMR-reader container image.*
         *See the upgrade guide for more information.*
+
+    [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button .md-button--primary }
 
 !!! danger "Dropped database support for"
 
@@ -40,7 +40,7 @@
     
         *Most versions are either end-of-life or no longer supported by the Django Framework.*        
 
-        *Tip: Upgrade to ==PostgreSQL 17== if you need to upgrade anyway - This will likely defer following database upgrades for a few more years, as it's [expected to be end-of-life in 2029 or later](https://www.postgresql.org/support/versioning/).*
+        *Tip: Upgrade to ==PostgreSQL 17== if you need to upgrade anyway - This will likely delay following database upgrades required, for a few more years, as it's [expected to be end-of-life after 2029 (or later)](https://www.postgresql.org/support/versioning/).*
 
 !!! danger "Dropped Python support for"
 
@@ -53,7 +53,7 @@
 
     !!! note ""
 
-        *DSMR-reader is developed, tested and built on Python 3.13+. Older versions are unlikely to work due to dependency pinning.*
+        *DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*
 
 
 #### Other changes
@@ -65,9 +65,6 @@
 
     #### MinderGas
     - Added explanation about upload time to MinderGas - by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979){ .md-button }
-    
-    #### Dropbox
-    - Upgrade Dropbox SDK to version 12 ==*(version 11 breaks on 1st of January 2026)*==
 
     #### InfluxDB
     - Use Influx URL instead of Influx hostname + port combination [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984){ .md-button }
