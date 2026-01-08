@@ -319,32 +319,34 @@ E.g. is your hardware is accessible at `123.456.78.90`, go to: http://123.456.78
 ### Installation step 6: Configure automatic startup
 Now we will make sure DSMR-reader starts automatically on (re)boot. E.g. after system updates or a power outage.
 
-- Stop the containers first:
+- Stop the containers first, create a systemd user service and enable + start it:
 
-```shell
-# Still as "dsmrreader" user
-podman-compose down
-```
+=== "RaspberryPi OS (Debian)"
 
-- To have DSMR-reader start automatically on boot, create a systemd user service.
+    ``` shell
+    # Still as "dsmrreader" user
+    podman-compose down
+    podman-compose systemd -a register
 
-```shell
-podman-compose systemd -a register
-```
+    logout
+    # Or press CTRL + D
+    
+    # As sudo-user (e.g. pi)
+    sudo systemctl enable podman-compose@dsmrreader --user -M dsmrreader@
+    sudo systemctl start podman-compose@dsmrreader --user -M dsmrreader@
+    ```
 
-- Go back to root/sudo user (e.g. `pi` user) with:
+=== "Ubuntu"
+    
+    ``` shell
+    # Still as "dsmrreader" user
+    podman-compose down
+    podman-compose systemd -a register
 
-```shell
-logout
-# Or press CTRL + D
-```
-
-- Enable the service and start it:
-
-```shell
-sudo systemctl enable podman-compose@dsmrreader --user -M dsmrreader@
-sudo systemctl start podman-compose@dsmrreader --user -M dsmrreader@
-```
+    systemctl --user daemon-reload
+    systemctl --user enable podman-compose@dsmrreader
+    systemctl --user start podman-compose@dsmrreader
+    ```
 
 - Reboot to test automatic startup:
 
@@ -378,51 +380,52 @@ sudo apt install ser2net
 - It should automatically make it a system service that starts on (re)boot.
 - Depending on the Ser2net version you are using and the DSMR-protocol version of your smart meter, configure:
 
-**Ser2net version 4+**
-```yaml title="/etc/ser2net.yaml (DSMR v4/v5 meters)" hl_lines="7-17"
-%YAML 1.1
----
-# This is a ser2net configuration file, tailored to be rather simple
+=== "Ser2net version 4+"
 
-define: &banner \r\nser2net port \p device \d [\B] (Debian GNU/Linux)\r\n\r\n
-
-connection: &con0096
-    accepter: tcp,4000
-    enable: on
-    options:
-      max-connections: 3
-      banner: *banner
-      kickolduser: true
-      telnet-brk-on-sync: true
-    connector: serialdev,
-              /dev/ttyUSB0,
-              115200n81,local
-```
-
-Or (older meters)
-
-```yaml title="/etc/ser2net.yaml (DSMR v2 meters)" hl_lines="7-17"
-%YAML 1.1
----
-# This is a ser2net configuration file, tailored to be rather simple
-
-define: &banner \r\nser2net port \p device \d [\B] (Debian GNU/Linux)\r\n\r\n
-
-connection: &con0096
-    accepter: tcp,4000
-    enable: on
-    options:
-      max-connections: 3
-      banner: *banner
-      kickolduser: true
-      telnet-brk-on-sync: true
-    connector: serialdev,
-              /dev/ttyUSB0,
-              9600e71,local
-```
-
-!!! abstract "Older Ser2net versions"
+    ```yaml title="/etc/ser2net.yaml (DSMR v4/v5 meters)" hl_lines="7-17"
+    %YAML 1.1
+    ---
+    # This is a ser2net configuration file, tailored to be rather simple
     
+    define: &banner \r\nser2net port \p device \d [\B] (Debian GNU/Linux)\r\n\r\n
+    
+    connection: &con0096
+        accepter: tcp,4000
+        enable: on
+        options:
+          max-connections: 3
+          banner: *banner
+          kickolduser: true
+          telnet-brk-on-sync: true
+        connector: serialdev,
+                  /dev/ttyUSB0,
+                  115200n81,local
+    ```
+    
+    Or (older meters)
+    
+    ```yaml title="/etc/ser2net.yaml (DSMR v2 meters)" hl_lines="7-17"
+    %YAML 1.1
+    ---
+    # This is a ser2net configuration file, tailored to be rather simple
+    
+    define: &banner \r\nser2net port \p device \d [\B] (Debian GNU/Linux)\r\n\r\n
+    
+    connection: &con0096
+        accepter: tcp,4000
+        enable: on
+        options:
+          max-connections: 3
+          banner: *banner
+          kickolduser: true
+          telnet-brk-on-sync: true
+        connector: serialdev,
+                  /dev/ttyUSB0,
+                  9600e71,local
+    ```
+
+=== "Older Ser2net versions"
+        
     ```ini title="/etc/ser2net.conf (DSMR v4/v5 meters)" hl_lines="1"
     4000:telnet:600:/dev/ttyUSB0:115200 8DATABITS NONE 1STOPBIT banner max-connections=3
     ```

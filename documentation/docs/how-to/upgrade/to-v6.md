@@ -10,7 +10,7 @@ hide:
     DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in January 2026](https://github.com/dsmrreader/dsmr-reader/releases).
     Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until **stable release**. The documentation hosted is also subject to change.
 
-!!! abstract ""
+!!! warning ""
 
     Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
 
@@ -18,33 +18,55 @@ hide:
 
 ## Upgrading existing container installations
 
-!!! warning ""
-
-    This guide is only for users that were already using the ==**containerized** installation== method.
-
-- DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **PostgreSQL 17**, if you need to upgrade PostgreSQL anyway.
-    - The easiest way of upgrading is to **stop** DSMR-reader (keep the database running), **export** the database as SQL, **update** PostgreSQL, **import** the SQL again, **start** DSMR-reader again.
-    - **Export**: E.g. if your database user is ``dsmrreader_user`` and the database name ``dsmrreader``:
-        - ``docker-compose exec dsmrdb pg_dump -U dsmrreader_user -d dsmrreader | gzip --fast > dsmrreader-export.sql.gz`` 
-    - **Update**: E.g. updating to PostgreSQL 17:
-        - Make sure to update the ==volume mapping== to ``/var/lib/postgresql/data``, as this [was changed since PostgreSQL 17 Docker](https://hub.docker.com/_/postgres#pgdata) and will change again in the version after! E.g. ``./dsmr_database/postgresql17:/var/lib/postgresql/data``
-    - **Import**: E.g. to import the backup created:
-        - ``zcat dsmrreader-export.sql.gz | docker-compose exec dsmrdb psql -U dsmrreader_user -d dsmrreader`` 
-
-- DSMR-reader v6 now requires you to set your own username and password for the admin panel, the former _defaults_ have been removed.
-    - Set `DSMRREADER_ADMIN_USER` and `DSMRREADER_ADMIN_PASSWORD` env vars. See [Environment variables](../../reference/environment-variables.md).
-
-- DSMR-reader v6 now requires you to set your own secret for security internals, the former _defaults_ have been removed.
-    - Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
+### PostgreSQL
+DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **PostgreSQL 17**, if you need to upgrade PostgreSQL anyway.
 
 !!! abstract ""
 
+    The easiest way of upgrading PostgreSQL is to **stop** DSMR-reader (keep the database running), **export** the database as SQL, **update** PostgreSQL, **import** the SQL again, **start** DSMR-reader again.
+    
+    === "Export database"
+        
+        E.g. if your database user is ``dsmrreader_user`` and the database name ``dsmrreader``:
+    
+        ```shell
+        docker-compose exec dsmrdb pg_dump -U dsmrreader_user -d dsmrreader | gzip --fast > dsmrreader-export.sql.gz
+        ``` 
+        
+    === "Update PostgreSQL"
+        
+        E.g. updating to PostgreSQL 17:
+    
+        - Make sure to update the ==volume mapping== to ``/var/lib/postgresql/data``, as this [was changed since PostgreSQL 17 Docker](https://hub.docker.com/_/postgres#pgdata) and will change again in the version after! E.g. ``./dsmr_database/postgresql17:/var/lib/postgresql/data``
+    
+    === "Import database"
+        
+        E.g. to import the backup created:
+    
+        ```shell
+        zcat dsmrreader-export.sql.gz | docker-compose exec dsmrdb psql -U dsmrreader_user -d dsmrreader
+        ``` 
+
+### DSMRREADER_ADMIN_USER / DSMRREADER_ADMIN_PASSWORD
+
+    DSMR-reader v6 now requires you to set your own username and password for the admin panel, the former _defaults_ have been removed.
+
+    Set `DSMRREADER_ADMIN_USER` and `DSMRREADER_ADMIN_PASSWORD` env vars. See [Environment variables](../../reference/environment-variables.md).
+
+### DJANGO_SECRET_KEY
+
+    DSMR-reader v6 now requires you to set your own secret for security internals, the former _defaults_ have been removed.
+
+    Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
+
+### dsmr-reader-docker:VERSION
+
     DSMR-reader Docker now also tags the major versions of DSMR-reader:
 
-    - If you are currently using ``dsmr-reader-docker:latest``, this will continue to work, but _may_ push incompatible updates.
-    - You are advised to use ``dsmr-reader-docker:6`` instead, as this will always give you the latest version in the release series and _should_ never break.
+    If you are currently using ``dsmr-reader-docker:latest``, this will continue to work, but _may_ push incompatible updates.
+    You are advised to use ``dsmr-reader-docker:6`` instead, as this will always give you the latest version in the release series and _should_ never break.
 
-- Set your compose config (or whatever you are using) to use:
+    Set your compose config (or whatever you are using) to use:
     - ``ghcr.io/xirixiz/dsmr-reader-docker:6`` (advised)
     - or ``ghcr.io/xirixiz/dsmr-reader-docker:latest`` (use at own risk)
 
@@ -57,10 +79,6 @@ hide:
 ----
 
 ## Upgrading existing native installations
-
-!!! warning ""
-
-    This guide is only for users that were using the ==**native** installation== method (**non-containerized**).
 
 ### Upgrade step 1: Backup your DSMR-reader v5.x data
 
@@ -106,60 +124,61 @@ Depending on if you want to switch to DSMR-reader v6.x permanently, or just want
 - Option 1: Remove the old DSMR-reader v5.x installation entirely.
 - Option 2: Keep the old DSMR-reader v5.x installation.
 
+=== "Option 1: Remove old DSMR-reader"
 
-#### Option 1: Remove the old DSMR-reader v5.x installation entirely
-- To remove DSMR-reader v5 from your system, execute the following commands:
-
-```shell
-# Nginx.
-sudo rm /etc/nginx/sites-enabled/dsmr-webinterface
-sudo service nginx reload
-sudo rm -rf /var/www/dsmrreader
-
-# Supervisor.
-sudo supervisorctl stop all
-sudo rm /etc/supervisor/conf.d/dsmr*.conf
-sudo supervisorctl reread
-sudo supervisorctl update
-
-# Homedir & user.
-sudo rm -rf /home/dsmr/
-sudo userdel dsmr
-To delete your data (the database) as well:
-
-sudo -u postgres dropdb dsmrreader
-```
-
-- Optionally, you can remove these packages:
-
-```shell
-sudo apt-get remove postgresql postgresql-server-dev-all python3-psycopg2 nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
-```
-
-#### Option 2: Keep the old DSMR-reader v5.x installation
-- Just stop the processes and prevent them from automatically starting:
-
-```shell
-sudo supervisorctl stop all
-sudo mv /etc/supervisor/conf.d/dsmr_backend.conf /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED
-sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED
-sudo mv /etc/supervisor/conf.d/dsmr_webinterface.conf /etc/supervisor/conf.d/dsmr_webinterface.conf.DISABLED
-sudo supervisorctl reread
-sudo supervisorctl update
-```
-
-!!! abstract ""
-
-    If you want to revert it later:
+    - To remove DSMR-reader v5 from your system, execute the following commands:
     
     ```shell
-    sudo mv /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED /etc/supervisor/conf.d/dsmr_backend.conf
-    sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED /etc/supervisor/conf.d/dsmr_datalogger.conf
-    sudo mv /etc/supervisor/conf.d/dsmr_webinterface.conf.DISABLED /etc/supervisor/conf.d/dsmr_webinterface.conf
+    # Nginx.
+    sudo rm /etc/nginx/sites-enabled/dsmr-webinterface
+    sudo service nginx reload
+    sudo rm -rf /var/www/dsmrreader
+    
+    # Supervisor.
+    sudo supervisorctl stop all
+    sudo rm /etc/supervisor/conf.d/dsmr*.conf
     sudo supervisorctl reread
     sudo supervisorctl update
-    sudo supervisorctl start all
+    
+    # Homedir & user.
+    sudo rm -rf /home/dsmr/
+    sudo userdel dsmr
+    To delete your data (the database) as well:
+    
+    sudo -u postgres dropdb dsmrreader
     ```
+    
+    - Optionally, you can remove these packages:
+    
+    ```shell
+    sudo apt-get remove postgresql postgresql-server-dev-all python3-psycopg2 nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
+    ```
+
+=== "Option 2: Keep old DSMR-reader"
+
+    - Just stop the processes and prevent them from automatically starting:
+    
+    ```shell
+    sudo supervisorctl stop all
+    sudo mv /etc/supervisor/conf.d/dsmr_backend.conf /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED
+    sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED
+    sudo mv /etc/supervisor/conf.d/dsmr_webinterface.conf /etc/supervisor/conf.d/dsmr_webinterface.conf.DISABLED
+    sudo supervisorctl reread
+    sudo supervisorctl update
+    ```
+    
+    !!! abstract ""
+    
+        If you want to revert it later:
+        
+        ```shell
+        sudo mv /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED /etc/supervisor/conf.d/dsmr_backend.conf
+        sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED /etc/supervisor/conf.d/dsmr_datalogger.conf
+        sudo mv /etc/supervisor/conf.d/dsmr_webinterface.conf.DISABLED /etc/supervisor/conf.d/dsmr_webinterface.conf
+        sudo supervisorctl reread
+        sudo supervisorctl update
+        sudo supervisorctl start all
+        ```
 
 !!! success ""
 
@@ -171,72 +190,74 @@ sudo supervisorctl update
 
 If you want to know more about the differences between the native setup of DSMR-reader v5.x and the containerized setup of DSMR-reader v6.x, see the diagrams below. Or just skip it entirely.
 
+=== "DSMR-reader v5.x"
 
-## Visual: Native setup for DSMR-reader v5.x
-*All dependencies reside on the OS and required end-user to manually install/upgrade.*
-
-```mermaid
-sequenceDiagram
-    participant OS as Server (host)
-    Note over OS: E.g. RaspberryPi OS
+    ## Visual: Native setup for DSMR-reader v5.x
+    *All dependencies reside on the OS and required end-user to manually install/upgrade.*
     
-    create participant DSMRReader@{ "type" : "entity" }
-
-    rect rgb(200, 150, 255)
-    OS-->>DSMRReader: Hosts Supervisor to run
-    Note over OS: Python
-    Note over OS: Packages
-    Note over DSMRReader: DSMR-reader code
-    end
-
-    create participant Database@{ "type" : "database" }
-    DSMRReader->>Database: Communicates with
-    
-    rect rgb(191, 223, 255)
-    OS-->>Database: Hosts
-    Note over Database: PostgreSQL
-    end
-```
-
-
-## Visual: New setup for DSMR-reader v6.x
-*All dependencies are moved into containers and do no longer require end-user installation or upgrades.*
-
-```mermaid
-sequenceDiagram
-    participant OS as Server (host)
-    Note over OS: E.g. RaspberryPi OS
-    rect rgb(200, 150, 255)
-    create participant REGISTRY as Docker/Podman
-    OS->>REGISTRY: Runs
-    end
+    ```mermaid
+    sequenceDiagram
+        participant OS as Server (host)
+        Note over OS: E.g. RaspberryPi OS
         
-    create participant DSMRReader@{ "type" : "entity" }
+        create participant DSMRReader@{ "type" : "entity" }
+    
+        rect rgb(200, 150, 255)
+        OS-->>DSMRReader: Hosts Supervisor to run
+        Note over OS: Python
+        Note over OS: Packages
+        Note over DSMRReader: DSMR-reader code
+        end
+    
+        create participant Database@{ "type" : "database" }
+        DSMRReader->>Database: Communicates with
+        
+        rect rgb(191, 223, 255)
+        OS-->>Database: Hosts
+        Note over Database: PostgreSQL
+        end
+    ```
 
-    rect rgb(200, 150, 255)
-    REGISTRY-->>DSMRReader: Hosts DSMRReader Docker container
-    Note over DSMRReader: Python
-    Note over DSMRReader: Packages
-    Note over DSMRReader: DSMR-reader code
-    end
-     
-    rect rgb(200, 150, 255)
-    OS<<-->>DSMRReader: Mounted volume
-    Note over OS: /home/dsmrreader/dsmr_backups
-    Note over DSMRReader: /app/backups
-    end
+=== "DSMR-reader v6.x"
+
+    ## Visual: New setup for DSMR-reader v6.x
+    *All dependencies are moved into containers and do no longer require end-user installation or upgrades.*
     
-    create participant Database@{ "type" : "database" }
-    DSMRReader->>Database: Communicates with
+    ```mermaid
+    sequenceDiagram
+        participant OS as Server (host)
+        Note over OS: E.g. RaspberryPi OS
+        rect rgb(200, 150, 255)
+        create participant REGISTRY as Docker/Podman
+        OS->>REGISTRY: Runs
+        end
+            
+        create participant DSMRReader@{ "type" : "entity" }
     
-    rect rgb(191, 223, 255)
-    REGISTRY-->>Database: Hosts PostgreSQL container
-    Note over Database: E.g. PostgreSQL
-    end
-    
-    rect rgb(200, 150, 255)
-    OS<<-->>Database: Mounted volume
-    Note over OS: /home/dsmrreader/dsmr_database
-    Note over Database: /var/lib/postgresql
-    end
-```
+        rect rgb(200, 150, 255)
+        REGISTRY-->>DSMRReader: Hosts DSMRReader Docker container
+        Note over DSMRReader: Python
+        Note over DSMRReader: Packages
+        Note over DSMRReader: DSMR-reader code
+        end
+         
+        rect rgb(200, 150, 255)
+        OS<<-->>DSMRReader: Mounted volume
+        Note over OS: /home/dsmrreader/dsmr_backups
+        Note over DSMRReader: /app/backups
+        end
+        
+        create participant Database@{ "type" : "database" }
+        DSMRReader->>Database: Communicates with
+        
+        rect rgb(191, 223, 255)
+        REGISTRY-->>Database: Hosts PostgreSQL container
+        Note over Database: E.g. PostgreSQL
+        end
+        
+        rect rgb(200, 150, 255)
+        OS<<-->>Database: Mounted volume
+        Note over OS: /home/dsmrreader/dsmr_database
+        Note over Database: /var/lib/postgresql
+        end
+    ```
