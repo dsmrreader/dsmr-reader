@@ -50,106 +50,89 @@ DSMR-reader only supports the built-in integrations mentioned above and, for pra
 
 
 ## Screenshots
-#### Dashboard
 
-The dashboard displays the latest information regarding the consumption of today.
-You can view the total consumption for the current month and year as well.
+*Navigate using the tabs below.*
 
-If your meter supports it, you can also see your gas consumption and electricity returned.
+=== "Dashboard"
 
-![Screenshot](../static/screenshots/about-dsmrreader/dashboard.png)
+    The dashboard displays the latest information regarding the consumption of today.
+    You can view the total consumption for the current month and year as well.
+    
+    If your meter supports it, you can also see your gas consumption and electricity returned.
+    
+    ![Screenshot](../static/screenshots/about-dsmrreader/dashboard.png)
 
-----
+=== "Live graphs"
 
-#### Live graphs
-
-The live graphs plots the most recent data available, depending on the capabilities of your smart meter.
-
-![Live](../static/screenshots/about-dsmrreader/live.png)
-
-----
-
-
-#### Archive
-
-The archive allows you to scroll through all historical data captured by the application.
-All data can be viewed on different levels: by day, by month and by year.
-
-![Archive](../static/screenshots/about-dsmrreader/archive.png)
-
-----
+    The live graphs plots the most recent data available, depending on the capabilities of your smart meter.
+    
+    ![Live](../static/screenshots/about-dsmrreader/live.png)
 
 
-#### Compare
+=== "Archive"
 
-This page allows you to simply compare two days, months or years with each other.
-It will also display the difference between each other as a percentage.
-
-![Compare](../static/screenshots/about-dsmrreader/compare.png)
-
-----
+    The archive allows you to scroll through all historical data captured by the application.
+    All data can be viewed on different levels: by day, by month and by year.
+    
+    ![Archive](../static/screenshots/about-dsmrreader/archive.png)
 
 
-#### Trends
-
-This page displays a summary of your average daily consumption and habits.
-
-![Trends](../static/screenshots/about-dsmrreader/trends.png)
-
-----
-
-
-#### Statistics
-
-This page displays your meter positions and statistics provided by the DSMR protocol.
-You can also find the number of readings stored and any excesses regarding consumption.
-
-![Statistics](../static/screenshots/about-dsmrreader/statistics.png)
-
-----
-
-#### Energy contracts
-
-Summary of all your contracts and the amount of energy consumed/generated.
-
-![Energy contracts](../static/screenshots/about-dsmrreader/energy-contracts.png)
-
-----
+=== "Compare"
+    
+    This page allows you to simply compare two days, months or years with each other.
+    It will also display the difference between each other as a percentage.
+    
+    ![Compare](../static/screenshots/about-dsmrreader/compare.png)
 
 
-#### Export
-
-This pages allows you to export all day or hour statistics to CSV.
-
-![Export](../static/screenshots/about-dsmrreader/export.png)
-
-----
+=== "Trends"
+    
+    This page displays a summary of your average daily consumption and habits.
+    
+    ![Trends](../static/screenshots/about-dsmrreader/trends.png)
 
 
-#### About
+=== "Statistics"
+    
+    This page displays your meter positions and statistics provided by the DSMR protocol.
+    You can also find the number of readings stored and any excesses regarding consumption.
+    
+    ![Statistics](../static/screenshots/about-dsmrreader/statistics.png)
 
-Shows the 'health' of the application. Any issues will be reported here.
-You can also easily check for DSMR-reader updates here.
+=== "Energy contracts"
 
-![About](../static/screenshots/about-dsmrreader/about.png)
-
-----
-
-
-#### Support
-
-Assists you in finding the information required for debugging your installation or any issues.
-
-![Support](../static/screenshots/about-dsmrreader/support.png)
-
-----
+    Summary of all your contracts and the amount of energy consumed/generated.
+    
+    ![Energy contracts](../static/screenshots/about-dsmrreader/energy-contracts.png)
 
 
-#### Configuration
+=== "Export"
+    
+    This pages allows you to export all day or hour statistics to CSV.
+    
+    ![Export](../static/screenshots/about-dsmrreader/export.png)
 
-The configuration page is the entrypoint for the admin interface.
 
-You can type any topic or setting you're searching for, as it should pop up with clickable deeplink to the admin panel.
-Or you can just skip it this page and continue directly to the admin panel.
+=== "About"
+    
+    Shows the 'health' of the application. Any issues will be reported here.
+    You can also easily check for DSMR-reader updates here.
+    
+    ![About](../static/screenshots/about-dsmrreader/about.png)
 
-![Configuration](../static/screenshots/about-dsmrreader/configuration.png)
+
+=== "Support"
+    
+    Assists you in finding the information required for debugging your installation or any issues.
+    
+    ![Support](../static/screenshots/about-dsmrreader/support.png)
+
+
+=== "Configuration"
+    
+    The configuration page is the entrypoint for the admin interface.
+    
+    You can type any topic or setting you're searching for, as it should pop up with clickable deeplink to the admin panel.
+    Or you can just skip it this page and continue directly to the admin panel.
+    
+    ![Configuration](../static/screenshots/about-dsmrreader/configuration.png)
