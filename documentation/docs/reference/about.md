@@ -51,7 +51,7 @@ DSMR-reader only supports the built-in integrations mentioned above and, for pra
 
 ## Screenshots
 
-*Navigate using the tabs below.*
+<small>*Navigate using the tabs below.*</small>
 
 === "Dashboard"
 

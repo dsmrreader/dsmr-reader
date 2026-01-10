@@ -5,111 +5,120 @@
     Before updating, make sure to check the changelog for any incompatible changes that may affect your installation.
     Usually only major version updates contain **incompatible changes**. E.g. upgrading from `v6.x` to `v7.x`.
 
-## Current release series
-### v6.0.0 - January 2026
+## v6.0.0 - January 2026
 
-#### Incompatible changes
+!!! danger "Incompatible changes"
 
-!!! danger ""
+    ### Incompatible changes: Installations
+    Dropped installation support for:
 
-    *Navigate using the tabs below.*
-    
-    === "Installation"
-        
-        Dropped installation support for native installations without containers. This project moves forward by adopting the containerized of Xirixiz. 
-    
-        [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button .md-button--primary }
-    
-    === "Database"
-        
-        Dropped database support for
-    
-        - **PostgreSQL 10**
-        - **PostgreSQL 11**
-        - **PostgreSQL 12**
-        - **PostgreSQL 13**
-        - **MariaDB 10.1**
-        - **MariaDB 10.2**
-        - **MariaDB 10.3**
-        - **MariaDB 10.4**
-        - **MySQL 5.x**
-        - **MySQL 8.0.10** (and lower)
-    
-        *Most versions are either end-of-life or no longer supported by the Django Framework.*        
+    - ==Native/bare metal installations== without containers
 
-        *Tip: Upgrade to ==PostgreSQL 17== if you need to upgrade anyway - This will likely delay following database upgrades required, for a few more years, as it's [expected to be end-of-life after 2029 (or later)](https://www.postgresql.org/support/versioning/).*
+    This project moves forward by adopting the containerized version of Xirixiz as the de facto standard installation method. 
 
-    === "Python"
-        
-        Dropped Python support for
-    
-        - **Python 3.7**
-        - **Python 3.8**
-        - **Python 3.9**
-        - **Python 3.10**
-        - **Python 3.11**
-        - **Python 3.12**
-    
-        *DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*
+    [DSMR-reader v6 upgrade guide](../how-to/upgrade/to-v6.md){ .md-button }
 
-#### Other changes
+    <small>You can always host DSMR-reader yourself without containers and **without support**, as there are purposely no technical blockers built-in that prevent it. However, future releases will not take these installations into account and might break them unintentionally (e.g. with a Python upgrade). Care when chosing this route and manually updating in the future.</small>  
+    
+    ---
 
-!!! abstract ""
-    
-    *Navigate using the tabs below.*
-    
-    === "Hosting"
-    
-        - Django settings exposed via envvars [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
-    
-    === "MinderGas"
-    
-        - Added explanation about upload time to MinderGas - by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979)
-    
-    === "InfluxDB"
-    
-        - Use Influx URL instead of Influx hostname + port combination [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
-        - Added command-line alias for clearing InfluxDB queue
-            ```shell
-            ./manage.py dsmr_influxdb_clear_queue
-            ```
-    
-    === "MQTT"
-    
-        - Changed message queue primary key from AutoField to BigAutoField to reduce sequence resets needed [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
-        - Added command-line alias for clearing MQTT queue
-            ```shell
-            ./manage.py dsmr_mqtt_clear_queue
-            ```
-    
-    === "PVOutput"
-    
-        - Improved net power calculation to use average of consumption data instead of single record value [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
-    
-    === "Docs"
-    
-        - Dropped Dutch translation for the documentation
-            - *(DSMR-reader translations inside the application are **not** affected)*
-        - Fixed broken API docs rendering caused by legacy ReDoc link
-        - Simplify documentation [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
-    
-    === "Misc"
-    
-        - Updated Django to 5.2 LTS
-        - Updated a lot of other dependencies to a more recent version
-        - Updated FontAwesome icons to version 7.1
-        - Added missing favicon for admin interface
-        - Added dedicated URL for monitoring purposes: `/healthcheck`
-        - Fixed some small typo's and translations
-        - Added ``DSMRREADER_BACKEND_HIBERNATE`` in favor of migrating to containerized setup
+    ### Incompatible changes: Database versions
+    Dropped database support for:
 
+    - **PostgreSQL 10**
+    - **PostgreSQL 11**
+    - **PostgreSQL 12**
+    - **PostgreSQL 13**
+    - **MariaDB 10.1**
+    - **MariaDB 10.2**
+    - **MariaDB 10.3**
+    - **MariaDB 10.4**
+    - **MySQL 5.7** <small>(and lower)</small>
+    - **MySQL 8.0.10** <small>(and lower)</small>
+
+    <small>
+    *Most database versions are [either end-of-life](https://www.postgresql.org/support/versioning/) or [no longer supported by the Django Framework](https://code.djangoproject.com/wiki/SupportedDatabaseVersions) version DSMR-reader uses (or will upgrade to in the upcoming year).*        
+    *You are advised to upgrade to ==PostgreSQL 17== if you need to upgrade anyway. This will likely delay your next database upgrade required, for a few more years, as it's [expected to be end-of-life around late 2029](https://www.postgresql.org/support/versioning/).*
+    </small>
+
+    ---
+
+    ### Incompatible changes: Python versions
+    Dropped Python support for:
+
+    - **Python 3.7**
+    - **Python 3.8**
+    - **Python 3.9**
+    - **Python 3.10**
+    - **Python 3.11**
+    - **Python 3.12**
+
+    <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
+
+!!! success "New features"
+
+    ### Hosting
+    - Added new dedicated URL route for health check and monitoring purposes:
+        ```
+        GET /healthcheck
+        ```
+    - More [Django settings](./environment-variables.md/#django-settingsoverrides) exposed via environment variables [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
+    - Added [``DSMRREADER_BACKEND_HIBERNATE``](./environment-variables.md/#dsmrreader_backend_hibernate) in favor of migrating to containerized setup
+
+    <small>*This greatly improves the flexibility of changing internal settings without having to manually alter the installation.*</small>
+
+    [All environment variables available](./environment-variables.md){ .md-button }
+
+    ---
+
+    ### InfluxDB
+    - Use Influx URL instead of Influx hostname + port combination [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
+    - Added command-line alias for clearing InfluxDB queue
+        - <small>*This is an alternative for executing manual database queries that do the same*</small>
+        ```shell
+        ./manage.py dsmr_influxdb_clear_queue
+        ```
+
+    ---
+
+    ### MQTT
+    - Changed message queue primary key from AutoField to BigAutoField to reduce the number if sequence resets needed [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
+    - Added command-line alias for clearing MQTT queue
+        - <small>*This is an alternative for executing manual database queries that do the same*</small>
+        ```shell
+        ./manage.py dsmr_mqtt_clear_queue
+        ```
+
+!!! abstract "Other changes and fixes"
+    
+
+    ### PVOutput
+    - Improved net power calculation to use **average** recent consumption data instead of latest value [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
+    
+    ---
+
+    ### Documentation
+    - Added explanation about upload time to MinderGas - by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979)
+    - Fixed broken API docs rendering caused by legacy ReDoc link
+    - Simplified online documentation [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
+    - Dropped Dutch translation for the online documentation
+        - <small>*The DSMR-reader translations inside the application are **not** affected*</small>
+   
+    ---
+
+    ### Miscelaneous
+    - Updated Django to 5.2 LTS
+    - Updated a lot of other dependencies to a more recent version
+        - <small>*The Dropbox SDK is the most important one due to incompatible Dropbox API changes per 1 January 2026*</small>
+    - Updated FontAwesome icons assets to latest version
+    - Added missing favicon for admin interface
+    - Fixed some small typo's and translations
 
 ---
 
-
 ## Previous release series
 
-*Navigate between releases using the tabs below.*
+<small>*Navigate between releases using the tabs below.*</small>
 
 === "v5.12"
 
