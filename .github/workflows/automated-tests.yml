@@ -27,7 +27,7 @@ jobs:
       - name: Build docker image(s)
         run: |
           ln -s provisioning/container/compose.test.yml compose.yml
-          docker compose build
+          docker compose build --build-arg PYTHON_VERSION=${{ matrix.python-version }}
 
       - name: Run docker image(s)
         run: |
