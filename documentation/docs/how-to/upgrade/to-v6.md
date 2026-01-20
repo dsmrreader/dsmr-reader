@@ -7,7 +7,7 @@ hide:
 
 !!! bug "Warning"
 
-    DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in January 2026](https://github.com/dsmrreader/dsmr-reader/releases).
+    DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in late January 2026](https://github.com/dsmrreader/dsmr-reader/releases).
     Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until **stable release**. The documentation hosted is also subject to change.
 
 !!! warning ""
@@ -49,27 +49,29 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
 
 ### DSMRREADER_ADMIN_USER / DSMRREADER_ADMIN_PASSWORD
 
-    DSMR-reader v6 now requires you to set your own username and password for the admin panel, the former _defaults_ have been removed.
+DSMR-reader v6 now requires you to set your own username and password for the admin panel, the former _defaults_ have been removed.
 
-    Set `DSMRREADER_ADMIN_USER` and `DSMRREADER_ADMIN_PASSWORD` env vars. See [Environment variables](../../reference/environment-variables.md).
+Set `DSMRREADER_ADMIN_USER` and `DSMRREADER_ADMIN_PASSWORD` env vars. See [Environment variables](../../reference/environment-variables.md).
 
 ### DJANGO_SECRET_KEY
 
-    DSMR-reader v6 now requires you to set your own secret for security internals, the former _defaults_ have been removed.
+DSMR-reader v6 now requires you to set your own secret for security internals, the former _defaults_ have been removed.
 
-    Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
+Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
 
 ### dsmr-reader-docker:VERSION
 
-    DSMR-reader Docker now also tags the major versions of DSMR-reader:
+DSMR-reader Docker now also tags the major versions of DSMR-reader:
 
-    If you are currently using ``dsmr-reader-docker:latest``, this will continue to work, but _may_ push incompatible updates.
-    You are advised to use ``dsmr-reader-docker:6`` instead, as this will always give you the latest version in the release series and _should_ never break.
+If you are currently using ``dsmr-reader-docker:latest``, this will continue to work, but _may_ push incompatible updates.
+You are advised to use ``dsmr-reader-docker:6`` instead, as this will always give you the latest version in the release series and _should_ never break.
 
-    Set your compose config (or whatever you are using) to use:
-    - ``ghcr.io/xirixiz/dsmr-reader-docker:6`` (advised)
-    - or ``ghcr.io/xirixiz/dsmr-reader-docker:latest`` (use at own risk)
+Set your compose config (or whatever you are using) to use:
 
+- ``ghcr.io/xirixiz/dsmr-reader-docker:6`` (advised)
+- or ``ghcr.io/xirixiz/dsmr-reader-docker:latest`` (use at own risk)
+
+### Finalize upgrade
 - Pull or update the container and you should be good to go!
 
 !!! success ""
