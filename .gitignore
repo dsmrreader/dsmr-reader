@@ -29,4 +29,5 @@
 /Dockerfile
 /Containerfile
 /.container-data/
+/provisioning/container-data/
 /.agent-data/

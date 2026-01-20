@@ -33,7 +33,7 @@ services:
     restart: 'unless-stopped'
     volumes:
       # Persist database storage between container recreation
-      - ./.container-data/dev-dsmr-db/:/var/lib/postgresql/data
+      - ./container-data/dev-dsmr-db/postgres17:/var/lib/postgresql/data
       # Only use for creating or restoring DB-backups.
       # Export: pg_dump -U dbuser dsmrreader > /run/host/Desktop/dsmrreader-postgresql-backup.sql
       # Import: psql -U dbuser -f /run/host/Desktop/dsmrreader-postgresql-backup.sql dsmrreader
