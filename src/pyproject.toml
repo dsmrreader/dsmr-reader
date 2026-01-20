@@ -39,7 +39,7 @@ python-decouple = "^3"
 pyyaml = "^6"
 requests = "^2"
 urllib3 = "^2"
-
+uritemplate = "^4"
 
 [tool.poetry.group.dev.dependencies]
 black = "^25"
@@ -58,8 +58,6 @@ types-python-dateutil = "^2"
 types-pytz = "^2025"
 types-requests = "^2"
 types-six = "^1"
-uritemplate = "^4"
-
 
 [tool.black]
 line-length = 120
