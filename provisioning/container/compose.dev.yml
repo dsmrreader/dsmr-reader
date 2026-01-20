@@ -52,7 +52,7 @@ services:
   dsmr-docs:
     container_name: dsmr-docs
     restart: 'on-failure'
-    command: 'serve --dev-addr 0.0.0.0:10000'
+    command: 'serve --livereload --dev-addr 0.0.0.0:10000'
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
