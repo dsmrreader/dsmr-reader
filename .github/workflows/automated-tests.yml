@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - '3.13'
+          - '3.14'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
