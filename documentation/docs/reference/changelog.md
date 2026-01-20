@@ -5,6 +5,16 @@
     Before updating, make sure to check the changelog for any incompatible changes that may affect your installation.
     Usually only major version updates contain **incompatible changes**. E.g. upgrading from `v6.x` to `v7.x`.
 
+
+## v6.1.0 - February 2026
+
+!!! abstract "Other changes and fixes"
+
+    ### Hosting
+    - Updated Python to 3.14
+
+----
+
 ## v6.0.0 - January 2026
 
 !!! danger "Incompatible changes"
