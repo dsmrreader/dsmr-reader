@@ -9,11 +9,9 @@ class Command(BaseCommand):  # noqa
     def handle(self, **options):
         """WARNING: Only safe for command line execution. Do NOT use for web requests!"""
         username = config(
-            "DSMR_USER",  # @deprecated v4.5, removed v5.0
             default=config("DSMRREADER_ADMIN_USER", default=None),
         )
         password = config(
-            "DSMR_PASSWORD",  # @deprecated v4.5, removed v5.0
             default=config("DSMRREADER_ADMIN_PASSWORD"),
         )
 

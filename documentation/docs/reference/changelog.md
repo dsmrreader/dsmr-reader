@@ -55,6 +55,18 @@
 
     <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
 
+    ---
+
+    ### Incompatible changes: Legacy environment variables
+    Dropped:
+
+    - `DSMR_USER` <small>(replaced by `DSMRREADER_ADMIN_USER` since v5)</small>
+    - `DSMR_PASSWORD` <small>(replaced by `DSMRREADER_ADMIN_PASSWORD` since v5)</small>
+    - `DSMRREADER_BACKUP_INTERVAL_DAYS` <small>(replaced by admin setting since v5.9)</small>
+    - `DSMRREADER_BACKUP_NAME_PREFIX` <small>(no replacement)</small>
+
+    <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
+
 ??? success "New features"
 
     ### Hosting
