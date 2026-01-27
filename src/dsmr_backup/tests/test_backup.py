@@ -7,7 +7,7 @@ import os
 import io
 
 from django.db import connection
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from django.utils import timezone
 from django.conf import settings
 
