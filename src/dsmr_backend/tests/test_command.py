@@ -13,6 +13,9 @@ class TestCommand(InterceptCommandStdoutMixin, TestCase):
         # Just test whether it exists and runs.
         self._intercept_command_stdout("dsmr_debuginfo")
 
+    def test_dsmr_superuser(self):
+        self._intercept_command_stdout("dsmr_superuser")
+
     def test_check_deploy(self):
         if connection.vendor != "sqlite":  # pragma: no cover
             return self.skipTest(reason="Only SQLite supported")
