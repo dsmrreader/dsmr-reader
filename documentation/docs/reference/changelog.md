@@ -53,7 +53,7 @@
     - **Python 3.11**
     - **Python 3.12**
 
-    <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
+    <small>*DSMR-reader is developed, tested and built on Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
 
     ---
 
