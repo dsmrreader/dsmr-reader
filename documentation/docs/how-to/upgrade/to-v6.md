@@ -5,18 +5,24 @@ hide:
 
 # Upgrading v5.x to v6.x
 
-!!! bug "Warning"
-
-    DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in late January 2026](https://github.com/dsmrreader/dsmr-reader/releases).
-    Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until **stable release**. The documentation hosted is also subject to change.
-
-!!! warning ""
+!!! example ""
 
     Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
 
 ----
 
 ## Upgrading existing container installations
+
+!!! bug "Warning"
+    
+    !!! example "DSMR-reader v6 state"
+
+        DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in early February 2026](https://github.com/dsmrreader/dsmr-reader/releases).
+        Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until the final **stable release**. The documentation hosted is also subject to change.
+    
+    !!! example ""
+    
+        Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
 
 ### PostgreSQL
 DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **PostgreSQL 17**, if you need to upgrade PostgreSQL anyway.
@@ -81,6 +87,17 @@ Set your compose config (or whatever you are using) to use:
 ----
 
 ## Upgrading existing native installations
+
+!!! bug "Warning"
+    
+    !!! example "DSMR-reader v6 state"
+
+        DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in early February 2026](https://github.com/dsmrreader/dsmr-reader/releases).
+        Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until the final **stable release**. The documentation hosted is also subject to change.
+    
+    !!! example ""
+    
+        Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
 
 ### Upgrade step 1: Backup your DSMR-reader v5.x data
 
