@@ -7,7 +7,7 @@ hide:
 
 This documentation covers the most basic topics and common troubleshooting. But you may need more help. 
 
-## DSMR-reader feature help
+## DSMR-reader features/bugs
 Go to the official DSMR-reader repository for help regarding DSMR-reader features and usage.
 
 Also, most feature requests and bug reports have been reported already, in the past ten years. Chances are high you will find similar questions and their solution.
@@ -16,7 +16,7 @@ Also, most feature requests and bug reports have been reported already, in the p
 
 
 
-## Container feature help
+## Container features/bugs
 Go to the DSMR-reader Docker repository for help regarding the containerized version of DSMR-reader.
 If you are not sure whether your question is related to DSMR-reader or the container setup, start with [DSMR-reader](https://github.com/dsmrreader/dsmr-reader/issues) first.
 

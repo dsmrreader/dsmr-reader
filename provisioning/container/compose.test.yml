@@ -25,6 +25,8 @@ services:
       DJANGO_DATABASE_NAME: 'test_dsmrreader'
       DJANGO_DATABASE_USER: 'dbtestuser'
       DJANGO_DATABASE_PASSWORD: 'dbtestpasswd'
+      DSMRREADER_ADMIN_USER: 'testadmin'
+      DSMRREADER_ADMIN_PASSWORD: 'testpassword'
 
   tests-dsmr-db:
     container_name: tests-dsmr-db

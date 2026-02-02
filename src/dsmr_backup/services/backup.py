@@ -43,14 +43,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     # Schedule for whatever interval is set (usually 1 day), for the time specified.
     backup_settings = BackupSettings.get_solo()
-
-    # @deprecated legacy - Will be removed in v6.x
-    if settings.DSMRREADER_BACKUP_INTERVAL_DAYS > 0:
-        interval_in_days = settings.DSMRREADER_BACKUP_INTERVAL_DAYS
-    else:
-        interval_in_days = backup_settings.backup_interval_in_days
-
-    next_backup_timestamp = timezone.now() + timezone.timedelta(days=interval_in_days)
+    next_backup_timestamp = timezone.now() + timezone.timedelta(days=backup_settings.backup_interval_in_days)
     next_backup_timestamp = timezone.localtime(next_backup_timestamp)
 
     next_backup_timestamp = next_backup_timestamp.replace(
@@ -83,14 +76,10 @@ def create_full(folder: str) -> str:
         os.makedirs(folder)
 
     file_name_format = "{}.sql".format(BackupSettings.get_solo().file_name)
-
-    # @deprecated legacy - Will be removed in v6.x
-    prefix = settings.DSMRREADER_BACKUP_NAME_PREFIX
-
     backup_file = os.path.join(
         folder,
         file_name_format.format(
-            prefix=prefix if prefix else "dsmrreader",
+            prefix="dsmrreader",
             day_name=formats.date_format(timezone.now().date(), "l"),
             backup_type="backup",
             database_vendor=connection.vendor,
@@ -161,14 +150,10 @@ def create_partial(folder: str, models_to_backup: Iterable) -> str:  # pragma: n
         os.makedirs(folder)
 
     file_name_format = "{}.sql".format(BackupSettings.get_solo().file_name)
-
-    # @deprecated legacy - Will be removed in v6.x
-    prefix = settings.DSMRREADER_BACKUP_NAME_PREFIX
-
     backup_file = os.path.join(
         folder,
         file_name_format.format(
-            prefix=prefix if prefix else "dsmrreader",
+            prefix="dsmrreader",
             day_name=formats.date_format(timezone.now().date(), "l"),
             backup_type="partial-backup",
             database_vendor=connection.vendor,

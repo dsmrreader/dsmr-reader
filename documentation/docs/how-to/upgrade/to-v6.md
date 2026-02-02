@@ -1,24 +1,25 @@
----
-hide:
-  - toc
----
-
 # Upgrading v5.x to v6.x
 
-!!! bug "Warning"
-
-    DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in January 2026](https://github.com/dsmrreader/dsmr-reader/releases).
-    Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until **stable release**. The documentation hosted is also subject to change.
-
-!!! warning ""
+!!! example ""
 
     Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
 
 ----
 
-## Upgrading existing container installations
+## A: Upgrading existing container installations
 
-### PostgreSQL
+!!! bug "Warning"
+    
+    !!! example "DSMR-reader v6 state"
+
+        DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in early February 2026](https://github.com/dsmrreader/dsmr-reader/releases).
+        Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until the final **stable release**. The documentation hosted is also subject to change.
+    
+    !!! example ""
+    
+        Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
+
+### Upgrade step A1: PostgreSQL
 DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **PostgreSQL 17**, if you need to upgrade PostgreSQL anyway.
 
 !!! abstract ""
@@ -47,40 +48,57 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
         zcat dsmrreader-export.sql.gz | docker-compose exec dsmrdb psql -U dsmrreader_user -d dsmrreader
         ``` 
 
-### DSMRREADER_ADMIN_USER / DSMRREADER_ADMIN_PASSWORD
+### Upgrade step A2: Apply mandatory environment variable changes
 
-    DSMR-reader v6 now requires you to set your own username and password for the admin panel, the former _defaults_ have been removed.
+- DSMR-reader v6 now requires you to set your own username and password for the admin panel, the former _defaults_ have been removed.
 
-    Set `DSMRREADER_ADMIN_USER` and `DSMRREADER_ADMIN_PASSWORD` env vars. See [Environment variables](../../reference/environment-variables.md).
+    !!! abstract ""
+  
+        Set `DSMRREADER_ADMIN_USER` and `DSMRREADER_ADMIN_PASSWORD` env vars. See [Environment variables](../../reference/environment-variables.md).
 
-### DJANGO_SECRET_KEY
+- DSMR-reader v6 now requires you to set your own secret for security internals, the former _defaults_ have been removed.
 
-    DSMR-reader v6 now requires you to set your own secret for security internals, the former _defaults_ have been removed.
+    !!! abstract ""
+  
+        Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
 
-    Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
+### Upgrade step A3: Notice container image version tagging changes
 
-### dsmr-reader-docker:VERSION
+DSMR-reader Docker now also tags the major versions of DSMR-reader:
 
-    DSMR-reader Docker now also tags the major versions of DSMR-reader:
+If you are currently using ``dsmr-reader-docker:latest``, this will continue to work, but _may_ push incompatible updates.
+You are advised to use ``dsmr-reader-docker:6`` instead, as this will always give you the latest version in the release series and _should_ never break.
 
-    If you are currently using ``dsmr-reader-docker:latest``, this will continue to work, but _may_ push incompatible updates.
-    You are advised to use ``dsmr-reader-docker:6`` instead, as this will always give you the latest version in the release series and _should_ never break.
-
+!!! abstract ""
+    
     Set your compose config (or whatever you are using) to use:
+    
     - ``ghcr.io/xirixiz/dsmr-reader-docker:6`` (advised)
     - or ``ghcr.io/xirixiz/dsmr-reader-docker:latest`` (use at own risk)
 
+### Upgrade step A4: Finalize
 - Pull or update the container and you should be good to go!
 
-!!! success ""
+!!! abstract ""
 
     You are done! Welcome to DSMR-reader 6.x 
 
 ----
 
-## Upgrading existing native installations
+## B: Upgrading existing native installations
 
-### Upgrade step 1: Backup your DSMR-reader v5.x data
+!!! bug "Warning"
+    
+    !!! example "DSMR-reader v6 state"
+
+        DSMR-reader v6 is currently in **pre-release state** and [scheduled for release in early February 2026](https://github.com/dsmrreader/dsmr-reader/releases).
+        Feel free to test a release-candidate (v6.0rcX), but you're advised to wait until the final **stable release**. The documentation hosted is also subject to change.
+    
+    !!! example ""
+    
+        Read the [v6 changelog for all changes](../../reference/changelog.md). You will likely need to upgrade your database version as well.
+
+### Upgrade step B1: Backup your DSMR-reader v5.x data
 
 ```shell
 sudo su - dsmr
@@ -105,7 +123,7 @@ sudo mv /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wed
 
 ----
 
-### Upgrade step 2: Install DSMR-reader v6.x using the containerized method
+### Upgrade step B2: Install DSMR-reader v6.x using the containerized method
 
 !!! abstract ""
 
@@ -118,7 +136,7 @@ sudo mv /home/dsmr/dsmr-reader/backups/manually/dsmrreader-postgresql-backup-Wed
 
 ----
 
-### Upgrade step 3: Decide what to do with your old DSMR-reader v5.x installation
+### Upgrade step B3: Decide what to do with your old DSMR-reader v5.x installation
 Depending on if you want to switch to DSMR-reader v6.x permanently, or just want to have it run parallel for a while, you can either:
 
 - Option 1: Remove the old DSMR-reader v5.x installation entirely.
@@ -180,19 +198,19 @@ Depending on if you want to switch to DSMR-reader v6.x permanently, or just want
         sudo supervisorctl start all
         ```
 
-!!! success ""
+!!! abstract ""
 
     You are done! Welcome to DSMR-reader 6.x 
 
 ---
 
-### Visual overview of the differences between DSMR-reader v5.x and v6.x
+## Visual overview of the differences between DSMR-reader v5.x and v6.x
 
 If you want to know more about the differences between the native setup of DSMR-reader v5.x and the containerized setup of DSMR-reader v6.x, see the diagrams below. Or just skip it entirely.
 
 === "DSMR-reader v5.x"
 
-    ## Visual: Native setup for DSMR-reader v5.x
+    ### Native setup for DSMR-reader v5.x
     *All dependencies reside on the OS and required end-user to manually install/upgrade.*
     
     ```mermaid
@@ -220,7 +238,7 @@ If you want to know more about the differences between the native setup of DSMR-
 
 === "DSMR-reader v6.x"
 
-    ## Visual: New setup for DSMR-reader v6.x
+    ### New setup for DSMR-reader v6.x
     *All dependencies are moved into containers and do no longer require end-user installation or upgrades.*
     
     ```mermaid

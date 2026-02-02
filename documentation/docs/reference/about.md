@@ -29,18 +29,16 @@ DSMR-reader only supports the built-in integrations mentioned above and, for pra
 - Any [support and communication](https://github.com/dsmrreader/dsmr-reader/issues/new/choose) is available in both **English** and **Dutch**.
 - This documentation is only available in **English**. 
  
+!!! danger inline end "Heads up"
+
+    Originally this project was built to run on SD-cards, but through the years it became clear that SD-cards are not reliable enough for this purpose.
+
+    They will randomly and suddenly get corrupted, so be warned!
 
 ## Hardware requirements
-
 - RaspberryPi 5 (or similar) or better.
 - P1 telegram cable or a network socket (when using ``ser2net``).
 - A smart meter supporting any of these DSMR-telegram versions: ``v2`` / ``v4`` / ``v5``.
-
-!!! danger "Heads up"
-
-    Originally this project was built to run on SD-cards, but through the years it became clear that SD-cards are not reliable enough for this purpose.
-    They will randomly and suddenly get corrupted, so be warned!
-
 
 ## Software requirements
 

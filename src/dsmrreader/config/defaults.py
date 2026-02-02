@@ -34,13 +34,6 @@ DSMRREADER_SUPPORTED_DB_VENDORS = ("postgresql", "mysql")
 
 DSMRREADER_BACKUP_PG_DUMP = "pg_dump"
 DSMRREADER_BACKUP_MYSQLDUMP = "mysqldump"
-DSMRREADER_BACKUP_NAME_PREFIX = config(  # @deprecated since v5.9, will be dropped in v6.x
-    "DSMRREADER_BACKUP_NAME_PREFIX", cast=str, default=""
-)
-DSMRREADER_BACKUP_INTERVAL_DAYS = config(  # @deprecated since v5.9, will be dropped in v6.x
-    "DSMRREADER_BACKUP_INTERVAL_DAYS", cast=int, default=0
-)
-
 DSMRREADER_BACKUP_SQLITE = "sqlite3"
 DSMRREADER_REST_FRAMEWORK_API_USER = "api-user"
 

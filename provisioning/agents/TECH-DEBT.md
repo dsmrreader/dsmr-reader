@@ -1,0 +1,1 @@
+- Improve tests and coverage for `dsmr_superuser` CLI command
