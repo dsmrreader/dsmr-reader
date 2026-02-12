@@ -50,8 +50,8 @@ docker compose exec dev-dsmr-app poetry run /app/manage.py dsmrreader_lock_migra
 ```
 
 **Process**:
-1. The command outputs a file name (e.g., `provisioning/downgrade/v6.0.0.sh`)
+1. The command outputs a file name (e.g., `<PROJECT ROOT>/provisioning/downgrade/v6.0.0.sh`)
 2. Extract the file name from the output
 3. The output also contains the bash script content (migration commands)
 4. Create the file with the provided path and write the bash script content to it
-5. Ensure the file has executable permissions: `chmod +x provisioning/downgrade/v<VERSION>.sh`
+5. Ensure the file has executable permissions: `chmod +x <PROJECT ROOT>/provisioning/downgrade/v<VERSION>.sh`
