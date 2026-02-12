@@ -1,4 +1,4 @@
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dsmrreader/dsmr-reader/automated-tests.yml?branch=v6&style=for-the-badge)](https://github.com/dsmrreader/dsmr-reader/actions)
+[![Tests Status](https://img.shields.io/github/actions/workflow/status/dsmrreader/dsmr-reader/tests.yml?branch=v6&style=for-the-badge)](https://github.com/dsmrreader/dsmr-reader/actions)
 [![Read the Docs](https://img.shields.io/readthedocs/dsmr-reader/v6?style=for-the-badge)](https://dsmr-reader.readthedocs.io/en/v6/)
 [![Xirixiz DSMR-reader Docker](https://img.shields.io/docker/pulls/xirixiz/dsmr-reader-docker?style=for-the-badge)](https://hub.docker.com/r/xirixiz/dsmr-reader-docker/tags)
 
