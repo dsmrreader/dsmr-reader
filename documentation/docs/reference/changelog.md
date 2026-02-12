@@ -14,6 +14,7 @@
 ??? abstract "Fixes"
     
     **Miscelaneous**
+
     - Updated dependencies due to security vulnerabilities
         - [#2109](https://github.com/dsmrreader/dsmr-reader/issues/2109)
         - [#2110](https://github.com/dsmrreader/dsmr-reader/issues/2110)
