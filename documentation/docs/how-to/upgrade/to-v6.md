@@ -49,6 +49,13 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
   
         Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
 
+- Other changes: **Some** pre-existing `DSMRREADER_` env vars specifically for Xirixiz DSMR-reader Docker have been changed to `CONTAINER_`. E.g. `DSMRREADER_OPERATION_MODE` is now `CONTAINER_RUN_MODE`. 
+  
+    !!! abstract ""
+  
+        [See the changes here in `xirixiz/dsmr-reader-docker`](https://github.com/xirixiz/dsmr-reader-docker?tab=readme-ov-file#variables-changes).
+
+
 ### Upgrade step A3: Notice container image version tagging changes
 
 DSMR-reader Docker now also tags the major versions of DSMR-reader:
