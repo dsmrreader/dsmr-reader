@@ -49,11 +49,18 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
   
         Set `DJANGO_SECRET_KEY` env var with a [generated value](https://www.lastpass.com/features/password-generator) (50 characters, **no** symbols). See [Environment variables](../../reference/environment-variables.md).
 
-- Other changes: **Some** pre-existing `DSMRREADER_` env vars specifically for Xirixiz DSMR-reader Docker have been changed to `CONTAINER_`. E.g. `DSMRREADER_OPERATION_MODE` is now `CONTAINER_RUN_MODE`. 
+- **Some** pre-existing `DSMRREADER_` env vars specifically for Xirixiz DSMR-reader Docker have been changed to `CONTAINER_`. E.g. `DSMRREADER_OPERATION_MODE` is now `CONTAINER_RUN_MODE`. 
   
     !!! abstract ""
   
         [See the changes here in `xirixiz/dsmr-reader-docker`](https://github.com/xirixiz/dsmr-reader-docker?tab=readme-ov-file#variables-changes).
+
+- Other environment variables may have been added, removed or renamed as well.
+
+    <small>Check the new setup, specifically the [compose.ENV file](https://github.com/dsmrreader/dsmr-reader/blob/v6/provisioning/container/compose.prod.env) for the new environment variables required and adjust your setup accordingly. It's **not** required to mirror your setup with the new one, or to use an .env file. Focus on the environment variables that may affect you.</small>
+
+    [View compose.YML on GitHub](https://github.com/dsmrreader/dsmr-reader/blob/v6/provisioning/container/compose.prod.yml){ .md-button }
+    [View compose.ENV on GitHub](https://github.com/dsmrreader/dsmr-reader/blob/v6/provisioning/container/compose.prod.env){ .md-button }
 
 
 ### Upgrade step A3: Notice container image version tagging changes
