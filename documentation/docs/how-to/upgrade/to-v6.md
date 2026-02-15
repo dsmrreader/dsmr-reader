@@ -35,7 +35,14 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
         zcat dsmrreader-export.sql.gz | docker-compose exec dsmrdb psql -U dsmrreader_user -d dsmrreader
         ``` 
 
-### Upgrade step A2: Apply mandatory environment variable changes
+### Upgrade step A2: Apply mandatory (environment variable) changes
+
+- If you are using this former `localtime` volume mapping in the database (or dsmr) container, **remove it**, as it could cause NULL field errors and a lot of users reported this.
+
+    ```
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ```
 
 - **Some** pre-existing Xirixiz DSMR-reader Docker `DSMRREADER_` env vars specifically have been changed to `CONTAINER_`. 
   
