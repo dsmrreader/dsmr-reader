@@ -11,7 +11,7 @@
 
 ## v6.0.1 - February 2026
 
-??? abstract "Fixes"
+!!! abstract "Fixes"
     
     **Miscelaneous**
 
@@ -24,7 +24,7 @@
 
 ## v6.0.0 - February 2026
 
-??? danger "Incompatible changes"
+!!! danger "Incompatible changes"
 
     ### Incompatible changes: Installations
     Dropped installation support for:
@@ -84,7 +84,7 @@
 
     <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
 
-??? success "New features"
+!!! success "New features"
 
     ### Hosting
     - Added new dedicated URL route for health check and monitoring purposes:
@@ -121,7 +121,7 @@
         ./manage.py dsmr_mqtt_clear_queue
         ```
 
-??? abstract "Other changes and fixes"
+!!! abstract "Other changes and fixes"
     
 
     ### PVOutput
@@ -159,7 +159,7 @@
 
     #### v5.12.0 - December 2025
     
-    ???+ warning
+    !!!+ warning
     
         This is the last release in the DSMR-reader v5.x series. Upgrade to DSMR-reader v6.x for future support and features.
     
