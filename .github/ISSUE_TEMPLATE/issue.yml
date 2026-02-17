@@ -1,5 +1,5 @@
-name: DSMR-reader issue
-description: Only for DSMR-reader bugs or features. Need help? [Ask here at Discussions](https://github.com/dsmrreader/dsmr-reader/discussions).
+name: DSMR-reader bugs or feature requests
+description: Only for DSMR-reader bugs or features. Need help? Ask at Discussions-tab.
 title: '?'
 body:
   - type: dropdown
