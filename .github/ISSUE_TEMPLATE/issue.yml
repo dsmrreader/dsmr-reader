@@ -46,9 +46,6 @@ body:
       label: DSMR-reader version
       description: |
         What DSMR-reader version does it apply to?
-        
-        > [!IMPORTANT]
-        > *Specify the full version, e.g. ``v5.10.2``.*
       placeholder: vX.Y.Z
     validations:
       required: true
@@ -57,7 +54,7 @@ body:
     id: platform
     attributes:
       label: DSMR-reader platform
-      description: How did you install/do you run DSMR-reader?
+      description: How did you install or do you run DSMR-reader?
       options:
         - "Native/bare metal (without containers)"
         - "Podman (e.g. default installation)"
@@ -71,7 +68,7 @@ body:
     attributes:
       label: 'Optional: Container Compose YAML file'
       description: |
-        When applicable. **Remove secrets and sensitive information before creating the issue.**
+        When applicable. ⚠️ **Remove secrets and sensitive information before creating the issue.** ⚠️
       render: shell-script
 
   - type: textarea
@@ -87,8 +84,5 @@ body:
     attributes:
       label: 'Optional: Smart meter telegram'
       description: |
-        > [!TIP]
-        > Providing this information *may* assist in providing you better help. *Also, everything you type in this fields will be automatically formatted into code, so **no need for backticks**.*
-        
         When applicable (e.g. on readings mismatch), add a [data telegram](https://dsmr-reader.readthedocs.io/nl/v5/explained/about.html#support) below.
       render: shell-script
