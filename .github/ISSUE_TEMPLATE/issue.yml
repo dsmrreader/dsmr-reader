@@ -1,15 +1,7 @@
 name: DSMR-reader issue
-description: Only for DSMR-reader specific stuff.
+description: Only for DSMR-reader bugs or features. Need help? [Ask here at Discussions](https://github.com/dsmrreader/dsmr-reader/discussions).
 title: '?'
 body:
-  - type: markdown
-    attributes:
-      value: |
-        > [!TIP]
-        > *Choose a title ⬆️ that help other people understand what your issue is about, without reading the entire thing below.*
-        
-        ----
-
   - type: dropdown
     id: language
     attributes:
@@ -24,23 +16,6 @@ body:
     validations:
       required: true
 
-  - type: checkboxes
-    attributes:
-      label: Help yourself
-      description: |
-        > [!IMPORTANT]
-        > Most of the times you can help yourself by checking the guides or previous solutions/reports made. Simply searching for a minute may save you lots of time. 
-        
-      options:
-        - label: "I've checked [the how-to guides](https://dsmr-reader.readthedocs.io/nl/v5/how-to/index.html)"
-          required: true
-        - label: "I've checked previous [questions](https://github.com/dsmrreader/dsmr-reader/discussions)"
-          required: true
-        - label: "I've checked (recent) [previous issues](https://github.com/dsmrreader/dsmr-reader/issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc) and their solutions"
-          required: true
-        - label: "I've checked the [logfiles](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/logfiles.html) *(when applicable)*"
-          required: true
-
   - type: markdown
     attributes:
       value: ----
@@ -51,8 +26,7 @@ body:
       label: Inquiry
       description: What do you need?
       options:
-        - 'Help with installation or upgrade'
-        - 'Report a bug'
+        - 'Bug'
         - 'Feature or idea'
     validations:
       required: true
@@ -63,9 +37,6 @@ body:
       label: 'Description'
       description: |
         Your issue, suggestion or bug description
-        
-        > [!TIP]
-        > E.g. installation trouble, readings stopped working, data is gone, feature request, bug report...
     validations:
       required: true
 
@@ -74,7 +45,7 @@ body:
     attributes:
       label: DSMR-reader version
       description: |
-        What DSMR-reader version are you using?
+        What DSMR-reader version does it apply to?
         
         > [!IMPORTANT]
         > *Specify the full version, e.g. ``v5.10.2``.*
@@ -88,6 +59,7 @@ body:
       label: DSMR-reader platform
       description: How did you install/do you run DSMR-reader?
       options:
+        - "Native/bare metal (without containers)"
         - "Podman (e.g. default installation)"
         - "Docker (e.g. Xirixiz's DSMR-reader Docker)"
         - "Other (e.g. Home Assistant Plugin)"
@@ -95,13 +67,18 @@ body:
       required: true
 
   - type: textarea
+    id: container-compose
+    attributes:
+      label: 'Optional: Container Compose YAML file'
+      description: |
+        When applicable. **Remove secrets and sensitive information before creating the issue.**
+      render: shell-script
+
+  - type: textarea
     id: debug-info-dump
     attributes:
       label: 'Optional: Debug info dump (of DSMR-reader)'
       description: |
-        > [!TIP]
-        > Providing this information *may* assist in providing you better help. *Also, everything you type in this fields will be automatically formatted into code, so **no need for backticks**.*
-
         When applicable (e.g. with tech issues), add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/debug-info-dump.html) below.
       render: shell-script
 
