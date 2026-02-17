@@ -1,8 +1,10 @@
 blank_issues_enabled: false
 contact_links:
-  - name: DSMR-reader Q&A and discussions
+  - name: Ask for help with DSMR-reader
     url: https://github.com/dsmrreader/dsmr-reader/discussions/new/choose
-    about: Having trouble? [Check the discussions](https://github.com/dsmrreader/dsmr-reader/discussions) for help, or [ask your question there](https://github.com/dsmrreader/dsmr-reader/discussions/new/choose).
+    about: Having trouble? Check the Discussions-tab for help, or ask your question there.
   - name: Container features & bugs
     url: https://github.com/xirixiz/dsmr-reader-docker/issues
-    about: This is [the project that builds the container images](https://github.com/xirixiz/dsmr-reader-docker) for DSMR-reader. Only report bugs or request features related to the container images there, not generic inquiries or DSMR-reader specific stuff.
+    about: |
+      This is the project that builds the container images for DSMR-reader. 
+      Only report bugs or request features related to the container images there, not generic inquiries or DSMR-reader specific stuff.
