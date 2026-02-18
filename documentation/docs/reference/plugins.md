@@ -34,7 +34,7 @@ You can create plugins in their own file in ``dsmr_plugins/modules/plugin_name.p
 
     If you have trouble adding or editing files due to **permissions**, type `logout` and reset permissions by running:
 
-    ```shell
+    ```shell title="shell"
     sudo chown -R dsmrreader:dsmrreader /home/dsmrreader/dsmr_plugins
     ```
 

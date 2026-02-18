@@ -106,7 +106,7 @@
         - [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
     - Added command-line alias for clearing InfluxDB queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
-        ```shell
+        ```shell title="shell"
         ./manage.py dsmr_influxdb_clear_queue
         ```
 
@@ -117,7 +117,7 @@
         - [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
     - Added command-line alias for clearing MQTT queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
-        ```shell
+        ```shell title="shell"
         ./manage.py dsmr_mqtt_clear_queue
         ```
 

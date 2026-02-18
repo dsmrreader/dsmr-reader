@@ -6,7 +6,7 @@
 
 - Log in as the `dsmrreader` user and run:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 podman-compose exec /app/dsmr manage.py dsmr_stats_recalculate_prices
 ```
