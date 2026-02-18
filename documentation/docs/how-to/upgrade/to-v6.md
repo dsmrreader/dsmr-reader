@@ -13,21 +13,21 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
 
     The easiest way of upgrading PostgreSQL is to **stop** DSMR-reader (keep the database running), **export** the database as SQL, **update** PostgreSQL, **import** the SQL again, **start** DSMR-reader again.
     
-    === "Export database"
+    #### Export database
         
         E.g. if your database user is ``dsmrreader_user`` and the database name ``dsmrreader``:
     
         ```shell
         docker-compose exec dsmrdb pg_dump -U dsmrreader_user -d dsmrreader | gzip --fast > dsmrreader-export.sql.gz
         ``` 
-        
-    === "Update PostgreSQL"
+         
+    #### Update PostgreSQL
         
         E.g. updating to PostgreSQL 17:
     
         - Make sure to update the ==volume mapping== to ``/var/lib/postgresql/data``, as this [was changed since PostgreSQL 17 Docker](https://hub.docker.com/_/postgres#pgdata) and will change again in the version after! E.g. ``./dsmr_database/postgresql17:/var/lib/postgresql/data``
     
-    === "Import database"
+    #### Import database
         
         E.g. to import the backup created:
     
