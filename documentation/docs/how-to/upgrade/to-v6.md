@@ -11,37 +11,104 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
 
 !!! abstract ""
 
-    The easiest way of upgrading PostgreSQL is to **stop** DSMR-reader (keep the database running), **export** the database as SQL, **update** PostgreSQL, **import** the SQL again, **start** DSMR-reader again.
+    The easiest way of upgrading PostgreSQL is to **stop** ==DSMR-reader== (keep the database running), **export** the database as SQL, **update** PostgreSQL, **import** the SQL again, **start** DSMR-reader again.
     
+    ----
+
+    #### Export file location
+
+    Mount a location to export the database outside the container.
+
+    ```yaml title="compose.yml" hl_lines="2 4"
+    services:
+      dsmrdb:
+        volumes:
+        - ./dsmr_database_import:/run/database-import
+    ```
+
+    - Restart the DB container.
+    - Check if the volume is properly mounted, it should return an empty directory
+    ```shell title="shell"
+    docker-compose exec dsmrdb ls -la /run/database-import
+    ```
+
     #### Export database
         
-        E.g. if your database user is ``dsmrreader_user`` and the database name ``dsmrreader``:
-    
-        ```shell
-        docker-compose exec dsmrdb pg_dump -U dsmrreader_user -d dsmrreader | gzip --fast > dsmrreader-export.sql.gz
-        ``` 
+    If your database user is ``dsmrreader_user`` and the database name ``dsmrreader``:
+
+    ```shell title="shell"
+    # Go inside container.
+    docker-compose exec dsmrdb bash
+
+    # Backup - Be sure to CHECK the correct DB user and DB name in the first part of the command.
+    pg_dump -U dsmrreader_user -d dsmrreader | gzip --fast > /run/database-import/dsmrreader-export.sql.gz
+
+    # Check if there is a backup now
+    ls -lh /run/database-import/dsmrreader-export.sql.gz
+
+    # Go outside container and check if it's there too
+    # Or CTRL+D
+    logout
+
+    ls -lh dsmr_database_import/
+    ``` 
+
+    Do not continue if there is no backup file created, or if the file is empty.
+
+    ----
          
     #### Update PostgreSQL
-        
-        E.g. updating to PostgreSQL 17:
+    Change your old PostgreSQL container to the new version, e.g. from ``postgres:14`` to ``postgres:17``.
+
+    ```yaml title="compose.yml" hl_lines="2 3"
+    services:
+      dsmrdb:
+        image: docker.io/postgres:17-alpine
+    ```
+
+    Specifically for updating to newer PostgreSQL containers:
+
+    - Make sure to update the ==volume mapping== to ``/var/lib/postgresql/data``, and **==not== ``/var/lib/postgresql``** as this [was changed PostgreSQL Docker](https://hub.docker.com/_/postgres#pgdata) and will change again in the container of PostgreSQL 18 and later!
+
+    ```yaml title="compose.yml" hl_lines="2 5"
+    services:
+      dsmrdb:
+        volumes:
+        # Note the /data at the end
+        - ./dsmr_database/postgresql17:/var/lib/postgresql/data
+    ```
     
-        - Make sure to update the ==volume mapping== to ``/var/lib/postgresql/data``, as this [was changed since PostgreSQL 17 Docker](https://hub.docker.com/_/postgres#pgdata) and will change again in the version after! E.g. ``./dsmr_database/postgresql17:/var/lib/postgresql/data``
-    
+    ----
+
     #### Import database
         
-        E.g. to import the backup created:
-    
-        ```shell
-        zcat dsmrreader-export.sql.gz | docker-compose exec dsmrdb psql -U dsmrreader_user -d dsmrreader
-        ``` 
+    To import the backup created:
+
+    ```shell title="shell"
+    # Go inside container.
+    docker-compose exec dsmrdb bash
+
+    # Restore - Be sure to CHECK the correct DB user and DB name in the second part of the command.
+    zcat /run/database-import/dsmrreader-export.sql.gz | psql -U dsmrreader_user -d dsmrreader
+    ``` 
+
+    Restore should be complete. You're advised to preserve the backup file for a while, just in case.
 
 ### Upgrade step A2: Apply mandatory (environment variable) changes
 
 - If you are using this former `localtime` volume mapping in the database (or dsmr) container, **remove it**, as it could cause NULL field errors and a lot of users reported this.
 
-    ```
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
+    ```yaml title="compose.yml" hl_lines="2 5 7 10"
+    services:
+      dsmrdb:
+        volumes:
+          # Remove this line if you have it
+          - /etc/localtime:/etc/localtime:ro
+  
+      dsmr:
+        volumes:
+          # Remove this line if you have it
+          - /etc/localtime:/etc/localtime:ro  
     ```
 
 - **Some** pre-existing Xirixiz DSMR-reader Docker `DSMRREADER_` env vars specifically have been changed to `CONTAINER_`. 
@@ -117,7 +184,7 @@ You are advised to use ``dsmr-reader-docker:6`` instead, as this will always giv
 
 ### Upgrade step B1: Backup your DSMR-reader v5.x data
 
-```shell
+```shell title="shell"
 sudo su - dsmr
 
 # This may take a few minutes, depending on the size of your database and your hardware.
@@ -131,7 +198,7 @@ sudo su - dsmr
   - If you are installing DSMR-reader on a **new device**, make sure to export the created backup file to your new device.
   - If the new DSMR-reader installation will be on the **same device**, you may want to relocate it to the home directory of a sudo user, e.g. `pi`:
 
-```shell
+```shell title="shell"
 # Or press CTRL+D
 logout
 
@@ -163,7 +230,7 @@ Depending on if you want to switch to DSMR-reader v6.x permanently, or just want
 
     - To remove DSMR-reader v5 from your system, execute the following commands:
     
-    ```shell
+    ```shell title="shell"
     # Nginx.
     sudo rm /etc/nginx/sites-enabled/dsmr-webinterface
     sudo service nginx reload
@@ -185,7 +252,7 @@ Depending on if you want to switch to DSMR-reader v6.x permanently, or just want
     
     - Optionally, you can remove these packages:
     
-    ```shell
+    ```shell title="shell"
     sudo apt-get remove postgresql postgresql-server-dev-all python3-psycopg2 nginx supervisor git python3-pip python3-virtualenv virtualenvwrapper
     ```
 
@@ -193,7 +260,7 @@ Depending on if you want to switch to DSMR-reader v6.x permanently, or just want
 
     - Just stop the processes and prevent them from automatically starting:
     
-    ```shell
+    ```shell title="shell"
     sudo supervisorctl stop all
     sudo mv /etc/supervisor/conf.d/dsmr_backend.conf /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED
     sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED
@@ -206,7 +273,7 @@ Depending on if you want to switch to DSMR-reader v6.x permanently, or just want
     
         If you want to revert it later:
         
-        ```shell
+        ```shell title="shell"
         sudo mv /etc/supervisor/conf.d/dsmr_backend.conf.DISABLED /etc/supervisor/conf.d/dsmr_backend.conf
         sudo mv /etc/supervisor/conf.d/dsmr_datalogger.conf.DISABLED /etc/supervisor/conf.d/dsmr_datalogger.conf
         sudo mv /etc/supervisor/conf.d/dsmr_webinterface.conf.DISABLED /etc/supervisor/conf.d/dsmr_webinterface.conf
