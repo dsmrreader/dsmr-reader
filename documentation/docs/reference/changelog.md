@@ -6,6 +6,8 @@
     Usually only major version updates contain **incompatible changes**. E.g. upgrading from `v6.x` to `v7.x`.
 
 
+---
+
 ## v6.1.0 - February 2026
 
 !!! abstract "Other changes and fixes"
@@ -17,7 +19,23 @@
 
 ## v6.0.0 - January 2026
 
-??? danger "Incompatible changes"
+
+## v6.0.1 - February 2026
+
+!!! abstract "Fixes"
+    
+    **Miscelaneous**
+
+    - Updated dependencies due to security vulnerabilities
+        - [#2109](https://github.com/dsmrreader/dsmr-reader/issues/2109)
+        - [#2110](https://github.com/dsmrreader/dsmr-reader/issues/2110)
+
+---
+
+
+## v6.0.0 - February 2026
+
+!!! danger "Incompatible changes"
 
     ### Incompatible changes: Installations
     Dropped installation support for:
@@ -77,14 +95,15 @@
 
     <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
 
-??? success "New features"
+!!! success "New features"
 
     ### Hosting
     - Added new dedicated URL route for health check and monitoring purposes:
         ```
         GET /healthcheck
         ```
-    - More [Django settings](./environment-variables.md/#django-settingsoverrides) exposed via environment variables [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
+    - More [Django settings](./environment-variables.md/#django-settingsoverrides) exposed via environment variables
+        - [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
     - Added [``DSMRREADER_BACKEND_HIBERNATE``](./environment-variables.md/#dsmrreader_backend_hibernate) in favor of migrating to containerized setup
 
     <small>*This greatly improves the flexibility of changing internal settings without having to manually alter the installation.*</small>
@@ -94,35 +113,40 @@
     ---
 
     ### InfluxDB
-    - Use Influx URL instead of Influx hostname + port combination [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
+    - Use Influx URL instead of Influx hostname + port combination
+        - [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
     - Added command-line alias for clearing InfluxDB queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
-        ```shell
+        ```shell title="shell"
         ./manage.py dsmr_influxdb_clear_queue
         ```
 
     ---
 
     ### MQTT
-    - Changed message queue primary key from AutoField to BigAutoField to reduce the number if sequence resets needed [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
+    - Changed message queue primary key from AutoField to BigAutoField to reduce the number if sequence resets needed
+        - [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
     - Added command-line alias for clearing MQTT queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
-        ```shell
+        ```shell title="shell"
         ./manage.py dsmr_mqtt_clear_queue
         ```
 
-??? abstract "Other changes and fixes"
+!!! abstract "Other changes and fixes"
     
 
     ### PVOutput
-    - Improved net power calculation to use **average** recent consumption data instead of latest value [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
+    - Improved net power calculation to use **average** recent consumption data instead of latest value
+        - [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
     
     ---
 
     ### Documentation
-    - Added explanation about upload time to MinderGas - by `MrLurch81`  [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979)
+    - Added explanation about upload time to MinderGas
+        - [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979) by `MrLurch81`
     - Fixed broken API docs rendering caused by legacy ReDoc link
-    - Simplified online documentation [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
+    - Simplified online documentation
+        - [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
     - Dropped Dutch translation for the online documentation
         - <small>*The DSMR-reader translations inside the application are **not** affected*</small>
    
@@ -146,7 +170,7 @@
 
     #### v5.12.0 - December 2025
     
-    ???+ warning
+    !!!+ warning
     
         This is the last release in the DSMR-reader v5.x series. Upgrade to DSMR-reader v6.x for future support and features.
     

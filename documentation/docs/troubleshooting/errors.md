@@ -10,7 +10,7 @@ Common error messages and their solutions.
 ### Creating container storage: the container name is already in use by...
 If you see an error like this when (re)starting DSMR-reader with `podman-compose up -d`:
 
-```shell
+```shell title="shell"
 Error: creating container storage: the container name "dsmrdb" is already 
 in use by 520d7e8b1ec65d5a1b69967338e9d98671aa05d6f483481a243657c3ab92a2a1. 
 
@@ -29,7 +29,7 @@ dsmr
 
 Just use ``--force-recreate`` instead:
 
-```shell
+```shell title="shell"
 podman-compose up -d --force-recreate
 ```
 
@@ -43,7 +43,7 @@ Key (id)=(1292) already exists.
 
 This depends on the situation, but you can always try the following yourself first:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 podman-compose exec dsmr /app/manage.py dsmr_sqlsequencereset
 ```
@@ -83,7 +83,7 @@ If this happens, either DSMR-reader is creating MQTT-messages faster than your M
 
 Whatever the reason, if you want to clear the queue **which will permanently delete all those pending messages**, you can do so by running:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 podman-compose exec dsmr /app/manage.py dsmr_mqtt_clear_queue
 ```
@@ -94,7 +94,7 @@ podman-compose exec dsmr /app/manage.py dsmr_mqtt_clear_queue
 
 Similar to MQTT above, this will clear the InfluxDB queue **permanently deleting all those pending measurements**:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 podman-compose exec dsmr /app/manage.py dsmr_influxdb_clear_queue
 ```

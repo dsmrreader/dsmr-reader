@@ -1,0 +1,88 @@
+name: DSMR-reader bugs or feature requests
+description: Only for DSMR-reader bugs or features. Need help? Ask at Discussions-tab.
+title: '?'
+body:
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language / Voertaal
+      description: |
+        > [!TIP]
+        > *🇬🇧 Unable to communicate in Dutch? Welcome anyway! Feel free to use English.*
+        > *🇳🇱 Voel je vooral vrij om in het Nederlands te communiceren, ondanks dat het project Engelstalig is.*
+      options:
+        - '🇳🇱 Nederlandstalig'
+        - '🇬🇧 English'
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: ----
+
+  - type: dropdown
+    id: inquiry
+    attributes:
+      label: Inquiry
+      description: What do you need?
+      options:
+        - 'Bug'
+        - 'Feature or idea'
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 'Description'
+      description: |
+        Your issue, suggestion or bug description
+    validations:
+      required: true
+
+  - type: input
+    id: dsmrreader-version
+    attributes:
+      label: DSMR-reader version
+      description: |
+        What DSMR-reader version does it apply to?
+      placeholder: vX.Y.Z
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: DSMR-reader platform
+      description: How did you install or do you run DSMR-reader?
+      options:
+        - "Native/bare metal (without containers)"
+        - "Podman (e.g. default installation)"
+        - "Docker (e.g. Xirixiz's DSMR-reader Docker)"
+        - "Other (e.g. Home Assistant Plugin)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: container-compose
+    attributes:
+      label: 'Optional: Container Compose YAML file'
+      description: |
+        When applicable. ⚠️ **Remove secrets and sensitive information before creating the issue.** ⚠️
+      render: shell-script
+
+  - type: textarea
+    id: debug-info-dump
+    attributes:
+      label: 'Optional: Debug info dump (of DSMR-reader)'
+      description: |
+        When applicable (e.g. with tech issues), add a [dsmr_debuginfo dump](https://dsmr-reader.readthedocs.io/nl/v5/how-to/troubleshooting/debug-info-dump.html) below.
+      render: shell-script
+
+  - type: textarea
+    id: telegram
+    attributes:
+      label: 'Optional: Smart meter telegram'
+      description: |
+        When applicable (e.g. on readings mismatch), add a [data telegram](https://dsmr-reader.readthedocs.io/nl/v5/explained/about.html#support) below.
+      render: shell-script

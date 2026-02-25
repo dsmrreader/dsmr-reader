@@ -1,5 +1,10 @@
 blank_issues_enabled: false
 contact_links:
-  - name: DSMR-reader Home Assistant Add-On issue
-    url: https://github.com/sanderdw/hassio-addons/issues
-    about: Can't get DSMR-reader working in Home Assistant as Add-On? You probably used Sander de Wildt's plugin. Check out this link for more information!
+  - name: Ask for help with DSMR-reader
+    url: https://github.com/dsmrreader/dsmr-reader/discussions/new/choose
+    about: Having trouble? Check the Discussions-tab for help, or ask your question there.
+  - name: Container features & bugs
+    url: https://github.com/xirixiz/dsmr-reader-docker/issues
+    about: |
+      This is the project that builds the container images for DSMR-reader. 
+      Only report bugs or request features related to the container images there, not generic inquiries or DSMR-reader specific stuff.

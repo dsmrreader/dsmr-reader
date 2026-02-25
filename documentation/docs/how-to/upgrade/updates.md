@@ -14,14 +14,14 @@ E.g. due to altered settings that need to be reapplied to DSMR-reader.
 
 - Log in as the `dsmrreader` user and run:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 podman-compose up -d
 ```
 
 - If no settings were changed, this will have no effect. Then run this instead:
 
-```shell
+```shell title="shell"
 podman-compose restart dsmr
 ```
 
@@ -39,7 +39,7 @@ podman-compose restart dsmr
 
 - Log in as the `dsmrreader` user and run:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 podman-compose pull
 podman-compose up -d
@@ -62,7 +62,7 @@ Some incompatible changes may be there, e.g. unsupported database versions or fe
 
 - Log in as the `dsmrreader` user:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 ```
 
@@ -78,7 +78,7 @@ services:
 
 - To apply, now run:
 
-```shell
+```shell title="shell"
 podman-compose up -d
 ```
 

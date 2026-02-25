@@ -19,7 +19,7 @@ graph LR
 
 - To view the database logs, login as the `dsmrreader` user and run:
 
-```shell
+```shell title="shell"
 podman-compose logs -f dsmrdb
 # Press CTRL + C to stop following the logs
 
@@ -39,7 +39,7 @@ DSMR-reader technically consists of these processes:
 
 - To view the application logs, login as the `dsmrreader` user and run:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 
 podman-compose logs -f dsmr
@@ -64,7 +64,7 @@ You can enable the DEBUG logging by setting the `DSMRREADER_LOGLEVEL` env var to
 
 - Login as the `dsmrreader` user and edit the `compose.env` file:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 vi compose.env
 ```
@@ -76,7 +76,7 @@ DSMRREADER_LOGLEVEL=DEBUG
 
 - Apply changes:
 
-```shell
+```shell title="shell"
 podman-compose up -d
 ```
 

@@ -19,7 +19,7 @@ DSMR-reader `v4.x` is backwards incompatible with `3.x`. You will have to manual
 
 Execute the following:
 
-```shell
+```shell title="shell"
 sudo su - dsmr
 ./deploy.sh
 ```
@@ -28,13 +28,13 @@ sudo su - dsmr
 
 If you're using PostgreSQL (the default for DSMR-reader), install the following system package:
 
-```shell
+```shell title="shell"
 sudo apt-get install python3-psycopg2
 ```
 
 Execute the following:
 
-```shell
+```shell title="shell"
 sudo supervisorctl stop all
 
 sudo su - dsmr
@@ -55,13 +55,13 @@ logout
 >
 > Example:
 >
-> ```shell
+> ```shell title="shell"
 > virtualenv /home/dsmr/.virtualenvs/dsmrreader --system-site-packages --python python3.6
 > ```
 
 > Note: If you're getting any errors, you can revert to the old version by running:
 >
-> ```shell
+> ```shell title="shell"
 > sudo su - dsmr
 >
 > deactivate
@@ -85,7 +85,7 @@ DSMR-reader `v4.x` lives in a different branch, to prevent any users from unexpe
 
 Execute the following:
 
-```shell
+```shell title="shell"
 sudo supervisorctl stop all
 
 sudo su - dsmr
@@ -107,7 +107,7 @@ DSMR-reader started with a `settings.py` for your local settings. This has some 
 
 Therefore the configuration has been migrated to a `.env` file and system env vars are now supported as well. Follow these steps to migrate:
 
-```shell
+```shell title="shell"
 sudo su - dsmr
 mv dsmrreader/settings.py dsmrreader/settings.py.BACKUP
 cp dsmrreader/provisioning/django/settings.py.template dsmrreader/settings.py
@@ -119,7 +119,7 @@ Now check the settings you were using in `dsmrreader/settings.py.BACKUP`. Compar
 
 Execute the following:
 
-```shell
+```shell title="shell"
 logout
 ```
 
@@ -147,14 +147,14 @@ To prevent some users from forgetting to set a custom secret key, DSMR-reader no
 
 Execute the following:
 
-```shell
+```shell title="shell"
 sudo su - dsmr
 ./tools/generate-secret-key.sh
 ```
 
 Check whether the script updated your `.env` file properly:
 
-```shell
+```shell title="shell"
 grep 'SECRET_KEY=' .env
 ```
 
@@ -162,7 +162,7 @@ It should display the key generated when you execute it.
 
 Check the configuration with:
 
-```shell
+```shell title="shell"
 ./manage.py check
 ```
 
@@ -174,7 +174,7 @@ Check the configuration with:
 >
 > Revert the `psycopg2` installation above with:
 >
-> ```shell
+> ```shell title="shell"
 > logout
 > sudo apt-get remove python3-psycopg2
 >
@@ -187,7 +187,7 @@ Check the configuration with:
 
 Execute the following:
 
-```shell
+```shell title="shell"
 logout
 ```
 
@@ -197,19 +197,19 @@ The `dsmr_mqtt` process has been merged into `dsmr_backend`.
 
 Execute the following:
 
-```shell
+```shell title="shell"
 sudo supervisorctl status
 ```
 
 Is `dsmr_mqtt` listed? If **not listed**, skip this chapter. Otherwise remove it:
 
-```shell
+```shell title="shell"
 sudo rm /etc/supervisor/conf.d/dsmr_mqtt.conf
 ```
 
 Apply changes:
 
-```shell
+```shell title="shell"
 sudo supervisorctl reread
 sudo supervisorctl update
 

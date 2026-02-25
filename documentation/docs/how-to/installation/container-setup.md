@@ -32,12 +32,12 @@ This guide presumes you use Podman, however you can also use Docker or other con
 ### Installation step 1: OS packages
 - Install system packages:
 
-```shell
+```shell title="shell"
 sudo apt-get update
 sudo apt-get install podman podman-compose podman-docker crun
 ```
 
-```shell
+```shell title="shell"
 podman info --debug
 ```
 
@@ -45,7 +45,7 @@ podman info --debug
 
     - Install ``cu`` package to manually read from the P1 port:
 
-    ```shell
+    ```shell title="shell"
     # Skip this if you have already read your meter's P1 telegram port (ever) before or are an existing DSMR-reader user.
     sudo apt-get install cu
     ```
@@ -63,12 +63,12 @@ podman info --debug
 
 - Add dedicated `dsmrreader` system user for DSMR-reader (and its database) to run on:
 
-```shell
+```shell title="shell"
 sudo useradd dsmrreader --create-home
 sudo usermod -a -G dialout dsmrreader
 ```
 
-```shell
+```shell title="shell"
 # Write down the IDs in the output (they are likely the same, e.g. "1001")
 id --user dsmrreader
 id --group dsmrreader
@@ -76,7 +76,7 @@ id --group dsmrreader
 
 - Enable lingering and a systemd service to allow autostart of containers on (re)boot:
 
-```shell
+```shell title="shell"
 sudo loginctl enable-linger dsmrreader
 sudo podman-compose systemd -a create-unit
 ```
@@ -88,7 +88,7 @@ Now we'll configure the DSMR-reader system user we just created.
 
 - Login as "dsmrreader" user:
 
-```shell
+```shell title="shell"
 sudo su - dsmrreader
 ```
 
@@ -101,13 +101,13 @@ sudo su - dsmrreader
 
     - Test with ``cu`` for **DSMR 4/5** first (your meter will likely use this):
     
-    ```shell
+    ```shell title="shell"
     cu -l /dev/ttyUSB0 -s 115200 --parity=none -E q
     ```
     
     - Or test with ``cu`` for **DSMR 2.2**:
     
-    ```shell
+    ```shell title="shell"
     cu -l /dev/ttyUSB0 -s 9600 --parity=none
     ```
     
@@ -127,7 +127,7 @@ Continuing the setup:
 [View compose.YML on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml){ .md-button }
 [View compose.ENV on GitHub](https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.env){ .md-button }
 
-```shell
+```shell title="shell"
 # Or use these to download the files directly:
 wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.yml -O /home/dsmrreader/compose.yml
 wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/provisioning/container/compose.prod.env -O /home/dsmrreader/compose.env
@@ -135,7 +135,7 @@ wget https://raw.githubusercontent.com/dsmrreader/dsmr-reader/refs/heads/v6/prov
 
 - Configure Compose ENV file to your needs:
 
-```shell
+```shell title="shell"
 vi compose.env
 # Or use "nano" instead of "vi" if you prefer another text editor.
 ```
@@ -215,7 +215,7 @@ services:
 
 - Try running the DB container first:
 
-```shell
+```shell title="shell"
 # This may take a few moments, mostly depending on the hardware and Internet connection available.
 # Please wait patiently.
 podman-compose up -d dsmrdb
@@ -223,14 +223,14 @@ podman-compose up -d dsmrdb
 
 - If there are any errors, try:
 
-```shell
+```shell title="shell"
 podman-compose logs -f dsmrdb
 # Press CTRL + C to stop following the logs
 ```
 
 - Check folders created:
 
-```shell
+```shell title="shell"
 ls -l
 ```
 
@@ -243,28 +243,28 @@ ls -l
 
     Make sure your backup is moved into the `dsmr_database/import/` folder. E.g.
 
-    ```shell
+    ```shell title="shell"
     logout
     sudo mv /home/pi/dsmrreader-postgresql-backup-Wednesday.sql.gz /home/dsmrreader/dsmr_database/import/
     ```
 
     Go back to the `dsmrreader` user and into the DB container:
 
-    ```shell
+    ```shell title="shell"
     sudo su - dsmrreader
     podman-compose exec dsmrdb sh
     ```
 
     Import the backup, depending on how you created it:
 
-    ```shell
+    ```shell title="shell"
     # For .sql files, use:
     psql -U dsmrreader_user -d dsmrreader -f /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql
     ```
 
     Or
 
-    ```shell
+    ```shell title="shell"
     # For .sql.gz files, use:
     zcat /run/database-import/dsmrreader-postgresql-backup-Wednesday.sql.gz | psql -U dsmrreader_user -d dsmrreader
     ```
