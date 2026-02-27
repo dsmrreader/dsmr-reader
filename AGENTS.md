@@ -27,7 +27,6 @@ Always run these in order:
 - Ensure code consistency across the project.
 - Check `documentation/` folder for typos and clarity.
 - Run all quality checks (above) before considering work complete.
-- Imports should always reside at the top of the file.
 
 ## Translation updates
 - Run `docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -q dsmr_frontend/tests/regression/test_translations.py` for translation status.

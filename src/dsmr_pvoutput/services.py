@@ -2,7 +2,6 @@ import logging
 from typing import Optional, Dict
 
 from django.conf import settings
-from django.db.models import Avg
 from django.utils import timezone
 import requests
 
@@ -89,7 +88,6 @@ def get_next_export() -> timezone.datetime:
 
 def get_export_data(next_export: Optional[timezone.datetime], upload_delay: int) -> Optional[Dict]:
     """Returns the data to export. Raises exception when 'not ready'."""
-
     # Find the first and last consumption of today, taking any delay into account.
     local_now = timezone.localtime(timezone.now())
     search_start = local_now.replace(hour=0, minute=0, second=0, microsecond=0)  # Midnight
@@ -118,11 +116,7 @@ def get_export_data(next_export: Optional[timezone.datetime], upload_delay: int)
 
     diff = last - first  # Custom operator for convenience
     total_consumption = diff["delivered_1"] + diff["delivered_2"]
-
-    # Calculate net_power as the average of (currently_delivered - currently_returned) across all records fetched
-    avg_delivered = ecs.aggregate(Avg("currently_delivered"))["currently_delivered__avg"]
-    avg_returned = ecs.aggregate(Avg("currently_returned"))["currently_returned__avg"]
-    net_power = avg_delivered - avg_returned
+    net_power = last.currently_delivered - last.currently_returned
 
     return dict(
         d=consumption_timestamp.date().strftime("%Y%m%d"),
