@@ -19,7 +19,7 @@ class TestServices(TestCase):
 
     def _apply_fake_settings(self):
         PVOutputAPISettings.get_solo().update(  # noqa: S106
-            auth_token="XXXXX",
+            auth_token="XXXXX",  # noqa: S106
             system_identifier=12345,
         )
         PVOutputAddStatusSettings.get_solo().update(export=True, upload_delay=1)

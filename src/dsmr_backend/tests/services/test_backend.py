@@ -419,7 +419,7 @@ class TestIsLocalTimestampPassed(TestCase):
         DJANGO_DATABASE_PORT="11111",
         DJANGO_DATABASE_NAME="my-db",
         DJANGO_DATABASE_USER="my-user",
-        DJANGO_DATABASE_PASSWORD="my-pass",
+        DJANGO_DATABASE_PASSWORD="my-pass",  # noqa: S106
         DJANGO_DATABASE_CONN_MAX_AGE="111",
         DJANGO_TIME_ZONE="my-timezone",
         DJANGO_SECRET_KEY="my-secret-key",

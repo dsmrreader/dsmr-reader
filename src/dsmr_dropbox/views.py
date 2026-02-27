@@ -17,10 +17,10 @@ class DropboxAppAuthorizationView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         dropbox_settings = DropboxSettings.get_solo()
 
-        auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(  # noqa: S106
+        auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(
             settings.DSMRREADER_DROPBOX_APP_KEY,
             use_pkce=True,
-            token_access_type="offline",
+            token_access_type="offline",  # noqa: S106
             timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
         )
         authorize_url = auth_flow.start()

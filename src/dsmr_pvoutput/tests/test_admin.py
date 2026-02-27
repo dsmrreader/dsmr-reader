@@ -26,9 +26,9 @@ class TestAdmin(TestCase):
 
         response = self.client.post(
             API_URL,
-            dict(  # noqa: S106
-                auth_token="test",
-                system_identifier="12345",
+            dict(
+                auth_token="test",  # noqa: S106
+                system_identifier="12345",  # noqa: S106
             ),
         )
         self.assertEqual(response.status_code, 302)
