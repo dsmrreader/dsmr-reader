@@ -229,8 +229,8 @@
     - **Added** [#1794](https://github.com/dsmrreader/dsmr-reader/issues/1794) Added new datalogger configuration option for selecting extra device channel for specific vendor(s)
     - **Added** Old Dashboard notifications can now be viewed and permanently deleted in the Frontend admin section.
     
-    - **Changed** [#1725](https://github.com/dsmrreader/dsmr-reader/issues/1725) The value of `DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD` is now restricted to: `DEBUG`, `WARNING` or `ERROR`
-    - **Changed** [#1725](https://github.com/dsmrreader/dsmr-reader/issues/1725) The value of `DSMRREADER_LOGLEVEL` is now restricted to: `serial` or `ipv4`
+    - **Changed** [#1725](https://github.com/dsmrreader/dsmr-reader/issues/1725) The value of `DSMRREADER_LOGLEVEL` is now restricted to: `DEBUG`, `WARNING` or `ERROR`
+    - **Changed** [#1725](https://github.com/dsmrreader/dsmr-reader/issues/1725) The value of `DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD` is now restricted to: `serial` or `ipv4`
     - **Changed** [#1794](https://github.com/dsmrreader/dsmr-reader/issues/1794) [#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764) Updated dsmr_parser (mostly) with latest version
 
 === "v5.9"
