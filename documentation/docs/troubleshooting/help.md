@@ -14,7 +14,11 @@ Also, most feature requests and bug reports have been reported already, in the p
 
 [Visit DSMR-reader on GitHub](https://github.com/dsmrreader/dsmr-reader/issues){ .md-button .md-button--primary }
 
+----
 
+<a href="https://github.com/xirixiz/dsmr-reader-docker" target="blank_">
+  <img src="https://www.yunta.nl/dsmr-reader-docker-docs/assets/icon.png" alt="logo" style="width: 200px;"/>
+</a>
 
 ## Container features/bugs
 Go to the DSMR-reader Docker repository for help regarding the containerized version of DSMR-reader.

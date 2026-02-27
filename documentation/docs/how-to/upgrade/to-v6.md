@@ -96,7 +96,7 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
 
 ### Upgrade step A2: Apply mandatory (environment variable) changes
 
-- If you are using this former `localtime` volume mapping in the database (or dsmr) container, **remove it**, as it could cause NULL field errors and a lot of users reported this.
+- If you are using this former `localtime` volume mapping in the database (or dsmr) container, **remove it**, as it could cause `NULL` field errors and a lot of users reported this.
 
     ```yaml title="compose.yml" hl_lines="2 5 7 10"
     services:
@@ -115,7 +115,12 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
   
     !!! abstract ""
   
-        [See the changes here in `xirixiz/dsmr-reader-docker`](https://github.com/xirixiz/dsmr-reader-docker?tab=readme-ov-file#variables-changes).
+        <a href="https://github.com/xirixiz/dsmr-reader-docker" target="blank_">
+          <img src="https://www.yunta.nl/dsmr-reader-docker-docs/assets/icon.png" alt="logo" style="width: 100px;"/>
+        </a>
+  
+        See the [official Xirixiz DSMR-reader Docker docs here](https://www.yunta.nl/dsmr-reader-docker-docs/).
+        As well as [the run **mode changes**](https://www.yunta.nl/dsmr-reader-docker-docs/general/run-modes/).
 
 - Other DSMR-reader specific environment variables may have been added, removed or renamed as well. 
 

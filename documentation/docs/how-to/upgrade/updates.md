@@ -2,6 +2,10 @@
 
 DSMR-reader update process. To see (recent) updates check the changelog.
 
+<a href="https://github.com/xirixiz/dsmr-reader-docker" target="blank_">
+  <img src="https://www.yunta.nl/dsmr-reader-docker-docs/assets/icon.png" alt="logo" style="width: 100px;"/>
+</a>
+
 [Changelog](../../reference/changelog.md){ .md-button .md-button--primary }
 [Recent Xirixiz container updates](https://ghcr.io/xirixiz/dsmr-reader-docker){ .md-button .md-button--primary }
 

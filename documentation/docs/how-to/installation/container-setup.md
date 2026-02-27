@@ -7,6 +7,10 @@ hide:
 
 !!! note ""
 
+    <a href="https://github.com/xirixiz/dsmr-reader-docker" target="blank_">
+      <img src="https://www.yunta.nl/dsmr-reader-docker-docs/assets/icon.png" alt="logo" style="width: 200px;"/>
+    </a>
+
     The [containerized version of DSMR-reader](https://github.com/xirixiz/dsmr-reader-docker) is created and maintained by Xirixiz a.k.a. Bram van Dartel.
     He has been working on it since 2017 and it is widely used by the DSMR-reader community. Since DSMR-reader v6 this is the only installation method supported.
 
