@@ -9,6 +9,20 @@
 ---
 
 
+## v6.0.2 - February 2026
+
+!!! abstract "Fixes"
+    
+    **Miscelaneous**
+
+    ### PVOutput
+    - ==Reverted== <del>[#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064) Improved net power calculation to use **average** recent consumption data instead of latest value</del>
+        - [#2131](https://github.com/dsmrreader/dsmr-reader/pull/2131)
+
+
+---
+
+
 ## v6.0.1 - February 2026
 
 !!! abstract "Fixes"
@@ -18,6 +32,7 @@
     - Updated dependencies due to security vulnerabilities
         - [#2109](https://github.com/dsmrreader/dsmr-reader/issues/2109)
         - [#2110](https://github.com/dsmrreader/dsmr-reader/issues/2110)
+
 
 ---
 
