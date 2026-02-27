@@ -8,17 +8,6 @@
 
 ---
 
-## v6.1.0 - February 2026
-
-!!! abstract "Other changes and fixes"
-
-    ### Hosting
-    - Updated Python to 3.14
-
-----
-
-## v6.0.0 - January 2026
-
 
 ## v6.0.1 - February 2026
 
