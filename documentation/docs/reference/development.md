@@ -82,5 +82,7 @@ docker compose exec dev-dsmr-app poetry run flake8 -v
 docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest
 ```
 
+The `-e DJANGO_SETTINGS_MODULE=dsmrreader.config.test` part is important, as some tests may fail otherwise.
+
 ## Other stuff
 There is some more to it, such as tests and documentation. If you ever need to work on those, just see how similar stuff works in the project. Or ask for more information.

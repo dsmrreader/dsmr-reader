@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker: PyTest" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="docker compose exec dev-dsmr-app poetry run py.test" />
+    <option name="SCRIPT_TEXT" value="docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run py.test" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />
