@@ -53,7 +53,7 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
     ls -lh dsmr_database_import/
     ``` 
 
-    Do not continue if there is no backup file created, or if the file is empty.
+    ==Do **not continue** if there is **no backup file** created, or if the file is **empty**.==
 
     ----
          
@@ -92,7 +92,7 @@ DSMR-reader v6 only supports **PostgreSQL 14+** and you are _advised_ to run **P
     zcat /run/database-import/dsmrreader-export.sql.gz | psql -U dsmrreader_user -d dsmrreader
     ``` 
 
-    Restore should be complete. You're advised to preserve the backup file for a while, just in case.
+    Restore should be complete. You're advised to **preserve the backup file for a while**, just in case.
 
 ### Upgrade step A2: Apply mandatory (environment variable) changes
 
