@@ -2,6 +2,9 @@
 /.project/
 /.idea/*
 !/.idea/runConfigurations/*
+/.claude/*
+!/.claude/settings.json
+!/.claude/commands/
 *.pyc
 **/__pycache__
 **/.pytest_cache
@@ -28,6 +31,6 @@
 /compose.env
 /Dockerfile
 /Containerfile
-/.container-data/
+/container-data/
 /provisioning/container-data/
 /.agent-data/

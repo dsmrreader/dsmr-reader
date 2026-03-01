@@ -42,6 +42,22 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 
 
+FROM local-dsmrreader-dev AS  local-dsmrreader-dev-claude
+
+ARG CLAUDE_INSTALL_CHECKSUM="431889ac7d056f636aaf5b71524666d04c89c45560f80329940846479d484778"
+ENV PATH="/root/.local/bin:${PATH}"
+
+RUN apt-get update && apt-get install -y bash curl
+RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install.sh \
+    && echo "${CLAUDE_INSTALL_CHECKSUM}  /tmp/install.sh" | sha256sum --check \
+    && bash /tmp/install.sh \
+    && rm /tmp/install.sh
+
+# Save template so entrypoint can seed empty bind mounts
+RUN cp /root/.claude.json /root/.claude.json.template
+
+
+
 FROM local-dsmrreader-base AS local-dsmrreader-docs
 WORKDIR /app
 COPY ./documentation/requirements.txt /requirements.txt
