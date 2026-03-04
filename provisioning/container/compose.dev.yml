@@ -98,12 +98,13 @@ services:
     env_file:
       - compose.env
 
-
   ##### Automated testing #####
   tests-dsmr-db:
     container_name: tests-dsmr-db
     image: postgres:17-alpine
     restart: 'unless-stopped'
+    tmpfs:
+      - /var/lib/postgresql/data
     healthcheck:
       # Must match with POSTGRES_USER (-U) and POSTGRES_DB (-d)
       test: ["CMD-SHELL", "pg_isready -U testuser -d test_dsmrreader"]
