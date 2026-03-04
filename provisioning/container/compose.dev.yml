@@ -41,7 +41,9 @@ services:
 #      # Claude Code project settings and commands
 #      - ./.claude:/app/.claude
 #      - ./AGENTS.md:/app/AGENTS.md
-
+#      # Claude access tot non-code
+#      - ./provisioning/:/provisioning/
+#      - ./documentation/:/documentation/
 
   dev-dsmr-db:
     container_name: dev-dsmr-db
