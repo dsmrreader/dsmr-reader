@@ -34,3 +34,5 @@
 /container-data/
 /provisioning/container-data/
 /.agent-data/
+src/.claude
+src/AGENTS.md

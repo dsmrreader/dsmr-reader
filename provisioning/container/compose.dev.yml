@@ -40,6 +40,7 @@ services:
 #      - ./container-data/dev-dsmr-app/claude.json:/root/.claude.json
 #      # Claude Code project settings and commands
 #      - ./.claude:/app/.claude
+#      - ./AGENTS.md:/app/AGENTS.md
 
 
   dev-dsmr-db:
