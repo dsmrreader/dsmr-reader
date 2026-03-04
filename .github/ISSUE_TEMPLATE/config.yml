@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Ask for help with DSMR-reader
-    url: https://github.com/dsmrreader/dsmr-reader/discussions/new/choose
+    url: https://github.com/dsmrreader/dsmr-reader/discussions?discussions_q=
     about: Having trouble? Check the Discussions-tab for help, or ask your question there.
   - name: Container features & bugs
     url: https://github.com/xirixiz/dsmr-reader-docker/issues
