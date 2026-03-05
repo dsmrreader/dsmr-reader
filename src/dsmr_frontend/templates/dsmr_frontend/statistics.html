@@ -5,6 +5,8 @@
 
 {% load i18n %}
 
+{% load dsmr_frontend_extras %}
+
 {% block title %}
     {% translate "Statistics" %}
 {% endblock %}
@@ -51,12 +53,12 @@
                                         {{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span>
+                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-'|decimal_html }}</span>
                                     </td>
                                     {% if capabilities.electricity_returned %}
                                         <td>
                                             <span class="badge bg-green">
-                                                {{ latest_reading.electricity_returned_1|default:'-' }}
+                                                {{ latest_reading.electricity_returned_1|default:'-'|decimal_html }}
                                             </span>
                                         </td>
                                     {% endif %}
@@ -66,12 +68,12 @@
                                         {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span>
+                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-'|decimal_html }}</span>
                                     </td>
                                     {% if capabilities.electricity_returned %}
                                         <td>
                                             <span class="badge bg-green">
-                                                {{ latest_reading.electricity_returned_2|default:'-' }}
+                                                {{ latest_reading.electricity_returned_2|default:'-'|decimal_html }}
                                             </span>
                                         </td>
                                     {% endif %}
@@ -82,12 +84,12 @@
                                             {% translate "Electricity (combined)" %} <span class="unit">{% translate "kWh" %}</span>
                                         </td>
                                         <td>
-                                            <span class="badge bg-red">{{ delivered_sum|default:'-' }}</span>
+                                            <span class="badge bg-red">{{ delivered_sum|default:'-'|decimal_html }}</span>
                                         </td>
                                         {% if capabilities.electricity_returned %}
                                             <td>
                                                 <span class="badge bg-green">
-                                                    {{ returned_sum|default:'-' }}
+                                                    {{ returned_sum|default:'-'|decimal_html }}
                                                 </span>
                                             </td>
                                         {% endif %}
@@ -100,7 +102,7 @@
                                             {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
                                         </td>
                                         <td colspan="2">
-                                            <span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-' }}</span>
+                                            <span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-'|decimal_html }}</span>
                                         </td>
                                     </tr>
                                 {% endif %}
@@ -241,7 +243,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.highest_usage_l1_value }}
+                                                    {{ electricity_statistics.highest_usage_l1_value|decimal_html }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -255,7 +257,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.highest_usage_l2_value }}
+                                                    {{ electricity_statistics.highest_usage_l2_value|decimal_html }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -269,7 +271,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.highest_usage_l3_value }}
+                                                    {{ electricity_statistics.highest_usage_l3_value|decimal_html }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -284,7 +286,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.lowest_usage_l1_value }}
+                                                    {{ electricity_statistics.lowest_usage_l1_value|decimal_html }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -298,7 +300,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.lowest_usage_l2_value }}
+                                                    {{ electricity_statistics.lowest_usage_l2_value|decimal_html }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -312,7 +314,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.lowest_usage_l3_value }}
+                                                    {{ electricity_statistics.lowest_usage_l3_value|decimal_html }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -328,7 +330,7 @@
                                                 </td>
                                                 <td class="col-sm-6">
                                                     <span class="badge bg-green">
-                                                        {{ electricity_statistics.highest_return_l1_value }}
+                                                        {{ electricity_statistics.highest_return_l1_value|decimal_html }}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -342,7 +344,7 @@
                                                 </td>
                                                 <td class="col-sm-6">
                                                     <span class="badge bg-green">
-                                                        {{ electricity_statistics.highest_return_l2_value }}
+                                                        {{ electricity_statistics.highest_return_l2_value|decimal_html }}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -356,7 +358,7 @@
                                                 </td>
                                                 <td class="col-sm-6">
                                                     <span class="badge bg-green">
-                                                        {{ electricity_statistics.highest_return_l3_value }}
+                                                        {{ electricity_statistics.highest_return_l3_value|decimal_html }}
                                                     </span>
                                                 </td>
                                             </tr>
