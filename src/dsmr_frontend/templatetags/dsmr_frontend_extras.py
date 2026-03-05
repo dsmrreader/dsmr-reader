@@ -1,6 +1,6 @@
 from django import template
 from django.utils.html import format_html
-from django.utils.safestring import SafeData, mark_safe
+from django.utils.safestring import SafeData
 
 
 register = template.Library()
@@ -18,7 +18,7 @@ def decimal_html(value: object) -> SafeData:
     comma_pos = text.rfind(",")
 
     if dot_pos == -1 and comma_pos == -1:
-        return mark_safe(text)
+        return format_html("{}", text)
 
     sep_pos = max(dot_pos, comma_pos)
     sep = text[sep_pos]
