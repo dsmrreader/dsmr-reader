@@ -1,4 +1,5 @@
 from django import template
+from django.utils import formats
 from django.utils.html import format_html
 from django.utils.safestring import SafeData
 
@@ -13,7 +14,7 @@ def decimal_html(value: object) -> SafeData:
     When both '.' and ',' are present (e.g. thousands separators), the one appearing last
     is treated as the decimal separator (e.g. '35.267,585' → sep=',', '1,234.56' → sep='.').
     """
-    text = str(value)
+    text = formats.localize(value) if not isinstance(value, str) else value
     dot_pos = text.rfind(".")
     comma_pos = text.rfind(",")
 
