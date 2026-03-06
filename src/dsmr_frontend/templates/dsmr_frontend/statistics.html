@@ -42,11 +42,11 @@
                                         {% translate "Delivered" %}
                                     </th>
 
-                                    {% if capabilities.electricity_returned %}
-                                        <th class="col-sm-3">
+                                    <th class="col-sm-3">
+                                        {% if capabilities.electricity_returned %}
                                             {% translate "Returned" %}
-                                        </th>
-                                    {% endif %}
+                                        {% endif %}
+                                    </th>
                                 </tr>
                                 <tr>
                                     <td>
@@ -55,13 +55,13 @@
                                     <td>
                                         <span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-'|decimal_html }}</span>
                                     </td>
-                                    {% if capabilities.electricity_returned %}
-                                        <td>
-                                            <span class="badge bg-green">
-                                                {{ latest_reading.electricity_returned_1|default:'-'|decimal_html }}
-                                            </span>
-                                        </td>
-                                    {% endif %}
+                                    <td>
+                                        <span class="badge bg-green">
+                                            {% if capabilities.electricity_returned %}
+                                                {{ latest_reading.electricity_returned_1|default:'-' }}
+                                            {% endif %}
+                                        </span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -70,13 +70,13 @@
                                     <td>
                                         <span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-'|decimal_html }}</span>
                                     </td>
-                                    {% if capabilities.electricity_returned %}
-                                        <td>
-                                            <span class="badge bg-green">
-                                                {{ latest_reading.electricity_returned_2|default:'-'|decimal_html }}
-                                            </span>
-                                        </td>
-                                    {% endif %}
+                                    <td>
+                                        <span class="badge bg-green">
+                                            {% if capabilities.electricity_returned %}
+                                                {{ latest_reading.electricity_returned_2|default:'-' }}
+                                            {% endif %}
+                                        </span>
+                                    </td>
                                 </tr>
                                 {% if latest_reading and delivered_sum %}
                                     <tr>
@@ -86,13 +86,13 @@
                                         <td>
                                             <span class="badge bg-red">{{ delivered_sum|default:'-'|decimal_html }}</span>
                                         </td>
-                                        {% if capabilities.electricity_returned %}
-                                            <td>
-                                                <span class="badge bg-green">
-                                                    {{ returned_sum|default:'-'|decimal_html }}
-                                                </span>
-                                            </td>
-                                        {% endif %}
+                                        <td>
+                                            <span class="badge bg-green">
+                                                {% if capabilities.electricity_returned %}
+                                                    {{ returned_sum|default:'-' }}
+                                                {% endif %}
+                                            </span>
+                                        </td>
                                     </tr>
                                 {% endif %}
 

@@ -39,11 +39,13 @@
                                                 {% endif %}
                                             {% endif %}
                                         </th>
-                                        {% if capabilities.electricity_returned and current.prices.electricity_returned_1_price or capabilities.electricity_returned and current.prices.electricity_returned_2_price %}
-                                            <th class="col-sm-2">
-                                                {% translate "Returned" %}
-                                            </th>
-                                        {% endif %}
+                                        <th class="col-sm-2">
+                                            {% if current.prices.electricity_returned_1_price or current.prices.electricity_returned_2_price %}
+                                                {% if capabilities.electricity_returned %}
+                                                    {% translate "Returned" %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </th>
                                         <th class="col-sm-2">
                                             {% translate "Costs" %} <span class="unit">&euro;</span>
                                         </th>
@@ -64,13 +66,13 @@
                                                         {{ current.summary.electricity1|default:'-'|decimal_html }} </span>
                                                     {% endif %}
                                                 </td>
-                                                {% if current.prices.electricity_returned_1_price %}
-                                                    <td>
-                                                        <span class="badge bg-green">
-                                                            {{ current.summary.electricity1_returned|default:'-'|decimal_html }}
-                                                        </span>
-                                                    </td>
-                                                {% endif %}
+                                                <td>
+                                                    <span class="badge bg-green">
+                                                        {% if current.prices.electricity_returned_1_price %}
+                                                            {{ current.summary.electricity1_returned|default:'-' }}
+                                                        {% endif %}
+                                                    </span>
+                                                </td>
                                                 <td>
                                                     <span class="badge bg-black">
                                                         {% if capabilities.electricity %}
@@ -93,13 +95,13 @@
                                                         {% endif %}
                                                     </span>
                                                 </td>
-                                                {% if current.prices.electricity_returned_2_price %}
-                                                    <td>
-                                                        <span class="badge bg-green">
-                                                            {{ current.summary.electricity2_returned|default:'-'|decimal_html }}
-                                                        </span>
-                                                    </td>
-                                                {% endif %}
+                                                <td>
+                                                    <span class="badge bg-green">
+                                                        {% if current.prices.electricity_returned_2_price %}
+                                                            {{ current.summary.electricity2_returned|default:'-' }}
+                                                        {% endif %}
+                                                    </span>
+                                                </td>
                                                 <td>
                                                     <span class="badge bg-black">
                                                         {% if capabilities.electricity %}
@@ -123,13 +125,15 @@
                                                     {% endif %}
                                                 {% endif %}
                                             </td>
-                                            {% if capabilities.electricity_returned and current.prices.electricity_returned_1_price or capabilities.electricity_returned and current.prices.electricity_returned_2_price %}
-                                                <td>
+                                            <td>
+                                                {% if current.prices.electricity_returned_1_price or current.prices.electricity_returned_2_price %}
                                                     <span class="badge bg-green">
-                                                        {{ current.summary.electricity_returned_merged|default:'-'|decimal_html }}
+                                                        {% if capabilities.electricity_returned %}
+                                                            {{ current.summary.electricity_returned_merged|default:'-' }}
+                                                        {% endif %}
                                                     </span>
-                                                </td>
-                                            {% endif %}
+                                                {% endif %}
+                                            </td>
                                             <td>
                                                 <span class="badge bg-black">{{ current.summary.electricity_cost_merged|default:'-'|decimal_html }}</span>
                                             </td>
@@ -265,11 +269,11 @@
                                             <td>
                                                 <span class="unit">{% translate "Delivered" %}</span>
                                             </td>
-                                            {% if capabilities.electricity_returned %}
-                                                <td>
+                                            <td>
+                                                {% if capabilities.electricity_returned %}
                                                     <span class="unit">{% translate "Returned" %}</span>
-                                                </td>
-                                            {% endif %}
+                                                {% endif %}
+                                            </td>
                                             <td>
                                             </td>
                                         </tr>
@@ -282,11 +286,11 @@
                                                 <td>
                                                     <span class="badge bg-red">{{ current.first_day.electricity1_reading|decimal_html }}</span>
                                                 </td>
-                                                {% if capabilities.electricity_returned %}
-                                                    <td>
-                                                        <span class="badge bg-green">{{ current.first_day.electricity1_returned_reading|decimal_html }}</span>
-                                                    </td>
-                                                {% endif %}
+                                                <td>
+                                                    {% if capabilities.electricity_returned %}
+                                                        <span class="badge bg-green"><small>{{ current.first_day.electricity1_returned_reading }}</small></span>
+                                                    {% endif %}
+                                                </td>
                                                 <td>
                                                 </td>
                                             </tr>
@@ -300,11 +304,11 @@
                                                 <td>
                                                     <span class="badge bg-red">{{ current.first_day.electricity2_reading|decimal_html }}</span>
                                                 </td>
-                                                {% if capabilities.electricity_returned %}
-                                                    <td>
-                                                        <span class="badge bg-green">{{ current.first_day.electricity2_returned_reading|decimal_html }}</span>
-                                                    </td>
-                                                {% endif %}
+                                                <td>
+                                                    {% if capabilities.electricity_returned %}
+                                                        <span class="badge bg-green"><small>{{ current.first_day.electricity2_returned_reading }}</small></span>
+                                                    {% endif %}
+                                                </td>
                                                 <td>
                                                 </td>
                                             </tr>
