@@ -17,10 +17,12 @@ class TestMessages(TestCase):
         self.assertTrue(queue.Message.objects.exists())
 
     @override_settings(DSMRREADER_MQTT_MAX_MESSAGES_IN_QUEUE=1)
-    @mock.patch("django.core.cache.backends.dummy.DummyCache.get")
-    def test_max(self, cache_mock):
+    @mock.patch("dsmr_mqtt.services.messages.caches")
+    def test_max(self, mock_caches):
         # Caching disabled for this test.
-        cache_mock.return_value = None
+        mock_cache = mock.MagicMock()
+        mock_cache.get.return_value = None
+        mock_caches.__getitem__.return_value = mock_cache
 
         self.assertEqual(queue.Message.objects.all().count(), 0)
         dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.PAYLOAD)
@@ -30,10 +32,11 @@ class TestMessages(TestCase):
         dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.DIFFERENT_PAYLOAD)
         self.assertEqual(queue.Message.objects.all().count(), 1)
 
-    @mock.patch("django.core.cache.backends.dummy.DummyCache.get")
-    @mock.patch("django.core.cache.backends.dummy.DummyCache.set")
-    def test_cached(self, cache_set_mock, cache_get_mock):
-        cache_get_mock.return_value = self.PAYLOAD
+    @mock.patch("dsmr_mqtt.services.messages.caches")
+    def test_cached(self, mock_caches):
+        mock_cache = mock.MagicMock()
+        mock_cache.get.return_value = self.PAYLOAD
+        mock_caches.__getitem__.return_value = mock_cache
 
         # Same topic/payload should block message.
         self.assertFalse(queue.Message.objects.exists())
@@ -41,12 +44,12 @@ class TestMessages(TestCase):
         self.assertFalse(queue.Message.objects.exists())
 
         # Different payload for the same topic should be allowed
-        cache_set_mock.reset_mock()
+        mock_cache.set.reset_mock()
         dsmr_mqtt.services.messages.queue_message(topic=self.TOPIC, payload=self.DIFFERENT_PAYLOAD)
         self.assertTrue(queue.Message.objects.exists())
 
         # Cache should be updated with new value.
-        calls = cache_set_mock.call_args_list[0][0]
+        calls = mock_cache.set.call_args_list[0][0]
         self.assertIn(self.TOPIC, calls)
         self.assertIn(self.DIFFERENT_PAYLOAD, calls)
         self.assertNotIn(self.PAYLOAD, calls)
