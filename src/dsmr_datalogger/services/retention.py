@@ -41,7 +41,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
             base_queryset.filter(**{"{}__lt".format(datetime_field): retention_date})
             .annotate(item_hour=TruncHour(datetime_field, tzinfo=ZoneInfo("UTC")))
             .values("item_hour")
-            .annotate(item_count=Count("id"))
+            .annotate(item_count=Count(datetime_field))
             .order_by()
             .filter(item_count__gt=ITEM_COUNT_PER_HOUR)
             .order_by("item_hour")
@@ -53,7 +53,9 @@ def run(scheduled_process: ScheduledProcess) -> None:
         if not hours_to_cleanup:
             continue
 
-        data_to_clean_up = True
+        # Only flag more data pending when the batch was saturated, implying there may be more to process.
+        if len(hours_to_cleanup) >= settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN:
+            data_to_clean_up = True
 
         for current_hour in hours_to_cleanup:
             # Fetch all data per hour.

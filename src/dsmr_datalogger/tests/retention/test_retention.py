@@ -77,9 +77,9 @@ class TestRetention(TestCase):
 
         self.assertFalse(GasConsumption.objects.filter(pk=32).exists())
 
-        # As long as there was data, it should still be planned.
+        # Batch was not saturated, so the process should be delayed (no more data expected imminently).
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now())
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12))
 
     @mock.patch("django.utils.timezone.now")
     def test_enabled_no_cleanup(self, now_mock):

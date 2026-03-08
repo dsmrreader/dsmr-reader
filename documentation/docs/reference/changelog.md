@@ -13,18 +13,20 @@
 
 !!! tip "Improvements"
 
-    **Miscelaneous**
-
+    #### UI
     - Improved visual decimal/numeric formatting
+
+    #### Retention
+    - Improved retention data rotation query performance by using index-friendly count - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
+    - Improved retention data rotation scheduling to avoid redundant re-runs in steady state - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
+
+    #### Miscelaneous
     - Generic development improvements
 
 !!! abstract "Fixes"
 
-    **Miscelaneous**
-
-    ### Retention
-    - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`)
-        - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
+    #### Retention
+    - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
 
 
 ---
@@ -34,11 +36,8 @@
 
 !!! abstract "Fixes"
     
-    **Miscelaneous**
-
-    ### PVOutput
-    - ==Reverted== <del>[#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064) Improved net power calculation to use **average** recent consumption data instead of latest value</del>
-        - [#2131](https://github.com/dsmrreader/dsmr-reader/pull/2131)
+    #### PVOutput
+    - ==Reverted v6.0 change== <del>[#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064) Improved net power calculation to use **average** recent consumption data instead of latest value</del> - [#2131](https://github.com/dsmrreader/dsmr-reader/pull/2131)
 
 
 ---
@@ -48,11 +47,9 @@
 
 !!! abstract "Fixes"
     
-    **Miscelaneous**
+    #### Security
 
-    - Updated dependencies due to security vulnerabilities
-        - [#2109](https://github.com/dsmrreader/dsmr-reader/issues/2109)
-        - [#2110](https://github.com/dsmrreader/dsmr-reader/issues/2110)
+    - Updated dependencies due to security vulnerabilities - [#2109](https://github.com/dsmrreader/dsmr-reader/issues/2109) - [#2110](https://github.com/dsmrreader/dsmr-reader/issues/2110)
 
 
 ---
@@ -62,7 +59,7 @@
 
 !!! danger "Incompatible changes"
 
-    ### Incompatible changes: Installations
+    #### Incompatible changes: Installations
     Dropped installation support for:
 
     - ==Native/bare metal installations== without containers
@@ -75,7 +72,7 @@
     
     ---
 
-    ### Incompatible changes: Database versions
+    #### Incompatible changes: Database versions
     Dropped database support for:
 
     - **PostgreSQL 10**
@@ -96,7 +93,7 @@
 
     ---
 
-    ### Incompatible changes: Python versions
+    #### Incompatible changes: Python versions
     Dropped Python support for:
 
     - **Python 3.7**
@@ -110,7 +107,7 @@
 
     ---
 
-    ### Incompatible changes: Legacy environment variables
+    #### Incompatible changes: Legacy environment variables
     Dropped:
 
     - `DSMR_USER` <small>(replaced by `DSMRREADER_ADMIN_USER` since v5)</small>
@@ -122,13 +119,12 @@
 
 !!! success "New features"
 
-    ### Hosting
+    #### Hosting
     - Added new dedicated URL route for health check and monitoring purposes:
         ```
         GET /healthcheck
         ```
-    - More [Django settings](./environment-variables.md/#django-settingsoverrides) exposed via environment variables
-        - [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
+    - More [Django settings](./environment-variables.md/#django-settingsoverrides) exposed via environment variables - [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
     - Added [``DSMRREADER_BACKEND_HIBERNATE``](./environment-variables.md/#dsmrreader_backend_hibernate) in favor of migrating to containerized setup
 
     <small>*This greatly improves the flexibility of changing internal settings without having to manually alter the installation.*</small>
@@ -137,9 +133,8 @@
 
     ---
 
-    ### InfluxDB
-    - Use Influx URL instead of Influx hostname + port combination
-        - [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
+    #### InfluxDB
+    - Use Influx URL instead of Influx hostname + port combination - [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
     - Added command-line alias for clearing InfluxDB queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
         ```shell title="shell"
@@ -148,9 +143,8 @@
 
     ---
 
-    ### MQTT
-    - Changed message queue primary key from AutoField to BigAutoField to reduce the number if sequence resets needed
-        - [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
+    #### MQTT
+    - Changed message queue primary key from AutoField to BigAutoField to reduce the number if sequence resets needed - [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
     - Added command-line alias for clearing MQTT queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
         ```shell title="shell"
@@ -160,24 +154,21 @@
 !!! abstract "Other changes and fixes"
     
 
-    ### PVOutput
-    - Improved net power calculation to use **average** recent consumption data instead of latest value
-        - [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
+    #### PVOutput
+    - Improved net power calculation to use **average** recent consumption data instead of latest value - [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
     
     ---
 
-    ### Documentation
-    - Added explanation about upload time to MinderGas
-        - [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979) by `MrLurch81`
+    #### Documentation
+    - Added explanation about upload time to MinderGas - [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979) by `MrLurch81`
     - Fixed broken API docs rendering caused by legacy ReDoc link
-    - Simplified online documentation
-        - [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
+    - Simplified online documentation - [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
     - Dropped Dutch translation for the online documentation
         - <small>*The DSMR-reader translations inside the application are **not** affected*</small>
    
     ---
 
-    ### Miscelaneous
+    #### Miscelaneous
     - Updated Django to 5.2 LTS
     - Updated a lot of other dependencies to a more recent version
         - <small>*The Dropbox SDK is the most important one due to incompatible Dropbox API changes per 1 January 2026*</small>
