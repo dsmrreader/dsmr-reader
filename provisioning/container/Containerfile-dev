@@ -56,6 +56,13 @@ RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install.sh \
 # Save template so entrypoint can seed empty bind mounts
 RUN cp /root/.claude.json /root/.claude.json.template
 
+COPY provisioning/container/entrypoint-claude.sh /entrypoint.sh
+
+WORKDIR /app/src
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["sleep", "infinity"]
+
 
 
 FROM local-dsmrreader-base AS local-dsmrreader-docs

@@ -13,4 +13,5 @@ poetry run /app/manage.py migrate --noinput
 poetry run /app/manage.py dsmr_superuser
 
 # E.g. "poetry run /app/manage.py runserver 8000"
+echo "Running: ${@}"
 exec ${@}
