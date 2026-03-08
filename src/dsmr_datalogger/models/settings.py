@@ -174,3 +174,14 @@ class RetentionSettings(ModelUpdateMixin, SingletonModel):
     class Meta:
         default_permissions: tuple[str, ...] = tuple()
         verbose_name = _("Retention configuration")
+
+
+@receiver(django.db.models.signals.post_save, sender=RetentionSettings)
+def _on_retention_settings_updated_signal(instance: "RetentionSettings", created: bool, raw: bool, **kwargs) -> None:
+    """On retention settings change, clear cached lower bounds so the next run scans from the beginning."""
+    if created or raw:
+        return
+
+    from dsmr_datalogger.services.retention import clear_cache
+
+    clear_cache()

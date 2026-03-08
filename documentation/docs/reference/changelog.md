@@ -19,6 +19,7 @@
     #### Retention
     - Improved retention data rotation query performance by using index-friendly count - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
     - Improved retention data rotation scheduling to avoid redundant re-runs in steady state - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
+    - Improved retention data rotation to cache progress, skipping already-processed hours on subsequent runs - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
 
     #### Miscelaneous
     - Generic development improvements
