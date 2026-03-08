@@ -20,7 +20,9 @@
       "Bash(ls *)",
       "Bash(head *)",
       "Bash(tail *)",
-      "Bash(wc *)"
+      "Bash(wc *)",
+      "Edit(/app/documentation/*)",
+      "Write(/app/documentation/*)"
     ],
     "deny": []
   }
