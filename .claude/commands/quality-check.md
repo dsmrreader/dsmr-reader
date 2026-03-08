@@ -22,7 +22,7 @@ poetry run flake8 -v
 
 5. **Test** (PyTest):
 ```bash
-poetry run pytest -q
+DJANGO_SETTINGS_MODULE=dsmrreader.config.test poetry run pytest -q
 ```
 
 Report results for each step. Stop and report if any step fails.
