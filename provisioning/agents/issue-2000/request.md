@@ -1,7 +1,0 @@
-- Origin: https://github.com/dsmrreader/dsmr-reader/issues/2000
-- Load `agents.md` into context
-- Rework `src/dsmr_mqtt/models/queue.py`
-- Convert the primary key of `Message` from integer ID to BigAutoField
-- Update tests accordingly
-- Mention the changes in `CHANGELOG.md` below `Other changes` with a header "MQTT"
-- Create a `result.md` file with your output of the session and identify yourself as the author of it and name the model (with its version) used as well
