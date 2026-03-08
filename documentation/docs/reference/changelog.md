@@ -11,6 +11,13 @@
 
 ## v6.1.0 - March 2026
 
+!!! tip "Improvements"
+
+    **Miscelaneous**
+
+    - Improved visual decimal/numeric formatting
+    - Generic development improvements
+
 !!! abstract "Fixes"
 
     **Miscelaneous**
