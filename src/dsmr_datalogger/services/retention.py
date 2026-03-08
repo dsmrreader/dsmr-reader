@@ -39,7 +39,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
     for base_queryset, datetime_field in MODELS_TO_CLEANUP.items():
         hours_to_cleanup = (
             base_queryset.filter(**{"{}__lt".format(datetime_field): retention_date})
-            .annotate(item_hour=TruncHour(datetime_field))
+            .annotate(item_hour=TruncHour(datetime_field, tzinfo=ZoneInfo("UTC")))
             .values("item_hour")
             .annotate(item_count=Count("id"))
             .order_by()

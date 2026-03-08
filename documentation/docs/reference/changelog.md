@@ -9,6 +9,20 @@
 ---
 
 
+## v6.1.0 - March 2026
+
+!!! abstract "Fixes"
+
+    **Miscelaneous**
+
+    ### Retention
+    - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`)
+        - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
+
+
+---
+
+
 ## v6.0.2 - February 2026
 
 !!! abstract "Fixes"
