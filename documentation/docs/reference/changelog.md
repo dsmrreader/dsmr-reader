@@ -14,7 +14,7 @@
 !!! tip "Improvements"
 
     #### UI
-    - Improved visual decimal/numeric formatting
+    - Improved decimal rendering with experimental formatting
 
     #### Retention
     - Improved retention data rotation query performance by using index-friendly count - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
