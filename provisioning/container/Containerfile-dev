@@ -5,7 +5,7 @@
 ARG PYTHON_VERSION="3.14"
 
 FROM python:${PYTHON_VERSION}-slim-trixie AS local-dsmrreader-base
-WORKDIR /app
+WORKDIR /app/src
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 RUN apt-get update
@@ -19,7 +19,7 @@ FROM local-dsmrreader-base AS local-dsmrreader-dev
 # Also, the only reason for .venv is the IDE's detection
 ENV POETRY_VIRTUALENVS_CREATE=true \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
-    POETRY_VIRTUALENVS_PATH=/app/.venv \
+    POETRY_VIRTUALENVS_PATH=/app/src/.venv \
     DJANGO_SETTINGS_MODULE=dsmrreader.config.development
 
 RUN pip install poetry
@@ -29,7 +29,7 @@ COPY provisioning/container/entrypoint-dev.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["poetry", "run", "/app/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["poetry", "run", "/app/src/manage.py", "runserver", "0.0.0.0:8000"]
 
 
 
@@ -60,8 +60,8 @@ COPY provisioning/container/entrypoint-claude.sh /entrypoint.sh
 
 WORKDIR /app/src
 
+CMD ["poetry", "run", "/app/src/manage.py", "runserver", "0.0.0.0:8000"]
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["sleep", "infinity"]
 
 
 

@@ -7,11 +7,11 @@ set -e
 poetry install
 
 # This could collide if you happen to work on a migration yourself and you restart the container.
-poetry run /app/manage.py migrate --noinput
+poetry run /app/src/manage.py migrate --noinput
 
 # Reset password.
-poetry run /app/manage.py dsmr_superuser
+poetry run /app/src/manage.py dsmr_superuser
 
-# E.g. "poetry run /app/manage.py runserver 8000"
+# E.g. "poetry run /app/src/manage.py runserver 8000"
 echo "Running: ${@}"
 exec ${@}

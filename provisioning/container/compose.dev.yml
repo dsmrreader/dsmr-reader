@@ -12,8 +12,8 @@ services:
       dockerfile: provisioning/container/Containerfile-dev
       target: local-dsmrreader-dev
     volumes:
-      - ./src:/app
-      - /app/.venv  # Prevents mirroring it to host
+      - ./:/app
+      - /app/src/.venv  # Prevents mirroring it to host
     depends_on:
       dev-dsmr-db:
         condition: service_healthy
