@@ -45,7 +45,7 @@ jobs:
         run: docker compose run tests-dsmr-app poetry run flake8 -v
 
       - name: Type check with MyPy
-        run: docker compose run tests-dsmr-app poetry run mypy /app
+        run: docker compose run tests-dsmr-app poetry run mypy /app/src
 
       - name: Run PostgreSQL tests
         run: docker compose run tests-dsmr-app poetry run pytest
