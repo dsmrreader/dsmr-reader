@@ -42,7 +42,7 @@ urllib3 = "^2"
 uritemplate = "^4"
 
 [tool.poetry.group.dev.dependencies]
-black = "^25"
+black = "^26"
 djlint = "^1"
 flake8 = "^7"
 flake8-bandit = "^4"
