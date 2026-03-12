@@ -21,6 +21,9 @@
     - Improved retention data rotation scheduling to avoid redundant re-runs in steady state - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
     - Improved retention data rotation to cache progress, skipping already-processed hours on subsequent runs - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
 
+    #### Dropbox
+    - Improved Dropbox sync to no longer remove credentials on server/API errors, instead rescheduling for 5 minutes
+
     #### Miscelaneous
     - Generic development improvements
 

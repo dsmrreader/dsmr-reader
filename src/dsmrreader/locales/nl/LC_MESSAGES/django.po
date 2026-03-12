@@ -1263,10 +1263,6 @@ msgstr ""
 msgid "Dropbox"
 msgstr "Dropbox"
 
-msgid "Unable to authenticate with Dropbox, removing credentials. Error: {}"
-msgstr ""
-"Kan niet authenticeren met Dropbox, inloggegevens weggehaald. Fout: {}"
-
 msgid ""
 "Unable to upload files to Dropbox due to {}. Ignoring new files for the next"
 " {} hours..."
@@ -3675,6 +3671,10 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Unable to authenticate with Dropbox, removing credentials. Error: {}"
+#~ msgstr ""
+#~ "Kan niet authenticeren met Dropbox, inloggegevens weggehaald. Fout: {}"
 
 #~ msgid "Frequently asked questions (FAQ)"
 #~ msgstr "Veelgestelde vragen (FAQ)"
