@@ -27,8 +27,8 @@ services:
       # Use these env vars for your IDE's Python interpreter. Set Python path to /app/.venv/bin/python3 as well.
       - '${HOST_DJANGO_PORT:-8000}:${CONTAINER_DJANGO_PORT:-8000}'
 
-#  claude-dev:
-#    container_name: claude-dev
+#  dev-dsmr-app:
+#    container_name: dev-dsmr-app
 #    restart: 'unless-stopped'
 #    build:
 #      context: .
@@ -38,8 +38,6 @@ services:
 #      # Claude Code credentials and session data
 #      - ./container-data/claude-dev/claude:/root/.claude
 #      - ./container-data/claude-dev/claude.json:/root/.claude.json
-#      # Root level project settings and commands
-#      - .:/app/
 
   dev-dsmr-db:
     container_name: dev-dsmr-db
