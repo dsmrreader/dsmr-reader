@@ -38,7 +38,7 @@
 - Containers built? See if this command works:
 
 ```shell title="shell"
-    docker exec -it dev-dsmr-app poetry run /app/manage.py check
+    docker exec -it dev-dsmr-app poetry run /app/src/manage.py check
 
     # Expected output: "System check identified no issues (0 silenced)"
 ```
@@ -61,14 +61,14 @@ Any Python code changes you make will cause the Django Development Server to rel
 - Run ``makemessages`` to extract those strings:
 
 ```shell title="shell"
-docker compose exec dev-dsmr-app poetry run /app/manage.py makemessages -l nl
+docker compose exec dev-dsmr-app poetry run /app/src/manage.py makemessages -l nl
 ```
  
 - Open ``dsmr_frontend/locale/nl/LC_MESSAGES/django.po`` with PO Editor or a similar tool and translate the new strings.
 - After translation, run ``compilemessages`` to compile the PO-translations into the MO-files:
 
 ```shell title="shell"
-docker compose exec dev-dsmr-app poetry run /app/manage.py compilemessage
+docker compose exec dev-dsmr-app poetry run /app/src/manage.py compilemessage
 ```
 
 ## Code style

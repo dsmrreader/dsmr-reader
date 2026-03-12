@@ -12,7 +12,7 @@ poetry run djlint --reformat .
 
 3. **Type check** (MyPy):
 ```bash
-poetry run mypy /app
+poetry run mypy /app/src
 ```
 
 4. **Lint Python** (Flake8):

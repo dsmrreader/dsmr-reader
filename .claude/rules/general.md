@@ -81,9 +81,9 @@ It exposes a web UI, REST API, and integrates with external services (MQTT, Infl
 - Parallelisation via `pytest-xdist` is available (`-n auto`).
 
 ### Migrations
-- Generate with: `poetry run /app/manage.py makemigrations`
-- Apply with: `poetry run /app/manage.py migrate`
-- Lock for release with: `poetry run /app/manage.py dsmrreader_lock_migrations`
+- Generate with: `poetry run /app/src/manage.py makemigrations`
+- Apply with: `poetry run /app/src/manage.py migrate`
+- Lock for release with: `poetry run /app/src/manage.py dsmrreader_lock_migrations`
 - **Never edit locked migrations.**
 
 ### Environment / Configuration
@@ -115,7 +115,7 @@ Never modify, format, lint, or type-check these:
 ```bash
 poetry run black .                          # 1. Format Python
 poetry run djlint --reformat .              # 2. Format templates
-poetry run mypy /app                        # 3. Type check
+poetry run mypy /app/src                    # 3. Type check
 poetry run flake8                           # 4. Lint
 poetry run pytest -q                        # 5. Test
 ```
