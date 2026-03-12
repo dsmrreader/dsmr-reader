@@ -98,7 +98,7 @@ ignore_missing_imports = true
 
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "dsmrreader.settings"
+DJANGO_SETTINGS_MODULE = "dsmrreader.config.test"
 pythonpath = "."
 addopts = "--cov=. --cov-report=html:coverage_report/html -q"
 testpaths = ["dsmr_api/tests", "dsmr_backend/tests", "dsmr_backup/tests", "dsmr_consumption/tests", "dsmr_datalogger/tests", "dsmr_dropbox/tests", "dsmr_frontend/tests", "dsmr_influxdb/tests", "dsmr_mindergas/tests", "dsmr_mqtt/tests", "dsmr_notification/tests", "dsmr_plugins/tests", "dsmr_pvoutput/tests", "dsmr_stats/tests", "dsmr_weather/tests"]
