@@ -77,15 +77,18 @@ def run(scheduled_process: ScheduledProcess) -> None:
         hours_to_cleanup = list(hours_to_cleanup)  # Force evaluation.
 
         if not hours_to_cleanup:
-            cache.delete(_cache_key(model_name))  # Caught up, clear lower bound.
             continue
+
+        # Advance the lower bound past the last cleaned hour so future runs skip already-processed history.
+        cache.set(
+            _cache_key(model_name),
+            max(hours_to_cleanup) + timezone.timedelta(hours=1),
+            timeout=None,
+        )
 
         # Only flag more data pending when the batch was saturated, implying there may be more to process.
         if len(hours_to_cleanup) >= settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN:
             data_to_clean_up = True
-            cache.set(_cache_key(model_name), max(hours_to_cleanup), timeout=None)
-        else:
-            cache.delete(_cache_key(model_name))  # Batch not saturated, no lower bound needed next run.
 
         for current_hour in hours_to_cleanup:
             # Fetch all data per hour.

@@ -154,9 +154,11 @@ class TestRetentionCache(TestCase):
         self.assertEqual(ElectricityConsumption.objects.count(), 67)
         self.assertEqual(GasConsumption.objects.count(), 33)
 
-        # Cache entries cleared since nothing was found (caught up).
+        # Cache entries are left untouched when nothing was found (lower bound is preserved).
         for model_name in ["DsmrReading", "ElectricityConsumption", "GasConsumption"]:
-            self.assertIsNone(cache.get(dsmr_datalogger.services.retention._cache_key(model_name)))
+            self.assertEqual(
+                cache.get(dsmr_datalogger.services.retention._cache_key(model_name)), future_bound
+            )
 
         # Process delayed since there was nothing to clean.
         self.schedule_process.refresh_from_db()
