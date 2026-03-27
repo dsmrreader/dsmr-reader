@@ -1,4 +1,5 @@
 {
+  "gitCoAuthorship": false ,
   "permissions": {
     "allow": [
       "Bash(poetry run black .)",

@@ -3,13 +3,10 @@
 !/.idea/runConfigurations/*
 
 # Claude
-/.claude/*
-!/.claude/settings.json
-!/.claude/commands/
+/.claude/settings.local.json
 /.agent-data/
 /provisioning/agents/
-src/.claude
-src/AGENTS.md
+/CLAUDE.local.md
 
 # Python
 *.pyc
