@@ -8,6 +8,9 @@
 {% block title %}
     {% translate "Configuration" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Configuration" %}
+{% endblock %}
 {% block header %}
     {% translate "Configuration" %} &nbsp; <i class="fas fa-wrench"></i>
 {% endblock %}
@@ -18,11 +21,14 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         {% translate "Search for a topic or setting" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <div class="ui search">
+                            <label for="search" class="sr-only">
+                                {% translate "Search for a topic or setting" %}
+                            </label>
                             <div class="ui icon input">
                                 <input id="search"
                                        class="prompt"

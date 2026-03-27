@@ -10,6 +10,9 @@
 {% block title %}
     {% translate "Energy contracts" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Energy contracts" %}
+{% endblock %}
 {% block header %}
     {% translate "Energy contracts" %} &nbsp; <i class="fa-solid fa-object-ungroup"></i>
 {% endblock %}
@@ -22,9 +25,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel">
-                            <header class="panel-heading">
+                            <h2 class="panel-heading">
                                 <strong>{{ current.description }}</strong> <span class="unit">{{ current.summary.number_of_days }} {% blocktranslate count counter=current.summary.number_of_days %}day{% plural %}days{% endblocktranslate %} {% translate "stored" %}</span>
-                            </header>
+                            </h2>
                             <div class="panel-body">
                                 <table class="table table-hover">
                                     <tr>

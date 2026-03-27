@@ -10,6 +10,9 @@
 {% block title %}
     {% translate "Statistics" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Statistics" %}
+{% endblock %}
 {% block header %}
     {% translate "Statistics" %} &nbsp; <i class="fa-solid fa-list-ol"></i>
 {% endblock %}
@@ -27,9 +30,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel">
-                        <header class="panel-heading">
+                        <h2 class="panel-heading">
                             {% translate "Meter positions" %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <tr>
@@ -115,9 +118,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel">
-                        <header class="panel-heading">
+                        <h2 class="panel-heading">
                             {% translate "Meter flags/statistics" %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <tr>
@@ -217,9 +220,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel">
-                        <header class="panel-heading">
+                        <h2 class="panel-heading">
                             {% translate "All time highs & lows" %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
 
                             {% if electricity_statistics %}

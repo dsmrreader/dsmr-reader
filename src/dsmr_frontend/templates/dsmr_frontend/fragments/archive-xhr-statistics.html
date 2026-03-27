@@ -6,34 +6,34 @@
 {% load dsmr_frontend_extras %}
 
 <div class="panel">
-    <header class="panel-heading centered-header">
+    <h2 class="panel-heading centered-header">
         {{ title|unlocalize }}
 
         {% if selected_level == 'days' %}
             <small class="pull-right">
                 <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}"
-                   title="{% translate "Add note for this date" %}">
-                    <span class="badge bg-green"><i class="fas fa-plus"></i></span>
+                   aria-label="{% translate "Add note for this date" %}">
+                    <span class="badge bg-green" aria-hidden="true"><i class="fas fa-plus" aria-hidden="true"></i></span>
                 </a>
             </small>
         {% endif %}
-    </header>
+    </h2>
     <div class="panel-body archive-header-panel-body">
         <table class="table table-hover">
             <tr>
-                <th class="col-sm-4">
+                <th scope="col" class="col-sm-4">
                 </th>
-                <th class="col-sm-3">
+                <th scope="col" class="col-sm-3">
                     {% if capabilities.electricity %}
                         {% translate "Consumed" %}
                     {% endif %}
                 </th>
-                <th class="col-sm-3">
+                <th scope="col" class="col-sm-3">
                     {% if capabilities.electricity_returned %}
                         {% translate "Returned" %}
                     {% endif %}
                 </th>
-                <th class="col-sm-2">
+                <th scope="col" class="col-sm-2">
                     {% if capabilities.costs %}
                         {% translate "Costs" %} <span class="unit">&euro;</span>
                     {% endif %}
@@ -200,7 +200,7 @@
         {% if notes %}
             {% for current_note in notes %}
                 <div class="alert alert-warning" role="alert">
-                    <i class="fas fa-comments"></i> {{ current_note.description|linebreaksbr }}
+                    <i class="fas fa-comments" aria-hidden="true"></i> {{ current_note.description|linebreaksbr }}
                 </div>
             {% endfor %}
         {% endif %}
@@ -213,23 +213,23 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <header class="panel-heading centered-header">
+                <h2 class="panel-heading centered-header">
                     {% translate "Meter positions" %}
-                </header>
+                </h2>
                 <div class="panel-body">
                     <table class="table table-hover">
                         <tr>
-                            <th class="col-sm-4">
+                            <th scope="col" class="col-sm-4">
                             </th>
-                            <th class="col-sm-3">
+                            <th scope="col" class="col-sm-3">
                                 {% translate "Delivered" %}
                             </th>
-                            <th class="col-sm-3">
+                            <th scope="col" class="col-sm-3">
                                 {% if capabilities.electricity_returned %}
                                     {% translate "Returned" %}
                                 {% endif %}
                             </th>
-                            <th class="col-sm-2">
+                            <th scope="col" class="col-sm-2">
                                 {% translate "Timestamp" %}
                             </th>
                         </tr>

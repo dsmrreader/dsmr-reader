@@ -11,21 +11,23 @@
                 {% if data and capabilities.electricity %}
                     <table class="table table-hover">
                         <tr>
-                            <th class="col-sm-6">
+                            <th scope="col" class="col-sm-6">
                                 {{ day|date:date_formatter|capfirst }}
                             </th>
-                            <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
+                            <th scope="col"
+                                class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
                                 {% if capabilities.electricity %}
                                     {% translate "Consumed" %}
                                 {% endif %}
                             </th>
-                            <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
+                            <th scope="col"
+                                class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
                                 {% if capabilities.electricity_returned %}
                                     {% translate "Returned" %}
                                 {% endif %}
                             </th>
                             {% if capabilities.costs %}
-                                <th class="col-sm-2">
+                                <th scope="col" class="col-sm-2">
                                     {% translate "Costs" %} <span class="unit">&euro;</span>
                                 </th>
                             {% endif %}

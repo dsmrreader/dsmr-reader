@@ -6,6 +6,9 @@
 {% block title %}
     {% translate "Support" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Support" %}
+{% endblock %}
 {% block header %}
     {% translate "Support" %} &nbsp; <i class="fas fa-handshake-angle"></i>
 {% endblock %}
@@ -17,9 +20,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         <i class="fa-solid fa-circle-info"></i> &nbsp; {% translate "Help" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -86,9 +89,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         <i class="fa-solid fa-download"></i> &nbsp; {% translate "Data" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -106,9 +109,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         <i class="fa-brands fa-github"></i> &nbsp; {% translate "Reporting problems / Feature requests" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -154,9 +157,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         <i class="fa-solid fa-code"></i> &nbsp; {% translate "Debug info dump" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <a href="#" data-trigger="click">{% translate "Show debug info dump" %}</a>
                         <pre class="xhr-hidden" id="debug_info_dump_result"></pre>
@@ -174,9 +177,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         <i class="fa-solid fa-plug-circle-exclamation"></i> &nbsp; {% translate "Telegram data" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <a href="#" data-trigger="click">{% translate "Show telegram" %}</a>
                         <pre class="xhr-hidden" id="latest_telegram_result"></pre>

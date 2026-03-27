@@ -6,6 +6,9 @@
 {% block title %}
     {% translate "About" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "About" %}
+{% endblock %}
 {% block header %}
     {% translate "About" %} &nbsp; <i class="fas fa-heart-pulse"></i>
 {% endblock %}
@@ -17,7 +20,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         {% translate "Application status" %}
                         {% if monitoring_status_issues %}
                             &nbsp;
@@ -29,7 +32,7 @@
                         {% endblocktranslate %}
                             </span>
                         {% endif %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         {% for current in monitoring_issues %}
                             <div class="row">
@@ -58,9 +61,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         {% translate "Version" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-6">
@@ -97,9 +100,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         {% translate "Credits" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-6">

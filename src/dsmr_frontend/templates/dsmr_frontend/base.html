@@ -4,7 +4,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
-<html>
+<html lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta charset="UTF-8">
         <title>
@@ -16,8 +16,7 @@
         <meta name="theme-color" content="#2B3A45">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-              name="viewport">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
 
         {% block stylesheets %}
             <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}"
@@ -75,28 +74,27 @@
         <![endif]-->
     </head>
     <body class="skin-black">
+        <a href="#main-content" class="sr-only sr-only-focusable">{% translate "Skip to main content" %}</a>
         <header class="header">
             <a href="{% url 'frontend:dashboard' %}" class="logo">DSMR-reader</a>
-            <nav class="navbar navbar-static-top" role="navigation">
-                <a href="#"
-                   class="navbar-btn sidebar-toggle"
-                   data-toggle="offcanvas"
-                   role="button"
-                   title="{% translate 'Toggle navigation' %}">
-                    <span class="sr-only">{% translate "Toggle navigation" %}</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
+            <nav class="navbar navbar-static-top"
+                 aria-label="{% translate 'Main navigation' %}">
+                <button class="navbar-btn sidebar-toggle"
+                        data-toggle="offcanvas"
+                        aria-expanded="false"
+                        aria-controls="sidebar-menu"
+                        aria-label="{% translate 'Toggle navigation' %}">
+                    <span class="icon-bar" aria-hidden="true"></span>
+                    <span class="icon-bar" aria-hidden="true"></span>
+                    <span class="icon-bar" aria-hidden="true"></span>
+                </button>
                 <div class="navbar-left">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown user user-menu">
-                            <a href="" onclick="return false;">
-                                <span>
-                                    {% block header %}
-                                    {% endblock %}
-                                </span>
-                            </a>
+                        <li class="user user-menu">
+                            <span class="navbar-text">
+                                {% block header %}
+                                {% endblock %}
+                            </span>
                         </li>
                     </ul>
                 </div>
@@ -105,63 +103,84 @@
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <aside class="left-side sidebar-offcanvas" style="z-index: 9999;">
                 <section class="sidebar">
-                    <ul class="sidebar-menu">
+                    <ul class="sidebar-menu" id="sidebar-menu">
                         <li>
-                            <a href="{% url 'frontend:dashboard' %}">
-                                <i class="fas fa-tachometer-alt"></i> &nbsp; <span>{% translate "Dashboard" %}</span>
+                            {% url 'frontend:dashboard' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fas fa-tachometer-alt" aria-hidden="true"></i> &nbsp; <span>{% translate "Dashboard" %}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:live-graphs' %}">
-                                <i class="fa-solid fa-chart-area"></i> &nbsp; <span>{% translate "Live graphs" %}</span>
+                            {% url 'frontend:live-graphs' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fa-solid fa-chart-area" aria-hidden="true"></i> &nbsp; <span>{% translate "Live graphs" %}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:archive' %}">
-                                <i class="fas fa-history"></i> &nbsp; <span>{% translate "Archive" %}</span>
+                            {% url 'frontend:archive' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fas fa-history" aria-hidden="true"></i> &nbsp; <span>{% translate "Archive" %}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:compare' %}">
-                                <i class="fas fa-balance-scale-left"></i> &nbsp; <span>{% translate "Compare" %}</span>
+                            {% url 'frontend:compare' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fas fa-balance-scale-left" aria-hidden="true"></i> &nbsp; <span>{% translate "Compare" %}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:trends' %}">
-                                <i class="fa-solid fa-arrow-trend-up"></i> &nbsp; <span>{% translate "Trends" %}</span>
+                            {% url 'frontend:trends' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> &nbsp; <span>{% translate "Trends" %}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:statistics' %}">
-                                <i class="fa-solid fa-list-ol"></i> &nbsp; <span>{% translate "Statistics" %}</span>
+                            {% url 'frontend:statistics' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fa-solid fa-list-ol" aria-hidden="true"></i> &nbsp; <span>{% translate "Statistics" %}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:energy-contracts' %}">
-                                <i class="fa-solid fa-object-ungroup"></i> &nbsp; <span>{% translate "Energy contracts" %}</span>
+                            {% url 'frontend:energy-contracts' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fa-solid fa-object-ungroup" aria-hidden="true"></i> &nbsp; <span>{% translate "Energy contracts" %}</span>
                             </a>
                         </li>
                         <li>
                             &nbsp;&nbsp;
                         </li>
                         <li>
-                            <a href="{% url 'frontend:configuration' %}">
-                                <i class="fas fa-xs fa-wrench"></i> &nbsp; <small>{% translate "Configuration" %}</small>
+                            {% url 'frontend:configuration' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fas fa-xs fa-wrench" aria-hidden="true"></i> &nbsp; <small>{% translate "Configuration" %}</small>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:support' %}">
-                                <i class="fas fa-xs fa-handshake-angle"></i> &nbsp; <small>{% translate "Support" %}</small>
+                            {% url 'frontend:support' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fas fa-xs fa-handshake-angle" aria-hidden="true"></i> &nbsp; <small>{% translate "Support" %}</small>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'frontend:about' %}">
-                                <i class="fas fa-xs fa-heart-pulse"></i> &nbsp;
+                            {% url 'frontend:about' as nav_url %}
+                            <a href="{{ nav_url }}"
+                               {% if request.path == nav_url %} aria-current="page"{% endif %}>
+                                <i class="fas fa-xs fa-heart-pulse" aria-hidden="true"></i> &nbsp;
                                 <small>
                                     {% translate "About" %}
 
                                     {% if monitoring_status_issues %}
-                                        &nbsp; <span class="badge bg-red">{{ monitoring_status_issues|length }}</span>
+                                        &nbsp; <span class="badge bg-red"
+       aria-label="{% blocktranslate count count=monitoring_status_issues|length %}{{ count }} monitoring issue{% plural %}{{ count }} monitoring issues{% endblocktranslate %}">{{ monitoring_status_issues|length }}</span>
                                     {% endif %}
                                 </small>
                             </a>
@@ -169,12 +188,17 @@
                     </ul>
                 </section>
             </aside>
-            <aside class="right-side">
+            <main class="right-side" id="main-content">
+                <h1 class="sr-only">
+                    {% block page_heading %}
+                        DSMR-reader
+                    {% endblock %}
+                </h1>
                 <div class="clearfix">
                 </div>
                 {% block content %}
                 {% endblock %}
-            </aside>
+            </main>
         </div>
 
         {% block javascript %}

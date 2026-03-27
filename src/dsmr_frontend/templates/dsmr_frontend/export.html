@@ -8,6 +8,9 @@
 {% block title %}
     {% translate "Export data" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Export data" %}
+{% endblock %}
 {% block header %}
     {% translate "Export data" %} &nbsp; <i class="fas fa-file-excel"></i>
 {% endblock %}
@@ -30,68 +33,73 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel">
-                            <header class="panel-heading">
+                            <h2 class="panel-heading">
                                 <i class="fas fa-tasks"></i> &nbsp; {% translate "Select data type" %}
                                 <br />
                                 <small>{% blocktranslate %}Select the type of data you want to export.{% endblocktranslate %}</small>
-                            </header>
+                            </h2>
                             <div class="panel-body">
-                                <table class="table table-hover">
-                                    <tr>
-                                        <td class="col-sm-3">
-                                            <input class=""
-                                                   type="radio"
-                                                   name="data_type"
-                                                   value="day"
-                                                   id="data_day_totals"
-                                                   checked="checked">
-                                            &nbsp;
-                                            <label for="data_day_totals">
-                                                {% translate "Day totals" %}
-                                            </label>
-                                        </td>
-                                        <td class="col-sm-9">
-                                            {% blocktranslate %}Summary of each day. Contains (when available) electricity, gas, costs and the first meter positions of the day.{% endblocktranslate %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-sm-3">
-                                            <input class=""
-                                                   type="radio"
-                                                   name="data_type"
-                                                   value="hour"
-                                                   id="data_hour_totals">
-                                            &nbsp;
-                                            <label for="data_hour_totals">
-                                                {% translate "Hour totals" %}
-                                            </label>
-                                        </td>
-                                        <td class="col-sm-9">
-                                            {% blocktranslate %}Summary of each hour read. Contains (when available) electricity and gas.{% endblocktranslate %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            &nbsp;
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-sm-3">
-                                            <input class=""
-                                                   type="radio"
-                                                   name="data_type"
-                                                   value="temperature"
-                                                   id="data_temperature">
-                                            &nbsp;
-                                            <label for="data_temperature">
-                                                {% translate "Temperatures" %}
-                                            </label>
-                                        </td>
-                                        <td class="col-sm-9">
-                                            {% blocktranslate %}Summary of all temperatures read (if enabled).{% endblocktranslate %}
-                                        </td>
-                                    </tr>
-                                </table>
+                                <fieldset>
+                                    <legend class="sr-only">
+                                        {% translate "Select data type" %}
+                                    </legend>
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <td class="col-sm-3">
+                                                <input class=""
+                                                       type="radio"
+                                                       name="data_type"
+                                                       value="day"
+                                                       id="data_day_totals"
+                                                       checked="checked">
+                                                &nbsp;
+                                                <label for="data_day_totals">
+                                                    {% translate "Day totals" %}
+                                                </label>
+                                            </td>
+                                            <td class="col-sm-9">
+                                                {% blocktranslate %}Summary of each day. Contains (when available) electricity, gas, costs and the first meter positions of the day.{% endblocktranslate %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3">
+                                                <input class=""
+                                                       type="radio"
+                                                       name="data_type"
+                                                       value="hour"
+                                                       id="data_hour_totals">
+                                                &nbsp;
+                                                <label for="data_hour_totals">
+                                                    {% translate "Hour totals" %}
+                                                </label>
+                                            </td>
+                                            <td class="col-sm-9">
+                                                {% blocktranslate %}Summary of each hour read. Contains (when available) electricity and gas.{% endblocktranslate %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                &nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3">
+                                                <input class=""
+                                                       type="radio"
+                                                       name="data_type"
+                                                       value="temperature"
+                                                       id="data_temperature">
+                                                &nbsp;
+                                                <label for="data_temperature">
+                                                    {% translate "Temperatures" %}
+                                                </label>
+                                            </td>
+                                            <td class="col-sm-9">
+                                                {% blocktranslate %}Summary of all temperatures read (if enabled).{% endblocktranslate %}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
                             </div>
                         </div>
                     </div>
@@ -101,11 +109,11 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="panel">
-                            <header class="panel-heading centered-header">
+                            <h2 class="panel-heading centered-header">
                                 <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range start" %}
                                 <br />
                                 <small>{% blocktranslate %}Select starting day for export.{% endblocktranslate %}</small>
-                            </header>
+                            </h2>
                             <div class="panel-body center-block datepicker-calendar-block">
                                 <div id="start_datepicker">
                                 </div>
@@ -116,11 +124,11 @@
 
                     <div class="col-sm-6">
                         <div class="panel">
-                            <header class="panel-heading centered-header">
+                            <h2 class="panel-heading centered-header">
                                 <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range end" %}
                                 <br />
                                 <small>{% blocktranslate %}Select ending day for export.{% endblocktranslate %}</small>
-                            </header>
+                            </h2>
                             <div class="panel-body center-block datepicker-calendar-block">
                                 <div id="end_datepicker">
                                 </div>
@@ -134,11 +142,11 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel">
-                            <header class="panel-heading">
+                            <h2 class="panel-heading">
                                 <i class="fas fa-file"></i> &nbsp; {% translate "Select export format" %}
                                 <br />
                                 <small>{% blocktranslate %}Choose a format the data will be exported in.{% endblocktranslate %}</small>
-                            </header>
+                            </h2>
                             <div class="panel-body">
                                 <table class="table table-hover">
                                     <tr>
