@@ -1786,11 +1786,20 @@ msgstr "Selecteer detailniveau."
 msgid "Days"
 msgstr "Dagen"
 
+msgid "Select days view"
+msgstr "Selecteer dagweergave"
+
 msgid "Months"
 msgstr "Maanden"
 
+msgid "Select months view"
+msgstr "Selecteer maandweergave"
+
 msgid "Years"
 msgstr "Jaren"
+
+msgid "Select years view"
+msgstr "Selecteer jaarweergave"
 
 msgid "Loading..."
 msgstr "Bezig met laden..."
@@ -1806,6 +1815,12 @@ msgstr "Elektriciteitskosten (totaal)"
 
 msgid "Electricity returned (total)"
 msgstr "Elektriciteit teruggeleverd (totaal)"
+
+msgid "Skip to main content"
+msgstr "Ga naar hoofdinhoud"
+
+msgid "Main navigation"
+msgstr "Hoofdnavigatie"
 
 msgid "Toggle navigation"
 msgstr "Toon/verberg navigatiebalk"
@@ -1830,6 +1845,12 @@ msgstr "Energiecontracten"
 
 msgid "Support"
 msgstr "Ondersteuning"
+
+#, python-format
+msgid "%(count)s monitoring issue"
+msgid_plural "%(count)s monitoring issues"
+msgstr[0] "%(count)s monitoringsprobleem"
+msgstr[1] "%(count)s monitoringsproblemen"
 
 msgid "Compare from"
 msgstr "Vergelijk van"
@@ -2227,14 +2248,29 @@ msgstr ""
 "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. "
 "Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
 
+msgid "no significant change"
+msgstr "geen significant verschil"
+
+msgid "increased by"
+msgstr "gestegen met"
+
+msgid "decreased by"
+msgstr "gedaald met"
+
 msgid "total"
 msgstr "totaal"
 
 msgid "No data available (yet)."
 msgstr "Nog geen gegevens beschikbaar."
 
+msgid "Help: live graph controls"
+msgstr "Help: bediening live grafieken"
+
 msgid "Latest update received"
 msgstr "Laatst ontvangen update"
+
+msgid "Loading latest timestamp"
+msgstr "Laatste tijdstempel laden"
 
 msgid "Consuming"
 msgstr "Verbruik"
@@ -2352,8 +2388,8 @@ msgstr "Log in om te markeren als gelezen"
 msgid "Mark as read"
 msgstr "Markeer als gelezen"
 
-msgid "View page"
-msgstr "Bekijk pagina"
+msgid "View page (opens in same tab)"
+msgstr "Bekijk pagina (opent in hetzelfde tabblad)"
 
 msgid "There are no unread notifications."
 msgstr "Er zijn geen ongelezen notificaties."
@@ -3671,6 +3707,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "View page"
+#~ msgstr "Bekijk pagina"
 
 #~ msgid "Unable to authenticate with Dropbox, removing credentials. Error: {}"
 #~ msgstr ""
