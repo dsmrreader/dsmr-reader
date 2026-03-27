@@ -2,11 +2,12 @@
   "gitCoAuthorship": false ,
   "permissions": {
     "allow": [
-      "Bash(poetry run black .)",
-      "Bash(poetry run djlint --reformat .)",
-      "Bash(poetry run mypy /app)",
+      "Bash(poetry run black*)",
+      "Bash(poetry run djlint*)",
+      "Bash(poetry run mypy /app*)",
       "Bash(poetry run flake8*)",
       "Bash(poetry run pytest*)",
+      "Bash(DJANGO_SETTINGS_MODULE=* poetry run pytest*)",
       "Bash(poetry run /app/manage.py makemigrations*)",
       "Bash(poetry run /app/manage.py migrate*)",
       "Bash(poetry run /app/manage.py dsmr_backend*)",
@@ -14,6 +15,7 @@
       "Bash(poetry run /app/manage.py dsmrreader_lock_migrations*)",
       "Bash(poetry run /app/manage.py development_reset*)",
       "Bash(poetry run /app/manage.py dsmr_superuser*)",
+      "Bash(git commit*)",
       "Bash(poetry update)",
       "Bash(cat *)",
       "Bash(find *)",
