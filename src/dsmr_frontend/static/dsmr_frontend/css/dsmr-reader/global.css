@@ -46,6 +46,20 @@ a.graph_controls_help_trigger {
 	cursor: pointer;
 }
 
+/* Reset <button> browser defaults so datepicker triggers look identical to the former <span> elements. */
+button.datepicker-trigger {
+    border: none;
+    padding: 0;
+}
+
+/* Reset h2 browser defaults so panel headings look identical to the former <header> elements. */
+h2.panel-heading {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+    line-height: 20px;
+}
+
 .datepicker-panel {
     min-height: 330px;
 }
