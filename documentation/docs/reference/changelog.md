@@ -11,7 +11,9 @@
 
 ## v6.1.0 - March 2026
 
-!!! tip "Improvements"
+<small>*Accessibility improvements, retention performance fixes, and UI refinements.*</small>
+
+??? tip "Improvements"
 
     #### Accessibility
     - Applied WCAG 2.2 AA accessibility improvements to frontend templates (semantic headings, ARIA attributes, keyboard navigation, screen reader support)
@@ -30,7 +32,7 @@
     #### Miscelaneous
     - Generic development improvements
 
-!!! abstract "Fixes"
+??? abstract "Fixes"
 
     #### Retention
     - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
@@ -41,7 +43,9 @@
 
 ## v6.0.2 - February 2026
 
-!!! abstract "Fixes"
+<small>*Reverts a PVOutput net power calculation change introduced in v6.0.0.*</small>
+
+??? abstract "Fixes"
     
     #### PVOutput
     - ==Reverted v6.0 change== <del>[#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064) Improved net power calculation to use **average** recent consumption data instead of latest value</del> - [#2131](https://github.com/dsmrreader/dsmr-reader/pull/2131)
@@ -52,7 +56,9 @@
 
 ## v6.0.1 - February 2026
 
-!!! abstract "Fixes"
+<small>*Security dependency updates.*</small>
+
+??? abstract "Fixes"
     
     #### Security
 
@@ -64,7 +70,9 @@
 
 ## v6.0.0 - February 2026
 
-!!! danger "Incompatible changes"
+<small>*Major release dropping bare-metal installations, legacy database/Python versions, and old environment variables. Adds containerized hosting improvements, InfluxDB/MQTT queue management commands, and upgrades to Django 5.2 LTS.*</small>
+
+??? danger "Incompatible changes"
 
     #### Incompatible changes: Installations
     Dropped installation support for:
@@ -124,7 +132,7 @@
 
     <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
 
-!!! success "New features"
+??? success "New features"
 
     #### Hosting
     - Added new dedicated URL route for health check and monitoring purposes:
@@ -158,7 +166,7 @@
         ./manage.py dsmr_mqtt_clear_queue
         ```
 
-!!! abstract "Other changes and fixes"
+??? abstract "Other changes and fixes"
     
 
     #### PVOutput
