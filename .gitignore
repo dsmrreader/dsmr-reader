@@ -12,7 +12,7 @@
 *.pyc
 **/__pycache__
 **/.pytest_cache
-**/.coverage
+**/.coverage*
 **/.env
 
 # Django / app
