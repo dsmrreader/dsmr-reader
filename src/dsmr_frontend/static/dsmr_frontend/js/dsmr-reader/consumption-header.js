@@ -1,6 +1,11 @@
 function decimal_html(value)
 {
     let text = String(value);
+
+    if (typeof DECIMAL_SIZE_FORMATTING !== 'undefined' && !DECIMAL_SIZE_FORMATTING) {
+        return text;
+    }
+
     let dot_pos = text.lastIndexOf('.');
     let comma_pos = text.lastIndexOf(',');
 

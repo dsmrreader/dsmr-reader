@@ -67,6 +67,7 @@
 
         const XHR_CONSUMPTION_HEADER_URL = "{% url 'frontend:xhr-consumption-header' %}";
         const GUI_REFRESH_INTERVAL = {{ frontend_settings.gui_refresh_interval }};
+        const DECIMAL_SIZE_FORMATTING = {{ decimal_size_formatting|yesno:"true,false" }};
 
         $(document).ready(function(){
              console.debug('GUI refresh interval:', GUI_REFRESH_INTERVAL);

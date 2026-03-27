@@ -348,6 +348,7 @@
 
     <script type="text/javascript">
         const XHR_CONSUMPTION_HEADER_URL = "{% url 'frontend:xhr-consumption-header' %}";
+        const DECIMAL_SIZE_FORMATTING = {{ decimal_size_formatting|yesno:"true,false" }};
         const sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())
 
         $(document).ready(function(){

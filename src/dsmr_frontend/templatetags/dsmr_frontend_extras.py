@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from django.utils import formats
 from django.utils.html import format_html
 from django.utils.safestring import SafeData
@@ -13,12 +14,18 @@ def decimal_html(value: object) -> SafeData:
 
     When both '.' and ',' are present (e.g. thousands separators), the one appearing last
     is treated as the decimal separator (e.g. '35.267,585' → sep=',', '1,234.56' → sep='.').
+
+    Formatting can be disabled via the DSMRREADER_DECIMAL_SIZE_FORMATTING setting.
     """
     if isinstance(value, str):
         text = value
     else:
         localized = formats.localize(value)
         text = localized if isinstance(localized, str) else str(value)
+
+    if not settings.DSMRREADER_DECIMAL_SIZE_FORMATTING:
+        return format_html("{}", text)
+
     dot_pos = text.rfind(".")
     comma_pos = text.rfind(",")
 

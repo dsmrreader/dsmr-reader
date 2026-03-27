@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.views.generic.base import TemplateView
 
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
@@ -21,5 +22,6 @@ class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
         context_data["month_date_format"] = "DSMR_DATEPICKER_MONTH"
         context_data["year_date_format"] = "DSMR_DATEPICKER_YEAR"
         context_data["period_totals"] = dsmr_stats.services.period_totals()
+        context_data["decimal_size_formatting"] = settings.DSMRREADER_DECIMAL_SIZE_FORMATTING
 
         return context_data
