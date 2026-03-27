@@ -64,7 +64,7 @@ Any Python code changes you make will cause the Django Development Server to rel
 docker compose exec dev-dsmr-app poetry run /app/src/manage.py makemessages -l nl
 ```
  
-- Open ``dsmr_frontend/locale/nl/LC_MESSAGES/django.po`` with PO Editor or a similar tool and translate the new strings.
+- Open ``dsmr_frontend/locale/en/LC_MESSAGES/django.po`` with PO Editor or a similar tool and translate the new strings.
 - After translation, run ``compilemessages`` to compile the PO-translations into the MO-files:
 
 ```shell title="shell"
