@@ -15,7 +15,7 @@ Always run these in order:
 2. **Lint HTML**: `docker compose exec dev-dsmr-app poetry run djlint --reformat .`
 3. **Type check**: `docker compose exec dev-dsmr-app poetry run mypy /app`
 4. **Lint Python**: `docker compose exec dev-dsmr-app poetry run flake8 -v`
-5. **Test**: `docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -q`
+5. **Test**: `docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -v`
 
 ## Maintenance Tasks
 - **Update dependencies**: `docker compose exec dev-dsmr-app poetry update`
@@ -29,7 +29,7 @@ Always run these in order:
 - Run all quality checks (above) before considering work complete.
 
 ## Translation updates
-- Run `docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -q dsmr_frontend/tests/regression/test_translations.py` for translation status.
+- Run `docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -v dsmr_frontend/tests/regression/test_translations.py` for translation status.
 
 ## Release Steps
 ### Verify Stable Version

@@ -77,7 +77,7 @@ It exposes a web UI, REST API, and integrates with external services (MQTT, Infl
 - Tests use **pytest** (not `unittest.TestCase` directly).
 - Fixture files live in `<app>/fixtures/`.
 - Test paths are declared in `pyproject.toml` — add new apps there.
-- Run with: `poetry run pytest -q`
+- Run with: `poetry run pytest -v`
 - Parallelisation via `pytest-xdist` is available (`-n auto`).
 
 ### Migrations
@@ -117,7 +117,7 @@ poetry run black .                          # 1. Format Python
 poetry run djlint --reformat .              # 2. Format templates
 poetry run mypy /app/src                    # 3. Type check
 poetry run flake8                           # 4. Lint
-poetry run pytest -q                        # 5. Test
+poetry run pytest -v                        # 5. Test
 ```
 
 All steps must pass before a change is considered complete. **Always run `/quality-check` after making any code changes.**
