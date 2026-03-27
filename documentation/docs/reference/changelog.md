@@ -13,6 +13,9 @@
 
 !!! tip "Improvements"
 
+    #### Accessibility
+    - Applied WCAG 2.2 AA accessibility improvements to frontend templates (semantic headings, ARIA attributes, keyboard navigation, screen reader support)
+
     #### UI
     - Improved decimal rendering with experimental formatting
 
