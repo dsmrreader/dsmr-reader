@@ -1,29 +1,11 @@
 let g_datepicker_view_mode = 'months';
 let g_datepicker_selections = {};
-let g_day_pickers = {};
+let g_day_picker_month = {'1': null, '2': null};
 let g_month_picker_year = {'1': null, '2': null};
 let g_year_picker_decade_start = {'1': null, '2': null};
 
 
 $(document).ready(function () {
-    ['1', '2'].forEach(function (postfix) {
-        g_day_pickers[postfix] = flatpickr("#datepicker" + postfix + "-day", {
-            inline: true,
-            defaultDate: datepicker_end_date,
-            minDate: datepicker_start_date,
-            maxDate: datepicker_end_date,
-            dateFormat: "Y-m-d",
-            locale: datepicker_language_code.startsWith('nl') ? 'nl' : 'default',
-            onChange: function (selectedDates) {
-                if (g_datepicker_view_mode !== 'days') {
-                    return;
-                }
-                g_datepicker_selections[postfix] = selectedDates[0];
-                update_summary();
-            }
-        });
-    });
-
     $("#datepicker_trigger_days").click(function () {
         g_datepicker_view_mode = 'days';
         switch_mode();
@@ -58,11 +40,16 @@ function switch_mode() {
 
     ['1', '2'].forEach(function (postfix) {
         if (g_datepicker_view_mode === 'days') {
-            g_day_pickers[postfix].calendarContainer.style.display = '';
+            $('#datepicker' + postfix + '-day').show();
             $('#datepicker' + postfix + '-month').hide();
             $('#datepicker' + postfix + '-year').hide();
+
+            if (!g_day_picker_month[postfix]) {
+                g_day_picker_month[postfix] = {year: endDate.getFullYear(), month: endDate.getMonth()};
+            }
+            render_day_picker(postfix);
         } else if (g_datepicker_view_mode === 'months') {
-            g_day_pickers[postfix].calendarContainer.style.display = 'none';
+            $('#datepicker' + postfix + '-day').hide();
             $('#datepicker' + postfix + '-month').show();
             $('#datepicker' + postfix + '-year').hide();
 
@@ -73,7 +60,7 @@ function switch_mode() {
                 Math.min(endDate.getFullYear(), g_month_picker_year[postfix]));
             render_month_picker(postfix);
         } else {
-            g_day_pickers[postfix].calendarContainer.style.display = 'none';
+            $('#datepicker' + postfix + '-day').hide();
             $('#datepicker' + postfix + '-month').hide();
             $('#datepicker' + postfix + '-year').show();
 
@@ -82,6 +69,99 @@ function switch_mode() {
             }
             render_year_picker(postfix);
         }
+    });
+}
+
+/**
+ * Renders the day-grid calendar picker for the given postfix.
+ * Reads / mutates: g_day_picker_month[postfix], g_datepicker_selections[postfix].
+ */
+function render_day_picker(postfix) {
+    var startDate = new Date(datepicker_start_date);
+    var endDate = new Date(datepicker_end_date);
+    var year = g_day_picker_month[postfix].year;
+    var month = g_day_picker_month[postfix].month;
+    var locale = datepicker_language_code.startsWith('nl') ? 'nl-NL' : 'en-GB';
+
+    /* Weekday header row — Monday first (Jan 1 2024 is a Monday) */
+    var weekdays = '';
+    for (var d = 0; d < 7; d++) {
+        var name = new Intl.DateTimeFormat(locale, {weekday: 'short'}).format(new Date(2024, 0, 1 + d));
+        weekdays += '<div class="dsmr-picker-weekday">' + name + '</div>';
+    }
+
+    /* Number of days in this month; weekday of the 1st (0=Mon … 6=Sun) */
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
+
+    var cells = '';
+
+    /* Spillover days from previous month */
+    var prevMonthDays = new Date(year, month, 0).getDate();
+    for (var p = firstWeekday - 1; p >= 0; p--) {
+        cells += '<button class="dsmr-picker-cell muted" disabled>' + (prevMonthDays - p) + '</button>';
+    }
+
+    /* Days of current month */
+    var minDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+    var maxDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+    for (var day = 1; day <= daysInMonth; day++) {
+        var cellDate = new Date(year, month, day);
+        var isDisabled = cellDate < minDate || cellDate > maxDate;
+        var sel = g_datepicker_selections[postfix];
+        var isActive = sel
+            && sel.getFullYear() === year
+            && sel.getMonth() === month
+            && sel.getDate() === day;
+        var cls = 'dsmr-picker-cell' + (isActive ? ' active' : '');
+        if (isDisabled) {
+            cells += '<button class="' + cls + '" disabled>' + day + '</button>';
+        } else {
+            cells += '<button class="' + cls + '" data-day="' + day + '">' + day + '</button>';
+        }
+    }
+
+    /* Trailing spillover to complete the last row */
+    var totalCells = firstWeekday + daysInMonth;
+    var trailingCells = (7 - (totalCells % 7)) % 7;
+    for (var n = 1; n <= trailingCells; n++) {
+        cells += '<button class="dsmr-picker-cell muted" disabled>' + n + '</button>';
+    }
+
+    /* Nav disabled logic */
+    var prevMonthDate = new Date(year, month - 1, 1);
+    var nextMonthDate = new Date(year, month + 1, 1);
+    var prevDisabled = prevMonthDate < new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+    var nextDisabled = nextMonthDate > new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+
+    var titleStr = new Intl.DateTimeFormat(locale, {month: 'long', year: 'numeric'}).format(new Date(year, month, 1));
+
+    document.getElementById('datepicker' + postfix + '-day').innerHTML =
+        '<div class="dsmr-picker">' +
+        '<div class="dsmr-picker-nav">' +
+        '<button class="dsmr-picker-prev"' + (prevDisabled ? ' disabled' : '') + '>&#8249;</button>' +
+        '<span class="dsmr-picker-title">' + titleStr + '</span>' +
+        '<button class="dsmr-picker-next"' + (nextDisabled ? ' disabled' : '') + '>&#8250;</button>' +
+        '</div>' +
+        '<div class="dsmr-picker-grid dsmr-picker-grid--days">' + weekdays + cells + '</div>' +
+        '</div>';
+
+    var container = document.getElementById('datepicker' + postfix + '-day');
+
+    container.querySelector('.dsmr-picker-prev').addEventListener('click', function () {
+        g_day_picker_month[postfix] = {year: prevMonthDate.getFullYear(), month: prevMonthDate.getMonth()};
+        render_day_picker(postfix);
+    });
+    container.querySelector('.dsmr-picker-next').addEventListener('click', function () {
+        g_day_picker_month[postfix] = {year: nextMonthDate.getFullYear(), month: nextMonthDate.getMonth()};
+        render_day_picker(postfix);
+    });
+    container.querySelectorAll('.dsmr-picker-cell[data-day]').forEach(function (cell) {
+        cell.addEventListener('click', function () {
+            g_datepicker_selections[postfix] = new Date(year, month, parseInt(this.getAttribute('data-day')));
+            update_summary();
+            render_day_picker(postfix);
+        });
     });
 }
 
