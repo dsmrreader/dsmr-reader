@@ -98,7 +98,7 @@ def get_export_data(next_export: Optional[timezone.datetime], upload_delay: int)
     if not ecs.exists():
         return None
 
-    first = ecs[0]
+    first = ecs.order_by("read_at")[0]
     last = ecs.order_by("-read_at")[0]
     consumption_timestamp = timezone.localtime(last.read_at)
 
