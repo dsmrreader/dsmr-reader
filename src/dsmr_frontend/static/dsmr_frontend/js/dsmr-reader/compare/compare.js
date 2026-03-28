@@ -45,9 +45,7 @@ function switch_mode() {
             $('#datepicker' + postfix + '-month').hide();
             $('#datepicker' + postfix + '-year').hide();
 
-            if (!g_day_picker_month[postfix]) {
-                g_day_picker_month[postfix] = {year: endDate.getFullYear(), month: endDate.getMonth()};
-            }
+            g_day_picker_month[postfix] = {year: endDate.getFullYear(), month: endDate.getMonth()};
             render_day_picker(postfix);
         } else if (g_datepicker_view_mode === 'months') {
             $('#datepicker' + postfix + '-day').hide();
