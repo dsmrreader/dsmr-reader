@@ -11,12 +11,15 @@
 
 ## v6.1.0 - April 2026
 
-<small>*Spring cleaning: improved accessibility, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
+<small>*Spring cleaning: improved accessibility, rolling 365-day dashboard panel, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
 
 ??? tip "Improvements"
 
     #### Accessibility
     - Applied WCAG 2.2 AA accessibility improvements to frontend templates (semantic headings, ARIA attributes, keyboard navigation, screen reader support)
+
+    #### Dashboard
+    - Added rolling past-365-days consumption panel to the dashboard - [#1998](https://github.com/dsmrreader/dsmr-reader/issues/1998)
 
     #### UI
     - Improved decimal rendering with ==experimental== formatting <small>— Give yourself a few days to get used to it ;-)</small>
