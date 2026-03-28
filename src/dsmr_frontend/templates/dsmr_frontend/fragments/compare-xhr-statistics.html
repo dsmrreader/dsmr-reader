@@ -65,14 +65,13 @@
                     </td>
                     <td>
                         {% if not diff.electricity1|intdiv:1 %}
-                            <i class="fas fa-compress-alt"
-                               aria-label="{% translate 'no significant change' %}"></i> &nbsp; ~ <span class="unit">%</span>
+                            ~ <span class="unit">%</span>
                         {% elif diff.electricity1 > 0 %}
-                            <i class="fas fa-long-arrow-alt-up fa-rotate-45"
-                               aria-label="{% translate 'increased by' %}"></i> &nbsp; <span class="degraded">{{ diff.electricity1|floatformat:0 }} </span> <span class="unit">%</span>
+                            <span class="degraded">{{ diff.electricity1|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+                               aria-label="{% translate 'increased by' %}"></i>
                         {% elif diff.electricity1 < 0 %}
-                            <i class="fas fa-long-arrow-alt-down fa-rotate-315"
-                               aria-label="{% translate 'decreased by' %}"></i> &nbsp; <span class="improved">{{ diff.electricity1|floatformat:0|abs }} </span> <span class="unit">%</span>
+                            <span class="improved">{{ diff.electricity1|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+                               aria-label="{% translate 'decreased by' %}"></i>
                         {% endif %}
                     </td>
                 </tr>
@@ -92,14 +91,13 @@
                     </td>
                     <td>
                         {% if not diff.electricity2|intdiv:1 %}
-                            <i class="fas fa-compress-alt"
-                               aria-label="{% translate 'no significant change' %}"></i> &nbsp; ~ <span class="unit">%</span>
+                            ~ <span class="unit">%</span>
                         {% elif diff.electricity2 > 0 %}
-                            <i class="fas fa-long-arrow-alt-up fa-rotate-45"
-                               aria-label="{% translate 'increased by' %}"></i> &nbsp; <span class="degraded">{{ diff.electricity2|floatformat:0 }} </span> <span class="unit">%</span>
+                            <span class="degraded">{{ diff.electricity2|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+                               aria-label="{% translate 'increased by' %}"></i>
                         {% elif diff.electricity2 < 0 %}
-                            <i class="fas fa-long-arrow-alt-down fa-rotate-315"
-                               aria-label="{% translate 'decreased by' %}"></i> &nbsp; <span class="improved">{{ diff.electricity2|floatformat:0|abs }} </span> <span class="unit">%</span>
+                            <span class="improved">{{ diff.electricity2|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+                               aria-label="{% translate 'decreased by' %}"></i>
                         {% endif %}
                     </td>
                 </tr>
@@ -122,14 +120,13 @@
                     </td>
                     <td>
                         {% if not diff.electricity_merged|intdiv:1 %}
-                            <i class="fas fa-compress-alt"
-                               aria-label="{% translate 'no significant change' %}"></i> &nbsp; ~ <span class="unit">%</span>
+                            ~ <span class="unit">%</span>
                         {% elif diff.electricity_merged > 0 %}
-                            <i class="fas fa-long-arrow-alt-up fa-rotate-45"
-                               aria-label="{% translate 'increased by' %}"></i> &nbsp; <span class="degraded">{{ diff.electricity_merged|floatformat:0 }}</span> <span class="unit">%</span>
+                            <span class="degraded">{{ diff.electricity_merged|floatformat:0 }}</span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+                               aria-label="{% translate 'increased by' %}"></i>
                         {% elif diff.electricity_merged < 0 %}
-                            <i class="fas fa-long-arrow-alt-down fa-rotate-315"
-                               aria-label="{% translate 'decreased by' %}"></i> &nbsp; <span class="improved">{{ diff.electricity_merged|floatformat:0|abs }} </span> <span class="unit">%</span>
+                            <span class="improved">{{ diff.electricity_merged|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+                               aria-label="{% translate 'decreased by' %}"></i>
                         {% endif %}
                     </td>
                 </tr>
@@ -152,14 +149,13 @@
                     </td>
                     <td>
                         {% if not diff.electricity1_returned|intdiv:1 %}
-                            <i class="fas fa-compress-alt"
-                               aria-label="{% translate 'no significant change' %}"></i> &nbsp; ~ <span class="unit">%</span>
+                            ~ <span class="unit">%</span>
                         {% elif diff.electricity1_returned > 0 %}
-                            <i class="fas fa-long-arrow-alt-up fa-rotate-45"
-                               aria-label="{% translate 'increased by' %}"></i> &nbsp; <span class="improved">{{ diff.electricity1_returned|floatformat:0 }} </span> <span class="unit">%</span>
+                            <span class="improved">{{ diff.electricity1_returned|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+                               aria-label="{% translate 'increased by' %}"></i>
                         {% elif diff.electricity1_returned < 0 %}
-                            <i class="fas fa-long-arrow-alt-down fa-rotate-315"
-                               aria-label="{% translate 'decreased by' %}"></i> &nbsp; <span class="degraded">{{ diff.electricity1_returned|floatformat:0|abs }} </span> <span class="unit">%</span>
+                            <span class="degraded">{{ diff.electricity1_returned|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+                               aria-label="{% translate 'decreased by' %}"></i>
                         {% endif %}
                     </td>
                 </tr>
@@ -179,14 +175,13 @@
                     </td>
                     <td>
                         {% if not diff.electricity2_returned|intdiv:1 %}
-                            <i class="fas fa-compress-alt"
-                               aria-label="{% translate 'no significant change' %}"></i> &nbsp; ~ <span class="unit">%</span>
+                            ~ <span class="unit">%</span>
                         {% elif diff.electricity2_returned > 0 %}
-                            <i class="fas fa-long-arrow-alt-up fa-rotate-45"
-                               aria-label="{% translate 'increased by' %}"></i> &nbsp; <span class="improved">{{ diff.electricity2_returned|floatformat:0 }} </span> <span class="unit">%</span>
+                            <span class="improved">{{ diff.electricity2_returned|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+                               aria-label="{% translate 'increased by' %}"></i>
                         {% elif diff.electricity2_returned < 0 %}
-                            <i class="fas fa-long-arrow-alt-down fa-rotate-315"
-                               aria-label="{% translate 'decreased by' %}"></i> &nbsp; <span class="degraded">{{ diff.electricity2_returned|floatformat:0|abs }} </span> <span class="unit">%</span>
+                            <span class="degraded">{{ diff.electricity2_returned|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+                               aria-label="{% translate 'decreased by' %}"></i>
                         {% endif %}
                     </td>
                 </tr>
@@ -209,14 +204,13 @@
                     </td>
                     <td>
                         {% if not diff.electricity_returned_merged|intdiv:1 %}
-                            <i class="fas fa-compress-alt"
-                               aria-label="{% translate 'no significant change' %}"></i> &nbsp; ~ <span class="unit">%</span>
+                            ~ <span class="unit">%</span>
                         {% elif diff.electricity_returned_merged > 0 %}
-                            <i class="fas fa-long-arrow-alt-up fa-rotate-45"
-                               aria-label="{% translate 'increased by' %}"></i> &nbsp; <span class="improved">{{ diff.electricity_returned_merged|floatformat:0 }} </span> <span class="unit">%</span>
+                            <span class="improved">{{ diff.electricity_returned_merged|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+                               aria-label="{% translate 'increased by' %}"></i>
                         {% elif diff.electricity_returned_merged < 0 %}
-                            <i class="fas fa-long-arrow-alt-down fa-rotate-315"
-                               aria-label="{% translate 'decreased by' %}"></i> &nbsp; <span class="degraded">{{ diff.electricity_returned_merged|floatformat:0|abs }} </span> <span class="unit">%</span>
+                            <span class="degraded">{{ diff.electricity_returned_merged|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+                               aria-label="{% translate 'decreased by' %}"></i>
                         {% endif %}
                     </td>
                 </tr>
@@ -239,14 +233,13 @@
                     </td>
                     <td>
                         {% if not diff.gas|intdiv:1 %}
-                            <i class="fas fa-compress-alt"
-                               aria-label="{% translate 'no significant change' %}"></i> &nbsp; ~ <span class="unit">%</span>
+                            ~ <span class="unit">%</span>
                         {% elif diff.gas > 0 %}
-                            <i class="fas fa-long-arrow-alt-up fa-rotate-45"
-                               aria-label="{% translate 'increased by' %}"></i> &nbsp; <span class="degraded">{{ diff.gas|floatformat:0 }} </span> <span class="unit">%</span>
+                            <span class="degraded">{{ diff.gas|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+                               aria-label="{% translate 'increased by' %}"></i>
                         {% elif diff.gas < 0 %}
-                            <i class="fas fa-long-arrow-alt-down fa-rotate-315"
-                               aria-label="{% translate 'decreased by' %}"></i> &nbsp; <span class="improved">{{ diff.gas|floatformat:0|abs }} </span> <span class="unit">%</span>
+                            <span class="improved">{{ diff.gas|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+                               aria-label="{% translate 'decreased by' %}"></i>
                         {% endif %}
                     </td>
                 </tr>
