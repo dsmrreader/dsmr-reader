@@ -136,7 +136,7 @@
 
     {% get_current_language as LANGUAGE_CODE %}
     <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/moment-with-locales-2.29.4.min.js' %}"></script>
+            src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
     <script type="text/javascript"
@@ -247,8 +247,8 @@
                 return;
             }
 
-            let start_date = moment(raw_start_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
-            let end_date = moment(raw_end_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
+            let start_date = dayjs(raw_start_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
+            let end_date = dayjs(raw_end_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
 
             // Top area chart(s)
             update_trends_averages(start_date, end_date);

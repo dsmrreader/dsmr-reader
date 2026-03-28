@@ -91,7 +91,7 @@ function update_summary(selected_date) {
     summary_xhr_request = $.ajax({
         url: ARCHIVE_XHR_SUMMARY_URL,
         data: {
-            'date': moment(selected_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase()),
+            'date': dayjs(selected_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase()),
             'level': g_datepicker_view_mode
         },
     }).done(function (data) {
@@ -130,7 +130,7 @@ function update_graphs(selected_date) {
         url: ARCHIVE_XHR_GRAPHS_URL,
         dataType: "json",
         data: {
-            'date': moment(selected_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase()),
+            'date': dayjs(selected_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase()),
             'level': g_datepicker_view_mode
         }
     }).done(function (response) {

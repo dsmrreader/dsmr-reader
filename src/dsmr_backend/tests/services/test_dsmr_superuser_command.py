@@ -16,19 +16,25 @@ class TestDsmrSuperuserCommand(InterceptCommandStdoutMixin, TestCase):
         return authenticate(request=request, username=username, password=password) is not None
 
     def test_missing_username_raises(self):
-        with mock.patch.dict(os.environ, {"DSMRREADER_ADMIN_USER": "", "DSMRREADER_ADMIN_PASSWORD": "secret"}):  # noqa: S105
+        with mock.patch.dict(
+            os.environ, {"DSMRREADER_ADMIN_USER": "", "DSMRREADER_ADMIN_PASSWORD": "secret"}  # noqa: S105
+        ):
             with self.assertRaises(CommandError):
                 self._intercept_command_stdout("dsmr_superuser")
 
     def test_missing_password_raises(self):
-        with mock.patch.dict(os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": ""}):  # noqa: S105
+        with mock.patch.dict(
+            os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": ""}  # noqa: S105
+        ):
             with self.assertRaises(CommandError):
                 self._intercept_command_stdout("dsmr_superuser")
 
     def test_creates_new_superuser(self):
         self.assertFalse(User.objects.filter(username="admin").exists())
 
-        with mock.patch.dict(os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "secret"}):  # noqa: S105
+        with mock.patch.dict(
+            os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "secret"}  # noqa: S105
+        ):
             self._intercept_command_stdout("dsmr_superuser")
 
         user = User.objects.get(username="admin")
@@ -39,7 +45,9 @@ class TestDsmrSuperuserCommand(InterceptCommandStdoutMixin, TestCase):
     def test_updates_existing_superuser_password(self):
         User.objects.create_superuser("admin", "admin@localhost", "old-secret")
 
-        with mock.patch.dict(os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "new-secret"}):  # noqa: S105
+        with mock.patch.dict(
+            os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "new-secret"}  # noqa: S105
+        ):
             self._intercept_command_stdout("dsmr_superuser")
 
         self.assertFalse(self._authenticate("admin", "old-secret"))  # noqa: S106
@@ -50,7 +58,9 @@ class TestDsmrSuperuserCommand(InterceptCommandStdoutMixin, TestCase):
         user.is_active = False
         user.save()
 
-        with mock.patch.dict(os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "secret"}):  # noqa: S105
+        with mock.patch.dict(
+            os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "secret"}  # noqa: S105
+        ):
             self._intercept_command_stdout("dsmr_superuser")
 
         user.refresh_from_db()
@@ -59,7 +69,9 @@ class TestDsmrSuperuserCommand(InterceptCommandStdoutMixin, TestCase):
     def test_deactivates_other_superusers(self):
         User.objects.create_superuser("other", "other@localhost", "other-secret")
 
-        with mock.patch.dict(os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "secret"}):  # noqa: S105
+        with mock.patch.dict(
+            os.environ, {"DSMRREADER_ADMIN_USER": "admin", "DSMRREADER_ADMIN_PASSWORD": "secret"}  # noqa: S105
+        ):
             self._intercept_command_stdout("dsmr_superuser")
 
         self.assertFalse(User.objects.get(username="other").is_active)

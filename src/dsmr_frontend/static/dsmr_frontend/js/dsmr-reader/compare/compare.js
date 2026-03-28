@@ -83,8 +83,8 @@ function update_summary() {
         return;
     }
 
-    let base_selection = moment(g_datepicker_selections[1]).format(datepicker_locale_format.toUpperCase());
-    let comparison_selection = moment(g_datepicker_selections[2]).format(datepicker_locale_format.toUpperCase());
+    let base_selection = dayjs(g_datepicker_selections[1]).format(datepicker_locale_format.toUpperCase());
+    let comparison_selection = dayjs(g_datepicker_selections[2]).format(datepicker_locale_format.toUpperCase());
 
     $("#summary-holder").hide();
     $("#summary-loader").show();
