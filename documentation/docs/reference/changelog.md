@@ -213,7 +213,7 @@
 
     #### v5.12.0 - December 2025
     
-    !!!+ warning
+    !!! warning
     
         This is the last release in the DSMR-reader v5.x series. Upgrade to DSMR-reader v6.x for future support and features.
     
@@ -223,7 +223,7 @@
     
     - **Fixed** Updated Dropbox SDK to latest version in favor of incompatible API changes on January 1st, 2026.
     
-    - **Changed** **Dropped** support for Python 3.7 and 3.8 - Do NOT update if you run these versions! Switch directly to DSMR-reader v6 instead.
+    - **Dropped** support for Python 3.7 and 3.8 - Do NOT update if you run these versions! Switch directly to DSMR-reader v6 instead.
 
 === "v5.11"
     
