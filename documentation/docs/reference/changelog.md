@@ -9,7 +9,7 @@
 ---
 
 
-## v6.1.0 - March 2026
+## v6.1.0 - April 2026
 
 <small>*Better accessibility, more reliable data retention and Dropbox sync, and a round of spring cleaning under the hood.*</small>
 
@@ -33,6 +33,7 @@
 
     #### Fixes
     - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
+    - Fixed empty green badges rendering on the energy contracts page when no electricity returned data is available - [#2133](https://github.com/dsmrreader/dsmr-reader/issues/2133)
 
     #### UI
     - Improved compare page trend icons and layout
