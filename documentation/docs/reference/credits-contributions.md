@@ -70,13 +70,10 @@ DSMR-reader would **not have been possible** without the following software and 
 - [jQuery](https://jquery.com/) — JavaScript utility library
 - [Apache ECharts](https://echarts.apache.org/) — interactive charts and graphs
 - [Day.js](https://day.js.org/) — lightweight date/time library
-- [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.org/) — date picker widget
+- [Flatpickr](https://flatpickr.js.org/) — date picker widget
 - [Font Awesome](https://fontawesome.com/) — icon set
 - [Director Responsive Admin](https://github.com/nichealpham/director-responsive-admin) — admin UI template <small>*(original website offline)*</small>
-- [iCheck](https://github.com/fronteed/icheck) — custom checkbox and radio inputs
 - [ReDoc](https://github.com/Redocly/redoc) — API documentation renderer
-- [html5shiv](https://github.com/aFarkas/html5shiv) — HTML5 compatibility for older browsers
-- [Respond.js](https://github.com/scottjehl/Respond) — CSS media query polyfill
 - Favicon made by [Freepik](https://www.freepik.com/) from [flaticon.com](https://www.flaticon.com/free-icon/eco-energy_25013)
 - [Real Favicon Generator](https://realfavicongenerator.net) — favicon tooling
 
@@ -96,3 +93,23 @@ DSMR-reader would **not have been possible** without the following software and 
 - [djlint](https://www.djlint.com/) — Django template linter and formatter
 - [pytest](https://pytest.org/) — test framework (with pytest-django and pytest-xdist)
 - [Claude Code](https://claude.ai/code) by [Anthropic](https://www.anthropic.com/) — AI coding assistant
+
+---
+
+## Previously used software
+
+Software that was part of DSMR-reader in earlier versions but has since been removed or replaced:
+
+### Frontend (removed)
+
+- [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.org/) — date picker widget *(replaced by Flatpickr)*
+- [Moment.js](https://momentjs.com/) — date/time library *(replaced by Day.js)*
+- [Semantic UI](https://semantic-ui.com/) — UI component framework *(search component replaced by plain jQuery)*
+- [iCheck](https://github.com/fronteed/icheck) — custom checkbox and radio inputs *(removed, unused)*
+- [jQuery Inputmask](https://github.com/RobinHerbots/Inputmask) — input masking plugin *(removed, unused)*
+- [jQuery placeholder](https://github.com/mathiasbynens/jquery-placeholder) — placeholder polyfill *(removed, unused)*
+- [jQuery slimScroll](https://github.com/rochal/jQuery-slimScroll) — custom scrollbar plugin *(removed, unused)*
+- [jQuery ba-resize](https://github.com/cowboy/jquery-resize) — element resize event plugin *(removed, replaced by ResizeObserver)*
+- [Ionicons](https://ionic.io/ionicons) — icon set *(removed, unused)*
+- [html5shiv](https://github.com/aFarkas/html5shiv) — HTML5 compatibility for older browsers *(removed)*
+- [Respond.js](https://github.com/scottjehl/Respond) — CSS media query polyfill for IE *(removed)*
