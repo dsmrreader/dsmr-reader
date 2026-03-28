@@ -6,19 +6,13 @@ DSMR-reader was originally authored by [Dennis Siemensma](https://www.linkedin.c
 
 ## Special thanks
 
-For providing their time and support:
-
 - [Bram van Dartel](https://www.linkedin.com/in/bramvandartel/) ([@xirixiz](https://github.com/xirixiz)) — author of [DSMR-reader Docker](https://github.com/xirixiz/dsmr-reader-docker) and providing the containers
 - [Nigel Dokter](https://www.linkedin.com/in/nigel-dokter-5321ab110/) ([@ndokter](https://github.com/ndokter)) — author of [DSMR-parser](https://github.com/ndokter/dsmr_parser)
 - [Jeroen Peters](https://www.linkedin.com/in/jeroen-peters-nl/) ([@jeroenpeters1986](https://github.com/jeroenpeters1986))
 - [JetBrains](https://www.jetbrains.com/?from=DSMR-reader) — for providing a JetBrains IDE license to work on DSMR-reader for many years
+- [GitHub](https://github.com/) — for hosting the project code and issues
+- [Read The Docs](https://readthedocs.org/) — for hosting all documentation of DSMR-reader
 - [All contributors on GitHub](https://github.com/dsmrreader/dsmr-reader/graphs/contributors)
-
-
-## Other thanks to
-
-- [GitHub](https://github.com/) for hosting the project code and issues
-- [Read The Docs](https://readthedocs.org/) for hosting all documentation of DSMR-reader
 
 
 ## Software used
@@ -98,18 +92,16 @@ DSMR-reader would **not have been possible** without the following software and 
 
 ## Previously used software
 
-Software that was part of DSMR-reader in earlier versions but has since been removed or replaced:
+Software that was part of DSMR-reader in earlier versions:
 
-### Frontend (removed)
-
-- [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.org/) — date picker widget *(replaced by Flatpickr)*
-- [Moment.js](https://momentjs.com/) — date/time library *(replaced by Day.js)*
-- [Semantic UI](https://semantic-ui.com/) — UI component framework *(search component replaced by plain jQuery)*
-- [iCheck](https://github.com/fronteed/icheck) — custom checkbox and radio inputs *(removed, unused)*
-- [jQuery Inputmask](https://github.com/RobinHerbots/Inputmask) — input masking plugin *(removed, unused)*
-- [jQuery placeholder](https://github.com/mathiasbynens/jquery-placeholder) — placeholder polyfill *(removed, unused)*
-- [jQuery slimScroll](https://github.com/rochal/jQuery-slimScroll) — custom scrollbar plugin *(removed, unused)*
-- [jQuery ba-resize](https://github.com/cowboy/jquery-resize) — element resize event plugin *(removed, replaced by ResizeObserver)*
-- [Ionicons](https://ionic.io/ionicons) — icon set *(removed, unused)*
-- [html5shiv](https://github.com/aFarkas/html5shiv) — HTML5 compatibility for older browsers *(removed)*
-- [Respond.js](https://github.com/scottjehl/Respond) — CSS media query polyfill for IE *(removed)*
+- [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.org/) — date picker widget
+- [Moment.js](https://momentjs.com/) — date/time library
+- [Semantic UI](https://semantic-ui.com/) — UI component framework
+- [iCheck](https://github.com/fronteed/icheck) — custom checkbox and radio inputs
+- [jQuery Inputmask](https://github.com/RobinHerbots/Inputmask) — input masking plugin
+- [jQuery placeholder](https://github.com/mathiasbynens/jquery-placeholder) — placeholder polyfill
+- [jQuery slimScroll](https://github.com/rochal/jQuery-slimScroll) — custom scrollbar plugin
+- [jQuery ba-resize](https://github.com/cowboy/jquery-resize) — element resize event plugin
+- [Ionicons](https://ionic.io/ionicons) — icon set
+- [html5shiv](https://github.com/aFarkas/html5shiv) — HTML5 compatibility for older browsers
+- [Respond.js](https://github.com/scottjehl/Respond) — CSS media query polyfill
