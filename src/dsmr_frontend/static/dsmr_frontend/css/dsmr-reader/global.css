@@ -186,6 +186,18 @@ h2.panel-heading {
     cursor: not-allowed;
 }
 
+.dsmr-picker-grid--days {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.dsmr-picker-weekday {
+    text-align: center;
+    padding: 4px;
+    font-size: 11px;
+    color: #999;
+    font-weight: 600;
+}
+
 div.archive-header-panel-body {
     min-height: 350px;
 }
