@@ -29,8 +29,9 @@ $(document).ready(function () {
  * Shows the appropriate pickers for the current mode and resets selections.
  */
 function switch_mode() {
-    /* Reset selections so both dates must be re-chosen in the new mode. */
+    /* Reset selections and day picker positions so both dates must be re-chosen in the new mode. */
     g_datepicker_selections = {};
+    g_day_picker_month = {'1': null, '2': null};
 
     $('.datepicker-trigger').removeClass('st-green').addClass('st-gray');
     $('#datepicker_trigger_' + g_datepicker_view_mode).removeClass('st-gray').addClass('st-green');
