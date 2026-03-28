@@ -2248,9 +2248,6 @@ msgstr ""
 "Er is een verschil in het aantal beschikbare datapunten voor deze selectie. "
 "Dit kan ervoor zorgen dat de vergelijking onnauwkeurig is."
 
-msgid "no significant change"
-msgstr "geen significant verschil"
-
 msgid "increased by"
 msgstr "gestegen met"
 
@@ -3707,6 +3704,9 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "no significant change"
+#~ msgstr "geen significant verschil"
 
 #~ msgid "View page"
 #~ msgstr "Bekijk pagina"
