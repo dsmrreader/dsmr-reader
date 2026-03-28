@@ -76,7 +76,8 @@
                             <div class="row">
                                 <div class="col-lg-push-4 col-lg-4">
                                     <div class="center-block centered-header">
-                                        <input id="datepicker-day" type="hidden">
+                                        <div id="datepicker-day" style="display:none;">
+                                        </div>
                                         <div id="datepicker-month" style="display:none;">
                                         </div>
                                         <div id="datepicker-year" style="display:none;">
@@ -130,9 +131,6 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link href="{% static 'dsmr_frontend/css/flatpickr.min.css' %}?r=v{{ dsmr_version }}"
-          rel="stylesheet"
-          type="text/css" />
 {% endblock %}
 
 {% block javascript %}
@@ -144,12 +142,6 @@
     {% get_current_language as LANGUAGE_CODE %}
     <script type="text/javascript"
             src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/flatpickr.min.js' %}?r=v{{ dsmr_version }}"></script>
-    {% if LANGUAGE_CODE == 'nl' %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/flatpickr-locale-nl.js' %}?r=v{{ dsmr_version }}"></script>
-    {% endif %}
 
     <script type="text/javascript">
         let echarts_electricity_graph = null;
