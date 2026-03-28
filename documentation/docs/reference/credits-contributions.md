@@ -64,7 +64,6 @@ DSMR-reader would **not have been possible** without the following software and 
 - [jQuery](https://jquery.com/) — JavaScript utility library
 - [Apache ECharts](https://echarts.apache.org/) — interactive charts and graphs
 - [Day.js](https://day.js.org/) — lightweight date/time library
-- [Flatpickr](https://flatpickr.js.org/) — date picker widget
 - [Font Awesome](https://fontawesome.com/) — icon set
 - [Director Responsive Admin](https://github.com/nichealpham/director-responsive-admin) — admin UI template <small>*(original website offline)*</small>
 - [ReDoc](https://github.com/Redocly/redoc) — API documentation renderer
@@ -95,6 +94,7 @@ DSMR-reader would **not have been possible** without the following software and 
 Software that was part of DSMR-reader in earlier versions:
 
 - [Bootstrap Datepicker](https://bootstrap-datepicker.readthedocs.org/) — date picker widget
+- [Flatpickr](https://flatpickr.js.org/) — date picker widget
 - [Moment.js](https://momentjs.com/) — date/time library
 - [Semantic UI](https://semantic-ui.com/) — UI component framework
 - [iCheck](https://github.com/fronteed/icheck) — custom checkbox and radio inputs

@@ -42,7 +42,7 @@
     - Updated Font Awesome Free from 7.1.0 to 7.2.0
     - Updated ECharts from 5.3.3 to 5.6.0
     - Updated jQuery from 3.6.0 to 3.7.1
-    - Replaced Bootstrap Datepicker 1.9.0 with Flatpickr 4.6.13
+    - Replaced Bootstrap Datepicker 1.9.0 with a custom day/month/year picker (Archive, Compare, Trends)
     - Replaced Moment.js with Day.js (~2 KB vs ~70 KB)
     - Removed unused vendored libraries: Semantic UI, iCheck, jQuery Inputmask, jQuery placeholder, jQuery slimScroll, jQuery ba-resize, Ionicons, html5shiv, Respond.js
 
