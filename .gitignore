@@ -4,6 +4,8 @@
 
 # Claude
 settings.local.json
+/docs/
+/.superpowers/
 /provisioning/agents/
 /CLAUDE.local.md
 
