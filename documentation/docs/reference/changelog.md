@@ -11,7 +11,7 @@
 
 ## v6.1.0 - April 2026
 
-<small>*Better accessibility, more reliable data retention and Dropbox sync, and a round of spring cleaning under the hood.*</small>
+<small>*Spring cleaning: improved accessibility, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
 
 ??? tip "Improvements"
 
