@@ -70,11 +70,9 @@
                                                     {% endif %}
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-green">
-                                                        {% if current.prices.electricity_returned_1_price %}
-                                                            {{ current.summary.electricity1_returned|default:'-' }}
-                                                        {% endif %}
-                                                    </span>
+                                                    {% if current.prices.electricity_returned_1_price %}
+                                                        <span class="badge bg-green">{{ current.summary.electricity1_returned|default:'-' }}</span>
+                                                    {% endif %}
                                                 </td>
                                                 <td>
                                                     <span class="badge bg-black">
@@ -99,11 +97,9 @@
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-green">
-                                                        {% if current.prices.electricity_returned_2_price %}
-                                                            {{ current.summary.electricity2_returned|default:'-' }}
-                                                        {% endif %}
-                                                    </span>
+                                                    {% if current.prices.electricity_returned_2_price %}
+                                                        <span class="badge bg-green">{{ current.summary.electricity2_returned|default:'-' }}</span>
+                                                    {% endif %}
                                                 </td>
                                                 <td>
                                                     <span class="badge bg-black">
@@ -129,12 +125,10 @@
                                                 {% endif %}
                                             </td>
                                             <td>
-                                                {% if current.prices.electricity_returned_1_price or current.prices.electricity_returned_2_price %}
-                                                    <span class="badge bg-green">
-                                                        {% if capabilities.electricity_returned %}
-                                                            {{ current.summary.electricity_returned_merged|default:'-' }}
-                                                        {% endif %}
-                                                    </span>
+                                                {% if capabilities.electricity_returned %}
+                                                    {% if current.prices.electricity_returned_1_price or current.prices.electricity_returned_2_price %}
+                                                        <span class="badge bg-green">{{ current.summary.electricity_returned_merged|default:'-' }}</span>
+                                                    {% endif %}
                                                 {% endif %}
                                             </td>
                                             <td>
