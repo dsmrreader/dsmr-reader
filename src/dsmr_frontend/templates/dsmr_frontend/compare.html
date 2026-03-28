@@ -88,7 +88,8 @@
                         </h2>
                         <div class="panel-body">
                             <div class="row center-block centered-header datepicker-calendar-block">
-                                <input id="datepicker1-day" type="hidden">
+                                <div id="datepicker1-day" style="display:none;">
+                                </div>
                                 <div id="datepicker1-month" style="display:none;">
                                 </div>
                                 <div id="datepicker1-year" style="display:none;">
@@ -105,7 +106,8 @@
                         </h2>
                         <div class="panel-body">
                             <div class="row center-block centered-header datepicker-calendar-block">
-                                <input id="datepicker2-day" type="hidden">
+                                <div id="datepicker2-day" style="display:none;">
+                                </div>
                                 <div id="datepicker2-month" style="display:none;">
                                 </div>
                                 <div id="datepicker2-year" style="display:none;">
@@ -130,9 +132,6 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link href="{% static 'dsmr_frontend/css/flatpickr.min.css' %}?r=v{{ dsmr_version }}"
-          rel="stylesheet"
-          type="text/css" />
 {% endblock %}
 
 {% block javascript %}
@@ -140,12 +139,6 @@
     {% get_current_language as LANGUAGE_CODE %}
     <script type="text/javascript"
             src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/flatpickr.min.js' %}?r=v{{ dsmr_version }}"></script>
-    {% if LANGUAGE_CODE == 'nl' %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/flatpickr-locale-nl.js' %}?r=v{{ dsmr_version }}"></script>
-    {% endif %}
 
     <script type="text/javascript">
         /* Settings. */
