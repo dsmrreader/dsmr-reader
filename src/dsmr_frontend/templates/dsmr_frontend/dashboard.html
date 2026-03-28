@@ -47,6 +47,7 @@
             {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.today date_formatter=today_date_format capabilities=capabilities day=period_totals.day %}
             {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.month date_formatter=month_date_format capabilities=capabilities day=period_totals.day %}
             {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.year date_formatter=year_date_format capabilities=capabilities day=period_totals.day %}
+            {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=past_365_stats custom_start_date=past_365_start custom_end_date=past_365_end custom_title=past_365_title capabilities=capabilities %}
         {% endif %}
 
     </section>

@@ -12,7 +12,11 @@
                     <table class="table table-hover">
                         <tr>
                             <th scope="col" class="col-sm-6">
-                                {{ day|date:date_formatter|capfirst }}
+                                {% if custom_start_date and custom_end_date %}
+                                    {{ custom_title|capfirst }} <span class="unit">{{ custom_start_date|date:"j M Y" }} – {{ custom_end_date|date:"j M Y" }}</span>
+                                {% else %}
+                                    {{ day|date:date_formatter|capfirst }}
+                                {% endif %}
                             </th>
                             <th scope="col"
                                 class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">

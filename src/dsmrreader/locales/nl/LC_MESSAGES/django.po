@@ -2601,6 +2601,9 @@ msgstr "Verbruik per elektriciteitstarief"
 msgid "average"
 msgstr "gemiddeld"
 
+msgid "Past 365 days"
+msgstr "Afgelopen 365 dagen"
+
 msgid "The backend process should automatically restart to apply changes."
 msgstr ""
 "Het backend-proces zou automatisch moeten herstarten om de wijzigingen door "
