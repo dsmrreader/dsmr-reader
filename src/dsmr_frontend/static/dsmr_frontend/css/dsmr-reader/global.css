@@ -93,8 +93,98 @@ h2.panel-heading {
 
 .datepicker-calendar-block {
      /* Ensures center-block works. */
-     width: 220px;
+     width: fit-content;
  }
+
+/* Flatpickr: hide the text input — calendar shown inline via .flatpickr-calendar */
+.flatpickr-input {
+    display: none !important;
+}
+
+/* Flatpickr: inherit Bootstrap font so sizing matches the rest of the UI */
+.flatpickr-calendar {
+    font-family: inherit;
+    font-size: 13px;
+}
+
+/* -----------------------------------------------------------------------
+   Inline month / year grid picker (replaces Bootstrap Datepicker views)
+   ----------------------------------------------------------------------- */
+.dsmr-picker {
+    display: inline-block;
+    font-size: 13px;
+    min-width: 250px;
+}
+
+.dsmr-picker-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+}
+
+.dsmr-picker-prev,
+.dsmr-picker-next {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 4px 10px;
+    font-size: 18px;
+    line-height: 1;
+    color: #333;
+}
+.dsmr-picker-prev:hover:not(:disabled),
+.dsmr-picker-next:hover:not(:disabled) {
+    background: #e6e6e6;
+    border-color: #adadad;
+}
+.dsmr-picker-prev:disabled,
+.dsmr-picker-next:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.dsmr-picker-title {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.dsmr-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 2px 0;
+}
+
+.dsmr-picker-cell {
+    text-align: center;
+    padding: 6px 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: none;
+    color: #333;
+    font-size: 13px;
+}
+.dsmr-picker-cell:hover:not(:disabled) {
+    background: #e6e6e6;
+    border-color: #adadad;
+}
+.dsmr-picker-cell.active,
+.dsmr-picker-cell.active:hover {
+    background: #428bca;
+    color: #fff;
+    border-color: #357ebd;
+}
+.dsmr-picker-cell.muted {
+    color: #999;
+}
+.dsmr-picker-cell:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
 
 div.archive-header-panel-body {
     min-height: 350px;

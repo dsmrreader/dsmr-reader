@@ -87,17 +87,74 @@ html body.dark-mode {
 }
 
 /**
-* Datepicker
+* Datepicker mode buttons
 */
-.dark-mode .datepicker table tr th:hover, 
-.dark-mode .datepicker table tr td.day:hover,
-.dark-mode .datepicker table tr td span:hover,
-.dark-mode .datepicker table tr td span.focused
-{
-    background-color: var(--dark-table-background);
-}
 .dark-mode .datepicker-trigger.st-gray {
     background-color: var(--dark-table-background);
+}
+
+/**
+* Flatpickr dark mode
+*/
+.dark-mode .flatpickr-calendar {
+    background: var(--dark-panel-background);
+    box-shadow: none;
+    border-color: var(--dark-border-color);
+}
+.dark-mode .flatpickr-months .flatpickr-month,
+.dark-mode .flatpickr-weekdays,
+.dark-mode span.flatpickr-weekday {
+    background: var(--dark-panel-background);
+    color: var(--dark-font-color);
+    fill: var(--dark-font-color);
+}
+.dark-mode .flatpickr-day {
+    color: var(--dark-font-color);
+}
+.dark-mode .flatpickr-day:hover,
+.dark-mode .flatpickr-day.prevMonthDay:hover,
+.dark-mode .flatpickr-day.nextMonthDay:hover {
+    background: var(--dark-table-background);
+    border-color: var(--dark-table-background);
+}
+.dark-mode .flatpickr-day.selected,
+.dark-mode .flatpickr-day.selected:hover {
+    background: #428bca;
+    border-color: #428bca;
+}
+.dark-mode .flatpickr-day.today {
+    border-bottom-color: var(--dark-font-color);
+}
+.dark-mode .flatpickr-months .flatpickr-prev-month svg,
+.dark-mode .flatpickr-months .flatpickr-next-month svg {
+    fill: var(--dark-font-color);
+}
+
+/**
+* Month / year grid picker dark mode
+*/
+.dark-mode .dsmr-picker-cell {
+    color: var(--dark-font-color);
+}
+.dark-mode .dsmr-picker-cell:hover:not(:disabled) {
+    background: var(--dark-table-background);
+    border-color: var(--dark-table-background);
+}
+.dark-mode .dsmr-picker-cell.muted {
+    color: #666;
+}
+.dark-mode .dsmr-picker-cell:disabled {
+    color: #555;
+}
+.dark-mode .dsmr-picker-prev,
+.dark-mode .dsmr-picker-next,
+.dark-mode .dsmr-picker-title {
+    color: var(--dark-font-color);
+}
+.dark-mode .dsmr-picker-prev:hover:not(:disabled),
+.dark-mode .dsmr-picker-next:hover:not(:disabled) {
+    background: var(--dark-table-background);
+    border-color: var(--dark-table-background);
 }
 
 /**

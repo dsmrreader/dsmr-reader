@@ -115,8 +115,7 @@
                                 <small>{% blocktranslate %}Select starting day for export.{% endblocktranslate %}</small>
                             </h2>
                             <div class="panel-body center-block datepicker-calendar-block">
-                                <div id="start_datepicker">
-                                </div>
+                                <input id="start_datepicker" type="hidden">
                                 <input type="hidden" name="start_date" id="start_date" />
                             </div>
                         </div>
@@ -130,8 +129,7 @@
                                 <small>{% blocktranslate %}Select ending day for export.{% endblocktranslate %}</small>
                             </h2>
                             <div class="panel-body center-block datepicker-calendar-block">
-                                <div id="end_datepicker">
-                                </div>
+                                <input id="end_datepicker" type="hidden">
                                 <input type="hidden" name="end_date" id="end_date" />
                             </div>
                         </div>
@@ -182,7 +180,7 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}"
+    <link href="{% static 'dsmr_frontend/css/flatpickr.min.css' %}?r=v{{ dsmr_version }}"
           rel="stylesheet"
           type="text/css" />
 {% endblock %}
@@ -195,16 +193,16 @@
     <script type="text/javascript"
             src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
     <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
+            src="{% static 'dsmr_frontend/js/flatpickr.min.js' %}?r=v{{ dsmr_version }}"></script>
+    {% if LANGUAGE_CODE == 'nl' %}
+        <script type="text/javascript"
+                src="{% static 'dsmr_frontend/js/flatpickr-locale-nl.js' %}?r=v{{ dsmr_version }}"></script>
+    {% endif %}
 
     <script type="text/javascript">
         /* Settings. */
-        const datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
-        const datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
+        const datepicker_start_date = "{{ start_date|date:'Y-m-d' }}";
+        const datepicker_end_date = "{{ end_date|date:'Y-m-d' }}";
         const datepicker_locale_format = "{{ datepicker_locale_format }}";
         const datepicker_language_code = "{{ LANGUAGE_CODE }}";
 

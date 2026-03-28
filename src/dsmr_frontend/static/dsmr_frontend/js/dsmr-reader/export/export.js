@@ -9,20 +9,22 @@ $(document).ready(function () {
 });
 
 function initialize_datepicker(datepicker_id, initial_date, input_id) {
-    $("#" + datepicker_id).datepicker({
-        startView: 'months',
-        minViewMode: 'days',
-        maxViewMode: 'years',
-        calendarWeeks: true,
-        weekStart: 1,
-        startDate: datepicker_start_date,
-        endDate: datepicker_end_date,
-        format: datepicker_locale_format,
-        language: datepicker_language_code
+    var fp = flatpickr("#" + datepicker_id, {
+        inline: true,
+        defaultDate: initial_date,
+        minDate: datepicker_start_date,
+        maxDate: datepicker_end_date,
+        dateFormat: "Y-m-d",
+        locale: datepicker_language_code.startsWith('nl') ? 'nl' : 'default',
+        onChange: function (selectedDates) {
+            let selected_date = dayjs(selectedDates[0]).format(datepicker_locale_format.toUpperCase());
+            $("#" + input_id).val(selected_date);
+        }
+    });
 
-    }).on('changeDate', function (e) {
-        let selected_date = dayjs(e.date).format(datepicker_locale_format.toUpperCase());
-        $("#" + input_id).val(selected_date)
-
-    }).datepicker('update', initial_date).datepicker('setDate', initial_date);
+    /* Set initial value in the hidden form input. */
+    if (fp.selectedDates.length > 0) {
+        let selected_date = dayjs(fp.selectedDates[0]).format(datepicker_locale_format.toUpperCase());
+        $("#" + input_id).val(selected_date);
+    }
 }
