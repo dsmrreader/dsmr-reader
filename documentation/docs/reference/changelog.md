@@ -11,7 +11,7 @@
 
 ## v6.1.0 - March 2026
 
-<small>*Accessibility improvements, retention performance fixes, and UI refinements.*</small>
+<small>*Better accessibility, more reliable data retention and Dropbox sync, and a round of spring cleaning under the hood.*</small>
 
 ??? tip "Improvements"
 
@@ -29,13 +29,24 @@
     #### Dropbox
     - Improved Dropbox sync to no longer remove credentials on server/API errors, instead rescheduling for 5 minutes
 
-    #### Miscelaneous
-    - Generic development improvements
+??? abstract "Other changes and fixes"
 
-??? abstract "Fixes"
-
-    #### Retention
+    #### Fixes
     - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
+
+    #### UI
+    - Improved compare page trend icons and layout
+
+    #### Dependencies
+    - Updated Font Awesome Free from 7.1.0 to 7.2.0
+    - Updated ECharts from 5.3.3 to 5.6.0
+    - Updated jQuery from 3.6.0 to 3.7.1
+    - Replaced Bootstrap Datepicker 1.9.0 with Flatpickr 4.6.13
+    - Replaced Moment.js with Day.js (~2 KB vs ~70 KB)
+    - Removed unused vendored libraries: Semantic UI, iCheck, jQuery Inputmask, jQuery placeholder, jQuery slimScroll, jQuery ba-resize, Ionicons, html5shiv, Respond.js
+
+    #### Miscellaneous
+    - Generic development improvements
 
 
 ---
