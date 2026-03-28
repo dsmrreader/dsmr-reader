@@ -19,7 +19,7 @@
     - Applied WCAG 2.2 AA accessibility improvements to frontend templates (semantic headings, ARIA attributes, keyboard navigation, screen reader support)
 
     #### UI
-    - Improved decimal rendering with ==experimental== formatting
+    - Improved decimal rendering with ==experimental== formatting <small>— Give yourself a few days to get used to it ;-)</small>
 
     #### Retention
     - Improved retention data rotation query performance by using index-friendly count - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
