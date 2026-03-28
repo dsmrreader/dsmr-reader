@@ -115,7 +115,8 @@
                                 <small>{% blocktranslate %}Select starting day for export.{% endblocktranslate %}</small>
                             </h2>
                             <div class="panel-body center-block datepicker-calendar-block">
-                                <input id="start_datepicker" type="hidden">
+                                <div id="start_datepicker" style="display:none;">
+                                </div>
                                 <input type="hidden" name="start_date" id="start_date" />
                             </div>
                         </div>
@@ -129,7 +130,8 @@
                                 <small>{% blocktranslate %}Select ending day for export.{% endblocktranslate %}</small>
                             </h2>
                             <div class="panel-body center-block datepicker-calendar-block">
-                                <input id="end_datepicker" type="hidden">
+                                <div id="end_datepicker" style="display:none;">
+                                </div>
                                 <input type="hidden" name="end_date" id="end_date" />
                             </div>
                         </div>
@@ -180,9 +182,6 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link href="{% static 'dsmr_frontend/css/flatpickr.min.css' %}?r=v{{ dsmr_version }}"
-          rel="stylesheet"
-          type="text/css" />
 {% endblock %}
 
 {% block javascript %}
@@ -192,12 +191,6 @@
 
     <script type="text/javascript"
             src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/flatpickr.min.js' %}?r=v{{ dsmr_version }}"></script>
-    {% if LANGUAGE_CODE == 'nl' %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/flatpickr-locale-nl.js' %}?r=v{{ dsmr_version }}"></script>
-    {% endif %}
 
     <script type="text/javascript">
         /* Settings. */
