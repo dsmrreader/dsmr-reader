@@ -1,4 +1,5 @@
 import configparser
+import datetime
 import json
 from typing import Dict
 
@@ -19,6 +20,7 @@ from dsmr_consumption.models.consumption import (
     QuarterHourPeakElectricityConsumption,
 )
 from dsmr_datalogger.models.statistics import MeterStatistics
+from dsmr_stats.models.statistics import DayStatistics
 import dsmr_consumption.services
 import dsmr_mqtt.services.messages
 import dsmr_stats.services
@@ -125,6 +127,11 @@ def publish_split_topic_period_totals() -> None:
 
 def convert_period_totals() -> Dict:
     """Uses a generic datasource, but should be converted to flat format. Also, not all data is required at all."""
+    yesterday = (timezone.localtime(timezone.now()) - datetime.timedelta(days=1)).date()
+
+    if not DayStatistics.objects.filter(day=yesterday).exists():
+        return {}
+
     totals = dsmr_stats.services.period_totals()
 
     excluded_keys = (

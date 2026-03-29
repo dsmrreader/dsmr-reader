@@ -22,6 +22,15 @@ class TestPeriodTotals(TestCase):
         self.assertEqual(result, {})
 
     @mock.patch("django.utils.timezone.now")
+    def test_get_period_totals_missing_yesterday_suppresses_publish(self, now_mock):
+        """When DayStatistics for yesterday is absent (e.g. midnight window), result must be empty."""
+        # Fixture has stats up to 2021-02-14; use a date where yesterday has no record.
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 6, 15))
+
+        result = dsmr_mqtt.services.callbacks.convert_period_totals()
+        self.assertEqual(result, {})
+
+    @mock.patch("django.utils.timezone.now")
     def test_get_period_totals_empty_day_with_1_month_statistics(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2021, 1, 1))
 

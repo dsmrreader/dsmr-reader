@@ -44,6 +44,40 @@
     }
 },
 {
+    "pk": 3,
+    "fields": {
+        "day": "2020-12-31",
+        "electricity1": "0",
+        "electricity1_returned": "0",
+        "electricity1_cost": "0",
+        "electricity2": "0",
+        "electricity2_returned": "0",
+        "electricity2_cost": "0",
+        "gas": null,
+        "gas_cost": null,
+        "fixed_cost": "0",
+        "total_cost": "0"
+    },
+    "model": "dsmr_stats.daystatistics"
+},
+{
+    "pk": 4,
+    "fields": {
+        "day": "2021-02-14",
+        "electricity1": "0",
+        "electricity1_returned": "0",
+        "electricity1_cost": "0",
+        "electricity2": "0",
+        "electricity2_returned": "0",
+        "electricity2_cost": "0",
+        "gas": null,
+        "gas_cost": null,
+        "fixed_cost": "0",
+        "total_cost": "0"
+    },
+    "model": "dsmr_stats.daystatistics"
+},
+{
     "pk": 1,
     "fields": {
         "day": "2021-01-01",
