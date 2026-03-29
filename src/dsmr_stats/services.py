@@ -516,6 +516,176 @@ def recalculate_prices() -> None:
         current_day.save()
 
 
+def _electricity_deltas(current_record: DayStatistics, next_record: DayStatistics) -> Optional[tuple]:
+    """Returns (e1, e2, e1r, e2r) deltas, or None when the day must be skipped."""
+    readings = [
+        current_record.electricity1_reading,
+        current_record.electricity2_reading,
+        current_record.electricity1_returned_reading,
+        current_record.electricity2_returned_reading,
+        next_record.electricity1_reading,
+        next_record.electricity2_reading,
+        next_record.electricity1_returned_reading,
+        next_record.electricity2_returned_reading,
+    ]
+    if any(v is None for v in readings):
+        print(" - [SKIP] NULL electricity reading(s) for: {}".format(current_record.day))
+        return None
+
+    # type: ignore[operator] silences MyPy — None values are guarded by the any() check above
+    new_e1 = next_record.electricity1_reading - current_record.electricity1_reading  # type: ignore[operator]
+    new_e2 = next_record.electricity2_reading - current_record.electricity2_reading  # type: ignore[operator]
+    cur_e1r = current_record.electricity1_returned_reading
+    cur_e2r = current_record.electricity2_returned_reading
+    new_e1_ret = next_record.electricity1_returned_reading - cur_e1r  # type: ignore[operator]
+    new_e2_ret = next_record.electricity2_returned_reading - cur_e2r  # type: ignore[operator]
+
+    if any(v < 0 for v in [new_e1, new_e2, new_e1_ret, new_e2_ret]):
+        print(" - [WARN] Negative electricity delta (possible meter replacement) for: {}".format(current_record.day))
+        return None
+
+    return new_e1, new_e2, new_e1_ret, new_e2_ret
+
+
+def _gas_delta(current_record: DayStatistics, next_record: DayStatistics) -> Optional[Decimal]:
+    """Returns gas delta, or None when gas update must be skipped."""
+    if current_record.gas_reading is None or next_record.gas_reading is None:
+        return None
+    delta = next_record.gas_reading - current_record.gas_reading
+    if delta < 0:
+        print(" - [WARN GAS] Negative gas delta for: {}, skipping gas update".format(current_record.day))
+        return None
+    return delta
+
+
+def recalculate_statistics_from_meter_positions(dry_run: bool = False) -> None:
+    """Retroactively recalculates DayStatistics totals using stored meter positions (fixes #1770)."""
+    today = timezone.localtime(timezone.now()).date()
+    day_map: Dict[datetime.date, DayStatistics] = {r.day: r for r in DayStatistics.objects.all().order_by("day")}
+
+    skipped = 0
+    recalculated = 0
+
+    for current_record in day_map.values():
+        if current_record.day >= today:
+            continue
+
+        next_record = day_map.get(current_record.day + datetime.timedelta(days=1))
+
+        if next_record is None:
+            print(" - [SKIP] No next-day record for: {}".format(current_record.day))
+            skipped += 1
+            continue
+
+        deltas = _electricity_deltas(current_record, next_record)
+        if deltas is None:
+            skipped += 1
+            continue
+
+        new_e1, new_e2, new_e1_ret, new_e2_ret = deltas
+        new_gas = _gas_delta(current_record, next_record)
+
+        try:
+            prices = dsmr_consumption.services.get_day_prices(day=current_record.day)
+        except EnergySupplierPrice.DoesNotExist:
+            print("   [!] No prices found for {}, using zero fallback".format(current_record.day))
+            prices = dsmr_consumption.services.get_fallback_prices()
+
+        fixed_cost = prices.fixed_daily_cost
+        electricity1_cost = dsmr_consumption.services.round_decimal(
+            (new_e1 * prices.electricity_delivered_1_price) - (new_e1_ret * prices.electricity_returned_1_price)
+        )
+        electricity2_cost = dsmr_consumption.services.round_decimal(
+            (new_e2 * prices.electricity_delivered_2_price) - (new_e2_ret * prices.electricity_returned_2_price)
+        )
+        total_cost = electricity1_cost + electricity2_cost + fixed_cost
+
+        new_gas_cost: Optional[Decimal] = None
+        if new_gas is not None:
+            new_gas_cost = dsmr_consumption.services.round_decimal(new_gas * prices.gas_price)
+            total_cost += new_gas_cost
+        elif current_record.gas_cost is not None:
+            total_cost += current_record.gas_cost
+
+        total_cost = dsmr_consumption.services.round_decimal(total_cost)
+
+        suffix = " [DRY RUN]" if dry_run else ""
+        print(
+            " - Recalculating: {}  e1={}->{} e2={}->{} e1r={}->{} e2r={}->{}{}".format(
+                current_record.day,
+                current_record.electricity1,
+                new_e1,
+                current_record.electricity2,
+                new_e2,
+                current_record.electricity1_returned,
+                new_e1_ret,
+                current_record.electricity2_returned,
+                new_e2_ret,
+                suffix,
+            )
+        )
+
+        if not dry_run:
+            _save_recalculated_day(
+                current_record,
+                new_e1,
+                new_e2,
+                new_e1_ret,
+                new_e2_ret,
+                electricity1_cost,
+                electricity2_cost,
+                fixed_cost,
+                total_cost,
+                new_gas,
+                new_gas_cost,
+            )  # noqa: E501
+
+        recalculated += 1
+
+    print("\nDone. Recalculated: {}, Skipped: {}".format(recalculated, skipped))
+
+
+def _save_recalculated_day(
+    record: DayStatistics,
+    new_e1: Decimal,
+    new_e2: Decimal,
+    new_e1_ret: Decimal,
+    new_e2_ret: Decimal,
+    electricity1_cost: Decimal,
+    electricity2_cost: Decimal,
+    fixed_cost: Decimal,
+    total_cost: Decimal,
+    new_gas: Optional[Decimal],
+    new_gas_cost: Optional[Decimal],
+) -> None:
+    record.electricity1 = new_e1
+    record.electricity2 = new_e2
+    record.electricity1_returned = new_e1_ret
+    record.electricity2_returned = new_e2_ret
+    record.electricity1_cost = electricity1_cost
+    record.electricity2_cost = electricity2_cost
+    record.fixed_cost = fixed_cost
+    record.total_cost = total_cost
+
+    update_fields = [
+        "electricity1",
+        "electricity2",
+        "electricity1_returned",
+        "electricity2_returned",
+        "electricity1_cost",
+        "electricity2_cost",
+        "fixed_cost",
+        "total_cost",
+    ]
+
+    if new_gas is not None and new_gas_cost is not None:
+        record.gas = new_gas
+        record.gas_cost = new_gas_cost
+        update_fields += ["gas", "gas_cost"]
+
+    record.save(update_fields=update_fields)
+
+
 def reconstruct_missing_day_statistics() -> None:
     """Reconstructs missing day statistics."""
     dates_to_generate = (
