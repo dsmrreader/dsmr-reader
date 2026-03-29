@@ -145,7 +145,6 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     logger.debug("Stats: Creating day statistics for: %s", day)
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
-    # @TODO: Due to #1770. Fix for wrong gas consumption in some cases. Fix day_consumption() later. Just use the hour totals instead, for now.  # noqa: E501
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
     start_of_day = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0))
     end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)
@@ -157,7 +156,6 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     )["gas_sum"]
 
     try:
-        # @TODO: day_consumption() is still unreliable at this time due to #1770, rework later before marking OK again.
         meter_positions = dsmr_datalogger.services.readings.first_meter_positions_of_day(day=day)
     except LookupError:
         meter_positions_kwargs = {}
@@ -557,7 +555,7 @@ def _gas_delta(current_record: DayStatistics, next_record: DayStatistics) -> Opt
     return delta
 
 
-def recalculate_statistics_from_meter_positions(dry_run: bool = False) -> None:
+def recalculate_statistics_from_meter_positions(dry_run: bool = False) -> None:  # noqa: C901
     """Retroactively recalculates DayStatistics totals using stored meter positions (fixes #1770)."""
     today = timezone.localtime(timezone.now()).date()
     day_map: Dict[datetime.date, DayStatistics] = {r.day: r for r in DayStatistics.objects.all().order_by("day")}
@@ -609,20 +607,17 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False) -> None:
         total_cost = dsmr_consumption.services.round_decimal(total_cost)
 
         suffix = " [DRY RUN]" if dry_run else ""
-        print(
-            " - Recalculating: {}  e1={}->{} e2={}->{} e1r={}->{} e2r={}->{}{}".format(
-                current_record.day,
-                current_record.electricity1,
-                new_e1,
-                current_record.electricity2,
-                new_e2,
-                current_record.electricity1_returned,
-                new_e1_ret,
-                current_record.electricity2_returned,
-                new_e2_ret,
-                suffix,
-            )
-        )
+        print(" - Recalculating: {}{}".format(current_record.day, suffix))
+        if new_e1 != current_record.electricity1:
+            print("   electricity1:          {} -> {}".format(current_record.electricity1, new_e1))
+        if new_e2 != current_record.electricity2:
+            print("   electricity2:          {} -> {}".format(current_record.electricity2, new_e2))
+        if new_e1_ret != current_record.electricity1_returned:
+            print("   electricity1_returned: {} -> {}".format(current_record.electricity1_returned, new_e1_ret))
+        if new_e2_ret != current_record.electricity2_returned:
+            print("   electricity2_returned: {} -> {}".format(current_record.electricity2_returned, new_e2_ret))
+        if new_gas is not None and new_gas != current_record.gas:
+            print("   gas:                   {} -> {}".format(current_record.gas, new_gas))
 
         if not dry_run:
             _save_recalculated_day(
