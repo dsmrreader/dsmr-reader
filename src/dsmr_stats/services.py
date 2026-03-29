@@ -209,12 +209,16 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
         logger.debug("Stats: Skipping duplicate hour statistics for: %s", hour_start)
         return None
 
-    electricity_start = electricity_readings.first()
-    electricity_end = electricity_readings.last()
-    creation_kwargs["electricity1"] = electricity_end.delivered_1 - electricity_start.delivered_1
-    creation_kwargs["electricity2"] = electricity_end.delivered_2 - electricity_start.delivered_2
-    creation_kwargs["electricity1_returned"] = electricity_end.returned_1 - electricity_start.returned_1
-    creation_kwargs["electricity2_returned"] = electricity_end.returned_2 - electricity_start.returned_2
+    # Cross-hour anchors for gap-free hourly totals.
+    anchor_start = ElectricityConsumption.objects.filter(read_at__lt=hour_start).order_by("read_at").last()
+    anchor_end = ElectricityConsumption.objects.filter(read_at__lt=hour_end).order_by("read_at").last()
+    start_record = anchor_start if anchor_start is not None else electricity_readings.first()
+    end_record = anchor_end
+
+    creation_kwargs["electricity1"] = end_record.delivered_1 - start_record.delivered_1
+    creation_kwargs["electricity2"] = end_record.delivered_2 - start_record.delivered_2
+    creation_kwargs["electricity1_returned"] = end_record.returned_1 - start_record.returned_1
+    creation_kwargs["electricity2_returned"] = end_record.returned_2 - start_record.returned_2
 
     # DSMR v4.
     if len(gas_readings) == 1:
