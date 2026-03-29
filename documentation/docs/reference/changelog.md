@@ -16,6 +16,7 @@
 ??? danger "Incompatible changes"
 
     #### Fixes
+    - Fixed MQTT period totals being published with incomplete data during the post-midnight stats-generation window - [#1811](https://github.com/dsmrreader/dsmr-reader/issues/1811)
     - Fixed midnight-border gap causing electricity consumption to be silently dropped at calendar-day and calendar-hour boundaries in daily and hourly statistics - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
 
     !!! abstract ""
