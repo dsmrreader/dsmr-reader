@@ -532,7 +532,6 @@ def _electricity_deltas(current_record: DayStatistics, next_record: DayStatistic
         print(" - [SKIP] NULL electricity reading(s) for: {}".format(current_record.day))
         return None
 
-    # type: ignore[operator] silences MyPy — None values are guarded by the any() check above
     new_e1 = next_record.electricity1_reading - current_record.electricity1_reading  # type: ignore[operator]
     new_e2 = next_record.electricity2_reading - current_record.electricity2_reading  # type: ignore[operator]
     cur_e1r = current_record.electricity1_returned_reading
