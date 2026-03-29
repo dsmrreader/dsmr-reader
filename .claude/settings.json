@@ -1,5 +1,11 @@
 {
-  "gitCoAuthorship": false ,
+  "effortLevel": "medium",
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "gitCoAuthorship": false,
   "permissions": {
     "allow": [
       "Bash(poetry run black*)",
