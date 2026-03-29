@@ -112,6 +112,36 @@
     "model": "dsmr_stats.daystatistics"
 },
 {
+    "pk": 3,
+    "fields": {
+        "read_at": "2022-01-01T12:00:00Z",
+        "delivered_1": "20.000",
+        "delivered_2": "40.000",
+        "returned_1": "10.000",
+        "returned_2": "20.000",
+        "currently_delivered": "0",
+        "currently_returned": "0"
+    },
+    "model": "dsmr_consumption.electricityconsumption"
+},
+{
+    "pk": 5,
+    "fields": {
+        "day": "2021-12-31",
+        "electricity1": "0",
+        "electricity1_returned": "0",
+        "electricity1_cost": "0",
+        "electricity2": "0",
+        "electricity2_returned": "0",
+        "electricity2_cost": "0",
+        "gas": null,
+        "gas_cost": null,
+        "fixed_cost": "0",
+        "total_cost": "0"
+    },
+    "model": "dsmr_stats.daystatistics"
+},
+{
     "model": "dsmr_consumption.energysupplierprice",
     "pk": 1,
     "fields": {

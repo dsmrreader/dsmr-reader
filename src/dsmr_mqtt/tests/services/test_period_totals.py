@@ -31,6 +31,23 @@ class TestPeriodTotals(TestCase):
         self.assertEqual(result, {})
 
     @mock.patch("django.utils.timezone.now")
+    def test_get_period_totals_first_day_of_new_year(self, now_mock):
+        """On January 1st, no DayStatistics exist yet for the new year, but today's live
+        consumption must still flow through as the period total (issue #1944)."""
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 1, 1, 12, 0))
+        # Fixture: DayStatistics for 2021-12-31 satisfies the yesterday guard.
+        # No DayStatistics exist for any day in 2022 (empty month/year aggregate).
+        # ElectricityConsumption at 2022-01-01T12:00Z is the anchor_end for day_consumption().
+        # anchor_start is the last pre-midnight record (pk:2, delivered_1=10.000),
+        # so electricity1 delta = 20.000 - 10.000 = 10.000 kWh.
+        result = dsmr_mqtt.services.callbacks.convert_period_totals()
+        self.assertNotEqual(result, {})
+        self.assertEqual(result["current_month_electricity1"], Decimal("10.000"))
+        self.assertEqual(result["current_month_electricity2"], Decimal("20.000"))
+        self.assertEqual(result["current_year_electricity1"], Decimal("10.000"))
+        self.assertEqual(result["current_year_electricity2"], Decimal("20.000"))
+
+    @mock.patch("django.utils.timezone.now")
     def test_get_period_totals_empty_day_with_1_month_statistics(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2021, 1, 1))
 
