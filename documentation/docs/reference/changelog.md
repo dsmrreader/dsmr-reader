@@ -15,6 +15,16 @@
 
 ??? danger "Incompatible changes"
 
+    #### New commands
+    - Added management command to retroactively recalculate `DayStatistics` electricity totals from stored meter positions, correcting records affected by the midnight-border gap (dry-run by default) - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
+        ```shell title="shell"
+        # Preview changes (dry-run, no writes)
+        ./manage.py dsmr_stats_recalculate_from_meter_positions
+
+        # Apply changes to the database
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --write
+        ```
+
     #### Fixes
     - Fixed MQTT period totals being suppressed all day on January 1st (and the 1st of any month) when no historical day statistics exist yet for the new period - [#1944](https://github.com/dsmrreader/dsmr-reader/issues/1944)
     - Fixed MQTT period totals being published with incomplete data during the post-midnight stats-generation window - [#1811](https://github.com/dsmrreader/dsmr-reader/issues/1811)
