@@ -9,6 +9,31 @@
 ---
 
 
+## v6.2.0 - May 2026
+
+<small>*Accuracy fix: electricity consumption is no longer silently dropped at day and hour boundaries.*</small>
+
+??? danger "Incompatible changes"
+
+    #### Fixes
+    - Fixed midnight-border gap causing electricity consumption to be silently dropped at calendar-day and calendar-hour boundaries in daily and hourly statistics - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
+
+    !!! abstract ""
+
+        **Background: what was the midnight-border gap?**
+
+        Daily and hourly electricity totals were calculated as *last reading minus first reading within the window*, 
+        which meant the small interval between the last reading of one day and the first reading of the next was never counted.
+
+        The same gap existed at the end of every day and every hour, so a small slice of consumption was silently dropped at each boundary.
+
+        The fix looks up the last known meter position **before** the boundary instead of the first position inside the new window, so no interval is ever skipped.
+        No data migration or schema change is needed — the meter positions were always stored correctly; only the calculation logic was wrong.
+
+
+---
+
+
 ## v6.1.0 - April 2026
 
 <small>*Spring cleaning: improved accessibility, rolling 365-day dashboard panel, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
