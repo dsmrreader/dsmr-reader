@@ -985,3 +985,220 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 class TestServicesWithoutGas(TestServices):
     fixtures = ["dsmr_stats/electricity-consumption.json"]
     support_gas = False
+
+
+_D100 = Decimal("100.000")
+_D200 = Decimal("200.000")
+_D0 = Decimal("0.000")
+
+
+class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
+    """Tests for recalculate_statistics_from_meter_positions()."""
+
+    DAY1 = datetime.date(2020, 1, 1)
+    DAY2 = datetime.date(2020, 1, 2)
+    DAY3 = datetime.date(2020, 1, 3)
+
+    def _make_day(
+        self,
+        day: datetime.date,
+        e1_reading: object = _D100,
+        e2_reading: object = _D200,
+        e1r_reading: object = _D0,
+        e2r_reading: object = _D0,
+        gas_reading: object = None,
+        **kwargs: object,
+    ) -> DayStatistics:
+        return DayStatistics.objects.create(
+            day=day,
+            total_cost=Decimal("0.00"),
+            electricity1=Decimal("0.000"),
+            electricity2=Decimal("0.000"),
+            electricity1_returned=Decimal("0.000"),
+            electricity2_returned=Decimal("0.000"),
+            electricity1_cost=Decimal("0.00"),
+            electricity2_cost=Decimal("0.00"),
+            electricity1_reading=e1_reading,
+            electricity2_reading=e2_reading,
+            electricity1_returned_reading=e1r_reading,
+            electricity2_returned_reading=e2r_reading,
+            gas_reading=gas_reading,
+            **kwargs,
+        )
+
+    def test_recalculate_basic(self):
+        """Two consecutive days: day1 electricity fields updated, day2 unchanged."""
+        self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
+        self._make_day(self.DAY2, e1_reading=Decimal("101.500"), e2_reading=Decimal("202.000"))
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        day1 = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(day1.electricity1, Decimal("1.500"))
+        self.assertEqual(day1.electricity2, Decimal("2.000"))
+
+        day2 = DayStatistics.objects.get(day=self.DAY2)
+        self.assertEqual(day2.electricity1, Decimal("0.000"))  # unchanged (no day3)
+
+    def test_recalculate_skips_today(self):
+        """Today's record must not be modified."""
+        today = timezone.localtime(timezone.now()).date()
+        self._make_day(
+            today,
+            e1_reading=Decimal("100.000"),
+            e2_reading=Decimal("200.000"),
+        )
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=today)
+        self.assertEqual(record.electricity1, Decimal("0.000"))
+
+    def test_recalculate_skips_last_day(self):
+        """Single record with no next day: no exception, no changes."""
+        self._make_day(self.DAY1)
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("0.000"))
+
+    def test_recalculate_skips_null_positions(self):
+        """NULL electricity reading on either record causes the day to be skipped."""
+        self._make_day(self.DAY1, e1_reading=None)
+        self._make_day(self.DAY2, e1_reading=Decimal("101.000"))
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("0.000"))
+
+    def test_recalculate_skips_negative_delta(self):
+        """Negative electricity delta (e.g. meter replacement) causes entire day to be skipped."""
+        self._make_day(self.DAY1, e1_reading=Decimal("200.000"))
+        self._make_day(self.DAY2, e1_reading=Decimal("100.000"))  # lower than day1 → negative
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("0.000"))
+
+    def test_recalculate_gas_null(self):
+        """Electricity updated, gas fields unchanged when gas_reading is NULL."""
+        self._make_day(
+            self.DAY1,
+            e1_reading=Decimal("100.000"),
+            e2_reading=Decimal("200.000"),
+            gas_reading=None,
+            gas=Decimal("9.999"),
+            gas_cost=Decimal("5.00"),
+        )
+        self._make_day(
+            self.DAY2,
+            e1_reading=Decimal("101.000"),
+            e2_reading=Decimal("201.000"),
+            gas_reading=None,
+        )
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("1.000"))
+        self.assertEqual(record.gas, Decimal("9.999"))  # unchanged
+        self.assertEqual(record.gas_cost, Decimal("5.00"))  # unchanged
+
+    def test_recalculate_negative_gas_delta(self):
+        """Electricity updated but gas skipped when gas delta is negative."""
+        self._make_day(
+            self.DAY1,
+            e1_reading=Decimal("100.000"),
+            e2_reading=Decimal("200.000"),
+            gas_reading=Decimal("50.000"),
+            gas=Decimal("9.999"),
+        )
+        self._make_day(
+            self.DAY2,
+            e1_reading=Decimal("101.000"),
+            e2_reading=Decimal("201.000"),
+            gas_reading=Decimal("40.000"),  # less than day1 → negative delta
+        )
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("1.000"))
+        self.assertEqual(record.gas, Decimal("9.999"))  # unchanged
+
+    def test_recalculate_dry_run(self):
+        """Dry run: all checks run and output printed, but no DB writes."""
+        self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
+        self._make_day(self.DAY2, e1_reading=Decimal("101.500"), e2_reading=Decimal("202.000"))
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=True)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("0.000"))  # unchanged
+        self.assertEqual(record.electricity2, Decimal("0.000"))  # unchanged
+
+    def test_recalculate_reprices(self):
+        """Cost fields are recomputed from new electricity deltas."""
+        EnergySupplierPrice.objects.create(
+            start=self.DAY1,
+            end=self.DAY2,
+            electricity_delivered_1_price=Decimal("0.20"),
+            electricity_delivered_2_price=Decimal("0.30"),
+            gas_price=Decimal("1.00"),
+        )
+        self._make_day(
+            self.DAY1,
+            e1_reading=Decimal("100.000"),
+            e2_reading=Decimal("200.000"),
+            gas_reading=Decimal("10.000"),
+        )
+        self._make_day(
+            self.DAY2,
+            e1_reading=Decimal("102.000"),
+            e2_reading=Decimal("204.000"),
+            gas_reading=Decimal("10.500"),
+        )
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("2.000"))
+        self.assertEqual(record.electricity2, Decimal("4.000"))
+        self.assertEqual(record.electricity1_cost, Decimal("0.40"))
+        self.assertEqual(record.electricity2_cost, Decimal("1.20"))
+        self.assertEqual(record.gas, Decimal("0.500"))
+        self.assertEqual(record.gas_cost, Decimal("0.50"))
+
+    def test_recalculate_gap(self):
+        """Non-consecutive days (day1, day3): day1 is skipped because day2 is absent."""
+        self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
+        self._make_day(self.DAY3, e1_reading=Decimal("103.000"), e2_reading=Decimal("206.000"))
+
+        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("0.000"))  # skipped
+
+    def test_recalculate_command(self):
+        """Management command with --write writes to DB."""
+        self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
+        self._make_day(self.DAY2, e1_reading=Decimal("101.000"), e2_reading=Decimal("202.000"))
+
+        self._intercept_command_stdout("dsmr_stats_recalculate_from_meter_positions", dry_run=False)
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("1.000"))
+        self.assertEqual(record.electricity2, Decimal("2.000"))
+
+    def test_recalculate_command_dry_run(self):
+        """Management command without --write (default dry-run): DB unchanged."""
+        self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
+        self._make_day(self.DAY2, e1_reading=Decimal("101.000"), e2_reading=Decimal("202.000"))
+
+        self._intercept_command_stdout("dsmr_stats_recalculate_from_meter_positions")
+
+        record = DayStatistics.objects.get(day=self.DAY1)
+        self.assertEqual(record.electricity1, Decimal("0.000"))  # unchanged
