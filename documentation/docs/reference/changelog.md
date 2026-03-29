@@ -11,11 +11,12 @@
 
 ## v6.2.0 - May 2026
 
-<small>*Accuracy fix: electricity consumption is no longer silently dropped at day and hour boundaries.*</small>
+<small>*Accuracy fixes: electricity consumption is no longer silently dropped at day and hour boundaries, and MQTT period totals are now published correctly on the first day of a new month or year.*</small>
 
 ??? danger "Incompatible changes"
 
     #### Fixes
+    - Fixed MQTT period totals being suppressed all day on January 1st (and the 1st of any month) when no historical day statistics exist yet for the new period - [#1944](https://github.com/dsmrreader/dsmr-reader/issues/1944)
     - Fixed MQTT period totals being published with incomplete data during the post-midnight stats-generation window - [#1811](https://github.com/dsmrreader/dsmr-reader/issues/1811)
     - Fixed midnight-border gap causing electricity consumption to be silently dropped at calendar-day and calendar-hour boundaries in daily and hourly statistics - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
 
