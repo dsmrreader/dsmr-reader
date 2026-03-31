@@ -1,7 +1,7 @@
 var g_trends_start_date = null;
 var g_trends_end_date = null;
 
-let g_datepicker_view_mode = 'months';
+let g_datepicker_view_mode = 'days';
 let g_datepicker_selections = {};
 let g_day_picker_month = {'start': null, 'end': null};
 let g_month_picker_year = {'start': null, 'end': null};
