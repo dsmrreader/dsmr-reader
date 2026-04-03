@@ -34,9 +34,13 @@ class Command(BaseCommand):
         run_days = options["days"]
         run_hours = options["hours"]
 
-        # Default to days-only when neither flag is given (backwards-compatible).
         if not run_days and not run_hours:
-            run_days = True
+            self.stderr.write("Error: specify --days or --hours (not both).")
+            return
+
+        if run_days and run_hours:
+            self.stderr.write("Error: specify --days or --hours, not both.")
+            return
 
         if run_days:
             dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=dry_run)
@@ -48,7 +52,4 @@ class Command(BaseCommand):
                 print("\nDry run complete. Re-run with --write to apply changes.")
 
         if run_hours:
-            if run_days:
-                print()
-            print("--- HourStatistics ---")
             dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=dry_run)

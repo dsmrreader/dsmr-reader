@@ -1188,7 +1188,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
         self._make_day(self.DAY2, e1_reading=Decimal("101.000"), e2_reading=Decimal("202.000"))
 
-        self._intercept_command_stdout("dsmr_stats_recalculate_from_meter_positions", dry_run=False)
+        self._intercept_command_stdout("dsmr_stats_recalculate_from_meter_positions", days=True, dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("1.000"))
@@ -1199,7 +1199,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
         self._make_day(self.DAY2, e1_reading=Decimal("101.000"), e2_reading=Decimal("202.000"))
 
-        self._intercept_command_stdout("dsmr_stats_recalculate_from_meter_positions")
+        self._intercept_command_stdout("dsmr_stats_recalculate_from_meter_positions", days=True)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("0.000"))  # unchanged

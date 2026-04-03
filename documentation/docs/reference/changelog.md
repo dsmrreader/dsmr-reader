@@ -13,38 +13,36 @@
 
 <small>*Accuracy fixes: electricity consumption is no longer silently dropped at day and hour boundaries, and MQTT period totals are now published correctly on the first day of a new month or year. Quarter-hour peak data can now be exported as CSV.*</small>
 
-??? danger "Incompatible changes"
+??? danger "Major bugfix"
 
-    #### Fixes
+    #### Data accuracy
     - Fixed midnight-border gap causing electricity consumption to be silently dropped at calendar-day and calendar-hour boundaries in daily and hourly statistics - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
 
-    !!! abstract ""
+        ---
 
-        **Background: what was the midnight-border gap?**
-
-        Daily and hourly electricity totals were calculated as *last reading minus first reading within the window*, 
-        which meant the small interval between the last reading of one day and the first reading of the next was never counted.
-
-        The same gap existed at the end of every day and every hour, so a small slice of consumption was silently dropped at each boundary.
-
-        The fix looks up the last known meter position **before** the boundary instead of the first position inside the new window, so no interval is ever skipped.
-        No data migration or schema change is needed — the meter positions were always stored correctly; only the calculation logic was wrong.
+        _**Background: what was the midnight-border gap?**_
+    
+        _Daily and hourly electricity totals were calculated as *last reading minus first reading within the window*, 
+        which meant the small interval between the last reading of one day and the first reading of the next was never counted._
+    
+        _The same gap existed at the end of every day and every hour, so a small slice of consumption was silently dropped at each boundary._
+    
+        _The fix looks up the last known meter position **before** the boundary instead of the first position inside the new window, so no interval is ever skipped.
+        No data migration or schema change is needed — the meter positions were always stored correctly; only the calculation logic was wrong._
 
 ??? tip "Improvements"
 
     #### New commands
     - Added management command to retroactively recalculate `DayStatistics` electricity totals from stored meter positions, correcting records affected by the midnight-border gap (dry-run by default) - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
-    - Extended the same command with `--days` and `--hours` flags to target `DayStatistics`, `HourStatistics`, or both; running without either flag defaults to `--days` for backwards compatibility - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
+    - Extended the same command with `--days` and `--hours` flags to target `DayStatistics` or `HourStatistics` respectively; exactly one flag is required - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
         ```shell title="shell"
         # Preview changes (dry-run, no writes)
-        ./manage.py dsmr_stats_recalculate_from_meter_positions           # days only (default)
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --days    # days only
         ./manage.py dsmr_stats_recalculate_from_meter_positions --hours   # hours only
-        ./manage.py dsmr_stats_recalculate_from_meter_positions --days --hours  # both
 
         # Apply changes to the database
-        ./manage.py dsmr_stats_recalculate_from_meter_positions --write
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --days --write
         ./manage.py dsmr_stats_recalculate_from_meter_positions --hours --write
-        ./manage.py dsmr_stats_recalculate_from_meter_positions --days --hours --write
         ```
 
     #### Export
