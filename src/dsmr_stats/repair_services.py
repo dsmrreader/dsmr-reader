@@ -14,12 +14,17 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
     """Retroactively recalculates DayStatistics totals using stored meter positions (fixes #1770).
 
     Processes days newest-first in batches of `batch_size` to limit memory use.
+    In write mode, price contracts are resolved in Python from a single prefetched
+    queryset and modified records are flushed with bulk_update once per batch.
     """
     today = timezone.localtime(timezone.now()).date()
 
     all_days: List[datetime.date] = list(
         DayStatistics.objects.filter(day__lt=today).order_by("-day").values_list("day", flat=True)
     )
+
+    # Prefetch all price contracts once to avoid one SELECT per day.
+    all_prices: List[EnergySupplierPrice] = list(EnergySupplierPrice.objects.all()) if not dry_run else []
 
     skipped = 0
     recalculated = 0
@@ -32,6 +37,8 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
         records: Dict[datetime.date, DayStatistics] = {
             r.day: r for r in DayStatistics.objects.filter(day__in=set(batch_days) | set(next_days))
         }
+
+        to_save: List[DayStatistics] = []
 
         for day in batch_days:
             current_record = records.get(day)
@@ -53,10 +60,13 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
             new_e1, new_e2, new_e1_ret, new_e2_ret = deltas
             new_gas = _gas_delta(current_record, next_record)
 
-            try:
-                prices = dsmr_consumption.services.get_day_prices(day=current_record.day)
-            except EnergySupplierPrice.DoesNotExist:
-                print("   [!] No prices found for {}, using zero fallback".format(current_record.day))
+            if not dry_run:
+                try:
+                    prices = _resolve_prices(day=current_record.day, all_prices=all_prices)
+                except EnergySupplierPrice.DoesNotExist:
+                    print("   [!] No prices found for {}, using zero fallback".format(current_record.day))
+                    prices = dsmr_consumption.services.get_fallback_prices()
+            else:
                 prices = dsmr_consumption.services.get_fallback_prices()
 
             fixed_cost = prices.fixed_daily_cost
@@ -91,7 +101,7 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                 print("   gas:                   {} -> {}".format(current_record.gas, new_gas))
 
             if not dry_run:
-                _save_recalculated_day(
+                _apply_recalculated_day(
                     current_record,
                     new_e1,
                     new_e2,
@@ -104,19 +114,25 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                     new_gas,
                     new_gas_cost,
                 )
+                to_save.append(current_record)
 
             recalculated += 1
+
+        if to_save:
+            _bulk_update_day_statistics(to_save)
 
     print("\nDone. Recalculated: {}, Skipped: {}".format(recalculated, skipped))
 
 
-def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) -> None:
+def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) -> None:  # noqa: C901
     """Retroactively recalculates HourStatistics electricity totals using cross-boundary anchors (fixes #1770).
 
     Processes hours newest-first using a server-side cursor of `batch_size` to limit memory use.
+    In write mode, changed records are flushed with bulk_update once per cursor chunk.
     """
     skipped = 0
     recalculated = 0
+    to_save: List[HourStatistics] = []
 
     for hour in HourStatistics.objects.order_by("-hour_start").iterator(chunk_size=batch_size):
         hour_end = hour.hour_start + timezone.timedelta(hours=1)
@@ -161,11 +177,53 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) ->
             hour.electricity2 = new_e2
             hour.electricity1_returned = new_e1_ret
             hour.electricity2_returned = new_e2_ret
-            hour.save(update_fields=["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"])
+            to_save.append(hour)
+
+            if len(to_save) >= batch_size:
+                HourStatistics.objects.bulk_update(
+                    to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
+                )
+                to_save = []
 
         recalculated += 1
 
+    if to_save:
+        HourStatistics.objects.bulk_update(
+            to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
+        )
+
     print("\nDone. Recalculated: {}, Skipped: {}".format(recalculated, skipped))
+
+
+def _resolve_prices(day: datetime.date, all_prices: List[EnergySupplierPrice]) -> EnergySupplierPrice:
+    """Resolves the applicable price contract(s) for `day` from a pre-fetched list.
+
+    Mirrors dsmr_consumption.services.get_day_prices() but operates entirely in Python,
+    avoiding a database round-trip per day.
+    """
+    contracts = [p for p in all_prices if p.start <= day <= p.end]
+
+    if len(contracts) == 1:
+        return contracts[0]
+
+    if not contracts:
+        raise EnergySupplierPrice.DoesNotExist()
+
+    combined = dsmr_consumption.services.get_fallback_prices()
+
+    for field in (
+        "electricity_delivered_1_price",
+        "electricity_delivered_2_price",
+        "gas_price",
+        "electricity_returned_1_price",
+        "electricity_returned_2_price",
+        "fixed_daily_cost",
+    ):
+        values = [getattr(c, field) for c in contracts if getattr(c, field) > 0]
+        if len(values) == 1:
+            setattr(combined, field, values[0])
+
+    return combined
 
 
 def _electricity_deltas(current_record: DayStatistics, next_record: DayStatistics) -> Optional[tuple]:
@@ -209,7 +267,7 @@ def _gas_delta(current_record: DayStatistics, next_record: DayStatistics) -> Opt
     return delta
 
 
-def _save_recalculated_day(
+def _apply_recalculated_day(
     record: DayStatistics,
     new_e1: Decimal,
     new_e2: Decimal,
@@ -222,6 +280,7 @@ def _save_recalculated_day(
     new_gas: Optional[Decimal],
     new_gas_cost: Optional[Decimal],
 ) -> None:
+    """Mutates `record` in-place; caller is responsible for persisting via bulk_update."""
     record.electricity1 = new_e1
     record.electricity2 = new_e2
     record.electricity1_returned = new_e1_ret
@@ -231,7 +290,13 @@ def _save_recalculated_day(
     record.fixed_cost = fixed_cost
     record.total_cost = total_cost
 
-    update_fields = [
+    if new_gas is not None and new_gas_cost is not None:
+        record.gas = new_gas
+        record.gas_cost = new_gas_cost
+
+
+def _bulk_update_day_statistics(records: List[DayStatistics]) -> None:
+    fields = [
         "electricity1",
         "electricity2",
         "electricity1_returned",
@@ -240,11 +305,7 @@ def _save_recalculated_day(
         "electricity2_cost",
         "fixed_cost",
         "total_cost",
+        "gas",
+        "gas_cost",
     ]
-
-    if new_gas is not None and new_gas_cost is not None:
-        record.gas = new_gas
-        record.gas_cost = new_gas_cost
-        update_fields += ["gas", "gas_cost"]
-
-    record.save(update_fields=update_fields)
+    DayStatistics.objects.bulk_update(records, fields)
