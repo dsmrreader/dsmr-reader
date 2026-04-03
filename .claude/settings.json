@@ -21,6 +21,7 @@
       "Bash(poetry run /app/manage.py dsmrreader_lock_migrations*)",
       "Bash(poetry run /app/manage.py development_reset*)",
       "Bash(poetry run /app/manage.py dsmr_superuser*)",
+      "Bash(git -C /app*)",
       "Bash(git commit*)",
       "Bash(poetry update)",
       "Bash(cat *)",
