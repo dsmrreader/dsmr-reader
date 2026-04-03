@@ -483,9 +483,9 @@ def update_electricity_statistics(reading: DsmrReading) -> None:
         stats.save()
 
 
-def recalculate_prices() -> None:
+def recalculate_prices(batch_size: int = 365) -> None:
     """Retroactively sets the prices for all statistics. E.g. when the user has altered the prices in the past."""
-    for current_day in DayStatistics.objects.all():
+    for current_day in DayStatistics.objects.order_by("-day").iterator(chunk_size=batch_size):
         print(" - Recalculating prices for:", current_day.day)
 
         try:
@@ -514,7 +514,7 @@ def recalculate_prices() -> None:
         current_day.save()
 
 
-def reconstruct_missing_day_statistics() -> None:
+def reconstruct_missing_day_statistics(batch_size: int = 365) -> None:
     """Reconstructs missing day statistics."""
     dates_to_generate = (
         ElectricityConsumption.objects.exclude(
@@ -536,12 +536,13 @@ def reconstruct_missing_day_statistics() -> None:
 
     print("Found {} day(s) to reconstruct".format(len(dates_to_generate)))
 
-    for current_day in dates_to_generate:
-        print(" - Reconstructing:", current_day)
-        create_statistics(target_day=current_day)
+    for batch_start in range(0, len(dates_to_generate), batch_size):
+        for current_day in dates_to_generate[batch_start : batch_start + batch_size]:
+            print(" - Reconstructing:", current_day)
+            create_statistics(target_day=current_day)
 
 
-def reconstruct_missing_day_statistics_by_hours() -> None:
+def reconstruct_missing_day_statistics_by_hours(batch_size: int = 365) -> None:
     """Reconstructs missing day statistics by using available hour statistics."""
     dates_to_generate = (
         HourStatistics.objects.all()
@@ -559,25 +560,26 @@ def reconstruct_missing_day_statistics_by_hours() -> None:
 
     print("Found {} day(s) to reconstruct".format(len(dates_to_generate)))
 
-    for current_day in dates_to_generate:
-        print(" - Reconstructing:", current_day)
+    for batch_start in range(0, len(dates_to_generate), batch_size):
+        for current_day in dates_to_generate[batch_start : batch_start + batch_size]:
+            print(" - Reconstructing:", current_day)
 
-        day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(
-            electricity1_sum=Sum("electricity1"),
-            electricity2_sum=Sum("electricity2"),
-            electricity1_returned_sum=Sum("electricity1_returned"),
-            electricity2_returned_sum=Sum("electricity2_returned"),
-            gas_sum=Sum("gas"),
-        )
+            day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(
+                electricity1_sum=Sum("electricity1"),
+                electricity2_sum=Sum("electricity2"),
+                electricity1_returned_sum=Sum("electricity1_returned"),
+                electricity2_returned_sum=Sum("electricity2_returned"),
+                gas_sum=Sum("gas"),
+            )
 
-        DayStatistics.objects.create(
-            day=current_day,
-            electricity1=day_totals["electricity1_sum"],
-            electricity2=day_totals["electricity2_sum"],
-            electricity1_returned=day_totals["electricity1_returned_sum"],
-            electricity2_returned=day_totals["electricity2_returned_sum"],
-            gas=day_totals["gas_sum"],
-            total_cost=0,
-            electricity1_cost=0,
-            electricity2_cost=0,
-        )
+            DayStatistics.objects.create(
+                day=current_day,
+                electricity1=day_totals["electricity1_sum"],
+                electricity2=day_totals["electricity2_sum"],
+                electricity1_returned=day_totals["electricity1_returned_sum"],
+                electricity2_returned=day_totals["electricity2_returned_sum"],
+                gas=day_totals["gas_sum"],
+                total_cost=0,
+                electricity1_cost=0,
+                electricity2_cost=0,
+            )

@@ -7,5 +7,14 @@ import dsmr_stats.services
 class Command(BaseCommand):
     help = _("Recalculates day statistics prices")
 
+    def add_arguments(self, parser) -> None:
+        parser.add_argument(
+            "--batch-size",
+            type=int,
+            dest="batch_size",
+            default=365,
+            help="Number of records to process per batch (default: 365).",
+        )
+
     def handle(self, **options):
-        dsmr_stats.services.recalculate_prices()
+        dsmr_stats.services.recalculate_prices(batch_size=options["batch_size"])
