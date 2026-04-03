@@ -50,6 +50,8 @@ class Command(BaseCommand):
             self.stderr.write("Error: specify --days or --hours, not both.")
             return
 
+        print("Starting — this may take a few minutes before any progress is shown...\n")
+
         if run_days:
             kwargs = {"dry_run": dry_run}
             if batch_size is not None:
