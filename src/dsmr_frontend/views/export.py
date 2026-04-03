@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 from dsmr_weather.models.reading import TemperatureReading
+from dsmr_consumption.models.consumption import QuarterHourPeakElectricityConsumption
 from dsmr_frontend.forms import ExportAsCsvForm
 import dsmr_backend.services.backend
 
@@ -94,6 +95,16 @@ class ExportAsCsv(LoginRequiredMixin, BaseFormView):
                 "electricity1_returned",
                 "electricity2_returned",
                 "gas",
+            ]
+
+        elif data_type == ExportAsCsvForm.DATA_TYPE_QUARTER_HOUR_PEAK:
+            source_data = QuarterHourPeakElectricityConsumption.objects.filter(
+                read_at_start__gte=start_date, read_at_start__lte=end_date
+            ).order_by("read_at_start")
+            export_fields = [
+                "read_at_start",
+                "read_at_end",
+                "average_delivered",
             ]
 
         else:  # if data_type == ExportAsCsvForm.DATA_TYPE_TEMPERATURE:

@@ -11,7 +11,7 @@
 
 ## v6.2.0 - May 2026
 
-<small>*Accuracy fixes: electricity consumption is no longer silently dropped at day and hour boundaries, and MQTT period totals are now published correctly on the first day of a new month or year.*</small>
+<small>*Accuracy fixes: electricity consumption is no longer silently dropped at day and hour boundaries, and MQTT period totals are now published correctly on the first day of a new month or year. Quarter-hour peak data can now be exported as CSV.*</small>
 
 ??? danger "Incompatible changes"
 
@@ -41,6 +41,9 @@
         # Apply changes to the database
         ./manage.py dsmr_stats_recalculate_from_meter_positions --write
         ```
+
+    #### Export
+    - Added **Quarter-hour peaks** as a new data type option on the export page, allowing quarter hour peak records to be downloaded as CSV
 
     #### Fixes
     - Fixed MQTT period totals being suppressed all day on January 1st (and the 1st of any month) when no historical day statistics exist yet for the new period - [#1944](https://github.com/dsmrreader/dsmr-reader/issues/1944)

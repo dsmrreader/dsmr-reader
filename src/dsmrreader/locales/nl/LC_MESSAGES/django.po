@@ -1315,6 +1315,9 @@ msgstr "Dag"
 msgid "Hour"
 msgstr "Uur"
 
+msgid "Quarter-hour peaks"
+msgstr "Kwartierpiek-metingen"
+
 msgid "Temperatures"
 msgstr "Temperaturen"
 
@@ -2154,9 +2157,14 @@ msgid "Hour totals"
 msgstr "Uurtotalen"
 
 msgid ""
-"Summary of each hour read. Contains (when available) electricity and gas."
+"Summary of each hour read. Contains electricity and gas (if available)."
 msgstr ""
-"Samenvatting van elk uur. Bevat (waar beschikbaar) elektriciteit en gas."
+"Samenvatting van elk uur. Bevat elektriciteit en gas (indien beschikbaar)."
+
+msgid "Summary of all quarter-hour peak electricity readings (if available)."
+msgstr ""
+"Overzicht van alle kwartierpiek-metingen van elektriciteit (indien "
+"beschikbaar)."
 
 msgid "Summary of all temperatures read (if enabled)."
 msgstr "Overzicht van alle temperatuurmetingen (wanneer ingeschakeld)."

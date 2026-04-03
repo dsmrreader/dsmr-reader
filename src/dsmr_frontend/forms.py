@@ -7,10 +7,12 @@ import dsmr_backend.services.backend
 class ExportAsCsvForm(forms.Form):
     DATA_TYPE_DAY = "day"
     DATA_TYPE_HOUR = "hour"
+    DATA_TYPE_QUARTER_HOUR_PEAK = "quarterhourpeak"
     DATA_TYPE_TEMPERATURE = "temperature"
     DATA_TYPES = (
         (DATA_TYPE_DAY, _("Day")),
         (DATA_TYPE_HOUR, _("Hour")),
+        (DATA_TYPE_QUARTER_HOUR_PEAK, _("Quarter-hour peaks")),
         (DATA_TYPE_TEMPERATURE, _("Temperatures")),
     )
     EXPORT_FORMAT_CSV = "csv"

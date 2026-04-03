@@ -74,7 +74,23 @@
                                                 </label>
                                             </td>
                                             <td class="col-sm-9">
-                                                {% blocktranslate %}Summary of each hour read. Contains (when available) electricity and gas.{% endblocktranslate %}
+                                                {% blocktranslate %}Summary of each hour read. Contains electricity and gas (if available).{% endblocktranslate %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3">
+                                                <input class=""
+                                                       type="radio"
+                                                       name="data_type"
+                                                       value="quarterhourpeak"
+                                                       id="data_quarterhourpeak">
+                                                &nbsp;
+                                                <label for="data_quarterhourpeak">
+                                                    {% translate "Quarter-hour peaks" %}
+                                                </label>
+                                            </td>
+                                            <td class="col-sm-9">
+                                                {% blocktranslate %}Summary of all quarter-hour peak electricity readings (if available).{% endblocktranslate %}
                                             </td>
                                         </tr>
                                         <tr>
@@ -106,9 +122,9 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" style="display: flex; margin-bottom: 20px;">
                     <div class="col-sm-6">
-                        <div class="panel">
+                        <div class="panel" style="height: 100%;">
                             <h2 class="panel-heading centered-header">
                                 <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range start" %}
                                 <br />
@@ -123,7 +139,7 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <div class="panel">
+                        <div class="panel" style="height: 100%;">
                             <h2 class="panel-heading centered-header">
                                 <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range end" %}
                                 <br />
