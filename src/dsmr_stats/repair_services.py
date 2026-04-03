@@ -1,3 +1,4 @@
+import bisect
 import datetime
 from decimal import Decimal
 from typing import Dict, List, Optional
@@ -127,70 +128,91 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
 def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) -> None:  # noqa: C901
     """Retroactively recalculates HourStatistics electricity totals using cross-boundary anchors (fixes #1770).
 
-    Processes hours newest-first using a server-side cursor of `batch_size` to limit memory use.
-    In write mode, changed records are flushed with bulk_update once per cursor chunk.
+    Processes hours newest-first in batches of `batch_size`. Per batch, all required
+    ElectricityConsumption anchor records are fetched in two queries (window + preceding record),
+    then resolved via binary search — avoiding two DB queries per hour.
+    In write mode, changed records are flushed with bulk_update once per batch.
     """
     skipped = 0
     recalculated = 0
-    to_save: List[HourStatistics] = []
 
-    for hour in HourStatistics.objects.order_by("-hour_start").iterator(chunk_size=batch_size):
-        hour_end = hour.hour_start + timezone.timedelta(hours=1)
+    all_hour_ids: List[int] = list(HourStatistics.objects.order_by("-hour_start").values_list("id", flat=True))
 
-        anchor_start = ElectricityConsumption.objects.filter(read_at__lt=hour.hour_start).order_by("read_at").last()
-        anchor_end = ElectricityConsumption.objects.filter(read_at__lt=hour_end).order_by("read_at").last()
+    for batch_start in range(0, len(all_hour_ids), batch_size):
+        batch_ids = all_hour_ids[batch_start : batch_start + batch_size]
+        hours = list(HourStatistics.objects.filter(id__in=batch_ids).order_by("hour_start"))
 
-        if anchor_start is None or anchor_end is None:
-            print(" - [SKIP] Missing anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
-            skipped += 1
+        if not hours:
             continue
 
-        new_e1 = anchor_end.delivered_1 - anchor_start.delivered_1
-        new_e2 = anchor_end.delivered_2 - anchor_start.delivered_2
-        new_e1_ret = anchor_end.returned_1 - anchor_start.returned_1
-        new_e2_ret = anchor_end.returned_2 - anchor_start.returned_2
+        window_start = hours[0].hour_start
+        window_end = hours[-1].hour_start + timezone.timedelta(hours=1)
 
-        changed = (
-            new_e1 != hour.electricity1
-            or new_e2 != hour.electricity2
-            or new_e1_ret != hour.electricity1_returned
-            or new_e2_ret != hour.electricity2_returned
+        # Fetch EC records that span this batch's time window plus the one just before it.
+        ec_before = ElectricityConsumption.objects.filter(read_at__lt=window_start).order_by("-read_at").first()
+        ec_in_window: List[ElectricityConsumption] = list(
+            ElectricityConsumption.objects.filter(read_at__gte=window_start, read_at__lt=window_end).order_by("read_at")
         )
 
-        if not changed:
+        all_ec: List[ElectricityConsumption] = ([ec_before] if ec_before else []) + ec_in_window
+        ec_timestamps = [r.read_at for r in all_ec]
+
+        to_save: List[HourStatistics] = []
+
+        for hour in hours:
+            hour_end = hour.hour_start + timezone.timedelta(hours=1)
+
+            idx_start = bisect.bisect_left(ec_timestamps, hour.hour_start) - 1
+            idx_end = bisect.bisect_left(ec_timestamps, hour_end) - 1
+
+            if idx_start < 0 or idx_end < 0:
+                print(" - [SKIP] Missing anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
+                skipped += 1
+                continue
+
+            anchor_start = all_ec[idx_start]
+            anchor_end = all_ec[idx_end]
+
+            new_e1 = anchor_end.delivered_1 - anchor_start.delivered_1
+            new_e2 = anchor_end.delivered_2 - anchor_start.delivered_2
+            new_e1_ret = anchor_end.returned_1 - anchor_start.returned_1
+            new_e2_ret = anchor_end.returned_2 - anchor_start.returned_2
+
+            changed = (
+                new_e1 != hour.electricity1
+                or new_e2 != hour.electricity2
+                or new_e1_ret != hour.electricity1_returned
+                or new_e2_ret != hour.electricity2_returned
+            )
+
+            if not changed:
+                recalculated += 1
+                continue
+
+            suffix = " [DRY RUN]" if dry_run else ""
+            print(" - Recalculating: {}{}".format(timezone.localtime(hour.hour_start), suffix))
+            if new_e1 != hour.electricity1:
+                print("   electricity1:          {} -> {}".format(hour.electricity1, new_e1))
+            if new_e2 != hour.electricity2:
+                print("   electricity2:          {} -> {}".format(hour.electricity2, new_e2))
+            if new_e1_ret != hour.electricity1_returned:
+                print("   electricity1_returned: {} -> {}".format(hour.electricity1_returned, new_e1_ret))
+            if new_e2_ret != hour.electricity2_returned:
+                print("   electricity2_returned: {} -> {}".format(hour.electricity2_returned, new_e2_ret))
+
+            if not dry_run:
+                hour.electricity1 = new_e1
+                hour.electricity2 = new_e2
+                hour.electricity1_returned = new_e1_ret
+                hour.electricity2_returned = new_e2_ret
+                to_save.append(hour)
+
             recalculated += 1
-            continue
 
-        suffix = " [DRY RUN]" if dry_run else ""
-        print(" - Recalculating: {}{}".format(timezone.localtime(hour.hour_start), suffix))
-        if new_e1 != hour.electricity1:
-            print("   electricity1:          {} -> {}".format(hour.electricity1, new_e1))
-        if new_e2 != hour.electricity2:
-            print("   electricity2:          {} -> {}".format(hour.electricity2, new_e2))
-        if new_e1_ret != hour.electricity1_returned:
-            print("   electricity1_returned: {} -> {}".format(hour.electricity1_returned, new_e1_ret))
-        if new_e2_ret != hour.electricity2_returned:
-            print("   electricity2_returned: {} -> {}".format(hour.electricity2_returned, new_e2_ret))
-
-        if not dry_run:
-            hour.electricity1 = new_e1
-            hour.electricity2 = new_e2
-            hour.electricity1_returned = new_e1_ret
-            hour.electricity2_returned = new_e2_ret
-            to_save.append(hour)
-
-            if len(to_save) >= batch_size:
-                HourStatistics.objects.bulk_update(
-                    to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
-                )
-                to_save = []
-
-        recalculated += 1
-
-    if to_save:
-        HourStatistics.objects.bulk_update(
-            to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
-        )
+        if to_save:
+            HourStatistics.objects.bulk_update(
+                to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
+            )
 
     print("\nDone. Recalculated: {}, Skipped: {}".format(recalculated, skipped))
 
@@ -309,3 +331,55 @@ def _bulk_update_day_statistics(records: List[DayStatistics]) -> None:
         "gas_cost",
     ]
     DayStatistics.objects.bulk_update(records, fields)
+
+
+def recalculate_prices(batch_size: int = 365) -> None:
+    """Retroactively sets the prices for all statistics. E.g. when the user has altered the prices in the past.
+
+    Prefetches all price contracts once and accumulates changes for bulk_update per batch,
+    avoiding one SELECT and one UPDATE per day.
+    """
+    all_prices: List[EnergySupplierPrice] = list(EnergySupplierPrice.objects.all())
+    to_save: List[DayStatistics] = []
+
+    for current_day in DayStatistics.objects.order_by("-day").iterator(chunk_size=batch_size):
+        print(" - Recalculating prices for:", current_day.day)
+
+        try:
+            prices = _resolve_prices(day=current_day.day, all_prices=all_prices)
+        except EnergySupplierPrice.DoesNotExist:
+            print("   [!] No prices found for this day, using zero fallback")
+            prices = dsmr_consumption.services.get_fallback_prices()
+
+        current_day.fixed_cost = prices.fixed_daily_cost
+        current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
+            (current_day.electricity1 * prices.electricity_delivered_1_price)
+            - (current_day.electricity1_returned * prices.electricity_returned_1_price)
+        )
+        current_day.electricity2_cost = dsmr_consumption.services.round_decimal(
+            (current_day.electricity2 * prices.electricity_delivered_2_price)
+            - (current_day.electricity2_returned * prices.electricity_returned_2_price)
+        )
+
+        total_cost = current_day.electricity1_cost + current_day.electricity2_cost + current_day.fixed_cost
+
+        if current_day.gas is not None:
+            current_day.gas_cost = dsmr_consumption.services.round_decimal(current_day.gas * prices.gas_price)
+            total_cost += current_day.gas_cost
+
+        current_day.total_cost = dsmr_consumption.services.round_decimal(total_cost)
+        to_save.append(current_day)
+
+        if len(to_save) >= batch_size:
+            _bulk_update_day_price_fields(to_save)
+            to_save = []
+
+    if to_save:
+        _bulk_update_day_price_fields(to_save)
+
+
+def _bulk_update_day_price_fields(records: List[DayStatistics]) -> None:
+    DayStatistics.objects.bulk_update(
+        records,
+        ["electricity1_cost", "electricity2_cost", "fixed_cost", "gas_cost", "total_cost"],
+    )

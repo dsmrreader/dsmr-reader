@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.utils.translation import gettext as _
 
-import dsmr_stats.services
+import dsmr_stats.repair_services
 
 
 class Command(BaseCommand):
@@ -17,4 +17,4 @@ class Command(BaseCommand):
         )
 
     def handle(self, **options):
-        dsmr_stats.services.recalculate_prices(batch_size=options["batch_size"])
+        dsmr_stats.repair_services.recalculate_prices(batch_size=options["batch_size"])

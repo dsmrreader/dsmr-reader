@@ -16,7 +16,6 @@ from django.conf import settings
 
 from dsmr_backend.dto import Capability
 from dsmr_backend.models.schedule import ScheduledProcess
-from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import (
     DayStatistics,
     HourStatistics,
@@ -484,34 +483,10 @@ def update_electricity_statistics(reading: DsmrReading) -> None:
 
 
 def recalculate_prices(batch_size: int = 365) -> None:
-    """Retroactively sets the prices for all statistics. E.g. when the user has altered the prices in the past."""
-    for current_day in DayStatistics.objects.order_by("-day").iterator(chunk_size=batch_size):
-        print(" - Recalculating prices for:", current_day.day)
+    """Retroactively sets the prices for all statistics. Delegates to repair_services."""
+    import dsmr_stats.repair_services
 
-        try:
-            prices = dsmr_consumption.services.get_day_prices(day=current_day.day)
-        except EnergySupplierPrice.DoesNotExist:
-            print("   [!] No prices found for this day, using zero fallback")
-            prices = dsmr_consumption.services.get_fallback_prices()
-
-        current_day.fixed_cost = prices.fixed_daily_cost
-        current_day.electricity1_cost = dsmr_consumption.services.round_decimal(
-            (current_day.electricity1 * prices.electricity_delivered_1_price)
-            - (current_day.electricity1_returned * prices.electricity_returned_1_price)
-        )
-        current_day.electricity2_cost = dsmr_consumption.services.round_decimal(
-            (current_day.electricity2 * prices.electricity_delivered_2_price)
-            - (current_day.electricity2_returned * prices.electricity_returned_2_price)
-        )
-
-        total_cost = current_day.electricity1_cost + current_day.electricity2_cost + current_day.fixed_cost
-
-        if current_day.gas is not None:
-            current_day.gas_cost = dsmr_consumption.services.round_decimal(current_day.gas * prices.gas_price)
-            total_cost += current_day.gas_cost
-
-        current_day.total_cost = dsmr_consumption.services.round_decimal(total_cost)
-        current_day.save()
+    dsmr_stats.repair_services.recalculate_prices(batch_size=batch_size)
 
 
 def reconstruct_missing_day_statistics(batch_size: int = 365) -> None:

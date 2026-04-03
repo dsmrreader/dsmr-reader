@@ -37,8 +37,8 @@
     - Extended the same command with `--days` and `--hours` flags to target `DayStatistics` or `HourStatistics` respectively; exactly one flag is required - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
         ```shell title="shell"
         # Preview changes (dry-run, no writes)
-        ./manage.py dsmr_stats_recalculate_from_meter_positions --days    # days only
-        ./manage.py dsmr_stats_recalculate_from_meter_positions --hours   # hours only
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --days
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --hours
 
         # Apply changes to the database
         ./manage.py dsmr_stats_recalculate_from_meter_positions --days --write
