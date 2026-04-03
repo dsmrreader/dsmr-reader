@@ -45,6 +45,13 @@
         ./manage.py dsmr_stats_recalculate_from_meter_positions --hours --write
         ```
 
+    #### Command improvements
+    - All one-time repair/recalculate commands now accept `--batch-size` (default: 365) to control how many records are processed per batch, reducing peak memory use on large installations
+        - `dsmr_stats_recalculate_from_meter_positions` — processes newest-first in configurable batches
+        - `dsmr_stats_recalculate_prices` — iterates records via server-side cursor instead of loading all into memory
+        - `dsmr_stats_reconstruct_missing_day_statistics` — processes missing dates in batch slices
+        - `dsmr_stats_reconstruct_missing_day_statistics_by_hours` — same
+
     #### Export
     - Added **Quarter-hour peaks** as a new data type option on the export page, allowing quarter hour peak records to be downloaded as CSV
 
