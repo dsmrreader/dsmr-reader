@@ -20,6 +20,7 @@ from dsmr_stats.models.statistics import (
 from dsmr_consumption.models.settings import ConsumptionSettings
 from dsmr_datalogger.models.reading import DsmrReading
 import dsmr_backend.services.backend
+import dsmr_stats.repair_services
 import dsmr_stats.services
 
 
@@ -1031,7 +1032,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
         self._make_day(self.DAY2, e1_reading=Decimal("101.500"), e2_reading=Decimal("202.000"))
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         day1 = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(day1.electricity1, Decimal("1.500"))
@@ -1049,7 +1050,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
             e2_reading=Decimal("200.000"),
         )
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=today)
         self.assertEqual(record.electricity1, Decimal("0.000"))
@@ -1058,7 +1059,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         """Single record with no next day: no exception, no changes."""
         self._make_day(self.DAY1)
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("0.000"))
@@ -1068,7 +1069,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         self._make_day(self.DAY1, e1_reading=None)
         self._make_day(self.DAY2, e1_reading=Decimal("101.000"))
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("0.000"))
@@ -1078,7 +1079,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         self._make_day(self.DAY1, e1_reading=Decimal("200.000"))
         self._make_day(self.DAY2, e1_reading=Decimal("100.000"))  # lower than day1 → negative
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("0.000"))
@@ -1100,7 +1101,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
             gas_reading=None,
         )
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("1.000"))
@@ -1123,7 +1124,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
             gas_reading=Decimal("40.000"),  # less than day1 → negative delta
         )
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("1.000"))
@@ -1134,7 +1135,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
         self._make_day(self.DAY2, e1_reading=Decimal("101.500"), e2_reading=Decimal("202.000"))
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=True)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=True)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("0.000"))  # unchanged
@@ -1162,7 +1163,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
             gas_reading=Decimal("10.500"),
         )
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("2.000"))
@@ -1177,7 +1178,7 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
         self._make_day(self.DAY1, e1_reading=Decimal("100.000"), e2_reading=Decimal("200.000"))
         self._make_day(self.DAY3, e1_reading=Decimal("103.000"), e2_reading=Decimal("206.000"))
 
-        dsmr_stats.services.recalculate_statistics_from_meter_positions(dry_run=False)
+        dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=False)
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("0.000"))  # skipped
