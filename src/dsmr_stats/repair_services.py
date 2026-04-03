@@ -30,8 +30,7 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
         # Fetch current batch records plus their next-day neighbours for delta calculation.
         next_days = [d + datetime.timedelta(days=1) for d in batch_days]
         records: Dict[datetime.date, DayStatistics] = {
-            r.day: r
-            for r in DayStatistics.objects.filter(day__in=set(batch_days) | set(next_days))
+            r.day: r for r in DayStatistics.objects.filter(day__in=set(batch_days) | set(next_days))
         }
 
         for day in batch_days:
