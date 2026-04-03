@@ -28,11 +28,19 @@ class Command(BaseCommand):
             default=False,
             help="Retroactively recalculate HourStatistics electricity totals using cross-boundary anchors.",
         )
+        parser.add_argument(
+            "--batch-size",
+            type=int,
+            dest="batch_size",
+            default=None,
+            help="Number of records to process per batch (default: 365 for --days, 168 for --hours).",
+        )
 
     def handle(self, **options) -> None:
         dry_run = options["dry_run"]
         run_days = options["days"]
         run_hours = options["hours"]
+        batch_size = options["batch_size"]
 
         if not run_days and not run_hours:
             self.stderr.write("Error: specify --days or --hours (not both).")
@@ -43,7 +51,10 @@ class Command(BaseCommand):
             return
 
         if run_days:
-            dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(dry_run=dry_run)
+            kwargs = {"dry_run": dry_run}
+            if batch_size is not None:
+                kwargs["batch_size"] = batch_size
+            dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(**kwargs)
             if not dry_run:
                 print(
                     "\nPrices recalculated in the same pass — no need to run dsmr_stats_recalculate_prices separately."
@@ -52,4 +63,7 @@ class Command(BaseCommand):
                 print("\nDry run complete. Re-run with --write to apply changes.")
 
         if run_hours:
-            dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=dry_run)
+            kwargs = {"dry_run": dry_run}
+            if batch_size is not None:
+                kwargs["batch_size"] = batch_size
+            dsmr_stats.repair_services.recalculate_hour_statistics(**kwargs)
