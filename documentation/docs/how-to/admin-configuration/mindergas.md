@@ -16,7 +16,7 @@ Link your MinderGas.nl-account to have DSMR-reader upload your gas meter positio
 
 ![MinderGas settings](../../static/screenshots/admin/mindergassettings.png)
 
-Make sure you have a [Mindergas.nl](http://mindergas.nl) account or signup for one. 
+Make sure you have a [Mindergas.nl](https://www.mindergas.nl) account or signup for one. 
 Now go to "**Meterstand API**" and click on the button located below "**Authenticatietoken**".
 
 ![Mindergas API](../../static/screenshots/admin/mindergas_api.png)
