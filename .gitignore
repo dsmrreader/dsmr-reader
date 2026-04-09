@@ -3,7 +3,8 @@
 !/.idea/runConfigurations/*
 
 # Claude
-settings.local.json
+.claude/settings.local.json
+src/.claude/settings.local.json
 /docs/
 /.superpowers/
 /provisioning/agents/
