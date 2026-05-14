@@ -3523,162 +3523,6 @@ msgstr ""
 msgid "Temperature (in ℃)"
 msgstr "Temperatuur (in ℃)"
 
-msgid "Weather station Arcen"
-msgstr "Weerstation Arcen"
-
-msgid "Weather station Arnhem"
-msgstr "Weerstation Arnhem"
-
-msgid "Weather station Berkhout"
-msgstr "Weerstation Berkhout"
-
-msgid "Weather station Cadzand"
-msgstr "Weerstation Cadzand"
-
-msgid "Weather station De Bilt"
-msgstr "Weerstation De Bilt"
-
-msgid "Weather station Den Helder"
-msgstr "Weerstation Den Helder"
-
-msgid "Weather station Eindhoven"
-msgstr "Weerstation Eindhoven"
-
-msgid "Weather station Ell"
-msgstr "Weerstation Ell"
-
-msgid "Weather station Euro platform"
-msgstr "Weerstation Euro platform"
-
-msgid "Weather station Gilze Rijen"
-msgstr "Weerstation Gilze Rijen"
-
-msgid "Weather station Groenlo-Hupsel"
-msgstr "Weerstation Groenlo-Hupsel"
-
-msgid "Weather station Groningen"
-msgstr "Weerstation Groningen"
-
-msgid "Weather station Hansweert"
-msgstr "Weerstation Hansweert"
-
-msgid "Weather station Heino"
-msgstr "Weerstation Heino"
-
-msgid "Weather station Herwijnen"
-msgstr "Weerstation Herwijnen"
-
-msgid "Weather station Hoek van Holland"
-msgstr "Weerstation Hoek van Holland"
-
-msgid "Weather station Hoofdplaat"
-msgstr "Weerstation Hoofdplaat"
-
-msgid "Weather station Hoogeveen"
-msgstr "Weerstation Hoogeveen"
-
-msgid "Weather station Hoorn Terschelling"
-msgstr "Weerstation Hoorn Terschelling"
-
-msgid "Weather station Houtribdijk"
-msgstr "Weerstation Houtribdijk"
-
-msgid "Weather station Huibertgat"
-msgstr "Weerstation Huibertgat"
-
-msgid "Weather station IJmond"
-msgstr "Weerstation IJmond"
-
-msgid "Weather station IJmuiden"
-msgstr "Weerstation IJmuiden"
-
-msgid "Weather station Katwijk"
-msgstr "Weerstation Katwijk"
-
-msgid "Weather station Lauwersoog"
-msgstr "Weerstation Lauwersoog"
-
-msgid "Weather station LE Goeree"
-msgstr "Weerstation LE Goeree"
-
-msgid "Weather station Leeuwarden"
-msgstr "Weerstation Leeuwarden"
-
-msgid "Weather station Lelystad"
-msgstr "Weerstation Lelystad"
-
-msgid "Weather station Lopik-Cabauw"
-msgstr "Weerstation Lopik-Cabauw"
-
-msgid "Weather station Maastricht"
-msgstr "Weerstation Maastricht"
-
-msgid "Weather station Marknesse"
-msgstr "Weerstation Marknesse"
-
-msgid "Weather station Nieuw Beerta"
-msgstr "Weerstation Nieuw Beerta"
-
-msgid "Weather station Oosterschelde"
-msgstr "Weerstation Oosterschelde"
-
-msgid "Weather station Rotterdam"
-msgstr "Weerstation Rotterdam"
-
-msgid "Weather station Rotterdam Geulhaven"
-msgstr "Weerstation Rotterdam Geulhaven"
-
-msgid "Weather station Schaar"
-msgstr "Weerstation Schaar"
-
-msgid "Weather station Schiphol"
-msgstr "Weerstation Schiphol"
-
-msgid "Weather station Stavenisse"
-msgstr "Weerstation Stavenisse"
-
-msgid "Weather station Stavoren"
-msgstr "Weerstation Stavoren"
-
-msgid "Weather station Tholen"
-msgstr "Weerstation Tholen"
-
-msgid "Weather station Twente"
-msgstr "Weerstation Twente"
-
-msgid "Weather station Vlakte aan de Raan"
-msgstr "Weerstation Vlakte aan de Raan"
-
-msgid "Weather station Vlieland"
-msgstr "Weerstation Vlieland"
-
-msgid "Weather station Vlissingen"
-msgstr "Weerstation Vlissingen"
-
-msgid "Weather station Volkel"
-msgstr "Weerstation Volkel"
-
-msgid "Weather station Voorschoten"
-msgstr "Weerstation Voorschoten"
-
-msgid "Weather station Westdorpe"
-msgstr "Weerstation Westdorpe"
-
-msgid "Weather station Wijdenes"
-msgstr "Weerstation Wijdenes"
-
-msgid "Weather station Wijk aan Zee"
-msgstr "Weerstation Wijk aan Zee"
-
-msgid "Weather station Woensdrecht"
-msgstr "Weerstation Woensdrecht"
-
-msgid "Weather station Zeeplatform F-3"
-msgstr "Weerstation Zeeplatform F-3"
-
-msgid "Weather station Zeeplatform K13"
-msgstr "Weerstation Zeeplatform K13"
-
 msgid "Track weather"
 msgstr "Houd weergegevens bij"
 
@@ -3707,6 +3551,162 @@ msgstr "Nederlands"
 
 msgid "English"
 msgstr "Engels"
+
+#~ msgid "Weather station Arcen"
+#~ msgstr "Weerstation Arcen"
+
+#~ msgid "Weather station Arnhem"
+#~ msgstr "Weerstation Arnhem"
+
+#~ msgid "Weather station Berkhout"
+#~ msgstr "Weerstation Berkhout"
+
+#~ msgid "Weather station Cadzand"
+#~ msgstr "Weerstation Cadzand"
+
+#~ msgid "Weather station De Bilt"
+#~ msgstr "Weerstation De Bilt"
+
+#~ msgid "Weather station Den Helder"
+#~ msgstr "Weerstation Den Helder"
+
+#~ msgid "Weather station Eindhoven"
+#~ msgstr "Weerstation Eindhoven"
+
+#~ msgid "Weather station Ell"
+#~ msgstr "Weerstation Ell"
+
+#~ msgid "Weather station Euro platform"
+#~ msgstr "Weerstation Euro platform"
+
+#~ msgid "Weather station Gilze Rijen"
+#~ msgstr "Weerstation Gilze Rijen"
+
+#~ msgid "Weather station Groenlo-Hupsel"
+#~ msgstr "Weerstation Groenlo-Hupsel"
+
+#~ msgid "Weather station Groningen"
+#~ msgstr "Weerstation Groningen"
+
+#~ msgid "Weather station Hansweert"
+#~ msgstr "Weerstation Hansweert"
+
+#~ msgid "Weather station Heino"
+#~ msgstr "Weerstation Heino"
+
+#~ msgid "Weather station Herwijnen"
+#~ msgstr "Weerstation Herwijnen"
+
+#~ msgid "Weather station Hoek van Holland"
+#~ msgstr "Weerstation Hoek van Holland"
+
+#~ msgid "Weather station Hoofdplaat"
+#~ msgstr "Weerstation Hoofdplaat"
+
+#~ msgid "Weather station Hoogeveen"
+#~ msgstr "Weerstation Hoogeveen"
+
+#~ msgid "Weather station Hoorn Terschelling"
+#~ msgstr "Weerstation Hoorn Terschelling"
+
+#~ msgid "Weather station Houtribdijk"
+#~ msgstr "Weerstation Houtribdijk"
+
+#~ msgid "Weather station Huibertgat"
+#~ msgstr "Weerstation Huibertgat"
+
+#~ msgid "Weather station IJmond"
+#~ msgstr "Weerstation IJmond"
+
+#~ msgid "Weather station IJmuiden"
+#~ msgstr "Weerstation IJmuiden"
+
+#~ msgid "Weather station Katwijk"
+#~ msgstr "Weerstation Katwijk"
+
+#~ msgid "Weather station Lauwersoog"
+#~ msgstr "Weerstation Lauwersoog"
+
+#~ msgid "Weather station LE Goeree"
+#~ msgstr "Weerstation LE Goeree"
+
+#~ msgid "Weather station Leeuwarden"
+#~ msgstr "Weerstation Leeuwarden"
+
+#~ msgid "Weather station Lelystad"
+#~ msgstr "Weerstation Lelystad"
+
+#~ msgid "Weather station Lopik-Cabauw"
+#~ msgstr "Weerstation Lopik-Cabauw"
+
+#~ msgid "Weather station Maastricht"
+#~ msgstr "Weerstation Maastricht"
+
+#~ msgid "Weather station Marknesse"
+#~ msgstr "Weerstation Marknesse"
+
+#~ msgid "Weather station Nieuw Beerta"
+#~ msgstr "Weerstation Nieuw Beerta"
+
+#~ msgid "Weather station Oosterschelde"
+#~ msgstr "Weerstation Oosterschelde"
+
+#~ msgid "Weather station Rotterdam"
+#~ msgstr "Weerstation Rotterdam"
+
+#~ msgid "Weather station Rotterdam Geulhaven"
+#~ msgstr "Weerstation Rotterdam Geulhaven"
+
+#~ msgid "Weather station Schaar"
+#~ msgstr "Weerstation Schaar"
+
+#~ msgid "Weather station Schiphol"
+#~ msgstr "Weerstation Schiphol"
+
+#~ msgid "Weather station Stavenisse"
+#~ msgstr "Weerstation Stavenisse"
+
+#~ msgid "Weather station Stavoren"
+#~ msgstr "Weerstation Stavoren"
+
+#~ msgid "Weather station Tholen"
+#~ msgstr "Weerstation Tholen"
+
+#~ msgid "Weather station Twente"
+#~ msgstr "Weerstation Twente"
+
+#~ msgid "Weather station Vlakte aan de Raan"
+#~ msgstr "Weerstation Vlakte aan de Raan"
+
+#~ msgid "Weather station Vlieland"
+#~ msgstr "Weerstation Vlieland"
+
+#~ msgid "Weather station Vlissingen"
+#~ msgstr "Weerstation Vlissingen"
+
+#~ msgid "Weather station Volkel"
+#~ msgstr "Weerstation Volkel"
+
+#~ msgid "Weather station Voorschoten"
+#~ msgstr "Weerstation Voorschoten"
+
+#~ msgid "Weather station Westdorpe"
+#~ msgstr "Weerstation Westdorpe"
+
+#~ msgid "Weather station Wijdenes"
+#~ msgstr "Weerstation Wijdenes"
+
+#~ msgid "Weather station Wijk aan Zee"
+#~ msgstr "Weerstation Wijk aan Zee"
+
+#~ msgid "Weather station Woensdrecht"
+#~ msgstr "Weerstation Woensdrecht"
+
+#~ msgid "Weather station Zeeplatform F-3"
+#~ msgstr "Weerstation Zeeplatform F-3"
+
+#~ msgid "Weather station Zeeplatform K13"
+#~ msgstr "Weerstation Zeeplatform K13"
 
 #~ msgid "no significant change"
 #~ msgstr "geen significant verschil"
