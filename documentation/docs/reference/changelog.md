@@ -62,7 +62,7 @@
 ---
 
 
-## v6.1.0 - April 2026
+## v6.1.0 - May 2026
 
 <small>*Spring cleaning: improved accessibility, rolling 365-day dashboard panel, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
 
@@ -81,6 +81,9 @@
     - Improved retention data rotation query performance by using index-friendly count - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
     - Improved retention data rotation scheduling to avoid redundant re-runs in steady state - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
     - Improved retention data rotation to cache progress, skipping already-processed hours on subsequent runs - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
+
+    #### Weather
+    - Improved Buienradar weather station list to be fetched dynamically from the API instead of being hardcoded - [#2167](https://github.com/dsmrreader/dsmr-reader/issues/2167)
 
     #### Dropbox
     - Improved Dropbox sync to no longer remove credentials on server/API errors, instead rescheduling for 5 minutes

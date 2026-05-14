@@ -105,6 +105,7 @@ DSMRREADER_INFLUXDB_MAX_MEASUREMENTS_IN_QUEUE = 500
 DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN = 24
 
 DSMRREADER_BUIENRADAR_API_URL = "https://data.buienradar.nl/2.0/feed/json"
+DSMRREADER_BUIENRADAR_STATIONS_CACHE_TIMEOUT = 60 * 60 * 24 * 30  # 30 days
 
 # https://pvoutput.org/help.html#api-addstatus
 DSMRREADER_PVOUTPUT_ADD_STATUS_URL = "https://pvoutput.org/service/r2/addstatus.jsp"

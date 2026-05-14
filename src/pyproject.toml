@@ -53,6 +53,7 @@ polib = "^1"
 pytest-cov = "^7"
 pytest-django = "^4"
 pytest-xdist = "^3"
+regex = "2026.3.32"  # OOM otherwise when updating - Dep of djlint
 types-polib = "^1"
 types-python-dateutil = "^2"
 types-pytz = "^2025"

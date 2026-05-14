@@ -1,6 +1,7 @@
 from decimal import Decimal
 import logging
 
+from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
 import requests
@@ -11,6 +12,34 @@ from dsmr_weather.models.reading import TemperatureReading
 
 
 logger = logging.getLogger("dsmrreader")
+
+_STATIONS_CACHE_KEY = "buienradar_stations"
+
+
+def get_buienradar_stations() -> list[tuple[int, str]]:
+    cached: list[tuple[int, str]] | None = cache.get(_STATIONS_CACHE_KEY)
+    if cached is not None:
+        return cached
+
+    try:
+        response = requests.get(
+            settings.DSMRREADER_BUIENRADAR_API_URL,
+            timeout=settings.DSMRREADER_CLIENT_TIMEOUT,
+        )
+        response.raise_for_status()
+        stations = sorted(
+            [
+                (int(s["stationid"]), "Weather station {}".format(s["stationname"]))
+                for s in response.json()["actual"]["stationmeasurements"]
+            ],
+            key=lambda x: x[1],
+        )
+    except Exception:
+        logger.warning("Buienradar: Failed to fetch station list")
+        return []
+
+    cache.set(_STATIONS_CACHE_KEY, stations, settings.DSMRREADER_BUIENRADAR_STATIONS_CACHE_TIMEOUT)
+    return stations
 
 
 def run(scheduled_process: ScheduledProcess) -> None:
