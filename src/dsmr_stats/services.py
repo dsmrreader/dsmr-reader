@@ -409,28 +409,18 @@ def period_totals() -> Dict:
     )
 
     for k in month_stats.keys():
-        if k in excluded_keys:
+        if k in excluded_keys or month_stats[k] is None:
             continue
 
-        today_val = today_stats.get(k)
-
-        # Skip only when both the historical aggregate and today are absent.
-        if month_stats[k] is None and today_val is None:
-            continue
-
-        # Treat None (no prior DayStatistics in the period, e.g. first day of month/year) as 0.
-        month_stats[k] = (month_stats[k] or 0) + (today_val or 0)
+        # Assumes same keys, zero value fallback.
+        month_stats[k] += today_stats.get(k, 0)
 
     for k in year_stats.keys():
-        if k in excluded_keys:
+        if k in excluded_keys or year_stats[k] is None:
             continue
 
-        today_val = today_stats.get(k)
-
-        if year_stats[k] is None and today_val is None:
-            continue
-
-        year_stats[k] = (year_stats[k] or 0) + (today_val or 0)
+        # Assumes same keys, zero value fallback.
+        year_stats[k] += today_stats.get(k, 0)
 
     return dict(
         day=today,
