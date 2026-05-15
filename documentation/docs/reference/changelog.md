@@ -40,7 +40,7 @@
     #### Fixes
     - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
     - Fixed empty green badges rendering on the energy contracts page when no electricity returned data is available - [#2133](https://github.com/dsmrreader/dsmr-reader/issues/2133)
-    - Fixed dashboard current month/year panels showing no data on the first day of a new month or year - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
+    - Fixed dashboard current month/year panels showing no data on the first day of a new month or year - [#1944](https://github.com/dsmrreader/dsmr-reader/issues/1944)
 
     #### UI
     - Improved compare page trend icons and layout
