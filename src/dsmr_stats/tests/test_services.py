@@ -657,6 +657,39 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(data["gas"], daily["gas"] * days_in_year)
         self.assertEqual(data["gas_cost"], daily["gas_cost"] * days_in_year)
 
+    @mock.patch("dsmr_consumption.services.day_consumption")
+    @mock.patch("django.utils.timezone.now")
+    def test_period_totals_first_day_of_period(self, now_mock, day_consumption_mock):
+        """On the first day of a month/year, month and year DayStatistics are absent.
+        period_totals() must still surface today's live consumption (issue #2148)."""
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
+        today_data = {
+            "electricity1": Decimal("1.500"),
+            "electricity1_returned": Decimal("0.100"),
+            "electricity2": Decimal("2.000"),
+            "electricity2_returned": Decimal("0.200"),
+            "electricity_merged": Decimal("3.500"),
+            "electricity_returned_merged": Decimal("0.300"),
+            "electricity1_cost": Decimal("0.30"),
+            "electricity2_cost": Decimal("0.40"),
+            "electricity_cost_merged": Decimal("0.70"),
+            "gas": Decimal("1.234"),
+            "gas_cost": Decimal("0.80"),
+            "fixed_cost": Decimal("0.10"),
+            "total_cost": Decimal("1.60"),
+        }
+        day_consumption_mock.return_value = today_data
+
+        # No DayStatistics exist at all — simulates the first day of a new month/year.
+        DayStatistics.objects.all().delete()
+
+        result = dsmr_stats.services.period_totals()
+
+        # Both month and year aggregates should equal today's live values, not None/zero.
+        for key, expected in today_data.items():
+            self.assertEqual(result["month"][key], expected, msg=f"month[{key!r}] mismatch")
+            self.assertEqual(result["year"][key], expected, msg=f"year[{key!r}] mismatch")
+
     def test_electricity_tariff_percentage(self):
         target_date = timezone.make_aware(timezone.datetime(2016, 1, 1, 12))
         statistics_dict = self._get_statistics_dict(target_date)
