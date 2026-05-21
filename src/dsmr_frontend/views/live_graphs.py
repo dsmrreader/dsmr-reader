@@ -1,5 +1,6 @@
 import json
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.utils.cache import patch_response_headers
 from django.views.generic.base import TemplateView, View
@@ -37,6 +38,7 @@ class LiveGraphs(ConfigurableLoginRequiredMixin, TemplateView):
 
         today = timezone.localtime(timezone.now()).date()
         context_data["month_statistics"] = dsmr_stats.services.month_statistics(target_date=today)
+        context_data["decimal_size_formatting"] = settings.DSMRREADER_DECIMAL_SIZE_FORMATTING
         return context_data
 
 

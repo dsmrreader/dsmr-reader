@@ -32,7 +32,7 @@ jobs:
 
       - name: Run docker image(s)
         run: |
-          docker compose up -d
+          docker compose up -d --remove-orphans
           sleep 5
 
       - name: Check code formatting with Black
@@ -45,7 +45,7 @@ jobs:
         run: docker compose run tests-dsmr-app poetry run flake8 -v
 
       - name: Type check with MyPy
-        run: docker compose run tests-dsmr-app poetry run mypy /app
+        run: docker compose run tests-dsmr-app poetry run mypy /app/src
 
       - name: Run PostgreSQL tests
         run: docker compose run tests-dsmr-app poetry run pytest

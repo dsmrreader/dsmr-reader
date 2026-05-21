@@ -122,6 +122,26 @@ If the value of a topic changes, DSMR-reader will still send the updated value. 
 
 ---
 
+### ``DSMRREADER_DECIMAL_SIZE_FORMATTING``
+
+!!! question ""
+
+    *This environment variable was added in DSMR-reader v6.1*
+
+!!! note inline end ""
+
+    This setting is **optional**.
+
+Controls whether decimal values displayed in the web interface are rendered with the fractional part visually smaller than the integer part.
+
+Set to ``False`` to display plain localized values. Omit to use the default (``True``).
+
+```ini
+DSMRREADER_DECIMAL_SIZE_FORMATTING=False
+```
+
+---
+
 ### ``DSMRREADER_BACKEND_HIBERNATE``
 
 !!! example ""

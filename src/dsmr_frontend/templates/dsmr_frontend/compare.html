@@ -8,6 +8,9 @@
 {% block title %}
     {% translate "Compare" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Compare" %}
+{% endblock %}
 {% block header %}
     {% translate "Compare" %} &nbsp; <i class="fas fa-balance-scale-left"></i>
 {% endblock %}
@@ -25,9 +28,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel datepicker-panel" style="min-height: 0px">
-                        <header class="panel-heading centered-header">
+                        <h2 class="panel-heading centered-header">
                             {% blocktranslate %}Data selection{% endblocktranslate %}
-                        </header>
+                        </h2>
                         <div class="panel-body archive-header-panel-body" style="min-height: 0px">
                             <div class="row">
                                 <div class="col-lg-push-4 col-lg-4">
@@ -38,24 +41,36 @@
 
                                         <span class="datepicker-level-icon">
                                             <span class="center-block datepicker-level-name">{% translate "Days" %}</span>
-                                            <span class="sm-st-icon st-gray datepicker-trigger"
-                                                  id="datepicker_trigger_days"><i class="fas fa-calendar-check"></i></span>
+                                            <button class="sm-st-icon st-gray datepicker-trigger"
+                                                    id="datepicker_trigger_days"
+                                                    type="button"
+                                                    aria-label="{% translate 'Select days view' %}">
+                                                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                                            </button>
                                         </span>
 
                                         &nbsp;&nbsp;&nbsp;
 
                                         <span class="datepicker-level-icon">
                                             <span class="center-block datepicker-level-name">{% translate "Months" %}</span>
-                                            <span class="sm-st-icon st-green datepicker-trigger"
-                                                  id="datepicker_trigger_months"><i class="fas fa-calendar-check"></i></span>
+                                            <button class="sm-st-icon st-green datepicker-trigger"
+                                                    id="datepicker_trigger_months"
+                                                    type="button"
+                                                    aria-label="{% translate 'Select months view' %}">
+                                                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                                            </button>
                                         </span>
 
                                         &nbsp;&nbsp;&nbsp;
 
                                         <span class="datepicker-level-icon">
                                             <span class="center-block datepicker-level-name">{% translate "Years" %}</span>
-                                            <span class="sm-st-icon st-gray datepicker-trigger"
-                                                  id="datepicker_trigger_years"><i class="fas fa-calendar-check"></i></span>
+                                            <button class="sm-st-icon st-gray datepicker-trigger"
+                                                    id="datepicker_trigger_years"
+                                                    type="button"
+                                                    aria-label="{% translate 'Select years view' %}">
+                                                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
@@ -68,12 +83,16 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="panel datepicker-panel">
-                        <header class="panel-heading centered-header">
+                        <h2 class="panel-heading centered-header">
                             {% blocktranslate %}Compare from{% endblocktranslate %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
                             <div class="row center-block centered-header datepicker-calendar-block">
-                                <div id="datepicker1">
+                                <div id="datepicker1-day" style="display:none;">
+                                </div>
+                                <div id="datepicker1-month" style="display:none;">
+                                </div>
+                                <div id="datepicker1-year" style="display:none;">
                                 </div>
                             </div>
                         </div>
@@ -82,12 +101,16 @@
 
                 <div class="col-sm-6">
                     <div class="panel datepicker-panel">
-                        <header class="panel-heading centered-header">
+                        <h2 class="panel-heading centered-header">
                             {% blocktranslate %}Compare to{% endblocktranslate %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
                             <div class="row center-block centered-header datepicker-calendar-block">
-                                <div id="datepicker2">
+                                <div id="datepicker2-day" style="display:none;">
+                                </div>
+                                <div id="datepicker2-month" style="display:none;">
+                                </div>
+                                <div id="datepicker2-year" style="display:none;">
                                 </div>
                             </div>
                         </div>
@@ -109,27 +132,18 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}"
-          rel="stylesheet"
-          type="text/css" />
 {% endblock %}
 
 {% block javascript %}
     {{ block.super }}
     {% get_current_language as LANGUAGE_CODE %}
     <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/moment-with-locales-2.29.4.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
+            src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
 
     <script type="text/javascript">
         /* Settings. */
-        const datepicker_start_date = "{{ start_date|date:datepicker_date_format }}";
-        const datepicker_end_date = "{{ end_date|date:datepicker_date_format }}";
+        const datepicker_start_date = "{{ start_date|date:'Y-m-d' }}";
+        const datepicker_end_date = "{{ end_date|date:'Y-m-d' }}";
         const datepicker_locale_format = "{{ datepicker_locale_format }}";
         const datepicker_language_code = "{{ LANGUAGE_CODE }}";
 

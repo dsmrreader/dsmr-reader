@@ -77,13 +77,13 @@ It exposes a web UI, REST API, and integrates with external services (MQTT, Infl
 - Tests use **pytest** (not `unittest.TestCase` directly).
 - Fixture files live in `<app>/fixtures/`.
 - Test paths are declared in `pyproject.toml` — add new apps there.
-- Run with: `poetry run pytest -q`
+- Run with: `poetry run pytest -v`
 - Parallelisation via `pytest-xdist` is available (`-n auto`).
 
 ### Migrations
-- Generate with: `poetry run /app/manage.py makemigrations`
-- Apply with: `poetry run /app/manage.py migrate`
-- Lock for release with: `poetry run /app/manage.py dsmrreader_lock_migrations`
+- Generate with: `poetry run /app/src/manage.py makemigrations`
+- Apply with: `poetry run /app/src/manage.py migrate`
+- Lock for release with: `poetry run /app/src/manage.py dsmrreader_lock_migrations`
 - **Never edit locked migrations.**
 
 ### Environment / Configuration
@@ -115,12 +115,12 @@ Never modify, format, lint, or type-check these:
 ```bash
 poetry run black .                          # 1. Format Python
 poetry run djlint --reformat .              # 2. Format templates
-poetry run mypy /app                        # 3. Type check
+poetry run mypy /app/src                    # 3. Type check
 poetry run flake8                           # 4. Lint
-poetry run pytest -q                        # 5. Test
+poetry run pytest -v                        # 5. Test
 ```
 
-All steps must pass before a change is considered complete. Use `/quality-check` to run the full pipeline.
+All steps must pass before a change is considered complete. **Always run `/quality-check` after making any code changes.**
 
 ---
 

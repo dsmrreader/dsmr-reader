@@ -4,4 +4,6 @@
 set -e
 
 poetry install
+
+echo "Running: ${@}"
 exec ${@}

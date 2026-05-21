@@ -1,5 +1,7 @@
 import logging
+from datetime import datetime
 
+from django.core.cache import cache
 from django.db.models.functions.datetime import TruncHour
 from django.db.models.aggregates import Count
 from django.utils import timezone
@@ -13,6 +15,23 @@ from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsu
 
 
 logger = logging.getLogger("dsmrreader")
+
+_CACHE_KEY_PREFIX = "retention_lower_bound"
+
+
+def _cache_key(model_name: str) -> str:
+    return f"{_CACHE_KEY_PREFIX}_{model_name}"
+
+
+def clear_cache() -> None:
+    """Clear all retention progress cache entries, e.g. after retention settings change."""
+    cache.delete_many(
+        [
+            _cache_key("DsmrReading"),
+            _cache_key("ElectricityConsumption"),
+            _cache_key("GasConsumption"),
+        ]
+    )
 
 
 def run(scheduled_process: ScheduledProcess) -> None:
@@ -37,11 +56,18 @@ def run(scheduled_process: ScheduledProcess) -> None:
     timezone.activate(ZoneInfo("UTC"))
 
     for base_queryset, datetime_field in MODELS_TO_CLEANUP.items():
+        model_name = base_queryset.model.__name__
+        lower_bound: datetime | None = cache.get(_cache_key(model_name))
+
+        candidate_queryset = base_queryset.filter(**{"{}__lt".format(datetime_field): retention_date})
+
+        if lower_bound is not None:
+            candidate_queryset = candidate_queryset.filter(**{"{}__gte".format(datetime_field): lower_bound})
+
         hours_to_cleanup = (
-            base_queryset.filter(**{"{}__lt".format(datetime_field): retention_date})
-            .annotate(item_hour=TruncHour(datetime_field))
+            candidate_queryset.annotate(item_hour=TruncHour(datetime_field, tzinfo=ZoneInfo("UTC")))
             .values("item_hour")
-            .annotate(item_count=Count("id"))
+            .annotate(item_count=Count(datetime_field))
             .order_by()
             .filter(item_count__gt=ITEM_COUNT_PER_HOUR)
             .order_by("item_hour")
@@ -53,7 +79,16 @@ def run(scheduled_process: ScheduledProcess) -> None:
         if not hours_to_cleanup:
             continue
 
-        data_to_clean_up = True
+        # Advance the lower bound past the last cleaned hour so future runs skip already-processed history.
+        cache.set(
+            _cache_key(model_name),
+            max(hours_to_cleanup) + timezone.timedelta(hours=1),
+            timeout=None,
+        )
+
+        # Only flag more data pending when the batch was saturated, implying there may be more to process.
+        if len(hours_to_cleanup) >= settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN:
+            data_to_clean_up = True
 
         for current_hour in hours_to_cleanup:
             # Fetch all data per hour.

@@ -5,7 +5,12 @@
 
 {% load i18n %}
 
+{% load dsmr_frontend_extras %}
+
 {% block title %}
+    {% translate "Statistics" %}
+{% endblock %}
+{% block page_heading %}
     {% translate "Statistics" %}
 {% endblock %}
 {% block header %}
@@ -25,9 +30,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel">
-                        <header class="panel-heading">
+                        <h2 class="panel-heading">
                             {% translate "Meter positions" %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <tr>
@@ -51,14 +56,12 @@
                                         {{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-' }} </span>
+                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-'|decimal_html }}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-green">
-                                            {% if capabilities.electricity_returned %}
-                                                {{ latest_reading.electricity_returned_1|default:'-' }}
-                                            {% endif %}
-                                        </span>
+                                        {% if capabilities.electricity_returned %}
+                                            <span class="badge bg-green">{{ latest_reading.electricity_returned_1|default:'-' }}</span>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
@@ -66,14 +69,12 @@
                                         {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-' }}</span>
+                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-'|decimal_html }}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-green">
-                                            {% if capabilities.electricity_returned %}
-                                                {{ latest_reading.electricity_returned_2|default:'-' }}
-                                            {% endif %}
-                                        </span>
+                                        {% if capabilities.electricity_returned %}
+                                            <span class="badge bg-green">{{ latest_reading.electricity_returned_2|default:'-' }}</span>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {% if latest_reading and delivered_sum %}
@@ -82,14 +83,12 @@
                                             {% translate "Electricity (combined)" %} <span class="unit">{% translate "kWh" %}</span>
                                         </td>
                                         <td>
-                                            <span class="badge bg-red">{{ delivered_sum|default:'-' }}</span>
+                                            <span class="badge bg-red">{{ delivered_sum|default:'-'|decimal_html }}</span>
                                         </td>
                                         <td>
-                                            <span class="badge bg-green">
-                                                {% if capabilities.electricity_returned %}
-                                                    {{ returned_sum|default:'-' }}
-                                                {% endif %}
-                                            </span>
+                                            {% if capabilities.electricity_returned %}
+                                                <span class="badge bg-green">{{ returned_sum|default:'-' }}</span>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endif %}
@@ -100,7 +99,7 @@
                                             {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
                                         </td>
                                         <td colspan="2">
-                                            <span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-' }}</span>
+                                            <span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-'|decimal_html }}</span>
                                         </td>
                                     </tr>
                                 {% endif %}
@@ -113,9 +112,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel">
-                        <header class="panel-heading">
+                        <h2 class="panel-heading">
                             {% translate "Meter flags/statistics" %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <tr>
@@ -215,9 +214,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel">
-                        <header class="panel-heading">
+                        <h2 class="panel-heading">
                             {% translate "All time highs & lows" %}
-                        </header>
+                        </h2>
                         <div class="panel-body">
 
                             {% if electricity_statistics %}
@@ -241,7 +240,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.highest_usage_l1_value }}
+                                                    {{ electricity_statistics.highest_usage_l1_value|intcomma }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -255,7 +254,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.highest_usage_l2_value }}
+                                                    {{ electricity_statistics.highest_usage_l2_value|intcomma }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -269,7 +268,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.highest_usage_l3_value }}
+                                                    {{ electricity_statistics.highest_usage_l3_value|intcomma }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -284,7 +283,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.lowest_usage_l1_value }}
+                                                    {{ electricity_statistics.lowest_usage_l1_value|intcomma }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -298,7 +297,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.lowest_usage_l2_value }}
+                                                    {{ electricity_statistics.lowest_usage_l2_value|intcomma }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -312,7 +311,7 @@
                                             </td>
                                             <td class="col-sm-6">
                                                 <span class="badge bg-red">
-                                                    {{ electricity_statistics.lowest_usage_l3_value }}
+                                                    {{ electricity_statistics.lowest_usage_l3_value|intcomma }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -328,7 +327,7 @@
                                                 </td>
                                                 <td class="col-sm-6">
                                                     <span class="badge bg-green">
-                                                        {{ electricity_statistics.highest_return_l1_value }}
+                                                        {{ electricity_statistics.highest_return_l1_value|intcomma }}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -342,7 +341,7 @@
                                                 </td>
                                                 <td class="col-sm-6">
                                                     <span class="badge bg-green">
-                                                        {{ electricity_statistics.highest_return_l2_value }}
+                                                        {{ electricity_statistics.highest_return_l2_value|intcomma }}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -356,7 +355,7 @@
                                                 </td>
                                                 <td class="col-sm-6">
                                                     <span class="badge bg-green">
-                                                        {{ electricity_statistics.highest_return_l3_value }}
+                                                        {{ electricity_statistics.highest_return_l3_value|intcomma }}
                                                     </span>
                                                 </td>
                                             </tr>

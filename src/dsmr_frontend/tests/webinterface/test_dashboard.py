@@ -47,6 +47,10 @@ class TestViews(TestCase):
         self.assertIn("frontend_settings", response.context)
         self.assertIn("notification_count", response.context)
         self.assertIn("period_totals", response.context)
+        self.assertIn("past_365_stats", response.context)
+        self.assertIn("past_365_start", response.context)
+        self.assertIn("past_365_end", response.context)
+        self.assertIn("past_365_title", response.context)
 
 
 class TestViewsWithoutData(TestViews):

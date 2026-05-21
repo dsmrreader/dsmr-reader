@@ -7,6 +7,9 @@
 {% block title %}
     {% translate "Live graphs" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Live graphs" %}
+{% endblock %}
 {% block header %}
     {% translate "Live graphs" %} &nbsp; <i class="fa-solid fa-chart-area"></i>
 {% endblock %}
@@ -162,7 +165,7 @@
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/echarts.common-5.3.3.min.js' %}"></script>
+            src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
 
     <script type="text/javascript">
         let echarts_electricity_graph = null;
@@ -345,6 +348,7 @@
 
     <script type="text/javascript">
         const XHR_CONSUMPTION_HEADER_URL = "{% url 'frontend:xhr-consumption-header' %}";
+        const DECIMAL_SIZE_FORMATTING = {{ decimal_size_formatting|yesno:"true,false" }};
         const sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())
 
         $(document).ready(function(){

@@ -87,17 +87,44 @@ html body.dark-mode {
 }
 
 /**
-* Datepicker
+* Datepicker mode buttons
 */
-.dark-mode .datepicker table tr th:hover, 
-.dark-mode .datepicker table tr td.day:hover,
-.dark-mode .datepicker table tr td span:hover,
-.dark-mode .datepicker table tr td span.focused
-{
-    background-color: var(--dark-table-background);
-}
 .dark-mode .datepicker-trigger.st-gray {
     background-color: var(--dark-table-background);
+}
+
+/**
+* Day grid picker dark mode
+*/
+.dark-mode .dsmr-picker-weekday {
+    color: #aaa;
+}
+
+/**
+* Month / year grid picker dark mode
+*/
+.dark-mode .dsmr-picker-cell {
+    color: var(--dark-font-color);
+}
+.dark-mode .dsmr-picker-cell:hover:not(:disabled) {
+    background: var(--dark-table-background);
+    border-color: var(--dark-table-background);
+}
+.dark-mode .dsmr-picker-cell.muted {
+    color: #666;
+}
+.dark-mode .dsmr-picker-cell:disabled {
+    color: #555;
+}
+.dark-mode .dsmr-picker-prev,
+.dark-mode .dsmr-picker-next,
+.dark-mode .dsmr-picker-title {
+    color: var(--dark-font-color);
+}
+.dark-mode .dsmr-picker-prev:hover:not(:disabled),
+.dark-mode .dsmr-picker-next:hover:not(:disabled) {
+    background: var(--dark-table-background);
+    border-color: var(--dark-table-background);
 }
 
 /**

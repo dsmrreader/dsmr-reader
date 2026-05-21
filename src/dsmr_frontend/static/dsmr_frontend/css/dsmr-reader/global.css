@@ -2,6 +2,19 @@
 	display: none;
 }
 
+.search-results {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    margin-top: 6px;
+    padding: 8px 12px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.search-results .search-category { margin-bottom: 8px; }
+.search-results .search-category ul { margin: 4px 0 0 0; padding-left: 16px; }
+.search-results .search-category li { margin: 2px 0; }
+
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
     border-top: 1px solid #eee;
 }
@@ -46,6 +59,20 @@ a.graph_controls_help_trigger {
 	cursor: pointer;
 }
 
+/* Reset <button> browser defaults so datepicker triggers look identical to the former <span> elements. */
+button.datepicker-trigger {
+    border: none;
+    padding: 0;
+}
+
+/* Reset h2 browser defaults so panel headings look identical to the former <header> elements. */
+h2.panel-heading {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+    line-height: 20px;
+}
+
 .datepicker-panel {
     min-height: 330px;
 }
@@ -66,8 +93,110 @@ a.graph_controls_help_trigger {
 
 .datepicker-calendar-block {
      /* Ensures center-block works. */
-     width: 220px;
+     width: fit-content;
  }
+
+/* Flatpickr: hide the text input — calendar shown inline via .flatpickr-calendar */
+.flatpickr-input {
+    display: none !important;
+}
+
+/* Flatpickr: inherit Bootstrap font so sizing matches the rest of the UI */
+.flatpickr-calendar {
+    font-family: inherit;
+    font-size: 13px;
+}
+
+/* -----------------------------------------------------------------------
+   Inline month / year grid picker (replaces Bootstrap Datepicker views)
+   ----------------------------------------------------------------------- */
+.dsmr-picker {
+    display: inline-block;
+    font-size: 13px;
+    min-width: 250px;
+}
+
+.dsmr-picker-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+}
+
+.dsmr-picker-prev,
+.dsmr-picker-next {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 4px 10px;
+    font-size: 18px;
+    line-height: 1;
+    color: #333;
+}
+.dsmr-picker-prev:hover:not(:disabled),
+.dsmr-picker-next:hover:not(:disabled) {
+    background: #e6e6e6;
+    border-color: #adadad;
+}
+.dsmr-picker-prev:disabled,
+.dsmr-picker-next:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.dsmr-picker-title {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.dsmr-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 2px 0;
+}
+
+.dsmr-picker-cell {
+    text-align: center;
+    padding: 6px 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: none;
+    color: #333;
+    font-size: 13px;
+}
+.dsmr-picker-cell:hover:not(:disabled) {
+    background: #e6e6e6;
+    border-color: #adadad;
+}
+.dsmr-picker-cell.active,
+.dsmr-picker-cell.active:hover {
+    background: #428bca;
+    color: #fff;
+    border-color: #357ebd;
+}
+.dsmr-picker-cell.muted {
+    color: #999;
+}
+.dsmr-picker-cell:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.dsmr-picker-grid--days {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.dsmr-picker-weekday {
+    text-align: center;
+    padding: 4px;
+    font-size: 11px;
+    color: #999;
+    font-weight: 600;
+}
 
 div.archive-header-panel-body {
     min-height: 350px;
@@ -109,6 +238,12 @@ td.comparison-warning, div.search_help {
     clear: left;
     color: gray;
     font-size: xx-small;
+}
+
+.badge-decimal {
+    font-size: 0.7em !important;
+    vertical-align: 0 !important;
+    line-height: 1 !important;
 }
 
 tr > th {

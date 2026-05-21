@@ -1,7 +1,7 @@
 Update all Poetry dependencies:
 
 ```bash
-poetry update
+cd /app/src && poetry update
 ```
 
 Report which packages were updated.

@@ -7,6 +7,9 @@
 {% block title %}
     {% translate "Trends" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Trends" %}
+{% endblock %}
 {% block header %}
     {% translate "Trends" %} &nbsp; <i class="fa-solid fa-arrow-trend-up"></i>
 {% endblock %}
@@ -31,34 +34,32 @@
         {% if capabilities.electricity and has_statistics %}
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="panel">
-                        <header class="panel-heading centered-header">
-                            <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range start" %}
+                    <div class="panel datepicker-panel">
+                        <h2 class="panel-heading centered-header">
+                            {% translate "Select date range start" %}
                             <br />
                             <span class="unit">{% blocktranslate %}Select starting day for calculating trends{% endblocktranslate %}</span>
-                        </header>
+                        </h2>
                         <div class="panel-body">
-                            <div class="row center-block datepicker-calendar-block">
-                                <div id="start_datepicker">
+                            <div class="row center-block centered-header datepicker-calendar-block">
+                                <div id="datepicker-start-day">
                                 </div>
-                                <input type="hidden" name="start_date" id="start_date" />
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
-                    <div class="panel">
-                        <header class="panel-heading centered-header">
-                            <i class="fas fa-calendar"></i> &nbsp; {% translate "Select date range end" %}
+                    <div class="panel datepicker-panel">
+                        <h2 class="panel-heading centered-header">
+                            {% translate "Select date range end" %}
                             <br />
                             <span class="unit">{% blocktranslate %}Select ending day for calculating trends{% endblocktranslate %}</span>
-                        </header>
+                        </h2>
                         <div class="panel-body">
-                            <div class="row center-block datepicker-calendar-block">
-                                <div id="end_datepicker">
+                            <div class="row center-block centered-header datepicker-calendar-block">
+                                <div id="datepicker-end-day">
                                 </div>
-                                <input type="hidden" name="end_date" id="end_date" />
                             </div>
                         </div>
                     </div>
@@ -122,9 +123,6 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link href="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker3.min.css' %}"
-          rel="stylesheet"
-          type="text/css" />
 {% endblock %}
 
 {% block javascript %}
@@ -133,16 +131,9 @@
 
     {% get_current_language as LANGUAGE_CODE %}
     <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/moment-with-locales-2.29.4.min.js' %}"></script>
+            src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
     <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.en-GB.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.nl.min.js' %}"></script>
-
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/echarts.common-5.3.3.min.js' %}"></script>
+            src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
     <script type="text/javascript">
         /* Translations. */
         const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
@@ -163,8 +154,8 @@
         const GAS_DELIVERED_COLOR = "{{ frontend_settings.gas_delivered_color }}";
 
         /* Settings. */
-        const DATEPICKER_START_DATE = "{{ start_date|date:datepicker_date_format }}";
-        const DATEPICKER_END_DATE = "{{ end_date|date:datepicker_date_format }}";
+        const DATEPICKER_START_DATE = "{{ start_date|date:'Y-m-d' }}";
+        const DATEPICKER_END_DATE = "{{ end_date|date:'Y-m-d' }}";
         const DATEPICKER_LOCALE_FORMAT = "{{ datepicker_locale_format }}";
         const DATEPICKER_LANGUAGE_CODE = "{{ LANGUAGE_CODE }}";
         const GAS_GRAPH_STYLE = "{{ frontend_settings.gas_graph_style }}";
@@ -229,23 +220,13 @@
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            initialize_trends_datepicker('start_datepicker', DATEPICKER_END_DATE, update_trends);
-            initialize_trends_datepicker('end_datepicker', DATEPICKER_END_DATE, update_trends);
-        });
-    </script>
-
-    <script type="text/javascript">
         function update_trends() {
-            let raw_start_date = $('#start_datepicker').datepicker('getDate');
-            let raw_end_date = $('#end_datepicker').datepicker('getDate');
-
-            if (raw_start_date === null || raw_end_date === null) {
+            if (g_trends_start_date === null || g_trends_end_date === null) {
                 return;
             }
 
-            let start_date = moment(raw_start_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
-            let end_date = moment(raw_end_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
+            let start_date = dayjs(g_trends_start_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
+            let end_date = dayjs(g_trends_end_date).format(DATEPICKER_LOCALE_FORMAT.toUpperCase());
 
             // Top area chart(s)
             update_trends_averages(start_date, end_date);
@@ -259,7 +240,8 @@
     </script>
 
     <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/trends/selection.js' %}"></script>
+            src="{% static 'dsmr_frontend/js/dsmr-reader/trends/selection.js' %}?r=v{{ dsmr_version }}"></script>
+
     <script type="text/javascript"
             src="{% static 'dsmr_frontend/js/dsmr-reader/trends/average.js' %}?r=v{{ dsmr_version }}"></script>
 

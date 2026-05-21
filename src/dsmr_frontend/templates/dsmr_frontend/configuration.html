@@ -8,6 +8,9 @@
 {% block title %}
     {% translate "Configuration" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Configuration" %}
+{% endblock %}
 {% block header %}
     {% translate "Configuration" %} &nbsp; <i class="fas fa-wrench"></i>
 {% endblock %}
@@ -18,21 +21,24 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         {% translate "Search for a topic or setting" %}
-                    </header>
+                    </h2>
                     <div class="panel-body">
-                        <div class="ui search">
-                            <div class="ui icon input">
+                        <div class="search-widget">
+                            <label for="search" class="sr-only">
+                                {% translate "Search for a topic or setting" %}
+                            </label>
+                            <div>
                                 <input id="search"
-                                       class="prompt"
                                        type="text"
+                                       class="form-control"
                                        placeholder="{% translate "Type here to search..." %}">
                             </div>
 
                             &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% translate "Skip search and go directly to admin" %}</a>
 
-                            <div class="results">
+                            <div class="search-results" style="display:none">
                             </div>
                         </div>
 
@@ -46,17 +52,8 @@
     </section>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ block.super }}
-    <link href="{% static 'dsmr_frontend/semantic-2.4/semantic.min.css' %}"
-          rel="stylesheet"
-          type="text/css" />
-{% endblock %}
-
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/semantic-2.4/semantic.min.js' %}"></script>
 
     <script>
         const api_settings_url = '{% url "admin:dsmr_api_apisettings_change" api_settings.pk %}';
@@ -173,24 +170,38 @@
                 suggestionHandle.append('<li><a href="#" data-text="' + v + '" class="suggestion">' + v + '</a></li>')
             })
             $('a.suggestion').click(function(e){
-                $("#search").val(
-                    $(this).attr('data-text')
-                ).focus();
+                $("#search").val($(this).attr('data-text')).trigger('input').focus();
                 return false;
             });
 
-            $('.ui.search')
-              .search({
-                  searchDelay: 0,
-                  maxResults: 25,
-                  source: categoryContent,
-                  type: 'category',
-                  searchFields: [
-                      'category',
-                      'title'
-                  ]
-              })
-            ;
+            function renderSearchResults(query) {
+                let resultsEl = $('.search-results');
+                if (!query) { resultsEl.hide().empty(); return; }
+                let q = query.toLowerCase();
+                let matches = categoryContent.filter(function(item) {
+                    return item.category.toLowerCase().indexOf(q) !== -1
+                        || item.title.toLowerCase().indexOf(q) !== -1;
+                }).slice(0, 25);
+                if (!matches.length) { resultsEl.hide().empty(); return; }
+                let grouped = {};
+                matches.forEach(function(item) {
+                    if (!grouped[item.category]) grouped[item.category] = [];
+                    grouped[item.category].push(item);
+                });
+                let html = '';
+                Object.keys(grouped).forEach(function(cat) {
+                    html += '<div class="search-category"><strong>' + cat + '</strong><ul>';
+                    grouped[cat].forEach(function(item) {
+                        html += '<li><a href="' + item.url + '">' + item.title + '</a></li>';
+                    });
+                    html += '</ul></div>';
+                });
+                resultsEl.html(html).show();
+            }
+
+            $('#search').on('input', function() {
+                renderSearchResults($(this).val().trim());
+            });
         });
     </script>
 

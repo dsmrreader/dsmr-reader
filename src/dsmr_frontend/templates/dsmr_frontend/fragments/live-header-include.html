@@ -7,27 +7,33 @@
             <div class="panel-body">
                 <table class="table table-hover">
                     <tr>
-                        <th class="col-sm-6">
+                        <th scope="col" class="col-sm-6">
                             <span>
-                                <a class="help-trigger" href="#"><small><i class="fas fa-question-circle"></i></small></a>
+                                <a class="help-trigger"
+                                   href="#"
+                                   aria-label="{% blocktranslate %}Help: live graph controls{% endblocktranslate %}"><small><i class="fas fa-question-circle" aria-hidden="true"></i></small></a>
                                 <small class="xhr-hidden">
                                     {% blocktranslate %}Latest update received{% endblocktranslate %}
                                 </small>
                             </span>
-                            <span class="unit" id="latest_timestamp"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
+                            <span class="unit"
+                                  id="latest_timestamp"
+                                  aria-label="{% blocktranslate %}Loading latest timestamp{% endblocktranslate %}"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
                         </th>
-                        <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
+                        <th scope="col"
+                            class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
                             {% if capabilities.electricity %}
                                 {% translate "Consuming" %}
                             {% endif %}
                         </th>
-                        <th class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
+                        <th scope="col"
+                            class="{% if capabilities.costs %}col-sm-2{% else %}col-sm-3{% endif %}">
                             {% if capabilities.electricity_returned %}
                                 {% translate "Returning" %}
                             {% endif %}
                         </th>
                         {% if capabilities.costs %}
-                            <th class="col-sm-2">
+                            <th scope="col" class="col-sm-2">
                                 &euro; <span class="unit">/ {% translate 'hour' %}</span>
                             </th>
                         {% endif %}
@@ -38,7 +44,7 @@
                         </td>
                         <td>
                             {% if capabilities.electricity %}
-                                <span class="badge bg-red" id="latest_electricity_delivered"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
+                                <span class="badge bg-red" id="latest_electricity_delivered"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
                             {% endif %}
                         </td>
                         <td>

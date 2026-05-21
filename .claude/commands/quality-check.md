@@ -12,7 +12,7 @@ poetry run djlint --reformat .
 
 3. **Type check** (MyPy):
 ```bash
-poetry run mypy /app
+poetry run mypy /app/src
 ```
 
 4. **Lint Python** (Flake8):
@@ -22,7 +22,7 @@ poetry run flake8 -v
 
 5. **Test** (PyTest):
 ```bash
-poetry run pytest -q
+DJANGO_SETTINGS_MODULE=dsmrreader.config.test poetry run pytest -v
 ```
 
 Report results for each step. Stop and report if any step fails.

@@ -4,13 +4,15 @@
 {% load l10n %}
 {% load mathfilters %}
 
+{% load dsmr_frontend_extras %}
+
 <div class="panel">
     <div class="panel-body">
         <table class="table table-hover">
             <tr>
-                <th class="col-sm-3">
+                <th scope="col" class="col-sm-3">
                 </th>
-                <th class="col-sm-3">
+                <th scope="col" class="col-sm-3">
                     {{ base_title|unlocalize|capfirst }}
 
                     {% if data_count.base != data_count.comparison %}
@@ -20,7 +22,7 @@
                         </span>
                     {% endif %}
                 </th>
-                <th class="col-sm-3">
+                <th scope="col" class="col-sm-3">
                     {{ comparison_title|unlocalize|capfirst }}
 
                     {% if data_count.base != data_count.comparison %}
@@ -30,7 +32,7 @@
                         </span>
                     {% endif %}
                 </th>
-                <th class="col-sm-3">
+                <th scope="col" class="col-sm-3">
                     {% translate "Difference" %}
                 </th>
             </tr>
@@ -40,7 +42,7 @@
                     <td>
                     </td>
                     <td colspan="3" class="comparison-warning">
-                        <span class="fas fa-exclamation-triangle"></span> &nbsp;
+                        <span class="fas fa-exclamation-triangle" aria-hidden="true"></span> &nbsp;
                         {% blocktranslate %}There is a difference between the number of data points available for this selection. This may cause the comparison to be inaccurate.{% endblocktranslate %}
                     </td>
                 </tr>
@@ -53,190 +55,203 @@
                     </td>
                     <td>
                         {% if base.electricity1 %}
-                            <span class="badge bg-red">{{ base.electricity1|default:'-' }}</span
-                            {% endif %}
-                            >
-                        </td>
-                        <td>
-                            {% if comparison.electricity1 %}
-                                <span class="badge bg-red">{{ comparison.electricity1|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if not diff.electricity1|intdiv:1 %}
-                                <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
-                            {% elif diff.electricity1 > 0 %}
-                                <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="degraded">{{ diff.electricity1|floatformat:0 }} </span> <span class="unit">%</span>
-                            {% elif diff.electricity1 < 0 %}
-                                <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="improved">{{ diff.electricity1|floatformat:0|abs }} </span> <span class="unit">%</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
-                        </td>
-                        <td>
-                            {% if base.electricity2 %}
-                                <span class="badge bg-red">{{ base.electricity2|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if comparison.electricity2 %}
-                                <span class="badge bg-red">{{ comparison.electricity2|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if not diff.electricity2|intdiv:1 %}
-                                <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
-                            {% elif diff.electricity2 > 0 %}
-                                <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="degraded">{{ diff.electricity2|floatformat:0 }} </span> <span class="unit">%</span>
-                            {% elif diff.electricity2 < 0 %}
-                                <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="improved">{{ diff.electricity2|floatformat:0|abs }} </span> <span class="unit">%</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endif %}
-
-                {% if capabilities.electricity %}
-                    <tr>
-                        <td>
-                            {% translate "Electricity" %} ({% translate "total" %}) <span class="unit">{% translate "kWh" %}</span>
-                        </td>
-                        <td>
-                            {% if base.electricity_merged %}
-                                <span class="badge bg-red">{{ base.electricity_merged|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if comparison.electricity_merged %}
-                                <span class="badge bg-red">{{ comparison.electricity_merged|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if not diff.electricity_merged|intdiv:1 %}
-                                <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
-                            {% elif diff.electricity_merged > 0 %}
-                                <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="degraded">{{ diff.electricity_merged|floatformat:0 }}</span> <span class="unit">%</span>
-                            {% elif diff.electricity_merged < 0 %}
-                                <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="improved">{{ diff.electricity_merged|floatformat:0|abs }} </span> <span class="unit">%</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endif %}
-
-                {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
-                    <tr>
-                        <td>
-                            {{ frontend_settings.tariff_1_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
-                        </td>
-                        <td>
-                            {% if base.electricity1_returned %}
-                                <span class="badge bg-green">{{ base.electricity1_returned|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if comparison.electricity1_returned %}
-                                <span class="badge bg-green">{{ comparison.electricity1_returned|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if not diff.electricity1_returned|intdiv:1 %}
-                                <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
-                            {% elif diff.electricity1_returned > 0 %}
-                                <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="improved">{{ diff.electricity1_returned|floatformat:0 }} </span> <span class="unit">%</span>
-                            {% elif diff.electricity1_returned < 0 %}
-                                <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="degraded">{{ diff.electricity1_returned|floatformat:0|abs }} </span> <span class="unit">%</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ frontend_settings.tariff_2_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
-                        </td>
-                        <td>
-                            {% if base.electricity2_returned %}
-                                <span class="badge bg-green">{{ base.electricity2_returned|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if comparison.electricity2_returned %}
-                                <span class="badge bg-green">{{ comparison.electricity2_returned|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if not diff.electricity2_returned|intdiv:1 %}
-                                <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
-                            {% elif diff.electricity2_returned > 0 %}
-                                <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="improved">{{ diff.electricity2_returned|floatformat:0 }} </span> <span class="unit">%</span>
-                            {% elif diff.electricity2_returned < 0 %}
-                                <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="degraded">{{ diff.electricity2_returned|floatformat:0|abs }} </span> <span class="unit">%</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endif %}
-
-                {% if capabilities.electricity_returned %}
-                    <tr>
-                        <td>
-                            {% translate "Electricity returned" %} ({% translate "total" %}) <span class="unit">{% translate "kWh" %}</span>
-                        </td>
-                        <td>
-                            {% if base.electricity_returned_merged %}
-                                <span class="badge bg-green">{{ base.electricity_returned_merged|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if comparison.electricity_returned_merged %}
-                                <span class="badge bg-green">{{ comparison.electricity_returned_merged|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if not diff.electricity_returned_merged|intdiv:1 %}
-                                <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
-                            {% elif diff.electricity_returned_merged > 0 %}
-                                <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="improved">{{ diff.electricity_returned_merged|floatformat:0 }} </span> <span class="unit">%</span>
-                            {% elif diff.electricity_returned_merged < 0 %}
-                                <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="degraded">{{ diff.electricity_returned_merged|floatformat:0|abs }} </span> <span class="unit">%</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endif %}
-
-                {% if capabilities.gas %}
-                    <tr>
-                        <td>
-                            {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
-                        </td>
-                        <td>
-                            {% if base.gas %}
-                                <span class="badge bg-orange">{{ base.gas|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if comparison.gas %}
-                                <span class="badge bg-orange">{{ comparison.gas|default:'-' }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if not diff.gas|intdiv:1 %}
-                                <i class="fas fa-compress-alt"></i> &nbsp; ~ <span class="unit">%</span>
-                            {% elif diff.gas > 0 %}
-                                <i class="fas fa-long-arrow-alt-up fa-rotate-45"></i> &nbsp; <span class="degraded">{{ diff.gas|floatformat:0 }} </span> <span class="unit">%</span>
-                            {% elif diff.gas < 0 %}
-                                <i class="fas fa-long-arrow-alt-down fa-rotate-315"></i> &nbsp; <span class="improved">{{ diff.gas|floatformat:0|abs }} </span> <span class="unit">%</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endif %}
-            </table>
-
-            {% if notes %}
-                {% for current_note in notes %}
-                    <div class="alert alert-warning" role="alert">
-                        <i class="fas fa-comments"></i> {{ current_note.description }}
-                    </div>
-                {% endfor %}
+                            <span class="badge bg-red">{{ base.electricity1|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if comparison.electricity1 %}
+                            <span class="badge bg-red">{{ comparison.electricity1|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not diff.electricity1|intdiv:1 %}
+                            ~ <span class="unit">%</span>
+                        {% elif diff.electricity1 > 0 %}
+                            <span class="degraded">{{ diff.electricity1|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+    aria-label="{% translate 'increased by' %}"></i>
+                        {% elif diff.electricity1 < 0 %}
+                            <span class="improved">{{ diff.electricity1|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+    aria-label="{% translate 'decreased by' %}"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
+                    </td>
+                    <td>
+                        {% if base.electricity2 %}
+                            <span class="badge bg-red">{{ base.electricity2|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if comparison.electricity2 %}
+                            <span class="badge bg-red">{{ comparison.electricity2|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not diff.electricity2|intdiv:1 %}
+                            ~ <span class="unit">%</span>
+                        {% elif diff.electricity2 > 0 %}
+                            <span class="degraded">{{ diff.electricity2|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+    aria-label="{% translate 'increased by' %}"></i>
+                        {% elif diff.electricity2 < 0 %}
+                            <span class="improved">{{ diff.electricity2|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+    aria-label="{% translate 'decreased by' %}"></i>
+                        {% endif %}
+                    </td>
+                </tr>
             {% endif %}
-        </div>
+
+            {% if capabilities.electricity %}
+                <tr>
+                    <td>
+                        {% translate "Electricity" %} ({% translate "total" %}) <span class="unit">{% translate "kWh" %}</span>
+                    </td>
+                    <td>
+                        {% if base.electricity_merged %}
+                            <span class="badge bg-red">{{ base.electricity_merged|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if comparison.electricity_merged %}
+                            <span class="badge bg-red">{{ comparison.electricity_merged|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not diff.electricity_merged|intdiv:1 %}
+                            ~ <span class="unit">%</span>
+                        {% elif diff.electricity_merged > 0 %}
+                            <span class="degraded">{{ diff.electricity_merged|floatformat:0 }}</span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+    aria-label="{% translate 'increased by' %}"></i>
+                        {% elif diff.electricity_merged < 0 %}
+                            <span class="improved">{{ diff.electricity_merged|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+    aria-label="{% translate 'decreased by' %}"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if capabilities.electricity_returned and not frontend_settings.merge_electricity_tariffs %}
+                <tr>
+                    <td>
+                        {{ frontend_settings.tariff_1_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
+                    </td>
+                    <td>
+                        {% if base.electricity1_returned %}
+                            <span class="badge bg-green">{{ base.electricity1_returned|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if comparison.electricity1_returned %}
+                            <span class="badge bg-green">{{ comparison.electricity1_returned|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not diff.electricity1_returned|intdiv:1 %}
+                            ~ <span class="unit">%</span>
+                        {% elif diff.electricity1_returned > 0 %}
+                            <span class="improved">{{ diff.electricity1_returned|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+    aria-label="{% translate 'increased by' %}"></i>
+                        {% elif diff.electricity1_returned < 0 %}
+                            <span class="degraded">{{ diff.electricity1_returned|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+    aria-label="{% translate 'decreased by' %}"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ frontend_settings.tariff_2_returned_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
+                    </td>
+                    <td>
+                        {% if base.electricity2_returned %}
+                            <span class="badge bg-green">{{ base.electricity2_returned|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if comparison.electricity2_returned %}
+                            <span class="badge bg-green">{{ comparison.electricity2_returned|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not diff.electricity2_returned|intdiv:1 %}
+                            ~ <span class="unit">%</span>
+                        {% elif diff.electricity2_returned > 0 %}
+                            <span class="improved">{{ diff.electricity2_returned|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+    aria-label="{% translate 'increased by' %}"></i>
+                        {% elif diff.electricity2_returned < 0 %}
+                            <span class="degraded">{{ diff.electricity2_returned|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+    aria-label="{% translate 'decreased by' %}"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if capabilities.electricity_returned %}
+                <tr>
+                    <td>
+                        {% translate "Electricity returned" %} ({% translate "total" %}) <span class="unit">{% translate "kWh" %}</span>
+                    </td>
+                    <td>
+                        {% if base.electricity_returned_merged %}
+                            <span class="badge bg-green">{{ base.electricity_returned_merged|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if comparison.electricity_returned_merged %}
+                            <span class="badge bg-green">{{ comparison.electricity_returned_merged|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not diff.electricity_returned_merged|intdiv:1 %}
+                            ~ <span class="unit">%</span>
+                        {% elif diff.electricity_returned_merged > 0 %}
+                            <span class="improved">{{ diff.electricity_returned_merged|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+    aria-label="{% translate 'increased by' %}"></i>
+                        {% elif diff.electricity_returned_merged < 0 %}
+                            <span class="degraded">{{ diff.electricity_returned_merged|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+    aria-label="{% translate 'decreased by' %}"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if capabilities.gas %}
+                <tr>
+                    <td>
+                        {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
+                    </td>
+                    <td>
+                        {% if base.gas %}
+                            <span class="badge bg-orange">{{ base.gas|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if comparison.gas %}
+                            <span class="badge bg-orange">{{ comparison.gas|default:'-'|decimal_html }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not diff.gas|intdiv:1 %}
+                            ~ <span class="unit">%</span>
+                        {% elif diff.gas > 0 %}
+                            <span class="degraded">{{ diff.gas|floatformat:0 }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-up"
+    aria-label="{% translate 'increased by' %}"></i>
+                        {% elif diff.gas < 0 %}
+                            <span class="improved">{{ diff.gas|floatformat:0|abs }} </span> <span class="unit">%</span> &nbsp; <i class="fas fa-arrow-trend-down"
+    aria-label="{% translate 'decreased by' %}"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+
+        {% if notes %}
+            {% for current_note in notes %}
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-comments" aria-hidden="true"></i> {{ current_note.description }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
+</div>

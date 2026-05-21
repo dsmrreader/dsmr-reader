@@ -44,7 +44,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         Notification.objects.all().delete()
         self.assertEqual(Notification.objects.count(), 0)
 
-        # Generic connection error. Should NOT reset credentials.
+        # Generic connection error. Should NOT reset credentials. SP should be rescheduled for 5 minutes.
         refresh_access_token_mock.side_effect = TimeoutError()  # Network error
 
         with self.assertRaises(TimeoutError):
@@ -53,8 +53,12 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(Notification.objects.count(), 0)
         self.schedule_process.refresh_from_db()
         self.assertTrue(self.schedule_process.active)
+        self.assertGreater(
+            self.schedule_process.planned,
+            timezone.make_aware(timezone.datetime(2020, 1, 1, minute=4)),
+        )
 
-        # Dropbox Auth Error. Will reset credentials. Warning message should be created and SP disabled.
+        # Dropbox Auth Error. Should NOT reset credentials. SP should be rescheduled for 5 minutes and remain active.
         self.schedule_process.reschedule_asap()
         DropboxSettings.objects.all().update(refresh_token="invalid-token")  # noqa: S106
         refresh_access_token_mock.reset_mock()
@@ -63,9 +67,14 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         with self.assertRaises(dropbox.exceptions.AuthError):
             dsmr_dropbox.services.get_dropbox_client(self.schedule_process)
 
-        self.assertEqual(Notification.objects.count(), 1)
+        self.assertEqual(Notification.objects.count(), 0)
+        self.assertIsNotNone(DropboxSettings.get_solo().refresh_token)
         self.schedule_process.refresh_from_db()
-        self.assertFalse(self.schedule_process.active)
+        self.assertTrue(self.schedule_process.active)
+        self.assertGreater(
+            self.schedule_process.planned,
+            timezone.make_aware(timezone.datetime(2020, 1, 1, minute=4)),
+        )
 
         # Happy flow
         self.schedule_process.reschedule_asap()

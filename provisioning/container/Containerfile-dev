@@ -5,7 +5,7 @@
 ARG PYTHON_VERSION="3.14"
 
 FROM python:${PYTHON_VERSION}-slim-trixie AS local-dsmrreader-base
-WORKDIR /app
+WORKDIR /app/src
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 RUN apt-get update
@@ -19,7 +19,7 @@ FROM local-dsmrreader-base AS local-dsmrreader-dev
 # Also, the only reason for .venv is the IDE's detection
 ENV POETRY_VIRTUALENVS_CREATE=true \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
-    POETRY_VIRTUALENVS_PATH=/app/.venv \
+    POETRY_VIRTUALENVS_PATH=/app/src/.venv \
     DJANGO_SETTINGS_MODULE=dsmrreader.config.development
 
 RUN pip install poetry
@@ -29,7 +29,7 @@ COPY provisioning/container/entrypoint-dev.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["poetry", "run", "/app/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["poetry", "run", "/app/src/manage.py", "runserver", "0.0.0.0:8000"]
 
 
 
@@ -42,12 +42,12 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 
 
-FROM local-dsmrreader-dev AS  local-dsmrreader-dev-claude
+FROM local-dsmrreader-dev AS  local-dsmrreader-claude-dev
 
-ARG CLAUDE_INSTALL_CHECKSUM="431889ac7d056f636aaf5b71524666d04c89c45560f80329940846479d484778"
+ARG CLAUDE_INSTALL_CHECKSUM=''
 ENV PATH="/root/.local/bin:${PATH}"
 
-RUN apt-get update && apt-get install -y bash curl jq
+RUN apt-get update && apt-get install -y bash curl jq git gh
 RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install.sh \
     && echo "${CLAUDE_INSTALL_CHECKSUM}  /tmp/install.sh" | sha256sum --check \
     && bash /tmp/install.sh \
@@ -55,6 +55,13 @@ RUN curl -fsSL https://claude.ai/install.sh -o /tmp/install.sh \
 
 # Save template so entrypoint can seed empty bind mounts
 RUN cp /root/.claude.json /root/.claude.json.template
+
+COPY provisioning/container/entrypoint-claude.sh /entrypoint.sh
+
+WORKDIR /app/src
+
+CMD ["poetry", "run", "/app/src/manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 
 

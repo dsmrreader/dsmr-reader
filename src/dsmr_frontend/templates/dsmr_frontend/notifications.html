@@ -8,6 +8,9 @@
 {% block title %}
     {% translate "Notifications" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Notifications" %}
+{% endblock %}
 {% block header %}
     {% translate "Notifications" %} &nbsp; <i class="far fa-bell"></i>
 {% endblock %}
@@ -19,15 +22,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <header class="panel-heading">
+                    <h2 class="panel-heading">
                         {% translate "Unread Notifications" %}
                         &nbsp;
                         <div class="pull-right">
                             {% if notifications and user.is_authenticated %}
                                 <button class="btn btn-sm btn-success mark-all-notifications-read"
                                         data-notification-id="{{ current_notification.pk }}"
-                                        title="{% translate 'Mark all notifications as read' %}">
-                                    <i class="fas fa-check-double"></i> {% translate 'Mark all as read' %}
+                                        aria-label="{% translate 'Mark all notifications as read' %}">
+                                    <i class="fas fa-check-double" aria-hidden="true"></i> {% translate 'Mark all as read' %}
                                 </button>
                             {% elif not user.is_authenticated %}
                                 <a class="btn btn-sm btn-primary"
@@ -36,24 +39,24 @@
                                 </a>
                             {% endif %}
                         </div>
-                    </header>
-                    <div class="panel-body">
+                    </h2>
+                    <div class="panel-body" aria-live="polite" aria-atomic="false">
                         {% if notifications %}
                             {% for current_notification in notifications %}
                                 <div class="alert alert-info" role="alert">
                                     {% if user.is_authenticated %}
                                         <button class="btn btn-sm btn-success mark-notification-read"
                                                 data-notification-id="{{ current_notification.pk }}"
-                                                title="{% translate 'Mark as read' %}">
-                                            <i class="fas fa-check"></i>
+                                                aria-label="{% translate 'Mark as read' %}">
+                                            <i class="fas fa-check" aria-hidden="true"></i>
                                         </button>
-                                        &nbsp
+                                        &nbsp;
                                     {% endif %}
 
                                     {% if current_notification.redirect_to %}
                                         <a class="btn btn-sm btn-primary"
                                            href="{% url current_notification.redirect_to %}"
-                                           title="{% translate "View page" %}"><i class="fas fa-external-link-alt"></i></a> &nbsp;
+                                           aria-label="{% translate 'View page (opens in same tab)' %}"><i class="fas fa-external-link-alt" aria-hidden="true"></i></a> &nbsp;
                                     {% endif %}
 
                                     {{ current_notification.message|linebreaksbr }}

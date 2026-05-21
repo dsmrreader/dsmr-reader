@@ -12,7 +12,7 @@ services:
       dockerfile: provisioning/container/Containerfile-dev
       target: local-dsmrreader-test
     volumes:
-      - ./src:/app
+      - ./:/app
     depends_on:
       tests-dsmr-db:
         condition: service_healthy

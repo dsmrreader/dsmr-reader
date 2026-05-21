@@ -7,6 +7,9 @@
 {% block title %}
     {% translate "Dashboard" %}
 {% endblock %}
+{% block page_heading %}
+    {% translate "Dashboard" %}
+{% endblock %}
 {% block header %}
     {% translate "Dashboard" %} &nbsp; <i class="fas fa-tachometer-alt"></i>
 {% endblock %}
@@ -28,9 +31,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel header-panel">
-                        <header class="panel-heading">
+                        <h2 class="panel-heading">
                             {% translate "Unread notifications" %} &nbsp; <span class="badge bg-blue">{{ notification_count }}</span>
-                        </header>
+                        </h2>
                         <div class="panel-body">
                             <a class="btn btn-sm btn-primary"
                                href="{% url 'frontend:notifications' %}"><i class="fas fa-external-link-alt"></i> {% translate "Go to notification overview" %}</a>
@@ -44,6 +47,7 @@
             {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.today date_formatter=today_date_format capabilities=capabilities day=period_totals.day %}
             {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.month date_formatter=month_date_format capabilities=capabilities day=period_totals.day %}
             {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=period_totals.year date_formatter=year_date_format capabilities=capabilities day=period_totals.day %}
+            {% include "dsmr_frontend/fragments/dashboard-period-include.html" with data=past_365_stats custom_start_date=past_365_start custom_end_date=past_365_end custom_title=past_365_title capabilities=capabilities %}
         {% endif %}
 
     </section>
@@ -64,6 +68,7 @@
 
         const XHR_CONSUMPTION_HEADER_URL = "{% url 'frontend:xhr-consumption-header' %}";
         const GUI_REFRESH_INTERVAL = {{ frontend_settings.gui_refresh_interval }};
+        const DECIMAL_SIZE_FORMATTING = {{ decimal_size_formatting|yesno:"true,false" }};
 
         $(document).ready(function(){
              console.debug('GUI refresh interval:', GUI_REFRESH_INTERVAL);

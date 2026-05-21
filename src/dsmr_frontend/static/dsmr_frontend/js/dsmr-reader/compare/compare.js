@@ -1,90 +1,302 @@
 let g_datepicker_view_mode = 'months';
-let g_datepicker_selections = [];
+let g_datepicker_selections = {};
+let g_day_picker_month = {'1': null, '2': null};
+let g_month_picker_year = {'1': null, '2': null};
+let g_year_picker_decade_start = {'1': null, '2': null};
 
 
 $(document).ready(function () {
-    initialize_datepicker('1');
-    initialize_datepicker('2');
-
     $("#datepicker_trigger_days").click(function () {
         g_datepicker_view_mode = 'days';
-        initialize_datepicker('1')
-        initialize_datepicker('2')
+        switch_mode();
     });
 
     $("#datepicker_trigger_months").click(function () {
         g_datepicker_view_mode = 'months';
-        initialize_datepicker('1')
-        initialize_datepicker('2')
+        switch_mode();
     });
 
     $("#datepicker_trigger_years").click(function () {
         g_datepicker_view_mode = 'years';
-        initialize_datepicker('1')
-        initialize_datepicker('2')
+        switch_mode();
     });
+
+    /* Initial mode. */
+    switch_mode();
 });
 
 /**
- * Resets the datepicker. Required because options cannot be changed dynamically.
+ * Shows the appropriate pickers for the current mode and resets selections.
  */
-function initialize_datepicker(id_postfix) {
-    /* Reset selection. */
-    g_datepicker_selections = [];
+function switch_mode() {
+    /* Reset selections and day picker positions so both dates must be re-chosen in the new mode. */
+    g_datepicker_selections = {};
+    g_day_picker_month = {'1': null, '2': null};
 
     $('.datepicker-trigger').removeClass('st-green').addClass('st-gray');
     $('#datepicker_trigger_' + g_datepicker_view_mode).removeClass('st-gray').addClass('st-green');
 
-    if ($('#datepicker' + id_postfix).children().length > 0) {
-        /* Remove any previous events bound below. */
-        $('#datepicker' + id_postfix).off().datepicker('destroy');
-    }
+    var startDate = new Date(datepicker_start_date);
+    var endDate = new Date(datepicker_end_date);
 
-    $('#datepicker' + id_postfix).datepicker({
-        startView: g_datepicker_view_mode,
-        minViewMode: g_datepicker_view_mode,
-        maxViewMode: 'years',
-        calendarWeeks: true,
-        weekStart: 1,
-        todayHighlight: true,
-        startDate: datepicker_start_date,
-        endDate: datepicker_end_date,
-        format: datepicker_locale_format,
-        language: datepicker_language_code
-    }).on('changeDate', function (e) {
-        if (g_datepicker_view_mode !== 'days') {
-            return;
+    ['1', '2'].forEach(function (postfix) {
+        if (g_datepicker_view_mode === 'days') {
+            $('#datepicker' + postfix + '-day').show();
+            $('#datepicker' + postfix + '-month').hide();
+            $('#datepicker' + postfix + '-year').hide();
+
+            g_day_picker_month[postfix] = {year: endDate.getFullYear(), month: endDate.getMonth()};
+            render_day_picker(postfix);
+        } else if (g_datepicker_view_mode === 'months') {
+            $('#datepicker' + postfix + '-day').hide();
+            $('#datepicker' + postfix + '-month').show();
+            $('#datepicker' + postfix + '-year').hide();
+
+            if (!g_month_picker_year[postfix]) {
+                g_month_picker_year[postfix] = endDate.getFullYear();
+            }
+            g_month_picker_year[postfix] = Math.max(startDate.getFullYear(),
+                Math.min(endDate.getFullYear(), g_month_picker_year[postfix]));
+            render_month_picker(postfix);
+        } else {
+            $('#datepicker' + postfix + '-day').hide();
+            $('#datepicker' + postfix + '-month').hide();
+            $('#datepicker' + postfix + '-year').show();
+
+            if (!g_year_picker_decade_start[postfix]) {
+                g_year_picker_decade_start[postfix] = Math.floor(endDate.getFullYear() / 10) * 10;
+            }
+            render_year_picker(postfix);
         }
-        g_datepicker_selections[id_postfix] = e.date;
-        update_summary();
-
-    }).on('changeMonth', function (e) {
-        if (g_datepicker_view_mode !== 'months') {
-            return;
-        }
-        g_datepicker_selections[id_postfix] = e.date;
-        update_summary();
-
-    }).on('changeYear', function (e) {
-        if (g_datepicker_view_mode !== 'years') {
-            return;
-        }
-        g_datepicker_selections[id_postfix] = e.date;
-        update_summary();
-
     });
 }
 
 /**
- * Updates the the summary table.
+ * Renders the day-grid calendar picker for the given postfix.
+ * Reads / mutates: g_day_picker_month[postfix], g_datepicker_selections[postfix].
+ */
+function render_day_picker(postfix) {
+    var startDate = new Date(datepicker_start_date);
+    var endDate = new Date(datepicker_end_date);
+    var year = g_day_picker_month[postfix].year;
+    var month = g_day_picker_month[postfix].month;
+    var locale = datepicker_language_code.startsWith('nl') ? 'nl-NL' : 'en-GB';
+
+    /* Weekday header row — Monday first (Jan 1 2024 is a Monday) */
+    var weekdays = '';
+    for (var d = 0; d < 7; d++) {
+        var name = new Intl.DateTimeFormat(locale, {weekday: 'short'}).format(new Date(2024, 0, 1 + d));
+        weekdays += '<div class="dsmr-picker-weekday">' + name + '</div>';
+    }
+
+    /* Number of days in this month; weekday of the 1st (0=Mon … 6=Sun) */
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
+
+    var cells = '';
+
+    /* Spillover days from previous month */
+    var prevMonthDays = new Date(year, month, 0).getDate();
+    for (var p = firstWeekday - 1; p >= 0; p--) {
+        cells += '<button class="dsmr-picker-cell muted" disabled>' + (prevMonthDays - p) + '</button>';
+    }
+
+    /* Days of current month */
+    var minDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+    var maxDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+    for (var day = 1; day <= daysInMonth; day++) {
+        var cellDate = new Date(year, month, day);
+        var isDisabled = cellDate < minDate || cellDate > maxDate;
+        var sel = g_datepicker_selections[postfix];
+        var isActive = sel
+            && sel.getFullYear() === year
+            && sel.getMonth() === month
+            && sel.getDate() === day;
+        var cls = 'dsmr-picker-cell' + (isActive ? ' active' : '');
+        if (isDisabled) {
+            cells += '<button class="' + cls + '" disabled>' + day + '</button>';
+        } else {
+            cells += '<button class="' + cls + '" data-day="' + day + '">' + day + '</button>';
+        }
+    }
+
+    /* Trailing spillover to complete the last row */
+    var totalCells = firstWeekday + daysInMonth;
+    var trailingCells = (7 - (totalCells % 7)) % 7;
+    for (var n = 1; n <= trailingCells; n++) {
+        cells += '<button class="dsmr-picker-cell muted" disabled>' + n + '</button>';
+    }
+
+    /* Nav disabled logic */
+    var prevMonthDate = new Date(year, month - 1, 1);
+    var nextMonthDate = new Date(year, month + 1, 1);
+    var prevDisabled = prevMonthDate < new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+    var nextDisabled = nextMonthDate > new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+
+    var titleStr = new Intl.DateTimeFormat(locale, {month: 'long', year: 'numeric'}).format(new Date(year, month, 1));
+
+    document.getElementById('datepicker' + postfix + '-day').innerHTML =
+        '<div class="dsmr-picker">' +
+        '<div class="dsmr-picker-nav">' +
+        '<button class="dsmr-picker-prev"' + (prevDisabled ? ' disabled' : '') + '>&#8249;</button>' +
+        '<span class="dsmr-picker-title">' + titleStr + '</span>' +
+        '<button class="dsmr-picker-next"' + (nextDisabled ? ' disabled' : '') + '>&#8250;</button>' +
+        '</div>' +
+        '<div class="dsmr-picker-grid dsmr-picker-grid--days">' + weekdays + cells + '</div>' +
+        '</div>';
+
+    var container = document.getElementById('datepicker' + postfix + '-day');
+
+    container.querySelector('.dsmr-picker-prev').addEventListener('click', function () {
+        g_day_picker_month[postfix] = {year: prevMonthDate.getFullYear(), month: prevMonthDate.getMonth()};
+        render_day_picker(postfix);
+    });
+    container.querySelector('.dsmr-picker-next').addEventListener('click', function () {
+        g_day_picker_month[postfix] = {year: nextMonthDate.getFullYear(), month: nextMonthDate.getMonth()};
+        render_day_picker(postfix);
+    });
+    container.querySelectorAll('.dsmr-picker-cell[data-day]').forEach(function (cell) {
+        cell.addEventListener('click', function () {
+            g_datepicker_selections[postfix] = new Date(year, month, parseInt(this.getAttribute('data-day')));
+            update_summary();
+            render_day_picker(postfix);
+        });
+    });
+}
+
+/**
+ * Renders the month-grid picker for the given postfix.
+ */
+function render_month_picker(postfix) {
+    var startDate = new Date(datepicker_start_date);
+    var endDate = new Date(datepicker_end_date);
+    var year = g_month_picker_year[postfix];
+    var locale = datepicker_language_code.startsWith('nl') ? 'nl-NL' : 'en-GB';
+
+    var months = [];
+    for (var i = 0; i < 12; i++) {
+        months.push(new Intl.DateTimeFormat(locale, {month: 'short'}).format(new Date(2024, i, 1)));
+    }
+
+    var prevDisabled = (year - 1) < startDate.getFullYear();
+    var nextDisabled = (year + 1) > endDate.getFullYear();
+
+    var cells = '';
+    for (var m = 0; m < 12; m++) {
+        var cellDate = new Date(year, m, 1);
+        var minMonth = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+        var maxMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+        var isDisabled = cellDate < minMonth || cellDate > maxMonth;
+        var sel = g_datepicker_selections[postfix];
+        var isActive = sel && sel.getFullYear() === year && sel.getMonth() === m;
+        var cls = 'dsmr-picker-cell' + (isActive ? ' active' : '');
+        if (isDisabled) {
+            cells += '<button class="' + cls + '" disabled>' + months[m] + '</button>';
+        } else {
+            cells += '<button class="' + cls + '" data-month="' + m + '">' + months[m] + '</button>';
+        }
+    }
+
+    document.getElementById('datepicker' + postfix + '-month').innerHTML =
+        '<div class="dsmr-picker">' +
+        '<div class="dsmr-picker-nav">' +
+        '<button class="dsmr-picker-prev"' + (prevDisabled ? ' disabled' : '') + '>&#8249;</button>' +
+        '<span class="dsmr-picker-title">' + year + '</span>' +
+        '<button class="dsmr-picker-next"' + (nextDisabled ? ' disabled' : '') + '>&#8250;</button>' +
+        '</div>' +
+        '<div class="dsmr-picker-grid">' + cells + '</div>' +
+        '</div>';
+
+    var container = document.getElementById('datepicker' + postfix + '-month');
+
+    container.querySelector('.dsmr-picker-prev').addEventListener('click', function () {
+        g_month_picker_year[postfix]--;
+        render_month_picker(postfix);
+    });
+    container.querySelector('.dsmr-picker-next').addEventListener('click', function () {
+        g_month_picker_year[postfix]++;
+        render_month_picker(postfix);
+    });
+    container.querySelectorAll('.dsmr-picker-cell[data-month]').forEach(function (cell) {
+        cell.addEventListener('click', function () {
+            g_datepicker_selections[postfix] = new Date(
+                g_month_picker_year[postfix], parseInt(this.getAttribute('data-month')), 1
+            );
+            update_summary();
+            render_month_picker(postfix);
+        });
+    });
+}
+
+/**
+ * Renders the year-grid picker for the given postfix.
+ * Shows 12 years (decadeStart−1 … decadeStart+10) like Bootstrap Datepicker.
+ */
+function render_year_picker(postfix) {
+    var startDate = new Date(datepicker_start_date);
+    var endDate = new Date(datepicker_end_date);
+    var ds = g_year_picker_decade_start[postfix];
+
+    var prevDisabled = (ds - 1) < startDate.getFullYear();
+    var nextDisabled = (ds + 10) > endDate.getFullYear();
+
+    var cells = '';
+    for (var y = ds - 1; y <= ds + 10; y++) {
+        var isOutOfDecade = y < ds || y > ds + 9;
+        var isDisabled = y < startDate.getFullYear() || y > endDate.getFullYear();
+        var sel = g_datepicker_selections[postfix];
+        var isActive = sel && sel.getFullYear() === y;
+        var cls = 'dsmr-picker-cell'
+            + (isOutOfDecade && !isDisabled ? ' muted' : '')
+            + (isActive ? ' active' : '');
+        if (isDisabled) {
+            cells += '<button class="' + cls + '" disabled>' + y + '</button>';
+        } else {
+            cells += '<button class="' + cls + '" data-year="' + y + '">' + y + '</button>';
+        }
+    }
+
+    document.getElementById('datepicker' + postfix + '-year').innerHTML =
+        '<div class="dsmr-picker">' +
+        '<div class="dsmr-picker-nav">' +
+        '<button class="dsmr-picker-prev"' + (prevDisabled ? ' disabled' : '') + '>&#8249;</button>' +
+        '<span class="dsmr-picker-title">' + ds + '\u2013' + (ds + 9) + '</span>' +
+        '<button class="dsmr-picker-next"' + (nextDisabled ? ' disabled' : '') + '>&#8250;</button>' +
+        '</div>' +
+        '<div class="dsmr-picker-grid">' + cells + '</div>' +
+        '</div>';
+
+    var container = document.getElementById('datepicker' + postfix + '-year');
+
+    container.querySelector('.dsmr-picker-prev').addEventListener('click', function () {
+        g_year_picker_decade_start[postfix] -= 10;
+        render_year_picker(postfix);
+    });
+    container.querySelector('.dsmr-picker-next').addEventListener('click', function () {
+        g_year_picker_decade_start[postfix] += 10;
+        render_year_picker(postfix);
+    });
+    container.querySelectorAll('.dsmr-picker-cell[data-year]').forEach(function (cell) {
+        cell.addEventListener('click', function () {
+            g_datepicker_selections[postfix] = new Date(
+                parseInt(this.getAttribute('data-year')), 0, 1
+            );
+            update_summary();
+            render_year_picker(postfix);
+        });
+    });
+}
+
+/**
+ * Updates the summary table when both pickers have a selection.
  */
 function update_summary() {
-    if (!g_datepicker_selections[1] || !g_datepicker_selections[2]) {
+    if (!g_datepicker_selections['1'] || !g_datepicker_selections['2']) {
         return;
     }
 
-    let base_selection = moment(g_datepicker_selections[1]).format(datepicker_locale_format.toUpperCase());
-    let comparison_selection = moment(g_datepicker_selections[2]).format(datepicker_locale_format.toUpperCase());
+    let base_selection = dayjs(g_datepicker_selections['1']).format(datepicker_locale_format.toUpperCase());
+    let comparison_selection = dayjs(g_datepicker_selections['2']).format(datepicker_locale_format.toUpperCase());
 
     $("#summary-holder").hide();
     $("#summary-loader").show();
@@ -98,7 +310,7 @@ function update_summary() {
         },
     }).done(function (data) {
         $("#summary-holder").html(data).show();
-    }).always(function(){
+    }).always(function () {
         $("#summary-loader").hide();
     });
 }

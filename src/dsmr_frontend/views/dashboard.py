@@ -1,3 +1,8 @@
+import datetime
+
+from django.conf import settings
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 
 from dsmr_frontend.mixins import ConfigurableLoginRequiredMixin
@@ -11,6 +16,16 @@ import dsmr_stats.services
 class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = "dsmr_frontend/dashboard.html"
 
+    def _past_365_context(self) -> dict:
+        today = timezone.localdate()
+        start = today - datetime.timedelta(days=365)
+        return {
+            "past_365_stats": dsmr_stats.services.range_statistics(start=start, end=today),
+            "past_365_start": start,
+            "past_365_end": today - datetime.timedelta(days=1),
+            "past_365_title": _("Past 365 days"),
+        }
+
     def get_context_data(self, **kwargs):
         context_data = super(Dashboard, self).get_context_data(**kwargs)
         context_data["capabilities"] = dsmr_backend.services.backend.get_capabilities()
@@ -21,5 +36,7 @@ class Dashboard(ConfigurableLoginRequiredMixin, TemplateView):
         context_data["month_date_format"] = "DSMR_DATEPICKER_MONTH"
         context_data["year_date_format"] = "DSMR_DATEPICKER_YEAR"
         context_data["period_totals"] = dsmr_stats.services.period_totals()
+        context_data["decimal_size_formatting"] = settings.DSMRREADER_DECIMAL_SIZE_FORMATTING
+        context_data.update(self._past_365_context())
 
         return context_data

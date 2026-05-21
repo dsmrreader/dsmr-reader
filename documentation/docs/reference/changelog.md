@@ -9,15 +9,64 @@
 ---
 
 
+## v6.1.0 - May 2026
+
+<small>*Spring cleaning: improved accessibility, rolling 365-day dashboard panel, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
+
+??? tip "Improvements"
+
+    #### Accessibility
+    - Applied WCAG 2.2 AA accessibility improvements to frontend templates (semantic headings, ARIA attributes, keyboard navigation, screen reader support)
+
+    #### Dashboard
+    - Added rolling past-365-days consumption panel to the dashboard - [#1998](https://github.com/dsmrreader/dsmr-reader/issues/1998)
+
+    #### UI
+    - Improved decimal rendering with ==experimental== formatting <small>— Give yourself a few days to get used to it ;-)</small>
+
+    #### Retention
+    - Improved retention data rotation query performance by using index-friendly count - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
+    - Improved retention data rotation scheduling to avoid redundant re-runs in steady state - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
+    - Improved retention data rotation to cache progress, skipping already-processed hours on subsequent runs - [#2138](https://github.com/dsmrreader/dsmr-reader/issues/2138)
+
+    #### Weather
+    - Improved Buienradar weather station list to be fetched dynamically from the API instead of being hardcoded - [#2167](https://github.com/dsmrreader/dsmr-reader/issues/2167)
+
+    #### Dropbox
+    - Improved Dropbox sync to no longer remove credentials on server/API errors, instead rescheduling for 5 minutes
+
+??? abstract "Other changes and fixes"
+
+    #### Fixes
+    - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
+    - Fixed empty green badges rendering on the energy contracts page when no electricity returned data is available - [#2133](https://github.com/dsmrreader/dsmr-reader/issues/2133)
+
+    #### UI
+    - Improved compare page trend icons and layout
+
+    #### Dependencies
+    - Updated Font Awesome Free from 7.1.0 to 7.2.0
+    - Updated ECharts from 5.3.3 to 5.6.0
+    - Updated jQuery from 3.6.0 to 3.7.1
+    - Replaced Bootstrap Datepicker 1.9.0 with a custom day/month/year picker (Archive, Compare, Trends)
+    - Replaced Moment.js with Day.js (~2 KB vs ~70 KB)
+    - Removed unused vendored libraries: Semantic UI, iCheck, jQuery Inputmask, jQuery placeholder, jQuery slimScroll, jQuery ba-resize, Ionicons, html5shiv, Respond.js
+
+    #### Miscellaneous
+    - Generic development improvements
+
+
+---
+
+
 ## v6.0.2 - February 2026
 
-!!! abstract "Fixes"
-    
-    **Miscelaneous**
+<small>*Reverts a PVOutput net power calculation change introduced in v6.0.0.*</small>
 
-    ### PVOutput
-    - ==Reverted== <del>[#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064) Improved net power calculation to use **average** recent consumption data instead of latest value</del>
-        - [#2131](https://github.com/dsmrreader/dsmr-reader/pull/2131)
+??? abstract "Fixes"
+    
+    #### PVOutput
+    - ==Reverted v6.0 change== <del>[#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064) Improved net power calculation to use **average** recent consumption data instead of latest value</del> - [#2131](https://github.com/dsmrreader/dsmr-reader/pull/2131)
 
 
 ---
@@ -25,13 +74,13 @@
 
 ## v6.0.1 - February 2026
 
-!!! abstract "Fixes"
-    
-    **Miscelaneous**
+<small>*Security dependency updates.*</small>
 
-    - Updated dependencies due to security vulnerabilities
-        - [#2109](https://github.com/dsmrreader/dsmr-reader/issues/2109)
-        - [#2110](https://github.com/dsmrreader/dsmr-reader/issues/2110)
+??? abstract "Fixes"
+    
+    #### Security
+
+    - Updated dependencies due to security vulnerabilities - [#2109](https://github.com/dsmrreader/dsmr-reader/issues/2109) - [#2110](https://github.com/dsmrreader/dsmr-reader/issues/2110)
 
 
 ---
@@ -39,9 +88,11 @@
 
 ## v6.0.0 - February 2026
 
-!!! danger "Incompatible changes"
+<small>*Major release dropping bare-metal installations, legacy database/Python versions, and old environment variables. Adds containerized hosting improvements, InfluxDB/MQTT queue management commands, and upgrades to Django 5.2 LTS.*</small>
 
-    ### Incompatible changes: Installations
+??? danger "Incompatible changes"
+
+    #### Incompatible changes: Installations
     Dropped installation support for:
 
     - ==Native/bare metal installations== without containers
@@ -54,7 +105,7 @@
     
     ---
 
-    ### Incompatible changes: Database versions
+    #### Incompatible changes: Database versions
     Dropped database support for:
 
     - **PostgreSQL 10**
@@ -75,7 +126,7 @@
 
     ---
 
-    ### Incompatible changes: Python versions
+    #### Incompatible changes: Python versions
     Dropped Python support for:
 
     - **Python 3.7**
@@ -89,7 +140,7 @@
 
     ---
 
-    ### Incompatible changes: Legacy environment variables
+    #### Incompatible changes: Legacy environment variables
     Dropped:
 
     - `DSMR_USER` <small>(replaced by `DSMRREADER_ADMIN_USER` since v5)</small>
@@ -99,15 +150,14 @@
 
     <small>*DSMR-reader is developed, tested and built on Python 3.13 and will soon even move to Python 3.14. Older versions are unlikely to work due to dependency pinning.*</small>
 
-!!! success "New features"
+??? success "New features"
 
-    ### Hosting
+    #### Hosting
     - Added new dedicated URL route for health check and monitoring purposes:
         ```
         GET /healthcheck
         ```
-    - More [Django settings](./environment-variables.md/#django-settingsoverrides) exposed via environment variables
-        - [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
+    - More [Django settings](./environment-variables.md/#django-settingsoverrides) exposed via environment variables - [#2010](https://github.com/dsmrreader/dsmr-reader/issues/2010)
     - Added [``DSMRREADER_BACKEND_HIBERNATE``](./environment-variables.md/#dsmrreader_backend_hibernate) in favor of migrating to containerized setup
 
     <small>*This greatly improves the flexibility of changing internal settings without having to manually alter the installation.*</small>
@@ -116,9 +166,8 @@
 
     ---
 
-    ### InfluxDB
-    - Use Influx URL instead of Influx hostname + port combination
-        - [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
+    #### InfluxDB
+    - Use Influx URL instead of Influx hostname + port combination - [#1984](https://github.com/dsmrreader/dsmr-reader/issues/1984)
     - Added command-line alias for clearing InfluxDB queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
         ```shell title="shell"
@@ -127,36 +176,32 @@
 
     ---
 
-    ### MQTT
-    - Changed message queue primary key from AutoField to BigAutoField to reduce the number if sequence resets needed
-        - [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
+    #### MQTT
+    - Changed message queue primary key from AutoField to BigAutoField to reduce the number if sequence resets needed - [#2000](https://github.com/dsmrreader/dsmr-reader/issues/2000)
     - Added command-line alias for clearing MQTT queue
         - <small>*This is an alternative for executing database queries that do the same*</small>
         ```shell title="shell"
         ./manage.py dsmr_mqtt_clear_queue
         ```
 
-!!! abstract "Other changes and fixes"
+??? abstract "Other changes and fixes"
     
 
-    ### PVOutput
-    - Improved net power calculation to use **average** recent consumption data instead of latest value
-        - [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
+    #### PVOutput
+    - Improved net power calculation to use **average** recent consumption data instead of latest value - [#2064](https://github.com/dsmrreader/dsmr-reader/pull/2064)
     
     ---
 
-    ### Documentation
-    - Added explanation about upload time to MinderGas
-        - [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979) by `MrLurch81`
+    #### Documentation
+    - Added explanation about upload time to MinderGas - [#1979](https://github.com/dsmrreader/dsmr-reader/issues/1979) by `MrLurch81`
     - Fixed broken API docs rendering caused by legacy ReDoc link
-    - Simplified online documentation
-        - [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
+    - Simplified online documentation - [#1686](https://github.com/dsmrreader/dsmr-reader/issues/1686)
     - Dropped Dutch translation for the online documentation
         - <small>*The DSMR-reader translations inside the application are **not** affected*</small>
    
     ---
 
-    ### Miscelaneous
+    #### Miscelaneous
     - Updated Django to 5.2 LTS
     - Updated a lot of other dependencies to a more recent version
         - <small>*The Dropbox SDK is the most important one due to incompatible Dropbox API changes per 1 January 2026*</small>
@@ -174,7 +219,7 @@
 
     #### v5.12.0 - December 2025
     
-    !!!+ warning
+    !!! warning
     
         This is the last release in the DSMR-reader v5.x series. Upgrade to DSMR-reader v6.x for future support and features.
     
@@ -184,7 +229,7 @@
     
     - **Fixed** Updated Dropbox SDK to latest version in favor of incompatible API changes on January 1st, 2026.
     
-    - **Changed** **Dropped** support for Python 3.7 and 3.8 - Do NOT update if you run these versions! Switch directly to DSMR-reader v6 instead.
+    - **Dropped** support for Python 3.7 and 3.8 - Do NOT update if you run these versions! Switch directly to DSMR-reader v6 instead.
 
 === "v5.11"
     

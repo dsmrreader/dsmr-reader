@@ -19,7 +19,7 @@ class MinderGasSettingsAdmin(SingletonModelAdmin):
                 "fields": ["export", "auth_token"],
                 "description": _(
                     'Detailed instructions for configuring MinderGas.nl can be found here: <a href="https://dsmr-reader'
-                    '.readthedocs.io/nl/v5/how-to/admin/mindergas.html">Documentation</a>'
+                    '.readthedocs.io/en/v5/how-to/admin/mindergas.html">Documentation</a>'
                 ),
             },
         ),

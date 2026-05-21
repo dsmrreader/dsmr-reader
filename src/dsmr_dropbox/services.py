@@ -61,18 +61,9 @@ def get_dropbox_client(scheduled_process: ScheduledProcess) -> dropbox.Dropbox:
     except Exception as error:
         logger.error(" - Dropbox error: %s", error)
 
-        # Network errors should NOT reset the client side app token (see further below). Only API errors should do so.
-        if not isinstance(error, dropbox.exceptions.DropboxException):
-            scheduled_process.delay(minutes=1)
-            raise
+        # Both network and API errors reschedule for 5 minutes (credentials are NOT cleared).
+        scheduled_process.delay(minutes=5)
 
-        logger.error(" - Removing Dropbox credentials due to API failure")
-        message = _("Unable to authenticate with Dropbox, removing credentials. Error: {}".format(error))
-        dsmr_frontend.services.display_dashboard_message(message=message)
-        DropboxSettings.objects.update(
-            refresh_token=None,
-        )  # Does not trigger auto disable
-        scheduled_process.disable()
         raise
 
     logger.info("Dropbox: Auth/user check OK")

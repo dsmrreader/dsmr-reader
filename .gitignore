@@ -1,19 +1,23 @@
-/.pydevproject/
-/.project/
+# IDE
 /.idea/*
 !/.idea/runConfigurations/*
-/.claude/*
-!/.claude/settings.json
-!/.claude/commands/
+
+# Claude
+.claude/settings.local.json
+src/.claude/settings.local.json
+/docs/
+/.superpowers/
+/provisioning/agents/
+/CLAUDE.local.md
+
+# Python
 *.pyc
 **/__pycache__
 **/.pytest_cache
-**/.coverage
+**/.coverage*
 **/.env
-/.gitattributes
-/docs/_locale/nl/LC_MESSAGES/**/changelog.po
-/docs/_locale/nl/LC_MESSAGES/**/changelog.mo
-/docs/_locale/nl/LC_MESSAGES/how-to/upgrading/to-v*.po
+
+# Django / app
 /src/.venv/
 /src/dsmrreader/settings.py
 /src/dsmrreader/settings.py.BACKUP
@@ -21,9 +25,7 @@
 /src/backups/
 /src/logs/
 /src/dsmr_plugins/modules/
-/manage_mule.py
 # Containerization
-/venv/
 /docker-compose.override.yml
 /docker-compose.yml
 /compose.override.yml
@@ -33,4 +35,3 @@
 /Containerfile
 /container-data/
 /provisioning/container-data/
-/.agent-data/
