@@ -26,7 +26,7 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
     )
 
     # Prefetch all price contracts once to avoid one SELECT per day.
-    all_prices: List[EnergySupplierPrice] = list(EnergySupplierPrice.objects.all()) if not dry_run else []
+    all_prices: List[EnergySupplierPrice] = list(EnergySupplierPrice.objects.all())
 
     updated = 0
     unchanged = 0
@@ -69,16 +69,14 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
             new_e1, new_e2, new_e1_ret, new_e2_ret = deltas
             new_gas = _gas_delta(current_record, next_record)
 
-            if not dry_run:
-                try:
-                    prices = _resolve_prices(day=current_record.day, all_prices=all_prices)
-                except EnergySupplierPrice.DoesNotExist:
+            try:
+                prices = _resolve_prices(day=current_record.day, all_prices=all_prices)
+            except EnergySupplierPrice.DoesNotExist:
+                if not dry_run:
                     print("\n   [!] No prices found for {}, using zero fallback".format(current_record.day))
-                    prices = dsmr_consumption.services.get_fallback_prices()
-            else:
                 prices = dsmr_consumption.services.get_fallback_prices()
 
-            fixed_cost = prices.fixed_daily_cost
+            fixed_cost = dsmr_consumption.services.round_decimal(prices.fixed_daily_cost)
             electricity1_cost = dsmr_consumption.services.round_decimal(
                 (new_e1 * prices.electricity_delivered_1_price) - (new_e1_ret * prices.electricity_returned_1_price)
             )
@@ -126,6 +124,14 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                 print("   electricity2_returned: {} -> {}".format(current_record.electricity2_returned, new_e2_ret))
             if new_gas is not None and new_gas != current_record.gas:
                 print("   gas:                   {} -> {}".format(current_record.gas, new_gas))
+            if electricity1_cost != current_record.electricity1_cost:
+                print("   electricity1_cost:     {} -> {}".format(current_record.electricity1_cost, electricity1_cost))
+            if electricity2_cost != current_record.electricity2_cost:
+                print("   electricity2_cost:     {} -> {}".format(current_record.electricity2_cost, electricity2_cost))
+            if fixed_cost != current_record.fixed_cost:
+                print("   fixed_cost:            {} -> {}".format(current_record.fixed_cost, fixed_cost))
+            if total_cost != current_record.total_cost:
+                print("   total_cost:            {} -> {}".format(current_record.total_cost, total_cost))
 
             if not dry_run:
                 _apply_recalculated_day(
