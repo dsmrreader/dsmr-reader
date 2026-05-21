@@ -55,9 +55,9 @@ class TestStatisticsIntegration(TestCase):
     START_DATETIME = timezone.datetime(2020, 1, 10, 0, 0, 0)
     HOURS_TO_GENERATE = 48
     READINGS_PER_HOUR = 2  # One per 30 minutes (reduced for test speed)
-    # Extra readings appended after the main block (beyond the one Jan 12 sentinel).
+    # Extra readings appended after the main block (midnight anchor + Jan 12 sentinel).
     # Subclasses may override when their data generation needs additional boundary readings.
-    EXTRA_READINGS = 1
+    EXTRA_READINGS = 2
 
     ELECTRICITY_INCREMENT_1 = Decimal("0.001")  # kWh per reading
     ELECTRICITY_INCREMENT_2 = Decimal("0.002")
@@ -169,6 +169,27 @@ class TestStatisticsIntegration(TestCase):
                 )
             )
         DsmrReading.objects.bulk_create(readings_to_create)
+
+        # Midnight reading at AMS Jan 12 00:00 (UTC Jan 11 23:00) — closes the last UTC hour of Jan 11
+        # so create_hourly_statistics() has an anchor at both hour boundaries for that hour.
+        midnight_time = start_dt + timezone.timedelta(hours=48)
+        electricity_delivered_1 += self.ELECTRICITY_INCREMENT_1
+        electricity_delivered_2 += self.ELECTRICITY_INCREMENT_2
+        electricity_returned_1 += self.ELECTRICITY_RETURNED_1
+        electricity_returned_2 += self.ELECTRICITY_RETURNED_2
+        gas_delivered += self.GAS_INCREMENT
+        DsmrReading.objects.create(
+            timestamp=midnight_time,
+            electricity_delivered_1=electricity_delivered_1,
+            electricity_returned_1=electricity_returned_1,
+            electricity_delivered_2=electricity_delivered_2,
+            electricity_returned_2=electricity_returned_2,
+            electricity_currently_delivered=Decimal("0.500"),
+            electricity_currently_returned=Decimal("0.100"),
+            extra_device_timestamp=midnight_time,
+            extra_device_delivered=gas_delivered,
+            processed=False,
+        )
 
         # Extra reading on Jan 12 so the stats generator does not stall waiting
         # for a gas reading on the day after Jan 11.
