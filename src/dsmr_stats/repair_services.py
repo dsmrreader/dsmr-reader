@@ -58,14 +58,12 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                 print("\n - [SKIP] No next-day record for: {}".format(day))
                 skipped += 1
                 processed += 1
-                _print_progress(processed, total)
                 continue
 
             deltas = _electricity_deltas(current_record, next_record)
             if deltas is None:
                 skipped += 1
                 processed += 1
-                _print_progress(processed, total)
                 continue
 
             new_e1, new_e2, new_e1_ret, new_e2_ret = deltas
@@ -103,7 +101,7 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                 or new_e2 != current_record.electricity2
                 or new_e1_ret != current_record.electricity1_returned
                 or new_e2_ret != current_record.electricity2_returned
-                or new_gas != current_record.gas
+                or (new_gas is not None and new_gas != current_record.gas)
                 or electricity1_cost != current_record.electricity1_cost
                 or electricity2_cost != current_record.electricity2_cost
                 or fixed_cost != current_record.fixed_cost
@@ -147,10 +145,11 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
 
             updated += 1
             processed += 1
-            _print_progress(processed, total)
 
         if to_save:
             _bulk_update_day_statistics(to_save)
+
+        _print_progress(processed, total)
 
     print("\nDone. Updated: {}, Unchanged: {}, Skipped: {}".format(updated, unchanged, skipped))
 
@@ -213,7 +212,6 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
                 print("\n - [SKIP] Missing anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
                 skipped += 1
                 processed += 1
-                _print_progress(processed, total)
                 continue
 
             anchor_start = all_ec[idx_start]
@@ -257,12 +255,13 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
 
             updated += 1
             processed += 1
-            _print_progress(processed, total)
 
         if to_save:
             HourStatistics.objects.bulk_update(
                 to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
             )
+
+        _print_progress(processed, total)
 
     print("\nDone. Updated: {}, Unchanged: {}, Skipped: {}".format(updated, unchanged, skipped))
 
