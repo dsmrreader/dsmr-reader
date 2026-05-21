@@ -13,7 +13,7 @@
 
 <small>*Spring cleaning: improved accessibility, rolling 365-day dashboard panel, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
 
-??? tip "Improvements"
+!!! tip "Improvements"
 
     #### Accessibility
     - Applied WCAG 2.2 AA accessibility improvements to frontend templates (semantic headings, ARIA attributes, keyboard navigation, screen reader support)
@@ -35,7 +35,7 @@
     #### Dropbox
     - Improved Dropbox sync to no longer remove credentials on server/API errors, instead rescheduling for 5 minutes
 
-??? abstract "Other changes and fixes"
+!!! abstract "Other changes and fixes"
 
     #### Fixes
     - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
