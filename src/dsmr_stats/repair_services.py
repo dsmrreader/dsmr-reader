@@ -145,7 +145,7 @@ def _print_progress(current: int, total: int, width: int = 40) -> None:
     print("\r[{}] {}/{} ({}%)".format(bar, current, total, pct), end="", flush=True)
 
 
-def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) -> None:  # noqa: C901
+def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -> None:  # noqa: C901
     """Retroactively recalculates HourStatistics electricity totals using cross-boundary anchors (fixes #1770).
 
     Processes hours newest-first in batches of `batch_size`. Per batch, all required
