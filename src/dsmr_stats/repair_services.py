@@ -1,5 +1,6 @@
 import bisect
 import datetime
+import sys
 from decimal import Decimal
 from typing import Dict, List, Optional
 
@@ -136,6 +137,8 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
 
 
 def _print_progress(current: int, total: int, width: int = 40) -> None:
+    if not sys.stdout.isatty():
+        return
     filled = int(width * current / total) if total else width
     bar = "#" * filled + "." * (width - filled)
     pct = int(100 * current / total) if total else 100
