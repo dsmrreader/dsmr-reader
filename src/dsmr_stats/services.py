@@ -207,8 +207,8 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
         return None
 
     # Cross-hour anchors for gap-free hourly totals.
-    anchor_start = ElectricityConsumption.objects.filter(read_at__lt=hour_start).order_by("read_at").last()
-    anchor_end = ElectricityConsumption.objects.filter(read_at__lt=hour_end).order_by("read_at").last()
+    anchor_start = ElectricityConsumption.objects.filter(read_at__lte=hour_start).order_by("read_at").last()
+    anchor_end = ElectricityConsumption.objects.filter(read_at__lte=hour_end).order_by("read_at").last()
     start_record = anchor_start if anchor_start is not None else electricity_readings.first()
     end_record = anchor_end
 

@@ -1,4 +1,5 @@
 import datetime
+from typing import Optional
 from unittest import mock
 from decimal import Decimal
 
@@ -263,6 +264,32 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
         dsmr_stats.services.run(self.schedule_process)
         self.assertTrue(create_statistics_mock.called)
+
+    def test_create_hourly_statistics_uses_boundary_ec_records(self):
+        """EC at exactly hour_start/hour_end must be used as anchors, not the records 1 min before."""
+        hour_start = timezone.make_aware(timezone.datetime(2010, 1, 1, hour=10))
+        hour_end = hour_start + timezone.timedelta(hours=1)
+        ec_base = dict(
+            returned_1=Decimal("0.000"),
+            delivered_2=Decimal("0.000"),
+            returned_2=Decimal("0.000"),
+            currently_delivered=Decimal("0.000"),
+            currently_returned=Decimal("0.000"),
+        )
+
+        # Record just before the hour — must NOT be anchor_start.
+        ElectricityConsumption.objects.create(
+            read_at=hour_start - timezone.timedelta(minutes=1), delivered_1=Decimal("999.000"), **ec_base
+        )
+        # Record at exactly hour_start — correct anchor_start.
+        ElectricityConsumption.objects.create(read_at=hour_start, delivered_1=Decimal("1000.000"), **ec_base)
+        # Record at exactly hour_end — correct anchor_end.
+        ElectricityConsumption.objects.create(read_at=hour_end, delivered_1=Decimal("1001.500"), **ec_base)
+
+        dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
+
+        hs = HourStatistics.objects.get(hour_start=hour_start)
+        self.assertEqual(hs.electricity1, Decimal("1.500"))  # 1001.5 - 1000.0; buggy code gives 1.0 (1000-999)
 
     def test_create_hourly_statistics_dsmr_v4_gas(self):
         hour_start = timezone.make_aware(timezone.datetime(2010, 1, 1, hour=12))
@@ -1203,3 +1230,97 @@ class TestRecalculateFromMeterPositions(InterceptCommandStdoutMixin, TestCase):
 
         record = DayStatistics.objects.get(day=self.DAY1)
         self.assertEqual(record.electricity1, Decimal("0.000"))  # unchanged
+
+
+class TestRecalculateHourStatistics(InterceptCommandStdoutMixin, TestCase):
+    """Tests for recalculate_hour_statistics()."""
+
+    def _make_ec(
+        self,
+        read_at: timezone.datetime,
+        delivered_1: Decimal,
+        delivered_2: Optional[Decimal] = None,
+        returned_1: Optional[Decimal] = None,
+        returned_2: Optional[Decimal] = None,
+    ) -> ElectricityConsumption:
+        zero = Decimal("0.000")
+        return ElectricityConsumption.objects.create(
+            read_at=read_at,
+            delivered_1=delivered_1,
+            delivered_2=delivered_2 if delivered_2 is not None else zero,
+            returned_1=returned_1 if returned_1 is not None else zero,
+            returned_2=returned_2 if returned_2 is not None else zero,
+            currently_delivered=zero,
+            currently_returned=zero,
+        )
+
+    def _make_hour(self, hour_start: timezone.datetime, electricity1: Optional[Decimal] = None) -> HourStatistics:
+        zero = Decimal("0.000")
+        return HourStatistics.objects.create(
+            hour_start=hour_start,
+            electricity1=electricity1 if electricity1 is not None else zero,
+            electricity2=zero,
+            electricity1_returned=zero,
+            electricity2_returned=zero,
+        )
+
+    def test_recalculate_hour_corrects_boundary_anchors(self):
+        """EC at exactly hour_start/hour_end boundaries must be the anchors, not the records 1 min before."""
+        hour_start = timezone.make_aware(timezone.datetime(2020, 6, 15, 12))
+        hour_end = hour_start + timezone.timedelta(hours=1)
+
+        # One minute before: what buggy bisect_left would pick as anchor_start.
+        self._make_ec(hour_start - timezone.timedelta(minutes=1), delivered_1=Decimal("999.000"))
+        # At exactly hour_start: correct anchor_start.
+        self._make_ec(hour_start, delivered_1=Decimal("1000.000"))
+        # At exactly hour_end: correct anchor_end.
+        self._make_ec(hour_end, delivered_1=Decimal("1001.500"))
+
+        # Stale value as would be stored by buggy create_hourly_statistics (1000-999=1.0).
+        hour = self._make_hour(hour_start, electricity1=Decimal("1.000"))
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.electricity1, Decimal("1.500"))  # 1001.5-1000.0; buggy code leaves it at 1.0
+
+    def test_recalculate_hour_dry_run(self):
+        """Dry run: values computed but no DB writes."""
+        hour_start = timezone.make_aware(timezone.datetime(2020, 6, 15, 12))
+        hour_end = hour_start + timezone.timedelta(hours=1)
+
+        self._make_ec(hour_start, delivered_1=Decimal("1000.000"))
+        self._make_ec(hour_end, delivered_1=Decimal("1001.500"))
+
+        hour = self._make_hour(hour_start, electricity1=Decimal("0.000"))
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=True)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.electricity1, Decimal("0.000"))  # unchanged
+
+    def test_recalculate_hour_no_anchors(self):
+        """Hour with no surrounding EC records is skipped gracefully."""
+        hour_start = timezone.make_aware(timezone.datetime(2020, 6, 15, 12))
+
+        hour = self._make_hour(hour_start, electricity1=Decimal("5.000"))
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.electricity1, Decimal("5.000"))  # unchanged
+
+    def test_recalculate_hour_command(self):
+        """Management command --hours --write applies the corrected values."""
+        hour_start = timezone.make_aware(timezone.datetime(2020, 6, 15, 12))
+        hour_end = hour_start + timezone.timedelta(hours=1)
+
+        self._make_ec(hour_start, delivered_1=Decimal("1000.000"))
+        self._make_ec(hour_end, delivered_1=Decimal("1002.000"))
+
+        hour = self._make_hour(hour_start, electricity1=Decimal("0.000"))
+
+        self._intercept_command_stdout("dsmr_stats_recalculate_from_meter_positions", hours=True, dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.electricity1, Decimal("2.000"))  # 1002.0-1000.0

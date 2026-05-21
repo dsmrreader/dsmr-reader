@@ -151,7 +151,9 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) ->
         # Fetch EC records that span this batch's time window plus the one just before it.
         ec_before = ElectricityConsumption.objects.filter(read_at__lt=window_start).order_by("-read_at").first()
         ec_in_window: List[ElectricityConsumption] = list(
-            ElectricityConsumption.objects.filter(read_at__gte=window_start, read_at__lt=window_end).order_by("read_at")
+            ElectricityConsumption.objects.filter(read_at__gte=window_start, read_at__lte=window_end).order_by(
+                "read_at"
+            )
         )
 
         all_ec: List[ElectricityConsumption] = ([ec_before] if ec_before else []) + ec_in_window
@@ -162,8 +164,8 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) ->
         for hour in hours:
             hour_end = hour.hour_start + timezone.timedelta(hours=1)
 
-            idx_start = bisect.bisect_left(ec_timestamps, hour.hour_start) - 1
-            idx_end = bisect.bisect_left(ec_timestamps, hour_end) - 1
+            idx_start = bisect.bisect_right(ec_timestamps, hour.hour_start) - 1
+            idx_end = bisect.bisect_right(ec_timestamps, hour_end) - 1
 
             if idx_start < 0 or idx_end < 0:
                 print(" - [SKIP] Missing anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
