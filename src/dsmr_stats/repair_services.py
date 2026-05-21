@@ -29,8 +29,10 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
 
     skipped = 0
     recalculated = 0
+    total = len(all_days)
+    processed = 0
 
-    for batch_start in range(0, len(all_days), batch_size):
+    for batch_start in range(0, total, batch_size):
         batch_days = all_days[batch_start : batch_start + batch_size]
 
         # Fetch current batch records plus their next-day neighbours for delta calculation.
@@ -44,18 +46,24 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
         for day in batch_days:
             current_record = records.get(day)
             if current_record is None:
+                processed += 1
+                _print_progress(processed, total)
                 continue
 
             next_record = records.get(day + datetime.timedelta(days=1))
 
             if next_record is None:
-                print(" - [SKIP] No next-day record for: {}".format(day))
+                print("\n - [SKIP] No next-day record for: {}".format(day))
                 skipped += 1
+                processed += 1
+                _print_progress(processed, total)
                 continue
 
             deltas = _electricity_deltas(current_record, next_record)
             if deltas is None:
                 skipped += 1
+                processed += 1
+                _print_progress(processed, total)
                 continue
 
             new_e1, new_e2, new_e1_ret, new_e2_ret = deltas
@@ -65,7 +73,7 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                 try:
                     prices = _resolve_prices(day=current_record.day, all_prices=all_prices)
                 except EnergySupplierPrice.DoesNotExist:
-                    print("   [!] No prices found for {}, using zero fallback".format(current_record.day))
+                    print("\n   [!] No prices found for {}, using zero fallback".format(current_record.day))
                     prices = dsmr_consumption.services.get_fallback_prices()
             else:
                 prices = dsmr_consumption.services.get_fallback_prices()
@@ -89,7 +97,7 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
             total_cost = dsmr_consumption.services.round_decimal(total_cost)
 
             suffix = " [DRY RUN]" if dry_run else ""
-            print(" - Recalculating: {}{}".format(current_record.day, suffix))
+            print("\n - Recalculating: {}{}".format(current_record.day, suffix))
             if new_e1 != current_record.electricity1:
                 print("   electricity1:          {} -> {}".format(current_record.electricity1, new_e1))
             if new_e2 != current_record.electricity2:
@@ -118,11 +126,20 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                 to_save.append(current_record)
 
             recalculated += 1
+            processed += 1
+            _print_progress(processed, total)
 
         if to_save:
             _bulk_update_day_statistics(to_save)
 
     print("\nDone. Recalculated: {}, Skipped: {}".format(recalculated, skipped))
+
+
+def _print_progress(current: int, total: int, width: int = 40) -> None:
+    filled = int(width * current / total) if total else width
+    bar = "#" * filled + "." * (width - filled)
+    pct = int(100 * current / total) if total else 100
+    print("\r[{}] {}/{} ({}%)".format(bar, current, total, pct), end="", flush=True)
 
 
 def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) -> None:  # noqa: C901
@@ -137,8 +154,10 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) ->
     recalculated = 0
 
     all_hour_ids: List[int] = list(HourStatistics.objects.order_by("-hour_start").values_list("id", flat=True))
+    total = len(all_hour_ids)
+    processed = 0
 
-    for batch_start in range(0, len(all_hour_ids), batch_size):
+    for batch_start in range(0, total, batch_size):
         batch_ids = all_hour_ids[batch_start : batch_start + batch_size]
         hours = list(HourStatistics.objects.filter(id__in=batch_ids).order_by("hour_start"))
 
@@ -168,8 +187,10 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) ->
             idx_end = bisect.bisect_right(ec_timestamps, hour_end) - 1
 
             if idx_start < 0 or idx_end < 0:
-                print(" - [SKIP] Missing anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
+                print("\n - [SKIP] Missing anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
                 skipped += 1
+                processed += 1
+                _print_progress(processed, total)
                 continue
 
             anchor_start = all_ec[idx_start]
@@ -189,10 +210,12 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) ->
 
             if not changed:
                 recalculated += 1
+                processed += 1
+                _print_progress(processed, total)
                 continue
 
             suffix = " [DRY RUN]" if dry_run else ""
-            print(" - Recalculating: {}{}".format(timezone.localtime(hour.hour_start), suffix))
+            print("\n - Recalculating: {}{}".format(timezone.localtime(hour.hour_start), suffix))
             if new_e1 != hour.electricity1:
                 print("   electricity1:          {} -> {}".format(hour.electricity1, new_e1))
             if new_e2 != hour.electricity2:
@@ -210,6 +233,8 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 168) ->
                 to_save.append(hour)
 
             recalculated += 1
+            processed += 1
+            _print_progress(processed, total)
 
         if to_save:
             HourStatistics.objects.bulk_update(
@@ -343,14 +368,14 @@ def recalculate_prices(batch_size: int = 365) -> None:
     """
     all_prices: List[EnergySupplierPrice] = list(EnergySupplierPrice.objects.all())
     to_save: List[DayStatistics] = []
+    total = DayStatistics.objects.count()
+    processed = 0
 
     for current_day in DayStatistics.objects.order_by("-day").iterator(chunk_size=batch_size):
-        print(" - Recalculating prices for:", current_day.day)
-
         try:
             prices = _resolve_prices(day=current_day.day, all_prices=all_prices)
         except EnergySupplierPrice.DoesNotExist:
-            print("   [!] No prices found for this day, using zero fallback")
+            print("\n   [!] No prices found for this day, using zero fallback")
             prices = dsmr_consumption.services.get_fallback_prices()
 
         current_day.fixed_cost = prices.fixed_daily_cost
@@ -371,6 +396,8 @@ def recalculate_prices(batch_size: int = 365) -> None:
 
         current_day.total_cost = dsmr_consumption.services.round_decimal(total_cost)
         to_save.append(current_day)
+        processed += 1
+        _print_progress(processed, total)
 
         if len(to_save) >= batch_size:
             _bulk_update_day_price_fields(to_save)
@@ -378,6 +405,8 @@ def recalculate_prices(batch_size: int = 365) -> None:
 
     if to_save:
         _bulk_update_day_price_fields(to_save)
+
+    print("\nDone.")
 
 
 def _bulk_update_day_price_fields(records: List[DayStatistics]) -> None:
