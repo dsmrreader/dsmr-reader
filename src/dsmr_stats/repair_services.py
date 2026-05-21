@@ -12,7 +12,7 @@ from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 
 
-def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_size: int = 365) -> None:  # noqa: C901
+def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_size: int = 90) -> None:  # noqa: C901
     """Retroactively recalculates DayStatistics totals using stored meter positions (fixes #1770).
 
     Processes days newest-first in batches of `batch_size` to limit memory use.
@@ -28,8 +28,9 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
     # Prefetch all price contracts once to avoid one SELECT per day.
     all_prices: List[EnergySupplierPrice] = list(EnergySupplierPrice.objects.all()) if not dry_run else []
 
+    updated = 0
+    unchanged = 0
     skipped = 0
-    recalculated = 0
     total = len(all_days)
     processed = 0
 
@@ -97,6 +98,24 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
 
             total_cost = dsmr_consumption.services.round_decimal(total_cost)
 
+            changed = (
+                new_e1 != current_record.electricity1
+                or new_e2 != current_record.electricity2
+                or new_e1_ret != current_record.electricity1_returned
+                or new_e2_ret != current_record.electricity2_returned
+                or new_gas != current_record.gas
+                or electricity1_cost != current_record.electricity1_cost
+                or electricity2_cost != current_record.electricity2_cost
+                or fixed_cost != current_record.fixed_cost
+                or total_cost != current_record.total_cost
+            )
+
+            if not changed:
+                unchanged += 1
+                processed += 1
+                _print_progress(processed, total)
+                continue
+
             suffix = " [DRY RUN]" if dry_run else ""
             print("\n - Recalculating: {}{}".format(current_record.day, suffix))
             if new_e1 != current_record.electricity1:
@@ -126,14 +145,14 @@ def recalculate_statistics_from_meter_positions(dry_run: bool = False, batch_siz
                 )
                 to_save.append(current_record)
 
-            recalculated += 1
+            updated += 1
             processed += 1
             _print_progress(processed, total)
 
         if to_save:
             _bulk_update_day_statistics(to_save)
 
-    print("\nDone. Recalculated: {}, Skipped: {}".format(recalculated, skipped))
+    print("\nDone. Updated: {}, Unchanged: {}, Skipped: {}".format(updated, unchanged, skipped))
 
 
 def _print_progress(current: int, total: int, width: int = 40) -> None:
@@ -153,8 +172,9 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
     then resolved via binary search — avoiding two DB queries per hour.
     In write mode, changed records are flushed with bulk_update once per batch.
     """
+    updated = 0
+    unchanged = 0
     skipped = 0
-    recalculated = 0
 
     all_hour_ids: List[int] = list(HourStatistics.objects.order_by("-hour_start").values_list("id", flat=True))
     total = len(all_hour_ids)
@@ -212,7 +232,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
             )
 
             if not changed:
-                recalculated += 1
+                unchanged += 1
                 processed += 1
                 _print_progress(processed, total)
                 continue
@@ -235,7 +255,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
                 hour.electricity2_returned = new_e2_ret
                 to_save.append(hour)
 
-            recalculated += 1
+            updated += 1
             processed += 1
             _print_progress(processed, total)
 
@@ -244,7 +264,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
                 to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
             )
 
-    print("\nDone. Recalculated: {}, Skipped: {}".format(recalculated, skipped))
+    print("\nDone. Updated: {}, Unchanged: {}, Skipped: {}".format(updated, unchanged, skipped))
 
 
 def _resolve_prices(day: datetime.date, all_prices: List[EnergySupplierPrice]) -> EnergySupplierPrice:
