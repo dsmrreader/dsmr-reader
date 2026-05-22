@@ -45,6 +45,20 @@ DSMRREADER_RAW_VERSION = dsmrreader.VERSION
 DSMRREADER_USER_AGENT = "DSMR-reader v{}".format(DSMRREADER_VERSION)
 DSMRREADER_LATEST_RELEASES_LIST = "https://api.github.com/repos/dsmrreader/dsmr-reader/releases"
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "DSMR-reader API",
+    "DESCRIPTION": (
+        "# Postman collection\n"
+        "- Download current collection [here]({static_url}dsmr_frontend/postman/collection.json).\n"
+        "- Download current variables [here]({static_url}dsmr_frontend/postman/variables.json).".format(
+            static_url=STATIC_URL
+        )
+    ),
+    "VERSION": "v{}".format(DSMRREADER_VERSION),
+    "SERVE_AUTHENTICATION": [],
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
+}
+
 # Scheduled Process modules. DO NOT RELOCATE WITHOUT DB MIGRATION!
 DSMRREADER_MODULE_EMAIL_BACKUP = "dsmr_backup.services.email.run"
 DSMRREADER_MODULE_AUTO_UPDATE_CHECKER = "dsmr_backend.services.update_checker.run"

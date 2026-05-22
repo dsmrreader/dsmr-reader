@@ -5,8 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.utils import timezone
 from django.conf import settings
-
-from dsmr_api.schemas import DsmrReaderSchema
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_consumption.serializers.consumption import (
     ElectricityConsumptionSerializer,
@@ -42,6 +41,10 @@ import dsmr_backend.services.backend
 import dsmr_datalogger.signals
 
 
+@extend_schema_view(
+    list=extend_schema(operation_id="DSMR readings: List"),
+    create=extend_schema(operation_id="DSMR readings: Create"),
+)
 class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     list:
@@ -97,7 +100,6 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
     ```
     """
 
-    schema = DsmrReaderSchema(post="DSMR readings: Create", get="DSMR readings: List")
     FIELD = "timestamp"
     queryset = DsmrReading.objects.all()
     serializer_class = DsmrReadingSerializer
@@ -111,6 +113,10 @@ class DsmrReadingViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewset
         dsmr_datalogger.signals.dsmr_reading_created.send_robust(None, instance=new_instance)
 
 
+@extend_schema_view(
+    retrieve=extend_schema(operation_id="Meter statistics: Get"),
+    partial_update=extend_schema(operation_id="Meter statistics: Partial update"),
+)
 class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     """
     retrieve:
@@ -129,7 +135,6 @@ class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
     *It should auto-update otherwise!*
     """
 
-    schema = DsmrReaderSchema(get="Meter statistics: Get", patch="Meter statistics: Partial update")
     serializer_class = MeterStatisticsSerializer
 
     def get_queryset(self):  # pragma: nocover
@@ -142,6 +147,9 @@ class MeterStatisticsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
         return MeterStatistics.get_solo()
 
 
+@extend_schema_view(
+    list=extend_schema(operation_id="Energy supplier prices: List"),
+)
 class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Retrieves the energy supplier prices (contracts).
@@ -173,7 +181,6 @@ class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
     ```
     """
 
-    schema = DsmrReaderSchema(get="Energy supplier prices: List")
     queryset = EnergySupplierPrice.objects.all()
     serializer_class = EnergySupplierPriceSerializer
     filterset_class = EnergySupplierPriceFilter
@@ -184,7 +191,6 @@ class EnergySupplierPriceViewSet(viewsets.ReadOnlyModelViewSet):
 class TodayConsumptionView(APIView):
     """Returns the consumption of the current day so far."""
 
-    schema = DsmrReaderSchema(get="Today's consumption: Get")
     IGNORE_FIELDS = (
         "electricity1_start",
         "electricity2_start",
@@ -208,6 +214,7 @@ class TodayConsumptionView(APIView):
         "gas_cost",
     )  # These might miss during the first hour of each day.
 
+    @extend_schema(operation_id="Today's consumption: Get")
     def get(self, request):
         today = timezone.localtime(timezone.now()).date()
 
@@ -232,8 +239,7 @@ class TodayConsumptionView(APIView):
 class ElectricityLiveView(APIView):
     """Returns the live electricity consumption, containing the same data as the Dashboard header."""
 
-    schema = DsmrReaderSchema(get="Electricity consumption: Live")
-
+    @extend_schema(operation_id="Electricity consumption: Live")
     def get(self, request):
         return Response(dsmr_consumption.services.live_electricity_consumption())
 
@@ -241,12 +247,14 @@ class ElectricityLiveView(APIView):
 class GasLiveView(APIView):
     """Returns the latest gas consumption."""
 
-    schema = DsmrReaderSchema(get="Gas consumption: Live")
-
+    @extend_schema(operation_id="Gas consumption: Live")
     def get(self, request):
         return Response(dsmr_consumption.services.live_gas_consumption())
 
 
+@extend_schema_view(
+    list=extend_schema(operation_id="Electricity consumption: List"),
+)
 class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Retrieves any data regarding electricity consumption. This is based on the readings processed.
@@ -264,7 +272,6 @@ class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
     """
 
-    schema = DsmrReaderSchema(get="Electricity consumption: List")
     FIELD = "read_at"
     queryset = ElectricityConsumption.objects.all()
     serializer_class = ElectricityConsumptionSerializer
@@ -273,6 +280,9 @@ class ElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     ordering = FIELD
 
 
+@extend_schema_view(
+    list=extend_schema(operation_id="Quarter-hour peak electricity consumption: List"),
+)
 class QuarterHourPeakElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Retrieves any data regarding quarter-hour peak electricity consumption. This is based on the readings processed.
@@ -290,7 +300,6 @@ class QuarterHourPeakElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet
     returned by the average calculated (In kW).
     """
 
-    schema = DsmrReaderSchema(get="Quarter-hour peak electricity consumption: List")
     FIELD = "read_at_start"
     queryset = QuarterHourPeakElectricityConsumption.objects.all()
     serializer_class = QuarterHourPeakElectricityConsumptionSerializer
@@ -299,6 +308,9 @@ class QuarterHourPeakElectricityConsumptionViewSet(viewsets.ReadOnlyModelViewSet
     ordering = FIELD
 
 
+@extend_schema_view(
+    list=extend_schema(operation_id="Gas consumption: List"),
+)
 class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Retrieves any data regarding gas consumption. This is based on the readings processed.
@@ -316,7 +328,6 @@ class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     - Deprecated the ``read_at`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
     """
 
-    schema = DsmrReaderSchema(get="Gas consumption: List")
     FIELD = "read_at"
     queryset = GasConsumption.objects.all()
     serializer_class = GasConsumptionSerializer
@@ -325,6 +336,10 @@ class GasConsumptionViewSet(viewsets.ReadOnlyModelViewSet):
     ordering = FIELD
 
 
+@extend_schema_view(
+    list=extend_schema(operation_id="Day statistics: List"),
+    create=extend_schema(operation_id="Day statistics: Create"),
+)
 class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSet):
     """
     list:
@@ -352,7 +367,6 @@ class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSe
     - Should only be used to import historic data.
     """
 
-    schema = DsmrReaderSchema(post="Day statistics: Create", get="Day statistics: List")
     FIELD = "day"
     queryset = DayStatistics.objects.all()
     serializer_class = DayStatisticsSerializer
@@ -361,6 +375,9 @@ class DayStatisticsViewSet(mixins.CreateModelMixin, viewsets.ReadOnlyModelViewSe
     ordering = FIELD
 
 
+@extend_schema_view(
+    list=extend_schema(operation_id="Hour statistics: List"),
+)
 class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Retrieves any aggregated hour statistics, as displayed in the Archive.
@@ -381,7 +398,6 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
     - Deprecated the ``hour_start`` query parameter in DSMR-reader v5.3, will be dropped completely in v6.x
     """
 
-    schema = DsmrReaderSchema(get="Hour statistics: List")
     FIELD = "hour_start"
     queryset = HourStatistics.objects.all()
     serializer_class = HourStatisticsSerializer
@@ -393,8 +409,7 @@ class HourStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 class VersionView(APIView):
     """Returns the version of DSMR-reader you are running."""
 
-    schema = DsmrReaderSchema(get="Application: Version")
-
+    @extend_schema(operation_id="Application: Version")
     def get(self, request):
         return Response(
             {
@@ -406,8 +421,7 @@ class VersionView(APIView):
 class MonitoringIssuesView(APIView):
     """Returns any monitoring issues found. Reflects the same (issue) data as displayed on the Status page."""
 
-    schema = DsmrReaderSchema(get="Application: Monitoring")
-
+    @extend_schema(operation_id="Application: Monitoring")
     def get(self, request):
         issues = dsmr_backend.services.backend.request_monitoring_status()
 
