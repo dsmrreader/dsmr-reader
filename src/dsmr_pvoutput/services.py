@@ -1,6 +1,7 @@
 import logging
 from typing import Optional, Dict
 
+import datetime
 from django.conf import settings
 from django.utils import timezone
 import requests
@@ -73,11 +74,11 @@ def schedule_next_export(scheduled_process: ScheduledProcess) -> None:
     scheduled_process.reschedule(next_export)
 
 
-def get_next_export() -> timezone.datetime:
+def get_next_export() -> datetime.datetime:
     """Rounds the timestamp to the nearest upload interval, preventing the uploads to shift forward."""
     upload_interval = PVOutputAddStatusSettings.get_solo().upload_interval
 
-    next_export = timezone.now() + timezone.timedelta(minutes=upload_interval)
+    next_export = timezone.now() + datetime.timedelta(minutes=upload_interval)
 
     # Make sure it shifts back to the closest interval point possible.
     minute_marker = next_export.minute
@@ -86,12 +87,12 @@ def get_next_export() -> timezone.datetime:
     return next_export.replace(minute=minute_marker, second=0, microsecond=0)
 
 
-def get_export_data(next_export: Optional[timezone.datetime], upload_delay: int) -> Optional[Dict]:
+def get_export_data(next_export: Optional[datetime.datetime], upload_delay: int) -> Optional[Dict]:
     """Returns the data to export. Raises exception when 'not ready'."""
     # Find the first and last consumption of today, taking any delay into account.
     local_now = timezone.localtime(timezone.now())
     search_start = local_now.replace(hour=0, minute=0, second=0, microsecond=0)  # Midnight
-    search_end = local_now - timezone.timedelta(minutes=upload_delay)
+    search_end = local_now - datetime.timedelta(minutes=upload_delay)
 
     ecs = ElectricityConsumption.objects.filter(read_at__gte=search_start, read_at__lte=search_end)
 
@@ -104,7 +105,7 @@ def get_export_data(next_export: Optional[timezone.datetime], upload_delay: int)
 
     # Check whether we need to delay the export, until we have data that until at least the current upload time. (#467)
     if next_export is not None:
-        expected_data_timestamp = timezone.localtime(next_export - timezone.timedelta(minutes=upload_delay))
+        expected_data_timestamp = timezone.localtime(next_export - datetime.timedelta(minutes=upload_delay))
 
         if consumption_timestamp < expected_data_timestamp:
             logger.warning(

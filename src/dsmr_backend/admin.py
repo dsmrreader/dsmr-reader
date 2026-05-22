@@ -153,7 +153,7 @@ class ScheduledProcessAdmin(admin.ModelAdmin):
             {
                 "fields": ["planned"],
                 "description": _(
-                    _("Only reschedule a process if you really need to, as it could cause mistimings at some point.")
+                    "Only reschedule a process if you really need to, as it could cause mistimings at some point."
                 ),
             },
         ),

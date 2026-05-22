@@ -19,8 +19,10 @@ Tests will fail on unfixed code and pass once the fixes are applied.
 """
 
 from decimal import Decimal
+from typing import cast
 from unittest import mock
 
+import datetime
 from django.conf import settings
 from django.db.models import Sum
 from django.test import TestCase
@@ -51,8 +53,8 @@ class TestStatisticsIntegration(TestCase):
     """
 
     # Seed reading: last record before the data window starts.
-    SEED_DATETIME = timezone.datetime(2020, 1, 9, 23, 30, 0)
-    START_DATETIME = timezone.datetime(2020, 1, 10, 0, 0, 0)
+    SEED_DATETIME = datetime.datetime(2020, 1, 9, 23, 30, 0)
+    START_DATETIME = datetime.datetime(2020, 1, 10, 0, 0, 0)
     HOURS_TO_GENERATE = 48
     READINGS_PER_HOUR = 2  # One per 30 minutes (reduced for test speed)
     # Extra readings appended after the main block (midnight anchor + Jan 12 sentinel).
@@ -82,8 +84,8 @@ class TestStatisticsIntegration(TestCase):
 
     def setUp(self) -> None:
         EnergySupplierPrice.objects.create(
-            start=timezone.datetime(2019, 1, 1).date(),
-            end=timezone.datetime(2025, 1, 1).date(),
+            start=datetime.datetime(2019, 1, 1).date(),
+            end=datetime.datetime(2025, 1, 1).date(),
             description="Test Energy Price",
             electricity_delivered_1_price=Decimal("0.20"),
             electricity_delivered_2_price=Decimal("0.25"),
@@ -101,10 +103,10 @@ class TestStatisticsIntegration(TestCase):
         consumption_settings.save()
 
         self.consumption_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_GENERATE_CONSUMPTION)
-        self.consumption_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+        self.consumption_process.update(active=True, planned=timezone.make_aware(datetime.datetime(2000, 1, 1)))
 
         self.stats_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_STATS_GENERATOR)
-        self.stats_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+        self.stats_process.update(active=True, planned=timezone.make_aware(datetime.datetime(2000, 1, 1)))
 
         self._generate_readings()
 
@@ -148,7 +150,7 @@ class TestStatisticsIntegration(TestCase):
 
         readings_to_create = []
         for i in range(total_readings):
-            current_time = start_dt + timezone.timedelta(minutes=i * minutes_per_reading)
+            current_time = start_dt + datetime.timedelta(minutes=i * minutes_per_reading)
             electricity_delivered_1 += self.ELECTRICITY_INCREMENT_1
             electricity_delivered_2 += self.ELECTRICITY_INCREMENT_2
             electricity_returned_1 += self.ELECTRICITY_RETURNED_1
@@ -172,7 +174,7 @@ class TestStatisticsIntegration(TestCase):
 
         # Midnight reading at AMS Jan 12 00:00 (UTC Jan 11 23:00) — closes the last UTC hour of Jan 11
         # so create_hourly_statistics() has an anchor at both hour boundaries for that hour.
-        midnight_time = start_dt + timezone.timedelta(hours=48)
+        midnight_time = start_dt + datetime.timedelta(hours=48)
         electricity_delivered_1 += self.ELECTRICITY_INCREMENT_1
         electricity_delivered_2 += self.ELECTRICITY_INCREMENT_2
         electricity_returned_1 += self.ELECTRICITY_RETURNED_1
@@ -193,7 +195,7 @@ class TestStatisticsIntegration(TestCase):
 
         # Extra reading on Jan 12 so the stats generator does not stall waiting
         # for a gas reading on the day after Jan 11.
-        extra_time = start_dt + timezone.timedelta(hours=61)
+        extra_time = start_dt + datetime.timedelta(hours=61)
         electricity_delivered_1 += self.ELECTRICITY_INCREMENT_1
         electricity_delivered_2 += self.ELECTRICITY_INCREMENT_2
         electricity_returned_1 += self.ELECTRICITY_RETURNED_1
@@ -248,7 +250,7 @@ class TestStatisticsIntegration(TestCase):
         self.assertEqual(DsmrReading.objects.count(), expected_total)
         self.assertEqual(DsmrReading.objects.unprocessed().count(), expected_total)
 
-        seed = DsmrReading.objects.order_by("timestamp").first()
+        seed = cast(DsmrReading, DsmrReading.objects.order_by("timestamp").first())
         self.assertEqual(seed.timestamp, timezone.make_aware(self.SEED_DATETIME))
 
         first_main = DsmrReading.objects.order_by("timestamp")[1]
@@ -262,7 +264,7 @@ class TestStatisticsIntegration(TestCase):
         Verifies record counts at each stage, then delegates value assertions
         to the focused _verify_* helpers.
         """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 14, 12, 0, 0))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2020, 1, 14, 12, 0, 0))
 
         expected_record_count = 1 + self.HOURS_TO_GENERATE * self.READINGS_PER_HOUR + self.EXTRA_READINGS
         self.assertEqual(DsmrReading.objects.unprocessed().count(), expected_record_count)
@@ -281,8 +283,8 @@ class TestStatisticsIntegration(TestCase):
 
         # Jan 10 and Jan 11 — two complete days with full data.
         # (The seed reading on Jan 9 also produces a Jan 9 day stat, which is ignored here.)
-        jan_10 = timezone.datetime(2020, 1, 10).date()
-        jan_12 = timezone.datetime(2020, 1, 12).date()
+        jan_10 = datetime.datetime(2020, 1, 10).date()
+        jan_12 = datetime.datetime(2020, 1, 12).date()
         self.assertEqual(DayStatistics.objects.filter(day__gte=jan_10, day__lt=jan_12).count(), 2)
         self.assertEqual(
             HourStatistics.objects.filter(hour_start__date__gte=jan_10, hour_start__date__lt=jan_12).count(),
@@ -307,14 +309,17 @@ class TestStatisticsIntegration(TestCase):
         of day D-1 and the first reading of day D is silently dropped, so the sum
         falls short by one ELECTRICITY_INCREMENT per day boundary crossed.
         """
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 14, 12, 0, 0))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2020, 1, 14, 12, 0, 0))
 
         self._process_all_readings()
         self._generate_all_statistics()
 
-        seed_ec = ElectricityConsumption.objects.order_by("read_at").first()
-        end_of_jan_11 = timezone.make_aware(timezone.datetime(2020, 1, 11, 23, 59, 59))
-        final_ec = ElectricityConsumption.objects.filter(read_at__lte=end_of_jan_11).order_by("read_at").last()
+        seed_ec = cast(ElectricityConsumption, ElectricityConsumption.objects.order_by("read_at").first())
+        end_of_jan_11 = timezone.make_aware(datetime.datetime(2020, 1, 11, 23, 59, 59))
+        final_ec = cast(
+            ElectricityConsumption,
+            ElectricityConsumption.objects.filter(read_at__lte=end_of_jan_11).order_by("read_at").last(),
+        )
 
         expected_elec1 = final_ec.delivered_1 - seed_ec.delivered_1
         expected_elec2 = final_ec.delivered_2 - seed_ec.delivered_2
@@ -337,18 +342,18 @@ class TestStatisticsIntegration(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_gas_totals_accuracy(self, now_mock: mock.Mock) -> None:
         """Each day's gas total equals the sum of its HourStatistics gas values (issue #1770)."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 14, 12, 0, 0))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2020, 1, 14, 12, 0, 0))
 
         self._process_all_readings()
         self._generate_all_statistics()
 
-        jan_10 = timezone.datetime(2020, 1, 10).date()
-        jan_12 = timezone.datetime(2020, 1, 12).date()
+        jan_10 = datetime.datetime(2020, 1, 10).date()
+        jan_12 = datetime.datetime(2020, 1, 12).date()
         for day_stat in DayStatistics.objects.filter(day__gte=jan_10, day__lt=jan_12):
             day_start = timezone.make_aware(
-                timezone.datetime(year=day_stat.day.year, month=day_stat.day.month, day=day_stat.day.day)
+                datetime.datetime(year=day_stat.day.year, month=day_stat.day.month, day=day_stat.day.day)
             )
-            day_end = day_start + timezone.timedelta(hours=24)
+            day_end = day_start + datetime.timedelta(hours=24)
             hour_gas_sum = HourStatistics.objects.filter(
                 hour_start__gte=day_start,
                 hour_start__lt=day_end,
@@ -357,8 +362,8 @@ class TestStatisticsIntegration(TestCase):
             )["total"]
 
             self.assertAlmostEqual(
-                float(day_stat.gas),
-                float(hour_gas_sum),
+                float(day_stat.gas or 0),
+                float(hour_gas_sum or 0),
                 places=2,
                 msg=f"Day gas does not match hour sum for {day_stat.day} (issue #1770)",
             )
@@ -375,8 +380,8 @@ class TestStatisticsIntegration(TestCase):
         expected_elec1_returned = self.ELECTRICITY_RETURNED_1 * readings_per_day
         expected_elec2_returned = self.ELECTRICITY_RETURNED_2 * readings_per_day
 
-        jan_10 = timezone.datetime(2020, 1, 10).date()
-        jan_12 = timezone.datetime(2020, 1, 12).date()
+        jan_10 = datetime.datetime(2020, 1, 10).date()
+        jan_12 = datetime.datetime(2020, 1, 12).date()
         for day_stat in DayStatistics.objects.filter(day__gte=jan_10, day__lt=jan_12):
             self.assertAlmostEqual(
                 float(day_stat.electricity1), float(expected_elec1), places=3, msg=f"electricity1 {day_stat.day}"
@@ -397,8 +402,8 @@ class TestStatisticsIntegration(TestCase):
                 msg=f"electricity2_returned {day_stat.day}",
             )
             # Gas: reasonableness bounds only — boundary attribution is inherently ambiguous.
-            self.assertGreater(float(day_stat.gas), 1.0, msg=f"gas too low for {day_stat.day}")
-            self.assertLess(float(day_stat.gas), 2.0, msg=f"gas too high for {day_stat.day}")
+            self.assertGreater(float(day_stat.gas or 0), 1.0, msg=f"gas too low for {day_stat.day}")
+            self.assertLess(float(day_stat.gas or 0), 2.0, msg=f"gas too high for {day_stat.day}")
 
     def _verify_hour_statistics(self) -> None:
         """Each hour's electricity totals must equal increment × READINGS_PER_HOUR."""
@@ -407,8 +412,8 @@ class TestStatisticsIntegration(TestCase):
         expected_elec1_returned = self.ELECTRICITY_RETURNED_1 * self.READINGS_PER_HOUR
         expected_elec2_returned = self.ELECTRICITY_RETURNED_2 * self.READINGS_PER_HOUR
 
-        jan_10 = timezone.datetime(2020, 1, 10).date()
-        jan_12 = timezone.datetime(2020, 1, 12).date()
+        jan_10 = datetime.datetime(2020, 1, 10).date()
+        jan_12 = datetime.datetime(2020, 1, 12).date()
         for hour_stat in HourStatistics.objects.filter(hour_start__date__gte=jan_10, hour_start__date__lt=jan_12):
             self.assertAlmostEqual(
                 float(hour_stat.electricity1),
@@ -438,13 +443,13 @@ class TestStatisticsIntegration(TestCase):
 
     def _verify_hour_day_consistency(self) -> None:
         """Sum of each complete day's HourStatistics must match its DayStatistics values."""
-        jan_10 = timezone.datetime(2020, 1, 10).date()
-        jan_12 = timezone.datetime(2020, 1, 12).date()
+        jan_10 = datetime.datetime(2020, 1, 10).date()
+        jan_12 = datetime.datetime(2020, 1, 12).date()
         for day_stat in DayStatistics.objects.filter(day__gte=jan_10, day__lt=jan_12):
             day_start = timezone.make_aware(
-                timezone.datetime(year=day_stat.day.year, month=day_stat.day.month, day=day_stat.day.day)
+                datetime.datetime(year=day_stat.day.year, month=day_stat.day.month, day=day_stat.day.day)
             )
-            day_end = day_start + timezone.timedelta(hours=24)
+            day_end = day_start + datetime.timedelta(hours=24)
             hour_totals = HourStatistics.objects.filter(
                 hour_start__gte=day_start,
                 hour_start__lt=day_end,
@@ -481,8 +486,8 @@ class TestStatisticsIntegration(TestCase):
                 msg=f"Hour sum electricity2_returned != day total for {day_stat.day}",
             )
             self.assertAlmostEqual(
-                float(hour_totals["gas"]),
-                float(day_stat.gas),
+                float(hour_totals["gas"] or 0),
+                float(day_stat.gas or 0),
                 places=2,
                 msg=f"Hour sum gas != day total for {day_stat.day} (issue #1770)",
             )
@@ -545,7 +550,7 @@ class TestStatisticsIntegrationDSMRv4(TestStatisticsIntegration):
         readings_to_create = []
         last_gas_timestamp = None
         for i in range(total_readings):
-            current_time = start_dt + timezone.timedelta(minutes=i * minutes_per_reading)
+            current_time = start_dt + datetime.timedelta(minutes=i * minutes_per_reading)
             electricity_delivered_1 += self.ELECTRICITY_INCREMENT_1
             electricity_delivered_2 += self.ELECTRICITY_INCREMENT_2
             electricity_returned_1 += self.ELECTRICITY_RETURNED_1
@@ -577,7 +582,7 @@ class TestStatisticsIntegrationDSMRv4(TestStatisticsIntegration):
         # In DSMR v4, _compact_gas() shifts gas timestamps back 1 hour, so this reading's
         # gas (timestamped Jan 12 00:00+01:00) is stored as GasConsumption at Jan 11 23:00+01:00,
         # filling the last hour [23:00, 00:00) of Jan 11 which otherwise has no gas entry.
-        intermediate_time = start_dt + timezone.timedelta(hours=self.HOURS_TO_GENERATE)
+        intermediate_time = start_dt + datetime.timedelta(hours=self.HOURS_TO_GENERATE)
         electricity_delivered_1 += self.ELECTRICITY_INCREMENT_1
         electricity_delivered_2 += self.ELECTRICITY_INCREMENT_2
         electricity_returned_1 += self.ELECTRICITY_RETURNED_1
@@ -596,7 +601,7 @@ class TestStatisticsIntegrationDSMRv4(TestStatisticsIntegration):
             processed=False,
         )
 
-        extra_time = start_dt + timezone.timedelta(hours=61)
+        extra_time = start_dt + datetime.timedelta(hours=61)
         electricity_delivered_1 += self.ELECTRICITY_INCREMENT_1
         electricity_delivered_2 += self.ELECTRICITY_INCREMENT_2
         electricity_returned_1 += self.ELECTRICITY_RETURNED_1
@@ -622,8 +627,8 @@ class TestStatisticsIntegrationDSMRv4(TestStatisticsIntegration):
         expected_elec1_returned = self.ELECTRICITY_RETURNED_1 * self.READINGS_PER_HOUR
         expected_elec2_returned = self.ELECTRICITY_RETURNED_2 * self.READINGS_PER_HOUR
 
-        jan_10 = timezone.datetime(2020, 1, 10).date()
-        jan_12 = timezone.datetime(2020, 1, 12).date()
+        jan_10 = datetime.datetime(2020, 1, 10).date()
+        jan_12 = datetime.datetime(2020, 1, 12).date()
         for hour_stat in HourStatistics.objects.filter(hour_start__date__gte=jan_10, hour_start__date__lt=jan_12):
             self.assertAlmostEqual(
                 float(hour_stat.electricity1),

@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext, gettext_lazy as _
@@ -79,6 +80,6 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         return self.description or gettext("Energy supplier price contract")
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Energy supplier (price) contract")
         verbose_name_plural = _("Energy supplier (price) contracts")

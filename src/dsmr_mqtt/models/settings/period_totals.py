@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
@@ -63,7 +64,7 @@ current_year_total_cost = current_year_total_cost
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Current month/year totals: JSON")
 
 
@@ -119,5 +120,5 @@ current_year_total_cost = dsmr/current-year/total_cost
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Current month/year totals: Split topic")

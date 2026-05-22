@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
@@ -53,7 +54,7 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Backend configuration")
 
 
@@ -137,5 +138,5 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Email configuration")

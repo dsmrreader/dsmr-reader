@@ -3,6 +3,7 @@ import logging
 import random
 import json
 
+import datetime
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
@@ -42,24 +43,24 @@ def run(scheduled_process: ScheduledProcess) -> None:
         return
 
     # Reschedule between 3 AM and 6 AM next day.
-    midnight = timezone.localtime(timezone.make_aware(timezone.datetime.combine(timezone.now(), time.min)))
-    next_midnight = midnight + timezone.timedelta(
+    midnight = timezone.localtime(timezone.make_aware(datetime.datetime.combine(timezone.now(), time.min)))
+    next_midnight = midnight + datetime.timedelta(
         hours=dsmr_backend.services.backend.hours_in_day(day=timezone.now().date())
     )
     scheduled_process.reschedule(
-        next_midnight + timezone.timedelta(hours=random.randint(3, 5), minutes=random.randint(15, 59))
+        next_midnight + datetime.timedelta(hours=random.randint(3, 5), minutes=random.randint(15, 59))
     )
 
 
 def export() -> None:
     """Exports gas readings to the MinderGas website. DSMR-reader transmits the last reading of the previous day."""
     mindergas_settings = MinderGasSettings.get_solo()
-    midnight = timezone.localtime(timezone.make_aware(timezone.datetime.combine(timezone.now(), time.min)))
+    midnight = timezone.localtime(timezone.make_aware(datetime.datetime.combine(timezone.now(), time.min)))
 
     try:
         last_gas_reading = GasConsumption.objects.filter(
             # Slack of a few hours to make sure we have any valid reading at all.
-            read_at__range=(midnight - timezone.timedelta(hours=3), midnight)
+            read_at__range=(midnight - datetime.timedelta(hours=3), midnight)
         ).order_by("-read_at")[0]
     except IndexError as exc:
         raise AssertionError(_("No recent gas reading found")) from exc

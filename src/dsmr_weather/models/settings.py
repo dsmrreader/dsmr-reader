@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
@@ -31,5 +32,5 @@ class WeatherSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Weather configuration")

@@ -1,5 +1,8 @@
 import struct
-from typing import Optional, Any
+from typing import TYPE_CHECKING, Optional, Any
+
+if TYPE_CHECKING:
+    from django.utils.functional import _StrOrPromise
 
 from django.utils import translation
 from django.utils.translation import gettext as _
@@ -31,7 +34,7 @@ def get_translated_string(text: str, language: str = "nl") -> str:
     return translated_text
 
 
-def display_dashboard_message(message: str, redirect_to: Optional[str] = None) -> None:
+def display_dashboard_message(message: str | _StrOrPromise, redirect_to: Optional[str] = None) -> None:
     """Displays a message with today's date on the dashboard, but prevents any UNREAD duplicates."""
     today = formats.date_format(timezone.localtime(timezone.now()).date())
     Notification.objects.get_or_create(message="{}: {}".format(today, message), redirect_to=redirect_to, read=False)

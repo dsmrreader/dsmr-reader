@@ -60,6 +60,8 @@ types-python-dateutil = "^2"
 types-pytz = "^2025"
 types-requests = "^2"
 types-six = "^1"
+django-stubs = "^6.0.4"
+djangorestframework-stubs = "^3.17.0"
 
 [tool.black]
 line-length = 120
@@ -83,8 +85,12 @@ per-file-ignores = [
 
 
 [tool.mypy]
+plugins = ["mypy_django_plugin.main"]
 ignore_missing_imports = true
 exclude = [".*/migrations/"]
+
+[tool.django-stubs]
+django_settings_module = "dsmrreader.config.test"
 
 [[tool.mypy.overrides]]
 module = "paho.*"

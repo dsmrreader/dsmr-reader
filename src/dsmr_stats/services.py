@@ -4,7 +4,7 @@ import logging
 from decimal import Decimal
 from datetime import time, date
 import math
-from typing import Dict, Optional, List
+from typing import Any, Dict, List, Optional, cast
 
 from dateutil.relativedelta import relativedelta
 from django.db import transaction, connection, models
@@ -47,8 +47,8 @@ def get_next_day_to_generate() -> datetime.date:
         return timezone.localtime(read_at).date()
 
     # Search for the next day with any consumption.
-    next_day = latest_day + timezone.timedelta(days=1)
-    search_start = timezone.datetime.combine(next_day, timezone.datetime.min.time())
+    next_day = latest_day + datetime.timedelta(days=1)
+    search_start = datetime.datetime.combine(next_day, datetime.datetime.min.time())
     search_start = timezone.make_aware(search_start)
 
     try:
@@ -69,12 +69,12 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     now = timezone.localtime(timezone.now())
     target_day = get_next_day_to_generate()
-    next_day = target_day + timezone.timedelta(days=1)
+    next_day = target_day + datetime.timedelta(days=1)
 
     # Skip current day, wait until midnight.
     if target_day >= now.date():
         logger.debug("Stats: Waiting for day to pass: %s", target_day)
-        scheduled_process.reschedule(timezone.make_aware(timezone.datetime.combine(next_day, time.min)))
+        scheduled_process.reschedule(timezone.make_aware(datetime.datetime.combine(next_day, time.min)))
         return
 
     # All readings of the day must be processed.
@@ -95,7 +95,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     # If we recently supported gas, make sure we've received a gas reading on the next day (or later).
     recently_gas_read = GasConsumption.objects.filter(
-        read_at__date__gte=target_day - timezone.timedelta(days=1)
+        read_at__date__gte=target_day - datetime.timedelta(days=1)
     ).exists()
 
     # Unless it was disabled.
@@ -116,7 +116,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 def create_statistics(target_day: datetime.date) -> None:
     # One day at a time to prevent backend blocking.
     start_of_day = timezone.make_aware(
-        timezone.datetime(
+        datetime.datetime(
             year=target_day.year,
             month=target_day.month,
             day=target_day.day,
@@ -129,7 +129,7 @@ def create_statistics(target_day: datetime.date) -> None:
         hours_in_day = dsmr_backend.services.backend.hours_in_day(day=target_day)
 
         for current_hour in range(0, hours_in_day):
-            hour_start = start_of_day + timezone.timedelta(hours=current_hour)
+            hour_start = start_of_day + datetime.timedelta(hours=current_hour)
             create_hourly_statistics(hour_start=hour_start)
 
         instance = create_daily_statistics(day=target_day)
@@ -145,8 +145,8 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     consumption = dsmr_consumption.services.day_consumption(day=day)
 
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
-    start_of_day = timezone.make_aware(timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0))
-    end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)
+    start_of_day = timezone.make_aware(datetime.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0))
+    end_of_day = start_of_day + datetime.timedelta(hours=hours_in_day)
     hours_gas_sum = HourStatistics.objects.filter(
         hour_start__gte=start_of_day,
         hour_start__lt=end_of_day,
@@ -191,16 +191,16 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     )
 
 
-def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStatistics]:
+def create_hourly_statistics(hour_start: datetime.datetime) -> Optional[HourStatistics]:
     """Calculates and returns an hour summary, when applicable. Persists it as well."""
     logger.debug("Stats: Creating hour statistics for: %s", hour_start)
-    hour_end = hour_start + timezone.timedelta(hours=1)
+    hour_end = hour_start + datetime.timedelta(hours=1)
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(start=hour_start, end=hour_end)
 
     if not electricity_readings.exists():
         return None
 
-    creation_kwargs = {"hour_start": hour_start}
+    creation_kwargs: Dict[str, Any] = {"hour_start": hour_start}
 
     if HourStatistics.objects.filter(**creation_kwargs).exists():
         logger.debug("Stats: Skipping duplicate hour statistics for: %s", hour_start)
@@ -209,8 +209,11 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
     # Cross-hour anchors for gap-free hourly totals.
     anchor_start = ElectricityConsumption.objects.filter(read_at__lte=hour_start).order_by("read_at").last()
     anchor_end = ElectricityConsumption.objects.filter(read_at__lte=hour_end).order_by("read_at").last()
-    start_record = anchor_start if anchor_start is not None else electricity_readings.first()
-    end_record = anchor_end
+    start_record = cast(
+        ElectricityConsumption,
+        anchor_start if anchor_start is not None else electricity_readings.first(),
+    )
+    end_record = cast(ElectricityConsumption, anchor_end)
 
     creation_kwargs["electricity1"] = end_record.delivered_1 - start_record.delivered_1
     creation_kwargs["electricity2"] = end_record.delivered_2 - start_record.delivered_2
@@ -223,8 +226,8 @@ def create_hourly_statistics(hour_start: timezone.datetime) -> Optional[HourStat
 
     # DSMR v5
     elif len(gas_readings) > 1:
-        gas_readings = list(gas_readings)
-        creation_kwargs["gas"] = gas_readings[-1].delivered - gas_readings[0].delivered
+        gas_readings_list = list(gas_readings)
+        creation_kwargs["gas"] = gas_readings_list[-1].delivered - gas_readings_list[0].delivered
 
     return HourStatistics.objects.create(**creation_kwargs)
 
@@ -372,21 +375,21 @@ def range_statistics(start: datetime.date, end: datetime.date) -> Dict:
 
 def day_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a day targeted."""
-    next_day = timezone.datetime.combine(target_date + relativedelta(days=1), time.min)
+    next_day = datetime.datetime.combine(target_date + relativedelta(days=1), time.min)
     return range_statistics(start=target_date, end=next_day)
 
 
 def month_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a month targeted."""
-    start_of_month = timezone.datetime(year=target_date.year, month=target_date.month, day=1)
-    end_of_month = timezone.datetime.combine(start_of_month + relativedelta(months=1), time.min)
+    start_of_month = datetime.datetime(year=target_date.year, month=target_date.month, day=1)
+    end_of_month = datetime.datetime.combine(start_of_month + relativedelta(months=1), time.min)
     return range_statistics(start=start_of_month, end=end_of_month)
 
 
 def year_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a year targeted."""
-    start_of_year = timezone.datetime(year=target_date.year, month=1, day=1)
-    end_of_year = timezone.datetime.combine(start_of_year + relativedelta(years=1), time.min)
+    start_of_year = datetime.datetime(year=target_date.year, month=1, day=1)
+    end_of_year = datetime.datetime.combine(start_of_year + relativedelta(years=1), time.min)
     return range_statistics(start=start_of_year, end=end_of_year)
 
 
@@ -507,12 +510,12 @@ def reconstruct_missing_day_statistics(batch_size: int = 365) -> None:
     )
 
     # Budget distinct and sorting.
-    dates_to_generate = sorted(list(set(dates_to_generate)))
+    dates_list: List[date] = sorted(list(set(dates_to_generate)))
 
-    print("Found {} day(s) to reconstruct".format(len(dates_to_generate)))
+    print("Found {} day(s) to reconstruct".format(len(dates_list)))
 
-    for batch_start in range(0, len(dates_to_generate), batch_size):
-        for current_day in dates_to_generate[batch_start : batch_start + batch_size]:
+    for batch_start in range(0, len(dates_list), batch_size):
+        for current_day in dates_list[batch_start : batch_start + batch_size]:
             print(" - Reconstructing:", current_day)
             create_statistics(target_day=current_day)
 
@@ -531,12 +534,12 @@ def reconstruct_missing_day_statistics_by_hours(batch_size: int = 365) -> None:
     )
 
     # Budget distinct and sorting.
-    dates_to_generate = sorted(list(set(dates_to_generate)))
+    dates_list_hours: List[date] = sorted(list(set(dates_to_generate)))
 
-    print("Found {} day(s) to reconstruct".format(len(dates_to_generate)))
+    print("Found {} day(s) to reconstruct".format(len(dates_list_hours)))
 
-    for batch_start in range(0, len(dates_to_generate), batch_size):
-        for current_day in dates_to_generate[batch_start : batch_start + batch_size]:
+    for batch_start in range(0, len(dates_list_hours), batch_size):
+        for current_day in dates_list_hours[batch_start : batch_start + batch_size]:
             print(" - Reconstructing:", current_day)
 
             day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(

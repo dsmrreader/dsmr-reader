@@ -1,7 +1,11 @@
 import logging
+from typing import TYPE_CHECKING
 
 from django.core.mail.backends.smtp import EmailBackend
 from django.core import mail
+
+if TYPE_CHECKING:
+    from django.utils.functional import _StrOrPromise
 
 from dsmr_backend.models.settings import EmailSettings
 
@@ -10,10 +14,10 @@ logger = logging.getLogger("dsmrreader")
 
 
 def send(
-    email_from: str,
-    email_to: str,
-    subject: str,
-    body: str,
+    email_from: str | None,
+    email_to: str | None,
+    subject: str | _StrOrPromise,
+    body: str | _StrOrPromise,
     attachment: str | None = None,
 ) -> None:
     """Sends an email using the outgoing email settings."""
@@ -40,7 +44,7 @@ def send(
         subject=subject,
         body=body,
         from_email=email_from,
-        to=[email_to],
+        to=[email_to] if email_to else [],
         connection=email_backend,
     )
 

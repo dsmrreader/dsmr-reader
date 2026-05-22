@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand, CommandError
 from decouple import config
 
 
-class Command(BaseCommand):  # noqa
+class Command(BaseCommand):
     help = "Persists or updates a superuser, as defined by the environment vars. Deactivates any other users as well."
 
     def handle(self, **options):

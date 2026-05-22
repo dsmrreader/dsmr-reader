@@ -2,6 +2,7 @@ from io import StringIO
 from typing import Optional, List
 from unittest import mock
 
+import datetime
 from django.core.management import call_command
 from django.dispatch import receiver
 from django.utils import timezone
@@ -10,6 +11,7 @@ from django.apps import AppConfig
 from django.db import connection
 from django.conf import settings
 from django.core.checks import Warning, Critical, register, Tags
+from typing import Union
 
 from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.signals import request_status
@@ -25,7 +27,7 @@ class BackendAppConfig(AppConfig):
         @register(Tags.compatibility, deploy=True)
         def system_checks(app_configs, **kwargs) -> List:
             """@see https://docs.djangoproject.com/en/3.1/topics/checks/"""
-            errors = []
+            errors: List[Union[Warning, Critical]] = []
 
             # DB Engine check.
             if connection.vendor not in settings.DSMRREADER_SUPPORTED_DB_VENDORS:  # pragma: no cover
@@ -73,7 +75,7 @@ def check_scheduled_processes(**kwargs) -> List[MonitoringStatusIssue]:
     from dsmr_backend.models.schedule import ScheduledProcess
 
     issues = []
-    offset = timezone.now() - timezone.timedelta(
+    offset = timezone.now() - datetime.timedelta(
         minutes=settings.DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES
     )
     lagging_processes = ScheduledProcess.objects.filter(active=True, planned__lt=offset)

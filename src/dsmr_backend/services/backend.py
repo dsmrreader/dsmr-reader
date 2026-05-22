@@ -191,11 +191,13 @@ def hours_in_day(day: datetime.date) -> int:
     start = timezone.localtime(start)
     end = timezone.localtime(end)
 
+    start_dst = start.dst() or datetime.timedelta(0)
+    end_dst = end.dst() or datetime.timedelta(0)
     # CEST -> CET
-    if start.dst() > end.dst():
+    if start_dst > end_dst:
         return 25
     # CET -> CEST
-    elif end.dst() > start.dst():
+    elif end_dst > start_dst:
         return 23
     # All other days
     else:

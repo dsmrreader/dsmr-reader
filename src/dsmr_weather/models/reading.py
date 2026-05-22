@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -6,6 +7,8 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 class TemperatureReading(ModelUpdateMixin, models.Model):
     """Hourly temperature statistics. Model is generic to isolate it from external services."""
+
+    objects: models.Manager["TemperatureReading"] = models.Manager()
 
     read_at = models.DateTimeField(unique=True)
     degrees_celcius = models.DecimalField(
@@ -18,4 +21,4 @@ class TemperatureReading(ModelUpdateMixin, models.Model):
         return "{}: {} ℃".format(self.read_at, self.degrees_celcius)
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()

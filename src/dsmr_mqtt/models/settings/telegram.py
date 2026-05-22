@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.db import models
@@ -25,7 +26,7 @@ class RawTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Telegram: Raw")
 
 
@@ -83,7 +84,7 @@ phase_power_current_l3 = phase_power_current_l3
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Telegram: JSON")
 
 
@@ -135,5 +136,5 @@ phase_power_current_l3 = dsmr/reading/phase_power_current_l3
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Telegram: Split topic")

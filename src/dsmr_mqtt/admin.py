@@ -74,7 +74,7 @@ class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in telegram.JSONTelegramMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -103,7 +103,7 @@ class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in telegram.SplitTopicTelegramMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -135,7 +135,7 @@ class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in day_totals.JSONDayTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -164,7 +164,7 @@ class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in day_totals.SplitTopicDayTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -196,7 +196,7 @@ class JSONPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in period_totals.JSONCurrentPeriodTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -225,7 +225,7 @@ class SplitTopicPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -254,7 +254,7 @@ class SplitTopicMeterStatisticsMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in meter_statistics.SplitTopicMeterStatisticsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -286,7 +286,7 @@ class JSONGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in consumption.JSONGasConsumptionMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -315,7 +315,7 @@ class SplitTopicGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
                         [
                             x.default
                             for x in consumption.SplitTopicGasConsumptionMQTTSettings._meta.get_fields()
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -347,7 +347,7 @@ class JSONQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(SingletonModelA
                         [
                             x.default
                             for x in consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()  # noqa: E501
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),
@@ -376,7 +376,7 @@ class SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(Singleton
                         [
                             x.default
                             for x in consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()  # noqa: E501
-                            if x.name == "formatting"
+                            if x.name == "formatting" and isinstance(x, models.Field)
                         ][0]
                     )
                 ),

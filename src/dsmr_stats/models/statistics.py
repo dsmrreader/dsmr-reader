@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -154,7 +155,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         return (self.electricity1_cost or 0) + (self.electricity2_cost or 0)
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Day statistics (automatically generated data)")
         verbose_name_plural = verbose_name
         ordering = ["day"]
@@ -201,7 +202,7 @@ class HourStatistics(ModelUpdateMixin, models.Model):
         return self.electricity1_returned + self.electricity2_returned
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Hour statistics (automatically generated data)")
         verbose_name_plural = verbose_name
         ordering = ["hour_start"]
@@ -355,5 +356,5 @@ class ElectricityStatistics(SingletonModel):
         return data
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Electricity statistics")

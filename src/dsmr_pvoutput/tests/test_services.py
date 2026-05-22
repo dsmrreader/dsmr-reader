@@ -1,5 +1,6 @@
 from unittest import mock
 
+import datetime
 from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
@@ -15,7 +16,7 @@ class TestServices(TestCase):
 
     def setUp(self) -> None:
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_PVOUTPUT_EXPORT)
-        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+        self.schedule_process.update(active=True, planned=timezone.make_aware(datetime.datetime(2000, 1, 1)))
 
     def _apply_fake_settings(self):
         PVOutputAPISettings.get_solo().update(  # noqa: S106
@@ -29,7 +30,7 @@ class TestServices(TestCase):
         PVOutputAddStatusSettings.get_solo()
 
         PVOutputAddStatusSettings.objects.update(upload_interval=PVOutputAddStatusSettings.INTERVAL_5_MINUTES)
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 2, 1, hour=12, minute=13, second=15))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2018, 2, 1, hour=12, minute=13, second=15))
         result = dsmr_pvoutput.services.get_next_export()
 
         self.assertEqual(result.hour, 12)
@@ -37,14 +38,14 @@ class TestServices(TestCase):
         self.assertEqual(result.second, 0)
 
         PVOutputAddStatusSettings.objects.update(upload_interval=PVOutputAddStatusSettings.INTERVAL_15_MINUTES)
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 2, 1, hour=12, minute=25, second=50))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2018, 2, 1, hour=12, minute=25, second=50))
         result = dsmr_pvoutput.services.get_next_export()
         self.assertEqual(result.hour, 12)
         self.assertEqual(result.minute, 30)
         self.assertEqual(result.second, 0)
 
         # Pass hour mark.
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 2, 1, hour=12, minute=59, second=30))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2018, 2, 1, hour=12, minute=59, second=30))
         result = dsmr_pvoutput.services.get_next_export()
         self.assertEqual(result.hour, 13)
         self.assertEqual(result.minute, 0)
@@ -53,7 +54,7 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_get_export_data(self, now_mock):
         """Complexity to make sure the upload is in sync."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 9, 30, hour=15))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 9, 30, hour=15))
         self._apply_fake_settings()
 
         # Too soon, no data in today's range.
@@ -61,22 +62,22 @@ class TestServices(TestCase):
         self.assertIsNone(result)
 
         # First sync, next day.
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.
         result = dsmr_pvoutput.services.get_export_data(next_export=None, upload_delay=0)
         self.assertEqual(result, {"d": "20171001", "n": 1, "t": "13:00", "v3": 4000, "v4": -750})
 
         # Now with all test EC's.
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))  # Include all 3 EC's.
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 10, 1, hour=15))  # Include all 3 EC's.
         result = dsmr_pvoutput.services.get_export_data(next_export=None, upload_delay=0)
         self.assertEqual(result, {"d": "20171001", "n": 1, "t": "15:00", "v3": 7000, "v4": 450})
 
         # Now with delay, should not be allowed, as we wait for more data.
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 10, 1, hour=13))  # Include 2 EC's.
         with self.assertRaises(LookupError):
             dsmr_pvoutput.services.get_export_data(next_export=timezone.now(), upload_delay=1)
 
         # Again with delay, but we move forward in time.
-        now_mock.return_value = now_mock.return_value + timezone.timedelta(minutes=1)
+        now_mock.return_value = now_mock.return_value + datetime.timedelta(minutes=1)
         dsmr_pvoutput.services.get_export_data(next_export=timezone.now(), upload_delay=1)
 
         # Make delay again just fall off, failing.
@@ -105,7 +106,7 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_export_no_electricity(self, now_mock, requests_mock):
         """Test export() without electricity."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 10, 1, hour=15))
         self._apply_fake_settings()
 
         # Drop all electricity data.
@@ -122,7 +123,7 @@ class TestServices(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_export_fail(self, now_mock, export_data_mock, requests_post_mock):
         """Test export() failing by denied API call."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 10, 1, hour=15))
         export_data_mock.return_value = {"x": "y"}  # Unimportant for this test.
         self._apply_fake_settings()
 
@@ -132,7 +133,7 @@ class TestServices(TestCase):
         # Failure should retry after 5 minutes.
         self.assertEqual(
             self.schedule_process.planned,
-            timezone.now() + timezone.timedelta(minutes=5),
+            timezone.now() + datetime.timedelta(minutes=5),
         )
         self.assertTrue(requests_post_mock.called)
 
@@ -142,7 +143,7 @@ class TestServices(TestCase):
     @mock.patch("dsmr_pvoutput.signals.pvoutput_upload.send_robust")
     def test_export_postponed(self, send_robust_mock, now_mock, export_data_mock, requests_post_mock):
         """Test export() but failing due to lack of data ready."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=1))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 10, 1, hour=1))
 
         export_data_mock.side_effect = LookupError()  # Emulate.
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text="Fake accept")
@@ -163,7 +164,7 @@ class TestServices(TestCase):
     @mock.patch("dsmr_pvoutput.signals.pvoutput_upload.send_robust")
     def test_export_okay(self, send_robust_mock, now_mock, export_data_mock, requests_post_mock):
         """Test export() as designed."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 10, 1, hour=15))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2017, 10, 1, hour=15))
         export_data_mock.return_value = {"x": "y"}  # Unimportant for this test.
 
         requests_post_mock.return_value = mock.MagicMock(status_code=200, text="Fake accept")

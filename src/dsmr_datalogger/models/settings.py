@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.dispatch import receiver
@@ -117,7 +118,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Datalogger configuration")
 
 
@@ -172,7 +173,7 @@ class RetentionSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Retention configuration")
 
 

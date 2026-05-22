@@ -1,4 +1,5 @@
 from adminsortable.models import SortableMixin
+from typing import ClassVar
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
@@ -177,7 +178,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Frontend configuration")
 
 
@@ -190,7 +191,7 @@ class SortedGraph(SortableMixin, models.Model):
         return self.name
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Sorted graph")
         verbose_name_plural = _("Sorted graphs")
         ordering = ["sorting_order"]

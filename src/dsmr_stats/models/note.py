@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -11,7 +12,7 @@ class Note(ModelUpdateMixin, models.Model):
     description = models.CharField(max_length=256, verbose_name=_("Description"))
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("Note")
         verbose_name_plural = _("Notes")
 

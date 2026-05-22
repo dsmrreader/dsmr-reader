@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from solo.models import SingletonModel
@@ -35,7 +36,7 @@ currently_delivered = currently_delivered
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Gas consumption: JSON")
 
 
@@ -63,7 +64,7 @@ currently_delivered = dsmr/consumption/gas/currently_delivered
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Gas consumption: Split topic")
 
 
@@ -97,7 +98,7 @@ average_delivered = average_delivered
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Quarter-hour peak consumption: JSON")
 
 
@@ -127,5 +128,5 @@ average_delivered = dsmr/consumption/quarter-hour-peak-electricity/average_deliv
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("(Data source) Quarter-hour peak consumption: Split topic")

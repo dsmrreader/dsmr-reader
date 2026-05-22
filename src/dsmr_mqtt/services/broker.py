@@ -55,7 +55,7 @@ def initialize_client() -> Optional[paho.Client]:
         logger.debug("MQTT: Using insecure connection (no TLS)")
 
     try:
-        mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port)
+        mqtt_client.connect(host=broker_settings.hostname, port=broker_settings.port or 1883)
     except Exception as error:
         logger.error(
             "MQTT: Failed to connect to broker (%s:%d): %s",

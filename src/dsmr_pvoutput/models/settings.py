@@ -1,3 +1,4 @@
+from typing import ClassVar
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -29,7 +30,7 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("PVOutput: API configuration")
 
 
@@ -84,5 +85,5 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
         return self._meta.verbose_name.title()
 
     class Meta:
-        default_permissions: tuple[str, ...] = tuple()
+        default_permissions: ClassVar[tuple[str, ...]] = tuple()
         verbose_name = _("PVOutput: Add Status configuration")

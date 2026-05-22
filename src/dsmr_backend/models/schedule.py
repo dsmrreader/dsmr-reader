@@ -1,6 +1,7 @@
 import importlib
 import logging
 
+from typing import ClassVar
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.db import models
@@ -86,5 +87,5 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
         return self.name
 
     class Meta:
-        default_permissions: list[str] = []
+        default_permissions: ClassVar[list[str]] = []
         verbose_name = _("Scheduled process")

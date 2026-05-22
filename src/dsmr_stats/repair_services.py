@@ -2,7 +2,7 @@ import bisect
 import datetime
 import sys
 from decimal import Decimal
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, cast
 
 from django.utils import timezone
 
@@ -227,7 +227,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
             continue
 
         window_start = hours[0].hour_start
-        window_end = hours[-1].hour_start + timezone.timedelta(hours=1)
+        window_end = hours[-1].hour_start + datetime.timedelta(hours=1)
 
         # Fetch DsmrReading records that span this batch's time window plus the one just before it.
         dr_before = DsmrReading.objects.processed().filter(timestamp__lt=window_start).order_by("-timestamp").first()
@@ -243,7 +243,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
         to_save: List[HourStatistics] = []
 
         for hour in hours:
-            hour_end = hour.hour_start + timezone.timedelta(hours=1)
+            hour_end = hour.hour_start + datetime.timedelta(hours=1)
 
             idx_start = bisect.bisect_right(ec_timestamps, hour.hour_start) - 1
             idx_end = bisect.bisect_right(ec_timestamps, hour_end) - 1
@@ -359,12 +359,19 @@ def _electricity_deltas(
     if any(v is None for v in readings):
         return None, " - [SKIP] NULL electricity reading(s) for: {}".format(current_record.day)
 
-    new_e1 = next_record.electricity1_reading - current_record.electricity1_reading  # type: ignore[operator]
-    new_e2 = next_record.electricity2_reading - current_record.electricity2_reading  # type: ignore[operator]
-    cur_e1r = current_record.electricity1_returned_reading
-    cur_e2r = current_record.electricity2_returned_reading
-    new_e1_ret = next_record.electricity1_returned_reading - cur_e1r  # type: ignore[operator]
-    new_e2_ret = next_record.electricity2_returned_reading - cur_e2r  # type: ignore[operator]
+    cur_e1 = cast(Decimal, current_record.electricity1_reading)
+    cur_e2 = cast(Decimal, current_record.electricity2_reading)
+    cur_e1r = cast(Decimal, current_record.electricity1_returned_reading)
+    cur_e2r = cast(Decimal, current_record.electricity2_returned_reading)
+    nxt_e1 = cast(Decimal, next_record.electricity1_reading)
+    nxt_e2 = cast(Decimal, next_record.electricity2_reading)
+    nxt_e1r = cast(Decimal, next_record.electricity1_returned_reading)
+    nxt_e2r = cast(Decimal, next_record.electricity2_returned_reading)
+
+    new_e1 = nxt_e1 - cur_e1
+    new_e2 = nxt_e2 - cur_e2
+    new_e1_ret = nxt_e1r - cur_e1r
+    new_e2_ret = nxt_e2r - cur_e2r
 
     if any(v < 0 for v in [new_e1, new_e2, new_e1_ret, new_e2_ret]):
         return None, " - [WARN] Negative electricity delta (possible meter replacement) for: {}".format(
