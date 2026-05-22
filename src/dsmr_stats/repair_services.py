@@ -7,8 +7,8 @@ from typing import Dict, List, Optional
 from django.utils import timezone
 
 import dsmr_consumption.services
-from dsmr_consumption.models.consumption import ElectricityConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
+from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
 
 
@@ -195,16 +195,16 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
         window_start = hours[0].hour_start
         window_end = hours[-1].hour_start + timezone.timedelta(hours=1)
 
-        # Fetch EC records that span this batch's time window plus the one just before it.
-        ec_before = ElectricityConsumption.objects.filter(read_at__lt=window_start).order_by("-read_at").first()
-        ec_in_window: List[ElectricityConsumption] = list(
-            ElectricityConsumption.objects.filter(read_at__gte=window_start, read_at__lte=window_end).order_by(
-                "read_at"
-            )
+        # Fetch DsmrReading records that span this batch's time window plus the one just before it.
+        dr_before = DsmrReading.objects.processed().filter(timestamp__lt=window_start).order_by("-timestamp").first()
+        dr_in_window: List[DsmrReading] = list(
+            DsmrReading.objects.processed()
+            .filter(timestamp__gte=window_start, timestamp__lte=window_end)
+            .order_by("timestamp")
         )
 
-        all_ec: List[ElectricityConsumption] = ([ec_before] if ec_before else []) + ec_in_window
-        ec_timestamps = [r.read_at for r in all_ec]
+        all_dr: List[DsmrReading] = ([dr_before] if dr_before else []) + dr_in_window
+        ec_timestamps = [r.timestamp for r in all_dr]
 
         to_save: List[HourStatistics] = []
 
@@ -215,18 +215,18 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
             idx_end = bisect.bisect_right(ec_timestamps, hour_end) - 1
 
             if idx_start < 0 or idx_end < 0:
-                print("\n - [SKIP] Missing anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
+                print("\n - [SKIP] Missing DsmrReading anchor(s) for: {}".format(timezone.localtime(hour.hour_start)))
                 skipped += 1
                 processed += 1
                 continue
 
-            anchor_start = all_ec[idx_start]
-            anchor_end = all_ec[idx_end]
+            anchor_start = all_dr[idx_start]
+            anchor_end = all_dr[idx_end]
 
-            new_e1 = anchor_end.delivered_1 - anchor_start.delivered_1
-            new_e2 = anchor_end.delivered_2 - anchor_start.delivered_2
-            new_e1_ret = anchor_end.returned_1 - anchor_start.returned_1
-            new_e2_ret = anchor_end.returned_2 - anchor_start.returned_2
+            new_e1 = anchor_end.electricity_delivered_1 - anchor_start.electricity_delivered_1
+            new_e2 = anchor_end.electricity_delivered_2 - anchor_start.electricity_delivered_2
+            new_e1_ret = anchor_end.electricity_returned_1 - anchor_start.electricity_returned_1
+            new_e2_ret = anchor_end.electricity_returned_2 - anchor_start.electricity_returned_2
 
             changed = (
                 new_e1 != hour.electricity1

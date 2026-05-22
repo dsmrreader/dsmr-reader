@@ -1242,16 +1242,17 @@ class TestRecalculateHourStatistics(InterceptCommandStdoutMixin, TestCase):
         delivered_2: Optional[Decimal] = None,
         returned_1: Optional[Decimal] = None,
         returned_2: Optional[Decimal] = None,
-    ) -> ElectricityConsumption:
+    ) -> DsmrReading:
         zero = Decimal("0.000")
-        return ElectricityConsumption.objects.create(
-            read_at=read_at,
-            delivered_1=delivered_1,
-            delivered_2=delivered_2 if delivered_2 is not None else zero,
-            returned_1=returned_1 if returned_1 is not None else zero,
-            returned_2=returned_2 if returned_2 is not None else zero,
-            currently_delivered=zero,
-            currently_returned=zero,
+        return DsmrReading.objects.create(
+            processed=True,
+            timestamp=read_at,
+            electricity_delivered_1=delivered_1,
+            electricity_delivered_2=delivered_2 if delivered_2 is not None else zero,
+            electricity_returned_1=returned_1 if returned_1 is not None else zero,
+            electricity_returned_2=returned_2 if returned_2 is not None else zero,
+            electricity_currently_delivered=zero,
+            electricity_currently_returned=zero,
         )
 
     def _make_hour(self, hour_start: timezone.datetime, electricity1: Optional[Decimal] = None) -> HourStatistics:
@@ -1265,7 +1266,7 @@ class TestRecalculateHourStatistics(InterceptCommandStdoutMixin, TestCase):
         )
 
     def test_recalculate_hour_corrects_boundary_anchors(self):
-        """EC at exactly hour_start/hour_end boundaries must be the anchors, not the records 1 min before."""
+        """DsmrReading at exactly hour_start/hour_end boundaries must be the anchors, not the records 1 min before."""
         hour_start = timezone.make_aware(timezone.datetime(2020, 6, 15, 12))
         hour_end = hour_start + timezone.timedelta(hours=1)
 
@@ -1300,7 +1301,7 @@ class TestRecalculateHourStatistics(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(hour.electricity1, Decimal("0.000"))  # unchanged
 
     def test_recalculate_hour_no_anchors(self):
-        """Hour with no surrounding EC records is skipped gracefully."""
+        """Hour with no surrounding DsmrReading records is skipped gracefully."""
         hour_start = timezone.make_aware(timezone.datetime(2020, 6, 15, 12))
 
         hour = self._make_hour(hour_start, electricity1=Decimal("5.000"))
