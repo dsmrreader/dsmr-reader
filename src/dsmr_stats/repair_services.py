@@ -4,6 +4,8 @@ import sys
 from decimal import Decimal
 from typing import Dict, List, Optional, cast
 
+from django.db.models import Sum
+from django.db.models.functions import TruncDate
 from django.utils import timezone
 
 import dsmr_consumption.services
@@ -491,3 +493,103 @@ def _bulk_update_day_price_fields(records: List[DayStatistics]) -> None:
         records,
         ["electricity1_cost", "electricity2_cost", "fixed_cost", "gas_cost", "total_cost"],
     )
+
+
+def analyze_data_quality() -> None:
+    """Analyses statistics data quality against raw meter readings (read-only, no writes)."""
+    _analyze_day_vs_meter_positions()
+    _analyze_hour_vs_day()
+
+
+def _analyze_day_vs_meter_positions() -> None:
+    """Check DayStatistics electricity/gas totals against consecutive meter-position deltas."""
+    threshold = Decimal("0.001")
+    print("=== DayStatistics vs Meter Position Deltas ===")
+
+    all_days: List[DayStatistics] = list(DayStatistics.objects.order_by("day"))
+    pairs = [
+        (all_days[i], all_days[i + 1])
+        for i in range(len(all_days) - 1)
+        if all_days[i + 1].day == all_days[i].day + datetime.timedelta(days=1)
+    ]
+
+    print("Checking {} consecutive day pairs...".format(len(pairs)))
+    mismatches = 0
+
+    for current, nxt in pairs:
+        deltas, _ = _electricity_deltas(current, nxt)
+        new_gas, _ = _gas_delta(current, nxt)
+
+        bad = []
+        if deltas is not None:
+            exp_e1, exp_e2, exp_e1_ret, exp_e2_ret = deltas
+            for name, exp, got in [
+                ("electricity1", exp_e1, current.electricity1),
+                ("electricity2", exp_e2, current.electricity2),
+                ("electricity1_returned", exp_e1_ret, current.electricity1_returned),
+                ("electricity2_returned", exp_e2_ret, current.electricity2_returned),
+            ]:
+                if got is not None and abs(exp - got) > threshold:
+                    bad.append((name, exp, got, float(exp - got)))
+
+        if new_gas is not None and current.gas is not None:
+            gas_diff = new_gas - current.gas
+            if abs(gas_diff) > threshold:
+                bad.append(("gas", new_gas, current.gas, float(gas_diff)))
+
+        if bad:
+            mismatches += 1
+            print("  [MISMATCH] {}:".format(current.day))
+            for name, exp, got, diff in bad:
+                print("    {:24s}  expected={} stored={} diff={:.6f}".format(name + ":", exp, got, diff))
+
+    print("Result: {} mismatches in {} consecutive day pairs.\n".format(mismatches, len(pairs)))
+
+
+def _analyze_hour_vs_day() -> None:
+    """Check that HourStatistics electricity sums per day match DayStatistics totals."""
+    threshold = Decimal("0.001")
+    print("=== HourStatistics Sum vs DayStatistics ===")
+
+    local_tz = timezone.get_current_timezone()
+    hour_sums = (
+        HourStatistics.objects.annotate(local_day=TruncDate("hour_start", tzinfo=local_tz))
+        .values("local_day")
+        .annotate(
+            sum_e1=Sum("electricity1"),
+            sum_e2=Sum("electricity2"),
+            sum_e1_ret=Sum("electricity1_returned"),
+            sum_e2_ret=Sum("electricity2_returned"),
+        )
+        .order_by("local_day")
+    )
+
+    day_stats: Dict[datetime.date, DayStatistics] = {r.day: r for r in DayStatistics.objects.all()}
+
+    total = 0
+    mismatches = 0
+
+    for row in hour_sums:
+        day = row["local_day"]
+        ds = day_stats.get(day)
+        if ds is None:
+            continue
+        total += 1
+
+        bad = []
+        for name, s, d in [
+            ("electricity1", row["sum_e1"], ds.electricity1),
+            ("electricity2", row["sum_e2"], ds.electricity2),
+            ("electricity1_returned", row["sum_e1_ret"], ds.electricity1_returned),
+            ("electricity2_returned", row["sum_e2_ret"], ds.electricity2_returned),
+        ]:
+            if s is not None and d is not None and abs(s - d) > threshold:
+                bad.append((name, s, d, float(s - d)))
+
+        if bad:
+            mismatches += 1
+            print("  [MISMATCH] {}:".format(day))
+            for name, s, d, diff in bad:
+                print("    {:24s}  hour_sum={} day_stat={} diff={:.6f}".format(name + ":", s, d, diff))
+
+    print("Result: {} mismatches in {} days with hour data.\n".format(mismatches, total))

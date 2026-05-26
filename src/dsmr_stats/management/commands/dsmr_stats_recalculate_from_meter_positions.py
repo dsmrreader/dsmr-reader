@@ -29,6 +29,17 @@ class Command(BaseCommand):
             help="Retroactively recalculate HourStatistics electricity totals using cross-boundary anchors.",
         )
         parser.add_argument(
+            "--analyze",
+            action="store_true",
+            dest="analyze",
+            default=False,
+            help=(
+                "Analyse data quality only (read-only): checks DayStatistics against consecutive meter-position "
+                "deltas, and HourStatistics sums against DayStatistics totals. Cannot be combined with --days, "
+                "--hours, or --write."
+            ),
+        )
+        parser.add_argument(
             "--batch-size",
             type=int,
             dest="batch_size",
@@ -40,10 +51,18 @@ class Command(BaseCommand):
         dry_run = options["dry_run"]
         run_days = options["days"]
         run_hours = options["hours"]
+        run_analyze = options["analyze"]
         batch_size = options["batch_size"]
 
+        if run_analyze:
+            if run_days or run_hours or not dry_run:
+                self.stderr.write("Error: --analyze cannot be combined with --days, --hours, or --write.")
+                return
+            dsmr_stats.repair_services.analyze_data_quality()
+            return
+
         if not run_days and not run_hours:
-            self.stderr.write("Error: specify --days or --hours (not both).")
+            self.stderr.write("Error: specify --days, --hours, or --analyze.")
             return
 
         if run_days and run_hours:

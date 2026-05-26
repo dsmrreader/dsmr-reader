@@ -35,7 +35,11 @@
     #### New commands
     - Added management command to retroactively recalculate `DayStatistics` electricity totals from stored meter positions, correcting records affected by the midnight-border gap (dry-run by default) - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
     - Extended the same command with `--days` and `--hours` flags to target `DayStatistics` or `HourStatistics` respectively; exactly one flag is required - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
+    - Extended the same command with `--analyze` to perform a read-only data quality analysis: compares `DayStatistics` electricity totals against consecutive meter-position deltas, and checks that `HourStatistics` sums per day match `DayStatistics` totals - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
         ```shell title="shell"
+        # Analyze data quality only (read-only, no writes)
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --analyze
+
         # Preview changes (dry-run, no writes)
         ./manage.py dsmr_stats_recalculate_from_meter_positions --days
         ./manage.py dsmr_stats_recalculate_from_meter_positions --hours
