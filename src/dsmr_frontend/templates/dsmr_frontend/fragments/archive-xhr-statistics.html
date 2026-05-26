@@ -5,7 +5,7 @@
 
 {% load dsmr_frontend_extras %}
 
-<div class="panel">
+<div class="panel {{ period_class }}">
     <h2 class="panel-heading centered-header">
         {{ title|unlocalize }}
 
@@ -48,17 +48,17 @@
                     </td>
                     <td>
                         {% if capabilities.electricity and statistics.electricity_merged %}
-                            <span class="badge bg-red">{{ statistics.electricity_merged|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ statistics.electricity_merged|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if capabilities.electricity_returned and statistics.electricity_returned_merged %}
-                            <span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ statistics.electricity_returned_merged|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if capabilities.electricity and statistics.electricity_cost_merged %}
-                            <span class="badge bg-black">{{ statistics.electricity_cost_merged|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-black badge-type-cost">{{ statistics.electricity_cost_merged|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -71,17 +71,17 @@
                     </td>
                     <td>
                         {% if capabilities.electricity and statistics.electricity1 %}
-                            <span class="badge bg-red">{{ statistics.electricity1|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ statistics.electricity1|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if capabilities.electricity_returned and statistics.electricity1_returned %}
-                            <span class="badge bg-green">{{ statistics.electricity1_returned|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ statistics.electricity1_returned|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if capabilities.electricity and statistics.electricity1_cost %}
-                            <span class="badge bg-black">{{ statistics.electricity1_cost|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-black badge-type-cost">{{ statistics.electricity1_cost|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -93,17 +93,17 @@
                     </td>
                     <td>
                         {% if capabilities.electricity and statistics.electricity2 %}
-                            <span class="badge bg-red">{{ statistics.electricity2|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ statistics.electricity2|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if capabilities.electricity_returned and statistics.electricity2_returned %}
-                            <span class="badge bg-green">{{ statistics.electricity2_returned|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ statistics.electricity2_returned|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if capabilities.electricity and statistics.electricity2_cost %}
-                            <span class="badge bg-black">{{ statistics.electricity2_cost|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-black badge-type-cost">{{ statistics.electricity2_cost|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -116,7 +116,7 @@
                 </td>
                 <td>
                     {% if capabilities.gas and statistics.gas %}
-                        <span class="badge bg-orange">{{ statistics.gas|default:'-'|decimal_html }}</span>
+                        <span class="badge bg-orange badge-type-gas">{{ statistics.gas|default:'-'|decimal_html }}</span>
                     {% endif %}
                 </td>
                 <td>
@@ -124,7 +124,7 @@
                 </td>
                 <td>
                     {% if capabilities.gas and statistics.gas_cost %}
-                        <span class="badge bg-black">{{ statistics.gas_cost|default:'-'|decimal_html }}</span>
+                        <span class="badge bg-black badge-type-cost">{{ statistics.gas_cost|default:'-'|decimal_html }}</span>
                     {% endif %}
                 </td>
             </tr>
@@ -143,7 +143,7 @@
                         &nbsp;
                     </td>
                     <td>
-                        <span class="badge bg-black">{{ statistics.fixed_cost|default:'-'|decimal_html }}</span>
+                        <span class="badge bg-black badge-type-cost">{{ statistics.fixed_cost|default:'-'|decimal_html }}</span>
                     </td>
                 </tr>
             {% endif %}
@@ -153,17 +153,17 @@
                 </td>
                 <td>
                     {% if capabilities.electricity and statistics.electricity_merged %}
-                        <span class="badge bg-red">{{ statistics.electricity_merged|default:'-'|decimal_html }}</span>
+                        <span class="badge bg-red badge-type-electricity">{{ statistics.electricity_merged|default:'-'|decimal_html }}</span>
                     {% endif %}
                 </td>
                 <td>
                     {% if capabilities.electricity_returned and statistics.electricity_returned_merged %}
-                        <span class="badge bg-green">{{ statistics.electricity_returned_merged|default:'-'|decimal_html }}</span>
+                        <span class="badge bg-green badge-type-electricity">{{ statistics.electricity_returned_merged|default:'-'|decimal_html }}</span>
                     {% endif %}
                 </td>
                 <td>
                     {% if capabilities.costs and statistics.total_cost %}
-                        <span class="badge bg-black">{{ statistics.total_cost|default:'-'|decimal_html }}</span>
+                        <span class="badge bg-black badge-type-cost">{{ statistics.total_cost|default:'-'|decimal_html }}</span>
                     {% endif %}
                 </td>
             </tr>
@@ -180,17 +180,17 @@
                     </td>
                     <td>
                         {% if statistics.temperature_min %}
-                            <span class="badge bg-blue">{{ statistics.temperature_min|floatformat|default:'-'|decimal_html }}</span> <span class="unit">{% translate "Min" %}</span>
+                            <span class="badge bg-blue badge-type-temperature">{{ statistics.temperature_min|floatformat|default:'-'|decimal_html }}</span> <span class="unit">{% translate "Min" %}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if statistics.temperature_max %}
-                            <span class="badge bg-blue">{{ statistics.temperature_max|floatformat|default:'-'|decimal_html }}</span> <span class="unit">{% translate "Max" %}</span>
+                            <span class="badge bg-blue badge-type-temperature">{{ statistics.temperature_max|floatformat|default:'-'|decimal_html }}</span> <span class="unit">{% translate "Max" %}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if statistics.temperature_avg %}
-                            <span class="badge bg-blue">{{ statistics.temperature_avg|floatformat|default:'-'|decimal_html }}</span> <span class="unit">{% translate "Avg" %}</span>
+                            <span class="badge bg-blue badge-type-temperature">{{ statistics.temperature_avg|floatformat|default:'-'|decimal_html }}</span> <span class="unit">{% translate "Avg" %}</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -238,11 +238,11 @@
                                 {{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                             </td>
                             <td>
-                                <span class="badge bg-red">{{ day_statistics.electricity1_reading|decimal_html }}</span>
+                                <span class="badge bg-red badge-type-meter">{{ day_statistics.electricity1_reading|decimal_html }}</span>
                             </td>
                             <td>
                                 {% if capabilities.electricity_returned %}
-                                    <span class="badge bg-green">{{ day_statistics.electricity1_returned_reading|decimal_html }}</span>
+                                    <span class="badge bg-green badge-type-meter">{{ day_statistics.electricity1_returned_reading|decimal_html }}</span>
                                 {% endif %}
                             </td>
                             <td class="col-sm-2">
@@ -254,11 +254,11 @@
                                 {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                             </td>
                             <td>
-                                <span class="badge bg-red">{{ day_statistics.electricity2_reading|decimal_html }}</span>
+                                <span class="badge bg-red badge-type-meter">{{ day_statistics.electricity2_reading|decimal_html }}</span>
                             </td>
                             <td>
                                 {% if capabilities.electricity_returned %}
-                                    <span class="badge bg-green">{{ day_statistics.electricity2_returned_reading|decimal_html }}</span>
+                                    <span class="badge bg-green badge-type-meter">{{ day_statistics.electricity2_returned_reading|decimal_html }}</span>
                                 {% endif %}
                             </td>
                             <td class="col-sm-2">
@@ -272,7 +272,7 @@
                                     {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-orange">{{ day_statistics.gas_reading|decimal_html }}</span>
+                                    <span class="badge bg-orange badge-type-meter">{{ day_statistics.gas_reading|decimal_html }}</span>
                                 </td>
                                 <td>
                                 </td>

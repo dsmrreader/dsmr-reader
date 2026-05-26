@@ -246,6 +246,20 @@ td.comparison-warning, div.search_help {
     line-height: 1 !important;
 }
 
+table span.badge {
+    text-align: center;
+}
+
+/* Period-context sizing — only applies to typed badges */
+.period-sm table span.badge[class*="badge-type-"] { min-width: 2.5em; }
+.period-md table span.badge[class*="badge-type-"] { min-width: 3em; }
+.period-lg table span.badge[class*="badge-type-"] { min-width: 3.5em; }
+
+/* Type-specific sizes (independent of period) */
+table span.badge.badge-type-temperature { min-width: 2.5em; }
+table span.badge.badge-type-meter      { min-width: 4.5em; }
+table span.badge.badge-type-watt       { min-width: 3em; }
+
 tr > th {
     /* Remove weird duplicate border on top. */
     border-top: none !important;

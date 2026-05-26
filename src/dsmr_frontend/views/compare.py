@@ -94,5 +94,8 @@ class CompareXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
             base=base_data["number_of_days"],
             comparison=comparison_data["number_of_days"],
         )
+        context_data["period_class"] = {"days": "period-sm", "months": "period-md", "years": "period-lg"}[
+            selected_level
+        ]
 
         return context_data

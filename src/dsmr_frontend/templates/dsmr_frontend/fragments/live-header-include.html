@@ -44,18 +44,20 @@
                         </td>
                         <td>
                             {% if capabilities.electricity %}
-                                <span class="badge bg-red" id="latest_electricity_delivered"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+                                <span class="badge bg-red badge-type-watt"
+                                      id="latest_electricity_delivered"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if capabilities.electricity_returned %}
-                                <span class="badge bg-green" id="latest_electricity_returned"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
+                                <span class="badge bg-green badge-type-watt"
+                                      id="latest_electricity_returned"><i class="fas fa-circle-notch fa-spin fa-fw"></i></span>
                             {% endif %}
                         </td>
                         {% if capabilities.costs %}
                             <td>
                                 {% if capabilities.electricity %}
-                                    <span class="xhr-hidden badge bg-black" id="cost_per_hour"></span>
+                                    <span class="xhr-hidden badge bg-black badge-type-cost" id="cost_per_hour"></span>
                                 {% endif %}
                             </td>
                         {% endif %}

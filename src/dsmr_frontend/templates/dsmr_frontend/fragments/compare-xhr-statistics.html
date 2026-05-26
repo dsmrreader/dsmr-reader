@@ -6,7 +6,7 @@
 
 {% load dsmr_frontend_extras %}
 
-<div class="panel">
+<div class="panel {{ period_class }}">
     <div class="panel-body">
         <table class="table table-hover">
             <tr>
@@ -55,12 +55,12 @@
                     </td>
                     <td>
                         {% if base.electricity1 %}
-                            <span class="badge bg-red">{{ base.electricity1|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ base.electricity1|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if comparison.electricity1 %}
-                            <span class="badge bg-red">{{ comparison.electricity1|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ comparison.electricity1|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -81,12 +81,12 @@
                     </td>
                     <td>
                         {% if base.electricity2 %}
-                            <span class="badge bg-red">{{ base.electricity2|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ base.electricity2|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if comparison.electricity2 %}
-                            <span class="badge bg-red">{{ comparison.electricity2|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ comparison.electricity2|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -110,12 +110,12 @@
                     </td>
                     <td>
                         {% if base.electricity_merged %}
-                            <span class="badge bg-red">{{ base.electricity_merged|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ base.electricity_merged|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if comparison.electricity_merged %}
-                            <span class="badge bg-red">{{ comparison.electricity_merged|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-red badge-type-electricity">{{ comparison.electricity_merged|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -139,12 +139,12 @@
                     </td>
                     <td>
                         {% if base.electricity1_returned %}
-                            <span class="badge bg-green">{{ base.electricity1_returned|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ base.electricity1_returned|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if comparison.electricity1_returned %}
-                            <span class="badge bg-green">{{ comparison.electricity1_returned|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ comparison.electricity1_returned|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -165,12 +165,12 @@
                     </td>
                     <td>
                         {% if base.electricity2_returned %}
-                            <span class="badge bg-green">{{ base.electricity2_returned|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ base.electricity2_returned|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if comparison.electricity2_returned %}
-                            <span class="badge bg-green">{{ comparison.electricity2_returned|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ comparison.electricity2_returned|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -194,12 +194,12 @@
                     </td>
                     <td>
                         {% if base.electricity_returned_merged %}
-                            <span class="badge bg-green">{{ base.electricity_returned_merged|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ base.electricity_returned_merged|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if comparison.electricity_returned_merged %}
-                            <span class="badge bg-green">{{ comparison.electricity_returned_merged|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-green badge-type-electricity">{{ comparison.electricity_returned_merged|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
@@ -223,12 +223,12 @@
                     </td>
                     <td>
                         {% if base.gas %}
-                            <span class="badge bg-orange">{{ base.gas|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-orange badge-type-gas">{{ base.gas|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if comparison.gas %}
-                            <span class="badge bg-orange">{{ comparison.gas|default:'-'|decimal_html }}</span>
+                            <span class="badge bg-orange badge-type-gas">{{ comparison.gas|default:'-'|decimal_html }}</span>
                         {% endif %}
                     </td>
                     <td>

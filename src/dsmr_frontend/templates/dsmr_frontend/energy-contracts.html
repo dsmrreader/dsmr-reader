@@ -24,7 +24,7 @@
             {% for current in energy_contracts %}
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="panel">
+                        <div class="panel period-lg">
                             <h2 class="panel-heading">
                                 <strong>{{ current.description }}</strong> <span class="unit">{{ current.summary.number_of_days }} {% blocktranslate count counter=current.summary.number_of_days %}day{% plural %}days{% endblocktranslate %} {% translate "stored" %}</span>
                             </h2>
@@ -71,7 +71,7 @@
                                                 </td>
                                                 <td>
                                                     {% if current.prices.electricity_returned_1_price %}
-                                                        <span class="badge bg-green">{{ current.summary.electricity1_returned|default:'-' }}</span>
+                                                        <span class="badge bg-green badge-type-electricity">{{ current.summary.electricity1_returned|default:'-' }}</span>
                                                     {% endif %}
                                                 </td>
                                                 <td>
@@ -98,7 +98,7 @@
                                                 </td>
                                                 <td>
                                                     {% if current.prices.electricity_returned_2_price %}
-                                                        <span class="badge bg-green">{{ current.summary.electricity2_returned|default:'-' }}</span>
+                                                        <span class="badge bg-green badge-type-electricity">{{ current.summary.electricity2_returned|default:'-' }}</span>
                                                     {% endif %}
                                                 </td>
                                                 <td>
@@ -127,12 +127,12 @@
                                             <td>
                                                 {% if capabilities.electricity_returned %}
                                                     {% if current.prices.electricity_returned_1_price or current.prices.electricity_returned_2_price %}
-                                                        <span class="badge bg-green">{{ current.summary.electricity_returned_merged|default:'-' }}</span>
+                                                        <span class="badge bg-green badge-type-electricity">{{ current.summary.electricity_returned_merged|default:'-' }}</span>
                                                     {% endif %}
                                                 {% endif %}
                                             </td>
                                             <td>
-                                                <span class="badge bg-black">{{ current.summary.electricity_cost_merged|default:'-'|decimal_html }}</span>
+                                                <span class="badge bg-black badge-type-cost">{{ current.summary.electricity_cost_merged|default:'-'|decimal_html }}</span>
                                             </td>
                                         </tr>
                                     {% endif %}
@@ -143,13 +143,13 @@
                                                 {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
                                             </td>
                                             <td>
-                                                <span class="badge bg-orange">{{ current.summary.gas|default:'-'|decimal_html }}</span>
+                                                <span class="badge bg-orange badge-type-gas">{{ current.summary.gas|default:'-'|decimal_html }}</span>
                                             </td>
                                             <td>
                                                 &nbsp;
                                             </td>
                                             <td>
-                                                <span class="badge bg-black">{{ current.summary.gas_cost|default:'-'|decimal_html }}</span>
+                                                <span class="badge bg-black badge-type-cost">{{ current.summary.gas_cost|default:'-'|decimal_html }}</span>
                                             </td>
                                         </tr>
                                     {% endif %}
@@ -161,7 +161,7 @@
                                                 {% translate "Fixed costs" %}
                                             </td>
                                             <td>
-                                                <span class="badge bg-black">{{ current.summary.fixed_cost|default:'-'|decimal_html }}</span>
+                                                <span class="badge bg-black badge-type-cost">{{ current.summary.fixed_cost|default:'-'|decimal_html }}</span>
                                             </td>
                                         </tr>
                                     {% endif %}
@@ -172,7 +172,7 @@
                                             {% translate "Total costs" %}
                                         </td>
                                         <td>
-                                            <span class="badge bg-black">{{ current.summary.total_cost|default:'-'|decimal_html }}</span>
+                                            <span class="badge bg-black badge-type-cost">{{ current.summary.total_cost|default:'-'|decimal_html }}</span>
                                         </td>
                                     </tr>
 
@@ -281,11 +281,11 @@
                                                     <small>{{ frontend_settings.tariff_1_delivered_name|capfirst }}</small> <span class="unit">{% translate "kWh" %}</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-red">{{ current.first_day.electricity1_reading|decimal_html }}</span>
+                                                    <span class="badge bg-red badge-type-meter">{{ current.first_day.electricity1_reading|decimal_html }}</span>
                                                 </td>
                                                 <td>
                                                     {% if capabilities.electricity_returned %}
-                                                        <span class="badge bg-green"><small>{{ current.first_day.electricity1_returned_reading }}</small></span>
+                                                        <span class="badge bg-green badge-type-meter"><small>{{ current.first_day.electricity1_returned_reading }}</small></span>
                                                     {% endif %}
                                                 </td>
                                                 <td>
@@ -299,11 +299,11 @@
                                                     <small>{{ frontend_settings.tariff_2_delivered_name|capfirst }}</small> <span class="unit">{% translate "kWh" %}</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-red">{{ current.first_day.electricity2_reading|decimal_html }}</span>
+                                                    <span class="badge bg-red badge-type-meter">{{ current.first_day.electricity2_reading|decimal_html }}</span>
                                                 </td>
                                                 <td>
                                                     {% if capabilities.electricity_returned %}
-                                                        <span class="badge bg-green"><small>{{ current.first_day.electricity2_returned_reading }}</small></span>
+                                                        <span class="badge bg-green badge-type-meter"><small>{{ current.first_day.electricity2_returned_reading }}</small></span>
                                                     {% endif %}
                                                 </td>
                                                 <td>
@@ -316,7 +316,7 @@
                                                     {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-orange">{{ current.first_day.gas_reading|decimal_html }}</span>
+                                                    <span class="badge bg-orange badge-type-meter">{{ current.first_day.gas_reading|decimal_html }}</span>
                                                 </td>
                                                 <td colspan="2">
                                                 </td>

@@ -56,11 +56,11 @@
                                         {{ frontend_settings.tariff_1_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_1|default:'-'|decimal_html }}</span>
+                                        <span class="badge bg-red badge-type-meter">{{ latest_reading.electricity_delivered_1|default:'-'|decimal_html }}</span>
                                     </td>
                                     <td>
                                         {% if capabilities.electricity_returned %}
-                                            <span class="badge bg-green">{{ latest_reading.electricity_returned_1|default:'-' }}</span>
+                                            <span class="badge bg-green badge-type-meter">{{ latest_reading.electricity_returned_1|default:'-' }}</span>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -69,11 +69,11 @@
                                         {{ frontend_settings.tariff_2_delivered_name|capfirst }} <span class="unit">{% translate "kWh" %}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-red">{{ latest_reading.electricity_delivered_2|default:'-'|decimal_html }}</span>
+                                        <span class="badge bg-red badge-type-meter">{{ latest_reading.electricity_delivered_2|default:'-'|decimal_html }}</span>
                                     </td>
                                     <td>
                                         {% if capabilities.electricity_returned %}
-                                            <span class="badge bg-green">{{ latest_reading.electricity_returned_2|default:'-' }}</span>
+                                            <span class="badge bg-green badge-type-meter">{{ latest_reading.electricity_returned_2|default:'-' }}</span>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -83,11 +83,11 @@
                                             {% translate "Electricity (combined)" %} <span class="unit">{% translate "kWh" %}</span>
                                         </td>
                                         <td>
-                                            <span class="badge bg-red">{{ delivered_sum|default:'-'|decimal_html }}</span>
+                                            <span class="badge bg-red badge-type-meter">{{ delivered_sum|default:'-'|decimal_html }}</span>
                                         </td>
                                         <td>
                                             {% if capabilities.electricity_returned %}
-                                                <span class="badge bg-green">{{ returned_sum|default:'-' }}</span>
+                                                <span class="badge bg-green badge-type-meter">{{ returned_sum|default:'-' }}</span>
                                             {% endif %}
                                         </td>
                                     </tr>
@@ -99,7 +99,7 @@
                                             {% translate "Gas" %} <span class="unit">{% translate "m³" %}</span>
                                         </td>
                                         <td colspan="2">
-                                            <span class="badge bg-orange">{{ latest_reading.extra_device_delivered|default:'-'|decimal_html }}</span>
+                                            <span class="badge bg-orange badge-type-meter">{{ latest_reading.extra_device_delivered|default:'-'|decimal_html }}</span>
                                         </td>
                                     </tr>
                                 {% endif %}
@@ -239,7 +239,7 @@
                                                 <span class="unit">{{ electricity_statistics.highest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                             </td>
                                             <td class="col-sm-6">
-                                                <span class="badge bg-red">
+                                                <span class="badge bg-red badge-type-watt">
                                                     {{ electricity_statistics.highest_usage_l1_value|intcomma }}
                                                 </span>
                                             </td>
@@ -253,7 +253,7 @@
                                                 <span class="unit">{{ electricity_statistics.highest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                             </td>
                                             <td class="col-sm-6">
-                                                <span class="badge bg-red">
+                                                <span class="badge bg-red badge-type-watt">
                                                     {{ electricity_statistics.highest_usage_l2_value|intcomma }}
                                                 </span>
                                             </td>
@@ -267,7 +267,7 @@
                                                 <span class="unit">{{ electricity_statistics.highest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                             </td>
                                             <td class="col-sm-6">
-                                                <span class="badge bg-red">
+                                                <span class="badge bg-red badge-type-watt">
                                                     {{ electricity_statistics.highest_usage_l3_value|intcomma }}
                                                 </span>
                                             </td>
@@ -282,7 +282,7 @@
                                                 <span class="unit">{{ electricity_statistics.lowest_usage_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                             </td>
                                             <td class="col-sm-6">
-                                                <span class="badge bg-red">
+                                                <span class="badge bg-red badge-type-watt">
                                                     {{ electricity_statistics.lowest_usage_l1_value|intcomma }}
                                                 </span>
                                             </td>
@@ -296,7 +296,7 @@
                                                 <span class="unit">{{ electricity_statistics.lowest_usage_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                             </td>
                                             <td class="col-sm-6">
-                                                <span class="badge bg-red">
+                                                <span class="badge bg-red badge-type-watt">
                                                     {{ electricity_statistics.lowest_usage_l2_value|intcomma }}
                                                 </span>
                                             </td>
@@ -310,7 +310,7 @@
                                                 <span class="unit">{{ electricity_statistics.lowest_usage_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                             </td>
                                             <td class="col-sm-6">
-                                                <span class="badge bg-red">
+                                                <span class="badge bg-red badge-type-watt">
                                                     {{ electricity_statistics.lowest_usage_l3_value|intcomma }}
                                                 </span>
                                             </td>
@@ -326,7 +326,7 @@
                                                     <span class="unit">{{ electricity_statistics.highest_return_l1_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                                 </td>
                                                 <td class="col-sm-6">
-                                                    <span class="badge bg-green">
+                                                    <span class="badge bg-green badge-type-watt">
                                                         {{ electricity_statistics.highest_return_l1_value|intcomma }}
                                                     </span>
                                                 </td>
@@ -340,7 +340,7 @@
                                                     <span class="unit">{{ electricity_statistics.highest_return_l2_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                                 </td>
                                                 <td class="col-sm-6">
-                                                    <span class="badge bg-green">
+                                                    <span class="badge bg-green badge-type-watt">
                                                         {{ electricity_statistics.highest_return_l2_value|intcomma }}
                                                     </span>
                                                 </td>
@@ -354,7 +354,7 @@
                                                     <span class="unit">{{ electricity_statistics.highest_return_l3_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                                 </td>
                                                 <td class="col-sm-6">
-                                                    <span class="badge bg-green">
+                                                    <span class="badge bg-green badge-type-watt">
                                                         {{ electricity_statistics.highest_return_l3_value|intcomma }}
                                                     </span>
                                                 </td>

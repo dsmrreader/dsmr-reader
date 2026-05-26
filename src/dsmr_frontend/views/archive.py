@@ -78,6 +78,9 @@ class ArchiveXhrSummary(ConfigurableLoginRequiredMixin, TemplateView):
                 pass
 
         context_data["selected_level"] = selected_level
+        context_data["period_class"] = {"days": "period-sm", "months": "period-md", "years": "period-lg"}[
+            selected_level
+        ]
         context_data["selected_datetime"] = selected_datetime
         context_data["django_date_format"] = "DJANGO_DATE_FORMAT"
         return context_data
