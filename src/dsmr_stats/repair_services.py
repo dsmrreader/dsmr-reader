@@ -513,8 +513,10 @@ def _analyze_day_vs_meter_positions() -> None:
         if all_days[i + 1].day == all_days[i].day + datetime.timedelta(days=1)
     ]
 
-    print("Checking {} consecutive day pairs...".format(len(pairs)))
+    total = len(pairs)
+    processed = 0
     mismatches = 0
+    output_lines: List[str] = []
 
     for current, nxt in pairs:
         deltas, _ = _electricity_deltas(current, nxt)
@@ -539,11 +541,15 @@ def _analyze_day_vs_meter_positions() -> None:
 
         if bad:
             mismatches += 1
-            print("  [MISMATCH] {}:".format(current.day))
+            output_lines.append("  [MISMATCH] {}:".format(current.day))
             for name, exp, got, diff in bad:
-                print("    {:24s}  expected={} stored={} diff={:.6f}".format(name + ":", exp, got, diff))
+                output_lines.append("    {:24s}  expected={} stored={} diff={:.6f}".format(name + ":", exp, got, diff))
 
-    print("Result: {} mismatches in {} consecutive day pairs.\n".format(mismatches, len(pairs)))
+        processed += 1
+        _print_progress(processed, total, updated=mismatches, unchanged=processed - mismatches)
+
+    _flush_output(output_lines)
+    print("Result: {} mismatches in {} consecutive day pairs.\n".format(mismatches, total))
 
 
 def _analyze_hour_vs_day() -> None:
@@ -552,7 +558,7 @@ def _analyze_hour_vs_day() -> None:
     print("=== HourStatistics Sum vs DayStatistics ===")
 
     local_tz = timezone.get_current_timezone()
-    hour_sums = (
+    hour_sums = list(
         HourStatistics.objects.annotate(local_day=TruncDate("hour_start", tzinfo=local_tz))
         .values("local_day")
         .annotate(
@@ -566,15 +572,18 @@ def _analyze_hour_vs_day() -> None:
 
     day_stats: Dict[datetime.date, DayStatistics] = {r.day: r for r in DayStatistics.objects.all()}
 
-    total = 0
+    total = len(hour_sums)
+    processed = 0
     mismatches = 0
+    output_lines: List[str] = []
 
     for row in hour_sums:
         day = row["local_day"]
         ds = day_stats.get(day)
         if ds is None:
+            processed += 1
+            _print_progress(processed, total, updated=mismatches, unchanged=processed - mismatches)
             continue
-        total += 1
 
         bad = []
         for name, s, d in [
@@ -588,8 +597,12 @@ def _analyze_hour_vs_day() -> None:
 
         if bad:
             mismatches += 1
-            print("  [MISMATCH] {}:".format(day))
+            output_lines.append("  [MISMATCH] {}:".format(day))
             for name, s, d, diff in bad:
-                print("    {:24s}  hour_sum={} day_stat={} diff={:.6f}".format(name + ":", s, d, diff))
+                output_lines.append("    {:24s}  hour_sum={} day_stat={} diff={:.6f}".format(name + ":", s, d, diff))
 
+        processed += 1
+        _print_progress(processed, total, updated=mismatches, unchanged=processed - mismatches)
+
+    _flush_output(output_lines)
     print("Result: {} mismatches in {} days with hour data.\n".format(mismatches, total))
