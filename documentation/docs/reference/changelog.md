@@ -9,11 +9,11 @@
 ---
 
 
-## v6.2.0 - May 2026
+## v6.2.0 - June 2026
 
 <small>*Accuracy fixes: electricity consumption is no longer silently dropped at day and hour boundaries, and MQTT period totals are now published correctly on the first day of a new month or year. Quarter-hour peak data can now be exported as CSV.*</small>
 
-??? danger "Major bugfix"
+!!! danger "Major bugfix"
 
     #### Data accuracy
     - Fixed midnight-border gap causing electricity consumption to be silently dropped at calendar-day and calendar-hour boundaries in daily and hourly statistics - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
@@ -30,7 +30,7 @@
         _The fix looks up the last known meter position **before** the boundary instead of the first position inside the new window, so no interval is ever skipped.
         No data migration or schema change is needed — the meter positions were always stored correctly; only the calculation logic was wrong._
 
-??? tip "Improvements"
+!!! tip "Improvements"
 
     #### New commands
     - Added management command to retroactively recalculate `DayStatistics` electricity totals from stored meter positions, correcting records affected by the midnight-border gap (dry-run by default) - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
@@ -67,7 +67,7 @@
 
 <small>*Spring cleaning: improved accessibility, rolling 365-day dashboard panel, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
 
-!!! tip "Improvements"
+??? tip "Improvements"
 
     #### Accessibility
     - Applied WCAG 2.2 AA accessibility improvements to frontend templates (semantic headings, ARIA attributes, keyboard navigation, screen reader support)
@@ -89,7 +89,7 @@
     #### Dropbox
     - Improved Dropbox sync to no longer remove credentials on server/API errors, instead rescheduling for 5 minutes
 
-!!! abstract "Other changes and fixes"
+??? abstract "Other changes and fixes"
 
     #### Fixes
     - Fixed retention data rotation being stuck in a loop on non-UTC systems (e.g. `Europe/Amsterdam`) - [#2137](https://github.com/dsmrreader/dsmr-reader/issues/2137)
