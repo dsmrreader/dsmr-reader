@@ -53,19 +53,25 @@ class TestAdmin(TestCase):
         response = self.client.post(URL, data=data)
         self.assertEqual(response.status_code, 302)
 
-        # Test non-existing folder and cause permission denied.
-        data.update(dict(folder="/non/existing/"))
+        # Disabling backup with an inaccessible folder must still save successfully.
         exists_mock.return_value = False
         mkdirs_mock.side_effect = IOError("Denied")
+        data_disabled = dict(data, folder="/non/existing/")  # daily_backup absent == False
+        response = self.client.post(URL, data=data_disabled)
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(mkdirs_mock.called)
 
-        self.client.post(URL, data=data)
+        # Test non-existing folder and cause permission denied when backup is enabled.
+        mkdirs_mock.reset_mock()
+        data_enabled = dict(data, folder="/enabled/missing/", daily_backup=True)
+        self.client.post(URL, data=data_enabled)
         self.assertTrue(mkdirs_mock.called)
-        self.assertFalse(BackupSettings.objects.filter(folder=data["folder"]).exists())
+        self.assertFalse(BackupSettings.objects.filter(folder="/enabled/missing/").exists())
 
-        # OK flow.
+        # OK flow when backup is enabled.
         mkdirs_mock.side_effect = None
-        self.client.post(URL, data=data)
-        self.assertTrue(BackupSettings.objects.filter(folder=data["folder"]).exists())
+        self.client.post(URL, data=data_enabled)
+        self.assertTrue(BackupSettings.objects.filter(folder="/enabled/missing/").exists())
 
     def test_reschedule_email_backup(self):
         URL = reverse("admin:dsmr_backup_emailbackupsettings_changelist")
