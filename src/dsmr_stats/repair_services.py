@@ -514,9 +514,7 @@ def _analyze_day_vs_meter_positions() -> None:
     ]
 
     total = len(pairs)
-    processed = 0
     mismatches = 0
-    output_lines: List[str] = []
 
     for current, nxt in pairs:
         deltas, _ = _electricity_deltas(current, nxt)
@@ -541,14 +539,10 @@ def _analyze_day_vs_meter_positions() -> None:
 
         if bad:
             mismatches += 1
-            output_lines.append("  [MISMATCH] {}:".format(current.day))
+            print("  [MISMATCH] {}:".format(current.day))
             for name, exp, got, diff in bad:
-                output_lines.append("    {:24s}  expected={} stored={} diff={:.6f}".format(name + ":", exp, got, diff))
+                print("    {:24s}  expected={} stored={} diff={:.6f}".format(name + ":", exp, got, diff))
 
-        processed += 1
-        _print_progress(processed, total, updated=mismatches, unchanged=processed - mismatches)
-
-    _flush_output(output_lines)
     print("Result: {} mismatches in {} consecutive day pairs.\n".format(mismatches, total))
 
 
@@ -573,16 +567,12 @@ def _analyze_hour_vs_day() -> None:
     day_stats: Dict[datetime.date, DayStatistics] = {r.day: r for r in DayStatistics.objects.all()}
 
     total = len(hour_sums)
-    processed = 0
     mismatches = 0
-    output_lines: List[str] = []
 
     for row in hour_sums:
         day = row["local_day"]
         ds = day_stats.get(day)
         if ds is None:
-            processed += 1
-            _print_progress(processed, total, updated=mismatches, unchanged=processed - mismatches)
             continue
 
         bad = []
@@ -597,12 +587,8 @@ def _analyze_hour_vs_day() -> None:
 
         if bad:
             mismatches += 1
-            output_lines.append("  [MISMATCH] {}:".format(day))
+            print("  [MISMATCH] {}:".format(day))
             for name, s, d, diff in bad:
-                output_lines.append("    {:24s}  hour_sum={} day_stat={} diff={:.6f}".format(name + ":", s, d, diff))
+                print("    {:24s}  hour_sum={} day_stat={} diff={:.6f}".format(name + ":", s, d, diff))
 
-        processed += 1
-        _print_progress(processed, total, updated=mismatches, unchanged=processed - mismatches)
-
-    _flush_output(output_lines)
     print("Result: {} mismatches in {} days with hour data.\n".format(mismatches, total))
