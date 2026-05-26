@@ -36,4 +36,4 @@ def decimal_html(value: object) -> SafeData:
     sep = text[sep_pos]
     integer_part = text[:sep_pos]
     decimal_part = text[sep_pos + 1 :]
-    return format_html('{}<span class="badge-decimal">{} {}</span>', integer_part, sep, decimal_part)
+    return format_html('{}<span class="badge-decimal">{}{}</span>', integer_part, sep, decimal_part)
