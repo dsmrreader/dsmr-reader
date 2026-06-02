@@ -56,6 +56,10 @@
         - `dsmr_stats_reconstruct_missing_day_statistics` — processes missing dates in batch slices
         - `dsmr_stats_reconstruct_missing_day_statistics_by_hours` — same
 
+    #### UI
+    - Improved ==experimental== decimal badge rendering — integer and decimal parts now use differentiated font sizes and letter spacing for improved readability
+    - Fixed badge colors in dark mode — all `bg-*` badge classes are now rendered with muted, darker variants to reduce harsh contrast against dark panels
+
     #### Export
     - Added **Quarter-hour peaks** as a new data type option on the export page, allowing quarter hour peak records to be downloaded as CSV
 

@@ -240,8 +240,13 @@ td.comparison-warning, div.search_help {
     font-size: xx-small;
 }
 
+.badge-integer {
+    letter-spacing: 0.05em !important;
+}
+
 .badge-decimal {
-    font-size: 0.7em !important;
+    font-size: 0.8em !important;
+    letter-spacing: 0.05em !important;
     vertical-align: 0 !important;
     line-height: 1 !important;
 }
