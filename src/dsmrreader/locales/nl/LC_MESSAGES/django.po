@@ -2200,8 +2200,8 @@ msgstr ""
 msgid "Download export"
 msgstr "Download export"
 
-msgid "Add note for this date"
-msgstr "Voeg notitie toe voor deze datum"
+msgid "Add note"
+msgstr "Notitie toevoegen"
 
 msgid "Total"
 msgstr "Totaal"

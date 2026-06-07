@@ -120,7 +120,7 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
             hours_in_day = dsmr_backend.services.backend.hours_in_day(day=selected_datetime.date())
             source_data = HourStatistics.objects.filter(
                 hour_start__gte=selected_datetime,
-                hour_start__lte=selected_datetime + timezone.timedelta(hours=hours_in_day),
+                hour_start__lt=selected_datetime + timezone.timedelta(hours=hours_in_day),
             ).order_by("hour_start")
             x_format = "DSMR_GRAPH_SHORT_TIME_FORMAT"
             x_axis = "hour_start"

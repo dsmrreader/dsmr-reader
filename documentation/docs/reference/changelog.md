@@ -64,6 +64,7 @@
     - Added **Quarter-hour peaks** as a new data type option on the export page, allowing quarter hour peak records to be downloaded as CSV
 
     #### Fixes
+    - Fixed archive page day-level graphs including a spurious midnight (00:00) data point at the end of each day — graphs now end at 23:00 as intended
     - Fixed MQTT period totals being suppressed all day on January 1st (and the 1st of any month) when no historical day statistics exist yet for the new period - [#1944](https://github.com/dsmrreader/dsmr-reader/issues/1944)
     - Fixed MQTT period totals being published with incomplete data during the post-midnight stats-generation window - [#1811](https://github.com/dsmrreader/dsmr-reader/issues/1811)
     - Fixed backup settings form blocking the "disable backup" action when the backup folder is inaccessible — folder validation is now skipped when backup is being disabled - [#2169](https://github.com/dsmrreader/dsmr-reader/issues/2169)

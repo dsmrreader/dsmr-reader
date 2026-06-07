@@ -12,8 +12,8 @@
         {% if selected_level == 'days' %}
             <small class="pull-right">
                 <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}"
-                   aria-label="{% translate "Add note for this date" %}">
-                    <span class="badge bg-green" aria-hidden="true"><i class="fas fa-plus" aria-hidden="true"></i></span>
+                   class="btn btn-default btn-xs">
+                    <i class="fas fa-plus" aria-hidden="true"></i> {% translate "Add note" %}
                 </a>
             </small>
         {% endif %}
