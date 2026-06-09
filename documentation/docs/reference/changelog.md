@@ -68,6 +68,7 @@
     - Fixed MQTT period totals being suppressed all day on January 1st (and the 1st of any month) when no historical day statistics exist yet for the new period - [#1944](https://github.com/dsmrreader/dsmr-reader/issues/1944)
     - Fixed MQTT period totals being published with incomplete data during the post-midnight stats-generation window - [#1811](https://github.com/dsmrreader/dsmr-reader/issues/1811)
     - Fixed backup settings form blocking the "disable backup" action when the backup folder is inaccessible — folder validation is now skipped when backup is being disabled - [#2169](https://github.com/dsmrreader/dsmr-reader/issues/2169)
+    - Fixed InfluxDB writes failing after meter replacement — counter values starting at `0` were serialised as integers instead of floats, causing a field type conflict that rejected all subsequent writes - [#2174](https://github.com/dsmrreader/dsmr-reader/issues/2174)
 
 ---
 

@@ -192,6 +192,47 @@ class TestCases(InterceptCommandStdoutMixin, TestCase):
         self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="electricity_power").exists())
         self.assertTrue(InfluxdbMeasurement.objects.filter(measurement_name="gas_positions").exists())
 
+    def test_publish_dsmr_reading_decimal_fields_not_written_as_int(self):
+        """Meter reset sets counters to 0 (Python int). Verify decimal fields are written as float, not int.
+
+        InfluxDB uses the Python type to determine the line-protocol field type (float vs integer).
+        Once a field is typed as float in InfluxDB, any subsequent write with an int value causes
+        a "field type conflict" error and the write is rejected entirely.
+
+        Regression test for: meter replacement where all counters restart at 0 (issue #2174).
+        """
+        import codecs
+        import pickle  # noqa: S403
+
+        InfluxdbMeasurement.objects.all().delete()
+
+        # Simulate a new meter where all counters reset to 0 — these arrive as Python int via __dict__
+        zero_reading = DsmrReading.objects.create(
+            timestamp=self.reading.timestamp,
+            electricity_delivered_1=0,
+            electricity_returned_1=0,
+            electricity_delivered_2=0,
+            electricity_returned_2=0,
+            electricity_currently_delivered=0,
+            electricity_currently_returned=0,
+        )
+
+        dsmr_influxdb.services.publish_dsmr_reading(zero_reading)
+
+        for measurement in InfluxdbMeasurement.objects.all():
+            decoded_fields = codecs.decode(measurement.fields.encode(), "base64")
+            unpickled_fields = pickle.loads(decoded_fields)  # noqa: S301
+
+            for field_name, value in unpickled_fields.items():
+                if value is None:
+                    continue
+                self.assertNotIsInstance(
+                    value,
+                    int,
+                    msg=f"Field '{field_name}' in measurement '{measurement.measurement_name}' "
+                    f"was stored as int ({value!r}), but must be float to avoid InfluxDB type conflict",
+                )
+
     @mock.patch("logging.Logger.warning")
     def test_publish_dsmr_reading_invalid_mapping(self, warning_logger_mock):
         InfluxdbIntegrationSettings.objects.update(

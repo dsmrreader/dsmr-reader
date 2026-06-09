@@ -6,6 +6,7 @@ from typing import Dict, Optional
 import codecs
 
 from django.conf import settings
+from django.db import models as django_models
 from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
@@ -109,12 +110,27 @@ def publish_dsmr_reading(instance: DsmrReading) -> None:
 
     mapping = get_reading_to_measurement_mapping()
     data_source = instance.__dict__
+    model_fields = {f.name: f for f in DsmrReading._meta.get_fields()}
 
     for current_measurement, measurement_mapping in mapping.items():
         measurement_fields = {}
 
         for reading_field, influxdb_field in measurement_mapping.items():
-            measurement_fields[influxdb_field] = data_source[reading_field]
+            value = data_source[reading_field]
+
+            # When a meter is replaced, counters reset to 0. Django's __dict__ bypasses the
+            # DecimalField descriptor, so 0 arrives as Python int instead of Decimal. The InfluxDB
+            # client serialises int as "0i" (integer type), which conflicts with the existing float
+            # field type and causes the write to be rejected. Cast to float to match the expected type.
+            # See: issue #2174.
+            if (
+                isinstance(value, int)
+                and not isinstance(value, bool)
+                and isinstance(model_fields.get(reading_field), django_models.DecimalField)
+            ):
+                value = float(value)
+
+            measurement_fields[influxdb_field] = value
 
         pickled_fields = pickle.dumps(measurement_fields)
         encoded_fields = codecs.encode(pickled_fields, "base64").decode()
