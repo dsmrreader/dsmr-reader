@@ -27,8 +27,7 @@
     
         _The same gap existed at the end of every day and every hour, so a small slice of consumption was silently dropped at each boundary._
     
-        _The fix looks up the last known meter position **before** the boundary instead of the first position inside the new window, so no interval is ever skipped.
-        No data migration or schema change is needed — the meter positions were always stored correctly; only the calculation logic was wrong._
+        _The fix looks up the last known meter position **before** the boundary instead of the first position inside the new window._
 
 !!! tip "Improvements"
 
@@ -50,7 +49,7 @@
         ```
 
     #### Command improvements
-    - All one-time repair/recalculate commands now accept `--batch-size` (default: 365) to control how many records are processed per batch, reducing peak memory use on large installations
+    - All one-time repair/recalculate commands now accept an optional `--batch-size` to control how many records are processed per batch, reducing peak memory use on large installations
         - `dsmr_stats_recalculate_from_meter_positions` — processes newest-first in configurable batches
         - `dsmr_stats_recalculate_prices` — iterates records via server-side cursor instead of loading all into memory
         - `dsmr_stats_reconstruct_missing_day_statistics` — processes missing dates in batch slices
