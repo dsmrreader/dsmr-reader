@@ -63,6 +63,9 @@
     #### Export
     - Added **Quarter-hour peaks** as a new data type option on the export page, allowing quarter hour peak records to be downloaded as CSV
 
+    #### Weather
+    - Fixed Buienradar station list being fetched (and logging a warning on failure) even when weather tracking is disabled — station list is now only fetched when tracking is enabled - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
+
     #### Fixes
     - Fixed archive page day-level graphs including a spurious midnight (00:00) data point at the end of each day — graphs now end at 23:00 as intended
     - Fixed MQTT period totals being suppressed all day on January 1st (and the 1st of any month) when no historical day statistics exist yet for the new period - [#1944](https://github.com/dsmrreader/dsmr-reader/issues/1944)
