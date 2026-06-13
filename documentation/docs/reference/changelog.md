@@ -64,7 +64,6 @@
     - Added **Quarter-hour peaks** as a new data type option on the export page, allowing quarter hour peak records to be downloaded as CSV
 
     #### Weather
-    - Fixed Buienradar station list being fetched (and logging a warning on failure) even when weather tracking is disabled — station list is now only fetched when tracking is enabled - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
     - Fixed Buienradar API integration broken by an upstream response format change - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
 
     #### Fixes
