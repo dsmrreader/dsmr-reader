@@ -12,9 +12,6 @@ import dsmr_weather.services
 
 
 class TestGetBuienradarStations(TestCase):
-    def setUp(self):
-        WeatherSettings.get_solo().update(track=True)
-
     @mock.patch("requests.get")
     def test_ok(self, requests_mock):
         response_mock = mock.MagicMock()
@@ -37,12 +34,6 @@ class TestGetBuienradarStations(TestCase):
                 (6280, "Weather station Groningen"),
             ],
         )
-
-    def test_disabled_returns_empty_without_http(self):
-        WeatherSettings.get_solo().update(track=False)
-
-        result = dsmr_weather.services.get_buienradar_stations()
-        self.assertEqual(result, [])
 
     @mock.patch("requests.get")
     def test_connection_error_returns_empty(self, requests_mock):

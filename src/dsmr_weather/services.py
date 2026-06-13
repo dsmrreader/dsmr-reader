@@ -18,9 +18,6 @@ _STATIONS_CACHE_KEY = "buienradar_stations"
 
 
 def get_buienradar_stations() -> list[tuple[int, str]]:
-    if not WeatherSettings.get_solo().track:
-        return []
-
     cached: list[tuple[int, str]] | None = cache.get(_STATIONS_CACHE_KEY)
     if cached is not None:
         return cached
