@@ -36,7 +36,9 @@
                                        placeholder="{% translate "Type here to search..." %}">
                             </div>
 
-                            &nbsp; &nbsp; <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% translate "Skip search and go directly to admin" %}</a>
+                            <div class="configuration-skip-search">
+                                <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% translate "Skip search and go directly to admin" %}</a>
+                            </div>
 
                             <div class="search-results" style="display:none">
                             </div>

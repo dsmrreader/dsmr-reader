@@ -4218,3 +4218,7 @@ padding: 6px 10px;
 .st-gray {
   background-color: #c0c0c0;
 }
+
+.configuration-skip-search {
+  margin-top: 1.5rem;
+}
