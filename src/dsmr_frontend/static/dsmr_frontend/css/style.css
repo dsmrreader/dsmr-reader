@@ -642,13 +642,16 @@ body > .header .navbar {
   height: 50px;
   margin-bottom: 0;
   margin-left: 220px;
+  display: flex;
+  align-items: center;
 }
 body > .header .navbar .sidebar-toggle {
-  float: left;
+  float: none;
+  flex-shrink: 0;
   padding: 9px 5px;
-  margin-top: 8px;
+  margin-top: 0;
   margin-right: 0;
-  margin-bottom: 8px;
+  margin-bottom: 0;
   margin-left: 5px;
   background-color: transparent;
   background-image: none;
