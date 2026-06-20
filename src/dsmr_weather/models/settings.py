@@ -13,7 +13,7 @@ def _buienradar_station_choices() -> list[tuple[int, str]]:
 
 
 class WeatherSettings(ModelUpdateMixin, SingletonModel):
-    track = models.BooleanField(
+    track = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Track weather"),
         help_text=_(
@@ -21,7 +21,7 @@ class WeatherSettings(ModelUpdateMixin, SingletonModel):
             "Current service integrated is Buienradar"
         ),
     )
-    buienradar_station = models.IntegerField(
+    buienradar_station = models.IntegerField(  # type: ignore[var-annotated]
         choices=_buienradar_station_choices,
         default=6260,  # "De Bilt"
         verbose_name=_("Buienradar weather station"),

@@ -1,5 +1,6 @@
 import importlib
 import logging
+from datetime import timedelta
 
 from typing import ClassVar
 from django.utils.translation import gettext_lazy as _
@@ -21,21 +22,21 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
     """A scheduled process, not to be executed before the planned moment."""
 
     objects = ScheduledProcessManager()
-    name = models.CharField(verbose_name=_("Name"), max_length=64)
-    module = models.CharField(verbose_name=_("Module"), max_length=128, unique=True)
-    last_executed_at = models.DateTimeField(
+    name = models.CharField(verbose_name=_("Name"), max_length=64)  # type: ignore[var-annotated]
+    module = models.CharField(verbose_name=_("Module"), max_length=128, unique=True)  # type: ignore[var-annotated]
+    last_executed_at = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         verbose_name=_("Last executed at"),
         help_text=_("The last moment this process ran (disregarding whether it succeeded or failed)."),
     )
-    planned = models.DateTimeField(
+    planned = models.DateTimeField(  # type: ignore[var-annotated]
         default=timezone.now,
         db_index=True,
         verbose_name=_("Planned"),
         help_text=_("The next moment this process will run again."),
     )
-    active = models.BooleanField(
+    active = models.BooleanField(  # type: ignore[var-annotated]
         default=True,
         db_index=True,
         verbose_name=_("Active"),
@@ -59,11 +60,11 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
 
     def delay(self, **delta):
         """Delays the next call by the given delta, based on the current SYSTEM TIME (now)."""
-        self.reschedule(planned_at=timezone.now() + timezone.timedelta(**delta))
+        self.reschedule(planned_at=timezone.now() + timedelta(**delta))
 
     def postpone(self, **delta):
         """Delays the next call by the given delta, based on the already PLANNED time of this instance."""
-        self.reschedule(planned_at=self.planned + timezone.timedelta(**delta))
+        self.reschedule(planned_at=self.planned + timedelta(**delta))
 
     def reschedule(self, planned_at):
         """Schedules the next call at a predetermined moment."""

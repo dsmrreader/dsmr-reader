@@ -7,9 +7,9 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class Message(ModelUpdateMixin, models.Model):
     """Queued message for MQTT."""
 
-    id = models.BigAutoField(primary_key=True)
-    topic = models.CharField(max_length=255)
-    payload = models.TextField(null=True, blank=True)
+    id = models.BigAutoField(primary_key=True)  # type: ignore[var-annotated]
+    topic = models.CharField(max_length=255)  # type: ignore[var-annotated]
+    payload = models.TextField(null=True, blank=True)  # type: ignore[var-annotated]
 
     def __str__(self):
         return self.topic

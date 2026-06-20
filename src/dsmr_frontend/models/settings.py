@@ -27,13 +27,13 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         (THEME_DARK, _("Dark")),
     )
 
-    merge_electricity_tariffs = models.BooleanField(
+    merge_electricity_tariffs = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Merge electricity tariffs"),
         help_text=_("Whether you are using a single electricity tariff and both (high/low) should be displayed merged"),
     )
 
-    frontend_theme = models.IntegerField(
+    frontend_theme = models.IntegerField(  # type: ignore[var-annotated]
         choices=THEME_CHOICES,
         default=THEME_AUTOMATIC,
         verbose_name=_("Theme"),
@@ -100,7 +100,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Temperature color"),
         help_text=_("Graph color for temperatures read"),
     )
-    live_graphs_hours_range = models.IntegerField(
+    live_graphs_hours_range = models.IntegerField(  # type: ignore[var-annotated]
         default=24,
         validators=[MinValueValidator(1), MaxValueValidator(7 * 24)],
         verbose_name=_("Live graphs hours range"),
@@ -108,56 +108,56 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
             "The range of the data displayed in live graphs (increasing it may degrade rendering performance!)"
         ),
     )
-    live_graphs_initial_zoom = models.IntegerField(
+    live_graphs_initial_zoom = models.IntegerField(  # type: ignore[var-annotated]
         default=10,
         validators=[MinValueValidator(1), MaxValueValidator(100)],
         verbose_name=_("Live graphs initial zoom"),
         help_text=_("The percentage of the graph range displayed initially"),
     )
-    gas_graph_style = models.CharField(
+    gas_graph_style = models.CharField(  # type: ignore[var-annotated]
         max_length=4,
         choices=GRAPH_STYLES,
         default=GRAPH_STYLE_BAR,
         verbose_name=_("Gas graph style"),
         help_text=_("Using the bar style will help you distinguish empty values better"),
     )
-    electricity_graph_style = models.CharField(
+    electricity_graph_style = models.CharField(  # type: ignore[var-annotated]
         max_length=4,
         choices=GRAPH_STYLES,
         default=GRAPH_STYLE_BAR,
         verbose_name=_("Electricity graph style"),
         help_text=_("Use the bar style to change visualisation"),
     )
-    stack_electricity_graphs = models.BooleanField(
+    stack_electricity_graphs = models.BooleanField(  # type: ignore[var-annotated]
         default=True,
         verbose_name=_("Stack electricity graphs"),
         help_text=_("Stacking, in combination with the bar graph style, distinguishes tariffs better"),
     )
-    tariff_1_delivered_name = models.CharField(
+    tariff_1_delivered_name = models.CharField(  # type: ignore[var-annotated]
         max_length=30,
         default="Daltarief",
         verbose_name=_("Name of tariff 1 (delivered)"),
         help_text=_("Dutch users: Defaults to 'low tariff' delivered"),
     )
-    tariff_2_delivered_name = models.CharField(
+    tariff_2_delivered_name = models.CharField(  # type: ignore[var-annotated]
         max_length=30,
         default="Normaaltarief",
         verbose_name=_("Name of tariff 2 (delivered)"),
         help_text=_("Dutch users: Defaults to 'normal tariff' delivered"),
     )
-    tariff_1_returned_name = models.CharField(
+    tariff_1_returned_name = models.CharField(  # type: ignore[var-annotated]
         max_length=30,
         default="Daltarief teruglevering",
         verbose_name=_("Name of tariff 1 (returned)"),
         help_text=_("Dutch users: Defaults to 'low tariff' returned"),
     )
-    tariff_2_returned_name = models.CharField(
+    tariff_2_returned_name = models.CharField(  # type: ignore[var-annotated]
         max_length=30,
         default="Normaaltarief teruglevering",
         verbose_name=_("Name of tariff 2 (returned)"),
         help_text=_("Dutch users: Defaults to 'normal tariff' returned"),
     )
-    always_require_login = models.BooleanField(
+    always_require_login = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Force password login everywhere"),
         help_text=_(
@@ -165,7 +165,7 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
             "reachable on the Internet."
         ),
     )
-    gui_refresh_interval = models.IntegerField(
+    gui_refresh_interval = models.IntegerField(  # type: ignore[var-annotated]
         default=5,
         validators=[MinValueValidator(1), MaxValueValidator(5)],
         verbose_name=_("Refresh interval (GUI)"),
@@ -183,9 +183,9 @@ class FrontendSettings(ModelUpdateMixin, SingletonModel):
 
 
 class SortedGraph(SortableMixin, models.Model):
-    name = models.CharField(max_length=64)
-    graph_type = models.CharField(max_length=32)
-    sorting_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+    name = models.CharField(max_length=64)  # type: ignore[var-annotated]
+    graph_type = models.CharField(max_length=32)  # type: ignore[var-annotated]
+    sorting_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)  # type: ignore[var-annotated]
 
     def __str__(self):
         return self.name

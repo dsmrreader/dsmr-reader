@@ -55,15 +55,8 @@
         - `dsmr_stats_reconstruct_missing_day_statistics` — processes missing dates in batch slices
         - `dsmr_stats_reconstruct_missing_day_statistics_by_hours` — same
 
-    #### UI
-    - Improved ==experimental== decimal badge rendering — integer and decimal parts now use differentiated font sizes and letter spacing for improved readability
-    - Fixed badge colors in dark mode — these are now rendered with muted, darker variants to reduce harsh contrast against dark panels
-
     #### Export
     - Added **Quarter-hour peaks** as a new data type option on the export page, allowing quarter hour peak records to be downloaded as CSV
-
-    #### Weather
-    - Fixed Buienradar API integration broken by an upstream response format change - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
 
     #### Fixes
     - Fixed archive page day-level graphs including a spurious midnight (00:00) data point at the end of each day — graphs now end at 23:00 as intended
@@ -72,6 +65,25 @@
     - Fixed backup settings form blocking the "disable backup" action when the backup folder is inaccessible — folder validation is now skipped when backup is being disabled - [#2169](https://github.com/dsmrreader/dsmr-reader/issues/2169)
     - Fixed InfluxDB writes failing after meter replacement — counter values starting at `0` were serialised as integers instead of floats, causing a field type conflict that rejected all subsequent writes - [#2174](https://github.com/dsmrreader/dsmr-reader/issues/2174)
     - Bumped minimum Python version to 3.14
+
+---
+
+
+## v6.1.1 - June 2026
+
+<small>*Patch release: Buienradar API compatibility fix and dark mode UI improvements.*</small>
+
+!!! abstract "Fixes and improvements"
+
+    #### Weather
+    - Fixed Buienradar integration broken by an upstream API response format change - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
+
+    #### UI
+    - Fixed badge colors in dark mode
+    - Fixed dark mode weekday header color in the compare page
+    - Fixed empty green badge rendering in statistics when electricity returned is disabled
+    - Improved decimal badge rendering
+    - Fixed incorrect Dutch translation of "Electricity (total)" - [#2176](https://github.com/dsmrreader/dsmr-reader/issues/2176)
 
 ---
 

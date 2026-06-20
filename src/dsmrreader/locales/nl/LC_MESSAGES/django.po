@@ -1814,7 +1814,7 @@ msgid "Gas consumed"
 msgstr "Gas verbruikt"
 
 msgid "Electricity (total)"
-msgstr "Elektriciteitskosten (totaal)"
+msgstr "Elektriciteit (totaal)"
 
 msgid "Electricity returned (total)"
 msgstr "Elektriciteit teruggeleverd (totaal)"

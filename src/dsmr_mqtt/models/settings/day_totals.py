@@ -9,18 +9,18 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class JSONDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT JSON Dashboard overview."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether the day consumption is sent to the broker, in JSON format."),
     )
-    topic = models.CharField(
+    topic = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         default="dsmr/day-consumption",
         verbose_name=_("Topic path"),
         help_text=_("The topic to send the JSON formatted message to."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # DATA = JSON FIELD
@@ -64,12 +64,12 @@ energy_supplier_price_gas = energy_supplier_price_gas
 class SplitTopicDayTotalsMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT splitted day totals per field, mapped to topics."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether day consumption is sent to the broker, having each field sent to a different topic."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # DATA = TOPIC PATH

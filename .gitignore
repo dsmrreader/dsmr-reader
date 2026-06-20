@@ -4,6 +4,7 @@
 
 # Claude
 .claude/settings.local.json
+.claude/worktrees/
 src/.claude/settings.local.json
 /docs/
 /.superpowers/

@@ -8,8 +8,8 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class Note(ModelUpdateMixin, models.Model):
     """Daily note someone might place for some remarks about something related to consumption."""
 
-    day = models.DateField(db_index=True, verbose_name=_("Day"))
-    description = models.CharField(max_length=256, verbose_name=_("Description"))
+    day = models.DateField(db_index=True, verbose_name=_("Day"))  # type: ignore[var-annotated]
+    description = models.CharField(max_length=256, verbose_name=_("Description"))  # type: ignore[var-annotated]
 
     class Meta:
         default_permissions: ClassVar[tuple[str, ...]] = tuple()

@@ -10,12 +10,12 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class RawTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT raw telegrams."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether any raw telegrams received are sent to the broker."),
     )
-    topic = models.CharField(
+    topic = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         default="dsmr/raw",
         verbose_name=_("Topic path"),
@@ -33,18 +33,18 @@ class RawTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
 class JSONTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT JSON telegram."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether parsed telegrams are sent to the broker, in JSON format."),
     )
-    topic = models.CharField(
+    topic = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         default="dsmr/json",
         verbose_name=_("Topic path"),
         help_text=_("The topic to send the parsed JSON telegrams to."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # READING FIELD = JSON FIELD
@@ -74,7 +74,7 @@ phase_power_current_l3 = phase_power_current_l3
         verbose_name=_("Formatting"),
         help_text=_("Maps the field names used in the JSON message sent to the broker."),
     )
-    use_local_timezone = models.BooleanField(
+    use_local_timezone = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Use local timezone"),
         help_text=_("Whether to use the local timezone ({}) in the timestamp sent.".format(settings.TIME_ZONE)),
@@ -91,12 +91,12 @@ phase_power_current_l3 = phase_power_current_l3
 class SplitTopicTelegramMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT telegram per field, mapped to split topic."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether parsed telegrams are sent to the broker, having each field sent to a different topic."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # READING FIELD = TOPIC PATH
@@ -126,7 +126,7 @@ phase_power_current_l3 = dsmr/reading/phase_power_current_l3
         verbose_name=_("Formatting"),
         help_text=_("Maps the field names to separate topics sent to the broker."),
     )
-    use_local_timezone = models.BooleanField(
+    use_local_timezone = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Use local timezone"),
         help_text=_("Whether to use the local timezone ({}) in the timestamp sent.".format(settings.TIME_ZONE)),

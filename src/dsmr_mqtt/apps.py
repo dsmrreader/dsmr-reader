@@ -177,6 +177,6 @@ def check_mqtt_messages_queue(**kwargs) -> Optional[MonitoringStatusIssue]:
 
     return MonitoringStatusIssue(
         __name__,
-        _("Too many outgoing MQTT messages queued for transit"),
+        _("Too many outgoing MQTT messages queued for transit"),  # type: ignore[arg-type]
         timezone.now(),
     )

@@ -10,37 +10,41 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class DayStatistics(ModelUpdateMixin, models.Model):
     """Daily consumption usage summary."""
 
-    day = models.DateField(unique=True, db_index=True, verbose_name=_("Date"))
+    day = models.DateField(unique=True, db_index=True, verbose_name=_("Date"))  # type: ignore[var-annotated]
 
     """ Diffs calculated (field names may be renamed in the future to clarify) """
-    electricity1 = models.DecimalField(
+    electricity1 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity tariff 1 diff"),
         help_text=_("The difference between the first and last reading of the day"),
     )
-    electricity2 = models.DecimalField(
+    electricity2 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity tariff 2 diff"),
         help_text=_("The difference between the first and last reading of the day"),
     )
-    electricity1_returned = models.DecimalField(
+    electricity1_returned = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity tariff 1 returned diff"),
         help_text=_("The difference between the first and last reading of the day"),
     )
-    electricity2_returned = models.DecimalField(
+    electricity2_returned = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity tariff 2 returned diff"),
         help_text=_("The difference between the first and last reading of the day"),
     )
-    electricity1_cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 1 cost"))
-    electricity2_cost = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 2 cost"))
+    electricity1_cost = models.DecimalField(  # type: ignore[var-annotated]
+        max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 1 cost")
+    )
+    electricity2_cost = models.DecimalField(  # type: ignore[var-annotated]
+        max_digits=8, decimal_places=2, verbose_name=_("Electricity tariff 2 cost")
+    )
     # Gas readings are optional/not guaranteed.
-    gas = models.DecimalField(
+    gas = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -48,7 +52,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         verbose_name=_("Gas diff"),
         help_text=_("The difference between the first and last reading of the day"),
     )
-    gas_cost = models.DecimalField(
+    gas_cost = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=8,
         decimal_places=2,
         null=True,
@@ -56,39 +60,43 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         verbose_name=_("Gas cost"),
     )
     # Temperature readings depend on user settings.
-    lowest_temperature = models.DecimalField(
+    lowest_temperature = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=4,
         decimal_places=1,
         null=True,
         default=None,
         verbose_name=_("Lowest temperature"),
     )
-    highest_temperature = models.DecimalField(
+    highest_temperature = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=4,
         decimal_places=1,
         null=True,
         default=None,
         verbose_name=_("Highest temperature"),
     )
-    average_temperature = models.DecimalField(
+    average_temperature = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=4,
         decimal_places=1,
         null=True,
         default=None,
         verbose_name=_("Average temperature"),
     )
-    fixed_cost = models.DecimalField(max_digits=8, decimal_places=2, default=0, verbose_name=_("Fixed cost"))
-    total_cost = models.DecimalField(db_index=True, max_digits=8, decimal_places=2, verbose_name=_("Total cost"))
+    fixed_cost = models.DecimalField(  # type: ignore[var-annotated]
+        max_digits=8, decimal_places=2, default=0, verbose_name=_("Fixed cost")
+    )
+    total_cost = models.DecimalField(  # type: ignore[var-annotated]
+        db_index=True, max_digits=8, decimal_places=2, verbose_name=_("Total cost")
+    )
 
     """ Historic meter positions """
-    electricity_reading_timestamp = models.DateTimeField(
+    electricity_reading_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Electricity reading timestamp"),
         help_text=_("When the first absolute meter position (for electricity) was read at the start of the day"),
     )
-    electricity1_reading = models.DecimalField(
+    electricity1_reading = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         blank=True,
@@ -97,7 +105,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         verbose_name=_("Electricity tariff 1 reading"),
         help_text=_("The first absolute meter position read at the start of the day"),
     )
-    electricity2_reading = models.DecimalField(
+    electricity2_reading = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         blank=True,
@@ -106,7 +114,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         verbose_name=_("Electricity tariff 2 reading"),
         help_text=_("The first absolute meter position read at the start of the day"),
     )
-    electricity1_returned_reading = models.DecimalField(
+    electricity1_returned_reading = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         blank=True,
@@ -115,7 +123,7 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         verbose_name=_("Electricity tariff 1 reading"),
         help_text=_("The first absolute meter position read at the start of the day"),
     )
-    electricity2_returned_reading = models.DecimalField(
+    electricity2_returned_reading = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         blank=True,
@@ -125,14 +133,14 @@ class DayStatistics(ModelUpdateMixin, models.Model):
         help_text=_("The first absolute meter position read at the start of the day"),
     )
     # This one probably differs from the electricity reading used above. It may take a few minutes before gas is updated
-    gas_reading_timestamp = models.DateTimeField(
+    gas_reading_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Gas reading timestamp"),
         help_text=_("When the first absolute meter position (for gas) was read at the start of the day"),
     )
-    gas_reading = models.DecimalField(
+    gas_reading = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         blank=True,
@@ -167,31 +175,35 @@ class DayStatistics(ModelUpdateMixin, models.Model):
 class HourStatistics(ModelUpdateMixin, models.Model):
     """Hourly consumption usage summary."""
 
-    hour_start = models.DateTimeField(unique=True, db_index=True, verbose_name=_("Hour start"))
+    hour_start = models.DateTimeField(  # type: ignore[var-annotated]
+        unique=True, db_index=True, verbose_name=_("Hour start")
+    )
 
-    electricity1 = models.DecimalField(
+    electricity1 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity 1 (Dutch users: low tariff)"),
     )
-    electricity2 = models.DecimalField(
+    electricity2 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity 2 (Dutch users: normal tariff)"),
     )
-    electricity1_returned = models.DecimalField(
+    electricity1_returned = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity 1 returned (Dutch users: low tariff)"),
     )
-    electricity2_returned = models.DecimalField(
+    electricity2_returned = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         verbose_name=_("Electricity 2 returned (Dutch users: normal tariff)"),
     )
 
     # Gas readings are optional/not guaranteed. But need to be zero due to averages.
-    gas = models.DecimalField(max_digits=9, decimal_places=3, default=0, verbose_name=_("Gas"))
+    gas = models.DecimalField(  # type: ignore[var-annotated]
+        max_digits=9, decimal_places=3, default=0, verbose_name=_("Gas")
+    )
 
     @property
     def electricity_merged(self):
@@ -214,62 +226,62 @@ class HourStatistics(ModelUpdateMixin, models.Model):
 class ElectricityStatistics(SingletonModel):
     """Keeps track of the highest electricity statistics per phase."""
 
-    highest_usage_l1_timestamp = models.DateTimeField(
+    highest_usage_l1_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of highest usage on L1+"),
     )
-    highest_usage_l2_timestamp = models.DateTimeField(
+    highest_usage_l2_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of highest usage on L2+"),
     )
-    highest_usage_l3_timestamp = models.DateTimeField(
+    highest_usage_l3_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of highest usage on L3+"),
     )
-    highest_return_l1_timestamp = models.DateTimeField(
+    highest_return_l1_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of highest return on L1-"),
     )
-    highest_return_l2_timestamp = models.DateTimeField(
+    highest_return_l2_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of highest return on L2-"),
     )
-    highest_return_l3_timestamp = models.DateTimeField(
+    highest_return_l3_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of highest return on L3-"),
     )
-    lowest_usage_l1_timestamp = models.DateTimeField(
+    lowest_usage_l1_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of lowest usage on L1+"),
     )
-    lowest_usage_l2_timestamp = models.DateTimeField(
+    lowest_usage_l2_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of lowest usage on L2+"),
     )
-    lowest_usage_l3_timestamp = models.DateTimeField(
+    lowest_usage_l3_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
         verbose_name=_("Timestamp of lowest usage on L3+"),
     )
 
-    highest_usage_l1_value = models.DecimalField(
+    highest_usage_l1_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -277,7 +289,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Highest usage on L1+ (in kW)"),
     )
-    highest_usage_l2_value = models.DecimalField(
+    highest_usage_l2_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -285,7 +297,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Highest usage on L2+ (in kW)"),
     )
-    highest_usage_l3_value = models.DecimalField(
+    highest_usage_l3_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -293,7 +305,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Highest usage on L3+ (in kW)"),
     )
-    highest_return_l1_value = models.DecimalField(
+    highest_return_l1_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -301,7 +313,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Highest return on L1- (in kW)"),
     )
-    highest_return_l2_value = models.DecimalField(
+    highest_return_l2_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -309,7 +321,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Highest return on L2- (in kW)"),
     )
-    highest_return_l3_value = models.DecimalField(
+    highest_return_l3_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -317,7 +329,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Highest return on L3- (in kW)"),
     )
-    lowest_usage_l1_value = models.DecimalField(
+    lowest_usage_l1_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -325,7 +337,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Lowest usage on L1+ (in kW)"),
     )
-    lowest_usage_l2_value = models.DecimalField(
+    lowest_usage_l2_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,
@@ -333,7 +345,7 @@ class ElectricityStatistics(SingletonModel):
         default=None,
         verbose_name=_("Lowest usage on L2+ (in kW)"),
     )
-    lowest_usage_l3_value = models.DecimalField(
+    lowest_usage_l3_value = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         null=True,

@@ -9,7 +9,7 @@ from dsmr_backend.mixins import ModelUpdateMixin
 
 
 class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
-    auth_token = models.CharField(
+    auth_token = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         null=True,
         blank=True,
@@ -17,7 +17,7 @@ class PVOutputAPISettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("API key"),
         help_text=_('The API key for your PVOutput account. Listed in PVOutput at Settings -> "API Settings".'),
     )
-    system_identifier = models.CharField(
+    system_identifier = models.CharField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=None,
@@ -46,12 +46,12 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
         (INTERVAL_15_MINUTES, _("15 minutes")),
     )
 
-    export = models.BooleanField(
+    export = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether the system uploads consumption using the Add Status Service API call."),
     )
-    upload_interval = models.IntegerField(
+    upload_interval = models.IntegerField(  # type: ignore[var-annotated]
         default=INTERVAL_5_MINUTES,
         choices=INTERVAL_CHOICES,
         verbose_name=_("Upload interval"),
@@ -59,7 +59,7 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
             "The interval between each upload (in minutes). Please make sure this matches the device settings."
         ),
     )
-    upload_delay = models.IntegerField(
+    upload_delay = models.IntegerField(  # type: ignore[var-annotated]
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(30)],
         verbose_name=_("Upload offset (minutes)"),
@@ -69,7 +69,7 @@ class PVOutputAddStatusSettings(ModelUpdateMixin, SingletonModel):
             'It effectively limits its upload data search by "ignore the last X minutes", where X is this setting.'
         ),
     )
-    processing_delay = models.IntegerField(
+    processing_delay = models.IntegerField(  # type: ignore[var-annotated]
         default=None,
         null=True,
         blank=True,

@@ -10,33 +10,33 @@ from dsmr_backend.signals import backend_restart_required
 
 
 class BackendSettings(ModelUpdateMixin, SingletonModel):
-    language = models.CharField(
+    language = models.CharField(  # type: ignore[var-annotated]
         max_length=32,
         default="nl",
         choices=settings.LANGUAGES,
         verbose_name=_("Language"),
         help_text=_("The language used in backend processes"),
     )
-    automatic_update_checker = models.BooleanField(
+    automatic_update_checker = models.BooleanField(  # type: ignore[var-annotated]
         default=True,
         verbose_name=_("Automatically check for updates"),
         help_text=_("Whether the application checks once in a while for new DSMR-reader release in GitHub"),
     )
-    process_sleep = models.DecimalField(
+    process_sleep = models.DecimalField(  # type: ignore[var-annotated]
         default=1,
         max_digits=4,
         decimal_places=1,
         verbose_name=_("Backend process sleep"),
         help_text=_("The number of seconds the application will sleep after completing a backend run."),
     )
-    disable_gas_capability = models.BooleanField(
+    disable_gas_capability = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Disable gas capability"),
         help_text=_(
             "Whether to disable gas capability. E.g.: you’ve switched from using gas to an alternative energy source."
         ),
     )
-    disable_electricity_returned_capability = models.BooleanField(
+    disable_electricity_returned_capability = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Disable electricity returned capability"),
         help_text=_(
@@ -44,7 +44,7 @@ class BackendSettings(ModelUpdateMixin, SingletonModel):
             "electricity returned data, but you do not own any solar panels."
         ),
     )
-    restart_required = models.BooleanField(
+    restart_required = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Process restart required"),
         help_text=_("Whether the backend process requires a restart. It should occur automatically."),
@@ -69,7 +69,7 @@ def _on_backend_restart_required_signal(**kwargs):
 class EmailSettings(ModelUpdateMixin, SingletonModel):
     """Outgoing email settings."""
 
-    email_from = models.EmailField(
+    email_from = models.EmailField(  # type: ignore[var-annotated]
         max_length=255,
         default=None,
         null=True,
@@ -77,7 +77,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Email from"),
         help_text=_("The email address you want to send any emails from"),
     )
-    email_to = models.EmailField(
+    email_to = models.EmailField(  # type: ignore[var-annotated]
         max_length=255,
         default=None,
         null=True,
@@ -85,7 +85,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Email to"),
         help_text=_("The email address you want to send any emails to"),
     )
-    host = models.CharField(
+    host = models.CharField(  # type: ignore[var-annotated]
         max_length=255,
         default=None,
         null=True,
@@ -93,14 +93,14 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Host"),
         help_text=_("The hostname of the email server used for sending emails"),
     )
-    port = models.IntegerField(
+    port = models.IntegerField(  # type: ignore[var-annotated]
         default=None,
         null=True,
         blank=True,
         verbose_name=_("Port"),
         help_text=_("The port used by the email server to send mail"),
     )
-    username = models.CharField(
+    username = models.CharField(  # type: ignore[var-annotated]
         max_length=255,
         default=None,
         null=True,
@@ -108,7 +108,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Username"),
         help_text=_("Optional: The username required to authenticate on the email server"),
     )
-    password = models.CharField(
+    password = models.CharField(  # type: ignore[var-annotated]
         max_length=255,
         default=None,
         null=True,
@@ -116,7 +116,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Password"),
         help_text=_("Optional: The password required to authenticate on the email server"),
     )
-    use_tls = models.BooleanField(
+    use_tls = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Use TLS"),
         help_text=_(
@@ -124,7 +124,7 @@ class EmailSettings(ModelUpdateMixin, SingletonModel):
             "This is used for explicit TLS connections, generally on port 587"
         ),
     )
-    use_ssl = models.BooleanField(
+    use_ssl = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Use SSL"),
         help_text=_(

@@ -27,12 +27,12 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
         ),
     )
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether the InfluxDB integration is enabled."),
     )
-    api_url = models.CharField(
+    api_url = models.CharField(  # type: ignore[var-annotated]
         blank=True,
         max_length=255,
         default="",
@@ -43,7 +43,7 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
             "E.g. https://prometheus-prod-01-eu-west-0.grafana.net/api/v1/push/influx"
         ),
     )
-    hostname = models.CharField(
+    hostname = models.CharField(  # type: ignore[var-annotated]
         blank=True,
         max_length=128,
         verbose_name=_("(legacy) InfluxDB hostname"),
@@ -52,7 +52,7 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
             "and leave the current field empty."
         ),
     )
-    port = models.IntegerField(
+    port = models.IntegerField(  # type: ignore[var-annotated]
         blank=True,
         null=True,
         default=None,
@@ -63,27 +63,27 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
         ),
     )
     # @see https://docs.influxdata.com/influxdb/v2.1/organizations
-    organization = models.CharField(
+    organization = models.CharField(  # type: ignore[var-annotated]
         default="",
         max_length=128,
         verbose_name=_("InfluxDB organization"),
         help_text=_("The organization to use."),
     )
     # @see https://docs.influxdata.com/influxdb/v2.1/security/tokens/
-    api_token = models.CharField(
+    api_token = models.CharField(  # type: ignore[var-annotated]
         default="",
         max_length=128,
         verbose_name=_("InfluxDB API token"),
         help_text=_("The API token to use."),
     )
     # @see https://docs.influxdata.com/influxdb/v2.1/organizations/buckets
-    bucket = models.CharField(
+    bucket = models.CharField(  # type: ignore[var-annotated]
         max_length=128,
         default="dsmrreader_measurements",
         verbose_name=_("InfluxDB bucket"),
         help_text=_("The name of the bucket used in InfluxDB."),
     )
-    secure = models.CharField(
+    secure = models.CharField(  # type: ignore[var-annotated]
         max_length=24,
         default=INSECURE,
         choices=SECURE_CHOICES,
@@ -93,7 +93,7 @@ class InfluxdbIntegrationSettings(ModelUpdateMixin, SingletonModel):
             "Select SECURE (CERT_NONE) for self-signed certificates."
         ),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 ### [measurement_name]
 ### DSMR-reader field 1 = InfluxDB field 1
@@ -154,9 +154,9 @@ def _on_influxdb_settings_updated_signal(instance, created, raw, **kwargs):
 class InfluxdbMeasurement(ModelUpdateMixin, models.Model):
     """Queued measurement for InfluxDB."""
 
-    time = models.DateTimeField()
-    measurement_name = models.CharField(max_length=255)
-    fields = models.TextField()  # Base64 encoded
+    time = models.DateTimeField()  # type: ignore[var-annotated]
+    measurement_name = models.CharField(max_length=255)  # type: ignore[var-annotated]
+    fields = models.TextField()  # type: ignore[var-annotated]  # Base64 encoded
 
     def __str__(self):
         return self.measurement_name
