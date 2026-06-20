@@ -39,10 +39,17 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):
 
             latest_line = line
 
+        repo_root = os.path.abspath(
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "..")
+        )
         file_path = os.path.join(
-            "provisioning/container/downgrade",
+            repo_root,
+            "provisioning",
+            "downgrade",
             "v{}.sh".format(version_string),
         )
 
-        print("File name:", file_path)
-        print("File Contents:", lock_content)
+        with open(file_path, "w") as f:
+            f.write(lock_content)
+
+        print("Written to:", file_path)

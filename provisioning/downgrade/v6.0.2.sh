@@ -15,4 +15,3 @@
 ./manage.py migrate dsmr_pvoutput 0004_pvoutput_setting_refactoring
 ./manage.py migrate dsmr_stats 0020_day_statistics_fix_total_gas_consumption_retroactive
 ./manage.py migrate dsmr_weather 0006_schedule_weather_update
-
