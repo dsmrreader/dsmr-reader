@@ -133,3 +133,13 @@ html body.dark-mode {
 .dark-mode div.content > div.title {
     color: #FFF !important;
 }
+
+/**
+* Badge colors — muted for dark mode to reduce harsh contrast against dark panels
+*/
+.dark-mode .bg-green  { background-color: #196f3d !important; }  /* #27C24C → deep forest green */
+.dark-mode .bg-red    { background-color: #a83030 !important; }  /* #F05050 → deep red */
+.dark-mode .bg-orange { background-color: #b05a0a !important; }  /* #ff851b → deep amber */
+.dark-mode .bg-blue   { background-color: #1a5e8a !important; }  /* #0073b7 → deep blue */
+.dark-mode .bg-olive  { background-color: #1f6644 !important; }  /* #3d9970 → deep teal */
+.dark-mode .bg-black  { background-color: #222222 !important; }  /* unchanged */
