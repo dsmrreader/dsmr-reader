@@ -1,7 +1,6 @@
 import datetime
 from unittest import mock
 import json
-from datetime import timedelta
 
 from django.test import TestCase
 from django.utils import timezone
@@ -39,7 +38,7 @@ class TestServices(TestCase):
     ) -> QuarterHourPeakElectricityConsumption:
         return QuarterHourPeakElectricityConsumption.objects.create(
             read_at_start=timezone.now(),
-            read_at_end=timezone.now() + timedelta(minutes=14, seconds=59),
+            read_at_end=timezone.now() + timezone.timedelta(minutes=14, seconds=59),  # type: ignore[attr-defined]
             average_delivered=2.345,
         )
 

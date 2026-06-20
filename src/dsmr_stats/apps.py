@@ -1,5 +1,4 @@
 from typing import Optional
-from datetime import datetime, timedelta
 
 from django.apps import AppConfig
 from django.conf import settings
@@ -44,7 +43,9 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
     except IndexError:
         return MonitoringStatusIssue(__name__, _("No day statistics found"), timezone.now())  # type: ignore[arg-type]
 
-    offset = timezone.now().date() - timedelta(days=settings.DSMRREADER_STATUS_ALLOWED_DAY_STATISTICS_LAGG_IN_DAYS)
+    offset = timezone.now().date() - timezone.timedelta(  # type: ignore[attr-defined]
+        days=settings.DSMRREADER_STATUS_ALLOWED_DAY_STATISTICS_LAGG_IN_DAYS
+    )
 
     latest_date_generated = latest_day_statistics.day
 
@@ -55,7 +56,7 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
         __name__,
         _("Day statistics are lagging behind"),  # type: ignore[arg-type]
         timezone.make_aware(
-            datetime(
+            timezone.datetime(  # type: ignore[attr-defined]
                 year=latest_date_generated.year,
                 month=latest_date_generated.month,
                 day=latest_date_generated.day,

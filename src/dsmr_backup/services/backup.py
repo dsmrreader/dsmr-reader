@@ -4,7 +4,6 @@ import shutil
 import gzip
 import os
 from typing import Iterable, NoReturn
-from datetime import timedelta
 
 from django.utils.translation import gettext as _
 from django.db import connection
@@ -44,7 +43,9 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     # Schedule for whatever interval is set (usually 1 day), for the time specified.
     backup_settings = BackupSettings.get_solo()
-    next_backup_timestamp = timezone.now() + timedelta(days=backup_settings.backup_interval_in_days)
+    next_backup_timestamp = (  # type: ignore[attr-defined]
+        timezone.now() + timezone.timedelta(days=backup_settings.backup_interval_in_days)  # type: ignore[attr-defined]
+    )
     next_backup_timestamp = timezone.localtime(next_backup_timestamp)
 
     next_backup_timestamp = next_backup_timestamp.replace(

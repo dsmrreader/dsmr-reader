@@ -1,7 +1,6 @@
 from io import StringIO
 from typing import Optional, List
 from unittest import mock
-from datetime import timedelta
 
 from django.core.management import call_command
 from django.dispatch import receiver
@@ -74,7 +73,9 @@ def check_scheduled_processes(**kwargs) -> List[MonitoringStatusIssue]:
     from dsmr_backend.models.schedule import ScheduledProcess
 
     issues = []
-    offset = timezone.now() - timedelta(minutes=settings.DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES)
+    offset = timezone.now() - timezone.timedelta(  # type: ignore[attr-defined]
+        minutes=settings.DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES
+    )
     lagging_processes = ScheduledProcess.objects.filter(active=True, planned__lt=offset)
 
     for current in lagging_processes:

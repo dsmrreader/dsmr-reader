@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from django.core.cache import cache
 from django.db.models.functions.datetime import TruncHour
@@ -49,7 +49,10 @@ def run(scheduled_process: ScheduledProcess) -> None:
         GasConsumption.objects.all(): "read_at",
     }
 
-    retention_date = timezone.now() - timedelta(hours=retention_settings.data_retention_in_hours)
+    retention_date = (  # type: ignore[attr-defined]
+        timezone.now()  # type: ignore[attr-defined]
+        - timezone.timedelta(hours=retention_settings.data_retention_in_hours)  # type: ignore[attr-defined]
+    )
     data_to_clean_up = False
 
     # We need to force UTC here, to avoid AmbiguousTimeError's on DST changes.
@@ -82,7 +85,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
         # Advance the lower bound past the last cleaned hour so future runs skip already-processed history.
         cache.set(
             _cache_key(model_name),
-            max(hours_to_cleanup) + timedelta(hours=1),
+            max(hours_to_cleanup) + timezone.timedelta(hours=1),  # type: ignore[attr-defined]
             timeout=None,
         )
 
@@ -95,7 +98,8 @@ def run(scheduled_process: ScheduledProcess) -> None:
             data_set = base_queryset.filter(
                 **{
                     "{}__gte".format(datetime_field): current_hour,
-                    "{}__lt".format(datetime_field): current_hour + timedelta(hours=1),
+                    "{}__lt".format(datetime_field): current_hour  # type: ignore[attr-defined]
+                    + timezone.timedelta(hours=1),  # type: ignore[attr-defined]
                 }
             )
 

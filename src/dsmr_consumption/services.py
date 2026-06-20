@@ -1,6 +1,6 @@
 import datetime
 import logging
-from datetime import time, timedelta
+from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
 from typing import Dict, Optional, List, Tuple, Any
 from zoneinfo import ZoneInfo
@@ -59,11 +59,13 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     rewind_minutes = MINUTE_INTERVAL
 
     # Map to xx:00, xx:15, xx:30 or xx:45. E.g. 14:19 -> 14:15. Makes 19 % 15 = 4 (rewind_minutes = 15 + 4)
-    rewind_minutes += (fuzzy_start - timedelta(minutes=rewind_minutes)).minute % MINUTE_INTERVAL
+    rewind_minutes += (  # type: ignore[attr-defined]
+        fuzzy_start - timezone.timedelta(minutes=rewind_minutes)  # type: ignore[attr-defined]
+    ).minute % MINUTE_INTERVAL
 
     # E.g. Fuzzy start was 14:34. Now we start/end at 14:15/14:30.
-    start = fuzzy_start - timedelta(minutes=rewind_minutes)
-    end = start + timedelta(minutes=MINUTE_INTERVAL)
+    start = fuzzy_start - timezone.timedelta(minutes=rewind_minutes)  # type: ignore[attr-defined]
+    end = start + timezone.timedelta(minutes=MINUTE_INTERVAL)  # type: ignore[attr-defined]
 
     # Do NOT continue until we've received new readings AFTER the targeted end. Ensuring we do not miss any and it also
     # blocks the "self-healing" implementation when having data gaps.
@@ -108,7 +110,9 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
 
     if existing_data:
         logger.debug("Quarter hour peaks: Ready but quarter already processed, rescheduling for next quarter...")
-        scheduled_process.reschedule(planned_at=end + timedelta(minutes=MINUTE_INTERVAL))
+        scheduled_process.reschedule(  # type: ignore[attr-defined]
+            planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL)  # type: ignore[attr-defined]
+        )
         return
 
     # Calculate quarter data.
@@ -148,7 +152,9 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     )
 
     # Reschedule around the next moment we can expect to process the next quarter. Also works retroactively/with gaps.
-    scheduled_process.reschedule(planned_at=new_instance.read_at_end + timedelta(minutes=MINUTE_INTERVAL))
+    scheduled_process.reschedule(  # type: ignore[attr-defined]
+        planned_at=new_instance.read_at_end + timezone.timedelta(minutes=MINUTE_INTERVAL)  # type: ignore[attr-defined]
+    )
 
 
 def compact(dsmr_reading: DsmrReading) -> None:
@@ -156,15 +162,17 @@ def compact(dsmr_reading: DsmrReading) -> None:
     consumption_settings = ConsumptionSettings.get_solo()
 
     # Grouping by minute requires some distinction and history checking.
-    reading_start = datetime.datetime.combine(
+    reading_start = timezone.datetime.combine(  # type: ignore[attr-defined]
         dsmr_reading.timestamp.date(),
         time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
     ).replace(tzinfo=ZoneInfo("UTC"))
 
     if consumption_settings.electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_MINUTE:
-        system_time_past_minute = timezone.now() >= reading_start + timedelta(minutes=1)
+        system_time_past_minute = (  # type: ignore[attr-defined]
+            timezone.now() >= reading_start + timezone.timedelta(minutes=1)  # type: ignore[attr-defined]
+        )
         reading_past_minute_exists = DsmrReading.objects.filter(
-            timestamp__gte=reading_start + timedelta(minutes=1)
+            timestamp__gte=reading_start + timezone.timedelta(minutes=1)  # type: ignore[attr-defined]
         ).exists()
 
         # Postpone until the minute has passed on the system time. And when there are (new) readings beyond this minute.
@@ -192,7 +200,7 @@ def compact(dsmr_reading: DsmrReading) -> None:
 def _compact_electricity(
     dsmr_reading: DsmrReading,
     electricity_grouping_type: int,
-    reading_start: datetime.datetime,
+    reading_start: timezone.datetime,  # type: ignore[attr-defined,name-defined]
 ) -> None:
     """
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
@@ -228,7 +236,7 @@ def _compact_electricity(
 
         return
 
-    minute_end = reading_start + timedelta(minutes=1)
+    minute_end = reading_start + timezone.timedelta(minutes=1)  # type: ignore[attr-defined]
 
     # We might have multiple readings per minute, so there is a chance we already parsed it a moment ago.
     if ElectricityConsumption.objects.filter(read_at=minute_end).exists():
@@ -303,7 +311,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
 
     # DSMR v4 readings should reflect to the previous hour, to keep it compatible with the existing implementation.
     if dsmr_version is not None and dsmr_version.startswith("4"):
-        gas_read_at = gas_read_at - timedelta(hours=1)
+        gas_read_at = gas_read_at - timezone.timedelta(hours=1)  # type: ignore[attr-defined]
 
     # We will not override data, just ignore it. Also subject to DSMR v4 and grouped gas readings.
     if GasConsumption.objects.filter(read_at=gas_read_at).exists():
@@ -347,8 +355,10 @@ def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
     consumption: dict[str, Any] = {"day": day}
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
-    day_start = timezone.make_aware(datetime.datetime(year=day.year, month=day.month, day=day.day))
-    day_end = day_start + timedelta(hours=hours_in_day)
+    day_start = timezone.make_aware(  # type: ignore[attr-defined]
+        timezone.datetime(year=day.year, month=day.month, day=day.day)  # type: ignore[attr-defined]
+    )
+    day_end = day_start + timezone.timedelta(hours=hours_in_day)  # type: ignore[attr-defined]
 
     try:
         daily_energy_price = get_day_prices(day=day)
@@ -631,7 +641,7 @@ def summarize_energy_contracts() -> List[Dict]:
         summary = dsmr_stats.services.range_statistics(
             start=current.start,
             # Note: +1 day is due to range_statistics()'s query (#1534)
-            end=end_date + timedelta(days=1),
+            end=end_date + timezone.timedelta(days=1),  # type: ignore[attr-defined,operator]
         )
 
         # Override this one, since it's only good when ALL price fields are set.

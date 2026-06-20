@@ -1,6 +1,5 @@
 from decimal import Decimal
 import logging
-from datetime import timedelta
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -53,7 +52,9 @@ def run(scheduled_process: ScheduledProcess) -> None:
         scheduled_process.delay(hours=1)
         return
 
-    scheduled_process.reschedule(temperature_reading.read_at + timedelta(hours=1))
+    scheduled_process.reschedule(
+        temperature_reading.read_at + timezone.timedelta(hours=1)  # type: ignore[attr-defined]
+    )
 
 
 def get_temperature_from_api() -> TemperatureReading:

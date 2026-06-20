@@ -2,7 +2,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from datetime import timedelta
 
 from dsmr_backend.mixins import ModelUpdateMixin
 
@@ -204,7 +203,7 @@ class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
     )
 
     @property
-    def duration(self) -> timedelta:
+    def duration(self) -> timezone.timedelta:  # type: ignore[attr-defined,name-defined]
         """When possible, this is exactly 15 minutes, but usually a few seconds off."""
         return self.read_at_end - self.read_at_start
 

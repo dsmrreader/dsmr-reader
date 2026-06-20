@@ -1,5 +1,4 @@
 import logging
-from datetime import datetime, timedelta
 
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone, translation, formats
@@ -174,7 +173,9 @@ def send_notification(message: str, title: str) -> None:
     # Server error, delay a bit.
     elif str(response.status_code).startswith("5"):
         logger.warning(" - Notification API returned server error, retrying later...")
-        NotificationSetting.objects.update(next_notification=timezone.now() + timedelta(minutes=5))
+        NotificationSetting.objects.update(
+            next_notification=timezone.now() + timezone.timedelta(minutes=5)  # type: ignore[attr-defined]
+        )
 
     raise AssertionError("Notify API call failed: {0} (HTTP {1})".format(response.text, response.status_code))
 
@@ -182,7 +183,7 @@ def send_notification(message: str, title: str) -> None:
 def set_next_notification() -> None:
     """Set the next moment for notifications to be allowed again"""
     # DST can cause some trouble. We need to go forward and set the requested hour.
-    next_notification = timezone.now() + timedelta(hours=24)
+    next_notification = timezone.now() + timezone.timedelta(hours=24)  # type: ignore[attr-defined]
     next_notification = next_notification.replace(
         hour=settings.DSMRREADER_DAILY_NOTIFICATION_TIME_HOURS,
         minute=0,
@@ -212,14 +213,14 @@ def notify() -> None:
     # Just post the latest reading of the day before.
     today = timezone.localtime(timezone.now())
     midnight = timezone.make_aware(
-        datetime(
+        timezone.datetime(  # type: ignore[attr-defined]
             year=today.year,
             month=today.month,
             day=today.day,
             hour=0,
         )
     )
-    target_day = midnight - timedelta(hours=12)
+    target_day = midnight - timezone.timedelta(hours=12)  # type: ignore[attr-defined]
 
     try:
         day_statistics = DayStatistics.objects.get(day=target_day)
@@ -248,17 +249,18 @@ def check_status() -> None:
 
     if not DsmrReading.objects.exists():
         return StatusNotificationSetting.objects.update(  # type: ignore[return-value]
-            next_check=timezone.now() + timedelta(minutes=5)
+            next_check=timezone.now() + timezone.timedelta(minutes=5)  # type: ignore[attr-defined]
         )
 
     # Check for recent data.
     has_recent_reading = DsmrReading.objects.filter(
-        timestamp__gt=timezone.now() - timedelta(minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES)
+        timestamp__gt=timezone.now()  # type: ignore[attr-defined]
+        - timezone.timedelta(minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES)  # type: ignore[attr-defined]
     ).exists()
 
     if has_recent_reading:
         return StatusNotificationSetting.objects.update(  # type: ignore[return-value]
-            next_check=timezone.now() + timedelta(minutes=5)
+            next_check=timezone.now() + timezone.timedelta(minutes=5)  # type: ignore[attr-defined]
         )
 
     # Alert!
@@ -277,5 +279,6 @@ def check_status() -> None:
         )
 
     StatusNotificationSetting.objects.update(
-        next_check=timezone.now() + timedelta(hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS)
+        next_check=timezone.now()  # type: ignore[attr-defined]
+        + timezone.timedelta(hours=settings.DSMRREADER_STATUS_NOTIFICATION_COOLDOWN_HOURS)  # type: ignore[attr-defined]
     )

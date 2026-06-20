@@ -1,6 +1,5 @@
 import logging
 from typing import Dict, Iterator, Optional
-from datetime import datetime, timedelta
 
 from django.db.models.expressions import F
 from django.utils import timezone
@@ -135,7 +134,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
             model_fields["extra_device_timestamp"] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
 
     # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
-    discard_after = timezone.now() + timedelta(hours=24)
+    discard_after = timezone.now() + timezone.timedelta(hours=24)  # type: ignore[attr-defined]
 
     if model_fields["timestamp"] > discard_after or (  # type: ignore[operator]
         model_fields["extra_device_timestamp"] is not None and model_fields["extra_device_timestamp"] > discard_after
@@ -251,7 +250,10 @@ def postgresql_approximate_reading_count() -> Optional[int]:  # pragma: nocover
         return int(reading_count)
 
 
-def calculate_fake_gas_reading_timestamp(now: datetime, is_dsmr_v5: bool) -> datetime:
+def calculate_fake_gas_reading_timestamp(  # type: ignore[attr-defined,name-defined]
+    now: timezone.datetime,  # type: ignore[attr-defined,name-defined]
+    is_dsmr_v5: bool,
+) -> timezone.datetime:  # type: ignore[attr-defined,name-defined]
     """When overriding time, we cannot fake each gas reading to have its own timestamp. Simulate meters instead."""
     now = now.replace(second=0, microsecond=0)
 

@@ -2,7 +2,7 @@ import datetime
 import logging
 
 from decimal import Decimal
-from datetime import date, time, timedelta
+from datetime import time, date
 import math
 from typing import Dict, Optional, List
 
@@ -48,8 +48,8 @@ def get_next_day_to_generate() -> datetime.date:
         return timezone.localtime(read_at).date()
 
     # Search for the next day with any consumption.
-    next_day = latest_day + timedelta(days=1)
-    search_start = datetime.datetime.combine(next_day, datetime.datetime.min.time())
+    next_day = latest_day + timezone.timedelta(days=1)  # type: ignore[attr-defined]
+    search_start = timezone.datetime.combine(next_day, timezone.datetime.min.time())  # type: ignore[attr-defined]
     search_start = timezone.make_aware(search_start)
 
     try:
@@ -70,12 +70,14 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
     now = timezone.localtime(timezone.now())
     target_day = get_next_day_to_generate()
-    next_day = target_day + timedelta(days=1)
+    next_day = target_day + timezone.timedelta(days=1)  # type: ignore[attr-defined]
 
     # Skip current day, wait until midnight.
     if target_day >= now.date():
         logger.debug("Stats: Waiting for day to pass: %s", target_day)
-        scheduled_process.reschedule(timezone.make_aware(datetime.datetime.combine(next_day, time.min)))
+        scheduled_process.reschedule(
+            timezone.make_aware(timezone.datetime.combine(next_day, time.min))  # type: ignore[attr-defined]
+        )
         return
 
     # All readings of the day must be processed.
@@ -95,7 +97,9 @@ def run(scheduled_process: ScheduledProcess) -> None:
         return
 
     # If we recently supported gas, make sure we've received a gas reading on the next day (or later).
-    recently_gas_read = GasConsumption.objects.filter(read_at__date__gte=target_day - timedelta(days=1)).exists()
+    recently_gas_read = GasConsumption.objects.filter(
+        read_at__date__gte=target_day - timezone.timedelta(days=1)  # type: ignore[attr-defined]
+    ).exists()
 
     # Unless it was disabled.
     gas_capability = dsmr_backend.services.backend.get_capability(Capability.GAS)
@@ -115,7 +119,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
 def create_statistics(target_day: datetime.date) -> None:
     # One day at a time to prevent backend blocking.
     start_of_day = timezone.make_aware(
-        datetime.datetime(
+        timezone.datetime(  # type: ignore[attr-defined]
             year=target_day.year,
             month=target_day.month,
             day=target_day.day,
@@ -128,7 +132,7 @@ def create_statistics(target_day: datetime.date) -> None:
         hours_in_day = dsmr_backend.services.backend.hours_in_day(day=target_day)
 
         for current_hour in range(0, hours_in_day):
-            hour_start = start_of_day + timedelta(hours=current_hour)
+            hour_start = start_of_day + timezone.timedelta(hours=current_hour)  # type: ignore[attr-defined]
             create_hourly_statistics(hour_start=hour_start)
 
         instance = create_daily_statistics(day=target_day)
@@ -145,8 +149,10 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
 
     # @TODO: Due to #1770. Fix for wrong gas consumption in some cases. Fix day_consumption() later. Just use the hour totals instead, for now.  # noqa: E501
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
-    start_of_day = timezone.make_aware(datetime.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0))
-    end_of_day = start_of_day + timedelta(hours=hours_in_day)
+    start_of_day = timezone.make_aware(  # type: ignore[attr-defined]
+        timezone.datetime(year=day.year, month=day.month, day=day.day, hour=0, minute=0)  # type: ignore[attr-defined]
+    )
+    end_of_day = start_of_day + timezone.timedelta(hours=hours_in_day)  # type: ignore[attr-defined]
     hours_gas_sum = HourStatistics.objects.filter(
         hour_start__gte=start_of_day,
         hour_start__lt=end_of_day,
@@ -192,10 +198,12 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     )
 
 
-def create_hourly_statistics(hour_start: datetime.datetime) -> Optional[HourStatistics]:
+def create_hourly_statistics(
+    hour_start: timezone.datetime,  # type: ignore[attr-defined,name-defined]
+) -> Optional[HourStatistics]:
     """Calculates and returns an hour summary, when applicable. Persists it as well."""
     logger.debug("Stats: Creating hour statistics for: %s", hour_start)
-    hour_end = hour_start + timedelta(hours=1)
+    hour_end = hour_start + timezone.timedelta(hours=1)  # type: ignore[attr-defined]
     electricity_readings, gas_readings = dsmr_consumption.services.consumption_by_range(start=hour_start, end=hour_end)
 
     if not electricity_readings.exists():
@@ -377,21 +385,27 @@ def range_statistics(start: datetime.date, end: datetime.date) -> Dict:
 
 def day_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a day targeted."""
-    next_day = datetime.datetime.combine(target_date + relativedelta(days=1), time.min)
+    next_day = timezone.datetime.combine(target_date + relativedelta(days=1), time.min)  # type: ignore[attr-defined]
     return range_statistics(start=target_date, end=next_day)
 
 
 def month_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a month targeted."""
-    start_of_month = datetime.datetime(year=target_date.year, month=target_date.month, day=1)
-    end_of_month = datetime.datetime.combine(start_of_month + relativedelta(months=1), time.min)
+    start_of_month = timezone.datetime(  # type: ignore[attr-defined]
+        year=target_date.year, month=target_date.month, day=1
+    )
+    end_of_month = timezone.datetime.combine(  # type: ignore[attr-defined]
+        start_of_month + relativedelta(months=1), time.min
+    )
     return range_statistics(start=start_of_month, end=end_of_month)
 
 
 def year_statistics(target_date: datetime.date) -> Dict:
     """Alias of range_statistics() for a year targeted."""
-    start_of_year = datetime.datetime(year=target_date.year, month=1, day=1)
-    end_of_year = datetime.datetime.combine(start_of_year + relativedelta(years=1), time.min)
+    start_of_year = timezone.datetime(year=target_date.year, month=1, day=1)  # type: ignore[attr-defined]
+    end_of_year = timezone.datetime.combine(  # type: ignore[attr-defined]
+        start_of_year + relativedelta(years=1), time.min
+    )
     return range_statistics(start=start_of_year, end=end_of_year)
 
 

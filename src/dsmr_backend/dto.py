@@ -1,7 +1,6 @@
 import enum
 from enum import unique
 from typing import Union, Dict
-from datetime import datetime
 
 from django.utils import timezone
 
@@ -9,9 +8,11 @@ from django.utils import timezone
 class MonitoringStatusIssue(object):
     source: str
     description: str
-    since: datetime
+    since: timezone.datetime  # type: ignore[attr-defined,name-defined]
 
-    def __init__(self, source: str, description: str, since: datetime):
+    def __init__(  # type: ignore[attr-defined,name-defined]
+        self, source: str, description: str, since: timezone.datetime  # type: ignore[attr-defined,name-defined]
+    ):
         self.source = str(source)
         self.description = str(description)
         self.since = since
