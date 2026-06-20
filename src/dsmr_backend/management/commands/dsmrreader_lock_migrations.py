@@ -39,9 +39,7 @@ class Command(InterceptCommandStdoutMixin, BaseCommand):
 
             latest_line = line
 
-        repo_root = os.path.abspath(
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "..")
-        )
+        repo_root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", ".."))
         file_path = os.path.join(
             repo_root,
             "provisioning",
