@@ -1,5 +1,6 @@
 from decimal import Decimal
 import logging
+from datetime import timedelta
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -29,8 +30,8 @@ def get_buienradar_stations() -> list[tuple[int, str]]:
         response.raise_for_status()
         stations = sorted(
             [
-                (int(s["stationid"]), "Weather station {}".format(s["stationname"]))
-                for s in response.json()["actual"]["stationmeasurements"]
+                (int(s["StationId"]), "Weather station {}".format(s["StationName"]))
+                for s in response.json()["Actual"]["WeatherStationMeasurements"]
             ],
             key=lambda x: x[1],
         )
@@ -52,7 +53,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
         scheduled_process.delay(hours=1)
         return
 
-    scheduled_process.reschedule(temperature_reading.read_at + timezone.timedelta(hours=1))
+    scheduled_process.reschedule(temperature_reading.read_at + timedelta(hours=1))
 
 
 def get_temperature_from_api() -> TemperatureReading:
@@ -72,12 +73,12 @@ def get_temperature_from_api() -> TemperatureReading:
 
     # Find our selected station.
     station_id = WeatherSettings.get_solo().buienradar_station
-    station_data = [x for x in response.json()["actual"]["stationmeasurements"] if x["stationid"] == station_id]
+    station_data = [x for x in response.json()["Actual"]["WeatherStationMeasurements"] if x["StationId"] == station_id]
 
     if not station_data:
         raise RuntimeError("Selected station info not found: {}".format(station_id))
 
-    temperature = station_data[0]["temperature"]
+    temperature = station_data[0]["Temperature"]
     logger.debug("Buienradar: Storing temperature read: %s", temperature)
 
     hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)
