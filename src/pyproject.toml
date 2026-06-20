@@ -85,12 +85,8 @@ per-file-ignores = [
 
 
 [tool.mypy]
-plugins = ["mypy_django_plugin.main"]
 ignore_missing_imports = true
 exclude = [".*/migrations/"]
-
-[tool.django-stubs]
-django_settings_module = "dsmrreader.config.test"
 
 [[tool.mypy.overrides]]
 module = "paho.*"

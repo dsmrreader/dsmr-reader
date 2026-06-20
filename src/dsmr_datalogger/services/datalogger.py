@@ -1,7 +1,6 @@
 import logging
-from typing import Any, Dict, Iterator, Optional
+from typing import Dict, Iterator, Optional
 
-import datetime
 from django.db.models.expressions import F
 from django.utils import timezone
 from django.db import connection
@@ -96,7 +95,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
     ]
 
     datalogger_settings = DataloggerSettings.get_solo()
-    model_fields: Dict[str, Any] = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
+    model_fields = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
     mapping = _get_dsmrreader_mapping(datalogger_settings)
 
     for obis_ref, obis_data in parsed_telegram.items():
@@ -113,9 +112,9 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
             model_fields[target_field] = obis_data.value
 
     # Defaults for telegrams with missing data.
-    model_fields["timestamp"] = model_fields["timestamp"] or timezone.now()
-    model_fields["electricity_delivered_2"] = model_fields["electricity_delivered_2"] or 0
-    model_fields["electricity_returned_2"] = model_fields["electricity_returned_2"] or 0
+    model_fields["timestamp"] = model_fields["timestamp"] or timezone.now()  # type: ignore[assignment]
+    model_fields["electricity_delivered_2"] = model_fields["electricity_delivered_2"] or 0  # type:ignore[assignment]
+    model_fields["electricity_returned_2"] = model_fields["electricity_returned_2"] or 0  # type:ignore[assignment]
 
     # Ignore invalid dates on device bus. Reset the delivered value as well. This MUST be checked before override below.
     if model_fields["extra_device_timestamp"] is None:
@@ -126,7 +125,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
         now = timezone.now()
 
         logger.debug("WARNING: Overriding telegram timestamps due to configuration")
-        model_fields["timestamp"] = now
+        model_fields["timestamp"] = now  # type: ignore[assignment]
 
         if model_fields["extra_device_timestamp"] is not None:
             # WARNING: So None (v2, v3, Fluvius) default to v4 behaviour.
@@ -135,9 +134,9 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
             model_fields["extra_device_timestamp"] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
 
     # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
-    discard_after = timezone.now() + datetime.timedelta(hours=24)
+    discard_after = timezone.now() + timezone.timedelta(hours=24)  # type: ignore[attr-defined]
 
-    if model_fields["timestamp"] > discard_after or (
+    if model_fields["timestamp"] > discard_after or (  # type: ignore[operator]
         model_fields["extra_device_timestamp"] is not None and model_fields["extra_device_timestamp"] > discard_after
     ):
         error_message = "Discarded telegram with future timestamp(s): {} / {}".format(
@@ -216,7 +215,7 @@ def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
                 DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_2: obis_references.BELGIUM_MBUS2_METER_READING2,
                 DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_3: obis_references.BELGIUM_MBUS3_METER_READING2,
                 DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_4: obis_references.BELGIUM_MBUS4_METER_READING2,
-            }[datalogger_settings.dsmr_extra_device_channel or 0]
+            }[datalogger_settings.dsmr_extra_device_channel]
         except KeyError:
             mbus_reference = obis_references.BELGIUM_MBUS_WILDCARD_METER_READING2
 
@@ -251,7 +250,10 @@ def postgresql_approximate_reading_count() -> Optional[int]:  # pragma: nocover
         return int(reading_count)
 
 
-def calculate_fake_gas_reading_timestamp(now: datetime.datetime, is_dsmr_v5: bool) -> datetime.datetime:
+def calculate_fake_gas_reading_timestamp(  # type: ignore[attr-defined,name-defined]
+    now: timezone.datetime,  # type: ignore[attr-defined,name-defined]
+    is_dsmr_v5: bool,
+) -> timezone.datetime:  # type: ignore[attr-defined,name-defined]
     """When overriding time, we cannot fake each gas reading to have its own timestamp. Simulate meters instead."""
     now = now.replace(second=0, microsecond=0)
 

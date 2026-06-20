@@ -2,11 +2,11 @@ import datetime
 import logging
 from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
-from typing import Dict, Optional, List, Tuple, Any, cast
+from typing import Dict, Optional, List, Tuple, Any
 from zoneinfo import ZoneInfo
 
 from django.conf import settings
-from django.db.models import Avg, Min, Max, Count, QuerySet
+from django.db.models import Avg, Min, Max, Count, Manager
 from django.db.utils import IntegrityError
 from django.utils import timezone, formats
 
@@ -59,11 +59,13 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     rewind_minutes = MINUTE_INTERVAL
 
     # Map to xx:00, xx:15, xx:30 or xx:45. E.g. 14:19 -> 14:15. Makes 19 % 15 = 4 (rewind_minutes = 15 + 4)
-    rewind_minutes += (fuzzy_start - datetime.timedelta(minutes=rewind_minutes)).minute % MINUTE_INTERVAL
+    rewind_minutes += (  # type: ignore[attr-defined]
+        fuzzy_start - timezone.timedelta(minutes=rewind_minutes)  # type: ignore[attr-defined]
+    ).minute % MINUTE_INTERVAL
 
     # E.g. Fuzzy start was 14:34. Now we start/end at 14:15/14:30.
-    start = fuzzy_start - datetime.timedelta(minutes=rewind_minutes)
-    end = start + datetime.timedelta(minutes=MINUTE_INTERVAL)
+    start = fuzzy_start - timezone.timedelta(minutes=rewind_minutes)  # type: ignore[attr-defined]
+    end = start + timezone.timedelta(minutes=MINUTE_INTERVAL)  # type: ignore[attr-defined]
 
     # Do NOT continue until we've received new readings AFTER the targeted end. Ensuring we do not miss any and it also
     # blocks the "self-healing" implementation when having data gaps.
@@ -90,14 +92,14 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
         scheduled_process.postpone(minutes=MINUTE_INTERVAL)
         return
 
-    first_reading = cast(DsmrReading, quarter_hour_readings.first())
-    last_reading = cast(DsmrReading, quarter_hour_readings.last())
+    first_reading = quarter_hour_readings.first()
+    last_reading = quarter_hour_readings.last()
     logger.debug(
         "Quarter hour peaks: Quarter %s - %s resulted in readings %s - %s",
         timezone.localtime(start),
         timezone.localtime(end),
-        timezone.localtime(first_reading.timestamp),
-        timezone.localtime(last_reading.timestamp),
+        timezone.localtime(first_reading.timestamp),  # type: ignore[union-attr]
+        timezone.localtime(last_reading.timestamp),  # type: ignore[union-attr]
     )
 
     # Do not create duplicate data.
@@ -108,21 +110,27 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
 
     if existing_data:
         logger.debug("Quarter hour peaks: Ready but quarter already processed, rescheduling for next quarter...")
-        scheduled_process.reschedule(planned_at=end + datetime.timedelta(minutes=MINUTE_INTERVAL))
+        scheduled_process.reschedule(  # type: ignore[attr-defined]
+            planned_at=end + timezone.timedelta(minutes=MINUTE_INTERVAL)  # type: ignore[attr-defined]
+        )
         return
 
     # Calculate quarter data.
-    total_delivered_start = first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2
-    total_delivered_end = last_reading.electricity_delivered_1 + last_reading.electricity_delivered_2
+    total_delivered_start = (
+        first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2  # type: ignore[union-attr]
+    )
+    total_delivered_end = (
+        last_reading.electricity_delivered_1 + last_reading.electricity_delivered_2  # type: ignore[union-attr]
+    )
     avg_delivered_in_quarter = total_delivered_end - total_delivered_start
     logger.debug(
         "Quarter hour peaks: Calculating for %s - %s",
-        timezone.localtime(first_reading.timestamp),
-        timezone.localtime(last_reading.timestamp),
+        timezone.localtime(first_reading.timestamp),  # type: ignore[union-attr]
+        timezone.localtime(last_reading.timestamp),  # type: ignore[union-attr]
     )
 
     # We may not be able to track exactly 15 minutes, so adjust the average a bit based on the real duration.
-    time_diff = last_reading.timestamp - first_reading.timestamp
+    time_diff = last_reading.timestamp - first_reading.timestamp  # type: ignore[union-attr]
 
     # avg_delivered_in_quarter = kW QUARTER peak during ~15 minutes... x ~4 maps it to avg per hour for kW HOUR peak
     average_delivered_hour = avg_delivered_in_quarter * Decimal(3600 / time_diff.total_seconds())
@@ -133,8 +141,8 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     new_instance = QuarterHourPeakElectricityConsumption.objects.create(
         # Using the reading timestamps used to ensure we can indicate gaps or lag in reading input.
         # E.g. due backend/datalogger process sleep or simply v4 meters emitting a reading only once per 10 seconds.
-        read_at_start=first_reading.timestamp,
-        read_at_end=last_reading.timestamp,
+        read_at_start=first_reading.timestamp,  # type: ignore[union-attr]
+        read_at_end=last_reading.timestamp,  # type: ignore[union-attr]
         average_delivered=average_delivered_hour,
     )
     logger.debug(
@@ -144,7 +152,9 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     )
 
     # Reschedule around the next moment we can expect to process the next quarter. Also works retroactively/with gaps.
-    scheduled_process.reschedule(planned_at=new_instance.read_at_end + datetime.timedelta(minutes=MINUTE_INTERVAL))
+    scheduled_process.reschedule(  # type: ignore[attr-defined]
+        planned_at=new_instance.read_at_end + timezone.timedelta(minutes=MINUTE_INTERVAL)  # type: ignore[attr-defined]
+    )
 
 
 def compact(dsmr_reading: DsmrReading) -> None:
@@ -152,15 +162,17 @@ def compact(dsmr_reading: DsmrReading) -> None:
     consumption_settings = ConsumptionSettings.get_solo()
 
     # Grouping by minute requires some distinction and history checking.
-    reading_start = datetime.datetime.combine(
+    reading_start = timezone.datetime.combine(  # type: ignore[attr-defined]
         dsmr_reading.timestamp.date(),
         time(hour=dsmr_reading.timestamp.hour, minute=dsmr_reading.timestamp.minute),
     ).replace(tzinfo=ZoneInfo("UTC"))
 
     if consumption_settings.electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_MINUTE:
-        system_time_past_minute = timezone.now() >= reading_start + datetime.timedelta(minutes=1)
+        system_time_past_minute = (  # type: ignore[attr-defined]
+            timezone.now() >= reading_start + timezone.timedelta(minutes=1)  # type: ignore[attr-defined]
+        )
         reading_past_minute_exists = DsmrReading.objects.filter(
-            timestamp__gte=reading_start + datetime.timedelta(minutes=1)
+            timestamp__gte=reading_start + timezone.timedelta(minutes=1)  # type: ignore[attr-defined]
         ).exists()
 
         # Postpone until the minute has passed on the system time. And when there are (new) readings beyond this minute.
@@ -188,7 +200,7 @@ def compact(dsmr_reading: DsmrReading) -> None:
 def _compact_electricity(
     dsmr_reading: DsmrReading,
     electricity_grouping_type: int,
-    reading_start: datetime.datetime,
+    reading_start: timezone.datetime,  # type: ignore[attr-defined,name-defined]
 ) -> None:
     """
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
@@ -224,7 +236,7 @@ def _compact_electricity(
 
         return
 
-    minute_end = reading_start + datetime.timedelta(minutes=1)
+    minute_end = reading_start + timezone.timedelta(minutes=1)  # type: ignore[attr-defined]
 
     # We might have multiple readings per minute, so there is a chance we already parsed it a moment ago.
     if ElectricityConsumption.objects.filter(read_at=minute_end).exists():
@@ -299,7 +311,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
 
     # DSMR v4 readings should reflect to the previous hour, to keep it compatible with the existing implementation.
     if dsmr_version is not None and dsmr_version.startswith("4"):
-        gas_read_at = gas_read_at - datetime.timedelta(hours=1)
+        gas_read_at = gas_read_at - timezone.timedelta(hours=1)  # type: ignore[attr-defined]
 
     # We will not override data, just ignore it. Also subject to DSMR v4 and grouped gas readings.
     if GasConsumption.objects.filter(read_at=gas_read_at).exists():
@@ -313,7 +325,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
             read_at__lt=gas_read_at
         ).order_by("-read_at")[0]
     except IndexError:
-        gas_diff: Decimal = Decimal(0)
+        gas_diff = 0
     else:
         gas_diff = dsmr_reading.extra_device_delivered - previous.delivered
 
@@ -324,7 +336,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
     )
 
 
-def consumption_by_range(start, end) -> Tuple[QuerySet[ElectricityConsumption], QuerySet[GasConsumption]]:
+def consumption_by_range(start, end) -> Tuple[Manager, Manager]:
     """Calculates the consumption of a range specified."""
     electricity_readings = ElectricityConsumption.objects.filter(
         read_at__gte=start,
@@ -336,15 +348,17 @@ def consumption_by_range(start, end) -> Tuple[QuerySet[ElectricityConsumption], 
         read_at__lt=end,
     ).order_by("read_at")
 
-    return electricity_readings, gas_readings
+    return electricity_readings, gas_readings  # type: ignore[return-value]
 
 
 def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
     consumption: dict[str, Any] = {"day": day}
     hours_in_day = dsmr_backend.services.backend.hours_in_day(day=day)
-    day_start = timezone.make_aware(datetime.datetime(year=day.year, month=day.month, day=day.day))
-    day_end = day_start + datetime.timedelta(hours=hours_in_day)
+    day_start = timezone.make_aware(  # type: ignore[attr-defined]
+        timezone.datetime(year=day.year, month=day.month, day=day.day)  # type: ignore[attr-defined]
+    )
+    day_end = day_start + timezone.timedelta(hours=hours_in_day)  # type: ignore[attr-defined]
 
     try:
         daily_energy_price = get_day_prices(day=day)
@@ -356,31 +370,24 @@ def day_consumption(day: datetime.date) -> Dict:
     if not electricity_readings.exists():
         raise LookupError("No electricity readings found for: {}".format(day))
 
-    # Cross-midnight anchors for gap-free daily totals.
-    # anchor_start: last record strictly before this day's midnight (None for the very first day of data).
-    # anchor_end:   last record strictly before the next day's midnight (always exists — checked above).
-    anchor_start = ElectricityConsumption.objects.filter(read_at__lt=day_start).order_by("read_at").last()
-    anchor_end = ElectricityConsumption.objects.filter(read_at__lt=day_end).order_by("read_at").last()
+    electricity_reading_count = electricity_readings.count()
 
-    # When no prior data exists (first ever day), fall back to the first within-day record.
-    start_record = cast(
-        ElectricityConsumption, anchor_start if anchor_start is not None else electricity_readings.first()
-    )
-    end_record = cast(ElectricityConsumption, anchor_end)
+    first_reading = electricity_readings[0]  # type: ignore[index]
+    last_reading = electricity_readings[electricity_reading_count - 1]  # type: ignore[index]
 
-    consumption["latest_consumption"] = electricity_readings.last()
-    consumption["electricity1"] = end_record.delivered_1 - start_record.delivered_1
-    consumption["electricity2"] = end_record.delivered_2 - start_record.delivered_2
-    consumption["electricity1_start"] = start_record.delivered_1
-    consumption["electricity1_end"] = end_record.delivered_1
-    consumption["electricity2_start"] = start_record.delivered_2
-    consumption["electricity2_end"] = end_record.delivered_2
-    consumption["electricity1_returned"] = end_record.returned_1 - start_record.returned_1
-    consumption["electricity2_returned"] = end_record.returned_2 - start_record.returned_2
-    consumption["electricity1_returned_start"] = start_record.returned_1
-    consumption["electricity1_returned_end"] = end_record.returned_1
-    consumption["electricity2_returned_start"] = start_record.returned_2
-    consumption["electricity2_returned_end"] = end_record.returned_2
+    consumption["latest_consumption"] = last_reading
+    consumption["electricity1"] = last_reading.delivered_1 - first_reading.delivered_1
+    consumption["electricity2"] = last_reading.delivered_2 - first_reading.delivered_2
+    consumption["electricity1_start"] = first_reading.delivered_1
+    consumption["electricity1_end"] = last_reading.delivered_1
+    consumption["electricity2_start"] = first_reading.delivered_2
+    consumption["electricity2_end"] = last_reading.delivered_2
+    consumption["electricity1_returned"] = last_reading.returned_1 - first_reading.returned_1
+    consumption["electricity2_returned"] = last_reading.returned_2 - first_reading.returned_2
+    consumption["electricity1_returned_start"] = first_reading.returned_1
+    consumption["electricity1_returned_end"] = last_reading.returned_1
+    consumption["electricity2_returned_start"] = first_reading.returned_2
+    consumption["electricity2_returned_end"] = last_reading.returned_2
     consumption["electricity_merged"] = consumption["electricity1"] + consumption["electricity2"]
     consumption["electricity_returned_merged"] = (
         consumption["electricity1_returned"] + consumption["electricity2_returned"]
@@ -403,15 +410,12 @@ def day_consumption(day: datetime.date) -> Dict:
     # Gas readings are optional, as not all meters support this.
     if gas_readings.exists():
         gas_reading_count = gas_readings.count()
-        first_reading = gas_readings[0]
-        last_reading = gas_readings[gas_reading_count - 1]
+        first_reading = gas_readings[0]  # type: ignore[index]
+        last_reading = gas_readings[gas_reading_count - 1]  # type: ignore[index]
         consumption["gas"] = last_reading.delivered - first_reading.delivered
-        # Gas timestamps are always aligned to exact meter-generation intervals:
-        #   Old meters (DSMR ≤ 4): every 60 min  (60 % 60 = 0 → reading at midnight and every hour)
-        #   New meters (DSMR 5+):  every  5 min  (60 %  5 = 0 → reading at midnight and every hour)
-        # The same cross-midnight anchor fix used for electricity applies here too.
-        # TODO: apply anchor-based gas fix (issue #1770).
+        # @TODO: START might be slightly off for an hour, use dsmr_datalogger.services.readings.first_meter_positions_of_day() instead later  # noqa: E501
         consumption["gas_start"] = first_reading.delivered
+        # @TODO: END may be inaccurate as well be slightly off, create a reliable service like first_meter_positions_of_day() later  # noqa: E501
         consumption["gas_end"] = last_reading.delivered
         consumption["gas_cost"] = round_decimal(consumption["gas"] * daily_energy_price.gas_price)
         consumption["total_cost"] += consumption["gas_cost"]
@@ -489,7 +493,7 @@ def live_electricity_consumption() -> Dict:
     }
 
     try:
-        data["tariff_name"] = tariff_names[tariff or 0]
+        data["tariff_name"] = tariff_names[tariff]
     except KeyError:
         pass
 
@@ -508,10 +512,8 @@ def live_electricity_consumption() -> Dict:
     }
 
     try:
-        delivered_cost_per_hour = (
-            latest_reading.electricity_currently_delivered * delivered_prices_per_tariff[tariff or 0]
-        )
-        returned_cost_per_hour = latest_reading.electricity_currently_returned * returned_prices_per_tariff[tariff or 0]
+        delivered_cost_per_hour = latest_reading.electricity_currently_delivered * delivered_prices_per_tariff[tariff]
+        returned_cost_per_hour = latest_reading.electricity_currently_returned * returned_prices_per_tariff[tariff]
     except KeyError:
         return data
 
@@ -555,7 +557,7 @@ def round_decimal(value, decimal_count: int = 2) -> Decimal:
 
 def calculate_slumber_consumption_watt() -> Optional[int]:
     """Groups all electricity readings to find the most constant consumption."""
-    most_common: List[Any] = list(
+    most_common = (
         ElectricityConsumption.objects.filter(currently_delivered__gt=0)
         .values("currently_delivered")
         .annotate(currently_delivered_count=Count("currently_delivered"))
@@ -639,7 +641,7 @@ def summarize_energy_contracts() -> List[Dict]:
         summary = dsmr_stats.services.range_statistics(
             start=current.start,
             # Note: +1 day is due to range_statistics()'s query (#1534)
-            end=end_date + datetime.timedelta(days=1),
+            end=end_date + timezone.timedelta(days=1),  # type: ignore[attr-defined,operator]
         )
 
         # Override this one, since it's only good when ALL price fields are set.

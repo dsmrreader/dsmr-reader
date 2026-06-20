@@ -3,7 +3,6 @@ import logging
 import random
 import json
 
-import datetime
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
@@ -39,28 +38,35 @@ def run(scheduled_process: ScheduledProcess) -> None:
         logger.exception(error)
 
         scheduled_process.delay(hours=1)
-        dsmr_frontend.services.display_dashboard_message(message=_("Failed to export to MinderGas: {}".format(error)))
+        dsmr_frontend.services.display_dashboard_message(
+            message=_("Failed to export to MinderGas: {}".format(error))  # type: ignore[arg-type]
+        )
         return
 
     # Reschedule between 3 AM and 6 AM next day.
-    midnight = timezone.localtime(timezone.make_aware(datetime.datetime.combine(timezone.now(), time.min)))
-    next_midnight = midnight + datetime.timedelta(
+    midnight = timezone.localtime(
+        timezone.make_aware(timezone.datetime.combine(timezone.now(), time.min))  # type: ignore[attr-defined]
+    )
+    next_midnight = midnight + timezone.timedelta(  # type: ignore[attr-defined]
         hours=dsmr_backend.services.backend.hours_in_day(day=timezone.now().date())
     )
     scheduled_process.reschedule(
-        next_midnight + datetime.timedelta(hours=random.randint(3, 5), minutes=random.randint(15, 59))
+        next_midnight  # type: ignore[attr-defined]
+        + timezone.timedelta(hours=random.randint(3, 5), minutes=random.randint(15, 59))  # type: ignore[attr-defined]
     )
 
 
 def export() -> None:
     """Exports gas readings to the MinderGas website. DSMR-reader transmits the last reading of the previous day."""
     mindergas_settings = MinderGasSettings.get_solo()
-    midnight = timezone.localtime(timezone.make_aware(datetime.datetime.combine(timezone.now(), time.min)))
+    midnight = timezone.localtime(
+        timezone.make_aware(timezone.datetime.combine(timezone.now(), time.min))  # type: ignore[attr-defined]
+    )
 
     try:
         last_gas_reading = GasConsumption.objects.filter(
             # Slack of a few hours to make sure we have any valid reading at all.
-            read_at__range=(midnight - datetime.timedelta(hours=3), midnight)
+            read_at__range=(midnight - timezone.timedelta(hours=3), midnight)  # type: ignore[attr-defined]
         ).order_by("-read_at")[0]
     except IndexError as exc:
         raise AssertionError(_("No recent gas reading found")) from exc

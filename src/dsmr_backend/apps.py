@@ -2,7 +2,6 @@ from io import StringIO
 from typing import Optional, List
 from unittest import mock
 
-import datetime
 from django.core.management import call_command
 from django.dispatch import receiver
 from django.utils import timezone
@@ -11,7 +10,6 @@ from django.apps import AppConfig
 from django.db import connection
 from django.conf import settings
 from django.core.checks import Warning, Critical, register, Tags
-from typing import Union
 
 from dsmr_backend.dto import MonitoringStatusIssue
 from dsmr_backend.signals import request_status
@@ -27,7 +25,7 @@ class BackendAppConfig(AppConfig):
         @register(Tags.compatibility, deploy=True)
         def system_checks(app_configs, **kwargs) -> List:
             """@see https://docs.djangoproject.com/en/3.1/topics/checks/"""
-            errors: List[Union[Warning, Critical]] = []
+            errors = []
 
             # DB Engine check.
             if connection.vendor not in settings.DSMRREADER_SUPPORTED_DB_VENDORS:  # pragma: no cover
@@ -60,7 +58,7 @@ class BackendAppConfig(AppConfig):
 
                     if migrate_output:  # e.g. " Alter field phase_voltage_l2 on dsmrreading"
                         errors.append(
-                            Critical(
+                            Critical(  # type: ignore[arg-type]
                                 'There are unapplied migrations, please run "migrate"\n\n{}'.format(migrate_output),
                                 obj=None,
                                 id=settings.DSMRREADER_SYSTEM_CHECK_002,
@@ -75,7 +73,7 @@ def check_scheduled_processes(**kwargs) -> List[MonitoringStatusIssue]:
     from dsmr_backend.models.schedule import ScheduledProcess
 
     issues = []
-    offset = timezone.now() - datetime.timedelta(
+    offset = timezone.now() - timezone.timedelta(  # type: ignore[attr-defined]
         minutes=settings.DSMRREADER_STATUS_ALLOWED_SCHEDULED_PROCESS_LAGG_IN_MINUTES
     )
     lagging_processes = ScheduledProcess.objects.filter(active=True, planned__lt=offset)
@@ -100,7 +98,7 @@ def check_backend_hibernation(**kwargs) -> List[MonitoringStatusIssue]:
     return [
         MonitoringStatusIssue(
             __name__,
-            _("Backend hibernation is (still) enabled (DSMRREADER_BACKEND_HIBERNATE)"),
+            _("Backend hibernation is (still) enabled (DSMRREADER_BACKEND_HIBERNATE)"),  # type: ignore[arg-type]
             timezone.now(),
         )
     ]

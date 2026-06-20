@@ -38,7 +38,7 @@ class TestServices(TestCase):
     ) -> QuarterHourPeakElectricityConsumption:
         return QuarterHourPeakElectricityConsumption.objects.create(
             read_at_start=timezone.now(),
-            read_at_end=timezone.now() + datetime.timedelta(minutes=14, seconds=59),
+            read_at_end=timezone.now() + timezone.timedelta(minutes=14, seconds=59),  # type: ignore[attr-defined]
             average_delivered=2.345,
         )
 
@@ -89,7 +89,7 @@ class TestConsumption(TestServices):
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     @mock.patch("django.utils.timezone.now")
     def test_publish_json_gas_consumption(self, now_mock, queue_message_mock):
-        now_mock.return_value = timezone.make_aware(datetime.datetime(2020, 1, 1), timezone=datetime.timezone.utc)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1), timezone=datetime.timezone.utc)
         json_settings = consumption.JSONGasConsumptionMQTTSettings.get_solo()
         gas_consumption = self._create_gas_consumption()
 
@@ -124,7 +124,7 @@ currently_delivered = ccc
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     @mock.patch("django.utils.timezone.now")
     def test_publish_split_topic_gas_consumption(self, now_mock, queue_message_mock):
-        now_mock.return_value = timezone.make_aware(datetime.datetime(2020, 1, 1), timezone=datetime.timezone.utc)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2020, 1, 1), timezone=datetime.timezone.utc)
         split_topic_settings = consumption.SplitTopicGasConsumptionMQTTSettings.get_solo()
         gas_consumption = self._create_gas_consumption()
 
@@ -160,7 +160,7 @@ currently_delivered = dsmr/consumption/gas/currently_delivered
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     @mock.patch("django.utils.timezone.now")
     def test_publish_json_quarter_hour_peak_consumption(self, now_mock, queue_message_mock):
-        now_mock.return_value = timezone.make_aware(datetime.datetime(2023, 1, 1), timezone=datetime.timezone.utc)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2023, 1, 1), timezone=datetime.timezone.utc)
         json_settings = consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
         quarter_hour_peak_consumption = self._create_quarter_hour_peak_consumption()
 
@@ -195,7 +195,7 @@ average_delivered = ccc
     @mock.patch("dsmr_mqtt.services.messages.queue_message")
     @mock.patch("django.utils.timezone.now")
     def test_publish_split_topic_quarter_hour_peak_consumption(self, now_mock, queue_message_mock):
-        now_mock.return_value = timezone.make_aware(datetime.datetime(2023, 1, 1), timezone=datetime.timezone.utc)
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2023, 1, 1), timezone=datetime.timezone.utc)
         split_topic_settings = consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings.get_solo()
         quarter_hour_peak_consumption = self._create_quarter_hour_peak_consumption()
 

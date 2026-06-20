@@ -1,6 +1,5 @@
 import importlib
 import logging
-from datetime import timedelta
 
 from typing import ClassVar
 from django.utils.translation import gettext_lazy as _
@@ -60,11 +59,11 @@ class ScheduledProcess(ModelUpdateMixin, models.Model):
 
     def delay(self, **delta):
         """Delays the next call by the given delta, based on the current SYSTEM TIME (now)."""
-        self.reschedule(planned_at=timezone.now() + timedelta(**delta))
+        self.reschedule(planned_at=timezone.now() + timezone.timedelta(**delta))
 
     def postpone(self, **delta):
         """Delays the next call by the given delta, based on the already PLANNED time of this instance."""
-        self.reschedule(planned_at=self.planned + timedelta(**delta))
+        self.reschedule(planned_at=self.planned + timezone.timedelta(**delta))
 
     def reschedule(self, planned_at):
         """Schedules the next call at a predetermined moment."""
