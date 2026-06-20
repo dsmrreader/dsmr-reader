@@ -1,6 +1,7 @@
 from decimal import Decimal
 from unittest import mock
 
+import datetime
 from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
@@ -28,7 +29,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     def _create_reading1(self) -> DsmrReading:
         return DsmrReading.objects.create(
-            timestamp=timezone.make_aware(timezone.datetime(2022, 1, 1, hour=14, minute=15, second=1)),  # type: ignore[attr-defined]
+            timestamp=timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=15, second=1)),
             electricity_delivered_1=100,
             electricity_delivered_2=150,
             electricity_returned_1=0,
@@ -39,7 +40,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     def _create_reading2(self) -> DsmrReading:
         return DsmrReading.objects.create(
-            timestamp=timezone.make_aware(timezone.datetime(2022, 1, 1, hour=14, minute=29, second=40)),  # type: ignore[attr-defined]
+            timestamp=timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=29, second=40)),
             electricity_delivered_1=150,
             electricity_delivered_2=250,
             # Return should not affect peak calculations at all
@@ -51,7 +52,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     def _create_post_reading(self, reading2: DsmrReading) -> DsmrReading:
         return DsmrReading.objects.create(
-            timestamp=reading2.timestamp + timezone.timedelta(minutes=15),  # type: ignore[attr-defined]
+            timestamp=reading2.timestamp + datetime.timedelta(minutes=15),
             electricity_delivered_1=0,
             electricity_delivered_2=0,
             electricity_returned_1=0,
@@ -62,7 +63,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("django.utils.timezone.now")
     def test_okay(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 1, 1, hour=14, minute=34, second=0))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=34, second=0))
         self.schedule_process.reschedule(timezone.now())
 
         reading1 = self._create_reading1()
@@ -75,7 +76,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertFalse(QuarterHourPeakElectricityConsumption.objects.all().exists())
         self.assertEqual(
             self.schedule_process.planned,
-            timezone.now() + timezone.timedelta(seconds=5),  # Postponed + X secs
+            timezone.now() + datetime.timedelta(seconds=5),  # Postponed + X secs
         )
 
         # Create any reading after end.
@@ -89,7 +90,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         quarter_hour_peak = QuarterHourPeakElectricityConsumption.objects.get()
         self.assertEqual(quarter_hour_peak.read_at_start, reading1.timestamp)
         self.assertEqual(quarter_hour_peak.read_at_end, reading2.timestamp)
-        self.assertEqual(quarter_hour_peak.duration, timezone.timedelta(minutes=14, seconds=39))  # = 15m - 21s
+        self.assertEqual(quarter_hour_peak.duration, datetime.timedelta(minutes=14, seconds=39))  # = 15m - 21s
         self.assertEqual(
             quarter_hour_peak.average_delivered,
             # 150 kW for 879 seconds, but align with full hour (= 150 x ~4.09556314). 15m would be 3600 / 900 = 4x.
@@ -103,7 +104,7 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
 
     @mock.patch("django.utils.timezone.now")
     def test_too_few_readings(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 1, 1, hour=14, minute=34, second=0))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=34, second=0))
         self.schedule_process.reschedule(timezone.now())
 
         reading1 = self._create_reading1()
@@ -116,20 +117,20 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(QuarterHourPeakElectricityConsumption.objects.count(), 0)
         self.assertEqual(
             self.schedule_process.planned,
-            timezone.now() + timezone.timedelta(minutes=15),  # Postponed + X minutes
+            timezone.now() + datetime.timedelta(minutes=15),  # Postponed + X minutes
         )
 
     @mock.patch("django.utils.timezone.now")
     def test_retroactive(self, now_mock):
         """Ensure it should work retroactively as well."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 1, 1, hour=0, minute=0, second=0))
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2022, 1, 1, hour=0, minute=0, second=0))
 
         MAX_INTERVAL = 300
-        self.schedule_process.reschedule(timezone.now() - timezone.timedelta(minutes=MAX_INTERVAL))  # Schedule once
+        self.schedule_process.reschedule(timezone.now() - datetime.timedelta(minutes=MAX_INTERVAL))  # Schedule once
 
         for interval in range(0, MAX_INTERVAL, 5):
             DsmrReading.objects.create(
-                timestamp=timezone.now() - timezone.timedelta(minutes=interval),
+                timestamp=timezone.now() - datetime.timedelta(minutes=interval),
                 electricity_delivered_1=100 + 0.2 * interval,
                 electricity_delivered_2=150 + 0.2 * interval,
                 electricity_returned_1=0,

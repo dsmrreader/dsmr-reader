@@ -1,5 +1,6 @@
 from typing import Optional
 
+import datetime
 from django.apps import AppConfig
 from django.conf import settings
 from django.dispatch import receiver
@@ -41,9 +42,9 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
     try:
         latest_day_statistics = DayStatistics.objects.all().order_by("-day")[0]
     except IndexError:
-        return MonitoringStatusIssue(__name__, _("No day statistics found"), timezone.now())  # type: ignore[arg-type]
+        return MonitoringStatusIssue(__name__, _("No day statistics found"), timezone.now())
 
-    offset = timezone.now().date() - timezone.timedelta(  # type: ignore[attr-defined]
+    offset = timezone.now().date() - datetime.timedelta(
         days=settings.DSMRREADER_STATUS_ALLOWED_DAY_STATISTICS_LAGG_IN_DAYS
     )
 
@@ -54,9 +55,9 @@ def check_day_statistics_generation(**kwargs) -> Optional[MonitoringStatusIssue]
 
     return MonitoringStatusIssue(
         __name__,
-        _("Day statistics are lagging behind"),  # type: ignore[arg-type]
+        _("Day statistics are lagging behind"),
         timezone.make_aware(
-            timezone.datetime(  # type: ignore[attr-defined]
+            datetime.datetime(
                 year=latest_date_generated.year,
                 month=latest_date_generated.month,
                 day=latest_date_generated.day,

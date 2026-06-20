@@ -1,18 +1,20 @@
 import enum
 from enum import unique
-from typing import Union, Dict
+from typing import TYPE_CHECKING, Union, Dict
 
+import datetime
 from django.utils import timezone
+
+if TYPE_CHECKING:
+    from django.utils.functional import _StrOrPromise
 
 
 class MonitoringStatusIssue(object):
     source: str
     description: str
-    since: timezone.datetime  # type: ignore[attr-defined,name-defined]
+    since: datetime.datetime
 
-    def __init__(  # type: ignore[attr-defined,name-defined]
-        self, source: str, description: str, since: timezone.datetime  # type: ignore[attr-defined,name-defined]
-    ):
+    def __init__(self, source: str, description: str | _StrOrPromise, since: datetime.datetime):
         self.source = str(source)
         self.description = str(description)
         self.since = since
