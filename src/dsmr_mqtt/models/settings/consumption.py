@@ -8,18 +8,18 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class JSONGasConsumptionMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT JSON gas consumption."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether gas consumption is sent to the broker, in JSON format."),
     )
-    topic = models.CharField(
+    topic = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         default="dsmr/consumption/gas/json",
         verbose_name=_("Topic path"),
         help_text=_("The topic to send the parsed JSON telegrams to."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # DATA FIELD = JSON FIELD
@@ -42,12 +42,12 @@ currently_delivered = currently_delivered
 class SplitTopicGasConsumptionMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT gas consumption per field, mapped to split topic."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether gas consumption is sent to the broker, having each field sent to a different topic."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # READING FIELD = TOPIC PATH
@@ -70,18 +70,18 @@ currently_delivered = dsmr/consumption/gas/currently_delivered
 class JSONQuarterHourPeakElectricityConsumptionMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT JSON quarter-hour peak consumption."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether quarter-hour peak consumption is sent to the broker, in JSON format."),
     )
-    topic = models.CharField(
+    topic = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         default="dsmr/consumption/quarter-hour-peak-electricity/json",
         verbose_name=_("Topic path"),
         help_text=_("The topic to send the parsed JSON telegrams to."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # DATA FIELD = JSON FIELD
@@ -104,14 +104,14 @@ average_delivered = average_delivered
 class SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT quarter-hour peak consumption per field, mapped to split topic."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_(
             "Whether quarter-hour peak consumption is sent to the broker, having each field sent to a different topic."
         ),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # READING FIELD = TOPIC PATH

@@ -10,21 +10,21 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
     Represents the price you are charged by your energy supplier. Prices are per unit, which is either one kWh or m3 gas
     """
 
-    start = models.DateField(
+    start = models.DateField(  # type: ignore[var-annotated]
         db_index=True,
         verbose_name=_("Contract start"),
     )
-    end = models.DateField(
+    end = models.DateField(  # type: ignore[var-annotated]
         db_index=True,
         verbose_name=_("Contract end"),
         help_text=_("Set to a far future date when there is not contract end."),
     )
-    description = models.CharField(
+    description = models.CharField(  # type: ignore[var-annotated]
         max_length=255,
         verbose_name=_("Contract name"),
         help_text=_("For your own reference, i.e. the name of your supplier"),
     )
-    electricity_delivered_1_price = models.DecimalField(
+    electricity_delivered_1_price = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=11,
         decimal_places=6,
         default=0,
@@ -32,7 +32,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         verbose_name=_("Tariff 1 delivered price (€/kWh)"),
         help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
-    electricity_delivered_2_price = models.DecimalField(
+    electricity_delivered_2_price = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=11,
         decimal_places=6,
         default=0,
@@ -40,7 +40,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         verbose_name=_("Tariff 2 delivered price (€/kWh)"),
         help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
-    gas_price = models.DecimalField(
+    gas_price = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=11,
         decimal_places=6,
         default=0,
@@ -48,7 +48,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         verbose_name=_("Gas price (€/m³)"),
         help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
-    electricity_returned_1_price = models.DecimalField(
+    electricity_returned_1_price = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=11,
         decimal_places=6,
         default=0,
@@ -56,7 +56,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         verbose_name=_("Tariff 1 returned price (€/kWh)"),
         help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
-    electricity_returned_2_price = models.DecimalField(
+    electricity_returned_2_price = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=11,
         decimal_places=6,
         default=0,
@@ -64,7 +64,7 @@ class EnergySupplierPrice(ModelUpdateMixin, models.Model):
         verbose_name=_("Tariff 2 returned price (€/kWh)"),
         help_text=_("Set to zero when: Unused / Defined in other contract / Not applicable to your situation"),
     )
-    fixed_daily_cost = models.DecimalField(
+    fixed_daily_cost = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=11,
         decimal_places=6,
         default=0,

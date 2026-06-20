@@ -10,7 +10,7 @@ from dsmr_api.models import APISettings
 class APIv2TestCase(TestCase):
     NAMESPACE = "api-v2"
 
-    client = None
+    client = None  # type: ignore[assignment]
     api_settings = None
 
     def setUp(self):

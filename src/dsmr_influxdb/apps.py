@@ -69,6 +69,6 @@ def check_influxdb_measurements_queue(**kwargs) -> Optional[MonitoringStatusIssu
 
     return MonitoringStatusIssue(
         __name__,
-        _("Too many outgoing InfluxDB measurements queued for transit"),
+        _("Too many outgoing InfluxDB measurements queued for transit"),  # type: ignore[arg-type]
         InfluxdbMeasurement.objects.all().order_by("time")[0].time,
     )

@@ -10,7 +10,7 @@ class MinderGasSettings(ModelUpdateMixin, SingletonModel):
 
     API_URL = "https://www.mindergas.nl/api/meter_readings"
 
-    export = models.BooleanField(
+    export = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Export data to MinderGas"),
         help_text=_(
@@ -18,7 +18,7 @@ class MinderGasSettings(ModelUpdateMixin, SingletonModel):
             "DSMR-reader transmits the last reading of the previous day to your account."
         ),
     )
-    auth_token = models.CharField(
+    auth_token = models.CharField(  # type: ignore[var-annotated]
         max_length=64,
         null=True,
         blank=True,

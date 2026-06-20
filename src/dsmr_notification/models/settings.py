@@ -22,7 +22,7 @@ class NotificationSetting(SingletonModel):
         (NOTIFICATION_TELEGRAM, _("Telegram")),
     )
 
-    notification_service = models.CharField(
+    notification_service = models.CharField(  # type: ignore[var-annotated]
         max_length=20,
         null=True,
         blank=True,
@@ -31,14 +31,14 @@ class NotificationSetting(SingletonModel):
         verbose_name=_("Notification service"),
         help_text=_("Which notification service to use for sending daily usage notifications"),
     )
-    prowl_api_key = models.CharField(
+    prowl_api_key = models.CharField(  # type: ignore[var-annotated]
         max_length=64,
         null=True,
         blank=True,
         default=None,
         verbose_name=_("API key"),
     )
-    pushover_api_key = models.CharField(
+    pushover_api_key = models.CharField(  # type: ignore[var-annotated]
         max_length=64,
         null=True,
         blank=True,
@@ -46,14 +46,14 @@ class NotificationSetting(SingletonModel):
         verbose_name=_("API key"),
         help_text=_("The API key of your Pushover Application"),
     )
-    pushover_user_key = models.CharField(
+    pushover_user_key = models.CharField(  # type: ignore[var-annotated]
         max_length=64,
         null=True,
         blank=True,
         default=None,
         help_text=_("Your User Key displayed in your Pushover dashboard"),
     )
-    telegram_api_key = models.CharField(
+    telegram_api_key = models.CharField(  # type: ignore[var-annotated]
         max_length=64,
         null=True,
         blank=True,
@@ -62,14 +62,14 @@ class NotificationSetting(SingletonModel):
             "Your Telegram bot token. The token looks something like 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
         ),
     )
-    telegram_chat_id = models.CharField(
+    telegram_chat_id = models.CharField(  # type: ignore[var-annotated]
         max_length=64,
         null=True,
         blank=True,
         default=None,
         help_text=_('Identifier for the target chat ID, or @handle of a channel (without the "@")'),
     )
-    next_notification = models.DateTimeField(
+    next_notification = models.DateTimeField(  # type: ignore[var-annotated]
         default=None,
         null=True,
         blank=True,
@@ -88,7 +88,7 @@ class NotificationSetting(SingletonModel):
 class StatusNotificationSetting(SingletonModel):
     """Periodic check of the application status at regular intervals. Notifies when something is a miss."""
 
-    next_check = models.DateTimeField(
+    next_check = models.DateTimeField(  # type: ignore[var-annotated]
         default=None,
         null=True,
         blank=True,

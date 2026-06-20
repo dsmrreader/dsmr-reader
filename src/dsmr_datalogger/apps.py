@@ -1,4 +1,5 @@
 from typing import Optional
+from datetime import timedelta
 
 from django.apps import AppConfig
 from django.conf import settings
@@ -22,14 +23,18 @@ def check_recent_readings(**kwargs) -> Optional[MonitoringStatusIssue]:
     try:
         latest_reading = DsmrReading.objects.all().order_by("-timestamp")[0]
     except (DsmrReading.DoesNotExist, IndexError):
-        return MonitoringStatusIssue(__name__, _("Waiting for the first reading ever"), timezone.now())
+        return MonitoringStatusIssue(
+            __name__, _("Waiting for the first reading ever"), timezone.now()  # type: ignore[arg-type]
+        )
 
-    max_slack = timezone.now() - timezone.timedelta(minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES)
+    max_slack = timezone.now() - timedelta(minutes=settings.DSMRREADER_STATUS_READING_OFFSET_MINUTES)
 
     if latest_reading.timestamp > max_slack:
         return None
 
-    return MonitoringStatusIssue(__name__, _("No recent readings received"), latest_reading.timestamp)
+    return MonitoringStatusIssue(
+        __name__, _("No recent readings received"), latest_reading.timestamp  # type: ignore[arg-type]
+    )
 
 
 @receiver(request_status)

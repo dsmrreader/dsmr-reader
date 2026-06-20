@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from datetime import timedelta
 
 from dsmr_backend.mixins import ModelUpdateMixin
 
@@ -9,40 +10,40 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class ElectricityConsumption(ModelUpdateMixin, models.Model):
     """Point in time of electricity consumption (usage), extracted from reading(s)."""
 
-    read_at = models.DateTimeField(unique=True)
-    delivered_1 = models.DecimalField(
+    read_at = models.DateTimeField(unique=True)  # type: ignore[var-annotated]
+    delivered_1 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         help_text=_("Meter Reading electricity delivered to client (Dutch users: low tariff) in 0,001 kWh"),
     )
-    returned_1 = models.DecimalField(
+    returned_1 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         help_text=_("Meter Reading electricity delivered by client (Dutch users: low tariff) in 0,001 kWh"),
     )
-    delivered_2 = models.DecimalField(
+    delivered_2 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         help_text=_("Meter Reading electricity delivered to client (normal tariff) in 0,001 kWh"),
     )
-    returned_2 = models.DecimalField(
+    returned_2 = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         help_text=_("Meter Reading electricity delivered by client (normal tariff) in 0,001 kWh"),
     )
-    currently_delivered = models.DecimalField(
+    currently_delivered = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         help_text=_("Actual electricity power delivered (+P) in 1 Watt resolution"),
         db_index=True,
     )
-    currently_returned = models.DecimalField(
+    currently_returned = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         help_text=_("Actual electricity power received (-P) in 1 Watt resolution"),
         db_index=True,
     )
-    phase_currently_delivered_l1 = models.DecimalField(
+    phase_currently_delivered_l1 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=9,
@@ -50,7 +51,7 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         help_text=_("Instantaneous active power L1 (+P) in W resolution"),
         db_index=True,
     )
-    phase_currently_delivered_l2 = models.DecimalField(
+    phase_currently_delivered_l2 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=9,
@@ -58,7 +59,7 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         help_text=_("Instantaneous active power L2 (+P) in W resolution"),
         db_index=True,
     )
-    phase_currently_delivered_l3 = models.DecimalField(
+    phase_currently_delivered_l3 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=9,
@@ -66,28 +67,28 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         help_text=_("Instantaneous active power L3 (+P) in W resolution"),
         db_index=True,
     )
-    phase_currently_returned_l1 = models.DecimalField(
+    phase_currently_returned_l1 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=9,
         decimal_places=3,
         help_text=_("Instantaneous active power L1 (-P) in W resolution"),
     )
-    phase_currently_returned_l2 = models.DecimalField(
+    phase_currently_returned_l2 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=9,
         decimal_places=3,
         help_text=_("Instantaneous active power L2 (-P) in W resolution"),
     )
-    phase_currently_returned_l3 = models.DecimalField(
+    phase_currently_returned_l3 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=9,
         decimal_places=3,
         help_text=_("Instantaneous active power L3 (-P) in W resolution"),
     )
-    phase_voltage_l1 = models.DecimalField(
+    phase_voltage_l1 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=4,
@@ -95,7 +96,7 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         help_text=_("Current voltage for phase L1 (in V)"),
         db_index=True,
     )
-    phase_voltage_l2 = models.DecimalField(
+    phase_voltage_l2 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=4,
@@ -103,7 +104,7 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         help_text=_("Current voltage for phase L2 (in V)"),
         db_index=True,
     )
-    phase_voltage_l3 = models.DecimalField(
+    phase_voltage_l3 = models.DecimalField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         max_digits=4,
@@ -111,20 +112,20 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
         help_text=_("Current voltage for phase L3 (in V)"),
         db_index=True,
     )
-    phase_power_current_l1 = models.IntegerField(
+    phase_power_current_l1 = models.IntegerField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         validators=[MinValueValidator(0), MaxValueValidator(999)],
         help_text=_("Power/current for phase L1 (in A)"),
         db_index=True,
     )
-    phase_power_current_l2 = models.IntegerField(
+    phase_power_current_l2 = models.IntegerField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         validators=[MinValueValidator(0), MaxValueValidator(999)],
         help_text=_("Power/current for phase L2 (in A)"),
     )
-    phase_power_current_l3 = models.IntegerField(
+    phase_power_current_l3 = models.IntegerField(  # type: ignore[var-annotated]
         null=True,
         default=None,
         validators=[MinValueValidator(0), MaxValueValidator(999)],
@@ -156,10 +157,12 @@ class ElectricityConsumption(ModelUpdateMixin, models.Model):
 class GasConsumption(ModelUpdateMixin, models.Model):
     """Interpolated gas reading, containing the actual usage, based on the reading before (if any)."""
 
-    read_at = models.DateTimeField(unique=True)
-    delivered = models.DecimalField(max_digits=9, decimal_places=3, help_text=_("Last meter position read"))
+    read_at = models.DateTimeField(unique=True)  # type: ignore[var-annotated]
+    delivered = models.DecimalField(  # type: ignore[var-annotated]
+        max_digits=9, decimal_places=3, help_text=_("Last meter position read")
+    )
     # This value is not provided by DSMR so we calculate the difference relative to the previous reading.
-    currently_delivered = models.DecimalField(
+    currently_delivered = models.DecimalField(  # type: ignore[var-annotated]
         max_digits=9,
         decimal_places=3,
         help_text=_("Delivered value, based on the previous reading"),
@@ -181,16 +184,16 @@ class GasConsumption(ModelUpdateMixin, models.Model):
 class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
     """Average consumption calculated over a ~15 minute period."""
 
-    read_at_start = models.DateTimeField(
+    read_at_start = models.DateTimeField(  # type: ignore[var-annotated]
         db_index=True,
         verbose_name=_("Start"),
         help_text=_("The timestamp of the first reading used for average calculation"),
     )
-    read_at_end = models.DateTimeField(
+    read_at_end = models.DateTimeField(  # type: ignore[var-annotated]
         verbose_name=_("End"),
         help_text=_("The timestamp of the last reading used for average calculation"),
     )
-    average_delivered = models.DecimalField(
+    average_delivered = models.DecimalField(  # type: ignore[var-annotated]
         db_index=True,  # Possibly eases sorting or future analytics
         max_digits=9,
         decimal_places=3,
@@ -201,7 +204,7 @@ class QuarterHourPeakElectricityConsumption(ModelUpdateMixin, models.Model):
     )
 
     @property
-    def duration(self) -> timezone.timedelta:
+    def duration(self) -> timedelta:
         """When possible, this is exactly 15 minutes, but usually a few seconds off."""
         return self.read_at_end - self.read_at_start
 

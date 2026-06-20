@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest import mock
 from zoneinfo import ZoneInfo
 
@@ -27,7 +27,7 @@ class TestRetention(TestCase):
 
     def setUp(self):
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION)
-        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+        self.schedule_process.update(active=True, planned=timezone.make_aware(datetime(2000, 1, 1)))
 
         RetentionSettings.get_solo()
         RetentionSettings.objects.update(data_retention_in_hours=None)  # Legacy tests: This used to be the default.
@@ -37,7 +37,7 @@ class TestRetention(TestCase):
 
     @mock.patch("django.utils.timezone.now")
     def test_disabled(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
+        now_mock.return_value = timezone.make_aware(datetime(2016, 12, 25))
 
         dsmr_datalogger.services.retention.run(self.schedule_process)
 
@@ -51,7 +51,7 @@ class TestRetention(TestCase):
 
     @mock.patch("django.utils.timezone.now")
     def test_enabled_with_cleanup(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
+        now_mock.return_value = timezone.make_aware(datetime(2016, 12, 25))
 
         # Retention active, but point of retention not yet passed.
         RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_YEAR)
@@ -85,11 +85,11 @@ class TestRetention(TestCase):
 
         # Batch was not saturated, so the process should be delayed (no more data expected imminently).
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12))
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timedelta(hours=12))
 
     @mock.patch("django.utils.timezone.now")
     def test_enabled_no_cleanup(self, now_mock):
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
+        now_mock.return_value = timezone.make_aware(datetime(2016, 12, 25))
 
         # Clean.
         RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_WEEK)
@@ -104,7 +104,7 @@ class TestRetention(TestCase):
 
         # Should be delayed for a few hours now, nothing to do.
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12))
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timedelta(hours=12))
 
 
 class TestRetentionCache(TestCase):
@@ -116,7 +116,7 @@ class TestRetentionCache(TestCase):
 
     def setUp(self):
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION)
-        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+        self.schedule_process.update(active=True, planned=timezone.make_aware(datetime(2000, 1, 1)))
         RetentionSettings.get_solo()
         RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_WEEK)
 
@@ -124,7 +124,7 @@ class TestRetentionCache(TestCase):
     @mock.patch("django.utils.timezone.now")
     def test_saturated_batch_sets_cache_and_does_not_delay(self, now_mock):
         """A saturated batch stores a lower bound in the cache and does not delay the process."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
+        now_mock.return_value = timezone.make_aware(datetime(2016, 12, 25))
 
         dsmr_datalogger.services.retention.run(self.schedule_process)
 
@@ -133,13 +133,13 @@ class TestRetentionCache(TestCase):
 
         # Process must not be delayed when the batch was saturated.
         self.schedule_process.refresh_from_db()
-        self.assertNotEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12))
+        self.assertNotEqual(self.schedule_process.planned, timezone.now() + timedelta(hours=12))
 
     @override_settings(CACHES=_LOCMEM_CACHE)
     @mock.patch("django.utils.timezone.now")
     def test_cache_lower_bound_filters_already_processed(self, now_mock):
         """A pre-seeded lower bound causes the query to skip hours already processed."""
-        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 12, 25))
+        now_mock.return_value = timezone.make_aware(datetime(2016, 12, 25))
 
         # Set a lower bound beyond the retention cutoff — combined with timestamp__lt=retention_date
         # this makes the query unsatisfiable, so nothing is found.
@@ -160,7 +160,7 @@ class TestRetentionCache(TestCase):
 
         # Process delayed since there was nothing to clean.
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12))
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timedelta(hours=12))
 
     @override_settings(CACHES=_LOCMEM_CACHE)
     def test_clear_cache(self):
@@ -205,7 +205,7 @@ class TestRetentionDSTFallBack(TestCase):
 
     def setUp(self) -> None:
         self.schedule_process = ScheduledProcess.objects.get(module=settings.DSMRREADER_MODULE_RETENTION_DATA_ROTATION)
-        self.schedule_process.update(active=True, planned=timezone.make_aware(timezone.datetime(2000, 1, 1)))
+        self.schedule_process.update(active=True, planned=timezone.make_aware(datetime(2000, 1, 1)))
         RetentionSettings.get_solo()
         RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_WEEK)
 
@@ -266,7 +266,7 @@ class TestRetentionDSTFallBack(TestCase):
         dsmr_datalogger.services.retention.run(self.schedule_process)
         self.assertEqual(DsmrReading.objects.count(), 4)
         self.schedule_process.refresh_from_db()
-        self.assertEqual(self.schedule_process.planned, timezone.now() + timezone.timedelta(hours=12))
+        self.assertEqual(self.schedule_process.planned, timezone.now() + timedelta(hours=12))
 
     @mock.patch("django.utils.timezone.now")
     def test_trunchour_uses_explicit_utc(self, now_mock: mock.MagicMock) -> None:

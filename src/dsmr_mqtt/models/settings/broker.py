@@ -35,25 +35,25 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         (QOS_2, "QoS 2 - Exactly once"),
     )
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether the MQTT integration is enabled."),
     )
-    hostname = models.CharField(
+    hostname = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         blank=True,
         default="localhost",
         verbose_name=_("Hostname"),
         help_text=_("The hostname of the broker to send MQTT messages to."),
     )
-    port = models.IntegerField(
+    port = models.IntegerField(  # type: ignore[var-annotated]
         null=True,
         default=1883,
         verbose_name=_("Port"),
         help_text=_("MQTT: 1883 - MQTTS: 8883"),
     )
-    secure = models.IntegerField(
+    secure = models.IntegerField(  # type: ignore[var-annotated]
         default=INSECURE,
         choices=SECURE_CHOICES,
         verbose_name=_("Secure (SSL/TLS)"),
@@ -63,7 +63,7 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
             "Make sure to use the appropriate MQTT(S) port as well."
         ),
     )
-    username = models.CharField(
+    username = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         null=True,
         blank=True,
@@ -71,7 +71,7 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Username"),
         help_text=_("Optional: The username required for authentication (if any)."),
     )
-    password = models.CharField(
+    password = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         null=True,
         blank=True,
@@ -79,13 +79,13 @@ class MQTTBrokerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Password"),
         help_text=_("Optional: The password required for authentication (if any)."),
     )
-    client_id = models.CharField(
+    client_id = models.CharField(  # type: ignore[var-annotated]
         max_length=256,
         default="DSMR-reader",
         verbose_name=_("Client ID"),
         help_text=_("The client ID used to identify DSMR-reader sending the MQTT messages."),
     )
-    restart_required = models.BooleanField(
+    restart_required = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Restart required"),
         help_text=_("Whether the process requires a restart, forcing the client-broker connection to be reset."),

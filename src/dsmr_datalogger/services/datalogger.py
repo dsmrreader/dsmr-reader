@@ -1,5 +1,6 @@
 import logging
 from typing import Dict, Iterator, Optional
+from datetime import datetime, timedelta
 
 from django.db.models.expressions import F
 from django.utils import timezone
@@ -112,7 +113,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
             model_fields[target_field] = obis_data.value
 
     # Defaults for telegrams with missing data.
-    model_fields["timestamp"] = model_fields["timestamp"] or timezone.now()
+    model_fields["timestamp"] = model_fields["timestamp"] or timezone.now()  # type: ignore[assignment]
     model_fields["electricity_delivered_2"] = model_fields["electricity_delivered_2"] or 0  # type:ignore[assignment]
     model_fields["electricity_returned_2"] = model_fields["electricity_returned_2"] or 0  # type:ignore[assignment]
 
@@ -125,7 +126,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
         now = timezone.now()
 
         logger.debug("WARNING: Overriding telegram timestamps due to configuration")
-        model_fields["timestamp"] = now
+        model_fields["timestamp"] = now  # type: ignore[assignment]
 
         if model_fields["extra_device_timestamp"] is not None:
             # WARNING: So None (v2, v3, Fluvius) default to v4 behaviour.
@@ -134,9 +135,9 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
             model_fields["extra_device_timestamp"] = calculate_fake_gas_reading_timestamp(now=now, is_dsmr_v5=is_v5)
 
     # Fix for rare smart meters with a timestamp in the far future. We should disallow that.
-    discard_after = timezone.now() + timezone.timedelta(hours=24)
+    discard_after = timezone.now() + timedelta(hours=24)
 
-    if model_fields["timestamp"] > discard_after or (
+    if model_fields["timestamp"] > discard_after or (  # type: ignore[operator]
         model_fields["extra_device_timestamp"] is not None and model_fields["extra_device_timestamp"] > discard_after
     ):
         error_message = "Discarded telegram with future timestamp(s): {} / {}".format(
@@ -250,7 +251,7 @@ def postgresql_approximate_reading_count() -> Optional[int]:  # pragma: nocover
         return int(reading_count)
 
 
-def calculate_fake_gas_reading_timestamp(now: timezone.datetime, is_dsmr_v5: bool) -> timezone.datetime:
+def calculate_fake_gas_reading_timestamp(now: datetime, is_dsmr_v5: bool) -> datetime:
     """When overriding time, we cannot fake each gas reading to have its own timestamp. Simulate meters instead."""
     now = now.replace(second=0, microsecond=0)
 

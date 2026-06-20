@@ -11,12 +11,14 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class MeterStatistics(ModelUpdateMixin, SingletonModel):
     """Meter statistics, but only exists as a single record, containing the latest data."""
 
-    timestamp = models.DateTimeField(
+    timestamp = models.DateTimeField(  # type: ignore[var-annotated]
         help_text=_("Timestamp indicating when the reading was taken"),
         default=timezone.now,
     )
-    dsmr_version = models.CharField(help_text=_("DSMR version"), max_length=2, null=True, default=None)
-    electricity_tariff = models.IntegerField(
+    dsmr_version = models.CharField(  # type: ignore[var-annotated]
+        help_text=_("DSMR version"), max_length=2, null=True, default=None
+    )
+    electricity_tariff = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_(
             "Tariff indicator electricity. The tariff indicator can be used to switch tariff  "
             "dependent loads e.g boilers. This is responsibility of the P1 user."
@@ -24,45 +26,45 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
         null=True,
         default=None,
     )
-    power_failure_count = models.IntegerField(
+    power_failure_count = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of power failures in any phase"), null=True, default=None
     )
-    long_power_failure_count = models.IntegerField(
+    long_power_failure_count = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of long power failures in any phase"),
         null=True,
         default=None,
     )
-    voltage_sag_count_l1 = models.IntegerField(
+    voltage_sag_count_l1 = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of voltage sags/dips in phase L1"), null=True, default=None
     )
-    voltage_sag_count_l2 = models.IntegerField(
+    voltage_sag_count_l2 = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of voltage sags/dips in phase L2 (polyphase meters only)"),
         null=True,
         default=None,
     )
-    voltage_sag_count_l3 = models.IntegerField(
+    voltage_sag_count_l3 = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of voltage sags/dips in phase L3 (polyphase meters only)"),
         null=True,
         default=None,
     )
-    voltage_swell_count_l1 = models.IntegerField(
+    voltage_swell_count_l1 = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of voltage swells in phase L1"), null=True, default=None
     )
-    voltage_swell_count_l2 = models.IntegerField(
+    voltage_swell_count_l2 = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of voltage swells in phase L2 (polyphase meters only)"),
         null=True,
         default=None,
     )
-    voltage_swell_count_l3 = models.IntegerField(
+    voltage_swell_count_l3 = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of voltage swells in phase L3 (polyphase meters only)"),
         null=True,
         default=None,
     )
-    rejected_telegrams = models.IntegerField(
+    rejected_telegrams = models.IntegerField(  # type: ignore[var-annotated]
         help_text=_("Number of rejected telegrams due to invalid CRC checksum"),
         default=0,
     )
-    latest_telegram = models.TextField(
+    latest_telegram = models.TextField(  # type: ignore[var-annotated]
         help_text=_(
             "The latest telegram successfully read. Please note that only "
             "the latest telegram is saved here and will be overwritten each time."
@@ -81,18 +83,18 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
 
 
 class MeterStatisticsChange(models.Model):
-    created_at = models.DateTimeField(
+    created_at = models.DateTimeField(  # type: ignore[var-annotated]
         verbose_name=_("Created at"),
         help_text=_("Timestamp indicating when the change was logged"),
         auto_now_add=True,
     )
-    field = models.CharField(
+    field = models.CharField(  # type: ignore[var-annotated]
         verbose_name=_("Field"),
         help_text=_("The name of the statistics field that changed"),
         max_length=64,
     )
-    old_value = models.CharField(verbose_name=_("Old value"), max_length=32)
-    new_value = models.CharField(verbose_name=_("New value"), max_length=32)
+    old_value = models.CharField(verbose_name=_("Old value"), max_length=32)  # type: ignore[var-annotated]
+    new_value = models.CharField(verbose_name=_("New value"), max_length=32)  # type: ignore[var-annotated]
 
     class Meta:
         default_permissions: tuple[str, ...] = tuple()

@@ -37,8 +37,8 @@ def run(scheduled_process: ScheduledProcess) -> None:
     dsmr_backend.services.email.send(
         email_from=email_settings.email_from,
         email_to=email_settings.email_to,
-        subject=subject,
-        body=body,
+        subject=subject,  # type: ignore[arg-type]
+        body=body,  # type: ignore[arg-type]
         attachment=backup_file,
     )
 

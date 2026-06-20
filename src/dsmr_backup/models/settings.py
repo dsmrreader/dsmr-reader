@@ -11,14 +11,14 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class BackupSettings(ModelUpdateMixin, SingletonModel):
     """Generic backup settings."""
 
-    daily_backup = models.BooleanField(
+    daily_backup = models.BooleanField(  # type: ignore[var-annotated]
         default=True,
         verbose_name=_("Enable backup"),
         help_text=_(
             "Create a backup of your data. Stored locally. Can be exported using Dropbox (or a custom off disk sync)."
         ),
     )
-    backup_time = models.TimeField(
+    backup_time = models.TimeField(  # type: ignore[var-annotated]
         default=time(hour=2),
         verbose_name=_("Backup timestamp"),
         help_text=_(
@@ -26,13 +26,13 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
             "might freeze or lock the application shortly during backup creation."
         ),
     )
-    backup_interval_in_days = models.IntegerField(
+    backup_interval_in_days = models.IntegerField(  # type: ignore[var-annotated]
         default=1,
         validators=[MinValueValidator(1), MaxValueValidator(7)],
         verbose_name=_("Backup interval in days"),
         help_text=_("The minimal interval between backups. Defaults to daily."),
     )
-    folder = models.CharField(
+    folder = models.CharField(  # type: ignore[var-annotated]
         max_length=512,
         default="backups/",
         verbose_name=_("Backup storage folder"),
@@ -42,7 +42,7 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
             'Please make sure that the "dsmr" user has both read and write access to the folder.'
         ),
     )
-    file_name = models.CharField(
+    file_name = models.CharField(  # type: ignore[var-annotated]
         max_length=96,
         default="{prefix}-{database_vendor}-{backup_type}-{day_name}",
         verbose_name=_("Backup file name"),
@@ -53,7 +53,7 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
             'distinguish backup types. Defaults to "{prefix}-{database_vendor}-{backup_type}-{day_name}".'
         ),
     )
-    compression_level = models.IntegerField(
+    compression_level = models.IntegerField(  # type: ignore[var-annotated]
         default=1,
         validators=[MinValueValidator(1), MaxValueValidator(9)],
         verbose_name=_("Compression level"),
@@ -71,7 +71,7 @@ class BackupSettings(ModelUpdateMixin, SingletonModel):
 class DropboxSettings(ModelUpdateMixin, SingletonModel):
     """Dropbox backup upload settings."""
 
-    one_time_authorization_code = models.CharField(
+    one_time_authorization_code = models.CharField(  # type: ignore[var-annotated]
         max_length=255,
         default=None,
         null=True,
@@ -79,13 +79,13 @@ class DropboxSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Access Code by Dropbox"),
         help_text=_("Enter the one-time Access Code here that Dropbox generates for you after authorizing DSMR-reader"),
     )
-    serialized_auth_flow = models.BinaryField(
+    serialized_auth_flow = models.BinaryField(  # type: ignore[var-annotated]
         default=None,
         null=True,
         blank=True,
         help_text=_("Automatically managed by DSMR-reader - Only used once during authorization set up"),
     )
-    refresh_token = models.CharField(
+    refresh_token = models.CharField(  # type: ignore[var-annotated]
         max_length=255,
         default=None,
         null=True,
@@ -118,7 +118,7 @@ class EmailBackupSettings(ModelUpdateMixin, SingletonModel):
         (INTERVAL_BIWEEKLY, _("Every two weeks")),
         (INTERVAL_MONTHLY, _("Every four weeks")),
     )
-    interval = models.IntegerField(
+    interval = models.IntegerField(  # type: ignore[var-annotated]
         null=True,
         blank=True,
         default=INTERVAL_NONE,

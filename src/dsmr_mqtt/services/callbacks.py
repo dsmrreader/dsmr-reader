@@ -3,6 +3,7 @@ import json
 from typing import Dict
 
 from django.core import serializers
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import timezone
 
 from dsmr_datalogger.models.reading import DsmrReading
@@ -228,7 +229,7 @@ def publish_json_data(topic: str, mapping_format: str, data_source) -> None:
         config_key = json_mapping[k]
         json_dict[config_key] = v
 
-    json_data = json.dumps(json_dict, cls=serializers.json.DjangoJSONEncoder)
+    json_data = json.dumps(json_dict, cls=DjangoJSONEncoder)
     dsmr_mqtt.services.messages.queue_message(topic=topic, payload=json_data)
 
 

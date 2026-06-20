@@ -8,12 +8,12 @@ from dsmr_backend.mixins import ModelUpdateMixin
 class SplitTopicMeterStatisticsMQTTSettings(ModelUpdateMixin, SingletonModel):
     """MQTT splitted meter statistics per field, mapped to topics."""
 
-    enabled = models.BooleanField(
+    enabled = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Enabled"),
         help_text=_("Whether meter statistics are sent to the broker, having each field sent to a different topic."),
     )
-    formatting = models.TextField(
+    formatting = models.TextField(  # type: ignore[var-annotated]
         default="""
 [mapping]
 # DATA = TOPIC PATH

@@ -41,14 +41,14 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         (DSMR_EXTRA_DEVICE_CHANNEL_4, _("Belgium - Fluvius (channel 4)")),
     )
 
-    input_method = models.CharField(
+    input_method = models.CharField(  # type: ignore[var-annotated]
         max_length=16,
         default=INPUT_METHOD_SERIAL,
         choices=INPUT_METHODS,
         verbose_name=_("Input method"),
         help_text=_("Whether to read telegrams from a serial port or network socket."),
     )
-    dsmr_version = models.IntegerField(
+    dsmr_version = models.IntegerField(  # type: ignore[var-annotated]
         default=DSMR_VERSION_4_PLUS,
         choices=DSMR_VERSION_CHOICES,
         verbose_name=_("DSMR version/vendor"),
@@ -56,7 +56,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
             "The DSMR version your meter supports or the vendor related to it. Version should be printed on meter."
         ),
     )
-    dsmr_extra_device_channel = models.IntegerField(
+    dsmr_extra_device_channel = models.IntegerField(  # type: ignore[var-annotated]
         default=None,
         blank=True,
         null=True,
@@ -66,7 +66,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
             "Only use when your extra device is read incorrectly (e.g. gas). Also, only works with specific vendor(s)."
         ),
     )
-    serial_port = models.CharField(
+    serial_port = models.CharField(  # type: ignore[var-annotated]
         max_length=196,
         default="/dev/ttyUSB0",
         blank=True,
@@ -74,7 +74,7 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Serial port"),
         help_text=_("For serial input: Serial port connected to smartmeter. E.g.: /dev/ttyUSB0"),
     )
-    network_socket_address = models.CharField(
+    network_socket_address = models.CharField(  # type: ignore[var-annotated]
         max_length=196,
         default=None,
         blank=True,
@@ -82,13 +82,13 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
         verbose_name=_("Network socket address"),
         help_text=_("For network input: IP address or hostname of the network device connected to smartmeter."),
     )
-    network_socket_port = models.IntegerField(
+    network_socket_port = models.IntegerField(  # type: ignore[var-annotated]
         default=23,
         validators=[MinValueValidator(1), MaxValueValidator(65535)],
         verbose_name=_("Network socket port"),
         help_text=_("For network input: Port of the network device connected to smartmeter."),
     )
-    process_sleep = models.DecimalField(
+    process_sleep = models.DecimalField(  # type: ignore[var-annotated]
         default=5.0,
         max_digits=3,
         decimal_places=1,
@@ -99,12 +99,12 @@ class DataloggerSettings(ModelUpdateMixin, SingletonModel):
             "datalogger excluded). The recommended value is 5 seconds or higher and does not affect daily totals!"
         ),
     )
-    restart_required = models.BooleanField(
+    restart_required = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Process restart required"),
         help_text=_("Whether the datalogger process requires a restart. It should occur automatically."),
     )
-    override_telegram_timestamp = models.BooleanField(
+    override_telegram_timestamp = models.BooleanField(  # type: ignore[var-annotated]
         default=False,
         verbose_name=_("Override telegram timestamp"),
         help_text=_(
@@ -156,7 +156,7 @@ class RetentionSettings(ModelUpdateMixin, SingletonModel):
         (RETENTION_YEAR, _("Clean up most source data after one year")),
     )
 
-    data_retention_in_hours = models.IntegerField(
+    data_retention_in_hours = models.IntegerField(  # type: ignore[var-annotated]
         blank=True,
         null=True,
         default=RETENTION_MONTH,

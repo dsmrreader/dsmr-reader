@@ -21,7 +21,7 @@ class ConsumptionSettings(ModelUpdateMixin, SingletonModel):
         (GAS_GROUPING_BY_HOUR, _("Force grouping by hour")),
     )
 
-    electricity_grouping_type = models.IntegerField(
+    electricity_grouping_type = models.IntegerField(  # type: ignore[var-annotated]
         choices=ELECTRICITY_GROUPING_CHOICES,
         default=ELECTRICITY_GROUPING_BY_MINUTE,
         verbose_name=_("Electricity grouping type"),
@@ -29,7 +29,7 @@ class ConsumptionSettings(ModelUpdateMixin, SingletonModel):
             "Electricity readings are read every X seconds, depending on your meter. We can group these for you."
         ),
     )
-    gas_grouping_type = models.IntegerField(
+    gas_grouping_type = models.IntegerField(  # type: ignore[var-annotated]
         choices=GAS_GROUPING_CHOICES,
         default=GAS_GROUPING_BY_CHANGE,
         verbose_name=_("Gas grouping type"),

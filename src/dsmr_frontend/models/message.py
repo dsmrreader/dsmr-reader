@@ -14,9 +14,11 @@ class Notification(ModelUpdateMixin, models.Model):
 
     objects = NotificationManager()
 
-    message = models.TextField()
-    redirect_to = models.CharField(max_length=64, null=True, blank=True, default=None)  # = a Django reverse URL!
-    read = models.BooleanField(default=False)
+    message = models.TextField()  # type: ignore[var-annotated]
+    redirect_to = models.CharField(  # type: ignore[var-annotated]  # = a Django reverse URL!
+        max_length=64, null=True, blank=True, default=None
+    )
+    read = models.BooleanField(default=False)  # type: ignore[var-annotated]
 
     class Meta:
         default_permissions = ("delete",)  # Do allow deletion.
