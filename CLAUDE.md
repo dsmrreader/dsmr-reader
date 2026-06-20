@@ -11,3 +11,7 @@ git -C /app commit -m "..."
 ```
 
 File paths shown in `git -C /app status` are relative to `/app` (e.g. `src/.claude/settings.local.json`).
+
+## Changelog
+
+Entries must be short and non-technical. State what changed for the user, not how. No implementation details, no code references, no elaboration.

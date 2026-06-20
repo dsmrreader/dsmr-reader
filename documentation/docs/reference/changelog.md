@@ -9,6 +9,26 @@
 ---
 
 
+## v6.1.1 - June 2026
+
+<small>*Patch release: Buienradar API compatibility fix and dark mode UI improvements.*</small>
+
+!!! abstract "Fixes and improvements"
+
+    #### Weather
+    - Fixed Buienradar integration broken by an upstream API response format change - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
+
+    #### UI
+    - Fixed badge colors in dark mode — `bg-*` badge classes now render with muted variants to reduce harsh contrast against dark panels
+    - Fixed dark mode weekday header color in the compare page
+    - Fixed empty green badge rendering in statistics when electricity returned is disabled
+    - Improved decimal badge rendering — integer and decimal parts now use differentiated font sizes and letter spacing
+    - Fixed incorrect Dutch translation of "Electricity (total)" - [#2176](https://github.com/dsmrreader/dsmr-reader/issues/2176)
+
+
+---
+
+
 ## v6.1.0 - May 2026
 
 <small>*Spring cleaning: improved accessibility, rolling 365-day dashboard panel, more reliable data retention and Dropbox sync, and a lighter frontend dependency footprint.*</small>
