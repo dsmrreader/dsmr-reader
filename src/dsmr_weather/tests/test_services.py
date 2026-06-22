@@ -16,10 +16,10 @@ class TestGetBuienradarStations(TestCase):
     def test_ok(self, requests_mock):
         response_mock = mock.MagicMock()
         response_mock.json.return_value = {
-            "Actual": {
-                "WeatherStationMeasurements": [
-                    {"StationId": 6280, "StationName": "Groningen", "Temperature": 12.0},
-                    {"StationId": 6260, "StationName": "De Bilt", "Temperature": 15.0},
+            "actual": {
+                "stationmeasurements": [
+                    {"stationid": 6280, "stationname": "Groningen", "temperature": 12.0},
+                    {"stationid": 6260, "stationname": "De Bilt", "temperature": 15.0},
                 ]
             }
         }
@@ -90,12 +90,12 @@ class TestDsmrWeatherServices(TestCase):
 
         response_mock = mock.MagicMock()
         response_mock.json.return_value = {
-            "Actual": {
-                "WeatherStationMeasurements": [
+            "actual": {
+                "stationmeasurements": [
                     {
-                        "StationId": WeatherSettings.get_solo().buienradar_station,
-                        "GroundTemperature": 123.4,
-                        "Temperature": 567.8,
+                        "stationid": WeatherSettings.get_solo().buienradar_station,
+                        "groundtemperature": 123.4,
+                        "temperature": 567.8,
                     }
                 ]
             }
@@ -138,12 +138,12 @@ class TestDsmrWeatherServices(TestCase):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2017, 1, 1))
         response_mock = mock.MagicMock()
         response_mock.json.return_value = {
-            "Actual": {
-                "WeatherStationMeasurements": [
+            "actual": {
+                "stationmeasurements": [
                     {
-                        "StationId": 0,
-                        "Temperature": 123,
-                        "GroundTemperature": 456,
+                        "stationid": 0,
+                        "temperature": 123,
+                        "groundtemperature": 456,
                     }
                 ]
             }

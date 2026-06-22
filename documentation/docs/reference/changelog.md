@@ -66,6 +66,19 @@
     - Fixed InfluxDB writes failing after meter replacement — counter values starting at `0` were serialised as integers instead of floats, causing a field type conflict that rejected all subsequent writes - [#2174](https://github.com/dsmrreader/dsmr-reader/issues/2174)
     - Bumped minimum Python version to 3.14
 
+
+---
+
+
+## v6.1.2 - June 2026
+
+<small>*Patch release: Buienradar API compatibility fix.*</small>
+
+!!! abstract "Fixes and improvements"
+
+    #### Weather
+    - Fixed Buienradar integration broken **again** by the upstream API reverting to its original response format - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
+
 ---
 
 
