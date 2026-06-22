@@ -29,8 +29,8 @@ def get_buienradar_stations() -> list[tuple[int, str]]:
         response.raise_for_status()
         stations = sorted(
             [
-                (int(s["StationId"]), "Weather station {}".format(s["StationName"]))
-                for s in response.json()["Actual"]["WeatherStationMeasurements"]
+                (int(s["stationid"]), "Weather station {}".format(s["stationname"]))
+                for s in response.json()["actual"]["stationmeasurements"]
             ],
             key=lambda x: x[1],
         )
@@ -74,12 +74,12 @@ def get_temperature_from_api() -> TemperatureReading:
 
     # Find our selected station.
     station_id = WeatherSettings.get_solo().buienradar_station
-    station_data = [x for x in response.json()["Actual"]["WeatherStationMeasurements"] if x["StationId"] == station_id]
+    station_data = [x for x in response.json()["actual"]["stationmeasurements"] if x["stationid"] == station_id]
 
     if not station_data:
         raise RuntimeError("Selected station info not found: {}".format(station_id))
 
-    temperature = station_data[0]["Temperature"]
+    temperature = station_data[0]["temperature"]
     logger.debug("Buienradar: Storing temperature read: %s", temperature)
 
     hour_mark = timezone.now().replace(minute=0, second=0, microsecond=0)
