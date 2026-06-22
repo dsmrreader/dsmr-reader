@@ -9,6 +9,19 @@
 ---
 
 
+## v6.1.2 - June 2026
+
+<small>*Patch release: Buienradar API compatibility fix.*</small>
+
+!!! abstract "Fixes and improvements"
+
+    #### Weather
+    - Fixed Buienradar integration broken **again** by the upstream API reverting to its original response format - [#2148](https://github.com/dsmrreader/dsmr-reader/issues/2148)
+
+
+---
+
+
 ## v6.1.1 - June 2026
 
 <small>*Patch release: Buienradar API compatibility fix and dark mode UI improvements.*</small>
