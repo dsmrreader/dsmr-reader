@@ -23,7 +23,7 @@ jobs:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Build docker image(s)
         run: |
