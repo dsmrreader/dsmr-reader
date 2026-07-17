@@ -12,7 +12,7 @@ on:
 
 jobs:
   main_test:
-    name: 'Python 3.14'
+    name: 'CI Tests'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -22,13 +22,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Build docker image(s)
+      - name: Build and run Python ${{ env.PYTHON_VERSION }} app image
         run: |
           ln -s provisioning/container/compose.test.yml compose.yml
           docker compose build --build-arg PYTHON_VERSION=${{ env.PYTHON_VERSION }}
-
-      - name: Run docker image(s)
-        run: |
           docker compose up -d --remove-orphans
           sleep 5
 
