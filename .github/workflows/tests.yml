@@ -12,13 +12,9 @@ on:
 
 jobs:
   main_test:
-    name: 'Python ${{ matrix.python-version }}'
+    name: 'Python 3.14'
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    strategy:
-      matrix:
-        python-version:
-          - '3.14'
     env:
       # Do not log verbosely
       DSMRREADER_LOGLEVEL: ERROR
@@ -28,7 +24,7 @@ jobs:
       - name: Build docker image(s)
         run: |
           ln -s provisioning/container/compose.test.yml compose.yml
-          docker compose build --build-arg PYTHON_VERSION=${{ matrix.python-version }}
+          docker compose build --build-arg PYTHON_VERSION=3.14
 
       - name: Run docker image(s)
         run: |
