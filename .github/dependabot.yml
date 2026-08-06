@@ -8,17 +8,31 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     groups:
       github-actions:
         patterns:
           - "*"
+        update-types:
+          - "major"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
 
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     groups:
       pip:
         patterns:
           - "*"
+        update-types:
+          - "major"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
