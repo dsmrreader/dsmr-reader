@@ -77,6 +77,23 @@ docker compose exec dev-dsmr-app poetry run black .
 docker compose exec dev-dsmr-app poetry run flake8 -v
 ```
 
+## Managing dependencies
+
+Dependencies are declared in `src/pyproject.toml` (`[project.dependencies]` for runtime, `[dependency-groups.dev]` for development/test tooling).
+Poetry remains the tool actually used to install and run everything (`poetry install`, `poetry run ...`, in containers and CI), but resolving/locking is done with [uv](https://docs.astral.sh/uv/) instead of Poetry's own resolver, since Poetry's resolver can run out of memory when a constraint change forces it to backtrack over a large version range.
+
+To add, remove or update a dependency:
+
+```shell title="shell"
+uv add some-package               # or: uv remove some-package
+uv lock                           # re-resolve and refresh uv.lock
+python scripts/sync_poetry_lock.py  # regenerate poetry.lock from uv.lock
+poetry check                      # optional: confirm Poetry accepts the result
+```
+
+`scripts/sync_poetry_lock.py` writes `poetry.lock` directly from `uv.lock` and never invokes Poetry's resolver, so it's the same low-memory operation regardless of how large the dependency graph gets.
+Commit both `uv.lock` and the regenerated `poetry.lock`.
+
 ## Tests
 ```shell title="shell"
 docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest
