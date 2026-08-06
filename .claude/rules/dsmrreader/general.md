@@ -120,7 +120,7 @@ poetry run flake8                           # 4. Lint
 poetry run pytest -v                        # 5. Test
 ```
 
-All steps must pass before a change is considered complete. **Always run `/quality-check` after making any code changes.**
+All steps must pass before a change is considered complete. **Always run `/dsmrreader:quality-check` after making any code changes.**
 
 ---
 
