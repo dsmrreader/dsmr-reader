@@ -21,14 +21,10 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel">
-                    <h2 class="panel-heading">
-                        {% translate "Search for a topic or setting" %}
-                    </h2>
+                    <h2 class="panel-heading">{% translate "Search for a topic or setting" %}</h2>
                     <div class="panel-body">
                         <div class="search-widget">
-                            <label for="search" class="sr-only">
-                                {% translate "Search for a topic or setting" %}
-                            </label>
+                            <label for="search" class="sr-only">{% translate "Search for a topic or setting" %}</label>
                             <div>
                                 <input id="search"
                                        type="text"
@@ -40,8 +36,7 @@
                                 <a class="btn btn-sm btn-primary" href="{% url 'admin:index' %}"><i class="fas fa-external-link-alt"></i> {% translate "Skip search and go directly to admin" %}</a>
                             </div>
 
-                            <div class="search-results" style="display:none">
-                            </div>
+                            <div class="search-results" style="display:none"></div>
                         </div>
 
                         <small>{% translate "Click a topic below to display a pop-up with more details to choose from." %}</small>

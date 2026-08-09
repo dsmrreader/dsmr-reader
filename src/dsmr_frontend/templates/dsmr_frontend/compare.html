@@ -28,16 +28,12 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel datepicker-panel" style="min-height: 0px">
-                        <h2 class="panel-heading centered-header">
-                            {% blocktranslate %}Data selection{% endblocktranslate %}
-                        </h2>
+                        <h2 class="panel-heading centered-header">{% blocktranslate %}Data selection{% endblocktranslate %}</h2>
                         <div class="panel-body archive-header-panel-body" style="min-height: 0px">
                             <div class="row">
                                 <div class="col-lg-push-4 col-lg-4">
                                     <div class="center-block centered-header">
-                                        <div class="italic">
-                                            {% blocktranslate %}Select level of detail.{% endblocktranslate %}
-                                        </div>
+                                        <div class="italic">{% blocktranslate %}Select level of detail.{% endblocktranslate %}</div>
 
                                         <span class="datepicker-level-icon">
                                             <span class="center-block datepicker-level-name">{% translate "Days" %}</span>
@@ -83,17 +79,12 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="panel datepicker-panel">
-                        <h2 class="panel-heading centered-header">
-                            {% blocktranslate %}Compare from{% endblocktranslate %}
-                        </h2>
+                        <h2 class="panel-heading centered-header">{% blocktranslate %}Compare from{% endblocktranslate %}</h2>
                         <div class="panel-body">
                             <div class="row center-block centered-header datepicker-calendar-block">
-                                <div id="datepicker1-day" style="display:none;">
-                                </div>
-                                <div id="datepicker1-month" style="display:none;">
-                                </div>
-                                <div id="datepicker1-year" style="display:none;">
-                                </div>
+                                <div id="datepicker1-day" style="display:none;"></div>
+                                <div id="datepicker1-month" style="display:none;"></div>
+                                <div id="datepicker1-year" style="display:none;"></div>
                             </div>
                         </div>
                     </div>
@@ -101,17 +92,12 @@
 
                 <div class="col-sm-6">
                     <div class="panel datepicker-panel">
-                        <h2 class="panel-heading centered-header">
-                            {% blocktranslate %}Compare to{% endblocktranslate %}
-                        </h2>
+                        <h2 class="panel-heading centered-header">{% blocktranslate %}Compare to{% endblocktranslate %}</h2>
                         <div class="panel-body">
                             <div class="row center-block centered-header datepicker-calendar-block">
-                                <div id="datepicker2-day" style="display:none;">
-                                </div>
-                                <div id="datepicker2-month" style="display:none;">
-                                </div>
-                                <div id="datepicker2-year" style="display:none;">
-                                </div>
+                                <div id="datepicker2-day" style="display:none;"></div>
+                                <div id="datepicker2-month" style="display:none;"></div>
+                                <div id="datepicker2-year" style="display:none;"></div>
                             </div>
                         </div>
                     </div>
@@ -123,8 +109,7 @@
                 <div id="summary-loader" class="xhr-hidden text-center">
                     <i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <div class="col-sm-12" id="summary-holder">
-                </div>
+                <div class="col-sm-12" id="summary-holder"></div>
             </div>
         {% endif %}
     </section>

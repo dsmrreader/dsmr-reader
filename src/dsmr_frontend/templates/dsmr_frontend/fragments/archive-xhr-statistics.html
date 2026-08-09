@@ -21,8 +21,7 @@
     <div class="panel-body archive-header-panel-body">
         <table class="table table-hover">
             <tr>
-                <th scope="col" class="col-sm-4">
-                </th>
+                <th scope="col" class="col-sm-4"></th>
                 <th scope="col" class="col-sm-3">
                     {% if capabilities.electricity %}
                         {% translate "Consumed" %}
@@ -119,9 +118,7 @@
                         <span class="badge bg-orange badge-type-gas">{{ statistics.gas|default:'-'|decimal_html }}</span>
                     {% endif %}
                 </td>
-                <td>
-                    &nbsp;
-                </td>
+                <td>&nbsp;</td>
                 <td>
                     {% if capabilities.gas and statistics.gas_cost %}
                         <span class="badge bg-black badge-type-cost">{{ statistics.gas_cost|default:'-'|decimal_html }}</span>
@@ -139,18 +136,14 @@
                             {% blocktranslate count counter=statistics.number_of_days %}day{% plural %}days{% endblocktranslate %}
                         </span>
                     </td>
-                    <td>
-                        &nbsp;
-                    </td>
+                    <td>&nbsp;</td>
                     <td>
                         <span class="badge bg-black badge-type-cost">{{ statistics.fixed_cost|default:'-'|decimal_html }}</span>
                     </td>
                 </tr>
             {% endif %}
             <tr class="highlight">
-                <td style="font-weight: bold;">
-                    {% translate "Total" %}
-                </td>
+                <td style="font-weight: bold;">{% translate "Total" %}</td>
                 <td>
                     {% if capabilities.electricity and statistics.electricity_merged %}
                         <span class="badge bg-red badge-type-electricity">{{ statistics.electricity_merged|default:'-'|decimal_html }}</span>
@@ -170,14 +163,10 @@
 
             {% if statistics.temperature_avg %}
                 <tr>
-                    <td colspan="4">
-                        &nbsp;
-                    </td>
+                    <td colspan="4">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>
-                        {% translate "°C" %}
-                    </td>
+                    <td>{% translate "°C" %}</td>
                     <td>
                         {% if statistics.temperature_min %}
                             <span class="badge bg-blue badge-type-temperature">{{ statistics.temperature_min|floatformat|default:'-'|decimal_html }}</span> <span class="unit">{% translate "Min" %}</span>
@@ -213,25 +202,18 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">
-                <h2 class="panel-heading centered-header">
-                    {% translate "Meter positions" %}
-                </h2>
+                <h2 class="panel-heading centered-header">{% translate "Meter positions" %}</h2>
                 <div class="panel-body">
                     <table class="table table-hover">
                         <tr>
-                            <th scope="col" class="col-sm-4">
-                            </th>
-                            <th scope="col" class="col-sm-3">
-                                {% translate "Delivered" %}
-                            </th>
+                            <th scope="col" class="col-sm-4"></th>
+                            <th scope="col" class="col-sm-3">{% translate "Delivered" %}</th>
                             <th scope="col" class="col-sm-3">
                                 {% if capabilities.electricity_returned %}
                                     {% translate "Returned" %}
                                 {% endif %}
                             </th>
-                            <th scope="col" class="col-sm-2">
-                                {% translate "Timestamp" %}
-                            </th>
+                            <th scope="col" class="col-sm-2">{% translate "Timestamp" %}</th>
                         </tr>
                         <tr>
                             <td>
@@ -274,8 +256,7 @@
                                 <td>
                                     <span class="badge bg-orange badge-type-meter">{{ day_statistics.gas_reading|decimal_html }}</span>
                                 </td>
-                                <td>
-                                </td>
+                                <td></td>
                                 <td class="col-sm-2">
                                     <span class="unit">{{ day_statistics.gas_reading_timestamp|date:'DSMR_VERBOSE_DATETIME_FORMAT'|default:'-' }}</span>
                                 </td>

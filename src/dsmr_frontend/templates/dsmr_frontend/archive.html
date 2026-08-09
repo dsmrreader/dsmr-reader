@@ -25,16 +25,12 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel datepicker-panel">
-                        <h2 class="panel-heading centered-header">
-                            {% blocktranslate %}Data selection{% endblocktranslate %}
-                        </h2>
+                        <h2 class="panel-heading centered-header">{% blocktranslate %}Data selection{% endblocktranslate %}</h2>
                         <div class="panel-body archive-header-panel-body">
                             <div class="row">
                                 <div class="col-lg-push-4 col-lg-4">
                                     <div class="center-block centered-header">
-                                        <div class="italic">
-                                            {% blocktranslate %}Select level of detail.{% endblocktranslate %}
-                                        </div>
+                                        <div class="italic">{% blocktranslate %}Select level of detail.{% endblocktranslate %}</div>
 
                                         <span class="datepicker-level-icon">
                                             <span class="center-block datepicker-level-name">{% translate "Days" %}</span>
@@ -76,12 +72,9 @@
                             <div class="row">
                                 <div class="col-lg-push-4 col-lg-4">
                                     <div class="center-block centered-header">
-                                        <div id="datepicker-day" style="display:none;">
-                                        </div>
-                                        <div id="datepicker-month" style="display:none;">
-                                        </div>
-                                        <div id="datepicker-year" style="display:none;">
-                                        </div>
+                                        <div id="datepicker-day" style="display:none;"></div>
+                                        <div id="datepicker-month" style="display:none;"></div>
+                                        <div id="datepicker-year" style="display:none;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -95,31 +88,25 @@
                     <div id="summary-loader" class="xhr-hidden text-center">
                         <i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i>
                     </div>
-                    <div id="summary-holder">
-                    </div>
+                    <div id="summary-holder"></div>
                 </div>
             </div>
 
             <div class="row chart-holder">
                 <div class="col-sm-12">
                     <div class="panel">
-                        <h2 class="panel-heading centered-header">
-                            {% blocktranslate %}Graphs{% endblocktranslate %}
-                        </h2>
+                        <h2 class="panel-heading centered-header">{% blocktranslate %}Graphs{% endblocktranslate %}</h2>
                         <div class="panel-body">
                             {% if capabilities.electricity %}
-                                <div id="echarts-electricity-graph" class="graph-canvas">
-                                </div>
+                                <div id="echarts-electricity-graph" class="graph-canvas"></div>
                             {% endif %}
 
                             {% if capabilities.electricity_returned %}
-                                <div id="echarts-electricity-returned-graph" class="graph-canvas">
-                                </div>
+                                <div id="echarts-electricity-returned-graph" class="graph-canvas"></div>
                             {% endif %}
 
                             {% if capabilities.gas %}
-                                <div id="echarts-gas-graph" class="graph-canvas">
-                                </div>
+                                <div id="echarts-gas-graph" class="graph-canvas"></div>
                             {% endif %}
                         </div>
                     </div>

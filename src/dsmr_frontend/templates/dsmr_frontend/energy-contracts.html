@@ -145,9 +145,7 @@
                                             <td>
                                                 <span class="badge bg-orange badge-type-gas">{{ current.summary.gas|default:'-'|decimal_html }}</span>
                                             </td>
-                                            <td>
-                                                &nbsp;
-                                            </td>
+                                            <td>&nbsp;</td>
                                             <td>
                                                 <span class="badge bg-black badge-type-cost">{{ current.summary.gas_cost|default:'-'|decimal_html }}</span>
                                             </td>
@@ -157,9 +155,7 @@
                                     {# Fixed cost #}
                                     {% if current.summary.fixed_cost %}
                                         <tr>
-                                            <td colspan="3">
-                                                {% translate "Fixed costs" %}
-                                            </td>
+                                            <td colspan="3">{% translate "Fixed costs" %}</td>
                                             <td>
                                                 <span class="badge bg-black badge-type-cost">{{ current.summary.fixed_cost|default:'-'|decimal_html }}</span>
                                             </td>
@@ -168,9 +164,7 @@
 
                                     {# Grand totals #}
                                     <tr class="highlight">
-                                        <td style="font-weight: bold;" colspan="3">
-                                            {% translate "Total costs" %}
-                                        </td>
+                                        <td style="font-weight: bold;" colspan="3">{% translate "Total costs" %}</td>
                                         <td>
                                             <span class="badge bg-black badge-type-cost">{{ current.summary.total_cost|default:'-'|decimal_html }}</span>
                                         </td>
@@ -271,8 +265,7 @@
                                                     <span class="unit">{% translate "Returned" %}</span>
                                                 {% endif %}
                                             </td>
-                                            <td>
-                                            </td>
+                                            <td></td>
                                         </tr>
 
                                         {% if current.first_day.electricity1_reading or current.first_day.electricity1_returned_reading %}
@@ -288,8 +281,7 @@
                                                         <span class="badge bg-green badge-type-meter"><small>{{ current.first_day.electricity1_returned_reading }}</small></span>
                                                     {% endif %}
                                                 </td>
-                                                <td>
-                                                </td>
+                                                <td></td>
                                             </tr>
                                         {% endif %}
 
@@ -306,8 +298,7 @@
                                                         <span class="badge bg-green badge-type-meter"><small>{{ current.first_day.electricity2_returned_reading }}</small></span>
                                                     {% endif %}
                                                 </td>
-                                                <td>
-                                                </td>
+                                                <td></td>
                                             </tr>
                                         {% endif %}
                                         {% if current.first_day.gas_reading %}
@@ -318,8 +309,7 @@
                                                 <td>
                                                     <span class="badge bg-orange badge-type-meter">{{ current.first_day.gas_reading|decimal_html }}</span>
                                                 </td>
-                                                <td colspan="2">
-                                                </td>
+                                                <td colspan="2"></td>
                                             </tr>
                                         {% endif %}
                                     {% endif %}
