@@ -24,7 +24,7 @@ class APIv2TestCase(TestCase):
             path,
             HTTP_AUTHORIZATION="Token {}".format(self.api_settings.auth_key),
             content_type="application/json",
-            **kwargs
+            **kwargs,
         )
         self.assertEqual(response.status_code, expected_code, response.content)
         result = str(response.content, "utf-8")

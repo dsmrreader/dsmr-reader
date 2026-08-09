@@ -187,7 +187,7 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
         average_temperature=consumption.get("average_temperature"),
         fixed_cost=consumption["fixed_cost"],
         # Historic meter position summary, when available
-        **meter_positions_kwargs
+        **meter_positions_kwargs,
     )
 
 

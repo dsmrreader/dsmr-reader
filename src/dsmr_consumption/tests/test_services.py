@@ -165,35 +165,35 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             timestamp=reading_timestamp,
             extra_device_timestamp=reading_timestamp,
             extra_device_delivered=3.0,
-            **reading_kwargs
+            **reading_kwargs,
         )
         reading_timestamp = default_reading_timestamp - timezone.timedelta(hours=2)  # Earlier
         DsmrReading.objects.create(
             timestamp=reading_timestamp,
             extra_device_timestamp=reading_timestamp,
             extra_device_delivered=2.0,
-            **reading_kwargs
+            **reading_kwargs,
         )
         reading_timestamp = default_reading_timestamp - timezone.timedelta(hours=3)  # Earlier as well
         DsmrReading.objects.create(
             timestamp=reading_timestamp,
             extra_device_timestamp=reading_timestamp,
             extra_device_delivered=1.0,
-            **reading_kwargs
+            **reading_kwargs,
         )
         reading_timestamp = default_reading_timestamp + timezone.timedelta(hours=1)  # Later than first one
         DsmrReading.objects.create(
             timestamp=reading_timestamp,
             extra_device_timestamp=reading_timestamp,
             extra_device_delivered=4.0,
-            **reading_kwargs
+            **reading_kwargs,
         )
         reading_timestamp = default_reading_timestamp + timezone.timedelta(hours=2)
         DsmrReading.objects.create(
             timestamp=reading_timestamp,
             extra_device_timestamp=reading_timestamp,
             extra_device_delivered=5.0,
-            **reading_kwargs
+            **reading_kwargs,
         )
 
         dsmr_consumption.services.run(self.schedule_process)
