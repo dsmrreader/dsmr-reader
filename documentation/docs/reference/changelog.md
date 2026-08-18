@@ -9,6 +9,9 @@
 ---
 
 
+## v6.3.0 - Unreleased
+
+
 ## v6.2.0 - August 2026
 
 <small>*Accuracy fixes: electricity consumption is no longer silently dropped at day and hour boundaries, and MQTT period totals are now published correctly on the first day of a new month or year. Quarter-hour peak data can now be exported as CSV.*</small>
