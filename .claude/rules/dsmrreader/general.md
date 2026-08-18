@@ -42,7 +42,7 @@ It exposes a web UI, REST API, and integrates with external services (MQTT, Infl
 ├── dsmr_mindergas/      # Mindergas service
 ├── dsmr_mqtt/           # MQTT publishing
 ├── dsmr_notification/   # Email notifications
-├── dsmr_parser/         # Bundled DSMR telegram parser (treat as third-party)
+├── dsmr_parser/         # Bundled DSMR telegram parser (vendored from ndokter/dsmr_parser)
 ├── dsmr_plugins/        # Plugin system
 ├── dsmr_pvoutput/       # PVOutput service
 ├── dsmr_stats/          # Statistics aggregation
@@ -60,6 +60,11 @@ It exposes a web UI, REST API, and integrates with external services (MQTT, Infl
 - **Formatter**: Always run `poetry run black .` before committing.
 - **Template linter**: Run `poetry run djlint --reformat .` for HTML templates.
 - Do **not** manually wrap lines that Black will handle.
+
+### Comments
+- Comments must describe the current state, a fact, or a decision — never phrased relative to a change
+  (no "now does X", "fixed to...", "changed from...", "used to be...", references to issues/PRs/tasks).
+- Code and comments should read the same whether written today or found in the repo in five years.
 
 ### Type Hints
 - All new code must include type hints compatible with MyPy strict mode.
@@ -104,9 +109,13 @@ It exposes a web UI, REST API, and integrates with external services (MQTT, Infl
 Never modify, format, lint, or type-check these:
 - `.venv/*`
 - `*/migrations/*`
-- `dsmr_parser/*` (treat as third-party)
 - `dsmr_plugins/modules/*`
 - `dsmr_dropbox/dropboxinc/*`
+
+`dsmr_parser/*` is a vendored fork of upstream `ndokter/dsmr_parser` — don't hand-edit its logic outside of
+a deliberate upstream sync (see `value_types.py`, which is a deliberate DSMR-reader rewrite and must never
+be overwritten from upstream). It IS covered by Black and MyPy like the rest of the codebase; only Flake8
+excludes it (see `pyproject.toml`).
 
 ---
 
