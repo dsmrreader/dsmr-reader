@@ -11,6 +11,12 @@
 
 ## v6.3.0 - Unreleased
 
+!!! tip "Improvements"
+
+    #### Parser
+    - Updated the internal telegram parser to the latest upstream version (credits: [ndokter/dsmr_parser](https://github.com/ndokter/dsmr_parser))
+    - Fixed a parsing issue that blocked reading peak power data from some Belgian Fluvius meters - [#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764)
+
 
 ## v6.2.0 - August 2026
 
