@@ -131,6 +131,10 @@ poetry run pytest -v                        # 5. Test
 
 All steps must pass before a change is considered complete. **Always run `/dsmrreader:quality-check` after making any code changes.**
 
+Steps 1-4 (Black, djlint, MyPy, Flake8 — not the test suite) also run automatically as git pre-commit hooks via
+the `pre-commit` framework (`.pre-commit-config.yaml` at the repo root). Run `poetry run pre-commit install`
+once per checkout to enable them; a commit is blocked/auto-fixed if any of them fail.
+
 ---
 
 ## Django Settings
