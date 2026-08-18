@@ -3,7 +3,7 @@
 name = "DSMR-reader"
 description = "DSMR-protocol reader, P1 telegram data storage and energy consumption visualizer"
 license = "LicenseRef-CC-BY-NC-4.0"
-readme = "README.md"
+readme = "../README.md"
 version = "0.0.0"
 requires-python = ">=3.14,<4"
 authors = [
