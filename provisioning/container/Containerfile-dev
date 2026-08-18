@@ -22,7 +22,7 @@ ENV POETRY_VIRTUALENVS_CREATE=true \
     POETRY_VIRTUALENVS_PATH=/app/src/.venv \
     DJANGO_SETTINGS_MODULE=dsmrreader.config.development
 
-RUN pip install poetry
+RUN pip install poetry uv
 
 # This cannot reside in /app as it will be mounted during development.
 COPY provisioning/container/entrypoint-dev.sh /entrypoint.sh
