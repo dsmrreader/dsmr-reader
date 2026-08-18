@@ -16,6 +16,7 @@
     #### Parser
     - Updated the internal telegram parser to the latest upstream version (credits: [ndokter/dsmr_parser](https://github.com/ndokter/dsmr_parser))
     - Fixed a parsing issue that blocked reading peak power data from some Belgian Fluvius meters - [#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764)
+    - Fixed gas readings sometimes being read from an inactive meter channel instead of the active one, on setups with multiple gas devices connected
 
 
 ## v6.2.0 - August 2026

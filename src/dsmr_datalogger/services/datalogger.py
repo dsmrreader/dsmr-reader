@@ -112,6 +112,11 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
         else:
             model_fields[target_field] = obis_data.value
 
+    extra_device_reading = _select_extra_device_reading(parsed_telegram, datalogger_settings)
+    if extra_device_reading is not None:
+        model_fields["extra_device_delivered"] = extra_device_reading.value
+        model_fields["extra_device_timestamp"] = extra_device_reading.datetime
+
     # Defaults for telegrams with missing data.
     model_fields["timestamp"] = model_fields["timestamp"] or timezone.now()
     model_fields["electricity_delivered_2"] = model_fields["electricity_delivered_2"] or 0
@@ -164,6 +169,30 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str):
     return new_instance
 
 
+def _select_extra_device_reading(parsed_telegram: Any, datalogger_settings: DataloggerSettings) -> Optional[Any]:
+    """Picks the gas (or, in the future, water) reading from the telegram's MBus channels, if any.
+
+    DSMR v5+ and Belgium Fluvius report these on one or more MBus channels rather than a single fixed
+    OBIS reference, so the flat OBIS-to-field mapping above can't disambiguate between channels on its
+    own. dsmr_extra_device_channel lets a user pin a specific channel; otherwise the last channel with
+    a reading is used, matching the previous (pre-upstream-sync) default behaviour.
+    """
+    mbus_devices = getattr(parsed_telegram, "MBUS_DEVICES", None)
+    if not mbus_devices:
+        return None
+
+    channel = datalogger_settings.dsmr_extra_device_channel
+    if channel:
+        mbus_devices = [device for device in mbus_devices if device.channel_id == channel] or mbus_devices
+
+    for device in reversed(mbus_devices):
+        reading = getattr(device, "MBUS_METER_READING", None)
+        if reading is not None:
+            return reading
+
+    return None
+
+
 def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
     """Returns the mapping for OBIS to DSMR-reader (model fields)."""
     SPLIT_GAS_FIELD = {
@@ -193,8 +222,11 @@ def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
         obis_references.INSTANTANEOUS_CURRENT_L2: "phase_power_current_l2",
         obis_references.INSTANTANEOUS_CURRENT_L3: "phase_power_current_l3",
         # For some reason this identifier contains two fields, therefore we split them.
-        obis_references.HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,
+        obis_references.HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,  # DSMR v4.x
         obis_references.GAS_METER_READING: SPLIT_GAS_FIELD,  # Legacy
+        # DSMR v5.x/Belgium report gas on an MBus channel instead. That's handled separately in
+        # _select_extra_device_reading(), because a telegram may carry several MBus channels and
+        # this flat mapping can't tell them apart (see the parser's Telegram.MBUS_DEVICES).
         # Static data, stored in database but only data of the last reading is preserved.
         obis_references.P1_MESSAGE_HEADER: "dsmr_version",
         obis_references.ELECTRICITY_ACTIVE_TARIFF: "electricity_tariff",
@@ -207,24 +239,6 @@ def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
         obis_references.VOLTAGE_SWELL_L2_COUNT: "voltage_swell_count_l2",
         obis_references.VOLTAGE_SWELL_L3_COUNT: "voltage_swell_count_l3",
     }
-
-    if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_BELGIUM_FLUVIUS:
-        # Cheap hack for forcing channel selection.
-        try:
-            mbus_reference = {
-                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_1: obis_references.BELGIUM_MBUS1_METER_READING2,
-                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_2: obis_references.BELGIUM_MBUS2_METER_READING2,
-                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_3: obis_references.BELGIUM_MBUS3_METER_READING2,
-                DataloggerSettings.DSMR_EXTRA_DEVICE_CHANNEL_4: obis_references.BELGIUM_MBUS4_METER_READING2,
-            }[datalogger_settings.dsmr_extra_device_channel or 0]
-        except KeyError:
-            mbus_reference = obis_references.BELGIUM_MBUS_WILDCARD_METER_READING2
-
-        mapping.update(
-            {
-                mbus_reference: SPLIT_GAS_FIELD,
-            }
-        )
 
     if datalogger_settings.dsmr_version == DataloggerSettings.DSMR_LUXEMBOURG_SMARTY:
         mapping.update(
