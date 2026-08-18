@@ -49,6 +49,7 @@ dev = [
     "flake8-pyproject>=1,<2",
     "mypy>=1,<2",
     "polib>=1,<2",
+    "pre-commit>=4,<5",
     "pytest-cov>=7,<8",
     "pytest-django>=4,<5",
     "pytest-xdist>=3,<4",
