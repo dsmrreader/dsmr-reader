@@ -83,7 +83,7 @@ It exposes a web UI, REST API, and integrates with external services (MQTT, Infl
 ### Migrations
 - Generate with: `poetry run /app/src/manage.py makemigrations`
 - Apply with: `poetry run /app/src/manage.py migrate`
-- Lock for release with: `poetry run /app/src/manage.py dsmrreader_lock_migrations`
+- Lock for release with `/dsmrreader:production-release-steps`
 - **Never edit locked migrations.**
 
 ### Environment / Configuration
