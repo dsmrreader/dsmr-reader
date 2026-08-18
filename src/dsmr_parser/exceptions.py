@@ -14,4 +14,5 @@ class DecryptionError(Exception):
     callers should treat it as fatal and tear down the connection rather than
     skip the telegram like a regular parse error.
     """
+
     pass

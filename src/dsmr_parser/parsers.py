@@ -35,7 +35,7 @@ class TelegramParser(object):
         # Regexes are compiled once to improve performance
         self.telegram_specification_regexes = {
             object["obis_reference"]: re.compile(object["obis_reference"], re.DOTALL | re.MULTILINE)
-            for object in self.telegram_specification['objects']
+            for object in self.telegram_specification["objects"]
         }
 
     def parse(self, telegram_data, encryption_key="", authentication_key="", throw_ex=False):  # noqa: C901
@@ -58,12 +58,12 @@ class TelegramParser(object):
         if self.telegram_specification.get("general_global_cipher"):
             raise NotImplementedError("general_global_cipher telegrams are not supported by DSMR-reader")
 
-        if self.apply_checksum_validation and self.telegram_specification['checksum_support']:
+        if self.apply_checksum_validation and self.telegram_specification["checksum_support"]:
             self.validate_checksum(telegram_data)
 
         telegram = Telegram()
 
-        for object in self.telegram_specification['objects']:
+        for object in self.telegram_specification["objects"]:
             pattern = self.telegram_specification_regexes[object["obis_reference"]]
             matches = pattern.findall(telegram_data)
 
@@ -75,7 +75,7 @@ class TelegramParser(object):
                 except ParseError:
                     logger.error(
                         "ignore line with signature {}, because parsing failed.".format(object["obis_reference"]),
-                        exc_info=True
+                        exc_info=True,
                     )
                     if throw_ex:
                         raise
@@ -84,9 +84,7 @@ class TelegramParser(object):
                     raise
                 else:
                     telegram.add(
-                        obis_reference=object["obis_reference"],
-                        dsmr_object=dsmr_object,
-                        obis_name=object["value_name"]
+                        obis_reference=object["obis_reference"], dsmr_object=dsmr_object, obis_name=object["value_name"]
                     )
 
         return telegram
@@ -100,16 +98,16 @@ class TelegramParser(object):
         """
 
         # Extract the part for which the checksum applies.
-        checksum_contents = re.search(r'\/.+\!', telegram, re.DOTALL)
+        checksum_contents = re.search(r"\/.+\!", telegram, re.DOTALL)
 
         # Extract the hexadecimal checksum value itself.
         # The line ending '\r\n' for the checksum line can be ignored.
-        checksum_hex = re.search(r'((?<=\!)[0-9A-Z]{1,4})+', telegram)
+        checksum_hex = re.search(r"((?<=\!)[0-9A-Z]{1,4})+", telegram)
 
         if not checksum_contents or not checksum_hex:
             raise ParseError(
-                'Failed to perform CRC validation because the telegram is '
-                'incomplete. The checksum and/or content values are missing.'
+                "Failed to perform CRC validation because the telegram is "
+                "incomplete. The checksum and/or content values are missing."
             )
 
         calculated_crc = TelegramParser.crc16(checksum_contents.group(0))
@@ -118,10 +116,7 @@ class TelegramParser(object):
         if calculated_crc != expected_crc:
             raise InvalidChecksumError(
                 "Invalid telegram. The CRC checksum '{}' does not match the "
-                "expected '{}'".format(
-                    calculated_crc,
-                    expected_crc
-                )
+                "expected '{}'".format(calculated_crc, expected_crc)
             )
 
     @staticmethod
@@ -137,7 +132,7 @@ class TelegramParser(object):
             for i in range(0, 256):
                 crc = c_ushort(i).value
                 for j in range(0, 8):
-                    if (crc & 0x0001):
+                    if crc & 0x0001:
                         crc = c_ushort(crc >> 1).value ^ 0xA001
                     else:
                         crc = c_ushort(crc >> 1).value
@@ -147,7 +142,7 @@ class TelegramParser(object):
             d = ord(c)
             tmp = crcValue ^ d
             rotated = c_ushort(crcValue >> 8).value
-            crcValue = rotated ^ int(TelegramParser.crc16_tab[(tmp & 0x00ff)], 0)
+            crcValue = rotated ^ int(TelegramParser.crc16_tab[(tmp & 0x00FF)], 0)
 
         return crcValue
 
@@ -162,12 +157,11 @@ class DSMRObjectParser(object):
 
     def _is_line_wellformed(self, line, values):
         # allows overriding by child class
-        return (values and (len(values) == len(self.value_formats)))
+        return values and (len(values) == len(self.value_formats))
 
     def _parse_values(self, values):
         # allows overriding by child class
-        return [self.value_formats[i].parse(value)
-                for i, value in enumerate(values)]
+        return [self.value_formats[i].parse(value) for i, value in enumerate(values)]
 
     def _parse_obis_id_code(self, line):
         """
@@ -185,7 +179,7 @@ class DSMRObjectParser(object):
 
     def _parse(self, line):
         # Match value groups, but exclude the parentheses
-        pattern = re.compile(r'((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))')
+        pattern = re.compile(r"((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))")
 
         values = re.findall(pattern, line)
 
@@ -193,7 +187,7 @@ class DSMRObjectParser(object):
             raise ParseError("Invalid '%s' line for '%s'", line, self)
 
         # Convert empty value groups to None for clarity.
-        values = [None if value == '' else value for value in values]
+        values = [None if value == "" else value for value in values]
 
         return self._parse_values(values)
 
@@ -216,10 +210,7 @@ class MBusParser(DSMRObjectParser):
     """
 
     def parse(self, line):
-        return MBusObject(
-            obis_id_code=self._parse_obis_id_code(line),
-            values=self._parse(line)
-        )
+        return MBusObject(obis_id_code=self._parse_obis_id_code(line), values=self._parse(line))
 
 
 class MaxDemandParser(DSMRObjectParser):
@@ -244,7 +235,7 @@ class MaxDemandParser(DSMRObjectParser):
     """
 
     def parse(self, line):
-        pattern = re.compile(r'((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))')
+        pattern = re.compile(r"((?<=\()[0-9a-zA-Z\.\*\-\:]{0,}(?=\)))")
         values = re.findall(pattern, line)
 
         obis_id_code = self._parse_obis_id_code(line)
@@ -256,10 +247,9 @@ class MaxDemandParser(DSMRObjectParser):
             timestamp_month = ValueParser(timestamp).parse(values[i * 3 + 0])
             timestamp_occurred = ValueParser(timestamp).parse(values[i * 3 + 1])
             value = ValueParser(Decimal).parse(values[i * 3 + 2])
-            objects.append(MBusObjectPeak(
-                obis_id_code=obis_id_code,
-                values=[timestamp_month, timestamp_occurred, value]
-            ))
+            objects.append(
+                MBusObjectPeak(obis_id_code=obis_id_code, values=[timestamp_month, timestamp_occurred, value])
+            )
 
         return objects
 
@@ -285,10 +275,7 @@ class CosemParser(DSMRObjectParser):
     """
 
     def parse(self, line):
-        return CosemObject(
-            obis_id_code=self._parse_obis_id_code(line),
-            values=self._parse(line)
-        )
+        return CosemObject(obis_id_code=self._parse_obis_id_code(line), values=self._parse(line))
 
 
 class ProfileGenericParser(DSMRObjectParser):
@@ -319,7 +306,7 @@ class ProfileGenericParser(DSMRObjectParser):
         self.parsers_for_unidentified = parsers_for_unidentified
 
     def _is_line_wellformed(self, line, values):
-        if values and (len(values) == 1) and (values[0] == ''):
+        if values and (len(values) == 1) and (values[0] == ""):
             # special case: single empty parentheses (indicated by empty string)
             return True
 
@@ -335,7 +322,7 @@ class ProfileGenericParser(DSMRObjectParser):
             values = [0, None]  # buffer_length=0, buffer_value_obis_ID=None
         buffer_length = int(values[0])
         buffer_value_obis_ID = values[1]
-        if (buffer_length > 0):
+        if buffer_length > 0:
             if buffer_value_obis_ID in self.buffer_types:
                 bufferValueParsers = self.buffer_types[buffer_value_obis_ID]
             else:
@@ -347,10 +334,7 @@ class ProfileGenericParser(DSMRObjectParser):
         return [self.value_formats[i].parse(value) for i, value in enumerate(values)]
 
     def parse(self, line):
-        return ProfileGenericObject(
-            obis_id_code=self._parse_obis_id_code(line),
-            values=self._parse(line)
-        )
+        return ProfileGenericObject(obis_id_code=self._parse_obis_id_code(line), values=self._parse(line))
 
 
 class ValueParser(object):
@@ -370,14 +354,11 @@ class ValueParser(object):
     def parse(self, value):
         unit_of_measurement = None
 
-        if value and '*' in value:
-            value, unit_of_measurement = value.split('*')
+        if value and "*" in value:
+            value, unit_of_measurement = value.split("*")
 
         # A value group is not required to have a value, and then coercing does
         # not apply.
         value = self.coerce_type(value) if value is not None else value
 
-        return {
-            'value': value,
-            'unit': unit_of_measurement
-        }
+        return {"value": value, "unit": unit_of_measurement}

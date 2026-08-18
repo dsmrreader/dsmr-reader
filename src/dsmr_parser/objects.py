@@ -18,6 +18,7 @@ class Telegram(dict):
 
     Note: Dict like usage is deprecated. The inheritance from dict is because of backwards compatibility.
     """
+
     def __init__(self, *args, **kwargs):
         self._item_names = []
         self._mbus_devices = []
@@ -52,9 +53,9 @@ class Telegram(dict):
 
         mbus_device.add(obis_reference, dsmr_object, obis_name)
 
-        if not hasattr(self, 'MBUS_DEVICES'):
-            setattr(self, 'MBUS_DEVICES', self._mbus_devices)
-            self._item_names.append('MBUS_DEVICES')
+        if not hasattr(self, "MBUS_DEVICES"):
+            setattr(self, "MBUS_DEVICES", self._mbus_devices)
+            self._item_names.append("MBUS_DEVICES")
 
     def get_mbus_device_by_channel(self, channel_id):
         """
@@ -73,7 +74,7 @@ class Telegram(dict):
         output = ""
         for attr, value in self:
             if isinstance(value, list):
-                output += ''.join(map(str, value))
+                output += "".join(map(str, value))
             else:
                 output += "{}: \t {}\n".format(attr, str(value))
 
@@ -84,9 +85,8 @@ class Telegram(dict):
 
         for attr, value in self:
             if isinstance(value, list):
-                json_data[attr] = [json.loads(item.to_json() if hasattr(item, 'to_json') else item)
-                                   for item in value]
-            elif hasattr(value, 'to_json'):
+                json_data[attr] = [json.loads(item.to_json() if hasattr(item, "to_json") else item) for item in value]
+            elif hasattr(value, "to_json"):
                 json_data[attr] = json.loads(value.to_json())
 
         return json.dumps(json_data)
@@ -96,13 +96,14 @@ class DSMRObject(object):
     """
     Represents all data from a single telegram line.
     """
+
     def __init__(self, obis_id_code, values):
         self.obis_id_code = obis_id_code
         self.values = values
 
     @property
     def is_mbus_reading(self):
-        """ Detect Mbus related readings using obis id + channel. """
+        """Detect Mbus related readings using obis id + channel."""
         obis_id, channel_id = self.obis_id_code
 
         return obis_id == 0 and channel_id != 0
@@ -115,7 +116,7 @@ class MBusObject(DSMRObject):
 
     @property
     def datetime(self):
-        return self.values[0]['value']
+        return self.values[0]["value"]
 
     @property
     def value(self):
@@ -123,9 +124,9 @@ class MBusObject(DSMRObject):
         # TODO object, but let the parse set them differently? So don't use
         # TODO hardcoded indexes here.
         if len(self.values) != 2:  # v2
-            return self.values[6]['value']
+            return self.values[6]["value"]
         else:
-            return self.values[1]['value']
+            return self.values[1]["value"]
 
     @property
     def unit(self):
@@ -133,19 +134,15 @@ class MBusObject(DSMRObject):
         # TODO object, but let the parse set them differently? So don't use
         # TODO hardcoded indexes here.
         if len(self.values) != 2:  # v2
-            return self.values[5]['value']
+            return self.values[5]["value"]
         else:
-            return self.values[1]['unit']
+            return self.values[1]["unit"]
 
     def __str__(self):
         timestamp = self.datetime
         if isinstance(timestamp, datetime):
             timestamp = timestamp.astimezone(timezone.utc).isoformat()
-        output = "{}\t[{}] at {}".format(
-            str(self.value),
-            str(self.unit),
-            str(timestamp)
-        )
+        output = "{}\t[{}] at {}".format(str(self.value), str(self.unit), str(timestamp))
         return output
 
     def to_json(self):
@@ -157,11 +154,7 @@ class MBusObject(DSMRObject):
             value = value.astimezone(timezone.utc).isoformat()
         if isinstance(value, Decimal):
             value = float(value)
-        output = {
-            'datetime': timestamp,
-            'value': value,
-            'unit': self.unit
-        }
+        output = {"datetime": timestamp, "value": value, "unit": self.unit}
         return json.dumps(output)
 
 
@@ -169,19 +162,19 @@ class MBusObjectPeak(DSMRObject):
 
     @property
     def datetime(self):
-        return self.values[0]['value']
+        return self.values[0]["value"]
 
     @property
     def occurred(self):
-        return self.values[1]['value']
+        return self.values[1]["value"]
 
     @property
     def value(self):
-        return self.values[2]['value']
+        return self.values[2]["value"]
 
     @property
     def unit(self):
-        return self.values[2]['unit']
+        return self.values[2]["unit"]
 
     def __str__(self):
         timestamp = self.datetime
@@ -195,8 +188,9 @@ class MBusObjectPeak(DSMRObject):
             value = value.astimezone(timezone.utc).isoformat()
         if isinstance(value, Decimal):
             value = float(value)
-        output = "{}\t[{}] at {} occurred {}"\
-            .format(str(value), str(self.unit), str(timestamp), str(timestamp_occurred))
+        output = "{}\t[{}] at {} occurred {}".format(
+            str(value), str(self.unit), str(timestamp), str(timestamp_occurred)
+        )
         return output
 
     def to_json(self):
@@ -211,12 +205,7 @@ class MBusObjectPeak(DSMRObject):
             value = value.astimezone(timezone.utc).isoformat()
         if isinstance(value, Decimal):
             value = float(value)
-        output = {
-            'datetime': timestamp,
-            'occurred': timestamp_occurred,
-            'value': value,
-            'unit': self.unit
-        }
+        output = {"datetime": timestamp, "occurred": timestamp_occurred, "value": value, "unit": self.unit}
         return json.dumps(output)
 
 
@@ -224,11 +213,11 @@ class CosemObject(DSMRObject):
 
     @property
     def value(self):
-        return self.values[0]['value']
+        return self.values[0]["value"]
 
     @property
     def unit(self):
-        return self.values[0]['unit']
+        return self.values[0]["unit"]
 
     def __str__(self):
         print_value = self.value
@@ -243,10 +232,7 @@ class CosemObject(DSMRObject):
             json_value = self.value.astimezone(timezone.utc).isoformat()
         if isinstance(self.value, Decimal):
             json_value = float(self.value)
-        output = {
-            'value': json_value,
-            'unit': self.unit
-        }
+        output = {"value": json_value, "unit": self.unit}
         return json.dumps(output)
 
 
@@ -273,11 +259,11 @@ class ProfileGenericObject(DSMRObject):
 
     @property
     def buffer_length(self):
-        return self.values[0]['value']
+        return self.values[0]["value"]
 
     @property
     def buffer_type(self):
-        return self.values[1]['value']
+        return self.values[1]["value"]
 
     @property
     def buffer(self):
@@ -288,10 +274,7 @@ class ProfileGenericObject(DSMRObject):
             for i in range(self.buffer_length):
                 offset = values_offset + i * 2
                 self._buffer_list.append(
-                    MBusObject(
-                        obis_id_code=self.obis_id_code,
-                        values=[self.values[offset], self.values[offset + 1]]
-                    )
+                    MBusObject(obis_id_code=self.obis_id_code, values=[self.values[offset], self.values[offset + 1]])
                 )
 
         return self._buffer_list
@@ -322,10 +305,10 @@ class ProfileGenericObject(DSMRObject):
                               ]
                   }
         """
-        list = [['buffer_length', self.buffer_length]]
-        list.append(['buffer_type', self.buffer_type])
+        list = [["buffer_length", self.buffer_length]]
+        list.append(["buffer_type", self.buffer_type])
         buffer_repr = [json.loads(buffer_item.to_json()) for buffer_item in self.buffer]
-        list.append(['buffer', buffer_repr])
+        list.append(["buffer", buffer_repr])
         output = dict(list)
         return json.dumps(output)
 
@@ -361,6 +344,6 @@ class MbusDevice:
 
     def to_json(self):
         data = {obis_name: json.loads(value.to_json()) for obis_name, value in self}
-        data['CHANNEL_ID'] = self.channel_id
+        data["CHANNEL_ID"] = self.channel_id
 
         return json.dumps(data)
