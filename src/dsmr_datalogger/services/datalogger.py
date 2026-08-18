@@ -175,7 +175,7 @@ def _select_extra_device_reading(parsed_telegram: Any, datalogger_settings: Data
     DSMR v5+ and Belgium Fluvius report these on one or more MBus channels rather than a single fixed
     OBIS reference, so the flat OBIS-to-field mapping above can't disambiguate between channels on its
     own. dsmr_extra_device_channel lets a user pin a specific channel; otherwise the last channel with
-    a reading is used, matching the previous (pre-upstream-sync) default behaviour.
+    a reading is used.
     """
     mbus_devices = getattr(parsed_telegram, "MBUS_DEVICES", None)
     if not mbus_devices:
