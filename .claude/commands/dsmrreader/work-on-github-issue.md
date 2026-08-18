@@ -18,6 +18,10 @@ even in auto mode; a GitHub issue is written for the maintainer's own judgment, 
 don't guess at intent on their behalf. Only skip asking if the issue is fully unambiguous.
 
 ## 3. Implement
+Don't start writing code until the user has given an explicit, unambiguous go-ahead to implement —
+not a vague "continue" or "yes" that could just as easily mean "keep discussing/proposing." If there's
+any doubt what a reply confirms, ask directly rather than inferring permission to start coding.
+
 Follow the project's existing conventions (service layer, DTOs, type hints, signals, etc. — see
 `.claude/rules/dsmrreader/general.md`). Keep the change scoped to what the issue asks for.
 

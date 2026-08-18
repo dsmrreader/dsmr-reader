@@ -137,6 +137,13 @@ once per checkout to enable them; a commit is blocked/auto-fixed if any of them 
 
 ---
 
+## Git Commit Messages
+
+Single line, no body. `<type>: <short summary>`, optionally referencing an issue number. No multi-paragraph
+explanations of what/why — that belongs in the PR description, not the commit.
+
+---
+
 ## Django Settings
 
 - Default settings module (via `manage.py`): `dsmrreader.config.production`
