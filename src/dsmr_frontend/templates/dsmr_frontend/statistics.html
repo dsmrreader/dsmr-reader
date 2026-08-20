@@ -198,7 +198,7 @@
                                             <span class="badge bg-black">{{ meter_statistics.quarter_hour_maximum_demand_running_month|decimal_html }}</span>
                                             {% if meter_statistics.quarter_hour_maximum_demand_running_month_timestamp %}
                                                 <br>
-                                                <span class="unit">{{ meter_statistics.quarter_hour_maximum_demand_running_month_timestamp }}</span>
+                                                <span class="unit">{{ meter_statistics.quarter_hour_maximum_demand_running_month_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</span>
                                             {% endif %}
                                         {% endif %}
                                     </td>
@@ -209,7 +209,7 @@
                 </div>
             </div>
 
-            {% if meter_statistics.quarter_hour_maximum_demand_last_13_months %}
+            {% if quarter_hour_maximum_demand_last_13_months %}
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel">
@@ -221,11 +221,11 @@
                                         <th class="col-sm-4">{% translate "Peak" %} <span class="unit">{% translate "kW" %}</span></th>
                                         <th class="col-sm-4">{% translate "Occurred at" %}</th>
                                     </tr>
-                                    {% for entry in meter_statistics.quarter_hour_maximum_demand_last_13_months %}
+                                    {% for entry in quarter_hour_maximum_demand_last_13_months %}
                                         <tr>
-                                            <td>{{ entry.month|slice:":10" }}</td>
+                                            <td>{{ entry.month|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</td>
                                             <td><span class="badge bg-black">{{ entry.peak_demand|decimal_html }}</span></td>
-                                            <td>{{ entry.peak_timestamp|slice:":10" }} {{ entry.peak_timestamp|slice:"11:19" }}</td>
+                                            <td>{{ entry.peak_timestamp|date:'DSMR_STATISTICS_DATETIME_FORMAT' }}</td>
                                         </tr>
                                     {% endfor %}
                                 </table>

@@ -1,5 +1,6 @@
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.http import JsonResponse
+from django.utils.dateparse import parse_datetime
 from django.views.generic.base import TemplateView, View
 
 from dsmr_datalogger.models.reading import DsmrReading
@@ -32,7 +33,19 @@ class Statistics(ConfigurableLoginRequiredMixin, TemplateView):
             context_data["returned_sum"] = latest_reading.electricity_returned_1 + latest_reading.electricity_returned_2
 
         context_data["datalogger_settings"] = DataloggerSettings.get_solo()
-        context_data["meter_statistics"] = MeterStatistics.get_solo()
+        meter_statistics = MeterStatistics.get_solo()
+        context_data["meter_statistics"] = meter_statistics
+
+        if meter_statistics.quarter_hour_maximum_demand_last_13_months:
+            # JSONField round-trips datetimes as ISO strings, so parse them back for template date formatting.
+            context_data["quarter_hour_maximum_demand_last_13_months"] = [
+                {
+                    "month": parse_datetime(entry["month"]),
+                    "peak_timestamp": parse_datetime(entry["peak_timestamp"]),
+                    "peak_demand": entry["peak_demand"],
+                }
+                for entry in meter_statistics.quarter_hour_maximum_demand_last_13_months
+            ]
 
         return context_data
 

@@ -69,9 +69,9 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200, response.content)
         self.assertContains(response, '<span class="badge-integer">1</span><span class="badge-decimal">.566</span>')
         self.assertContains(response, '<span class="badge-integer">3</span><span class="badge-decimal">.332</span>')
-        self.assertContains(response, "2023-01-31")
-        self.assertContains(response, "2023-01-14")
-        self.assertContains(response, "11:45:00")
+        self.assertContains(response, "Wednesday 1 February 2023 at 1:00 a.m.")  # Running month timestamp
+        self.assertContains(response, "Wednesday 1 February 2023 at 12:00 a.m.")  # 13 months: month
+        self.assertContains(response, "Saturday 14 January 2023 at 12:45 p.m.")  # 13 months: peak timestamp
 
     def test_statistics_xhr_data(self):
         response = self.client.get(reverse("{}:statistics-xhr-data".format(self.namespace)))

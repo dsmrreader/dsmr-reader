@@ -157,7 +157,14 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     ):
         # Sourced directly from the meter (e.g. Belgium/VREG capacity tariff): use the last reading in this
         # window that carried the field. No fallback to the calculated value when it's missing.
-        metered_reading = quarter_hour_readings.filter(quarter_hour_current_average_demand__isnull=False).last()
+        metered_reading = next(
+            (
+                reading
+                for reading in reversed(quarter_hour_readings)
+                if reading.quarter_hour_current_average_demand is not None
+            ),
+            None,
+        )
         average_delivered_hour = (
             round_decimal(metered_reading.quarter_hour_current_average_demand, decimal_count=3)
             if metered_reading
