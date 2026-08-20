@@ -34,16 +34,6 @@ class Command(BaseCommand):
             timestamp__gte="2017-04-11 05:59:00",
         )
 
-    #         self._request(method='post', uri=URI, **{
-    #             'electricity_currently_delivered': 1.500,
-    #             'electricity_currently_returned': 0.025,
-    #             'electricity_delivered_1': 2000,
-    #             'electricity_delivered_2': 3000,
-    #             'electricity_returned_1': 0,
-    #             'electricity_returned_2': 0,
-    #             'timestamp': '2017-04-15T00:00:00+02',
-    #         })
-
     def _test_electricity_consumption(self):
         URI = "consumption/electricity"
         self._request(uri=URI, limit=5, ordering="-read_at", read_at__lte="2017-04-10 03:00:00")

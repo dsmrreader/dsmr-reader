@@ -16,6 +16,10 @@ from dsmr_backend.mixins import DeletionOnlyAdminModel
 from dsmr_mqtt.models import queue
 
 
+def get_field_default(model, field_name):
+    return model._meta.get_field(field_name).default
+
+
 @admin.register(broker.MQTTBrokerSettings)
 class MQTTBrokerSettingsAdmin(SingletonModelAdmin):
     fieldsets = (
@@ -71,11 +75,7 @@ class JSONTelegramMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in telegram.JSONTelegramMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(telegram.JSONTelegramMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -100,11 +100,7 @@ class SplitTopicTelegramMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in telegram.SplitTopicTelegramMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(telegram.SplitTopicTelegramMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -132,11 +128,7 @@ class JSONDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in day_totals.JSONDayTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(day_totals.JSONDayTotalsMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -161,11 +153,7 @@ class SplitTopicDayTotalsMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in day_totals.SplitTopicDayTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(day_totals.SplitTopicDayTotalsMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -193,11 +181,7 @@ class JSONPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in period_totals.JSONCurrentPeriodTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(period_totals.JSONCurrentPeriodTotalsMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -222,11 +206,7 @@ class SplitTopicPeriodTotalsUpdateMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(period_totals.SplitTopicCurrentPeriodTotalsMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -251,11 +231,7 @@ class SplitTopicMeterStatisticsMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in meter_statistics.SplitTopicMeterStatisticsMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(meter_statistics.SplitTopicMeterStatisticsMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -283,11 +259,7 @@ class JSONGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in consumption.JSONGasConsumptionMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(consumption.JSONGasConsumptionMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -312,11 +284,7 @@ class SplitTopicGasConsumptionMQTTSettingsAdmin(SingletonModelAdmin):
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in consumption.SplitTopicGasConsumptionMQTTSettings._meta.get_fields()
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(consumption.SplitTopicGasConsumptionMQTTSettings, "formatting")
                     )
                 ),
             },
@@ -344,11 +312,9 @@ class JSONQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(SingletonModelA
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()  # noqa: E501
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(
+                            consumption.JSONQuarterHourPeakElectricityConsumptionMQTTSettings, "formatting"
+                        )
                     )
                 ),
             },
@@ -373,11 +339,9 @@ class SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettingsAdmin(Singleton
                     {}
                     </pre>
                     """.format(
-                        [
-                            x.default  # type: ignore[union-attr]
-                            for x in consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings._meta.get_fields()  # noqa: E501
-                            if x.name == "formatting" and isinstance(x, models.Field)
-                        ][0]
+                        get_field_default(
+                            consumption.SplitTopicQuarterHourPeakElectricityConsumptionMQTTSettings, "formatting"
+                        )
                     )
                 ),
             },

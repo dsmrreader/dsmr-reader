@@ -17,6 +17,17 @@ from typing import Optional
 logger = logging.getLogger("dsmrreader")
 
 
+def add_batch_size_argument(parser, default: int = 365, unit: str = "records") -> None:
+    """Registers the common --batch-size argument shared by several management commands."""
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        dest="batch_size",
+        default=default,
+        help="Number of {} to process per batch (default: {}).".format(unit, default),
+    )
+
+
 class StopInfiniteRun(EnvironmentError):
     """Triggers InfiniteManagementCommandMixin to stop the current loop."""
 

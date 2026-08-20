@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-from django.utils import formats
 from django.utils.cache import patch_response_headers
 from django.views.generic.base import TemplateView, View
 
@@ -23,16 +22,7 @@ class Trends(ConfigurableLoginRequiredMixin, TemplateView):
         context_data["capabilities"] = capabilities
         context_data["frontend_settings"] = FrontendSettings.get_solo()
         context_data["has_statistics"] = DayStatistics.objects.exists() and HourStatistics.objects.exists()
-        context_data["datepicker_locale_format"] = formats.get_format("DSMR_DATEPICKER_LOCALE_FORMAT")
-        context_data["datepicker_date_format"] = "DSMR_DATEPICKER_DATE_FORMAT"
-
-        day_statistics = DayStatistics.objects.all().order_by("day")
-
-        try:
-            context_data["start_date"] = day_statistics[0].day
-            context_data["end_date"] = day_statistics.order_by("-day")[0].day
-        except IndexError:
-            pass
+        context_data.update(dsmr_stats.services.datepicker_context())
 
         return context_data
 

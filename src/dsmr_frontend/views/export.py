@@ -16,6 +16,7 @@ from dsmr_weather.models.reading import TemperatureReading
 from dsmr_consumption.models.consumption import QuarterHourPeakElectricityConsumption
 from dsmr_frontend.forms import ExportAsCsvForm
 import dsmr_backend.services.backend
+import dsmr_stats.services
 
 
 class Export(LoginRequiredMixin, TemplateView):
@@ -25,18 +26,7 @@ class Export(LoginRequiredMixin, TemplateView):
         context_data = super(Export, self).get_context_data(**kwargs)
         context_data["capabilities"] = dsmr_backend.services.backend.get_capabilities()
         context_data["frontend_settings"] = FrontendSettings.get_solo()
-
-        day_statistics = DayStatistics.objects.all().order_by("day")
-
-        try:
-            context_data["start_date"] = day_statistics[0].day
-            context_data["end_date"] = day_statistics.order_by("-day")[0].day
-        except IndexError:
-            context_data["start_date"] = None
-            context_data["end_date"] = None
-
-        context_data["datepicker_locale_format"] = formats.get_format("DSMR_DATEPICKER_LOCALE_FORMAT")
-        context_data["datepicker_date_format"] = "DSMR_DATEPICKER_DATE_FORMAT"
+        context_data.update(dsmr_stats.services.datepicker_context())
         return context_data
 
 

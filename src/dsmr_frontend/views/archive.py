@@ -15,6 +15,14 @@ import dsmr_backend.services.backend
 import dsmr_stats.services
 
 
+def _field(item, key):
+    """Reads a field from either a model instance or a dict, as source_data may hold either."""
+    try:
+        return getattr(item, key)
+    except AttributeError:
+        return item[key]
+
+
 class Archive(ConfigurableLoginRequiredMixin, TemplateView):
     template_name = "dsmr_frontend/archive.html"
 
@@ -22,17 +30,7 @@ class Archive(ConfigurableLoginRequiredMixin, TemplateView):
         context_data = super(Archive, self).get_context_data(**kwargs)
         context_data["capabilities"] = dsmr_backend.services.backend.get_capabilities()
         context_data["frontend_settings"] = FrontendSettings.get_solo()
-
-        day_statistics = DayStatistics.objects.all().order_by("day")
-
-        try:
-            context_data["start_date"] = day_statistics[0].day
-            context_data["end_date"] = day_statistics.order_by("-day")[0].day
-        except IndexError:
-            pass
-
-        context_data["datepicker_locale_format"] = formats.get_format("DSMR_DATEPICKER_LOCALE_FORMAT")
-        context_data["datepicker_date_format"] = "DSMR_DATEPICKER_DATE_FORMAT"
+        context_data.update(dsmr_stats.services.datepicker_context())
         return context_data
 
 
@@ -149,10 +147,7 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
             x_axis = "month"
 
         for current_item in source_data:
-            try:
-                x_value = getattr(current_item, x_axis)
-            except AttributeError:
-                x_value = current_item[x_axis]
+            x_value = _field(current_item, x_axis)
 
             if x_format_callback:
                 x_value = x_format_callback(x_value)
@@ -160,11 +155,7 @@ class ArchiveXhrGraphs(ConfigurableLoginRequiredMixin, View):
             data["x"].append(formats.date_format(x_value, x_format))
 
             for current_field in FIELDS:
-                try:
-                    y_value = getattr(current_item, current_field) or 0
-                except AttributeError:
-                    y_value = current_item[current_field] or 0
-
+                y_value = _field(current_item, current_field) or 0
                 data[current_field].append(float(y_value))
 
         if frontend_settings.merge_electricity_tariffs:

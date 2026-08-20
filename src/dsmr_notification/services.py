@@ -40,7 +40,7 @@ def notify_pre_check() -> bool:
         return True
 
     # Ready to go, but not time yet.
-    if notification_settings.next_notification is not None and timezone.now() < notification_settings.next_notification:
+    if not dsmr_backend.services.backend.is_timestamp_passed(notification_settings.next_notification):
         return False
 
     return True

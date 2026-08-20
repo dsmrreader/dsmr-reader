@@ -134,26 +134,14 @@ def convert_period_totals() -> Dict:
         return {}
 
     totals = dsmr_stats.services.period_totals()
-
-    excluded_keys = (
-        "number_of_days",
-        "temperature_avg",
-        "temperature_min",
-        "temperature_max",
-    )
     result = {}
 
-    for k in totals["month"].keys():
-        if k in excluded_keys or totals["month"][k] is None:
-            continue
+    for period, prefix in (("month", "current_month_"), ("year", "current_year_")):
+        for k, v in totals[period].items():
+            if k in dsmr_stats.services.PERIOD_TOTALS_EXCLUDED_KEYS or v is None:
+                continue
 
-        result["current_month_" + k] = totals["month"][k]
-
-    for k in totals["year"].keys():
-        if k in excluded_keys or totals["year"][k] is None:
-            continue
-
-        result["current_year_" + k] = totals["year"][k]
+            result[prefix + k] = v
 
     return result
 

@@ -133,9 +133,6 @@ class Command(BaseCommand):
 
         return last_pk
 
-    def fetch_readings(self, reading_fields):
-        return
-
     def _export(self, paginator):
         for page_num in paginator.page_range:
             batch = iter(paginator.get_page(page_num))
@@ -162,7 +159,7 @@ class Command(BaseCommand):
                     if value is None:
                         continue
 
-                    measurement_fields[influxdb_field] = getattr(current_reading, reading_field)
+                    measurement_fields[influxdb_field] = value
 
                 if not measurement_fields:
                     continue

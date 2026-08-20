@@ -11,7 +11,7 @@ from django.db import transaction, connection, models
 from django.db.models.aggregates import Avg, Sum, Min, Max, Count
 from django.core.cache import cache
 from django.db.models.functions import TruncDate
-from django.utils import timezone
+from django.utils import timezone, formats
 from django.conf import settings
 
 from dsmr_backend.dto import Capability
@@ -34,6 +34,25 @@ logger = logging.getLogger("dsmrreader")
 def is_data_available() -> bool:
     """Checks whether data is available for stats."""
     return ElectricityConsumption.objects.all().exists()
+
+
+def datepicker_context() -> Dict:
+    """Returns the day statistics date range and datepicker format context shared by several frontend views."""
+    day_statistics = DayStatistics.objects.all().order_by("day")
+
+    try:
+        start_date: Optional[date] = day_statistics[0].day
+        end_date: Optional[date] = day_statistics.order_by("-day")[0].day
+    except IndexError:
+        start_date = None
+        end_date = None
+
+    return dict(
+        start_date=start_date,
+        end_date=end_date,
+        datepicker_locale_format=formats.get_format("DSMR_DATEPICKER_LOCALE_FORMAT"),
+        datepicker_date_format="DSMR_DATEPICKER_DATE_FORMAT",
+    )
 
 
 def get_next_day_to_generate() -> datetime.date:
@@ -393,6 +412,30 @@ def year_statistics(target_date: datetime.date) -> Dict:
     return range_statistics(start=start_of_year, end=end_of_year)
 
 
+PERIOD_TOTALS_EXCLUDED_KEYS = (
+    "number_of_days",
+    "temperature_avg",
+    "temperature_min",
+    "temperature_max",
+)
+
+
+def _merge_today_into_period(period_stats: Dict, today_stats: Dict) -> None:
+    """Adds today's consumption on top of a month/year period's historical aggregate, in place."""
+    for k in period_stats.keys():
+        if k in PERIOD_TOTALS_EXCLUDED_KEYS:
+            continue
+
+        today_val = today_stats.get(k)
+
+        # Skip only when both the historical aggregate and today are absent.
+        if period_stats[k] is None and today_val is None:
+            continue
+
+        # Treat None (no prior DayStatistics in the period, e.g. first day of month/year) as 0.
+        period_stats[k] = (period_stats[k] or 0) + (today_val or 0)
+
+
 def period_totals() -> Dict:
     """Retrieves year/month period totals and merges them with today's consumption."""
     today = timezone.localtime(timezone.now())
@@ -404,36 +447,9 @@ def period_totals() -> Dict:
 
     month_stats = month_statistics(target_date=today)
     year_stats = year_statistics(target_date=today)
-    excluded_keys = (
-        "number_of_days",
-        "temperature_avg",
-        "temperature_min",
-        "temperature_max",
-    )
 
-    for k in month_stats.keys():
-        if k in excluded_keys:
-            continue
-
-        today_val = today_stats.get(k)
-
-        # Skip only when both the historical aggregate and today are absent.
-        if month_stats[k] is None and today_val is None:
-            continue
-
-        # Treat None (no prior DayStatistics in the period, e.g. first day of month/year) as 0.
-        month_stats[k] = (month_stats[k] or 0) + (today_val or 0)
-
-    for k in year_stats.keys():
-        if k in excluded_keys:
-            continue
-
-        today_val = today_stats.get(k)
-
-        if year_stats[k] is None and today_val is None:
-            continue
-
-        year_stats[k] = (year_stats[k] or 0) + (today_val or 0)
+    _merge_today_into_period(month_stats, today_stats)
+    _merge_today_into_period(year_stats, today_stats)
 
     return dict(
         day=today,
@@ -514,10 +530,9 @@ def reconstruct_missing_day_statistics(batch_size: int = 365) -> None:
 
     print("Found {} day(s) to reconstruct".format(len(dates_list)))
 
-    for batch_start in range(0, len(dates_list), batch_size):
-        for current_day in dates_list[batch_start : batch_start + batch_size]:
-            print(" - Reconstructing:", current_day)
-            create_statistics(target_day=current_day)
+    for current_day in dates_list:
+        print(" - Reconstructing:", current_day)
+        create_statistics(target_day=current_day)
 
 
 def reconstruct_missing_day_statistics_by_hours(batch_size: int = 365) -> None:
@@ -538,26 +553,25 @@ def reconstruct_missing_day_statistics_by_hours(batch_size: int = 365) -> None:
 
     print("Found {} day(s) to reconstruct".format(len(dates_list_hours)))
 
-    for batch_start in range(0, len(dates_list_hours), batch_size):
-        for current_day in dates_list_hours[batch_start : batch_start + batch_size]:
-            print(" - Reconstructing:", current_day)
+    for current_day in dates_list_hours:
+        print(" - Reconstructing:", current_day)
 
-            day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(
-                electricity1_sum=Sum("electricity1"),
-                electricity2_sum=Sum("electricity2"),
-                electricity1_returned_sum=Sum("electricity1_returned"),
-                electricity2_returned_sum=Sum("electricity2_returned"),
-                gas_sum=Sum("gas"),
-            )
+        day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(
+            electricity1_sum=Sum("electricity1"),
+            electricity2_sum=Sum("electricity2"),
+            electricity1_returned_sum=Sum("electricity1_returned"),
+            electricity2_returned_sum=Sum("electricity2_returned"),
+            gas_sum=Sum("gas"),
+        )
 
-            DayStatistics.objects.create(
-                day=current_day,
-                electricity1=day_totals["electricity1_sum"],
-                electricity2=day_totals["electricity2_sum"],
-                electricity1_returned=day_totals["electricity1_returned_sum"],
-                electricity2_returned=day_totals["electricity2_returned_sum"],
-                gas=day_totals["gas_sum"],
-                total_cost=0,
-                electricity1_cost=0,
-                electricity2_cost=0,
-            )
+        DayStatistics.objects.create(
+            day=current_day,
+            electricity1=day_totals["electricity1_sum"],
+            electricity2=day_totals["electricity2_sum"],
+            electricity1_returned=day_totals["electricity1_returned_sum"],
+            electricity2_returned=day_totals["electricity2_returned_sum"],
+            gas=day_totals["gas_sum"],
+            total_cost=0,
+            electricity1_cost=0,
+            electricity2_cost=0,
+        )

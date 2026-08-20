@@ -24,7 +24,7 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
 
     def run(self, **options):
         if not self.telegram_generator:  # pragma: nocover
-            self.telegram_generator = self._datasource()
+            self.telegram_generator = dsmr_datalogger.services.datalogger.get_telegram_generator()
 
         telegram = next(self.telegram_generator)
 
@@ -46,6 +46,3 @@ class Command(InfiniteManagementCommandMixin, BaseCommand):
         DataloggerSettings.objects.update(restart_required=False)
         logger.warning("Detected datalogger restart required, stopping process...")
         raise StopInfiniteRun()
-
-    def _datasource(self):
-        return dsmr_datalogger.services.datalogger.get_telegram_generator()

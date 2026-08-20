@@ -16,6 +16,10 @@ from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasuremen
 
 logger = logging.getLogger("dsmrreader")
 
+# Static per model, computed once instead of on every telegram.
+READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
+MODEL_FIELDS_BY_NAME = {f.name: f for f in DsmrReading._meta.get_fields()}
+
 
 def initialize_client() -> Optional[InfluxDBClient]:
     influxdb_settings = InfluxdbIntegrationSettings.get_solo()
@@ -108,9 +112,8 @@ def publish_dsmr_reading(instance: DsmrReading) -> None:
     if not influxdb_settings.enabled:
         return
 
-    mapping = get_reading_to_measurement_mapping()
+    mapping = get_reading_to_measurement_mapping(influxdb_settings=influxdb_settings)
     data_source = instance.__dict__
-    model_fields = {f.name: f for f in DsmrReading._meta.get_fields()}
 
     for current_measurement, measurement_mapping in mapping.items():
         measurement_fields = {}
@@ -126,7 +129,7 @@ def publish_dsmr_reading(instance: DsmrReading) -> None:
             if (
                 isinstance(value, int)
                 and not isinstance(value, bool)
-                and isinstance(model_fields.get(reading_field), django_models.DecimalField)
+                and isinstance(MODEL_FIELDS_BY_NAME.get(reading_field), django_models.DecimalField)
             ):
                 value = float(value)
 
@@ -142,13 +145,12 @@ def publish_dsmr_reading(instance: DsmrReading) -> None:
         )
 
 
-def get_reading_to_measurement_mapping() -> Dict:
+def get_reading_to_measurement_mapping(influxdb_settings: Optional[InfluxdbIntegrationSettings] = None) -> Dict:
     """Parses and returns the formatting mapping as defined by the user."""
-    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
     mapping: dict = defaultdict(dict)
 
     config_parser = configparser.ConfigParser()
-    config_parser.read_string(InfluxdbIntegrationSettings.get_solo().formatting)
+    config_parser.read_string((influxdb_settings or InfluxdbIntegrationSettings.get_solo()).formatting)
 
     for current_measurement in config_parser.sections():
         for instance_field_name in config_parser[current_measurement]:

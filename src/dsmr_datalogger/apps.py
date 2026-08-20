@@ -43,7 +43,7 @@ def check_reading_count(**kwargs) -> Optional[MonitoringStatusIssue]:  # pragma:
     if reading_count is None:
         return None
 
-    if reading_count is not None and reading_count < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_READING_COUNT:
+    if reading_count < settings.DSMRREADER_STATUS_WARN_OVER_EXCESSIVE_READING_COUNT:
         return None
 
     return MonitoringStatusIssue(

@@ -1,3 +1,6 @@
+from decimal import Decimal
+from typing import Optional
+
 from django.conf import settings
 from django.contrib import admin
 from django.dispatch import receiver
@@ -84,35 +87,27 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
     )
     list_filter = (("timestamp", DateTimeRangeFilter),)
 
-    def formatted_electricity_delivered_1(self, obj: DsmrReading) -> str:  # pragma: no cover
-        if not obj.electricity_delivered_1:
-            return "-"
+    @staticmethod
+    def _format_decimal(value: Optional[Decimal]) -> str:
+        return str(value) if value else "-"
 
-        return str(obj.electricity_delivered_1)
+    def formatted_electricity_delivered_1(self, obj: DsmrReading) -> str:  # pragma: no cover
+        return self._format_decimal(obj.electricity_delivered_1)
 
     formatted_electricity_delivered_1.short_description = "electricity 1"  # type: ignore[attr-defined]
 
     def formatted_electricity_delivered_2(self, obj: DsmrReading) -> str:  # pragma: no cover
-        if not obj.electricity_delivered_2:
-            return "-"
-
-        return str(obj.electricity_delivered_2)
+        return self._format_decimal(obj.electricity_delivered_2)
 
     formatted_electricity_delivered_2.short_description = "electricity 2"  # type: ignore[attr-defined]
 
     def formatted_electricity_returned_1(self, obj: DsmrReading) -> str:  # pragma: no cover
-        if not obj.electricity_returned_1:
-            return "-"
-
-        return str(obj.electricity_returned_1)
+        return self._format_decimal(obj.electricity_returned_1)
 
     formatted_electricity_returned_1.short_description = "electricity returned 1"  # type: ignore[attr-defined]
 
     def formatted_electricity_returned_2(self, obj: DsmrReading) -> str:  # pragma: no cover
-        if not obj.electricity_returned_2:
-            return "-"
-
-        return str(obj.electricity_returned_2)
+        return self._format_decimal(obj.electricity_returned_2)
 
     formatted_electricity_returned_2.short_description = "electricity returned 2"  # type: ignore[attr-defined]
 
@@ -125,10 +120,7 @@ class DsmrReadingAdmin(DeletionOnlyAdminModel):
     formatted_extra_device_timestamp.short_description = "gas timestamp"  # type: ignore[attr-defined]
 
     def formatted_extra_device_delivered(self, obj: DsmrReading) -> str:  # pragma: no cover
-        if not obj.extra_device_delivered:
-            return "-"
-
-        return str(obj.extra_device_delivered)
+        return self._format_decimal(obj.extra_device_delivered)
 
     formatted_extra_device_delivered.short_description = "gas"  # type: ignore[attr-defined]
 

@@ -51,21 +51,15 @@ function send_test_email() {
 }
 
 function render_mode() {
-    if (!mode) {
-
-    } else if (mode === "gmail") {
+    if (mode === "gmail") {
         $('[data-gui="email-address"]').removeClass("hidden")
         $('[data-gui="controls"]').removeClass("hidden")
-    } else {
-
     }
 }
 
 function save() {
     if (mode === "gmail") {
         apply_gmail($("#email_to").val())
-    } else {
-
     }
 }
 

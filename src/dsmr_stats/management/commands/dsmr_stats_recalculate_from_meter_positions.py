@@ -71,10 +71,11 @@ class Command(BaseCommand):
 
         print("Starting — this may take a few minutes before any progress is shown...\n")
 
+        kwargs = {"dry_run": dry_run}
+        if batch_size is not None:
+            kwargs["batch_size"] = batch_size
+
         if run_days:
-            kwargs = {"dry_run": dry_run}
-            if batch_size is not None:
-                kwargs["batch_size"] = batch_size
             dsmr_stats.repair_services.recalculate_statistics_from_meter_positions(**kwargs)
             if not dry_run:
                 print(
@@ -84,7 +85,4 @@ class Command(BaseCommand):
                 print("\nDry run complete. Re-run with --write to apply changes.")
 
         if run_hours:
-            kwargs = {"dry_run": dry_run}
-            if batch_size is not None:
-                kwargs["batch_size"] = batch_size
             dsmr_stats.repair_services.recalculate_hour_statistics(**kwargs)

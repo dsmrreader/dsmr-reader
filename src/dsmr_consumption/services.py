@@ -33,9 +33,16 @@ logger = logging.getLogger("dsmrreader")
 
 def run(scheduled_process: ScheduledProcess) -> None:
     """Compacts all unprocessed readings, capped by a max to prevent hanging backend."""
+    consumption_settings = ConsumptionSettings.get_solo()
+    meter_statistics = MeterStatistics.get_solo()
+
     for current_reading in DsmrReading.objects.unprocessed()[0 : settings.DSMRREADER_COMPACT_MAX]:
         try:
-            compact(dsmr_reading=current_reading)
+            compact(
+                dsmr_reading=current_reading,
+                consumption_settings=consumption_settings,
+                meter_statistics=meter_statistics,
+            )
         except CompactorNotReadyError:
             # Try again in a while, since we can't do anything now anyway.
             scheduled_process.delay(seconds=15)
@@ -147,9 +154,13 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
     scheduled_process.reschedule(planned_at=new_instance.read_at_end + datetime.timedelta(minutes=MINUTE_INTERVAL))
 
 
-def compact(dsmr_reading: DsmrReading) -> None:
+def compact(
+    dsmr_reading: DsmrReading,
+    consumption_settings: Optional[ConsumptionSettings] = None,
+    meter_statistics: Optional[MeterStatistics] = None,
+) -> None:
     """Compacts/converts DSMR readings to consumption data. Optionally groups electricity by minute."""
-    consumption_settings = ConsumptionSettings.get_solo()
+    consumption_settings = consumption_settings or ConsumptionSettings.get_solo()
 
     # Grouping by minute requires some distinction and history checking.
     reading_start = datetime.datetime.combine(
@@ -177,6 +188,7 @@ def compact(dsmr_reading: DsmrReading) -> None:
     _compact_gas(
         dsmr_reading=dsmr_reading,
         gas_grouping_type=consumption_settings.gas_grouping_type,
+        meter_statistics=meter_statistics,
     )
 
     dsmr_reading.processed = True
@@ -194,29 +206,37 @@ def _compact_electricity(
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
     """
 
+    # Consumption field name -> (DsmrReading field name, aggregate function).
+    FIELD_MAPPING = {
+        "delivered_1": ("electricity_delivered_1", Max),
+        "returned_1": ("electricity_returned_1", Max),
+        "delivered_2": ("electricity_delivered_2", Max),
+        "returned_2": ("electricity_returned_2", Max),
+        "currently_delivered": ("electricity_currently_delivered", Avg),
+        "currently_returned": ("electricity_currently_returned", Avg),
+        "phase_currently_delivered_l1": ("phase_currently_delivered_l1", Avg),
+        "phase_currently_delivered_l2": ("phase_currently_delivered_l2", Avg),
+        "phase_currently_delivered_l3": ("phase_currently_delivered_l3", Avg),
+        "phase_currently_returned_l1": ("phase_currently_returned_l1", Avg),
+        "phase_currently_returned_l2": ("phase_currently_returned_l2", Avg),
+        "phase_currently_returned_l3": ("phase_currently_returned_l3", Avg),
+        "phase_voltage_l1": ("phase_voltage_l1", Avg),
+        "phase_voltage_l2": ("phase_voltage_l2", Avg),
+        "phase_voltage_l3": ("phase_voltage_l3", Avg),
+        "phase_power_current_l1": ("phase_power_current_l1", Avg),
+        "phase_power_current_l2": ("phase_power_current_l2", Avg),
+        "phase_power_current_l3": ("phase_power_current_l3", Avg),
+    }
+
     if electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING:
         try:
             # NO grouping, so the data will be stored as is.
             ElectricityConsumption.objects.get_or_create(
                 read_at=dsmr_reading.timestamp,
-                delivered_1=dsmr_reading.electricity_delivered_1,
-                returned_1=dsmr_reading.electricity_returned_1,
-                delivered_2=dsmr_reading.electricity_delivered_2,
-                returned_2=dsmr_reading.electricity_returned_2,
-                currently_delivered=dsmr_reading.electricity_currently_delivered,
-                currently_returned=dsmr_reading.electricity_currently_returned,
-                phase_currently_delivered_l1=dsmr_reading.phase_currently_delivered_l1,
-                phase_currently_delivered_l2=dsmr_reading.phase_currently_delivered_l2,
-                phase_currently_delivered_l3=dsmr_reading.phase_currently_delivered_l3,
-                phase_currently_returned_l1=dsmr_reading.phase_currently_returned_l1,
-                phase_currently_returned_l2=dsmr_reading.phase_currently_returned_l2,
-                phase_currently_returned_l3=dsmr_reading.phase_currently_returned_l3,
-                phase_voltage_l1=dsmr_reading.phase_voltage_l1,
-                phase_voltage_l2=dsmr_reading.phase_voltage_l2,
-                phase_voltage_l3=dsmr_reading.phase_voltage_l3,
-                phase_power_current_l1=dsmr_reading.phase_power_current_l1,
-                phase_power_current_l2=dsmr_reading.phase_power_current_l2,
-                phase_power_current_l3=dsmr_reading.phase_power_current_l3,
+                **{
+                    consumption_field: getattr(dsmr_reading, reading_field)
+                    for consumption_field, (reading_field, _) in FIELD_MAPPING.items()
+                },
             )
         except IntegrityError:
             # This might happen, even though rarely, when the same timestamp with different values comes by.
@@ -231,53 +251,18 @@ def _compact_electricity(
         return
 
     grouped_reading = DsmrReading.objects.filter(timestamp__gte=reading_start, timestamp__lt=minute_end).aggregate(
-        # Average Watt
-        avg_delivered=Avg("electricity_currently_delivered"),
-        avg_returned=Avg("electricity_currently_returned"),
-        # Take the most recent (highest) meter positions
-        max_delivered_1=Max("electricity_delivered_1"),
-        max_delivered_2=Max("electricity_delivered_2"),
-        max_returned_1=Max("electricity_returned_1"),
-        max_returned_2=Max("electricity_returned_2"),
-        # Average all other data.
-        avg_phase_delivered_l1=Avg("phase_currently_delivered_l1"),
-        avg_phase_delivered_l2=Avg("phase_currently_delivered_l2"),
-        avg_phase_delivered_l3=Avg("phase_currently_delivered_l3"),
-        avg_phase_return_l1=Avg("phase_currently_returned_l1"),
-        avg_phase_return_l2=Avg("phase_currently_returned_l2"),
-        avg_phase_return_l3=Avg("phase_currently_returned_l3"),
-        avg_phase_voltage_l1=Avg("phase_voltage_l1"),
-        avg_phase_voltage_l2=Avg("phase_voltage_l2"),
-        avg_phase_voltage_l3=Avg("phase_voltage_l3"),
-        avg_phase_power_current_l1=Avg("phase_power_current_l1"),
-        avg_phase_power_current_l2=Avg("phase_power_current_l2"),
-        avg_phase_power_current_l3=Avg("phase_power_current_l3"),
+        **{
+            consumption_field: agg_func(reading_field)
+            for consumption_field, (reading_field, agg_func) in FIELD_MAPPING.items()
+        }
     )
 
-    ElectricityConsumption.objects.create(
-        read_at=minute_end,
-        delivered_1=grouped_reading["max_delivered_1"],
-        returned_1=grouped_reading["max_returned_1"],
-        delivered_2=grouped_reading["max_delivered_2"],
-        returned_2=grouped_reading["max_returned_2"],
-        currently_delivered=grouped_reading["avg_delivered"],
-        currently_returned=grouped_reading["avg_returned"],
-        phase_currently_delivered_l1=grouped_reading["avg_phase_delivered_l1"],
-        phase_currently_delivered_l2=grouped_reading["avg_phase_delivered_l2"],
-        phase_currently_delivered_l3=grouped_reading["avg_phase_delivered_l3"],
-        phase_currently_returned_l1=grouped_reading["avg_phase_return_l1"],
-        phase_currently_returned_l2=grouped_reading["avg_phase_return_l2"],
-        phase_currently_returned_l3=grouped_reading["avg_phase_return_l3"],
-        phase_voltage_l1=grouped_reading["avg_phase_voltage_l1"],
-        phase_voltage_l2=grouped_reading["avg_phase_voltage_l2"],
-        phase_voltage_l3=grouped_reading["avg_phase_voltage_l3"],
-        phase_power_current_l1=grouped_reading["avg_phase_power_current_l1"],
-        phase_power_current_l2=grouped_reading["avg_phase_power_current_l2"],
-        phase_power_current_l3=grouped_reading["avg_phase_power_current_l3"],
-    )
+    ElectricityConsumption.objects.create(read_at=minute_end, **grouped_reading)
 
 
-def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
+def _compact_gas(
+    dsmr_reading: DsmrReading, gas_grouping_type: int, meter_statistics: Optional[MeterStatistics] = None
+) -> None:
     """
     Compacts any DSMR readings to gas consumption records, optionally grouped. Only when there is support for gas.
 
@@ -290,7 +275,7 @@ def _compact_gas(dsmr_reading: DsmrReading, gas_grouping_type: int) -> None:
         return
 
     gas_read_at = dsmr_reading.extra_device_timestamp
-    dsmr_version = MeterStatistics.get_solo().dsmr_version
+    dsmr_version = (meter_statistics or MeterStatistics.get_solo()).dsmr_version
 
     # User requests grouping? Truncate any precision, making the gas reading's timestamp collide with the previous one,
     # until at least an hour passed by.
@@ -401,10 +386,9 @@ def day_consumption(day: datetime.date) -> Dict:
     consumption["total_cost"] = consumption["electricity_cost_merged"]
 
     # Gas readings are optional, as not all meters support this.
-    if gas_readings.exists():
-        gas_reading_count = gas_readings.count()
-        first_reading = gas_readings[0]
-        last_reading = gas_readings[gas_reading_count - 1]
+    first_reading = gas_readings.first()
+    if first_reading is not None:
+        last_reading = cast(GasConsumption, gas_readings.last())
         consumption["gas"] = last_reading.delivered - first_reading.delivered
         # Gas timestamps are always aligned to exact meter-generation intervals:
         #   Old meters (DSMR ≤ 4): every 60 min  (60 % 60 = 0 → reading at midnight and every hour)

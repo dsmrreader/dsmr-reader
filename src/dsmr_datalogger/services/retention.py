@@ -110,7 +110,7 @@ def run(scheduled_process: ScheduledProcess) -> None:
             logger.debug(
                 "Retention: Cleaning up: %s (%s)",
                 current_hour,
-                data_set[0].__class__.__name__,
+                model_name,
             )
             data_set.exclude(pk__in=keeper_pks).delete()
 

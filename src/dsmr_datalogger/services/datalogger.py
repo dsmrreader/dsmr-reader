@@ -20,8 +20,14 @@ import dsmr_datalogger.signals
 
 logger = logging.getLogger("dsmrreader")
 
+# Static per model, computed once instead of on every telegram.
+READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
+STATISTICS_FIELDS = [
+    x.name for x in MeterStatistics._meta.get_fields() if x.name not in ("id", "rejected_telegrams", "latest_telegram")
+]
 
-def get_dsmr_connection_parameters() -> Dict:
+
+def get_dsmr_connection_parameters(datalogger_settings: Optional[DataloggerSettings] = None) -> Dict:
     """Returns the communication settings required for the DSMR version set."""
     DSMR_VERSION_MAPPING = {
         DataloggerSettings.DSMR_VERSION_2_3: telegram_specifications.V2_2,
@@ -30,7 +36,7 @@ def get_dsmr_connection_parameters() -> Dict:
         DataloggerSettings.DSMR_LUXEMBOURG_SMARTY: telegram_specifications.LUXEMBOURG_SMARTY,
     }
 
-    datalogger_settings = DataloggerSettings.get_solo()
+    datalogger_settings = datalogger_settings or DataloggerSettings.get_solo()
     is_default_dsmr_protocol = datalogger_settings.dsmr_version != DataloggerSettings.DSMR_VERSION_2_3
     connection_parameters = dict(
         telegram_timeout=20,  # After this threshold, the datalogger will throw an exception to break the infinite loop.
@@ -71,7 +77,8 @@ def get_telegram_generator() -> Iterator:
 
 def telegram_to_reading(data: str) -> DsmrReading:
     """Converts a P1 telegram to a DSMR reading, which will be stored in database."""
-    params = get_dsmr_connection_parameters()
+    datalogger_settings = DataloggerSettings.get_solo()
+    params = get_dsmr_connection_parameters(datalogger_settings)
     parser = TelegramParser(params["specifications"])
     logger.debug("Received telegram:\n%s", data)
 
@@ -83,19 +90,11 @@ def telegram_to_reading(data: str) -> DsmrReading:
         logger.warning("Rejected telegram: %s", error)
         raise InvalidTelegramError(error) from error
 
-    return _map_telegram_to_model(parsed_telegram=parsed_telegram, data=data)
+    return _map_telegram_to_model(parsed_telegram=parsed_telegram, data=data, datalogger_settings=datalogger_settings)
 
 
-def _map_telegram_to_model(parsed_telegram: Dict, data: str):
+def _map_telegram_to_model(parsed_telegram: Dict, data: str, datalogger_settings: DataloggerSettings):
     """Maps parsed telegram to the fields."""
-    READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
-    STATISTICS_FIELDS = [
-        x.name
-        for x in MeterStatistics._meta.get_fields()
-        if x.name not in ("id", "rejected_telegrams", "latest_telegram")
-    ]
-
-    datalogger_settings = DataloggerSettings.get_solo()
     model_fields: Dict[str, Any] = {k: None for k in READING_FIELDS + STATISTICS_FIELDS}
     mapping = _get_dsmrreader_mapping(datalogger_settings)
 
