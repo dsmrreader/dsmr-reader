@@ -140,24 +140,39 @@ def run_quarter_hour_peaks(scheduled_process: ScheduledProcess) -> None:
         scheduled_process.reschedule(planned_at=end + datetime.timedelta(minutes=MINUTE_INTERVAL))
         return
 
-    # Calculate quarter data.
-    total_delivered_start = first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2
-    total_delivered_end = last_reading.electricity_delivered_1 + last_reading.electricity_delivered_2
-    avg_delivered_in_quarter = total_delivered_end - total_delivered_start
     logger.debug(
         "Quarter hour peaks: Calculating for %s - %s",
         timezone.localtime(first_reading.timestamp),
         timezone.localtime(last_reading.timestamp),
     )
+    consumption_settings = ConsumptionSettings.get_solo()
 
-    # We may not be able to track exactly 15 minutes, so adjust the average a bit based on the real duration.
+    # We may not be able to track exactly 15 minutes, so the calculated path adjusts the average a bit based
+    # on the real duration. Computed regardless of source, since it's also logged below.
     time_diff = last_reading.timestamp - first_reading.timestamp
 
-    # avg_delivered_in_quarter = kW QUARTER peak during ~15 minutes... x ~4 maps it to avg per hour for kW HOUR peak
-    average_delivered_hour = avg_delivered_in_quarter * Decimal(3600 / time_diff.total_seconds())
+    if (
+        consumption_settings.quarter_hour_peak_electricity_consumption_source
+        == ConsumptionSettings.QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_METER
+    ):
+        # Sourced directly from the meter (e.g. Belgium/VREG capacity tariff): use the last reading in this
+        # window that carried the field. No fallback to the calculated value when it's missing.
+        metered_reading = quarter_hour_readings.filter(quarter_hour_current_average_demand__isnull=False).last()
+        average_delivered_hour = (
+            round_decimal(metered_reading.quarter_hour_current_average_demand, decimal_count=3)
+            if metered_reading
+            else None
+        )
+    else:
+        total_delivered_start = first_reading.electricity_delivered_1 + first_reading.electricity_delivered_2
+        total_delivered_end = last_reading.electricity_delivered_1 + last_reading.electricity_delivered_2
+        avg_delivered_in_quarter = total_delivered_end - total_delivered_start
 
-    # Make sure to round here.
-    average_delivered_hour = round_decimal(average_delivered_hour, decimal_count=3)
+        # avg_delivered_in_quarter = kW QUARTER peak during ~15 minutes... x ~4 maps it to avg per hour for kW HOUR peak
+        average_delivered_hour = avg_delivered_in_quarter * Decimal(3600 / time_diff.total_seconds())
+
+        # Make sure to round here.
+        average_delivered_hour = round_decimal(average_delivered_hour, decimal_count=3)
 
     new_instance = QuarterHourPeakElectricityConsumption.objects.create(
         # Using the reading timestamps used to ensure we can indicate gaps or lag in reading input.

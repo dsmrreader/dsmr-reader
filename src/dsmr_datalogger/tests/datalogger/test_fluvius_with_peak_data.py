@@ -84,6 +84,7 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(reading.phase_power_current_l1, 1)
         self.assertEqual(reading.phase_power_current_l2, 1)
         self.assertEqual(reading.phase_power_current_l3, 1)
+        self.assertEqual(reading.quarter_hour_current_average_demand, Decimal("0.078"))
 
         meter_statistics = MeterStatistics.get_solo()
         self.assertIsNone(meter_statistics.dsmr_version)
@@ -96,6 +97,21 @@ class TestDatalogger(FakeDsmrReadingMixin, InterceptCommandStdoutMixin, TestCase
         self.assertEqual(meter_statistics.voltage_swell_count_l1, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l2, None)
         self.assertEqual(meter_statistics.voltage_swell_count_l3, None)
+        self.assertEqual(meter_statistics.quarter_hour_maximum_demand_running_month, Decimal("1.566"))
+        self.assertEqual(
+            meter_statistics.quarter_hour_maximum_demand_running_month_timestamp,
+            datetime(2023, 2, 1, 1, 0, 0, tzinfo=ZoneInfo("UTC")),
+        )
+        self.assertEqual(
+            meter_statistics.quarter_hour_maximum_demand_last_13_months,
+            [
+                {
+                    "month": "2023-01-31T23:00:00Z",
+                    "peak_timestamp": "2023-01-14T11:45:00Z",
+                    "peak_demand": "3.332",
+                }
+            ],
+        )
 
     @mock.patch("django.utils.timezone.now")
     def test_telegram_override_timestamp(self, now_mock):

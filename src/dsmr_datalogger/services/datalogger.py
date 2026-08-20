@@ -110,10 +110,7 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str, datalogger_settings
         else:
             model_fields[target_field] = obis_data.value
 
-    extra_device_reading = _select_extra_device_reading(parsed_telegram, datalogger_settings)
-    if extra_device_reading is not None:
-        model_fields["extra_device_delivered"] = extra_device_reading.value
-        model_fields["extra_device_timestamp"] = extra_device_reading.datetime
+    _apply_derived_fields(model_fields, parsed_telegram, datalogger_settings)
 
     # Defaults for telegrams with missing data.
     model_fields["timestamp"] = model_fields["timestamp"] or timezone.now()
@@ -167,6 +164,20 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str, datalogger_settings
     return new_instance
 
 
+def _apply_derived_fields(
+    model_fields: Dict[str, Any], parsed_telegram: Any, datalogger_settings: DataloggerSettings
+) -> None:
+    """Applies fields that need more than the flat OBIS-to-field mapping to extract."""
+    extra_device_reading = _select_extra_device_reading(parsed_telegram, datalogger_settings)
+    if extra_device_reading is not None:
+        model_fields["extra_device_delivered"] = extra_device_reading.value
+        model_fields["extra_device_timestamp"] = extra_device_reading.datetime
+
+    quarter_hour_maximum_demand_history = _extract_quarter_hour_maximum_demand_history(parsed_telegram)
+    if quarter_hour_maximum_demand_history is not None:
+        model_fields["quarter_hour_maximum_demand_last_13_months"] = quarter_hour_maximum_demand_history
+
+
 def _select_extra_device_reading(parsed_telegram: Any, datalogger_settings: DataloggerSettings) -> Optional[Any]:
     """Picks the gas (or, in the future, water) reading from the telegram's MBus channels, if any.
 
@@ -193,6 +204,23 @@ def _select_extra_device_reading(parsed_telegram: Any, datalogger_settings: Data
         return None
 
     return max(readings, key=lambda reading: reading.datetime)
+
+
+def _extract_quarter_hour_maximum_demand_history(parsed_telegram: Any) -> Optional[list]:
+    """Picks the last-13-months maximum demand history off the telegram, if present.
+
+    Returned as a list of MBusObjectPeak reduced to plain dicts, e.g. Belgium/VREG capacity tariff meters
+    (OBIS 98.1.0). Parsed as a list rather than a single DSMRObject, so it needs separate handling from the
+    flat OBIS-to-field mapping above. A telegram without this OBIS reference at all yields None; a meter
+    that reports the field but hasn't accumulated any history yet legitimately yields an empty list.
+    """
+    entries = getattr(parsed_telegram, "BELGIUM_MAXIMUM_DEMAND_13_MONTHS", None)
+    if entries is None:
+        return None
+
+    return [
+        {"month": entry.datetime, "peak_timestamp": entry.occurred, "peak_demand": entry.value} for entry in entries
+    ]
 
 
 def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
@@ -223,6 +251,13 @@ def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
         obis_references.INSTANTANEOUS_CURRENT_L1: "phase_power_current_l1",
         obis_references.INSTANTANEOUS_CURRENT_L2: "phase_power_current_l2",
         obis_references.INSTANTANEOUS_CURRENT_L3: "phase_power_current_l3",
+        obis_references.BELGIUM_CURRENT_AVERAGE_DEMAND: "quarter_hour_current_average_demand",
+        obis_references.BELGIUM_MAXIMUM_DEMAND_MONTH: {
+            "value": "quarter_hour_maximum_demand_running_month",
+            "datetime": "quarter_hour_maximum_demand_running_month_timestamp",
+        },
+        # BELGIUM_MAXIMUM_DEMAND_13_MONTHS is a list, not a single DSMRObject, so it's handled separately by
+        # _extract_quarter_hour_maximum_demand_history() rather than through this flat mapping.
         # For some reason this identifier contains two fields, therefore we split them.
         obis_references.HOURLY_GAS_METER_READING: SPLIT_GAS_FIELD,  # DSMR v4.x
         obis_references.GAS_METER_READING: SPLIT_GAS_FIELD,  # Legacy

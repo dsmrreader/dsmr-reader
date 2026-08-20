@@ -1,4 +1,5 @@
 from typing import ClassVar
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.dispatch import receiver
 from django.utils import timezone
@@ -65,6 +66,27 @@ class MeterStatistics(ModelUpdateMixin, SingletonModel):
         help_text=_("Number of rejected telegrams due to invalid CRC checksum"),
         default=0,
     )
+    quarter_hour_maximum_demand_running_month = models.DecimalField(  # type: ignore[var-annotated]
+        help_text=_("Maximum demand - active energy import of the running month (in kW)"),
+        max_digits=9,
+        decimal_places=3,
+        null=True,
+        default=None,
+    )
+    quarter_hour_maximum_demand_running_month_timestamp = models.DateTimeField(  # type: ignore[var-annotated]
+        help_text=_("Timestamp at which the running month's maximum demand occurred"),
+        null=True,
+        default=None,
+    )
+    quarter_hour_maximum_demand_last_13_months = models.JSONField(  # type: ignore[var-annotated]
+        help_text=_(
+            "Maximum demand - active energy import of the last 13 months. List of objects with "
+            "month, peak_timestamp and peak_demand."
+        ),
+        encoder=DjangoJSONEncoder,
+        null=True,
+        default=None,
+    )
     latest_telegram = models.TextField(  # type: ignore[var-annotated]
         help_text=_(
             "The latest telegram successfully read. Please note that only "
@@ -124,6 +146,8 @@ def _on_meter_statistics_pre_save_signal(instance, raw, update_fields, **kwargs)
             "electricity_tariff",
             "rejected_telegrams",
             "latest_telegram",
+            # Serialized value would not fit the change log's CharField(32) old_value/new_value columns.
+            "quarter_hour_maximum_demand_last_13_months",
         )
     ]
 

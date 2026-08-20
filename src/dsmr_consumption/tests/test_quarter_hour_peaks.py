@@ -10,6 +10,7 @@ from dsmr_backend.models.schedule import ScheduledProcess
 from dsmr_backend.tests.mixins import InterceptCommandStdoutMixin
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_consumption.models.consumption import QuarterHourPeakElectricityConsumption
+from dsmr_consumption.models.settings import ConsumptionSettings
 import dsmr_consumption.services
 
 
@@ -145,3 +146,70 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
             dsmr_consumption.services.run_quarter_hour_peaks(self.schedule_process)
 
         self.assertEqual(QuarterHourPeakElectricityConsumption.objects.count(), 20)
+
+
+class TestServicesMeterSourced(InterceptCommandStdoutMixin, TestCase):
+    """Belgium/VREG and similar: average_delivered sourced from the meter instead of calculated."""
+
+    def setUp(self):
+        self.schedule_process = ScheduledProcess.objects.get(
+            module=settings.DSMRREADER_MODULE_CALCULATE_QUARTER_HOUR_PEAKS
+        )
+        ConsumptionSettings.get_solo()
+        ConsumptionSettings.objects.all().update(
+            quarter_hour_peak_electricity_consumption_source=(
+                ConsumptionSettings.QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_METER
+            )
+        )
+
+    def _create_reading(self, timestamp, quarter_hour_current_average_demand=None) -> DsmrReading:
+        return DsmrReading.objects.create(
+            timestamp=timestamp,
+            electricity_delivered_1=100,
+            electricity_delivered_2=150,
+            electricity_returned_1=0,
+            electricity_returned_2=0,
+            electricity_currently_delivered=0,
+            electricity_currently_returned=0,
+            quarter_hour_current_average_demand=quarter_hour_current_average_demand,
+        )
+
+    @mock.patch("django.utils.timezone.now")
+    def test_metered_value_used(self, now_mock):
+        """The last reading in the window carrying the field wins, ignoring the delta-based calculation."""
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=34, second=0))
+        self.schedule_process.reschedule(timezone.now())
+
+        reading1 = self._create_reading(
+            timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=15, second=1)),
+            quarter_hour_current_average_demand=Decimal("0.500"),
+        )
+        reading2 = self._create_reading(
+            timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=29, second=40)),
+            quarter_hour_current_average_demand=Decimal("0.750"),
+        )
+        self._create_reading(reading2.timestamp + datetime.timedelta(minutes=15))
+
+        dsmr_consumption.services.run_quarter_hour_peaks(self.schedule_process)
+
+        quarter_hour_peak = QuarterHourPeakElectricityConsumption.objects.get()
+        self.assertEqual(quarter_hour_peak.read_at_start, reading1.timestamp)
+        self.assertEqual(quarter_hour_peak.read_at_end, reading2.timestamp)
+        self.assertEqual(quarter_hour_peak.average_delivered, Decimal("0.750"))
+
+    @mock.patch("django.utils.timezone.now")
+    def test_missing_metered_value_results_in_none(self, now_mock):
+        """No fallback to the calculated value when the telegram lacked the field for this window."""
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=34, second=0))
+        self.schedule_process.reschedule(timezone.now())
+
+        reading2 = self._create_reading(
+            timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=29, second=40)),
+        )
+        self._create_reading(timezone.make_aware(datetime.datetime(2022, 1, 1, hour=14, minute=15, second=1)))
+        self._create_reading(reading2.timestamp + datetime.timedelta(minutes=15))
+
+        dsmr_consumption.services.run_quarter_hour_peaks(self.schedule_process)
+
+        quarter_hour_peak = QuarterHourPeakElectricityConsumption.objects.get()
+        self.assertIsNone(quarter_hour_peak.average_delivered)

@@ -154,6 +154,16 @@ class DsmrReading(ModelUpdateMixin, models.Model):
         validators=[MinValueValidator(0), MaxValueValidator(999)],
         help_text=_("Power/current for phase L3 (in A)"),
     )
+    quarter_hour_current_average_demand = models.DecimalField(  # type: ignore[var-annotated]
+        null=True,
+        default=None,
+        max_digits=9,
+        decimal_places=3,
+        help_text=_(
+            "Current average demand for the in-progress quarter hour window, as reported by the meter (in kW). "
+            "Only present on meters reporting capacity tariff data, e.g. Belgium/VREG."
+        ),
+    )
 
     class Meta:
         default_permissions: ClassVar[tuple[str, ...]] = tuple()

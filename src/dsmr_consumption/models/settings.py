@@ -39,6 +39,23 @@ class ConsumptionSettings(ModelUpdateMixin, SingletonModel):
         ),
     )
 
+    QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_CALCULATED = 1
+    QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_METER = 2
+    QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_CHOICES = (
+        (QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_CALCULATED, _("Calculated (default)")),
+        (QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_METER, _("Reported by meter (Belgium/VREG and similar)")),
+    )
+    quarter_hour_peak_electricity_consumption_source = models.IntegerField(  # type: ignore[var-annotated]
+        choices=QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_CHOICES,
+        default=QUARTER_HOUR_PEAK_ELECTRICITY_CONSUMPTION_SOURCE_CALCULATED,
+        verbose_name=_("Quarter hour peak electricity consumption source"),
+        help_text=_(
+            "Whether the quarter hour peak electricity consumption is calculated from readings, or sourced "
+            "directly from the meter where the telegram reports it (e.g. Belgium/VREG capacity tariff meters). "
+            "When sourced from the meter and a window lacks the data, no value is stored for that window."
+        ),
+    )
+
     def __str__(self):
         return self._meta.verbose_name.title()
 
