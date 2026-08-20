@@ -1,3 +1,5 @@
+import hmac
+
 from django.contrib.auth.models import User
 from django.conf import settings
 from rest_framework import authentication
@@ -21,9 +23,12 @@ class HeaderAuthentication(authentication.BaseAuthentication):
         if not api_settings.allow:
             raise exceptions.PermissionDenied("API is disabled")
 
-        if request.META.get("HTTP_X_AUTHKEY") != api_settings.auth_key and request.META.get(
-            "HTTP_AUTHORIZATION"
-        ) != "Token {}".format(api_settings.auth_key):
+        x_authkey_valid = hmac.compare_digest(request.META.get("HTTP_X_AUTHKEY", ""), api_settings.auth_key)
+        authorization_valid = hmac.compare_digest(
+            request.META.get("HTTP_AUTHORIZATION", ""), "Token {}".format(api_settings.auth_key)
+        )
+
+        if not x_authkey_valid and not authorization_valid:
             raise exceptions.AuthenticationFailed("Invalid auth key")
 
         try:
