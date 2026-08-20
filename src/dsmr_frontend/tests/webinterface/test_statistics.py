@@ -73,6 +73,26 @@ class TestViews(TestCase):
         self.assertContains(response, "Wednesday 1 February 2023 at 12:00 a.m.")  # 13 months: month
         self.assertContains(response, "Saturday 14 January 2023 at 12:45 p.m.")  # 13 months: peak timestamp
 
+    @mock.patch("django.utils.timezone.now")
+    def test_statistics_quarter_hour_maximum_demand_zero_is_not_hidden(self, now_mock):
+        """A genuine 0.000 kW reading (e.g. right after a monthly reset) must still render, not look like no data."""
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+
+        if not self.support_data:
+            return
+
+        MeterStatistics.objects.all().update(
+            quarter_hour_maximum_demand_running_month=Decimal("0.000"),
+            quarter_hour_maximum_demand_running_month_timestamp=timezone.make_aware(
+                timezone.datetime(2023, 2, 1, 1, 0, 0)
+            ),
+        )
+
+        response = self.client.get(reverse("{}:statistics".format(self.namespace)))
+        self.assertEqual(response.status_code, 200, response.content)
+        self.assertContains(response, '<span class="badge-integer">0</span><span class="badge-decimal">.000</span>')
+        self.assertContains(response, "Wednesday 1 February 2023 at 1:00 a.m.")
+
     def test_statistics_xhr_data(self):
         response = self.client.get(reverse("{}:statistics-xhr-data".format(self.namespace)))
         self.assertEqual(response.status_code, 200, response.content)

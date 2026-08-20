@@ -30,7 +30,7 @@ voltage_swell_count_l2 = dsmr/meter-stats/voltage_swell_count_l2
 voltage_swell_count_l3 = dsmr/meter-stats/voltage_swell_count_l3
 rejected_telegrams = dsmr/meter-stats/rejected_telegrams
 quarter_hour_maximum_demand_running_month = dsmr/meter-stats/quarter_hour_maximum_demand_running_month
-quarter_hour_maximum_demand_running_month_timestamp = dsmr/meter-stats/quarter_hour_maximum_demand_month_timestamp
+quarter_hour_maximum_demand_running_month_timestamp = dsmr/meter-stats/quarter_hour_maximum_demand_running_month_timestamp
 """,
         verbose_name=_("Formatting"),
         help_text=_("Maps the field names to separate topics sent to the broker."),

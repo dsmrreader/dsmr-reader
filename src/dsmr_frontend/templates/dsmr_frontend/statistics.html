@@ -194,7 +194,7 @@
                                 <tr>
                                     <td>{% translate "Maximum demand - active energy import of the running month (in kW)" %}</td>
                                     <td>
-                                        {% if meter_statistics.quarter_hour_maximum_demand_running_month %}
+                                        {% if meter_statistics.quarter_hour_maximum_demand_running_month is not None %}
                                             <span class="badge bg-black">{{ meter_statistics.quarter_hour_maximum_demand_running_month|decimal_html }}</span>
                                             {% if meter_statistics.quarter_hour_maximum_demand_running_month_timestamp %}
                                                 <br>
