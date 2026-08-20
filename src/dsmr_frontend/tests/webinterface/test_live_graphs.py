@@ -328,6 +328,32 @@ class TestViews(TestCase):
             self.assertEqual(json_content, {"read_at": [], "average_delivered": []})
 
     @mock.patch("django.utils.timezone.now")
+    def test_live_xhr_electricity_peaks_meter_sourced_gap(self, now_mock):
+        """A quarter without a meter-reported value (average_delivered=None) should not crash the XHR view."""
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2022, 7, 1, 12, 0, 3))
+
+        if self.support_data:
+            QuarterHourPeakElectricityConsumption.objects.create(
+                read_at_start=timezone.now(),
+                read_at_end=timezone.now() + timezone.timedelta(minutes=14, seconds=58),
+                average_delivered=None,
+            )
+
+        response = self.client.get(reverse("{}:live-xhr-electricity-peaks".format(self.namespace)))
+        json_content = json.loads(response.content.decode("utf8"))
+
+        if self.support_data:
+            self.assertEqual(
+                json_content,
+                {
+                    "average_delivered": [None],
+                    "read_at": ["Fri 12:00:03 - Fri 12:15:01"],
+                },
+            )
+        else:
+            self.assertEqual(json_content, {"read_at": [], "average_delivered": []})
+
+    @mock.patch("django.utils.timezone.now")
     def test_live_xhr_gas(self, now_mock):
         now_mock.return_value = timezone.make_aware(timezone.datetime(2018, 7, 1))
 

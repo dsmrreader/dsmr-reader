@@ -191,11 +191,49 @@
                                         {% endif %}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>{% translate "Maximum demand - active energy import of the running month (in kW)" %}</td>
+                                    <td>
+                                        {% if meter_statistics.quarter_hour_maximum_demand_running_month %}
+                                            <span class="badge bg-black">{{ meter_statistics.quarter_hour_maximum_demand_running_month|decimal_html }}</span>
+                                            {% if meter_statistics.quarter_hour_maximum_demand_running_month_timestamp %}
+                                                <br>
+                                                <span class="unit">{{ meter_statistics.quarter_hour_maximum_demand_running_month_timestamp }}</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {% if meter_statistics.quarter_hour_maximum_demand_last_13_months %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel">
+                            <h2 class="panel-heading">{% translate "Maximum demand - active energy import of the last 13 months" %}</h2>
+                            <div class="panel-body">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th class="col-sm-4">{% translate "Month" %}</th>
+                                        <th class="col-sm-4">{% translate "Peak" %} <span class="unit">{% translate "kW" %}</span></th>
+                                        <th class="col-sm-4">{% translate "Occurred at" %}</th>
+                                    </tr>
+                                    {% for entry in meter_statistics.quarter_hour_maximum_demand_last_13_months %}
+                                        <tr>
+                                            <td>{{ entry.month|slice:":10" }}</td>
+                                            <td><span class="badge bg-black">{{ entry.peak_demand|decimal_html }}</span></td>
+                                            <td>{{ entry.peak_timestamp|slice:":10" }} {{ entry.peak_timestamp|slice:"11:19" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
 
             <div class="row">
                 <div class="col-sm-12">

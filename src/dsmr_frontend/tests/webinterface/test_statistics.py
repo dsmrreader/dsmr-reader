@@ -9,6 +9,7 @@ from django.urls import reverse
 from dsmr_consumption.models.consumption import ElectricityConsumption, GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_stats.models.statistics import DayStatistics
 
 
@@ -45,6 +46,32 @@ class TestViews(TestCase):
             self.assertIn("returned_sum", response.context)
             self.assertEqual(response.context["delivered_sum"], Decimal("1059.250"))
             self.assertEqual(response.context["returned_sum"], Decimal("124.356"))
+
+    @mock.patch("django.utils.timezone.now")
+    def test_statistics_quarter_hour_maximum_demand(self, now_mock):
+        """The maximum demand panels should render when the meter reports the data (Belgium/VREG and similar)."""
+        now_mock.return_value = timezone.make_aware(timezone.datetime(2016, 1, 1))
+
+        if not self.support_data:
+            return
+
+        MeterStatistics.objects.all().update(
+            quarter_hour_maximum_demand_running_month=Decimal("1.566"),
+            quarter_hour_maximum_demand_running_month_timestamp=timezone.make_aware(
+                timezone.datetime(2023, 2, 1, 1, 0, 0)
+            ),
+            quarter_hour_maximum_demand_last_13_months=[
+                {"month": "2023-01-31T23:00:00Z", "peak_timestamp": "2023-01-14T11:45:00Z", "peak_demand": "3.332"}
+            ],
+        )
+
+        response = self.client.get(reverse("{}:statistics".format(self.namespace)))
+        self.assertEqual(response.status_code, 200, response.content)
+        self.assertContains(response, '<span class="badge-integer">1</span><span class="badge-decimal">.566</span>')
+        self.assertContains(response, '<span class="badge-integer">3</span><span class="badge-decimal">.332</span>')
+        self.assertContains(response, "2023-01-31")
+        self.assertContains(response, "2023-01-14")
+        self.assertContains(response, "11:45:00")
 
     def test_statistics_xhr_data(self):
         response = self.client.get(reverse("{}:statistics-xhr-data".format(self.namespace)))

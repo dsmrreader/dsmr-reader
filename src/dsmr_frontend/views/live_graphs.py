@@ -163,7 +163,9 @@ class LiveXhrQuarterHourPeakElectricityConsumption(ConfigurableLoginRequiredMixi
             read_at_start = formats.date_format(timezone.localtime(current.read_at_start), FORMAT)
             read_at_end = formats.date_format(timezone.localtime(current.read_at_end), FORMAT)
             data["read_at"].append("{} - {}".format(read_at_start, read_at_end))
-            data["average_delivered"].append(float(current.average_delivered))
+            data["average_delivered"].append(
+                float(current.average_delivered) if current.average_delivered is not None else None
+            )
 
         response = JsonResponse(data)
         patch_response_headers(response)

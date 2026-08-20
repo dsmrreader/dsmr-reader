@@ -2474,6 +2474,18 @@ msgstr "Aantal spanningspieken in fase L2"
 msgid "Number of voltage swells in phase L3"
 msgstr "Aantal spanningspieken in fase L3"
 
+msgid "Maximum demand - active energy import of the last 13 months"
+msgstr "Maximumvermogen - actieve energie-import van de afgelopen 13 maanden"
+
+msgid "Month"
+msgstr "Maand"
+
+msgid "Peak"
+msgstr "Piek"
+
+msgid "Occurred at"
+msgstr "Opgetreden op"
+
 msgid "All time highs & lows"
 msgstr "Hoogte- en laagte records"
 
