@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.db import connection
 import serial
 
-from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading, READING_FIELDS
 from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_datalogger.models.settings import DataloggerSettings
 from dsmr_datalogger.exceptions import InvalidTelegramError
@@ -21,7 +21,6 @@ import dsmr_datalogger.signals
 logger = logging.getLogger("dsmrreader")
 
 # Static per model, computed once instead of on every telegram.
-READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
 STATISTICS_FIELDS = [
     x.name for x in MeterStatistics._meta.get_fields() if x.name not in ("id", "rejected_telegrams", "latest_telegram")
 ]

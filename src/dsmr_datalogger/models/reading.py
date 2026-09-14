@@ -170,3 +170,7 @@ class DsmrReading(ModelUpdateMixin, models.Model):
 
     def __str__(self):
         return "{} @ {}".format(self.id, timezone.localtime(self.timestamp))
+
+
+# Static per model, computed once instead of on every telegram.
+READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]

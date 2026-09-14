@@ -10,14 +10,13 @@ from django.db import models as django_models
 from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
-from dsmr_datalogger.models.reading import DsmrReading
+from dsmr_datalogger.models.reading import DsmrReading, READING_FIELDS
 from dsmr_influxdb.models import InfluxdbIntegrationSettings, InfluxdbMeasurement
 
 
 logger = logging.getLogger("dsmrreader")
 
 # Static per model, computed once instead of on every telegram.
-READING_FIELDS = [x.name for x in DsmrReading._meta.get_fields() if x.name not in ("id", "processed")]
 MODEL_FIELDS_BY_NAME = {f.name: f for f in DsmrReading._meta.get_fields()}
 
 
