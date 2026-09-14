@@ -124,11 +124,9 @@
     {{ block.super }}
 
     {% get_current_language as LANGUAGE_CODE %}
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
-    <script type="text/javascript">
+    <script src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
+    <script src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
+    <script>
         /* Translations. */
         const LOADING_OPTIONS = {text: '{% blocktranslate %}Loading...{% endblocktranslate %}'};
         const TEXT_ELECTRICITY_CONSUMED_HEADER = '{% blocktranslate %}Average electricity consumed{% endblocktranslate %} {S|kWh}';
@@ -213,7 +211,7 @@
         const BY_TARIFF_URL = "{% url 'frontend:trends-xhr-consumption-by-tariff' %}";
     </script>
 
-    <script type="text/javascript">
+    <script>
         function update_trends() {
             if (g_trends_start_date === null || g_trends_end_date === null) {
                 return;
@@ -233,14 +231,11 @@
 
     </script>
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/trends/selection.js' %}?r=v{{ dsmr_version }}"></script>
+    <script src="{% static 'dsmr_frontend/js/dsmr-reader/trends/selection.js' %}?r=v{{ dsmr_version }}"></script>
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/trends/average.js' %}?r=v{{ dsmr_version }}"></script>
+    <script src="{% static 'dsmr_frontend/js/dsmr-reader/trends/average.js' %}?r=v{{ dsmr_version }}"></script>
 
     {% if capabilities.electricity and not frontend_settings.merge_electricity_tariffs %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/trends/tariff.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/trends/tariff.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 {% endblock %}

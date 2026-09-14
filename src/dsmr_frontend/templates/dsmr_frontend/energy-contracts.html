@@ -33,7 +33,7 @@
                                     <tr>
                                         {# Headers #}
                                         <th class="col-sm-6">
-                                            <span class="unit">{{ current.start }} &larr;&rarr; {{ current.end|default:'-' }}</span>
+                                            <span class="unit">{{ current.start }} ←→ {{ current.end|default:'-' }}</span>
                                         </th>
                                         <th class="col-sm-2">
                                             {% if current.prices.electricity_delivered_1_price or current.prices.electricity_delivered_2_price or current.prices.gas_price %}
@@ -50,7 +50,7 @@
                                             {% endif %}
                                         </th>
                                         <th class="col-sm-2">
-                                            {% translate "Costs" %} <span class="unit">&euro;</span>
+                                            {% translate "Costs" %} <span class="unit">€</span>
                                         </th>
                                     </tr>
 
@@ -172,7 +172,8 @@
 
                                     <tr>
                                         <td colspan="4">
-                                            <a class="show-contract-details" href="#">{% translate 'Show more details' %}</a>
+                                            <a class="show-contract-details"
+                                               href="#">{% translate "Show more details" %}</a>
                                         </td>
                                     </tr>
 
@@ -331,7 +332,7 @@
 
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript">
+    <script>
 
     $(document).ready(function(){
         $('.show-contract-details').click(function(){

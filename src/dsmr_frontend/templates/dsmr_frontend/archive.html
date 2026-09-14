@@ -123,14 +123,12 @@
 {% block javascript %}
     {{ block.super }}
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
+    <script src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
 
     {% get_current_language as LANGUAGE_CODE %}
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
+    <script src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
 
-    <script type="text/javascript">
+    <script>
         let echarts_electricity_graph = null;
         let echarts_electricity_returned_graph = null;
         let echarts_gas_graph = null;
@@ -220,20 +218,16 @@
     </script>
 
     {% if capabilities.electricity %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.electricity_returned %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity-returned.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/archive/electricity-returned.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.gas %}
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/archive/gas.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/archive/gas.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/archive/archive.js' %}?r=v{{ dsmr_version }}"></script>
+    <script src="{% static 'dsmr_frontend/js/dsmr-reader/archive/archive.js' %}?r=v{{ dsmr_version }}"></script>
 {% endblock %}

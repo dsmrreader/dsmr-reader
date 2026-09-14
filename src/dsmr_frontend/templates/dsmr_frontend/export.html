@@ -189,10 +189,9 @@
 
     {% get_current_language as LANGUAGE_CODE %}
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
+    <script src="{% static 'dsmr_frontend/js/dayjs.min.js' %}"></script>
 
-    <script type="text/javascript">
+    <script>
         /* Settings. */
         const datepicker_start_date = "{{ start_date|date:'Y-m-d' }}";
         const datepicker_end_date = "{{ end_date|date:'Y-m-d' }}";
@@ -203,6 +202,5 @@
         const compare_xhr_summary_url = "{% url 'frontend:compare-xhr-summary' %}";
     </script>
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/export/export.js' %}"></script>
+    <script src="{% static 'dsmr_frontend/js/dsmr-reader/export/export.js' %}"></script>
 {% endblock %}

@@ -38,7 +38,8 @@
                                 {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                                 {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                             </div>
-                            <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                            <a href=""
+                               class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +59,8 @@
                                 {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                                 {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                             </div>
-                            <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                            <a href=""
+                               class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +79,8 @@
                                 {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                                 {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                             </div>
-                            <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                            <a href=""
+                               class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                         </div>
                     </div>
                 </div>
@@ -95,7 +98,8 @@
                                 {% blocktranslate %}Click on the data series in the legend below the graph to toggle displaying it.{% endblocktranslate %}
                                 {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                             </div>
-                            <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                            <a href=""
+                               class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                         </div>
                     </div>
                 </div>
@@ -112,7 +116,8 @@
                                 {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                                 <strong>{% blocktranslate %}Additionally, when using a DSMR v5 smart meter{% endblocktranslate %}</strong>: {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                             </div>
-                            <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                            <a href=""
+                               class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                         </div>
                     </div>
                 </div>
@@ -128,7 +133,8 @@
                             <div class="graph_controls_help xhr-hidden">
                                 {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                             </div>
-                            <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                            <a href=""
+                               class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                         </div>
                     </div>
                 </div>
@@ -147,7 +153,8 @@
                                 {% blocktranslate %}Scroll or pinch the graph to zoom in and out. To change the current point in time, drag the graph sideways, or use (the top of) the zoom control below the graph.{% endblocktranslate %}
                                 {% blocktranslate %}You can increase the total number of hours displayed (up to a week), and the initial zoom used, in the Frontend configuration.{% endblocktranslate %}
                             </div>
-                            <a href="" class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
+                            <a href=""
+                               class="graph_controls_help_trigger"><i class="fas fa-question"></i> &nbsp; {% translate "Graph controls help" %}</a>
                         </div>
                     </div>
                 </div>
@@ -159,10 +166,9 @@
 
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
+    <script src="{% static 'dsmr_frontend/js/echarts.common-5.6.0.min.js' %}"></script>
 
-    <script type="text/javascript">
+    <script>
         let echarts_electricity_graph = null;
         let echarts_gas_graph = null;
         let echarts_phases_graph = null;
@@ -246,7 +252,7 @@
     {{ sorted_graphs_json|json_script:'sorted_graphs_json' }}
 
     {% if capabilities.electricity %}
-        <script type="text/javascript">
+        <script>
         const STACK_ELECTRICITY_GRAPHS = {{ frontend_settings.stack_electricity_graphs|yesno:'true,false' }};
         const ELECTRICITY_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
 
@@ -261,12 +267,11 @@
         const ELECTRICITY_DELIVERED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_delivered_alternate_color }}";
         const ELECTRICITY_RETURNED_ALTERNATE_COLOR = "{{ frontend_settings.electricity_returned_alternate_color }}";
         </script>
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.multi_phases %}
-        <script type="text/javascript">
+        <script>
         const PHASES_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
 
         {% if capabilities.electricity_returned %}
@@ -282,66 +287,59 @@
         const PHASE_RETURNED_L2_COLOR = "{{ frontend_settings.phase_returned_l2_color }}";
         const PHASE_RETURNED_L3_COLOR = "{{ frontend_settings.phase_returned_l3_color }}";
         </script>
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/live/phases.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/live/phases.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.voltage %}
-        <script type="text/javascript">
+        <script>
         const VOLTAGE_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
         const VOLTAGE_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?voltage=True";
         const VOLTAGE_L1_COLOR = "{{ frontend_settings.phase_delivered_l1_color }}";
         const VOLTAGE_L2_COLOR = "{{ frontend_settings.phase_delivered_l2_color }}";
         const VOLTAGE_L3_COLOR = "{{ frontend_settings.phase_delivered_l3_color }}";
         </script>
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/live/voltage.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/live/voltage.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.power_current %}
-        <script type="text/javascript">
+        <script>
         const POWER_CURRENT_GRAPH_INTERVAL = GUI_REFRESH_INTERVAL;
         const POWER_CURRENT_GRAPH_URL = "{% url 'frontend:live-xhr-electricity' %}?power_current=True";
         const POWER_CURRENT_L1_COLOR = "{{ frontend_settings.phase_delivered_l1_color }}";
         const POWER_CURRENT_L2_COLOR = "{{ frontend_settings.phase_delivered_l2_color }}";
         const POWER_CURRENT_L3_COLOR = "{{ frontend_settings.phase_delivered_l3_color }}";
         </script>
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/live/power-current.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/live/power-current.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.gas %}
-        <script type="text/javascript">
+        <script>
         const GAS_GRAPH_URL = "{% url 'frontend:live-xhr-gas' %}";
         const GAS_DELIVERED_COLOR = "{{ frontend_settings.gas_delivered_color }}";
         const GAS_GRAPH_STYLE = "{{ frontend_settings.gas_graph_style }}";
         </script>
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/live/gas.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/live/gas.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.weather %}
-        <script type="text/javascript">
+        <script>
         const TEMPERATURE_GRAPH_URL = "{% url 'frontend:live-xhr-temperature' %}";
         const TEMPERATURE_COLOR = "{{ frontend_settings.temperature_color }}";
         </script>
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/live/temperature.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
     {% if capabilities.electricity %}
-        <script type="text/javascript">
+        <script>
         const ELECTRICITY_PEAKS_GRAPH_URL = "{% url 'frontend:live-xhr-electricity-peaks' %}";
         const ELECTRICITY_PEAKS_COLOR = "{{ frontend_settings.electricity_delivered_color }}";
         </script>
-        <script type="text/javascript"
-                src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity-peaks.js' %}?r=v{{ dsmr_version }}"></script>
+        <script src="{% static 'dsmr_frontend/js/dsmr-reader/live/electricity-peaks.js' %}?r=v{{ dsmr_version }}"></script>
     {% endif %}
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
+    <script src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
 
-    <script type="text/javascript">
+    <script>
         const XHR_CONSUMPTION_HEADER_URL = "{% url 'frontend:xhr-consumption-header' %}";
         const DECIMAL_SIZE_FORMATTING = {{ decimal_size_formatting|yesno:"true,false" }};
         const sorted_graphs = $.parseJSON($('#sorted_graphs_json').text())

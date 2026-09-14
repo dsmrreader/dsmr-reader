@@ -1,4 +1,4 @@
-{% extends 'admin/change_form.html' %}
+{% extends "admin/change_form.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -6,8 +6,7 @@
 {% block extrahead %}
     {{ block.super }}
     <link href="{% static 'dsmr_frontend/fontawesome-free-7.1.0-web/css/all.min.css' %}?r=v{{ dsmr_version }}"
-          rel="stylesheet"
-          type="text/css" />
+          rel="stylesheet" />
     {{ media }}
 {% endblock %}
 

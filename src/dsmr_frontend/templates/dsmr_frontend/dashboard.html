@@ -57,9 +57,8 @@
 {% block javascript %}
     {{ block.super }}
 
-    <script type="text/javascript"
-            src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
-    <script type="text/javascript">
+    <script src="{% static 'dsmr_frontend/js/dsmr-reader/consumption-header.js' %}?r=v{{ dsmr_version }}"></script>
+    <script>
         $(".help-trigger").click(function () {
             $(this).next().show();
             $(this).remove();

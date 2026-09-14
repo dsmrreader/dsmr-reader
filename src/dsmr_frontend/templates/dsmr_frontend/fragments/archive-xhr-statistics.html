@@ -9,7 +9,7 @@
     <h2 class="panel-heading centered-header">
         {{ title|unlocalize }}
 
-        {% if selected_level == 'days' %}
+        {% if selected_level == "days" %}
             <small class="pull-right">
                 <a href="{% url 'admin:dsmr_stats_note_add' %}?day={{ selected_datetime|date:django_date_format }}"
                    class="btn btn-default btn-xs">
@@ -34,7 +34,7 @@
                 </th>
                 <th scope="col" class="col-sm-2">
                     {% if capabilities.costs %}
-                        {% translate "Costs" %} <span class="unit">&euro;</span>
+                        {% translate "Costs" %} <span class="unit">€</span>
                     {% endif %}
                 </th>
             </tr>
@@ -128,7 +128,7 @@
             {% if capabilities.costs and statistics.fixed_cost %}
                 <tr>
                     <td>
-                        {% translate "Fixed costs" %} <span class="unit">&euro;</span>
+                        {% translate "Fixed costs" %} <span class="unit">€</span>
                     </td>
                     <td>
                         <span class="unit">

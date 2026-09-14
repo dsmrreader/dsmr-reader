@@ -19,24 +19,18 @@
 
         {% block stylesheets %}
             <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}"
-                  rel="stylesheet"
-                  type="text/css" />
+                  rel="stylesheet" />
             <link href="{% static 'dsmr_frontend/fontawesome-free-7.2.0-web/css/all.min.css' %}?r=v{{ dsmr_version }}"
-                  rel="stylesheet"
-                  type="text/css" />
+                  rel="stylesheet" />
             <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}"
-                  rel="stylesheet"
-                  type="text/css">
+                  rel="stylesheet">
             <link href="{% static 'dsmr_frontend/css/style.css' %}?r=v{{ dsmr_version }}"
-                  rel="stylesheet"
-                  type="text/css" />
+                  rel="stylesheet" />
             <link href="{% static 'dsmr_frontend/css/dsmr-reader/global.css' %}?r=v{{ dsmr_version }}"
-                  rel="stylesheet"
-                  type="text/css" />
+                  rel="stylesheet" />
             {% if frontend_settings.frontend_theme is not 0 %}
                 <link href="{% static 'dsmr_frontend/css/dsmr-reader/dark.css' %}?r=v{{ dsmr_version }}"
-                      rel="stylesheet"
-                      type="text/css" />
+                      rel="stylesheet" />
             {% endif %}
         {% endblock %}
 
@@ -97,49 +91,56 @@
                             {% url 'frontend:dashboard' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fas fa-tachometer-alt" aria-hidden="true"></i> &nbsp; <span>{% translate "Dashboard" %}</span>
+                                <i class="fas fa-tachometer-alt"
+                                   aria-hidden="true"></i> &nbsp; <span>{% translate "Dashboard" %}</span>
                             </a>
                         </li>
                         <li>
                             {% url 'frontend:live-graphs' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fa-solid fa-chart-area" aria-hidden="true"></i> &nbsp; <span>{% translate "Live graphs" %}</span>
+                                <i class="fa-solid fa-chart-area"
+                                   aria-hidden="true"></i> &nbsp; <span>{% translate "Live graphs" %}</span>
                             </a>
                         </li>
                         <li>
                             {% url 'frontend:archive' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fas fa-history" aria-hidden="true"></i> &nbsp; <span>{% translate "Archive" %}</span>
+                                <i class="fas fa-history"
+                                   aria-hidden="true"></i> &nbsp; <span>{% translate "Archive" %}</span>
                             </a>
                         </li>
                         <li>
                             {% url 'frontend:compare' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fas fa-balance-scale-left" aria-hidden="true"></i> &nbsp; <span>{% translate "Compare" %}</span>
+                                <i class="fas fa-balance-scale-left"
+                                   aria-hidden="true"></i> &nbsp; <span>{% translate "Compare" %}</span>
                             </a>
                         </li>
                         <li>
                             {% url 'frontend:trends' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> &nbsp; <span>{% translate "Trends" %}</span>
+                                <i class="fa-solid fa-arrow-trend-up"
+                                   aria-hidden="true"></i> &nbsp; <span>{% translate "Trends" %}</span>
                             </a>
                         </li>
                         <li>
                             {% url 'frontend:statistics' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fa-solid fa-list-ol" aria-hidden="true"></i> &nbsp; <span>{% translate "Statistics" %}</span>
+                                <i class="fa-solid fa-list-ol"
+                                   aria-hidden="true"></i> &nbsp; <span>{% translate "Statistics" %}</span>
                             </a>
                         </li>
                         <li>
                             {% url 'frontend:energy-contracts' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fa-solid fa-object-ungroup" aria-hidden="true"></i> &nbsp; <span>{% translate "Energy contracts" %}</span>
+                                <i class="fa-solid fa-object-ungroup"
+                                   aria-hidden="true"></i> &nbsp; <span>{% translate "Energy contracts" %}</span>
                             </a>
                         </li>
                         <li>&nbsp;&nbsp;</li>
@@ -147,14 +148,16 @@
                             {% url 'frontend:configuration' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fas fa-xs fa-wrench" aria-hidden="true"></i> &nbsp; <small>{% translate "Configuration" %}</small>
+                                <i class="fas fa-xs fa-wrench"
+                                   aria-hidden="true"></i> &nbsp; <small>{% translate "Configuration" %}</small>
                             </a>
                         </li>
                         <li>
                             {% url 'frontend:support' as nav_url %}
                             <a href="{{ nav_url }}"
                                {% if request.path == nav_url %} aria-current="page"{% endif %}>
-                                <i class="fas fa-xs fa-handshake-angle" aria-hidden="true"></i> &nbsp; <small>{% translate "Support" %}</small>
+                                <i class="fas fa-xs fa-handshake-angle"
+                                   aria-hidden="true"></i> &nbsp; <small>{% translate "Support" %}</small>
                             </a>
                         </li>
                         <li>
@@ -187,14 +190,10 @@
         </div>
 
         {% block javascript %}
-            <script src="{% static 'dsmr_frontend/js/jquery-3.7.1.min.js' %}"
-                    type="text/javascript"></script>
-            <script src="{% static 'dsmr_frontend/js/bootstrap.min.js' %}?r=v{{ dsmr_version }}"
-                    type="text/javascript"></script>
-            <script src="{% static 'dsmr_frontend/js/Director/app.min.js' %}?r=v{{ dsmr_version }}"
-                    type="text/javascript"></script>
-            <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}"
-                    type="text/javascript"></script>
+            <script src="{% static 'dsmr_frontend/js/jquery-3.7.1.min.js' %}"></script>
+            <script src="{% static 'dsmr_frontend/js/bootstrap.min.js' %}?r=v{{ dsmr_version }}"></script>
+            <script src="{% static 'dsmr_frontend/js/Director/app.min.js' %}?r=v{{ dsmr_version }}"></script>
+            <script src="{% static 'dsmr_frontend/js/dsmr-reader/global.min.js' %}?r=v{{ dsmr_version }}"></script>
             <script>
             let darkModeEnabled = {{ frontend_settings.frontend_theme|default_if_none:0 }};
             console.debug('Frontend theme setting:', darkModeEnabled);

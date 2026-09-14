@@ -73,7 +73,8 @@
                                    rel="noopener noreferrer">{% translate "View changelog" %} </a>
                             </div>
                             <div class="col-sm-6">
-                                <a class="btn btn-info trigger-update-check" href="#">{% translate "Check for updates" %}</a>
+                                <a class="btn btn-info trigger-update-check"
+                                   href="#">{% translate "Check for updates" %}</a>
                                 <i class="fas fa-spinner fa-pulse fa-fw xhr-loader hidden update-check"></i>
 
                                 <div id="update_check_no_update_available" class="xhr-hidden">
@@ -142,7 +143,7 @@
 
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript">
+    <script>
 
     $(document).ready(function(){
         $('.trigger-update-check').click(function(){
