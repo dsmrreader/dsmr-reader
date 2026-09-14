@@ -18,6 +18,9 @@
     - Fixed a parsing issue that blocked reading peak power data from some Belgian Fluvius meters - [#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764)
     - Fixed gas readings sometimes being read from an inactive meter channel instead of the active one, on setups with multiple gas devices connected
 
+    #### Fixes
+    - Fixed incorrect electricity values shown in Trends graphs for setups with two tariffs - [#2194](https://github.com/dsmrreader/dsmr-reader/issues/2194)
+
 
 ## v6.2.0 - August 2026
 
