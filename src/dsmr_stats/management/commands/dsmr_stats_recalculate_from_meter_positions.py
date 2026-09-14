@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 
+from dsmr_backend.mixins import add_batch_size_argument
 import dsmr_stats.repair_services
 
 
@@ -39,12 +40,10 @@ class Command(BaseCommand):
                 "--hours, or --write."
             ),
         )
-        parser.add_argument(
-            "--batch-size",
-            type=int,
-            dest="batch_size",
+        add_batch_size_argument(
+            parser,
             default=None,
-            help="Number of records to process per batch (default: 365 for --days, 168 for --hours).",
+            help_text="Number of records to process per batch (default: 365 for --days, 168 for --hours).",
         )
 
     def handle(self, **options) -> None:
