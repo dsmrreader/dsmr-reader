@@ -12,8 +12,9 @@ from dsmr_datalogger.tests.datalogger.mixins import FakeDsmrReadingMixin
 class TestDatalogger(FakeDsmrReadingMixin, TestCase):
     """Belgium Fluvius meter configured for a gas channel that isn't present in the telegram.
 
-    _select_extra_device_reading() must fall back to an available MBus channel instead of
-    silently dropping the extra device reading.
+    _select_extra_device_reading() must fall back to the active MBus channel (the one with the
+    most recently updated reading) instead of silently dropping the extra device reading, or
+    picking a stale/inactive channel.
     """
 
     def setUp(self):
@@ -75,15 +76,15 @@ class TestDatalogger(FakeDsmrReadingMixin, TestCase):
         self._fake_dsmr_reading()
         self.assertTrue(DsmrReading.objects.exists())
 
-    def test_falls_back_to_available_channel(self):
+    def test_falls_back_to_active_channel(self):
         self._fake_dsmr_reading()
         reading = DsmrReading.objects.get()
 
-        # Channel 3 was configured but isn't in the telegram, so the fallback (last available
-        # MBus channel, here channel 2) is used instead of leaving the extra device data empty.
+        # Channel 3 was configured but isn't in the telegram, so the fallback picks the channel
+        # with the most recently updated reading (channel 1) rather than the stale channel 2.
         self.assertIsNotNone(reading.extra_device_timestamp)
         self.assertEqual(
             reading.extra_device_timestamp,
-            datetime(2023, 1, 19, 11, 40, 5, tzinfo=ZoneInfo("UTC")),
+            datetime(2023, 1, 19, 11, 46, 16, tzinfo=ZoneInfo("UTC")),
         )
-        self.assertEqual(reading.extra_device_delivered, Decimal("0.000"))
+        self.assertEqual(reading.extra_device_delivered, Decimal("734.607"))

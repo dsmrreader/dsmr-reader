@@ -173,8 +173,9 @@ def _select_extra_device_reading(parsed_telegram: Any, datalogger_settings: Data
 
     DSMR v5+ and Belgium Fluvius report these on one or more MBus channels rather than a single fixed
     OBIS reference, so the flat OBIS-to-field mapping above can't disambiguate between channels on its
-    own. dsmr_extra_device_channel lets a user pin a specific channel; otherwise the last channel with
-    a reading is used.
+    own. dsmr_extra_device_channel lets a user pin a specific channel; otherwise the channel with the
+    most recently updated reading is used, as an inactive/disconnected MBus device keeps reporting the
+    same stale timestamp while the active one keeps advancing.
     """
     mbus_devices = getattr(parsed_telegram, "MBUS_DEVICES", None)
     if not mbus_devices:
@@ -184,12 +185,15 @@ def _select_extra_device_reading(parsed_telegram: Any, datalogger_settings: Data
     if channel:
         mbus_devices = [device for device in mbus_devices if device.channel_id == channel] or mbus_devices
 
-    for device in reversed(mbus_devices):
-        reading = getattr(device, "MBUS_METER_READING", None)
-        if reading is not None:
-            return reading
+    readings = [
+        reading
+        for reading in (getattr(device, "MBUS_METER_READING", None) for device in mbus_devices)
+        if reading is not None
+    ]
+    if not readings:
+        return None
 
-    return None
+    return max(readings, key=lambda reading: reading.datetime)
 
 
 def _get_dsmrreader_mapping(datalogger_settings: DataloggerSettings) -> Dict:
