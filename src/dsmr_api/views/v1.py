@@ -1,4 +1,3 @@
-import hmac
 import logging
 
 from django.http.response import (
@@ -13,6 +12,7 @@ from django.views.generic.base import View
 from dsmr_datalogger.exceptions import InvalidTelegramError
 from dsmr_api.models import APISettings
 from dsmr_api.forms import DsmrReadingForm
+import dsmr_api.services
 import dsmr_datalogger.services.datalogger
 
 
@@ -26,12 +26,7 @@ class DataloggerDsmrReading(View):
         if not api_settings.allow:
             return HttpResponseNotAllowed(permitted_methods=["POST"], content="API is disabled")
 
-        x_authkey_valid = hmac.compare_digest(request.META.get("HTTP_X_AUTHKEY", ""), api_settings.auth_key)
-        authorization_valid = hmac.compare_digest(
-            request.META.get("HTTP_AUTHORIZATION", ""), "Token {}".format(api_settings.auth_key)
-        )
-
-        if not x_authkey_valid and not authorization_valid:
+        if not dsmr_api.services.authkey_is_valid(request, api_settings):
             return HttpResponseForbidden(content="Invalid auth key")
 
         post_form = DsmrReadingForm(request.POST)

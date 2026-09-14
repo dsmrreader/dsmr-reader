@@ -82,6 +82,15 @@ class TestAPIv1(TestCase):
         response = self.client.post(self._api_url, HTTP_X_AUTHKEY=self._api_settings.auth_key)
         self.assertNotEqual(response.status_code, 403)
 
+    def test_unset_auth_key_rejects_instead_of_crashing(self):
+        """Tests API key comparison handles an unset (None) auth key gracefully."""
+        self._api_settings.auth_key = None
+        self._api_settings.save()
+
+        response = self.client.post(self._api_url, HTTP_X_AUTHKEY="")
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.content, b"Invalid auth key")
+
     def test_alternative_auth_header(self):
         """Tests the alternative header to specify token."""
         response = self.client.post(self._api_url)

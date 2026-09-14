@@ -31,6 +31,16 @@ class TestGeneric(APIv2TestCase):
         )
         self.assertEqual(response.status_code, 403)
 
+    def test_unset_auth_key_rejects_instead_of_crashing(self):
+        """Test API key comparison handles an unset (None) auth key gracefully."""
+        APISettings.objects.all().update(auth_key=None)
+
+        response = self.client.get(
+            reverse("{}:dsmrreading".format(self.NAMESPACE)),
+            HTTP_X_AUTHKEY="",
+        )
+        self.assertEqual(response.status_code, 403)
+
     def test_user_does_not_exist(self):
         """Tests what happens when the API user was not created."""
         User.objects.all().delete()
