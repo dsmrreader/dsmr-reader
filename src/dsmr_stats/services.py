@@ -530,9 +530,10 @@ def reconstruct_missing_day_statistics(batch_size: int = 365) -> None:
 
     print("Found {} day(s) to reconstruct".format(len(dates_list)))
 
-    for current_day in dates_list:
-        print(" - Reconstructing:", current_day)
-        create_statistics(target_day=current_day)
+    for batch_start in range(0, len(dates_list), batch_size):
+        for current_day in dates_list[batch_start : batch_start + batch_size]:
+            print(" - Reconstructing:", current_day)
+            create_statistics(target_day=current_day)
 
 
 def reconstruct_missing_day_statistics_by_hours(batch_size: int = 365) -> None:
@@ -553,25 +554,26 @@ def reconstruct_missing_day_statistics_by_hours(batch_size: int = 365) -> None:
 
     print("Found {} day(s) to reconstruct".format(len(dates_list_hours)))
 
-    for current_day in dates_list_hours:
-        print(" - Reconstructing:", current_day)
+    for batch_start in range(0, len(dates_list_hours), batch_size):
+        for current_day in dates_list_hours[batch_start : batch_start + batch_size]:
+            print(" - Reconstructing:", current_day)
 
-        day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(
-            electricity1_sum=Sum("electricity1"),
-            electricity2_sum=Sum("electricity2"),
-            electricity1_returned_sum=Sum("electricity1_returned"),
-            electricity2_returned_sum=Sum("electricity2_returned"),
-            gas_sum=Sum("gas"),
-        )
+            day_totals = HourStatistics.objects.filter(hour_start__date=current_day).aggregate(
+                electricity1_sum=Sum("electricity1"),
+                electricity2_sum=Sum("electricity2"),
+                electricity1_returned_sum=Sum("electricity1_returned"),
+                electricity2_returned_sum=Sum("electricity2_returned"),
+                gas_sum=Sum("gas"),
+            )
 
-        DayStatistics.objects.create(
-            day=current_day,
-            electricity1=day_totals["electricity1_sum"],
-            electricity2=day_totals["electricity2_sum"],
-            electricity1_returned=day_totals["electricity1_returned_sum"],
-            electricity2_returned=day_totals["electricity2_returned_sum"],
-            gas=day_totals["gas_sum"],
-            total_cost=0,
-            electricity1_cost=0,
-            electricity2_cost=0,
-        )
+            DayStatistics.objects.create(
+                day=current_day,
+                electricity1=day_totals["electricity1_sum"],
+                electricity2=day_totals["electricity2_sum"],
+                electricity1_returned=day_totals["electricity1_returned_sum"],
+                electricity2_returned=day_totals["electricity2_returned_sum"],
+                gas=day_totals["gas_sum"],
+                total_cost=0,
+                electricity1_cost=0,
+                electricity2_cost=0,
+            )
