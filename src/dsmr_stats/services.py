@@ -304,10 +304,6 @@ def average_consumption_by_hour(start: date, end: date) -> List:
         .values("hour_start")
         .order_by("hour_start")
         .annotate(
-            avg_electricity1=Avg("electricity1"),
-            avg_electricity2=Avg("electricity2"),
-            avg_electricity1_returned=Avg("electricity1_returned"),
-            avg_electricity2_returned=Avg("electricity2_returned"),
             avg_electricity_merged=Avg(models.F("electricity1") + models.F("electricity2")),
             avg_electricity_returned_merged=Avg(models.F("electricity1_returned") + models.F("electricity2_returned")),
             avg_gas=Avg("gas"),
