@@ -30,6 +30,28 @@ import dsmr_backend.services.backend
 
 logger = logging.getLogger("dsmrreader")
 
+# Consumption field name -> (DsmrReading field name, aggregate function).
+ELECTRICITY_FIELD_MAPPING = {
+    "delivered_1": ("electricity_delivered_1", Max),
+    "returned_1": ("electricity_returned_1", Max),
+    "delivered_2": ("electricity_delivered_2", Max),
+    "returned_2": ("electricity_returned_2", Max),
+    "currently_delivered": ("electricity_currently_delivered", Avg),
+    "currently_returned": ("electricity_currently_returned", Avg),
+    "phase_currently_delivered_l1": ("phase_currently_delivered_l1", Avg),
+    "phase_currently_delivered_l2": ("phase_currently_delivered_l2", Avg),
+    "phase_currently_delivered_l3": ("phase_currently_delivered_l3", Avg),
+    "phase_currently_returned_l1": ("phase_currently_returned_l1", Avg),
+    "phase_currently_returned_l2": ("phase_currently_returned_l2", Avg),
+    "phase_currently_returned_l3": ("phase_currently_returned_l3", Avg),
+    "phase_voltage_l1": ("phase_voltage_l1", Avg),
+    "phase_voltage_l2": ("phase_voltage_l2", Avg),
+    "phase_voltage_l3": ("phase_voltage_l3", Avg),
+    "phase_power_current_l1": ("phase_power_current_l1", Avg),
+    "phase_power_current_l2": ("phase_power_current_l2", Avg),
+    "phase_power_current_l3": ("phase_power_current_l3", Avg),
+}
+
 
 def run(scheduled_process: ScheduledProcess) -> None:
     """Compacts all unprocessed readings, capped by a max to prevent hanging backend."""
@@ -206,28 +228,6 @@ def _compact_electricity(
     Compacts any DSMR readings to electricity consumption records, optionally grouped.
     """
 
-    # Consumption field name -> (DsmrReading field name, aggregate function).
-    FIELD_MAPPING = {
-        "delivered_1": ("electricity_delivered_1", Max),
-        "returned_1": ("electricity_returned_1", Max),
-        "delivered_2": ("electricity_delivered_2", Max),
-        "returned_2": ("electricity_returned_2", Max),
-        "currently_delivered": ("electricity_currently_delivered", Avg),
-        "currently_returned": ("electricity_currently_returned", Avg),
-        "phase_currently_delivered_l1": ("phase_currently_delivered_l1", Avg),
-        "phase_currently_delivered_l2": ("phase_currently_delivered_l2", Avg),
-        "phase_currently_delivered_l3": ("phase_currently_delivered_l3", Avg),
-        "phase_currently_returned_l1": ("phase_currently_returned_l1", Avg),
-        "phase_currently_returned_l2": ("phase_currently_returned_l2", Avg),
-        "phase_currently_returned_l3": ("phase_currently_returned_l3", Avg),
-        "phase_voltage_l1": ("phase_voltage_l1", Avg),
-        "phase_voltage_l2": ("phase_voltage_l2", Avg),
-        "phase_voltage_l3": ("phase_voltage_l3", Avg),
-        "phase_power_current_l1": ("phase_power_current_l1", Avg),
-        "phase_power_current_l2": ("phase_power_current_l2", Avg),
-        "phase_power_current_l3": ("phase_power_current_l3", Avg),
-    }
-
     if electricity_grouping_type == ConsumptionSettings.ELECTRICITY_GROUPING_BY_READING:
         try:
             # NO grouping, so the data will be stored as is.
@@ -235,7 +235,7 @@ def _compact_electricity(
                 read_at=dsmr_reading.timestamp,
                 **{
                     consumption_field: getattr(dsmr_reading, reading_field)
-                    for consumption_field, (reading_field, _) in FIELD_MAPPING.items()
+                    for consumption_field, (reading_field, _) in ELECTRICITY_FIELD_MAPPING.items()
                 },
             )
         except IntegrityError:
@@ -253,7 +253,7 @@ def _compact_electricity(
     grouped_reading = DsmrReading.objects.filter(timestamp__gte=reading_start, timestamp__lt=minute_end).aggregate(
         **{
             consumption_field: agg_func(reading_field)
-            for consumption_field, (reading_field, agg_func) in FIELD_MAPPING.items()
+            for consumption_field, (reading_field, agg_func) in ELECTRICITY_FIELD_MAPPING.items()
         }
     )
 
