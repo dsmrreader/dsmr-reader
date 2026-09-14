@@ -21,6 +21,9 @@
     #### Fixes
     - Fixed incorrect electricity values shown in Trends graphs for setups with two tariffs - [#2194](https://github.com/dsmrreader/dsmr-reader/issues/2194)
 
+    #### Miscellaneous
+    - Package updates
+
 
 ## v6.2.0 - August 2026
 
