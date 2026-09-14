@@ -81,6 +81,10 @@ class TestViews(TestCase):
         self.assertEqual(len(json_response["avg_electricity"]), 24)
         self.assertEqual(len(json_response["avg_electricity_returned"]), 24)
 
+        # Average electricity is the sum of electricity1 and electricity2, not their sum halved.
+        self.assertEqual(json_response["hour_start"][2], "02:00")
+        self.assertAlmostEqual(json_response["avg_electricity"][2], 0.105, places=5)
+
         if self.support_gas:
             self.assertEqual(len(json_response["avg_gas"]), 24)
         else:

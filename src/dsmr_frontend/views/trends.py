@@ -54,18 +54,17 @@ class TrendsXhrAvgConsumption(ConfigurableLoginRequiredMixin, View):
             )
             data["hour_start"].append(hour_start)
 
-            avg_electricity = (current["avg_electricity1"] + current["avg_electricity2"]) / 2
-
             data["avg_electricity"].append(
-                float(dsmr_consumption.services.round_decimal(avg_electricity, decimal_count=5))
+                float(dsmr_consumption.services.round_decimal(current["avg_electricity_merged"], decimal_count=5))
             )
 
             if capabilities[Capability.ELECTRICITY_RETURNED]:
-                avg_electricity_returned = (
-                    current["avg_electricity1_returned"] + current["avg_electricity2_returned"]
-                ) / 2
                 data["avg_electricity_returned"].append(
-                    float(dsmr_consumption.services.round_decimal(avg_electricity_returned, decimal_count=5))
+                    float(
+                        dsmr_consumption.services.round_decimal(
+                            current["avg_electricity_returned_merged"], decimal_count=5
+                        )
+                    )
                 )
 
             if capabilities[Capability.GAS]:
