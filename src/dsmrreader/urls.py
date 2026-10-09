@@ -13,7 +13,7 @@ urlpatterns = [
     path("api/v2/", include("dsmr_api.urls.v2")),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG and "debug_toolbar" in settings.INSTALLED_APPS:
     from debug_toolbar.toolbar import debug_toolbar_urls  # pragma: no cover
 
     urlpatterns += debug_toolbar_urls()  # pragma: no cover
