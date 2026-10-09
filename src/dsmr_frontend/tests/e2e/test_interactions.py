@@ -7,6 +7,7 @@ from django.urls import reverse
 from playwright.sync_api import Page, expect
 
 from dsmr_frontend.models.message import Notification
+from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics
 from dsmr_frontend.tests.e2e.helpers import login, track_console_errors
 
@@ -449,3 +450,39 @@ def test_compare_only_requests_data_once_both_sides_are_chosen(live_server, page
     page.locator("#datepicker2-day .dsmr-picker-cell[data-day]").last.click()
     expect(page.locator("#summary-holder")).not_to_be_empty()
     assert len(requests) == 1
+
+
+@pytest.mark.parametrize(
+    "theme,color_scheme,expect_dark",
+    [(0, "dark", False), (1, "light", True), (-1, "dark", True), (-1, "light", False)],
+)
+def test_theme_setting_controls_dark_mode(
+    live_server, browser, frontend_data, theme: int, color_scheme: str, expect_dark: bool
+):
+    FrontendSettings.get_solo()
+    FrontendSettings.objects.update(frontend_theme=theme)
+    page = browser.new_page(color_scheme=color_scheme)
+
+    page.goto("{}{}".format(live_server.url, reverse("frontend:dashboard")))
+
+    if expect_dark:
+        expect(page.locator("body")).to_have_class(re.compile(r"\bdark-mode\b"))
+    else:
+        expect(page.locator("body")).not_to_have_class(re.compile(r"\bdark-mode\b"))
+    page.close()
+
+
+def test_live_graphs_load_their_data_and_render(live_server, page: Page, frontend_data):
+    errors = track_console_errors(page)
+
+    with page.expect_response(re.compile(r"/xhr/electricity")) as response_info:
+        page.goto("{}{}".format(live_server.url, reverse("frontend:live-graphs")))
+
+    assert response_info.value.status == 200
+    graphs = page.locator('[id^="echarts-"]')
+    assert graphs.count() > 0
+
+    for index in range(graphs.count()):
+        expect(graphs.nth(index).locator("canvas, svg")).to_have_count(1)
+
+    assert errors == [], "Console errors on live graphs: {}".format(errors)
