@@ -31,5 +31,11 @@ If `uv lock --check` fails, pyproject.toml changed and uv.lock is stale — run 
 DJANGO_SETTINGS_MODULE=dsmrreader.config.test poetry run pytest -v
 ```
 
+7. **Test in browser** (Playwright end-to-end, excluded from step 6):
+```bash
+DJANGO_SETTINGS_MODULE=dsmrreader.config.test poetry run pytest -m e2e dsmr_frontend/tests/e2e --no-cov
+```
+If the browser fails to launch (`error while loading shared libraries`), the development image is outdated: report that it must be rebuilt (`docker compose build dev-dsmr-app`) on the container host. Do not try to install system packages.
+
 Report results for each step. Stop and report if any step fails.
 

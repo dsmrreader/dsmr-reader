@@ -85,6 +85,7 @@ DSMR-reader would **not have been possible** without the following software and 
 - [MyPy](https://mypy.readthedocs.io/) — static type checker
 - [djlint](https://www.djlint.com/) — Django template linter and formatter
 - [pytest](https://pytest.org/) — test framework (with pytest-django and pytest-xdist)
+- [Playwright](https://playwright.dev/python/) — browser-based end-to-end tests (with pytest-playwright)
 - [Claude Code](https://claude.ai/code) by [Anthropic](https://www.anthropic.com/) — AI coding assistant
 
 ---

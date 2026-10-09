@@ -101,5 +101,24 @@ docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-ap
 
 The `-e DJANGO_SETTINGS_MODULE=dsmrreader.config.test` part is important, as some tests may fail otherwise.
 
+### End-to-end tests
+
+Browser-based smoke tests using [Playwright](https://playwright.dev/python/) live in `src/dsmr_frontend/tests/e2e/`.
+They start Django's live server and drive a real Chromium browser through the frontend.
+
+These tests are **not** part of the default test run (nor of CI), because they are marked `e2e` and excluded by `pytest` its default options.
+Run them explicitly:
+
+```shell title="shell"
+docker compose exec -e DJANGO_SETTINGS_MODULE=dsmrreader.config.test dev-dsmr-app poetry run pytest -m e2e dsmr_frontend/tests/e2e --no-cov
+```
+
+Chromium and its system libraries are installed in the development image. If the browser fails to launch (e.g. `error while loading shared libraries`), rebuild the image:
+
+```shell title="shell"
+docker compose build dev-dsmr-app
+docker compose up -d
+```
+
 ## Other stuff
 There is some more to it, such as tests and documentation. If you ever need to work on those, just see how similar stuff works in the project. Or ask for more information.
