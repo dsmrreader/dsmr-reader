@@ -408,3 +408,44 @@ def test_dashboard_header_is_filled_through_xhr(live_server, page: Page, fronten
     expect(page.locator("#latest_electricity_delivered")).not_to_be_empty()
     expect(page.locator("#header-loader")).to_be_hidden()
     assert errors == [], "Console errors on dashboard: {}".format(errors)
+
+
+@pytest.mark.parametrize("view_mode,picker,cell", [("months", "month", "data-month"), ("years", "year", "data-year")])
+def test_compare_sends_the_selected_level(live_server, page: Page, frontend_data, view_mode, picker, cell):
+    page.goto("{}{}".format(live_server.url, reverse("frontend:compare")))
+    page.locator("#datepicker_trigger_{}".format(view_mode)).click()
+
+    page.locator("#datepicker1-{} .dsmr-picker-cell[{}]".format(picker, cell)).first.click()
+    with page.expect_response(re.compile(r"/compare/xhr/summary\?")) as response_info:
+        page.locator("#datepicker2-{} .dsmr-picker-cell[{}]".format(picker, cell)).last.click()
+
+    assert response_info.value.status == 200
+    assert "level={}".format(view_mode) in response_info.value.url
+    expect(page.locator("#summary-holder")).not_to_be_empty()
+
+
+def test_compare_resets_selections_when_the_level_changes(live_server, page: Page, frontend_data):
+    page.goto("{}{}".format(live_server.url, reverse("frontend:compare")))
+    page.locator("#datepicker_trigger_days").click()
+    page.locator("#datepicker1-day .dsmr-picker-cell[data-day]").first.click()
+    expect(page.locator("#datepicker1-day .dsmr-picker-cell.active")).to_have_count(1)
+
+    page.locator("#datepicker_trigger_months").click()
+    page.locator("#datepicker_trigger_days").click()
+
+    expect(page.locator("#datepicker1-day .dsmr-picker-cell.active")).to_have_count(0)
+
+
+def test_compare_only_requests_data_once_both_sides_are_chosen(live_server, page: Page, frontend_data):
+    requests: list[str] = []
+    page.on("request", lambda request: requests.append(request.url) if "/compare/xhr/summary" in request.url else None)
+    page.goto("{}{}".format(live_server.url, reverse("frontend:compare")))
+    page.locator("#datepicker_trigger_days").click()
+
+    page.locator("#datepicker1-day .dsmr-picker-cell[data-day]").first.click()
+    page.wait_for_timeout(500)
+    assert requests == []
+
+    page.locator("#datepicker2-day .dsmr-picker-cell[data-day]").last.click()
+    expect(page.locator("#summary-holder")).not_to_be_empty()
+    assert len(requests) == 1
