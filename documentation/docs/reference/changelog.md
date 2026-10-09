@@ -15,18 +15,10 @@
 
     #### Peak power
     - Quarter hour peak electricity consumption can now be taken from the meter, when it reports it ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
+        - <small>*By default the peak is calculated from the readings. Some meters (e.g. Belgian Fluvius/VREG) report it themselves: set **Quarter hour peak electricity consumption source** to **Reported by meter** in the **Consumption configuration** to use that instead*</small>
+        - <small>*Quarter hours without a value from the meter are left empty, and peaks stored earlier are not changed*</small>
     - Statistics page now shows the maximum demand of the running month and the last 13 months, as reported by the meter ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
     - Added the maximum demand of the running month to the MQTT meter statistics ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
-
-        ---
-
-        _**Background: calculated or reported peak?**_
-
-        _By default DSMR-reader calculates the quarter hour peak from the meter positions of the readings within each quarter hour._
-
-        _Some meters (e.g. Belgian Fluvius/VREG capacity tariff meters) report their own quarter hour average demand and monthly maximum demand in the telegram._
-
-        _To use those instead, set **Quarter hour peak electricity consumption source** to **Reported by meter** in the **Consumption configuration**. Quarter hours in which the meter reports no value are left empty, without falling back to the calculated value. Peaks stored earlier are not changed._
 
 
 ## v6.2.1 - Unreleased
