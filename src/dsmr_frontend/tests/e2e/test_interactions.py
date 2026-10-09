@@ -1,5 +1,6 @@
 import datetime
 import re
+from pathlib import Path
 
 import pytest
 from django.urls import reverse
@@ -322,3 +323,88 @@ def test_month_picker_navigates_across_years(live_server, page: Page, multi_mont
     picker.locator(".dsmr-picker-cell[data-month]").click()
     expect(picker.locator(".dsmr-picker-cell.active")).to_have_count(1)
     expect(page.locator("#summary-holder")).not_to_be_empty()
+
+
+def _download_export_rows(page: Page) -> list[str]:
+    with page.expect_download() as download_info:
+        page.locator("#download_button").click()
+
+    content = Path(download_info.value.path()).read_text()
+    return [line for line in content.splitlines() if line.strip()]
+
+
+def test_export_requires_login(live_server, page: Page, frontend_data):
+    page.goto("{}{}".format(live_server.url, reverse("frontend:export")))
+
+    expect(page).to_have_url(re.compile(r"/admin/login/"))
+
+
+def test_export_preselects_the_full_available_range(live_server, page: Page, frontend_data, admin_credentials):
+    username, password = admin_credentials
+    login(page, live_server.url, username, password, next_url=reverse("frontend:export"))
+
+    expect(page.locator("#start_date")).not_to_have_value("")
+    expect(page.locator("#start_datepicker .dsmr-picker-cell.active")).to_have_text("1")
+    expect(page.locator("#end_datepicker .dsmr-picker-cell.active")).to_have_text("2")
+    # Two days of data plus the header.
+    assert len(_download_export_rows(page)) == 3
+
+
+def test_export_follows_the_selected_date_range(live_server, page: Page, frontend_data, admin_credentials):
+    username, password = admin_credentials
+    login(page, live_server.url, username, password, next_url=reverse("frontend:export"))
+    start_before = page.locator("#start_date").input_value()
+
+    page.locator("#end_datepicker .dsmr-picker-cell[data-day]").first.click()  # Same day as the start.
+
+    expect(page.locator("#end_datepicker .dsmr-picker-cell.active")).to_have_text("1")
+    assert page.locator("#end_date").input_value() == start_before
+    assert len(_download_export_rows(page)) == 2
+
+
+def test_export_switches_data_type(live_server, page: Page, frontend_data, admin_credentials):
+    username, password = admin_credentials
+    login(page, live_server.url, username, password, next_url=reverse("frontend:export"))
+    day_rows = _download_export_rows(page)
+
+    page.locator("#data_hour_totals").check()
+    hour_rows = _download_export_rows(page)
+
+    assert hour_rows[0] != day_rows[0]  # Different columns.
+
+
+def test_trends_shows_a_day_picker_for_both_ends_of_the_period(live_server, page: Page, frontend_data):
+    page.goto("{}{}".format(live_server.url, reverse("frontend:trends")))
+
+    for side in ("start", "end"):
+        expect(page.locator("#datepicker-{}-day".format(side))).to_be_visible()
+        expect(page.locator("#datepicker-{}-day .dsmr-picker-cell.active".format(side))).to_have_count(1)
+
+
+def test_trends_requests_new_data_for_the_selected_period(live_server, page: Page, frontend_data):
+    errors = track_console_errors(page)
+    page.goto("{}{}".format(live_server.url, reverse("frontend:trends")))
+    expect(page.locator('[id^="echarts-"] canvas, [id^="echarts-"] svg').first).to_be_visible()
+    start = page.locator("#datepicker-start-day .dsmr-picker-cell[data-day]").first
+
+    with page.expect_response(re.compile(r"/trends/xhr/avg-consumption\?")) as response_info:
+        start.click()
+
+    response = response_info.value
+    assert response.status == 200
+    assert "start_date=" in response.url and "end_date=" in response.url
+    expect(page.locator("#datepicker-start-day .dsmr-picker-cell.active")).to_have_count(1)
+    assert errors == [], "Console errors on trends: {}".format(errors)
+
+
+def test_dashboard_header_is_filled_through_xhr(live_server, page: Page, frontend_data):
+    errors = track_console_errors(page)
+
+    with page.expect_response(re.compile(r"/xhr/header")) as response_info:
+        page.goto("{}{}".format(live_server.url, reverse("frontend:dashboard")))
+
+    assert response_info.value.status == 200
+    expect(page.locator("#latest_timestamp")).not_to_be_empty()
+    expect(page.locator("#latest_electricity_delivered")).not_to_be_empty()
+    expect(page.locator("#header-loader")).to_be_hidden()
+    assert errors == [], "Console errors on dashboard: {}".format(errors)
