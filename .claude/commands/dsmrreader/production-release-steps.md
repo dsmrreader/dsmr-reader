@@ -26,5 +26,11 @@ Report the file path that was written and confirm the file exists.
 ## 5. Changelog
 Entries must be short and non-technical. State what changed for the user, not how. No implementation details, no code references, no elaboration.
 
+Check the newest release heading in `documentation/docs/reference/changelog.md` (first `## v…` heading below the intro):
+- The version must match the base version from step 3 (e.g. `VERSION = (6, 2, 1, "final", 0)` → `## v6.2.1`)
+- The suffix must be the release month and year in the format `Month YYYY` (e.g. `## v6.2.1 - October 2026`), not `Unreleased`
+
+If either isn't met, update the heading before proceeding. Report the verification status (PASS/FAIL).
+
 ---
 Once the release is out, run `/dsmrreader:new-development-release-start` to open the next development cycle.
