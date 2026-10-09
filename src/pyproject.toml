@@ -61,6 +61,7 @@ dev = [
     "types-six>=1,<2",
     "django-stubs>=6.0.4,<7",
     "djangorestframework-stubs>=3.17.0,<4",
+    "pytest-playwright>=0.9.0",
 ]
 
 [tool.poetry]
@@ -86,7 +87,7 @@ max-complexity = 10
 max-line-length = 120
 
 per-file-ignores = [
-    "*/tests/*:E501",  # Allow longer lines in tests
+    "*/tests/*:E501,S101",  # Allow longer lines, and plain `assert` (the normal pytest idiom), in tests
 ]
 
 
@@ -114,8 +115,11 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "dsmrreader.config.test"
 pythonpath = "."
-addopts = "--cov=. --cov-report=html:coverage_report/html -q"
+addopts = "--cov=. --cov-report=html:coverage_report/html -q -m \"not e2e\""
 testpaths = ["dsmr_api/tests", "dsmr_backend/tests", "dsmr_backup/tests", "dsmr_consumption/tests", "dsmr_datalogger/tests", "dsmr_dropbox/tests", "dsmr_frontend/tests", "dsmr_influxdb/tests", "dsmr_mindergas/tests", "dsmr_mqtt/tests", "dsmr_notification/tests", "dsmr_plugins/tests", "dsmr_pvoutput/tests", "dsmr_stats/tests", "dsmr_weather/tests"]
+markers = [
+    "e2e: browser-based end-to-end test using Playwright (dsmr_frontend/tests/e2e), excluded from the default run, use: pytest -m e2e dsmr_frontend/tests/e2e (requires 'playwright install chromium')",
+]
 
 
 [tool.coverage.run]

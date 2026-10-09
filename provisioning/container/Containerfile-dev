@@ -24,6 +24,11 @@ ENV POETRY_VIRTUALENVS_CREATE=true \
 
 RUN pip install poetry uv
 
+# Playwright's browser binary and OS-level dependencies live outside /app, so they survive the
+# development bind mount (unlike the Poetry-managed venv, which is reinstalled by the entrypoint
+# on every container start).
+RUN pip install playwright && playwright install --with-deps chromium
+
 # This cannot reside in /app as it will be mounted during development.
 COPY provisioning/container/entrypoint-dev.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
