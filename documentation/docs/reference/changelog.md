@@ -17,6 +17,7 @@
     - Quarter hour peak electricity consumption can now be taken from the meter, when it reports it ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
     - Statistics page now shows the maximum demand of the running month and the last 13 months, as reported by the meter ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
     - Added the maximum demand of the running month to the MQTT meter statistics ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
+    - See [Quarter hour peak](../how-to/admin-configuration/quarter-hour-peak.md) for how to switch to the meter-reported peak
 
 
 ## v6.2.1 - Unreleased
