@@ -11,7 +11,7 @@
 
 ## v6.3.0 - Unreleased
 
-!!! tip "Improvements"
+!!! abstract "Improvements"
 
     #### Peak power
     - Quarter hour peak electricity consumption can now be taken from the meter, when it reports it ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
@@ -23,7 +23,7 @@
 
 ## v6.2.1 - Unreleased
 
-!!! tip "Improvements"
+!!! abstract "Improvements"
 
     #### Parser
     - Updated the internal telegram parser to the latest upstream version (credits: [ndokter/dsmr_parser](https://github.com/ndokter/dsmr_parser))
