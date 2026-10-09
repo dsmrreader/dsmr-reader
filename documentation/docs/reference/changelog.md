@@ -23,7 +23,7 @@
 
 ## v6.2.1 - Unreleased
 
-!!! abstract "Improvements"
+!!! abstract "Fixes and improvements"
 
     #### Parser
     - Updated the internal telegram parser to the latest upstream version (credits: [ndokter/dsmr_parser](https://github.com/ndokter/dsmr_parser))
