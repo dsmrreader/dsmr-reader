@@ -1,11 +1,14 @@
 import datetime
 import re
+from decimal import Decimal
 from pathlib import Path
 
 import pytest
 from django.urls import reverse
+from django.utils import timezone
 from playwright.sync_api import Page, expect
 
+from dsmr_datalogger.models.statistics import MeterStatistics
 from dsmr_frontend.models.message import Notification
 from dsmr_frontend.models.settings import FrontendSettings
 from dsmr_stats.models.statistics import DayStatistics
@@ -486,3 +489,32 @@ def test_live_graphs_load_their_data_and_render(live_server, page: Page, fronten
         expect(graphs.nth(index).locator("canvas, svg")).to_have_count(1)
 
     assert errors == [], "Console errors on live graphs: {}".format(errors)
+
+
+def test_statistics_shows_meter_reported_maximum_demand(live_server, page: Page, frontend_data):
+    MeterStatistics.objects.all().update(
+        quarter_hour_maximum_demand_running_month=Decimal("1.566"),
+        quarter_hour_maximum_demand_running_month_timestamp=timezone.make_aware(datetime.datetime(2023, 2, 1, 1, 0)),
+        quarter_hour_maximum_demand_last_13_months=[
+            {"month": "2023-01-31T23:00:00Z", "peak_timestamp": "2023-01-14T11:45:00Z", "peak_demand": "3.332"}
+        ],
+    )
+    errors = track_console_errors(page)
+
+    page.goto("{}{}".format(live_server.url, reverse("frontend:statistics")))
+
+    expect(page.get_by_text("Maximum demand - active energy import of the last 13 months")).to_be_visible()
+    expect(page.locator("#main-content").get_by_text(".332")).to_be_visible()
+    expect(page.locator("#main-content").get_by_text(".566")).to_be_visible()
+    assert errors == [], "Console errors on statistics: {}".format(errors)
+
+
+def test_statistics_hides_maximum_demand_without_meter_data(live_server, page: Page, frontend_data):
+    MeterStatistics.objects.all().update(
+        quarter_hour_maximum_demand_running_month=None,
+        quarter_hour_maximum_demand_last_13_months=[],
+    )
+
+    page.goto("{}{}".format(live_server.url, reverse("frontend:statistics")))
+
+    expect(page.get_by_text("Maximum demand - active energy import of the last 13 months")).to_have_count(0)
