@@ -24,7 +24,7 @@ jobs:
 
       - name: Restore PostgreSQL image cache
         id: postgres-image-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: /tmp/postgres-image.tar
           key: postgres-image-${{ hashFiles('provisioning/container/compose.test.yml') }}
