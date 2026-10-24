@@ -22,6 +22,24 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Restore PostgreSQL image cache
+        id: postgres-image-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/postgres-image.tar
+          key: postgres-image-${{ hashFiles('provisioning/container/compose.test.yml') }}
+
+      - name: Load cached PostgreSQL image
+        if: steps.postgres-image-cache.outputs.cache-hit == 'true'
+        run: docker load --input /tmp/postgres-image.tar
+
+      - name: Pull and save PostgreSQL image
+        if: steps.postgres-image-cache.outputs.cache-hit != 'true'
+        run: |
+          image=$(grep -oP 'image:\s*\Kpostgres:\S+' provisioning/container/compose.test.yml)
+          for attempt in 1 2 3; do docker pull "$image" && break || sleep $((attempt * 20)); done
+          docker save "$image" --output /tmp/postgres-image.tar
+
       - name: Build and run Python ${{ env.PYTHON_VERSION }} app image
         run: |
           ln -s provisioning/container/compose.test.yml compose.yml
