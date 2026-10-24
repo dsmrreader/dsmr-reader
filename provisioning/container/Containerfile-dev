@@ -26,8 +26,12 @@ RUN pip install poetry uv
 
 # Playwright's browser binary and OS-level dependencies live outside /app, so they survive the
 # development bind mount (unlike the Poetry-managed venv, which is reinstalled by the entrypoint
-# on every container start).
-RUN pip install playwright && playwright install --with-deps chromium
+# on every container start). The version is pinned to the one in uv.lock so the browser build matches.
+COPY src/uv.lock /tmp/uv.lock
+RUN PLAYWRIGHT_VERSION=$(python -c "import tomllib; print(next(p['version'] for p in tomllib.load(open('/tmp/uv.lock', 'rb'))['package'] if p['name'] == 'playwright'))") \
+    && pip install "playwright==${PLAYWRIGHT_VERSION}" \
+    && playwright install --with-deps chromium \
+    && rm /tmp/uv.lock
 
 # This cannot reside in /app as it will be mounted during development.
 COPY provisioning/container/entrypoint-dev.sh /entrypoint.sh
