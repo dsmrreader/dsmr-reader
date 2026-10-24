@@ -40,11 +40,25 @@ jobs:
           for attempt in 1 2 3; do docker pull "$image" && break || sleep $((attempt * 20)); done
           docker save "$image" --output /tmp/postgres-image.tar
 
-      - name: Build and run Python ${{ env.PYTHON_VERSION }} app image
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build Python ${{ env.PYTHON_VERSION }} app image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: provisioning/container/Containerfile-dev
+          target: local-dsmrreader-test
+          build-args: PYTHON_VERSION=${{ env.PYTHON_VERSION }}
+          tags: dsmrreader-tests:local
+          load: true
+          cache-from: type=gha,scope=tests-py${{ env.PYTHON_VERSION }}
+          cache-to: type=gha,mode=max,scope=tests-py${{ env.PYTHON_VERSION }}
+
+      - name: Run Python ${{ env.PYTHON_VERSION }} app image
         run: |
           ln -s provisioning/container/compose.test.yml compose.yml
-          docker compose build --build-arg PYTHON_VERSION=${{ env.PYTHON_VERSION }}
-          docker compose up -d --remove-orphans
+          docker compose up -d --no-build --remove-orphans
           sleep 5
 
       - name: Check code formatting with Black

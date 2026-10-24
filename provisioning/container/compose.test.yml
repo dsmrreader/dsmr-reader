@@ -7,6 +7,7 @@ services:
     container_name: tests-dsmr-app
     restart: 'no'
     command: 'sleep 5'  # This is just to make sure the container keeps running.
+    image: dsmrreader-tests:local
     build:
       context: .
       dockerfile: provisioning/container/Containerfile-dev
