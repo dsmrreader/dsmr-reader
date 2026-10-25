@@ -9,7 +9,7 @@
 ---
 
 
-## v6.2.1 - Unreleased
+## v6.2.1 - October 2026
 
 !!! abstract "Fixes and improvements"
 
