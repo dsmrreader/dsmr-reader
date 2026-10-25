@@ -1654,14 +1654,14 @@ files = [
 
 [[package]]
 name = "reactivex"
-version = "6.0.0"
+version = "6.1.0"
 description = "ReactiveX (Rx) for Python"
 optional = false
 python-versions = "<4.0,>=3.11"
 groups = ["main"]
 files = [
-    {file = "reactivex-6.0.0-py3-none-any.whl", hash = "sha256:ae3c021aa7b29b502cf932f5f15c35d7753f74fabc8256232ff0883a1fd911d6"},
-    {file = "reactivex-6.0.0.tar.gz", hash = "sha256:843ce6a7d8aa82bf369915e1e2c9e19154dbd30c7974ee981fd90edd88bd9fcf"},
+    {file = "reactivex-6.1.0-py3-none-any.whl", hash = "sha256:9f3519afb08b122b2e2130b8811319f97cd4e2e432cab4a321cae0b3ee516a56"},
+    {file = "reactivex-6.1.0.tar.gz", hash = "sha256:09c856a3d727a08331e891d4af360b8a0069f34391957f21e417e62ffe81518c"},
 ]
 
 [package.dependencies]
