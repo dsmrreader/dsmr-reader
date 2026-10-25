@@ -21,7 +21,7 @@
     - Added the maximum demand of the running month to the MQTT meter statistics ([#1764](https://github.com/dsmrreader/dsmr-reader/issues/1764))
 
 
-## v6.2.1 - Unreleased
+## v6.2.1 - October 2026
 
 !!! abstract "Fixes and improvements"
 
