@@ -12,12 +12,12 @@
 ## v6.3.0 - Unreleased
 
 
-## v6.2.2 - Unreleased
+## v6.2.2 - October 2026
 
 !!! abstract "Fixes and improvements"
 
     #### Fixes
-    - Fixed gas readings alternating between devices on setups with multiple MBus devices, such as a gas and water meter
+    - Fixed gas readings alternating between devices on setups with multiple MBus devices, such as a gas and water meter - [#2198](https://github.com/dsmrreader/dsmr-reader/issues/2198)
 
 
 ## v6.2.1 - October 2026
