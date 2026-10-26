@@ -20,6 +20,8 @@ import dsmr_datalogger.signals
 
 logger = logging.getLogger("dsmrreader")
 
+MBUS_DEVICE_TYPE_GAS = 3
+
 # Static per model, computed once instead of on every telegram.
 STATISTICS_FIELDS = [
     x.name for x in MeterStatistics._meta.get_fields() if x.name not in ("id", "rejected_telegrams", "latest_telegram")
@@ -167,22 +169,35 @@ def _map_telegram_to_model(parsed_telegram: Dict, data: str, datalogger_settings
     return new_instance
 
 
+def _get_mbus_device_type(device: Any) -> Optional[int]:
+    device_type = getattr(device, "MBUS_DEVICE_TYPE", None)
+    return None if device_type is None else device_type.value
+
+
 def _select_extra_device_reading(parsed_telegram: Any, datalogger_settings: DataloggerSettings) -> Optional[Any]:
     """Picks the gas (or, in the future, water) reading from the telegram's MBus channels, if any.
 
     DSMR v5+ and Belgium Fluvius report these on one or more MBus channels rather than a single fixed
     OBIS reference, so the flat OBIS-to-field mapping above can't disambiguate between channels on its
-    own. dsmr_extra_device_channel lets a user pin a specific channel; otherwise the channel with the
-    most recently updated reading is used, as an inactive/disconnected MBus device keeps reporting the
-    same stale timestamp while the active one keeps advancing.
+    own. dsmr_extra_device_channel lets a user pin a specific channel, regardless of its device type. Otherwise
+    gas devices (MBus device type 3) take precedence over other device types, such as water or heat, when the
+    telegram reports types. Of the remaining channels, the one with the most recently updated reading is used,
+    as an inactive/disconnected MBus device keeps reporting the same stale timestamp while the active one
+    keeps advancing.
     """
     mbus_devices = getattr(parsed_telegram, "MBUS_DEVICES", None)
     if not mbus_devices:
         return None
 
     channel = datalogger_settings.dsmr_extra_device_channel
-    if channel:
-        mbus_devices = [device for device in mbus_devices if device.channel_id == channel] or mbus_devices
+    pinned_devices = [device for device in mbus_devices if device.channel_id == channel] if channel else []
+
+    if pinned_devices:
+        mbus_devices = pinned_devices
+    else:
+        mbus_devices = [
+            device for device in mbus_devices if _get_mbus_device_type(device) == MBUS_DEVICE_TYPE_GAS
+        ] or mbus_devices
 
     readings = [
         reading
