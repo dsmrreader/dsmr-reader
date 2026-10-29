@@ -227,6 +227,57 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         dsmr_stats.services.run(self.schedule_process)
         self.assertTrue(create_statistics_mock.called)  # Should now pass.
 
+    @mock.patch("dsmr_backend.services.backend.get_capability")
+    @mock.patch("dsmr_stats.services.create_statistics")
+    @mock.patch("dsmr_stats.services.is_data_available")
+    @mock.patch("dsmr_stats.services.get_next_day_to_generate")
+    @mock.patch("django.utils.timezone.now")
+    def test_analyze_gas_meter_removed(
+        self,
+        now_mock,
+        get_next_day_to_generate_mock,
+        is_data_available_mock,
+        create_statistics_mock,
+        get_capability_mock,
+    ):
+        """Gas meter removed: telegrams after the target day carry no gas data, so do not wait for a gas reading."""
+        get_capability_mock.return_value = True
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2020, 1, 3))
+        is_data_available_mock.return_value = True
+        target_datetime = timezone.now() - datetime.timedelta(days=2)
+        get_next_day_to_generate_mock.return_value = target_datetime.date()
+
+        ElectricityConsumption.objects.create(
+            read_at=target_datetime,
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=1,
+            currently_returned=2,
+        )
+        GasConsumption.objects.all().delete()
+        GasConsumption.objects.create(read_at=target_datetime, delivered=1, currently_delivered=2)
+
+        reading_kwargs = dict(
+            electricity_delivered_1=1,
+            electricity_returned_1=2,
+            electricity_delivered_2=3,
+            electricity_returned_2=4,
+            electricity_currently_delivered=5,
+            electricity_currently_returned=6,
+            processed=True,
+        )
+
+        # No telegrams after the target day yet, so the gas reading may still arrive.
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertFalse(create_statistics_mock.called)
+
+        # Telegrams after the target day without gas data.
+        DsmrReading.objects.create(timestamp=timezone.now() - datetime.timedelta(hours=12), **reading_kwargs)
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertTrue(create_statistics_mock.called)
+
     @mock.patch("dsmr_stats.services.create_statistics")
     @mock.patch("dsmr_stats.services.is_data_available")
     @mock.patch("dsmr_stats.services.get_next_day_to_generate")

@@ -11,6 +11,11 @@
 
 ## v6.3.0 - Unreleased
 
+!!! abstract "Fixes and improvements"
+
+    #### Fixes
+    - Fixed day and hour statistics not generating after the gas meter was removed - [#2199](https://github.com/dsmrreader/dsmr-reader/issues/2199)
+
 
 ## v6.2.2 - October 2026
 

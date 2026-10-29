@@ -121,9 +121,18 @@ def run(scheduled_process: ScheduledProcess) -> None:
     gas_capability = dsmr_backend.services.backend.get_capability(Capability.GAS)
 
     if gas_capability and recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
-        logger.debug("Stats: Waiting for first gas reading on the next day...")
-        scheduled_process.delay(minutes=5)
-        return
+        # A removed gas meter never delivers that reading. Telegrams after the target day without any gas data tell so.
+        next_day_readings = DsmrReading.objects.filter(timestamp__date__gte=next_day)
+        gas_meter_gone = (
+            next_day_readings.exists() and not next_day_readings.filter(extra_device_timestamp__isnull=False).exists()
+        )
+
+        if not gas_meter_gone:
+            logger.debug("Stats: Waiting for first gas reading on the next day...")
+            scheduled_process.delay(minutes=5)
+            return
+
+        logger.debug("Stats: No gas data in telegrams since %s, continuing without waiting for gas", next_day)
 
     create_statistics(target_day=target_day)
 
