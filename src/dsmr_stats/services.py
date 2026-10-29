@@ -30,6 +30,8 @@ import dsmr_consumption.services
 
 logger = logging.getLogger("dsmrreader")
 
+GAS_METER_GONE_MIN_TELEGRAM_SPAN = datetime.timedelta(hours=1)
+
 
 def is_data_available() -> bool:
     """Checks whether data is available for stats."""
@@ -121,10 +123,14 @@ def run(scheduled_process: ScheduledProcess) -> None:
     gas_capability = dsmr_backend.services.backend.get_capability(Capability.GAS)
 
     if gas_capability and recently_gas_read and not GasConsumption.objects.filter(read_at__date__gte=next_day).exists():
-        # A removed gas meter never delivers that reading. Telegrams after the target day without any gas data tell so.
+        # A removed gas meter never delivers that reading. Telegrams after the target day without any gas data tell so,
+        # but only once that has lasted for a while, to ride out a temporary glitch on the gas bus.
         next_day_readings = DsmrReading.objects.filter(timestamp__date__gte=next_day)
+        span = next_day_readings.aggregate(first=Min("timestamp"), last=Max("timestamp"))
         gas_meter_gone = (
-            next_day_readings.exists() and not next_day_readings.filter(extra_device_timestamp__isnull=False).exists()
+            span["first"] is not None
+            and span["last"] - span["first"] >= GAS_METER_GONE_MIN_TELEGRAM_SPAN
+            and not next_day_readings.filter(extra_device_timestamp__isnull=False).exists()
         )
 
         if not gas_meter_gone:
