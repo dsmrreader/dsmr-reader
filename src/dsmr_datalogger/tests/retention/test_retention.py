@@ -301,3 +301,77 @@ class TestRetentionDSTFallBack(TestCase):
                 utc,
                 "TruncHour must be called with tzinfo=ZoneInfo('UTC') to avoid DST grouping bugs on PostgreSQL (#2137)",
             )
+
+    def _create_three_hours_of_readings(self) -> list[datetime]:
+        """Replaces all readings with three processed readings in each of three non-consecutive hours."""
+        hours = [datetime(2016, 12, 20, 12 + offset, tzinfo=ZoneInfo("UTC")) for offset in (0, 2, 4)]
+        DsmrReading.objects.all().delete()
+        dsmr_datalogger.services.retention.clear_cache()
+
+        for hour in hours:
+            for minute in (0, 20, 40):
+                DsmrReading.objects.create(
+                    timestamp=hour + timedelta(minutes=minute),
+                    electricity_delivered_1=1,
+                    electricity_returned_1=2,
+                    electricity_delivered_2=3,
+                    electricity_returned_2=4,
+                    electricity_currently_delivered=5,
+                    electricity_currently_returned=6,
+                    processed=True,
+                )
+
+        RetentionSettings.objects.update(data_retention_in_hours=RetentionSettings.RETENTION_WEEK)
+        return hours
+
+    @override_settings(CACHES=_LOCMEM_CACHE)
+    @mock.patch("django.utils.timezone.now")
+    def test_hour_without_data_is_skipped(self, now_mock: mock.MagicMock) -> None:
+        """An hour that has no data left when it is cleaned up must not abort the run (#2200)."""
+        now_mock.return_value = timezone.make_aware(datetime(2017, 1, 25))
+        first, second, third = self._create_three_hours_of_readings()
+
+        def vanish_second_hour(message: str, current_hour: datetime, *args: object) -> None:
+            # The second hour has no rows left by the time its turn comes.
+            if current_hour == first:
+                DsmrReading.objects.filter(timestamp__gte=second, timestamp__lt=second + timedelta(hours=1)).delete()
+
+        with mock.patch.object(dsmr_datalogger.services.retention.logger, "debug", side_effect=vanish_second_hour):
+            dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        for hour, expected in ((first, 2), (second, 0), (third, 2)):
+            self.assertEqual(
+                DsmrReading.objects.filter(timestamp__gte=hour, timestamp__lt=hour + timedelta(hours=1)).count(),
+                expected,
+            )
+
+        self.assertEqual(
+            cache.get(dsmr_datalogger.services.retention._cache_key("DsmrReading")), third + timedelta(hours=1)
+        )
+
+    @override_settings(CACHES=_LOCMEM_CACHE)
+    @mock.patch("django.utils.timezone.now")
+    def test_failing_hour_does_not_skip_later_hours(self, now_mock: mock.MagicMock) -> None:
+        """The lower bound must not advance past hours that were not cleaned up (#2200)."""
+        now_mock.return_value = timezone.make_aware(datetime(2017, 1, 25))
+        first, second, third = self._create_three_hours_of_readings()
+
+        def fail_on_second_hour(message: str, current_hour: datetime, *args: object) -> None:
+            if current_hour == second:
+                raise RuntimeError("Simulated failure")
+
+        with mock.patch.object(dsmr_datalogger.services.retention.logger, "debug", side_effect=fail_on_second_hour):
+            with self.assertRaises(RuntimeError):
+                dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        self.assertEqual(
+            cache.get(dsmr_datalogger.services.retention._cache_key("DsmrReading")), first + timedelta(hours=1)
+        )
+
+        # The next run picks up where it failed.
+        dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        for hour in (first, second, third):
+            self.assertEqual(
+                DsmrReading.objects.filter(timestamp__gte=hour, timestamp__lt=hour + timedelta(hours=1)).count(), 2
+            )

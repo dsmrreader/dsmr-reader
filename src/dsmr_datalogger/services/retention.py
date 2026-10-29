@@ -79,13 +79,6 @@ def run(scheduled_process: ScheduledProcess) -> None:
         if not hours_to_cleanup:
             continue
 
-        # Advance the lower bound past the last cleaned hour so future runs skip already-processed history.
-        cache.set(
-            _cache_key(model_name),
-            max(hours_to_cleanup) + timedelta(hours=1),
-            timeout=None,
-        )
-
         # Only flag more data pending when the batch was saturated, implying there may be more to process.
         if len(hours_to_cleanup) >= settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN:
             data_to_clean_up = True
@@ -101,18 +94,23 @@ def run(scheduled_process: ScheduledProcess) -> None:
 
             # Extract the first/last item, so we can exclude it.
             # NOTE: Want to alter this? Please update ITEM_COUNT_PER_HOUR above as well!
-            keeper_pks = [
-                data_set.order_by(datetime_field)[0].pk,
-                data_set.order_by("-{}".format(datetime_field))[0].pk,
-            ]
+            first_item = data_set.order_by(datetime_field).first()
+            last_item = data_set.order_by("-{}".format(datetime_field)).first()
 
-            # Now drop all others.
-            logger.debug(
-                "Retention: Cleaning up: %s (%s)",
-                current_hour,
-                model_name,
-            )
-            data_set.exclude(pk__in=keeper_pks).delete()
+            if first_item is None or last_item is None:
+                logger.debug("Retention: Skipping hour without data: %s (%s)", current_hour, model_name)
+            else:
+                # Now drop all others.
+                logger.debug(
+                    "Retention: Cleaning up: %s (%s)",
+                    current_hour,
+                    model_name,
+                )
+                data_set.exclude(pk__in=[first_item.pk, last_item.pk]).delete()
+
+            # Advance the lower bound per hour, so future runs skip already-processed history without ever skipping
+            # hours that were not reached.
+            cache.set(_cache_key(model_name), current_hour + timedelta(hours=1), timeout=None)
 
     timezone.deactivate()
 
