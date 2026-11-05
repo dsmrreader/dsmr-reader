@@ -74,4 +74,4 @@ jobs:
         run: docker compose run --rm tests-dsmr-app poetry run mypy /app/src
 
       - name: Run PostgreSQL tests
-        run: docker compose run --rm tests-dsmr-app poetry run pytest
+        run: docker compose run --rm tests-dsmr-app poetry run pytest -n auto
