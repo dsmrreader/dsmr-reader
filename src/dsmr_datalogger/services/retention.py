@@ -74,7 +74,9 @@ def run(scheduled_process: ScheduledProcess) -> None:
             .values_list("item_hour", flat=True)[: settings.DSMRREADER_RETENTION_MAX_CLEANUP_HOURS_PER_RUN]
         )
 
-        hours_to_cleanup = list(hours_to_cleanup)  # Force evaluation.
+        # The hour is truncated in UTC by the database, so its wall-clock value is the UTC hour, whatever tzinfo the
+        # database layer attached to it.
+        hours_to_cleanup = [hour.replace(tzinfo=ZoneInfo("UTC")) for hour in hours_to_cleanup]  # Force evaluation.
 
         if not hours_to_cleanup:
             continue

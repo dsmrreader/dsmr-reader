@@ -375,3 +375,25 @@ class TestRetentionDSTFallBack(TestCase):
             self.assertEqual(
                 DsmrReading.objects.filter(timestamp__gte=hour, timestamp__lt=hour + timedelta(hours=1)).count(), 2
             )
+
+    @override_settings(CACHES=_LOCMEM_CACHE)
+    @mock.patch("django.utils.timezone.now")
+    def test_hours_labelled_in_local_time_are_cleaned_as_utc_hours(self, now_mock: mock.MagicMock) -> None:
+        """Hours returned with a non-UTC tzinfo must still be cleaned as the UTC hours they were truncated to (#2200)."""
+        now_mock.return_value = timezone.make_aware(datetime(2017, 1, 25))
+        hours = self._create_three_hours_of_readings()
+
+        # The seeded hours are not consecutive, so every hour is preceded by an hour without data.
+        original_trunchour = dsmr_datalogger.services.retention.TruncHour
+
+        class LocalLabelledTruncHour(original_trunchour):  # type: ignore[valid-type,misc]
+            def convert_value(self, value, expression, connection):  # type: ignore[no-untyped-def]
+                return timezone.make_aware(value.replace(tzinfo=None), ZoneInfo("Europe/Amsterdam"))
+
+        with mock.patch.object(dsmr_datalogger.services.retention, "TruncHour", LocalLabelledTruncHour):
+            dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        for hour in hours:
+            self.assertEqual(
+                DsmrReading.objects.filter(timestamp__gte=hour, timestamp__lt=hour + timedelta(hours=1)).count(), 2
+            )
