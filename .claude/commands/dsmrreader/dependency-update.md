@@ -13,5 +13,5 @@ like djlint run with the wrong version and produce output that fails CI's `--che
 
 Report which packages were updated (`git diff uv.lock` or `git diff poetry.lock` for the version bumps).
 
-Never list Python dependency updates in the changelog (`documentation/docs/reference/changelog.md`). Routine bumps are
-not changelog material; only mention a dependency update there when it is a security fix, or for frontend assets.
+In the changelog (`documentation/docs/reference/changelog.md`) never list individual packages or versions. Add only the
+generic line `- Package updates` under `#### Miscellaneous` of the release being prepared, as in v6.2.1.
