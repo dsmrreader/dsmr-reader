@@ -58,8 +58,7 @@ jobs:
       - name: Run Python ${{ env.PYTHON_VERSION }} app image
         run: |
           ln -s provisioning/container/compose.test.yml compose.yml
-          docker compose up -d --no-build --remove-orphans
-          sleep 5
+          docker compose up -d --no-build --remove-orphans --wait
 
       - name: Check code formatting with Black
         run: docker compose run --rm tests-dsmr-app poetry run black --check .
