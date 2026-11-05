@@ -60,17 +60,8 @@ jobs:
           ln -s provisioning/container/compose.test.yml compose.yml
           docker compose up -d --no-build --remove-orphans --wait
 
-      - name: Check code formatting with Black
-        run: docker compose run --rm tests-dsmr-app poetry run black --check .
-
-      - name: Check Django templates with djLint
-        run: docker compose run --rm tests-dsmr-app poetry run djlint --check .
-
-      - name: Check flake8
-        run: docker compose run --rm tests-dsmr-app poetry run flake8 -v
-
-      - name: Type check with MyPy
-        run: docker compose run --rm tests-dsmr-app poetry run mypy /app/src
+      - name: Check Black, djLint, flake8 and MyPy
+        run: docker compose run --rm tests-dsmr-app sh scripts/ci_lint.sh
 
       - name: Run PostgreSQL tests
         run: docker compose run --rm tests-dsmr-app poetry run pytest -n auto --no-cov
