@@ -378,6 +378,88 @@ class TestRetentionDSTFallBack(TestCase):
 
     @override_settings(CACHES=_LOCMEM_CACHE)
     @mock.patch("django.utils.timezone.now")
+    def test_hour_containing_cutoff_keeps_data_inside_retention_window(self, now_mock: mock.MagicMock) -> None:
+        """Only data older than the retention cutoff may be thinned, also in the hour containing the cutoff."""
+        first, _, _ = self._create_three_hours_of_readings()
+        DsmrReading.objects.all().delete()
+
+        for minute in (0, 10, 20, 40, 50):
+            DsmrReading.objects.create(
+                timestamp=first + timedelta(minutes=minute),
+                electricity_delivered_1=1,
+                electricity_returned_1=2,
+                electricity_delivered_2=3,
+                electricity_returned_2=4,
+                electricity_currently_delivered=5,
+                electricity_currently_returned=6,
+                processed=True,
+            )
+
+        # Cutoff is 7 days before now: 30 minutes past the first hour.
+        now_mock.return_value = first + timedelta(days=7, minutes=30)
+        dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        # Of the three rows before the cutoff (0, 10, 20) only the first and last remain. Both newer rows stay.
+        self.assertEqual(
+            list(DsmrReading.objects.order_by("timestamp").values_list("timestamp", flat=True)),
+            [first + timedelta(minutes=minute) for minute in (0, 20, 40, 50)],
+        )
+
+        # The hour is only partially cleaned, so it must stay eligible once the cutoff has passed it.
+        self.assertIsNone(cache.get(dsmr_datalogger.services.retention._cache_key("DsmrReading")))
+
+        now_mock.return_value = first + timedelta(days=7, hours=1, minutes=30)
+        dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        self.assertEqual(
+            list(DsmrReading.objects.order_by("timestamp").values_list("timestamp", flat=True)),
+            [first, first + timedelta(minutes=50)],
+        )
+
+    @override_settings(CACHES=_LOCMEM_CACHE)
+    @mock.patch("django.utils.timezone.now")
+    def test_equal_timestamps_keep_two_items(self, now_mock: mock.MagicMock) -> None:
+        """Readings sharing the first and last timestamp of an hour must not collapse into a single kept item."""
+        now_mock.return_value = timezone.make_aware(datetime(2017, 1, 25))
+        first, _, _ = self._create_three_hours_of_readings()
+        DsmrReading.objects.all().delete()
+
+        for minute in (0, 0, 0, 30, 30, 30):
+            DsmrReading.objects.create(
+                timestamp=first + timedelta(minutes=minute),
+                electricity_delivered_1=1,
+                electricity_returned_1=2,
+                electricity_delivered_2=3,
+                electricity_returned_2=4,
+                electricity_currently_delivered=5,
+                electricity_currently_returned=6,
+                processed=True,
+            )
+
+        dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        self.assertEqual(
+            list(DsmrReading.objects.order_by("timestamp").values_list("timestamp", flat=True)),
+            [first, first + timedelta(minutes=30)],
+        )
+
+    @override_settings(CACHES=_LOCMEM_CACHE)
+    @mock.patch("django.utils.timezone.now")
+    def test_timezone_is_restored_after_failure(self, now_mock: mock.MagicMock) -> None:
+        """A failing run must not leave the UTC override active for the rest of the process."""
+        now_mock.return_value = timezone.make_aware(datetime(2017, 1, 25))
+        self._create_three_hours_of_readings()
+        timezone.deactivate()
+        default_timezone = timezone.get_current_timezone()
+
+        with mock.patch.object(dsmr_datalogger.services.retention.logger, "debug", side_effect=RuntimeError("Fail")):
+            with self.assertRaises(RuntimeError):
+                dsmr_datalogger.services.retention.run(self.schedule_process)
+
+        self.assertEqual(timezone.get_current_timezone(), default_timezone)
+
+    @override_settings(CACHES=_LOCMEM_CACHE)
+    @mock.patch("django.utils.timezone.now")
     def test_hours_labelled_in_local_time_are_cleaned_as_utc_hours(self, now_mock: mock.MagicMock) -> None:
         """Hours returned with a non-UTC tzinfo must still be cleaned as the UTC hours they were truncated to (#2200)."""
         now_mock.return_value = timezone.make_aware(datetime(2017, 1, 25))
