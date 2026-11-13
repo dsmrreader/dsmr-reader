@@ -20,9 +20,12 @@
 
     #### Data accuracy
     - Fixed hourly and daily gas consumption being calculated too low, as gas used at hour boundaries was dropped - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
-    - Extended `dsmr_stats_recalculate_from_meter_positions --hours` to correct hourly gas as well
 
         ---
+
+        _**Am I affected?**_
+
+        _Only DSMR 5 (or newer) gas meters with the gas grouping type set to `On every change (default & recommended)`, as these store a gas reading every few minutes. DSMR 4 meters and `Force grouping by hour` are not affected._
 
         _**Already affected? Existing statistics are not corrected automatically.**_
 
