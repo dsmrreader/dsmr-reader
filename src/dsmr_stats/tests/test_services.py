@@ -462,6 +462,39 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         self.assertEqual(HourStatistics.objects.count(), 1)
         self.assertEqual(HourStatistics.objects.all()[0].gas, 2)
 
+    def test_create_hourly_statistics_dsmr_v5_gas_includes_hour_boundary(self):
+        """Gas used between the last reading of the previous hour and the first of this hour belongs to this hour."""
+        hour_start = timezone.make_aware(datetime.datetime(2010, 1, 1, hour=12))
+        ec_kwargs = {
+            "delivered_1": 0,
+            "returned_1": 0,
+            "delivered_2": 0,
+            "returned_2": 0,
+            "currently_delivered": 0,
+            "currently_returned": 0,
+        }
+        ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
+
+        GasConsumption.objects.create(
+            read_at=hour_start - datetime.timedelta(minutes=5),
+            delivered=Decimal("10.000"),
+            currently_delivered=Decimal("0.050"),
+        )
+        for minutes, delivered, currently_delivered in (
+            (0, "10.009", "0.009"),
+            (30, "10.100", "0.091"),
+            (55, "10.200", "0.100"),
+        ):
+            GasConsumption.objects.create(
+                read_at=hour_start + datetime.timedelta(minutes=minutes),
+                delivered=Decimal(delivered),
+                currently_delivered=Decimal(currently_delivered),
+            )
+
+        dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
+
+        self.assertEqual(HourStatistics.objects.get(hour_start=hour_start).gas, Decimal("0.200"))
+
     def test_create_hourly_statistics_exists(self):
         day_start = timezone.make_aware(datetime.datetime(2015, 12, 13, hour=0))
         ec_kwargs = {
@@ -1429,6 +1462,67 @@ class TestRecalculateHourStatistics(InterceptCommandStdoutMixin, TestCase):
 
         hour.refresh_from_db()
         self.assertEqual(hour.electricity1, Decimal("0.000"))  # unchanged
+
+    def _make_gas_hour(self, hour_start: datetime.datetime, gas: Decimal) -> HourStatistics:
+        self._make_ec(hour_start, delivered_1=Decimal("1000.000"))
+        self._make_ec(hour_start + datetime.timedelta(hours=1), delivered_1=Decimal("1001.000"))
+        hour = self._make_hour(hour_start, electricity1=Decimal("1.000"))
+        hour.gas = gas
+        hour.save()
+        return hour
+
+    def test_recalculate_hour_corrects_gas_boundary(self):
+        """Gas used between the last reading of the previous hour and the first of the hour belongs to the hour."""
+        hour_start = timezone.make_aware(datetime.datetime(2020, 6, 15, 12))
+        hour = self._make_gas_hour(hour_start, gas=Decimal("0.191"))
+
+        GasConsumption.objects.create(
+            read_at=hour_start - datetime.timedelta(minutes=5),
+            delivered=Decimal("10.000"),
+            currently_delivered=Decimal("0.050"),
+        )
+        for minutes, delivered, currently_delivered in ((0, "10.009", "0.009"), (30, "10.100", "0.091")):
+            GasConsumption.objects.create(
+                read_at=hour_start + datetime.timedelta(minutes=minutes),
+                delivered=Decimal(delivered),
+                currently_delivered=Decimal(currently_delivered),
+            )
+        GasConsumption.objects.create(
+            read_at=hour_start + datetime.timedelta(minutes=55),
+            delivered=Decimal("10.200"),
+            currently_delivered=Decimal("0.100"),
+        )
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=True)
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("0.191"))  # dry run does not write
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("0.200"))
+
+    def test_recalculate_hour_gas_single_reading(self):
+        """A single gas reading in the hour is reported by its own consumption, as when generating statistics."""
+        hour_start = timezone.make_aware(datetime.datetime(2020, 6, 15, 12))
+        hour = self._make_gas_hour(hour_start, gas=Decimal("0.000"))
+        GasConsumption.objects.create(
+            read_at=hour_start, delivered=Decimal("5.000"), currently_delivered=Decimal("1.000")
+        )
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("1.000"))
+
+    def test_recalculate_hour_gas_without_readings_untouched(self):
+        """Hours without gas readings keep their stored gas value."""
+        hour_start = timezone.make_aware(datetime.datetime(2020, 6, 15, 12))
+        hour = self._make_gas_hour(hour_start, gas=Decimal("0.500"))
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("0.500"))
 
     def test_recalculate_hour_no_anchors(self):
         """Hour with no surrounding DsmrReading records is skipped gracefully."""

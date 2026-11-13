@@ -372,6 +372,9 @@ class TestStatisticsIntegration(TestCase):
     # Shared assertion helpers (called from test_full_statistics_integration)
     # ------------------------------------------------------------------
 
+    def _expected_gas_per_day(self) -> Decimal:
+        return self.GAS_INCREMENT * 24 * self.READINGS_PER_HOUR
+
     def _verify_day_statistics(self) -> None:
         """Each complete day's electricity totals must equal increment × readings_per_day."""
         readings_per_day = 24 * self.READINGS_PER_HOUR
@@ -401,9 +404,9 @@ class TestStatisticsIntegration(TestCase):
                 places=3,
                 msg=f"electricity2_returned {day_stat.day}",
             )
-            # Gas: reasonableness bounds only — boundary attribution is inherently ambiguous.
-            self.assertGreater(float(day_stat.gas or 0), 1.0, msg=f"gas too low for {day_stat.day}")
-            self.assertLess(float(day_stat.gas or 0), 2.0, msg=f"gas too high for {day_stat.day}")
+            self.assertAlmostEqual(
+                float(day_stat.gas or 0), float(self._expected_gas_per_day()), places=3, msg=f"gas {day_stat.day}"
+            )
 
     def _verify_hour_statistics(self) -> None:
         """Each hour's electricity totals must equal increment × READINGS_PER_HOUR."""
@@ -511,6 +514,9 @@ class TestStatisticsIntegrationDSMRv4(TestStatisticsIntegration):
 
     def _dsmr_version(self) -> str:
         return "42"
+
+    def _expected_gas_per_day(self) -> Decimal:
+        return self.GAS_V4_PER_HOUR * 24
 
     def _generate_readings(self) -> None:
         self._generate_dsmr_readings_v4()

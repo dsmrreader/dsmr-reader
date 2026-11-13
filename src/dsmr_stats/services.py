@@ -225,6 +225,24 @@ def create_daily_statistics(day: datetime.date) -> DayStatistics:
     )
 
 
+def hourly_gas(readings: List[GasConsumption], previous: Optional[GasConsumption]) -> Optional[Decimal]:
+    """
+    Gas consumed in an hour, given its gas readings (oldest first) and the last reading before that hour, if any.
+    None when there are no readings in the hour.
+    """
+    # DSMR v4.
+    if len(readings) == 1:
+        return readings[0].currently_delivered
+
+    # DSMR v5
+    # Baseline is the last reading before the hour, so the gas used up to the first reading of the hour is included.
+    if len(readings) > 1:
+        start = previous if previous is not None else readings[0]
+        return readings[-1].delivered - start.delivered
+
+    return None
+
+
 def create_hourly_statistics(hour_start: datetime.datetime) -> Optional[HourStatistics]:
     """Calculates and returns an hour summary, when applicable. Persists it as well."""
     logger.debug("Stats: Creating hour statistics for: %s", hour_start)
@@ -254,14 +272,16 @@ def create_hourly_statistics(hour_start: datetime.datetime) -> Optional[HourStat
     creation_kwargs["electricity1_returned"] = end_record.returned_1 - start_record.returned_1
     creation_kwargs["electricity2_returned"] = end_record.returned_2 - start_record.returned_2
 
-    # DSMR v4.
-    if len(gas_readings) == 1:
-        creation_kwargs["gas"] = gas_readings[0].currently_delivered
+    gas_readings_list = list(gas_readings)
+    previous_gas = None
 
-    # DSMR v5
-    elif len(gas_readings) > 1:
-        gas_readings_list = list(gas_readings)
-        creation_kwargs["gas"] = gas_readings_list[-1].delivered - gas_readings_list[0].delivered
+    if len(gas_readings_list) > 1:
+        previous_gas = GasConsumption.objects.filter(read_at__lt=hour_start).order_by("read_at").last()
+
+    gas = hourly_gas(readings=gas_readings_list, previous=previous_gas)
+
+    if gas is not None:
+        creation_kwargs["gas"] = gas
 
     return HourStatistics.objects.create(**creation_kwargs)
 

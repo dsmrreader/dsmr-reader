@@ -9,6 +9,8 @@ from django.db.models.functions import TruncDate
 from django.utils import timezone
 
 import dsmr_consumption.services
+import dsmr_stats.services
+from dsmr_consumption.models.consumption import GasConsumption
 from dsmr_consumption.models.energysupplier import EnergySupplierPrice
 from dsmr_datalogger.models.reading import DsmrReading
 from dsmr_stats.models.statistics import DayStatistics, HourStatistics
@@ -205,11 +207,11 @@ def _flush_output(lines: List[str]) -> None:
 
 
 def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -> None:  # noqa: C901
-    """Retroactively recalculates HourStatistics electricity totals using cross-boundary anchors (fixes #1770).
+    """Retroactively recalculates HourStatistics electricity and gas totals using cross-boundary anchors (fixes #1770).
 
     Processes hours newest-first in batches of `batch_size`. Per batch, all required
     DsmrReading anchor records are fetched in two queries (window + preceding record),
-    then resolved via binary search — avoiding two DB queries per hour.
+    then resolved via binary search — avoiding two DB queries per hour. Gas readings are handled the same way.
     In write mode, changed records are flushed with bulk_update once per batch.
     """
     updated = 0
@@ -242,6 +244,14 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
         all_dr: List[DsmrReading] = ([dr_before] if dr_before else []) + dr_in_window
         ec_timestamps = [r.timestamp for r in all_dr]
 
+        # GasConsumption records for this batch's window, plus the one just before it.
+        gas_before = GasConsumption.objects.filter(read_at__lt=window_start).order_by("-read_at").first()
+        gas_in_window: List[GasConsumption] = list(
+            GasConsumption.objects.filter(read_at__gte=window_start, read_at__lt=window_end).order_by("read_at")
+        )
+        all_gas: List[GasConsumption] = ([gas_before] if gas_before else []) + gas_in_window
+        gas_timestamps = [r.read_at for r in all_gas]
+
         to_save: List[HourStatistics] = []
 
         for hour in hours:
@@ -267,11 +277,19 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
             new_e1_ret = anchor_end.electricity_returned_1 - anchor_start.electricity_returned_1
             new_e2_ret = anchor_end.electricity_returned_2 - anchor_start.electricity_returned_2
 
+            gas_start = bisect.bisect_left(gas_timestamps, hour.hour_start)
+            gas_end = bisect.bisect_left(gas_timestamps, hour_end)
+            new_gas = dsmr_stats.services.hourly_gas(
+                readings=all_gas[gas_start:gas_end],
+                previous=all_gas[gas_start - 1] if gas_start > 0 else None,
+            )
+
             changed = (
                 new_e1 != hour.electricity1
                 or new_e2 != hour.electricity2
                 or new_e1_ret != hour.electricity1_returned
                 or new_e2_ret != hour.electricity2_returned
+                or (new_gas is not None and new_gas != hour.gas)
             )
 
             if not changed:
@@ -290,12 +308,16 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
                 output_lines.append("   electricity1_returned: {} -> {}".format(hour.electricity1_returned, new_e1_ret))
             if new_e2_ret != hour.electricity2_returned:
                 output_lines.append("   electricity2_returned: {} -> {}".format(hour.electricity2_returned, new_e2_ret))
+            if new_gas is not None and new_gas != hour.gas:
+                output_lines.append("   gas:                   {} -> {}".format(hour.gas, new_gas))
 
             if not dry_run:
                 hour.electricity1 = new_e1
                 hour.electricity2 = new_e2
                 hour.electricity1_returned = new_e1_ret
                 hour.electricity2_returned = new_e2_ret
+                if new_gas is not None:
+                    hour.gas = new_gas
                 to_save.append(hour)
 
             updated += 1
@@ -304,7 +326,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
 
         if to_save:
             HourStatistics.objects.bulk_update(
-                to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned"]
+                to_save, ["electricity1", "electricity2", "electricity1_returned", "electricity2_returned", "gas"]
             )
 
         _print_progress(processed, total, updated, unchanged, skipped)

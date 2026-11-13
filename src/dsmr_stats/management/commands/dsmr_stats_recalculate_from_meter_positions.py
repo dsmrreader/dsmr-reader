@@ -5,7 +5,7 @@ import dsmr_stats.repair_services
 
 
 class Command(BaseCommand):
-    help = "Retroactively recalculates DayStatistics and/or HourStatistics electricity totals (fixes #1770)."
+    help = "Retroactively recalculates DayStatistics and/or HourStatistics totals (fixes #1770)."
 
     def add_arguments(self, parser) -> None:
         parser.add_argument(
@@ -27,7 +27,7 @@ class Command(BaseCommand):
             action="store_true",
             dest="hours",
             default=False,
-            help="Retroactively recalculate HourStatistics electricity totals using cross-boundary anchors.",
+            help="Retroactively recalculate HourStatistics electricity and gas totals using cross-boundary anchors.",
         )
         parser.add_argument(
             "--analyze",
