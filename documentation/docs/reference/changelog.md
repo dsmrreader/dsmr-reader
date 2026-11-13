@@ -17,6 +17,7 @@
     - Fixed day and hour statistics not generating after the gas meter was removed - [#2199](https://github.com/dsmrreader/dsmr-reader/issues/2199)
     - Fixed the data retention job aborting and leaving data uncleaned - [#2200](https://github.com/dsmrreader/dsmr-reader/issues/2200)
 
+    - Fixed the API documentation page not rendering - [#2202](https://github.com/dsmrreader/dsmr-reader/issues/2202)
     #### Miscellaneous
     - Package updates
 
