@@ -36,7 +36,10 @@ body:
     attributes:
       label: 'Description'
       description: |
-        Your issue, suggestion or bug description
+        Your issue, suggestion or bug description.
+
+        > [!NOTE]
+        > *Any research done by an LLM or agent (analysis, suspected cause or solution) does not belong here. Put it in the 'LLM/Agent info' field below.*
     validations:
       required: true
 
@@ -86,3 +89,16 @@ body:
       description: |
         When applicable (e.g. on readings mismatch), add a [data telegram](https://dsmr-reader.readthedocs.io/en/v5/explained/about.html#support) below.
       render: shell-script
+
+  - type: textarea
+    id: llm-agent-info
+    attributes:
+      label: 'Optional: LLM/Agent info'
+      description: |
+        Any self research, e.g. by an LLM or agent (analysis, suspected cause, suggested solution), goes here and not in the description. Keep your own description short and in your own words. Add the text between the `<details>` tags below, it will be collapsed in the issue.
+      value: |
+        <details><summary>LLM/Agent info</summary>
+
+        Paste LLM/Agent output here.
+
+        </details>
