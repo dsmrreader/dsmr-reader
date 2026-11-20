@@ -20,7 +20,7 @@
         {% block stylesheets %}
             <link href="{% static 'dsmr_frontend/css/bootstrap.min.css' %}?r=v{{ dsmr_version }}"
                   rel="stylesheet" />
-            <link href="{% static 'dsmr_frontend/fontawesome-free-7.2.0-web/css/all.min.css' %}?r=v{{ dsmr_version }}"
+            <link href="{% static 'dsmr_frontend/fontawesome-free-7.3.1-web/css/all.min.css' %}?r=v{{ dsmr_version }}"
                   rel="stylesheet" />
             <link href="{% static 'dsmr_frontend/css/lato-font.css' %}?r=v{{ dsmr_version }}"
                   rel="stylesheet">
@@ -170,7 +170,7 @@
 
                                     {% if monitoring_status_issues %}
                                         &nbsp; <span class="badge bg-red"
-       aria-label="{% blocktranslate count count=monitoring_status_issues|length %}{{ count }} monitoring issue{% plural %}{{ count }} monitoring issues{% endblocktranslate %}">{{ monitoring_status_issues|length }}</span>
+                                                     aria-label="{% blocktranslate count count=monitoring_status_issues|length %}{{ count }} monitoring issue{% plural %}{{ count }} monitoring issues{% endblocktranslate %}">{{ monitoring_status_issues|length }}</span>
                                     {% endif %}
                                 </small>
                             </a>

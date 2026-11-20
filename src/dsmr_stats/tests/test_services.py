@@ -1,5 +1,5 @@
 import datetime
-from typing import Optional
+from typing import List, Optional
 from unittest import mock
 from decimal import Decimal
 
@@ -227,6 +227,136 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         dsmr_stats.services.run(self.schedule_process)
         self.assertTrue(create_statistics_mock.called)  # Should now pass.
 
+    def _setup_gas_meter_removed(self, now_mock, get_next_day_to_generate_mock, is_data_available_mock):
+        """Last gas reading on the target day, which is two days ago."""
+        now_mock.return_value = timezone.make_aware(datetime.datetime(2020, 1, 3))
+        is_data_available_mock.return_value = True
+        target_datetime = timezone.now() - datetime.timedelta(days=2)
+        get_next_day_to_generate_mock.return_value = target_datetime.date()
+
+        ElectricityConsumption.objects.create(
+            read_at=target_datetime,
+            delivered_1=0,
+            returned_1=0,
+            delivered_2=0,
+            returned_2=0,
+            currently_delivered=1,
+            currently_returned=2,
+        )
+        GasConsumption.objects.all().delete()
+        GasConsumption.objects.create(read_at=target_datetime, delivered=1, currently_delivered=2)
+
+    def _create_next_day_readings(self, hours: List[int], with_gas: bool) -> None:
+        """Creates processed readings on the day after the target day, at the given hours."""
+        next_day_start = timezone.make_aware(datetime.datetime(2020, 1, 2))
+
+        for hour in hours:
+            timestamp = next_day_start + datetime.timedelta(hours=hour)
+            DsmrReading.objects.create(
+                timestamp=timestamp,
+                electricity_delivered_1=1,
+                electricity_returned_1=2,
+                electricity_delivered_2=3,
+                electricity_returned_2=4,
+                electricity_currently_delivered=5,
+                electricity_currently_returned=6,
+                extra_device_timestamp=timestamp if with_gas else None,
+                extra_device_delivered=1 if with_gas else None,
+                processed=True,
+            )
+
+    @mock.patch("dsmr_backend.services.backend.get_capability")
+    @mock.patch("dsmr_stats.services.create_statistics")
+    @mock.patch("dsmr_stats.services.is_data_available")
+    @mock.patch("dsmr_stats.services.get_next_day_to_generate")
+    @mock.patch("django.utils.timezone.now")
+    def test_analyze_gas_meter_removed(
+        self,
+        now_mock,
+        get_next_day_to_generate_mock,
+        is_data_available_mock,
+        create_statistics_mock,
+        get_capability_mock,
+    ):
+        """Gas meter removed: telegrams after the target day carry no gas data, so do not wait for a gas reading."""
+        get_capability_mock.return_value = True
+        self._setup_gas_meter_removed(now_mock, get_next_day_to_generate_mock, is_data_available_mock)
+
+        # No telegrams after the target day yet, so the gas reading may still arrive.
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertFalse(create_statistics_mock.called)
+
+        # Telegrams after the target day without gas data, for longer than the minimum span.
+        self._create_next_day_readings(hours=[0, 12], with_gas=False)
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertTrue(create_statistics_mock.called)
+
+    @mock.patch("dsmr_backend.services.backend.get_capability")
+    @mock.patch("dsmr_stats.services.create_statistics")
+    @mock.patch("dsmr_stats.services.is_data_available")
+    @mock.patch("dsmr_stats.services.get_next_day_to_generate")
+    @mock.patch("django.utils.timezone.now")
+    def test_analyze_gas_bus_glitch_shorter_than_minimum_span(
+        self,
+        now_mock,
+        get_next_day_to_generate_mock,
+        is_data_available_mock,
+        create_statistics_mock,
+        get_capability_mock,
+    ):
+        """A single telegram without gas data, or a short stretch of them, is not enough to give up on gas."""
+        get_capability_mock.return_value = True
+        self._setup_gas_meter_removed(now_mock, get_next_day_to_generate_mock, is_data_available_mock)
+
+        self._create_next_day_readings(hours=[0], with_gas=False)
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertFalse(create_statistics_mock.called)
+
+        DsmrReading.objects.all().delete()
+        next_day_start = timezone.make_aware(datetime.datetime(2020, 1, 2))
+        for minutes in (0, 59):
+            DsmrReading.objects.create(
+                timestamp=next_day_start + datetime.timedelta(minutes=minutes),
+                electricity_delivered_1=1,
+                electricity_returned_1=2,
+                electricity_delivered_2=3,
+                electricity_returned_2=4,
+                electricity_currently_delivered=5,
+                electricity_currently_returned=6,
+                processed=True,
+            )
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertFalse(create_statistics_mock.called)
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + datetime.timedelta(minutes=5))
+
+    @mock.patch("dsmr_backend.services.backend.get_capability")
+    @mock.patch("dsmr_stats.services.create_statistics")
+    @mock.patch("dsmr_stats.services.is_data_available")
+    @mock.patch("dsmr_stats.services.get_next_day_to_generate")
+    @mock.patch("django.utils.timezone.now")
+    def test_analyze_gas_meter_present_but_reading_not_consumed_yet(
+        self,
+        now_mock,
+        get_next_day_to_generate_mock,
+        is_data_available_mock,
+        create_statistics_mock,
+        get_capability_mock,
+    ):
+        """Telegrams with gas data on the next day, while its gas consumption is not generated yet, must still wait."""
+        get_capability_mock.return_value = True
+        self._setup_gas_meter_removed(now_mock, get_next_day_to_generate_mock, is_data_available_mock)
+
+        self._create_next_day_readings(hours=[0, 12], with_gas=True)
+        self.assertFalse(GasConsumption.objects.filter(read_at__date__gte=datetime.date(2020, 1, 2)).exists())
+
+        dsmr_stats.services.run(self.schedule_process)
+        self.assertFalse(create_statistics_mock.called)
+
+        self.schedule_process.refresh_from_db()
+        self.assertEqual(self.schedule_process.planned, timezone.now() + datetime.timedelta(minutes=5))
+
     @mock.patch("dsmr_stats.services.create_statistics")
     @mock.patch("dsmr_stats.services.is_data_available")
     @mock.patch("dsmr_stats.services.get_next_day_to_generate")
@@ -331,6 +461,39 @@ class TestServices(InterceptCommandStdoutMixin, TestCase):
         dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
         self.assertEqual(HourStatistics.objects.count(), 1)
         self.assertEqual(HourStatistics.objects.all()[0].gas, 2)
+
+    def test_create_hourly_statistics_dsmr_v5_gas_includes_hour_boundary(self):
+        """Gas used between the last reading of the previous hour and the first of this hour belongs to this hour."""
+        hour_start = timezone.make_aware(datetime.datetime(2010, 1, 1, hour=12))
+        ec_kwargs = {
+            "delivered_1": 0,
+            "returned_1": 0,
+            "delivered_2": 0,
+            "returned_2": 0,
+            "currently_delivered": 0,
+            "currently_returned": 0,
+        }
+        ElectricityConsumption.objects.create(read_at=hour_start, **ec_kwargs)
+
+        GasConsumption.objects.create(
+            read_at=hour_start - datetime.timedelta(minutes=5),
+            delivered=Decimal("10.000"),
+            currently_delivered=Decimal("0.050"),
+        )
+        for minutes, delivered, currently_delivered in (
+            (0, "10.009", "0.009"),
+            (30, "10.100", "0.091"),
+            (55, "10.200", "0.100"),
+        ):
+            GasConsumption.objects.create(
+                read_at=hour_start + datetime.timedelta(minutes=minutes),
+                delivered=Decimal(delivered),
+                currently_delivered=Decimal(currently_delivered),
+            )
+
+        dsmr_stats.services.create_hourly_statistics(hour_start=hour_start)
+
+        self.assertEqual(HourStatistics.objects.get(hour_start=hour_start).gas, Decimal("0.200"))
 
     def test_create_hourly_statistics_exists(self):
         day_start = timezone.make_aware(datetime.datetime(2015, 12, 13, hour=0))
@@ -1299,6 +1462,67 @@ class TestRecalculateHourStatistics(InterceptCommandStdoutMixin, TestCase):
 
         hour.refresh_from_db()
         self.assertEqual(hour.electricity1, Decimal("0.000"))  # unchanged
+
+    def _make_gas_hour(self, hour_start: datetime.datetime, gas: Decimal) -> HourStatistics:
+        self._make_ec(hour_start, delivered_1=Decimal("1000.000"))
+        self._make_ec(hour_start + datetime.timedelta(hours=1), delivered_1=Decimal("1001.000"))
+        hour = self._make_hour(hour_start, electricity1=Decimal("1.000"))
+        hour.gas = gas
+        hour.save()
+        return hour
+
+    def test_recalculate_hour_corrects_gas_boundary(self):
+        """Gas used between the last reading of the previous hour and the first of the hour belongs to the hour."""
+        hour_start = timezone.make_aware(datetime.datetime(2020, 6, 15, 12))
+        hour = self._make_gas_hour(hour_start, gas=Decimal("0.191"))
+
+        GasConsumption.objects.create(
+            read_at=hour_start - datetime.timedelta(minutes=5),
+            delivered=Decimal("10.000"),
+            currently_delivered=Decimal("0.050"),
+        )
+        for minutes, delivered, currently_delivered in ((0, "10.009", "0.009"), (30, "10.100", "0.091")):
+            GasConsumption.objects.create(
+                read_at=hour_start + datetime.timedelta(minutes=minutes),
+                delivered=Decimal(delivered),
+                currently_delivered=Decimal(currently_delivered),
+            )
+        GasConsumption.objects.create(
+            read_at=hour_start + datetime.timedelta(minutes=55),
+            delivered=Decimal("10.200"),
+            currently_delivered=Decimal("0.100"),
+        )
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=True)
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("0.191"))  # dry run does not write
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("0.200"))
+
+    def test_recalculate_hour_gas_single_reading(self):
+        """A single gas reading in the hour is reported by its own consumption, as when generating statistics."""
+        hour_start = timezone.make_aware(datetime.datetime(2020, 6, 15, 12))
+        hour = self._make_gas_hour(hour_start, gas=Decimal("0.000"))
+        GasConsumption.objects.create(
+            read_at=hour_start, delivered=Decimal("5.000"), currently_delivered=Decimal("1.000")
+        )
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("1.000"))
+
+    def test_recalculate_hour_gas_without_readings_untouched(self):
+        """Hours without gas readings keep their stored gas value."""
+        hour_start = timezone.make_aware(datetime.datetime(2020, 6, 15, 12))
+        hour = self._make_gas_hour(hour_start, gas=Decimal("0.500"))
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.gas, Decimal("0.500"))
 
     def test_recalculate_hour_no_anchors(self):
         """Hour with no surrounding DsmrReading records is skipped gracefully."""

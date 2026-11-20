@@ -20,7 +20,7 @@ If either isn't met, update the tuple before proceeding. Report the verification
 ```bash
 poetry run /app/src/manage.py dsmrreader_lock_migrations
 ```
-This command writes the downgrade script to `provisioning/container/downgrade/v<version>.sh`.
+This command writes the downgrade script to `provisioning/downgrade/v<version>.sh`.
 Report the file path that was written and confirm the file exists.
 
 ## 5. Changelog

@@ -9,6 +9,42 @@
 ---
 
 
+## v6.2.3 - November 2026
+
+!!! abstract "Fixes and improvements"
+
+    #### Fixes
+    - Fixed day and hour statistics not generating after the gas meter was removed - [#2199](https://github.com/dsmrreader/dsmr-reader/issues/2199)
+    - Fixed the data retention job aborting and leaving data uncleaned - [#2200](https://github.com/dsmrreader/dsmr-reader/issues/2200)
+    - Fixed the API documentation page not rendering - [#2202](https://github.com/dsmrreader/dsmr-reader/issues/2202)
+
+    #### Data accuracy
+    - Fixed hourly and daily gas consumption being calculated too low, as gas used at hour boundaries was dropped - [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
+
+        ---
+
+        _**Am I affected?**_
+
+        _Only DSMR 5 (or newer) gas meters with the gas grouping type set to `On every change (default & recommended)`, as these store a gas reading every few minutes. DSMR 4 meters and `Force grouping by hour` are not affected._
+
+        _**Already affected? Existing statistics are not corrected automatically.**_
+
+        _Run the commands below to recalculate them. Without `--write` they only preview the changes._
+
+        ```shell title="shell"
+        # Preview changes (dry-run, no writes)
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --days
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --hours
+
+        # Apply changes to the database
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --days --write
+        ./manage.py dsmr_stats_recalculate_from_meter_positions --hours --write
+        ```
+
+    #### Miscellaneous
+    - Package and web library updates
+
+
 ## v6.2.2 - October 2026
 
 !!! abstract "Fixes and improvements"
