@@ -16,6 +16,9 @@
     #### Data accuracy
     - Fixed negative electricity and gas values in hourly and daily statistics after a meter replacement, also when recalculating statistics - [#2204](https://github.com/dsmrreader/dsmr-reader/issues/2204), [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
 
+    #### Miscellaneous
+    - Package and web library updates
+
 ---
 
 
