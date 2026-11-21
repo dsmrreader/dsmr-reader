@@ -238,7 +238,13 @@ def hourly_gas(readings: List[GasConsumption], previous: Optional[GasConsumption
     # Baseline is the last reading before the hour, so the gas used up to the first reading of the hour is included.
     if len(readings) > 1:
         start = previous if previous is not None else readings[0]
-        return readings[-1].delivered - start.delivered
+        delta = readings[-1].delivered - start.delivered
+
+        # A decrease means the gas counter restarted or reported a bogus value, e.g. after a meter replacement.
+        if delta < 0:
+            delta = dsmr_consumption.services.counter_delta([start.delivered] + [r.delivered for r in readings])
+
+        return delta
 
     return None
 
@@ -267,10 +273,12 @@ def create_hourly_statistics(hour_start: datetime.datetime) -> Optional[HourStat
     )
     end_record = cast(ElectricityConsumption, anchor_end)
 
-    creation_kwargs["electricity1"] = end_record.delivered_1 - start_record.delivered_1
-    creation_kwargs["electricity2"] = end_record.delivered_2 - start_record.delivered_2
-    creation_kwargs["electricity1_returned"] = end_record.returned_1 - start_record.returned_1
-    creation_kwargs["electricity2_returned"] = end_record.returned_2 - start_record.returned_2
+    (
+        creation_kwargs["electricity1"],
+        creation_kwargs["electricity2"],
+        creation_kwargs["electricity1_returned"],
+        creation_kwargs["electricity2_returned"],
+    ) = dsmr_consumption.services.electricity_deltas(start_record, end_record)
 
     gas_readings_list = list(gas_readings)
     previous_gas = None

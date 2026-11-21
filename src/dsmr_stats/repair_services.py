@@ -269,13 +269,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
                 _print_progress(processed, total, updated, unchanged, skipped)
                 continue
 
-            anchor_start = all_dr[idx_start]
-            anchor_end = all_dr[idx_end]
-
-            new_e1 = anchor_end.electricity_delivered_1 - anchor_start.electricity_delivered_1
-            new_e2 = anchor_end.electricity_delivered_2 - anchor_start.electricity_delivered_2
-            new_e1_ret = anchor_end.electricity_returned_1 - anchor_start.electricity_returned_1
-            new_e2_ret = anchor_end.electricity_returned_2 - anchor_start.electricity_returned_2
+            new_e1, new_e2, new_e1_ret, new_e2_ret = _hour_electricity_deltas(all_dr[idx_start : idx_end + 1])
 
             gas_start = bisect.bisect_left(gas_timestamps, hour.hour_start)
             gas_end = bisect.bisect_left(gas_timestamps, hour_end)
@@ -333,6 +327,20 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
 
     _flush_output(output_lines)
     print("Done. Updated: {}, Unchanged: {}, Skipped: {}".format(updated, unchanged, skipped))
+
+
+def _hour_electricity_deltas(readings: List[DsmrReading]) -> tuple[Decimal, Decimal, Decimal, Decimal]:
+    """Electricity delivered (tariff 1, 2) and returned (tariff 1, 2) over chronological readings of an hour."""
+    fields = ("electricity_delivered_1", "electricity_delivered_2", "electricity_returned_1", "electricity_returned_2")
+    first, last = readings[0], readings[-1]
+    deltas = [getattr(last, field) - getattr(first, field) for field in fields]
+
+    # A decrease means the counter restarted, as caused by a meter replacement.
+    for index, field in enumerate(fields):
+        if deltas[index] < 0:
+            deltas[index] = dsmr_consumption.services.counter_delta([getattr(r, field) for r in readings])
+
+    return deltas[0], deltas[1], deltas[2], deltas[3]
 
 
 def _resolve_prices(day: datetime.date, all_prices: List[EnergySupplierPrice]) -> EnergySupplierPrice:

@@ -1549,3 +1549,87 @@ class TestRecalculateHourStatistics(InterceptCommandStdoutMixin, TestCase):
 
         hour.refresh_from_db()
         self.assertEqual(hour.electricity1, Decimal("2.000"))  # 1002.0-1000.0
+
+
+class TestMeterReplacement(TestCase):
+    """The counters of a replacement meter restart from zero, within the hour of the replacement."""
+
+    HOUR_START = datetime.datetime(2025, 1, 3, 14)
+
+    def setUp(self):
+        self.hour_start = timezone.make_aware(self.HOUR_START)
+
+    def _make_ec(self, read_at: datetime.datetime, delivered_1: str, returned_1: str = "0") -> None:
+        ElectricityConsumption.objects.create(
+            read_at=read_at,
+            delivered_1=Decimal(delivered_1),
+            delivered_2=Decimal("0"),
+            returned_1=Decimal(returned_1),
+            returned_2=Decimal("0"),
+            currently_delivered=Decimal("0"),
+            currently_returned=Decimal("0"),
+        )
+
+    def test_create_hourly_statistics_with_reset(self):
+        self._make_ec(self.hour_start - datetime.timedelta(minutes=114), "7317.923", returned_1="2832.766")
+        self._make_ec(self.hour_start + datetime.timedelta(minutes=14), "0.012")
+        self._make_ec(self.hour_start + datetime.timedelta(minutes=59), "0.512")
+
+        dsmr_stats.services.create_hourly_statistics(hour_start=self.hour_start)
+
+        hs = HourStatistics.objects.get(hour_start=self.hour_start)
+        self.assertEqual(hs.electricity1, Decimal("0.512"))
+        self.assertEqual(hs.electricity1_returned, Decimal("0"))
+
+    def test_hourly_gas_with_reset(self):
+        def reading(minutes: int, delivered: str) -> GasConsumption:
+            return GasConsumption(
+                read_at=self.hour_start + datetime.timedelta(minutes=minutes),
+                delivered=Decimal(delivered),
+                currently_delivered=Decimal("0"),
+            )
+
+        previous = reading(-5, "5811.400")
+
+        # Zero as last reading of the hour.
+        self.assertEqual(
+            dsmr_stats.services.hourly_gas([reading(0, "5811.410"), reading(55, "0.000")], previous),
+            Decimal("0.010"),
+        )
+        # Gas meter replaced.
+        self.assertEqual(
+            dsmr_stats.services.hourly_gas(
+                [reading(0, "5811.410"), reading(30, "0.000"), reading(55, "0.200")], previous
+            ),
+            Decimal("0.210"),
+        )
+
+    def test_recalculate_hour_statistics_with_reset(self):
+        def make_reading(minutes: int, delivered_1: str, returned_1: str = "0") -> None:
+            DsmrReading.objects.create(
+                processed=True,
+                timestamp=self.hour_start + datetime.timedelta(minutes=minutes),
+                electricity_delivered_1=Decimal(delivered_1),
+                electricity_delivered_2=Decimal("0"),
+                electricity_returned_1=Decimal(returned_1),
+                electricity_returned_2=Decimal("0"),
+                electricity_currently_delivered=Decimal("0"),
+                electricity_currently_returned=Decimal("0"),
+            )
+
+        make_reading(-114, "7317.923", returned_1="2832.766")
+        make_reading(14, "0.012")
+        make_reading(60, "0.512")
+        hour = HourStatistics.objects.create(
+            hour_start=self.hour_start,
+            electricity1=Decimal("0"),
+            electricity2=Decimal("0"),
+            electricity1_returned=Decimal("0"),
+            electricity2_returned=Decimal("0"),
+        )
+
+        dsmr_stats.repair_services.recalculate_hour_statistics(dry_run=False)
+
+        hour.refresh_from_db()
+        self.assertEqual(hour.electricity1, Decimal("0.512"))
+        self.assertEqual(hour.electricity1_returned, Decimal("0"))

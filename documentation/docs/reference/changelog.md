@@ -9,6 +9,16 @@
 ---
 
 
+## v6.2.4 - November 2026
+
+!!! abstract "Fixes and improvements"
+
+    #### Data accuracy
+    - Fixed negative electricity and gas values in hourly and daily statistics after a meter replacement, also when recalculating statistics - [#2204](https://github.com/dsmrreader/dsmr-reader/issues/2204), [#1770](https://github.com/dsmrreader/dsmr-reader/issues/1770)
+
+---
+
+
 ## v6.2.3 - November 2026
 
 !!! abstract "Fixes and improvements"

@@ -711,3 +711,63 @@ class TestServicesWithoutPrices(TestServices):
     def setUp(self):
         super(TestServicesWithoutPrices, self).setUp()
         self.support_prices = False
+
+
+class TestCounterReset(TestCase):
+    """Meter replacement: the counters of the new meter restart from zero."""
+
+    def _make_ec(self, read_at: datetime.datetime, **kwargs: str) -> ElectricityConsumption:
+        values = dict(delivered_1="0", delivered_2="0", returned_1="0", returned_2="0")
+        values.update(kwargs)
+        return ElectricityConsumption.objects.create(
+            read_at=read_at,
+            currently_delivered=Decimal("0"),
+            currently_returned=Decimal("0"),
+            **{key: Decimal(value) for key, value in values.items()},
+        )
+
+    def test_counter_delta(self):
+        d = Decimal
+        self.assertEqual(dsmr_consumption.services.counter_delta([]), d("0"))
+        self.assertEqual(dsmr_consumption.services.counter_delta([d("5")]), d("0"))
+        self.assertEqual(dsmr_consumption.services.counter_delta([d("5"), d("5.5"), d("7")]), d("2"))
+        # Restart after the second position: 1 + 0.5 (new meter counted in full) + 0.25.
+        self.assertEqual(dsmr_consumption.services.counter_delta([d("10"), d("11"), d("0.5"), d("0.75")]), d("1.75"))
+
+    def test_electricity_deltas_without_reset_ignores_records_between(self):
+        start = self._make_ec(timezone.make_aware(datetime.datetime(2025, 1, 3, 12)), delivered_1="100")
+        self._make_ec(timezone.make_aware(datetime.datetime(2025, 1, 3, 12, 30)), delivered_1="900")
+        end = self._make_ec(timezone.make_aware(datetime.datetime(2025, 1, 3, 13)), delivered_1="101.5")
+
+        self.assertEqual(dsmr_consumption.services.electricity_deltas(start, end)[0], Decimal("1.5"))
+
+    def test_electricity_deltas_with_reset(self):
+        start = self._make_ec(
+            timezone.make_aware(datetime.datetime(2025, 1, 3, 12, 6)),
+            delivered_1="7317.923",
+            delivered_2="6633.355",
+            returned_1="2832.766",
+            returned_2="6876.960",
+        )
+        self._make_ec(
+            timezone.make_aware(datetime.datetime(2025, 1, 3, 14, 14)), delivered_1="0.012", delivered_2="0.099"
+        )
+        end = self._make_ec(
+            timezone.make_aware(datetime.datetime(2025, 1, 3, 14, 50)), delivered_1="0.012", delivered_2="0.593"
+        )
+
+        self.assertEqual(
+            dsmr_consumption.services.electricity_deltas(start, end),
+            (Decimal("0.012"), Decimal("0.593"), Decimal("0.000"), Decimal("0.000")),
+        )
+
+    def test_day_consumption_with_reset(self):
+        self._make_ec(timezone.make_aware(datetime.datetime(2025, 1, 2, 23, 59)), delivered_1="7317.923")
+        self._make_ec(timezone.make_aware(datetime.datetime(2025, 1, 3, 14, 14)), delivered_1="0.012")
+        self._make_ec(timezone.make_aware(datetime.datetime(2025, 1, 3, 20)), delivered_1="1.012")
+        self._make_ec(timezone.make_aware(datetime.datetime(2025, 1, 4, 0, 1)), delivered_1="1.5")
+
+        consumption = dsmr_consumption.services.day_consumption(datetime.date(2025, 1, 3))
+
+        self.assertEqual(consumption["electricity1"], Decimal("1.012"))
+        self.assertEqual(consumption["electricity1_returned"], Decimal("0"))

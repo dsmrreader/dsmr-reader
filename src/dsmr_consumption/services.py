@@ -2,7 +2,7 @@ import datetime
 import logging
 from datetime import time
 from decimal import Decimal, ROUND_HALF_UP
-from typing import Dict, Optional, List, Tuple, Any, cast
+from typing import Dict, Optional, List, Sequence, Tuple, Any, cast
 from zoneinfo import ZoneInfo
 
 from django.conf import settings
@@ -324,6 +324,45 @@ def consumption_by_range(start, end) -> Tuple[QuerySet[ElectricityConsumption], 
     return electricity_readings, gas_readings
 
 
+def counter_delta(positions: Sequence[Decimal]) -> Decimal:
+    """
+    Amount counted by a cumulative meter counter, given its positions in chronological order.
+    A decrease means the counter restarted from zero (e.g. meter replacement), so the new position counts in full.
+    """
+    total = Decimal("0")
+
+    for previous, current in zip(positions, positions[1:]):
+        total += current - previous if current >= previous else current
+
+    return total
+
+
+def electricity_deltas(
+    start_record: ElectricityConsumption, end_record: ElectricityConsumption
+) -> Tuple[Decimal, Decimal, Decimal, Decimal]:
+    """
+    Electricity delivered (tariff 1, 2) and returned (tariff 1, 2) between two records.
+    The records in between are only consulted when a counter went down, as caused by a meter replacement.
+    """
+    fields = ("delivered_1", "delivered_2", "returned_1", "returned_2")
+    deltas = [getattr(end_record, field) - getattr(start_record, field) for field in fields]
+
+    if all(delta >= 0 for delta in deltas):
+        return deltas[0], deltas[1], deltas[2], deltas[3]
+
+    records = [start_record] + list(
+        ElectricityConsumption.objects.filter(read_at__gt=start_record.read_at, read_at__lte=end_record.read_at)
+        .order_by("read_at")
+        .iterator()
+    )
+
+    for index, field in enumerate(fields):
+        if deltas[index] < 0:
+            deltas[index] = counter_delta([getattr(record, field) for record in records])
+
+    return deltas[0], deltas[1], deltas[2], deltas[3]
+
+
 def day_consumption(day: datetime.date) -> Dict:
     """Calculates the consumption of an entire day."""
     consumption: dict[str, Any] = {"day": day}
@@ -354,14 +393,16 @@ def day_consumption(day: datetime.date) -> Dict:
     end_record = cast(ElectricityConsumption, anchor_end)
 
     consumption["latest_consumption"] = electricity_readings.last()
-    consumption["electricity1"] = end_record.delivered_1 - start_record.delivered_1
-    consumption["electricity2"] = end_record.delivered_2 - start_record.delivered_2
+    (
+        consumption["electricity1"],
+        consumption["electricity2"],
+        consumption["electricity1_returned"],
+        consumption["electricity2_returned"],
+    ) = electricity_deltas(start_record, end_record)
     consumption["electricity1_start"] = start_record.delivered_1
     consumption["electricity1_end"] = end_record.delivered_1
     consumption["electricity2_start"] = start_record.delivered_2
     consumption["electricity2_end"] = end_record.delivered_2
-    consumption["electricity1_returned"] = end_record.returned_1 - start_record.returned_1
-    consumption["electricity2_returned"] = end_record.returned_2 - start_record.returned_2
     consumption["electricity1_returned_start"] = start_record.returned_1
     consumption["electricity1_returned_end"] = end_record.returned_1
     consumption["electricity2_returned_start"] = start_record.returned_2
