@@ -337,30 +337,28 @@ def counter_delta(positions: Sequence[Decimal]) -> Decimal:
     return total
 
 
-def electricity_deltas(
-    start_record: ElectricityConsumption, end_record: ElectricityConsumption
-) -> Tuple[Decimal, Decimal, Decimal, Decimal]:
+def electricity_deltas(start_record: ElectricityConsumption, end_record: ElectricityConsumption) -> List[Decimal]:
     """
-    Electricity delivered (tariff 1, 2) and returned (tariff 1, 2) between two records.
+    Electricity delivered (tariff 1, 2) and returned (tariff 1, 2) between two records, in that order.
     The records in between are only consulted when a counter went down, as caused by a meter replacement.
     """
     fields = ("delivered_1", "delivered_2", "returned_1", "returned_2")
     deltas = [getattr(end_record, field) - getattr(start_record, field) for field in fields]
 
     if all(delta >= 0 for delta in deltas):
-        return deltas[0], deltas[1], deltas[2], deltas[3]
+        return deltas
 
     records = [start_record] + list(
-        ElectricityConsumption.objects.filter(read_at__gt=start_record.read_at, read_at__lte=end_record.read_at)
-        .order_by("read_at")
-        .iterator()
+        ElectricityConsumption.objects.filter(
+            read_at__gt=start_record.read_at, read_at__lte=end_record.read_at
+        ).order_by("read_at")
     )
 
     for index, field in enumerate(fields):
         if deltas[index] < 0:
             deltas[index] = counter_delta([getattr(record, field) for record in records])
 
-    return deltas[0], deltas[1], deltas[2], deltas[3]
+    return deltas
 
 
 def day_consumption(day: datetime.date) -> Dict:

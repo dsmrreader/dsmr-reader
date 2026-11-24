@@ -329,7 +329,7 @@ def recalculate_hour_statistics(dry_run: bool = False, batch_size: int = 2160) -
     print("Done. Updated: {}, Unchanged: {}, Skipped: {}".format(updated, unchanged, skipped))
 
 
-def _hour_electricity_deltas(readings: List[DsmrReading]) -> tuple[Decimal, Decimal, Decimal, Decimal]:
+def _hour_electricity_deltas(readings: List[DsmrReading]) -> List[Decimal]:
     """Electricity delivered (tariff 1, 2) and returned (tariff 1, 2) over chronological readings of an hour."""
     fields = ("electricity_delivered_1", "electricity_delivered_2", "electricity_returned_1", "electricity_returned_2")
     first, last = readings[0], readings[-1]
@@ -340,7 +340,7 @@ def _hour_electricity_deltas(readings: List[DsmrReading]) -> tuple[Decimal, Deci
         if deltas[index] < 0:
             deltas[index] = dsmr_consumption.services.counter_delta([getattr(r, field) for r in readings])
 
-    return deltas[0], deltas[1], deltas[2], deltas[3]
+    return deltas
 
 
 def _resolve_prices(day: datetime.date, all_prices: List[EnergySupplierPrice]) -> EnergySupplierPrice:

@@ -758,7 +758,7 @@ class TestCounterReset(TestCase):
 
         self.assertEqual(
             dsmr_consumption.services.electricity_deltas(start, end),
-            (Decimal("0.012"), Decimal("0.593"), Decimal("0.000"), Decimal("0.000")),
+            [Decimal("0.012"), Decimal("0.593"), Decimal("0.000"), Decimal("0.000")],
         )
 
     def test_day_consumption_with_reset(self):
