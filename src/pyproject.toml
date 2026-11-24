@@ -62,6 +62,9 @@ dev = [
     "django-stubs>=6.0.4,<7",
     "djangorestframework-stubs>=3.17.0,<4",
     "pytest-playwright>=0.9.0",
+    # The dev image installs the locked Playwright version with its OS dependencies (Containerfile-dev).
+    # Playwright 1.65+ needs libatomic, which that image lacks.
+    "playwright>=1.64,<1.65",
 ]
 
 [tool.poetry]
