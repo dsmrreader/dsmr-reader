@@ -1,3 +1,7 @@
+---
+description: Lint the Python code with Flake8 and bandit rules.
+---
+
 Run Flake8 linter on the project:
 
 ```bash

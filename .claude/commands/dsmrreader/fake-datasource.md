@@ -1,3 +1,7 @@
+---
+description: Start the fake datasource to generate gas and electricity test data in development.
+---
+
 Start the fake datasource to generate test data with gas and electricity returned:
 
 ```bash

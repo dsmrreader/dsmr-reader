@@ -1,3 +1,7 @@
+---
+description: Generate Django migrations after model changes. Never edit locked migrations.
+---
+
 Generate Django migrations for any model changes:
 
 ```bash

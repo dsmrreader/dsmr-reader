@@ -1,3 +1,7 @@
+---
+description: Upgrade all Python dependencies (uv + sync to poetry.lock) and the vendored web libraries. Never uses Poetry's resolver.
+---
+
 Update all Python dependencies and the vendored web libraries:
 
 ```bash
@@ -11,7 +15,11 @@ only ever used to install/run (`poetry install`, `poetry run ...`), never to res
 The `poetry install --no-root` step is required: without it the venv stays on old versions, so formatters
 like djlint run with the wrong version and produce output that fails CI's `--check` pass.
 
-Report which packages were updated (`git diff uv.lock` or `git diff poetry.lock` for the version bumps).
+Report which packages were updated (`git -C /app diff src/uv.lock` for the version bumps).
+
+Version pins and upper bounds belong in `pyproject.toml`, never only in the lock files: `uv lock --upgrade` discards lock-only pins.
+Check `pyproject.toml` for bounds that explain a package not moving (e.g. Playwright, which the development image installs with its OS dependencies).
+If Playwright changed, run `poetry run playwright install chromium` before the e2e tests.
 
 Then update the vendored web libraries in `src/dsmr_frontend/static/dsmr_frontend/` (no package manager is used):
 
@@ -23,3 +31,11 @@ Then update the vendored web libraries in `src/dsmr_frontend/static/dsmr_fronten
 
 In the changelog (`documentation/docs/reference/changelog.md`) never list individual packages, libraries or versions. Add only the
 generic line `- Package and web library updates` under `#### Miscellaneous` of the release being prepared.
+
+Finally, verify the development image still builds before committing or pushing (Playwright and other locked versions are
+installed in it, see `provisioning/container/Containerfile-dev`):
+```bash
+docker compose build dev-dsmr-app
+```
+If it fails, stop and report the failing step; do not commit or push. If no container runtime is available here, ask the user to run
+the build on the container host and wait for their confirmation first. Never commit or push dependency updates without it.

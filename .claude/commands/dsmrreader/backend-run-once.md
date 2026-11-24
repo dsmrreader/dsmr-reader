@@ -1,3 +1,7 @@
+---
+description: Run a single backend processing cycle (dsmr_backend --run-once).
+---
+
 Run a single backend processing cycle:
 
 ```bash

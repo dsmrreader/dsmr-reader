@@ -1,4 +1,9 @@
-Run the full quality verification pipeline. Execute all steps in order and report results:
+---
+model: haiku
+description: Run the full quality pipeline (Black, djlint, MyPy, Flake8, lock sync, pytest, e2e, image build). Required after every code change.
+---
+
+Run the full quality verification pipeline from `/app/src`. Execute all steps in order and report results:
 
 1. **Format** (Black):
 ```bash
@@ -17,7 +22,7 @@ poetry run mypy /app/src
 
 4. **Lint Python** (Flake8):
 ```bash
-poetry run flake8 -v
+poetry run flake8
 ```
 
 5. **Check pyproject.toml/uv.lock/poetry.lock are all in sync**:
@@ -28,14 +33,20 @@ If `uv lock --check` fails, pyproject.toml changed and uv.lock is stale — run 
 
 6. **Test** (PyTest):
 ```bash
-DJANGO_SETTINGS_MODULE=dsmrreader.config.test poetry run pytest -v
+DJANGO_SETTINGS_MODULE=dsmrreader.config.test poetry run pytest -q
 ```
 
 7. **Test in browser** (Playwright end-to-end, excluded from step 6):
 ```bash
 DJANGO_SETTINGS_MODULE=dsmrreader.config.test poetry run pytest -m e2e dsmr_frontend/tests/e2e --no-cov
 ```
-If the browser fails to launch (`error while loading shared libraries`), the development image is outdated: report that it must be rebuilt (`docker compose build dev-dsmr-app`) on the container host. Do not try to install system packages.
+If the browser binary is missing (`Executable doesn't exist`), run `poetry run playwright install chromium` and rerun. If it fails to launch (`error while loading shared libraries`), the development image is outdated: report that it must be rebuilt (`docker compose build dev-dsmr-app`) on the container host. Do not try to install system packages.
+
+8. **Build the development image** (required when `pyproject.toml`, `uv.lock`, `poetry.lock`, `provisioning/container/*` or compose files changed):
+```bash
+docker compose build dev-dsmr-app
+```
+If no container runtime is available here, ask the user to run it on the container host and wait for their confirmation. Do not commit or push these changes before the build has succeeded.
 
 Report results for each step. Stop and report if any step fails.
 
